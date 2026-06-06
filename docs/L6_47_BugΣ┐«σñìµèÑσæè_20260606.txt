@@ -1,0 +1,48 @@
+临渊者 L6.47 Bug 修复报告
+日期：2026-06-06
+来源：L6_47_Bug列表.txt
+
+一、修复结论
+- P0 plan_schema 不识别 output 包装层：已修复。
+- P2 --diagnose / repair-loop CLI TypeError：已修复。
+- P2 hotfix3 hash 比较文件名不匹配：已修复，通过恢复 UTF-8 中文文档名解决。
+- P2 工具注册表白名单未同步：已修复测试契约。
+- P3 status 输出脱敏后测试未更新：已修复测试契约。
+- P3 运行时报告版本号测试硬编码滞后：已修复测试契约，保持当前 L6.32 runtime_report 标题语义。
+- P3 文档文件名 UTF-8 编码：已修复，33 个可逆 mojibake 文档文件名已恢复为 UTF-8 中文名。
+
+二、修改文件
+1. tiangong_agent_runtime/plan_schema.py
+   - PLAN_SEQUENCE_KEYS 增加 output，兼容 schema prompt 的 {"output":{"steps":[...]}} 外形。
+2. tiangong_agent_runtime/runtime_entry.py
+   - run_engineering_repair_loop 增加 external_context_hint 可选参数，解除 CLI /repair-loop 传参 TypeError。
+   - 不把 external_context_hint 写入工具参数、报告或执行链，保持 Runtime 工具链边界不变。
+3. tests/test_l6_31_model_suggest_shape_hotfix.py
+   - 增加 output.steps 回归测试。
+4. tests/test_l6_10_tool_registry.py
+   - 同步 return_analysis / return_code 虚拟审计工具白名单。
+5. tests/test_l6_9_agent_shell_cli.py
+   - 同步脱敏输出契约 credential_state: <未配置>。
+6. tests/test_l6_12_audit_replay_report.py
+   - 同步当前 runtime_report 标题 L6.32。
+7. docs/*
+   - 33 个文件名由 zip mojibake恢复为 UTF-8 中文名。
+
+三、验证结果
+- python -m compileall -q tiangong_agent_runtime tiangong_agent_shell tiangong_kernel tests：PASS。
+- 受影响测试文件回归：28 passed。
+- L6.37-L6.47 冻结段回归：80 passed。
+- CLI smoke：run_agent.py --status、/diagnose、/diagnosis、/repair-loop、/diagnosis-save、/exit：PASS。
+- full pytest：已尝试；运行到 67% 时因外部超时中断，超时前未出现失败；不声明全量通过。
+
+四、边界说明
+- 未新增执行入口。
+- 未绕过 Runtime。
+- 未前端直连工具或 Provider。
+- 未写入 API Key、token、endpoint 明文。
+- 未删除失败测试。
+- 未修改 L0-L5 核心逻辑。
+
+五、剩余风险
+- full pytest 未完整跑完，仅能声明受影响回归与 L6.37-L6.47 冻结段通过。
+- docs 文件名已恢复为 UTF-8 中文名；若外部索引曾引用旧 mojibake 文件名，需要同步引用。

@@ -1,0 +1,35 @@
+天工造物 L4 第二阶段测试结果
+生成日期：2026-06-04
+
+一、compileall
+命令：python -m compileall -q tiangong_kernel tests
+结果：通过。
+日志：docs/l4_phase2_compileall.log
+
+二、第二阶段 targeted pytest
+命令：python -m pytest -q tests/test_l4_phase2_permit_refs.py tests/test_l4_phase2_gate_validation.py tests/test_l4_phase2_test_only_permit_isolation.py tests/test_l4_phase2_no_live_action_without_l5.py tests/test_l4_phase2_no_l5_l6_import.py
+结果：23 passed in 2.00s。
+日志：docs/l4_phase2_pytest_targeted.log
+
+三、第一阶段回归 pytest
+命令：python -m pytest -q tests/test_l4_phase1_imports_and_basic_objects.py tests/test_l4_phase1_serialization_and_hash.py tests/test_l4_phase1_disabled_by_default.py tests/test_l4_phase1_fake_dry_run_noop.py tests/test_l4_phase1_l3_compatibility.py tests/test_l4_phase1_boundary_no_real_actions.py tests/test_l4_phase1_no_l5_l6_imports.py
+结果：18 passed in 2.29s。
+日志：docs/l4_phase2_pytest_phase1_regression.log
+
+四、L4 分片 pytest
+命令：python -m pytest -q tests -k "l4_phase1 or l4_phase2"
+结果：41 passed, 628 deselected in 2.81s。
+日志：docs/l4_phase2_pytest_l4_phase1_phase2.log
+
+五、完整 pytest
+命令：python -m pytest -q tests
+结果：669 passed in 5.30s。
+日志：docs/l4_phase2_pytest_full.log
+
+六、hash 与静态扫描
+1. L0/L1/L2/L3 Python 源码 hash 比对：MATCH。
+2. L4 包越界关键词扫描：NO_MATCH。
+3. 第一/二阶段禁止模块名扫描：NO_MATCH。
+
+七、说明
+完整 tests 已实际执行并通过。本阶段未跳过失败项，未删除测试规避失败。

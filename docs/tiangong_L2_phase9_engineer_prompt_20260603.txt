@@ -1,0 +1,934 @@
+﻿你是“天工造物新版 L2 状态层”第九阶段补充开发工程师。
+
+本阶段是 L2 第九阶段：数学模型、情感系统与动态驱动状态预留补丁阶段。
+
+本阶段不是推翻 L2。
+本阶段不是重做 L2。
+本阶段不是 L3 开发。
+本阶段只是在 L2 已完成第一至第八阶段的基础上，补齐后续 L3 全系统数学驱动、L6 情感系统、动态驱动权重体系所需的状态入口。
+
+不得修改 L0。
+不得修改 L1。
+不得进入 L3。
+不得进入 L4。
+不得进入 L5。
+不得进入 L6。
+不得重构 L2 第一至第八阶段公共骨架。
+不得恢复旧能力包、CapabilityPort、AbilityPackagePort、神枢或旧 Runtime 主链。
+不得把 L2 从状态层改成计算层、执行层、裁决层、存储层或子系统层。
+
+────────────────────────────────
+一、你必须先读取的前置材料
+────────────────────────────────
+
+请先读取用户上传的以下文件：
+
+1. L1 最终冻结归档包；
+2. L2 第八阶段最终完整工程包；
+3. L2 第一至第八阶段开发日志；
+4. L2 第一至第八阶段 handoff 报告；
+5. L2 第一至第八阶段 validation 报告；
+6. L2 总收口报告；
+7. L2 全阶段质检报告，如有；
+8. L2 修复报告，如有；
+9. 本第九阶段工程员提示词。
+
+如果前置文件缺失，先明确列出缺失项，不得臆造已有代码结构。
+如果前置文件齐全，进入 L2 第九阶段补充开发。
+
+────────────────────────────────
+二、本阶段背景
+────────────────────────────────
+
+L2 第一至第八阶段已经完成 L2 状态层主干：
+
+1. 基础状态骨架；
+2. 生命体运行状态与连续性；
+3. Skill / ToolGroup / Model / Action 状态；
+4. 控制面、资源、环境、安全状态；
+5. 观察面状态；
+6. 记忆、上下文、检索、学习状态；
+7. 候选、变更、迭代、进化、实验、验证、恢复状态；
+8. 组件、兼容迁移、状态投影与 L2 总收口。
+
+现在用户新增全局方向：
+
+“所有系统都应由数学模型动态驱动。固定判定只保留不可突破的架构宪法和安全底线；其他行为应尽量转化为状态特征、目标函数、约束集合、评分向量和状态转移建议。”
+
+同时，旧版天工造物已有情感系统概念：
+
+稳定情感底色 + 临时情感 / 欲望 → 情感总色彩
+
+七情影响说话方式和表达倾向。
+六欲影响做事倾向和主动性。
+情志层只给表达/倾向，不给执行令，不能绕过边界和执行链。
+
+因此，L2 需要补充三类状态入口：
+
+1. 数学模型状态入口；
+2. 情感 / 情志状态入口；
+3. 全系统动态驱动权重状态入口。
+
+注意：
+L2 只记录这些状态，不计算它们。
+数学计算留给 L3。
+情感系统真实算法留给 L6。
+最终边界裁决留给 L5。
+真实执行留给 L4。
+
+────────────────────────────────
+三、本阶段定位
+────────────────────────────────
+
+L2 第九阶段只定义状态事实对象。
+
+本阶段只回答：
+
+1. 后续数学模型使用了哪些特征？
+2. 当前目标向量是什么？
+3. 当前约束集合是什么？
+4. 数学评分结果如何被记录？
+5. 数学建议如何被记录？
+6. 情感底色、临时情感、欲望倾向、情感总色彩如何被记录？
+7. 情感如何影响表达倾向和行为倾向？
+8. 全系统动态驱动权重如何被记录？
+9. 探索、稳定、谨慎、学习、恢复、执行准备度等压力如何被记录？
+10. 这些状态如何被 L3 引用、被 L5 审查、被 L6 子系统实现？
+
+本阶段不回答：
+
+1. 数学模型如何计算；
+2. 情感系统如何生成情感；
+3. 欲望倾向如何学习；
+4. 哪个动作最终执行；
+5. 哪个风险最终放行；
+6. 哪个工具最终调用；
+7. 哪个 Skill 最终选择；
+8. 哪个状态最终持久化；
+9. 哪个候选最终合入。
+
+一句话：
+
+L2 第九阶段 = 数学模型、情感系统、动态驱动机制的状态预留层。
+它只记录状态，不做计算，不做执行，不做裁决。
+
+────────────────────────────────
+四、必须坚持的分层边界
+────────────────────────────────
+
+L2：
+- 记录状态；
+- 记录特征；
+- 记录目标；
+- 记录约束；
+- 记录评分结果；
+- 记录情感状态；
+- 记录动态权重；
+- 记录引用；
+- 记录置信度；
+- 记录边界状态。
+
+L3：
+- 读取 L2 状态切片；
+- 计算数学评分；
+- 进行流程编排；
+- 输出状态转移建议；
+- 输出边界请求；
+- 输出执行请求；
+- 不执行工具；
+- 不裁决权限。
+
+L4：
+- 接收 L3 执行请求；
+- 在 L5 允许后执行真实动作；
+- 调用模型、工具、文件、网络、终端等真实适配器；
+- 返回结果和观察。
+
+L5：
+- 接收 L3 边界请求；
+- 做权限、风险、确认、租约、资源、安全、审计裁决；
+- 不被情感或数学模型绕过。
+
+L6：
+- 实现真实子系统；
+- 包括情感系统、记忆系统、Skill 系统、ToolGroup 系统、检索系统、学习系统、进化系统等；
+- 可以各自拥有专用数学模型；
+- 但不能绕过 L3/L5/L4 主链。
+
+硬边界：
+
+数学模型只能提供建议。
+情感系统只能影响表达和倾向。
+动态权重只能影响排序和优先级。
+任何执行都必须经 L5 边界与 L4 执行层。
+L2 不允许产生执行令。
+
+────────────────────────────────
+五、建议新增文件
+────────────────────────────────
+
+请在既有 L2 状态包目录中新增文件。
+若前八阶段目录为 tiangong_kernel/l2_state/，则继续使用该目录。
+
+建议新增：
+
+1. math_state.py
+   - 数学特征状态；
+   - 数学目标状态；
+   - 数学约束状态；
+   - 数学评分状态；
+   - 数学评估状态；
+   - 数学建议状态；
+   - 数学模型引用状态。
+
+2. affective_state.py
+   - 情感底色状态；
+   - 临时情感状态；
+   - 欲望倾向状态；
+   - 情感总色彩状态；
+   - 表达倾向状态；
+   - 行为倾向状态；
+   - 情志边界状态。
+
+3. dynamic_drive_state.py
+   - 动态权重状态；
+   - 系统驱动力状态；
+   - 探索/谨慎/稳定/学习/恢复/执行准备度压力状态；
+   - 目标偏好权重状态；
+   - 动态驱动评估引用状态。
+
+4. __init__.py
+   - 补充导出；
+   - 不破坏前八阶段导出；
+   - 不制造副作用。
+
+如前八阶段已有相近对象，优先复用和补充，不重复造概念。
+如需要兼容别名，必须写入报告。
+
+────────────────────────────────
+六、math_state.py 设计要求
+────────────────────────────────
+
+该模块只定义数学模型相关状态，不实现数学模型计算。
+
+建议包含但不限于：
+
+1. MathFeatureKind
+   可包含：
+   - goal_fit；
+   - confidence；
+   - risk_hint；
+   - cost；
+   - reversibility；
+   - stability；
+   - continuity；
+   - learning_value；
+   - information_gain；
+   - resource_pressure；
+   - context_pressure；
+   - tool_exposure；
+   - boundary_pressure；
+   - user_preference；
+   - affective_bias；
+   - unknown。
+
+2. MathFeatureState
+   字段建议：
+   - feature_id；
+   - feature_kind；
+   - source_state_refs；
+   - numeric_value；
+   - normalized_value；
+   - confidence；
+   - freshness；
+   - weight_hint；
+   - boundary_status；
+   - summary；
+   - created_at。
+
+3. MathObjectiveKind
+   可包含：
+   - task_success；
+   - safety；
+   - stability；
+   - speed；
+   - quality；
+   - reversibility；
+   - learning；
+   - exploration；
+   - user_alignment；
+   - resource_efficiency；
+   - minimal_tool_exposure；
+   - continuity；
+   - unknown。
+
+4. MathObjectiveState
+   字段建议：
+   - objective_id；
+   - objective_kind；
+   - target_value；
+   - priority_weight；
+   - tolerance；
+   - source_ref；
+   - active；
+   - summary；
+   - created_at。
+
+5. MathConstraintKind
+   可包含：
+   - hard_boundary；
+   - soft_boundary；
+   - resource_limit；
+   - time_limit；
+   - safety_limit；
+   - tool_exposure_limit；
+   - context_budget；
+   - user_confirmation_required；
+   - reversibility_required；
+   - l5_review_required；
+   - unknown。
+
+6. MathConstraintState
+   字段建议：
+   - constraint_id；
+   - constraint_kind；
+   - hard；
+   - limit_value；
+   - current_value；
+   - violation_hint；
+   - boundary_ref；
+   - source_ref；
+   - summary；
+   - created_at。
+
+7. MathScoreState
+   字段建议：
+   - score_id；
+   - target_ref；
+   - feature_refs；
+   - objective_refs；
+   - constraint_refs；
+   - raw_score；
+   - normalized_score；
+   - confidence；
+   - penalty_total；
+   - bonus_total；
+   - score_status；
+   - summary；
+   - created_at。
+
+8. MathEvaluationState
+   字段建议：
+   - evaluation_id；
+   - evaluator_ref；
+   - input_state_refs；
+   - feature_refs；
+   - objective_refs；
+   - constraint_refs；
+   - score_refs；
+   - ranking_refs；
+   - confidence；
+   - evaluation_status；
+   - summary；
+   - created_at。
+
+9. MathRecommendationState
+   字段建议：
+   - recommendation_id；
+   - evaluation_ref；
+   - recommended_target_ref；
+   - alternative_target_refs；
+   - rejected_target_refs；
+   - reason_summary；
+   - confidence；
+   - required_boundary_refs；
+   - required_execution_refs；
+   - state_update_suggestion_refs；
+   - recommendation_status；
+   - created_at。
+
+10. MathModelRefState
+   字段建议：
+   - model_ref_id；
+   - model_name；
+   - model_kind；
+   - version；
+   - scope；
+   - owner_layer；
+   - deterministic；
+   - summary；
+   - created_at。
+
+禁止事项：
+
+- 不得实现加权公式；
+- 不得实现真实排序算法；
+- 不得实现模型训练；
+- 不得调用 LLM；
+- 不得调用工具；
+- 不得读写文件；
+- 不得做最终裁决；
+- 不得执行状态转移；
+- 不得把 recommendation 当成 execution command。
+
+────────────────────────────────
+七、affective_state.py 设计要求
+────────────────────────────────
+
+该模块只定义情感 / 情志状态，不实现情感系统算法。
+
+旧版口径必须继承：
+
+1. 七情影响说话方式、表达强度和交流风格；
+2. 六欲影响做事倾向、主动性和偏好；
+3. 情感总色彩是稳定底色与临时情感/欲望的综合；
+4. 情志层只给表达/倾向，不给执行令；
+5. 情感不能绕过 L5 边界；
+6. 情感不能绕过 L4 执行；
+7. 情感不能直接调用工具或模型。
+
+建议包含但不限于：
+
+1. EmotionKind
+   可包含：
+   - joy；
+   - anger；
+   - worry；
+   - thoughtfulness；
+   - sadness；
+   - fear；
+   - surprise；
+   - calm；
+   - curiosity；
+   - urgency；
+   - caution；
+   - persistence；
+   - unknown。
+
+2. DesireTendencyKind
+   可包含：
+   - exploration；
+   - protection；
+   - achievement；
+   - communication；
+   - learning；
+   - stability；
+   - repair；
+   - creation；
+   - unknown。
+
+3. EmotionBaseState
+   字段建议：
+   - base_id；
+   - emotion_weights；
+   - stability；
+   - source_ref；
+   - summary；
+   - created_at；
+   - updated_at。
+   注意：emotion_weights 必须是不可变稳定结构，例如 tuple 形式键值对，不得使用可变 dict 默认值。
+
+4. EmotionTransientState
+   字段建议：
+   - transient_id；
+   - emotion_kind；
+   - intensity；
+   - decay_hint；
+   - source_ref；
+   - confidence；
+   - boundary_status；
+   - summary；
+   - created_at。
+
+5. DesireTendencyState
+   字段建议：
+   - desire_id；
+   - tendency_kind；
+   - intensity；
+   - priority_hint；
+   - source_ref；
+   - confidence；
+   - boundary_status；
+   - summary；
+   - created_at。
+
+6. AffectiveColorState
+   字段建议：
+   - color_id；
+   - base_ref；
+   - transient_refs；
+   - desire_refs；
+   - expression_bias_ref；
+   - action_bias_ref；
+   - total_intensity；
+   - stability_hint；
+   - confidence；
+   - summary；
+   - created_at。
+
+7. ExpressionBiasState
+   字段建议：
+   - expression_bias_id；
+   - warmth_weight；
+   - clarity_weight；
+   - brevity_weight；
+   - encouragement_weight；
+   - caution_tone_weight；
+   - directness_weight；
+   - summary；
+   - created_at。
+   注意：只影响表达，不影响执行权限。
+
+8. ActionBiasState
+   字段建议：
+   - action_bias_id；
+   - exploration_weight；
+   - caution_weight；
+   - persistence_weight；
+   - repair_weight；
+   - learning_weight；
+   - stability_weight；
+   - confirmation_preference_weight；
+   - summary；
+   - created_at。
+   注意：只影响 L3 排序和倾向，不产生执行令。
+
+9. AffectiveBoundaryState
+   字段建议：
+   - boundary_id；
+   - affective_refs；
+   - cannot_execute；
+   - cannot_override_l5；
+   - cannot_override_l4；
+   - cannot_access_secret；
+   - cannot_raise_permission；
+   - boundary_status；
+   - summary；
+   - created_at。
+
+禁止事项：
+
+- 不得实现情感生成算法；
+- 不得实现欲望算法；
+- 不得根据情感直接执行动作；
+- 不得根据情感绕过确认；
+- 不得根据情感提升权限；
+- 不得根据情感调用工具；
+- 不得根据情感调用模型；
+- 不得把情感状态写成用户人格判断；
+- 不得记录过度个人敏感信息；
+- 不得让情感状态覆盖架构边界。
+
+────────────────────────────────
+八、dynamic_drive_state.py 设计要求
+────────────────────────────────
+
+该模块只定义全系统动态驱动权重状态，不实现驱动算法。
+
+建议包含但不限于：
+
+1. DynamicDriveKind
+   可包含：
+   - exploration；
+   - exploitation；
+   - caution；
+   - stability；
+   - speed；
+   - quality；
+   - learning；
+   - repair；
+   - recovery；
+   - verification；
+   - resource_saving；
+   - context_saving；
+   - minimal_exposure；
+   - user_alignment；
+   - unknown。
+
+2. DynamicWeightState
+   字段建议：
+   - weight_id；
+   - drive_kind；
+   - value；
+   - source_refs；
+   - confidence；
+   - freshness；
+   - active；
+   - boundary_status；
+   - summary；
+   - created_at。
+
+3. SystemDriveState
+   字段建议：
+   - drive_id；
+   - target_system；
+   - weight_refs；
+   - dominant_drive_kind；
+   - drive_balance_hint；
+   - confidence；
+   - summary；
+   - created_at。
+
+4. PreferenceWeightState
+   字段建议：
+   - preference_id；
+   - preference_kind；
+   - weight_value；
+   - source_ref；
+   - stability_hint；
+   - confidence；
+   - summary；
+   - created_at。
+
+5. StabilityPressureState
+   字段建议：
+   - pressure_id；
+   - target_refs；
+   - pressure_value；
+   - instability_sources；
+   - recommended_bias_hint；
+   - confidence；
+   - summary；
+   - created_at。
+
+6. RiskPressureState
+   字段建议：
+   - pressure_id；
+   - target_refs；
+   - risk_value；
+   - risk_source_refs；
+   - l5_review_need_hint；
+   - confidence；
+   - summary；
+   - created_at。
+
+7. ExplorationPressureState
+   字段建议：
+   - pressure_id；
+   - target_refs；
+   - novelty_value；
+   - information_gain_hint；
+   - learning_value_hint；
+   - confidence；
+   - summary；
+   - created_at。
+
+8. ExecutionReadinessState
+   字段建议：
+   - readiness_id；
+   - target_refs；
+   - required_boundary_refs；
+   - required_execution_refs；
+   - required_context_refs；
+   - readiness_score；
+   - missing_requirements；
+   - confidence；
+   - summary；
+   - created_at。
+
+9. DynamicDriveEvaluationRefState
+   字段建议：
+   - evaluation_ref_id；
+   - math_evaluation_ref；
+   - system_drive_ref；
+   - affective_color_ref；
+   - target_refs；
+   - summary；
+   - created_at。
+
+禁止事项：
+
+- 不得实现动态决策算法；
+- 不得根据权重执行动作；
+- 不得根据权重直接选择 Skill；
+- 不得根据权重直接释放工具；
+- 不得根据权重做权限裁决；
+- 不得根据权重写入状态存储；
+- 不得引入真实运行循环。
+
+────────────────────────────────
+九、数据结构硬要求
+────────────────────────────────
+
+所有新增状态对象必须满足：
+
+1. 使用 @dataclass(frozen=True, slots=True)。
+2. 字段必须可稳定序列化。
+3. 字段默认值必须安全，不使用可变默认值。
+4. 不持有真实文件句柄、数据库连接、网络连接、模型客户端、工具对象、回调函数、协程、线程、锁或运行时执行器。
+5. 只记录 id、ref、status、kind、scope、timestamp、summary、hash、score、weight、confidence、boundary_status 等状态事实。
+6. 数值字段必须明确语义，建议 0.0-1.0 归一化字段使用 normalized/value/weight 命名。
+7. 长文本必须克制，优先 summary、hash、ref。
+8. 必须能参与快照、增量、稳定 hash、等值比较。
+9. 必须有中文 docstring。
+10. 禁止 import L3、L4、L5、L6 或任何未来层实现。
+11. 禁止第三方依赖。
+12. 禁止任何真实 IO、模型调用、工具调用或外部副作用。
+
+建议字段类型优先使用：
+
+- str
+- int
+- float
+- bool
+- tuple
+- frozenset
+- enum
+- datetime 字符串或 L0 时间类型
+- L0/L1/L2 已定义的引用对象
+- 本阶段状态对象
+
+避免使用：
+
+- dict 的可变嵌套结构；
+- list；
+- set；
+- Any；
+- Callable；
+- object；
+- 真实外部对象。
+
+如果需要表达键值权重，建议使用稳定 tuple：
+
+(("curiosity", 0.7), ("caution", 0.4))
+
+不要使用可变 dict 默认值。
+
+────────────────────────────────
+十、与 L2 第一至第八阶段的接线要求
+────────────────────────────────
+
+第九阶段必须与前八阶段兼容。
+
+1. 与第一阶段基础状态骨架兼容：
+   - 复用状态 id；
+   - 复用状态码；
+   - 复用稳定序列化；
+   - 复用稳定 hash；
+   - 复用快照/增量/不变量。
+
+2. 与第二阶段运行连续性兼容：
+   - MathEvaluation 可引用 Run / Task / Turn / Step 状态；
+   - DynamicDrive 可引用 Continuity 状态；
+   - 不实现运行循环。
+
+3. 与第三阶段 Skill / ToolGroup / Model / Action 状态兼容：
+   - MathFeature 可引用 Skill、ToolGroup、ToolIntent、ActionIntent、ModelFeedback 状态；
+   - DynamicWeight 可影响后续 L3 排序；
+   - 不选择 Skill；
+   - 不释放工具；
+   - 不执行动作。
+
+4. 与第四阶段控制、资源、环境、安全状态兼容：
+   - MathConstraint 可引用安全、资源、环境、边界状态；
+   - RiskPressure 可引用 L5 未来裁决需求；
+   - 不做真实风险评分；
+   - 不做真实权限裁决。
+
+5. 与第五阶段观察面状态兼容：
+   - MathFeature 可引用观察帧、事件流、指标、审计观察；
+   - 不读取日志；
+   - 不采样指标；
+   - 不写审计。
+
+6. 与第六阶段记忆、上下文、检索、学习状态兼容：
+   - MathFeature 可引用记忆相关性、上下文预算、检索质量、学习信号；
+   - AffectiveState 可作为 L3 倾向输入；
+   - 不执行检索；
+   - 不执行学习。
+
+7. 与第七阶段候选、变更、迭代、进化、实验、验证、恢复状态兼容：
+   - MathRecommendation 可引用候选、验证、恢复、进化状态；
+   - DynamicDrive 可影响后续 L3 候选排序；
+   - 不生成补丁；
+   - 不执行验证；
+   - 不执行恢复。
+
+8. 与第八阶段组件、兼容、投影、收口状态兼容：
+   - StateCatalog 可补充第九阶段状态对象；
+   - ProjectionState 可引用数学/情感/动态驱动状态；
+   - L2Closure 需要更新为含第九阶段补丁；
+   - 不重写第八阶段收口；
+   - 不进入 L3。
+
+────────────────────────────────
+十一、导出要求
+────────────────────────────────
+
+必须更新 L2 状态包 __init__.py：
+
+1. 导出新增 math_state / affective_state / dynamic_drive_state 公共对象。
+2. 不删除前八阶段已有导出。
+3. 不制造副作用。
+4. 不执行扫描。
+5. 不读取文件。
+6. 不注册插件。
+7. 不实例化外部对象。
+8. 如已有 __all__，必须补充新增对象。
+9. 如已有 state_catalog，可以最小补充第九阶段对象目录。
+10. 如已有 projection_state，可以增加引用能力，但不得重构投影系统。
+
+如果需要修改第八阶段 catalog / closure 相关对象，只允许做最小补充：
+- 追加第九阶段 domain；
+- 追加第九阶段对象目录；
+- 追加第九阶段补丁说明状态；
+不得重写第八阶段。
+
+────────────────────────────────
+十二、测试要求
+────────────────────────────────
+
+必须新增或补充测试。
+
+建议测试文件：
+
+tests/test_l2_phase9_math_state.py
+tests/test_l2_phase9_affective_state.py
+tests/test_l2_phase9_dynamic_drive_state.py
+tests/test_l2_phase9_serialization_and_hash.py
+tests/test_l2_phase9_boundary_no_execution.py
+tests/test_l2_phase9_integration_with_l2_phase1_to_phase8.py
+
+至少覆盖：
+
+1. 所有新增状态对象可实例化。
+2. 所有新增状态对象 frozen，不允许修改字段。
+3. 所有新增状态对象 slots 生效。
+4. 所有新增状态对象可稳定序列化。
+5. 所有新增状态对象可稳定 hash。
+6. 所有新增状态对象默认值安全，无可变默认值污染。
+7. MathState 不计算、不排序、不裁决、不执行。
+8. AffectiveState 不执行、不越权、不提升权限、不绕过 L5/L4。
+9. DynamicDriveState 不执行、不选择 Skill、不释放工具、不做裁决。
+10. 新增对象可以引用前八阶段状态 ref。
+11. __init__.py 导出完整且无副作用。
+12. 不存在文件 IO、网络 IO、数据库连接、模型调用、工具调用、命令执行。
+13. 不 import L3-L6。
+14. 不恢复旧能力包、CapabilityPort、AbilityPackagePort、神枢或旧 Runtime 主链。
+15. compileall 通过。
+16. L2 相关 pytest 分片通过。
+17. 如完整 pytest 成本可控，建议运行完整 pytest；未运行不得声称完整通过。
+
+推荐命令：
+
+python -m compileall tiangong_kernel tests
+pytest tests/test_l2_phase9_math_state.py -q
+pytest tests/test_l2_phase9_affective_state.py -q
+pytest tests/test_l2_phase9_dynamic_drive_state.py -q
+pytest tests/test_l2_phase9_serialization_and_hash.py -q
+pytest tests/test_l2_phase9_boundary_no_execution.py -q
+pytest tests/test_l2_phase9_integration_with_l2_phase1_to_phase8.py -q
+pytest tests -q -k "l2"
+
+如果没有运行完整 pytest，不得声称完整 pytest 通过。
+
+────────────────────────────────
+十三、禁止项硬边界
+────────────────────────────────
+
+本阶段严禁：
+
+1. 修改 L0。
+2. 修改 L1。
+3. 开发 L3。
+4. 开发 L4。
+5. 开发 L5。
+6. 开发 L6。
+7. 重构 L2 第一至第八阶段公共骨架。
+8. 实现数学评分算法。
+9. 实现真实排序算法。
+10. 实现真实情感算法。
+11. 实现真实欲望算法。
+12. 实现动态决策算法。
+13. 实现模型调用。
+14. 实现工具调用。
+15. 实现文件 IO。
+16. 实现网络 IO。
+17. 实现命令执行。
+18. 实现数据库访问。
+19. 实现状态存储。
+20. 实现调度器。
+21. 实现运行循环。
+22. 实现插件宿主。
+23. 实现权限裁决。
+24. 实现风险评分。
+25. 实现 Skill 选择。
+26. 实现工具组释放。
+27. 实现候选生成。
+28. 实现补丁生成。
+29. 实现验证器。
+30. 实现回滚器。
+31. 新增第三方依赖。
+32. 恢复旧能力包主链。
+33. 恢复 CapabilityPort / AbilityPackagePort 主链。
+34. 恢复“神枢”作为新版核心概念。
+35. 让情感状态产生执行命令。
+36. 让数学建议绕过 L5。
+37. 让动态权重绕过 L4。
+38. 让 L2 状态对象持有真实执行器。
+
+如果发现必须触碰禁止项，停止开发并写入阻断报告，不得自行越界。
+
+────────────────────────────────
+十四、本阶段完成标准
+────────────────────────────────
+
+第九阶段完成时，必须达到：
+
+1. L2 新增数学模型状态入口。
+2. L2 新增情感 / 情志状态入口。
+3. L2 新增动态驱动权重状态入口。
+4. 所有新增状态对象 frozen + slots。
+5. 所有新增状态对象稳定序列化、稳定 hash。
+6. 所有新增状态对象无 IO、无执行、无副作用。
+7. 与 L2 第一至第八阶段兼容。
+8. __init__.py 导出完整且无副作用。
+9. 如有 state_catalog / projection / closure，完成最小补充。
+10. 没有进入 L3-L6。
+11. 没有实现数学计算、情感算法、动态决策算法。
+12. 没有恢复旧能力包、CapabilityPort、神枢或旧 Runtime 主链。
+13. 测试覆盖新增状态对象、边界、序列化、hash、兼容性。
+14. compileall 通过。
+15. 相关 pytest 通过。
+16. 输出完整工程 zip、开发日志、handoff 报告、validation 报告、修改清单、测试结果、未做事项。
+17. 明确是否建议进入 L2 第九阶段专项质检或 L2 全阶段二次质检。
+
+────────────────────────────────
+十五、交付物要求
+────────────────────────────────
+
+完成后必须交付：
+
+1. L2 第九阶段完整工程 zip；
+2. L2 第九阶段开发日志；
+3. L2 第九阶段 handoff 报告；
+4. L2 第九阶段 validation 报告；
+5. L2 第九阶段修改清单；
+6. L2 第九阶段测试结果；
+7. L2 第九阶段未做事项；
+8. 如修改了第八阶段 catalog / projection / closure，必须单独列出；
+9. 是否建议进入第九阶段专项质检；
+10. 是否建议重新打 L2 最终冻结包。
+
+报告必须中文。
+不要在聊天框展开大量细节。
+将详细内容写入 txt / md 文件。
+交付 zip 必须是完整工程包，不要只给 patch。
+
+────────────────────────────────
+十六、给工程员的开工口令
+────────────────────────────────
+
+开始 L2 第九阶段补充工程。
+
+请先读取我上传的 L1 最终冻结归档包、L2 第八阶段最终完整工程包、L2 第一至第八阶段开发日志、handoff 报告、validation 报告、L2 总收口报告、L2 质检/修复报告，以及 L2 第九阶段工程员提示词。
+
+先确认前置文件是否齐全。
+如果齐全，只做第九阶段：数学模型、情感系统与动态驱动状态预留补丁。
+
+本阶段只补 L2 状态入口，不计算、不执行、不裁决、不进入 L3-L6。
+重点新增 math_state.py、affective_state.py、dynamic_drive_state.py，并完成导出、测试、报告。
+不得恢复旧能力包、CapabilityPort、AbilityPackagePort、神枢或旧 Runtime 主链。
+不得让情感、数学建议或动态权重绕过 L5 边界和 L4 执行层。
+
+完成后交付完整 zip、开发日志、handoff 报告、validation 报告、修改清单、测试结果、未做事项，并明确是否建议进入第九阶段专项质检。

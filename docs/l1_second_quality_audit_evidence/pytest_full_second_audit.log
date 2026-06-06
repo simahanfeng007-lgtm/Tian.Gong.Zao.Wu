@@ -1,0 +1,2 @@
+command: python3 -m pytest -q tests
+result: 326 passed in 6.48s

@@ -1,0 +1,22 @@
+L5 第七阶段审计证据索引
+
+包含：
+- host_boundary_gate_refs
+- l3_handoff_refs
+- l4_handoff_refs
+- l6_entry_refs
+- route_refs
+- hook_refs
+- event_subscription_refs
+- contract_binding_refs
+- service_mount_binding_refs
+- capability_mount_binding_refs
+- production_mount_binding_refs
+- governance_gate_refs
+- validation_report_refs
+- conflict_report_refs
+- quality_gate_decision_refs
+- public_projection_refs
+- event_refs / evidence_refs / provenance_refs / accountability_refs / tamper_evidence_ref
+
+说明：均为声明级 ref，不写真实审计库。

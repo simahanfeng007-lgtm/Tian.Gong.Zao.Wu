@@ -1,0 +1,35 @@
+天工造物 L6 第五阶段修改清单
+
+一、新增源码目录
+- tiangong_kernel/l6_plugins/governance_control/
+
+二、新增源码文件
+1. __init__.py
+2. common.py
+3. risk_assessment.py
+4. permission_requirement.py
+5. budget_pressure.py
+6. audit_evidence.py
+7. credential_boundary.py
+8. privacy_redaction.py
+9. governance_review.py
+10. human_gate.py
+11. degradation_policy.py
+12. long_chain_governance.py
+13. public_projection_safety.py
+14. bridge_reviews.py
+15. invariants.py
+16. forbidden_scan.py
+17. quality_gate.py
+
+三、非破坏性修改
+- tiangong_kernel/l6_plugins/__init__.py 追加 governance_control 导出。
+
+四、新增测试
+- 新增 41 个 tests/test_l6_phase5_*.py。
+
+五、未修改
+- L0-L5 全部未改。
+- L6 common 未改。
+- L6 mind 未改。
+- L6 cognitive_continuity 未改。

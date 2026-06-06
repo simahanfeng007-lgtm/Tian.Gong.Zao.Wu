@@ -1,0 +1,85 @@
+天工造物 L4 第四阶段测试结果
+
+阶段名称：第四阶段，模型动作、工具动作、ToolGroup 动作承载骨架
+工程目录：project_l4_phase4
+测试日期：2026-06-04
+
+一、编译检查
+
+命令：
+
+python -m compileall -q tiangong_kernel tests
+
+结果：
+
+compileall passed
+
+日志：
+
+docs/l4_phase4_compileall.log
+
+二、第四阶段目标测试
+
+命令：
+
+python -m pytest -q tests/test_l4_phase4_model_action_envelopes.py tests/test_l4_phase4_tool_action_envelopes.py tests/test_l4_phase4_tool_group_context.py tests/test_l4_phase4_fake_model_tool_adapters.py tests/test_l4_phase4_dry_run_model_tool_adapters.py tests/test_l4_phase4_real_model_tool_disabled_by_default.py tests/test_l4_phase4_no_live_model_or_tool_without_l5.py tests/test_l4_phase4_l3_intent_binding_structural_only.py tests/test_l4_phase4_no_skill_tool_registry_implementation.py tests/test_l4_phase4_no_legacy_runtime_or_ability_package.py
+
+结果：
+
+19 passed in 2.32s
+
+日志：
+
+docs/l4_phase4_pytest_targeted.log
+
+三、L4 第一至第三阶段回归测试
+
+命令：
+
+python -m pytest -q tests/test_l4_phase1_boundary_no_real_actions.py tests/test_l4_phase1_disabled_by_default.py tests/test_l4_phase1_fake_dry_run_noop.py tests/test_l4_phase1_imports_and_basic_objects.py tests/test_l4_phase1_l3_compatibility.py tests/test_l4_phase1_no_l5_l6_imports.py tests/test_l4_phase1_serialization_and_hash.py tests/test_l4_phase2_gate_validation.py tests/test_l4_phase2_no_l5_l6_import.py tests/test_l4_phase2_no_live_action_without_l5.py tests/test_l4_phase2_permit_refs.py tests/test_l4_phase2_test_only_permit_isolation.py tests/test_l4_phase3_adapter_disabled.py tests/test_l4_phase3_adapter_fake_dryrun_noop.py tests/test_l4_phase3_adapter_invariants.py tests/test_l4_phase3_adapter_protocol.py tests/test_l4_phase3_adapter_registry.py tests/test_l4_phase3_adapter_selector.py tests/test_l4_phase3_l0_l3_compat.py tests/test_l4_phase3_no_real_actions.py
+
+结果：
+
+68 passed in 3.61s
+
+日志：
+
+docs/l4_phase4_pytest_phase1_phase2_phase3_regression.log
+
+四、L4 第一至第四阶段筛选测试
+
+命令：
+
+python -m pytest -q tests -k "l4_phase1 or l4_phase2 or l4_phase3 or l4_phase4"
+
+结果：
+
+87 passed, 628 deselected in 4.06s
+
+日志：
+
+docs/l4_phase4_pytest_l4_phase1_to_phase4.log
+
+五、全量测试
+
+命令：
+
+python -m pytest -q tests
+
+结果：
+
+715 passed in 6.31s
+
+日志：
+
+docs/l4_phase4_pytest_full.log
+
+六、静态与边界检查
+
+1. L0/L1/L2/L3 哈希对照：MATCH。
+2. 第四阶段禁止关键词扫描：NO_MATCH。
+3. 第四阶段禁止模块与真实动作语义扫描：NO_MATCH。
+
+七、结论
+
+第四阶段测试通过，且没有发现真实模型、真实工具、真实文件、真实网络、真实 shell、真实桌面动作入口。

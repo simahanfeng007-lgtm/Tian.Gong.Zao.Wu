@@ -1,0 +1,15 @@
+天工造物 L6 第三阶段 Handoff 报告
+
+交接给 L6 第四阶段的稳定对象：
+1. MindPluginGroupArchitecture：心智插件组总体架构。
+2. MindPluginDeclaration：13 个插件声明的统一形态。
+3. MindStateEnvelope 与各 MindStateDomain：候选状态域，不是 L2 fact。
+4. MindOutputBase 与各 Projection/Suggestion/Report/Score：统一输出对象。
+5. MindScoreBase 与 10 类动态评分模型：动态评分，不是授权。
+6. MindModelNeed / MindToolNeed：模型与工具需求只输出 requirement。
+7. MindInteroperationMatrix：跨插件协作只能通过 Event / Projection / Handoff / PublicProjection / Host-mediated / L3-L5 reschedule。
+8. L6Phase3MindQualityGateDecision：P0/P1 阻断第四阶段。
+9. default_l6_phase3_mind_forbidden_scan_rules：第三阶段禁用结构扫描规则。
+10. default_l6_phase3_mind_invariant_rules：第三阶段不变量集合。
+
+第四阶段可以基于这些契约继续做更具体插件组实现，但仍不得绕过 L3/L4/L5，不得裸调模型、裸调工具或直接写状态。

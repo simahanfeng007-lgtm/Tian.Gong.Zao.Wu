@@ -1,0 +1,74 @@
+# 临渊者 L6.32 Planner 驱动真实执行主链闭环交付报告
+
+## 一、结论
+
+已完成 L6.32：把 L6.31 的 UnifiedPlannerContext / ExecutionStepDraft 推进为可执行主链控制器。
+
+核心链路已变为：
+
+用户任务 / 模型计划 / 显式计划
+→ Planner plan
+→ L6.32 PlannerExecutionController
+→ LongChainRunner
+→ ExecutionSpine
+→ PermitGateway / RiskClassifier / Registry / Adapter / Audit
+→ PlannerExecutionReport / ReplayEvent / ResumeEnvelope
+
+本轮仍只改外壳层：未修改 tiangong_kernel，未新增并行 Runtime，未绕过治理链。
+
+## 二、本轮新增能力
+
+1. 新增 `tiangong_agent_runtime/planner_execution_controller.py`。
+   - `PlannerExecutionController`
+   - `PlannerExecutionReport`
+   - `PlannerExecutionStepRecord`
+   - `PlannerReplayEvent`
+   - `PlannerExecutionResumeEnvelope`
+   - `stable_planner_execution_digest`
+
+2. Runtime 主链接入 L6.32。
+   - `RuntimeEntry.run_text()` 已通过 L6.32 控制器包裹执行链。
+   - `RuntimeEntry.execute_plan()` 已通过 L6.32 控制器包裹执行链。
+   - `RuntimeEntry.run_model_chat()` 已纳入 L6.32 replay/report 外壳。
+   - 新增 `run_planner_execution_task()`、`planner_execution_snapshot()`、`export_planner_execution_json()`、`reset_planner_execution()`。
+
+3. CLI 新增 L6.32 命令。
+   - `/planner-execute <任务>`
+   - `/planner-execution`
+   - `/planner-execution-save <path>`
+   - `/planner-execution-reset`
+
+4. 运行报告升级。
+   - `runtime_report.py` 现在导出 `planner_execution_report`。
+   - Markdown 报告会显示 L6.32 执行摘要。
+
+## 三、执行边界
+
+- 不改 `tiangong_kernel`。
+- 不新增并行 Runtime。
+- 不直接调用 adapter。
+- 不跳过 `LongChainRunner` / `ExecutionSpine`。
+- 不裸调模型，不触网，不读密钥。
+- A0-A3 仍可自动流转。
+- A4 仍生成确认票据。
+- A5 仍硬阻断。
+
+## 四、验证结果
+
+- compileall：通过。
+- L6.32 新增测试：7 passed。
+- L6.30-L6.32 回归：34 passed。
+- L6.10 / L6.11 / L6.13 / L6.14 / L6.23 分片：22 passed。
+- L6.20-L6.29 分片：82 passed。
+- CLI smoke：通过。
+- tiangong_kernel hash compare：changed=0 / added=0 / removed=0。
+- forbidden scan：blocking_findings=0；allowlisted_text_mentions=2（CLI help 中 OpenAI-compatible 字样）。
+
+## 五、未做事项
+
+1. 未声明完整全量 pytest 通过。当前环境中大聚合 pytest 仍可能出现子进程/管道超时不回收，已采用分片验证。
+2. 未做 GUI 全路径点击。
+3. 未做 Windows 原生验证。
+4. 未做安装包级验证。
+5. 未做真实 Provider 网络调用。
+6. L6.33 建议做分片执行器、超时收割、真实长链回放与执行上限压测。

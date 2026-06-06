@@ -1,0 +1,29 @@
+天工造物 L6 第二阶段测试结果
+生成日期：2026-06-05
+
+一、执行命令与结果
+1. python3 -m compileall -q tiangong_kernel tests
+   - 结果：通过，exit_code=0。
+2. python3 -m pytest --collect-only -q
+   - 结果：1453 tests collected in 5.70s
+3. python3 -m pytest -q tests/test_l6_phase2_*.py
+   - 结果：39 passed in 1.37s
+4. python3 -m pytest -q tests/test_l6_phase1_*.py tests/test_l6_phase2_*.py
+   - 结果：58 passed in 3.08s
+5. python3 -m pytest -q tests -k 'l6 or phase2'
+   - 结果：271 passed, 1182 deselected in 6.72s
+6. python3 -m pytest -q tests
+   - 结果：1453 passed in 13.06s
+
+二、说明
+- full pytest 已真实执行完成，不是占位声明。
+- 新增测试 5 个文件、39 个二阶段测试。
+- 未删除既有测试，未修改既有测试。
+
+三、日志文件
+- docs/l6_phase2_compileall_20260605.log
+- docs/l6_phase2_pytest_collect_only_20260605.log
+- docs/l6_phase2_pytest_targeted_20260605.log
+- docs/l6_phase2_pytest_l6_phase1_phase2_20260605.log
+- docs/l6_phase2_pytest_l6_or_phase2_20260605.log
+- docs/l6_phase2_pytest_full_20260605.log

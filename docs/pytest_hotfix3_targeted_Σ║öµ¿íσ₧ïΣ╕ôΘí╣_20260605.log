@@ -1,0 +1,4 @@
+$ python3 -m pytest -q tests/test_l1_model_provider_port_exists.py tests/test_l1_model_invocation_port_exists.py tests/test_provider_factsheet_official_doc_refs_match_provider.py tests/test_provider_factsheet_mimo_lowercase_and_api_surfaces.py tests/test_l4_model_provider_adapter_public_export_or_handoff.py tests/test_hotfix3_l5_impact_report_matches_hash_compare.py tests/test_docs_filenames_are_utf8_readable.py
+........                                                                 [100%]
+8 passed in 4.18s
+exit_code=0

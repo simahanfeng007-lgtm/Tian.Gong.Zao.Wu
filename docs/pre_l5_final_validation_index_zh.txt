@@ -1,0 +1,24 @@
+天工造物 L1-L4 进入 L5 前最终验证索引
+日期：2026-06-04
+
+最终结论：
+1. 当前进入 L5 前最终门检以 2026-06-04 rerun 质检报告为准。
+2. 当前最终全量测试结论为 python -m pytest -q tests：929 passed。
+3. 当前交付包 SHA256 以包外同名 .zip.sha256.txt 文件为准。
+4. 当前门检结论：通过，可进入 L5 插件宿主层总策划与工程准备。
+
+历史测试数字口径：
+1. 824 passed：L4 第八阶段冻结候选时期的阶段性全量结果，用于说明当时 L4 phase8 范围，不作为当前最终结论。
+2. 921 passed：L4->L5/L6 前置连续修复早期归档结果，已被后续新增专项和 P0 修复后的全量结果替代。
+3. 929 passed：L1-L4 跨专项 P0 修复后、L5 前总门检 rerun 复核后的最终基线数字。
+
+进入 L5 前证据读取顺序：
+1. docs/pre_l5_gate_audit_rerun_summary_zh.txt
+2. docs/pre_l5_cross_specialty_gate_p0_repair_report_zh.txt
+3. docs/pre_l5_sequential_patch_validation_report_zh.txt
+4. docs/pre_l5_eight_specialty_patch_validation_report_zh.txt
+5. docs/pre_l5_sequential_patch_test_results_zh.txt
+6. docs/pre_l5_eight_specialty_patch_test_results_zh.txt
+
+归档说明：
+历史报告保留原阶段数字，不直接改写，以免破坏阶段追溯；最终交接、L5 总策划和后续质检均应引用本索引的最终结论。

@@ -1,0 +1,28 @@
+{
+  "name": "l6_33_34_chain",
+  "status": "passed",
+  "returncode": 0,
+  "duration_seconds": 23.604795,
+  "timeout_seconds": 120.0,
+  "started_at": 1780726363.623737,
+  "finished_at": 1780726387.2285306,
+  "command": [
+    "/opt/pyvenv/bin/python3",
+    "-m",
+    "pytest",
+    "tests/test_l6_33_test_shard_runner.py",
+    "tests/test_l6_34_model_cli_continuity.py",
+    "-q"
+  ],
+  "cwd": "/mnt/data/l635_work/project",
+  "purpose": "pytest shard",
+  "required": true,
+  "rerun_command": "/opt/pyvenv/bin/python3 -m pytest tests/test_l6_33_test_shard_runner.py tests/test_l6_34_model_cli_continuity.py -q",
+  "stdout_path": "/mnt/data/l635_work/project/reports/l6_35_shards/l6_33_34_chain/stdout.log",
+  "stderr_path": "/mnt/data/l635_work/project/reports/l6_35_shards/l6_33_34_chain/stderr.log",
+  "stdout_tail": "..............                                                           [100%]\n14 passed in 20.20s\n",
+  "stderr_tail": "",
+  "error_message": "",
+  "timed_out": false,
+  "process_group_reaped": false
+}

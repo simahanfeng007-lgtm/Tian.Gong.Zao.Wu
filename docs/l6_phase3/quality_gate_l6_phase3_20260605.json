@@ -1,0 +1,8 @@
+{
+  "allow_enter_phase4": true,
+  "p0_count": 0,
+  "p1_count": 0,
+  "blocking_reasons": [],
+  "full_pytest_passed_for_freeze": true,
+  "note": "full pytest was executed separately and passed; dataclass flag defaults false to avoid fake success when instantiated without evidence."
+}

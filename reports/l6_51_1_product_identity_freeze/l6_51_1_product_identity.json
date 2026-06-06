@@ -1,0 +1,10 @@
+{
+  "schema": "tiangong.l6_51_1.product_identity.v1",
+  "product_name": "天工造物 / 临渊者",
+  "unique_developer": "于泳翔",
+  "angel_investor": "胖胖龙",
+  "endpoint": "/metadata/product",
+  "public": true,
+  "runtime_semantics": "metadata_only",
+  "frontend_permission": "read_only_display"
+}

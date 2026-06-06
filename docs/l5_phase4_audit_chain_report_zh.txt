@@ -1,0 +1,37 @@
+天工造物 L5 第四阶段审计证据责任链报告
+
+结论：通过。
+
+已显式承载责任链字段的对象：
+- PluginLifecycleStateRef
+- PluginLifecycleTransitionRule
+- PluginLifecycleStateMachine
+- PluginMountDeclaration
+- PluginMountSurfaceRef
+- PluginLifecycleValidationReport
+- PluginMountDeclarationConflictReport
+- PluginLifecycleQualityGateDecision
+- PluginLifecyclePublicProjection
+- PluginLifecycleAuditIndex
+
+责任链字段覆盖：
+- actor_ref
+- scope_ref
+- trace_ref
+- policy_ref
+- approval_ref
+- responsibility_chain_ref
+- accountability_ref
+- provenance_refs
+- evidence_refs
+- tamper_evidence_ref
+- lifecycle_event_refs / event_kind_refs
+
+Event-first 声明：
+- lifecycle_event_kind_refs
+- mount_event_kind_refs
+- validation_event_refs
+- quality_gate_event_ref
+- conflict_event_refs
+
+本阶段未 emit 真实事件，未写真实审计库；只保存结构化 ref / summary / digest / kind / source_layer 类轻量引用。

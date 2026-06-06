@@ -1,0 +1,10 @@
+天工造物 L5 第二阶段 forbidden scan 报告
+
+扫描范围：tiangong_kernel/l5_plugin_host/*.py
+扫描结论：通过。
+阻断项：0。
+旧主链回归：0。
+L6 业务插件实现：0。
+真实动态加载/外部动作/进程/网络/文件写删/沙箱/注册表写入：0。
+疑似明文凭据值：0。
+说明：扫描区分治理字段名与疑似真实凭据值；secret_scope_refs、token_scope_refs、credential_handle_refs 等字段名不作为阻断项。

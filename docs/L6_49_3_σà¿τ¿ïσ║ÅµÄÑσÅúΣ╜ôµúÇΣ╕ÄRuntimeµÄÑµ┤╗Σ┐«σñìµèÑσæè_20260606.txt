@@ -1,0 +1,159 @@
+天工造物 / 临渊者 L6.49.3 全程序接口体检与 Runtime 接活修复报告
+================================================================
+
+一、本轮目标
+
+用户要求：过一遍所有程序接口，确认是否还存在“引擎本体正确，但 Runtime / 内核接口没有接活、签名错配、静默吞错”的问题，包括 tiangong_kernel 接口。
+
+本轮按修理师口径执行：先验证、再定位、再最小补丁、再回归；不重构、不绕 Runtime、不污染内核。
+
+二、体检范围
+
+1. Python 源码根：
+   - tiangong_agent_runtime
+   - tiangong_agent_shell
+   - tiangong_kernel
+
+2. 静态体检：
+   - 822 个源码 Python 文件 AST 解析。
+   - 822 个 runtime/shell/kernel 模块逐个 import。
+   - 显式项目调用的轻量签名扫描。
+   - source 级 except-pass 静默吞错扫描。
+   - kernel 是否反向 import runtime/shell 边界扫描。
+
+3. 动态体检：
+   - RuntimeEntry.run_text 触发 live context。
+   - MemoryRecallRouter.route 是否由 Runtime 调用。
+   - ForgetReviewRouter.review(record, vector) 是否由 Runtime 正确签名调用。
+   - AffectiveStateEngine.evolve 是否跨 turn 传 previous_state。
+   - LifecycleCoordinator.build_bundle 是否由 Runtime 调用。
+   - FourPathContextRouter.build 是否由 Runtime 调用。
+   - BudgetLowFrictionGovernanceBridge.evaluate 是否由 Runtime 调用。
+   - PlannerUnifiedConsumptionBridge.consume 是否由 Runtime 调用。
+
+三、确认存在的问题
+
+【P1】部分 L6.40-L6.44 接口仍处于“引擎/桥存在，但 Runtime 未接活”状态。
+
+确认未接活接口：
+1. MemoryRecallRouter.route(query, top_k, now)
+   - 现象：L6.40 长期记忆召回路由只有专项测试调用，Runtime live planner context 未真实调用。
+   - 影响：MemoryStoreBridge 即使注入 Runtime，也只能被遗忘复核使用，无法向 Planner 输出摘要级召回 hint。
+
+2. LifecycleCoordinator.build_bundle(...)
+   - 现象：L6.42 生命周期协调器只有专项测试和模拟测试调用，Runtime live planner context 未持有生命周期 bundle。
+   - 影响：自愈/自主学习/自由意志/自我迭代只停留在模块和测试层，真实 Runtime 任务上下文没有生命周期候选投影。
+
+3. FourPathContextRouter.build(...)
+   - 现象：L6.43 四主路径统一投影存在，但 Runtime 仍使用旧式多段 hint 拼接。
+   - 影响：执行链、记忆、情志、生命周期、预算、质量门没有被压缩为统一 FourPathContextReport。
+
+4. PlannerUnifiedConsumptionBridge.consume(four_path_report, plan)
+   - 现象：L6.43.1 Planner 单入口消费桥存在，但 Runtime 未消费 FourPathContextReport。
+   - 影响：Planner context 仍不是严格意义的“单一消费入口”。
+
+5. BudgetLowFrictionGovernanceBridge.evaluate(plan, budget_snapshot)
+   - 现象：L6.44 低摩擦预算治理只在专项测试中运行，Runtime live context 未输出预算压力建议。
+   - 影响：A0-A4 低摩擦、A5 硬边界、续租/降级提示没有进入 live Planner hint。
+
+【P2】source 级静默吞错残留。
+
+位置：tiangong_agent_runtime/test_shard_runner.py
+性质：测试分片 runner 的 result.json 解析 fallback 与进程收割 fallback 使用 bare pass。
+影响：不在 Runtime 主链，但属于“接口体检”下的静默吞错残留，已修为可见 error_message 或明确 fallback。
+
+【P3】CLI 状态标题版本滞后。
+
+位置：tiangong_agent_shell/cli_loop.py
+现象：status 标题仍显示“L6.38 P0 系统接入启动器状态”。
+影响：文案滞后，不影响执行链；已修为通用“临渊者 Runtime 启动器状态”。
+
+四、本轮修复
+
+1. RuntimeEntry 新增只读/候选接口持有：
+   - budget_low_friction = BudgetLowFrictionGovernanceBridge()
+   - lifecycle_coordinator = LifecycleCoordinator()
+   - four_path_context = FourPathContextRouter()
+   - planner_unified_consumption = PlannerUnifiedConsumptionBridge()
+
+2. Runtime live context 接活以下接口：
+   - AffectiveStateEngine.evolve(..., previous_state=...)
+   - MemoryRecallRouter(store).route(user_message, top_k=5, now=...)
+   - ForgetReviewRouter.review(record, vector)
+   - BudgetLowFrictionGovernanceBridge.evaluate([], budget_snapshot=...)
+   - LifecycleCoordinator.build_bundle(...)
+   - FourPathContextRouter.build(...)
+   - PlannerUnifiedConsumptionBridge.consume(four_path_report, plan=[])
+
+3. 新增 Runtime 快照接口：
+   - memory_recall_runtime_snapshot()
+   - lifecycle_runtime_snapshot()
+   - budget_low_friction_runtime_snapshot()
+   - four_path_runtime_snapshot()
+   - planner_unified_consumption_snapshot()
+   - interface_wiring_snapshot()
+
+4. _build_planner_context_hint 增加以下 planner hint：
+   - budget_low_friction.build_planner_hint()
+   - lifecycle_coordinator.build_planner_hint()
+   - four_path_context.build_planner_hint()
+   - planner_unified_consumption.build_planner_hint()
+
+5. test_shard_runner 去除 source 级 bare pass：
+   - result.json 解析失败进入 result_read_error。
+   - 进程收割失败不吞，转为明确 fallback。
+
+6. CLI status 标题去 L6.38 硬编码。
+
+五、内核接口结论
+
+1. tiangong_kernel 未发现反向 import tiangong_agent_runtime / tiangong_agent_shell。
+2. tiangong_kernel 仍保持契约/数据结构/端口层，不被 Runtime 修复污染。
+3. runtime/shell/kernel 共 822 个源码模块 import 全通过。
+4. 未发现源码级 ImportError / ModuleNotFoundError / 循环导入加载失败。
+5. 本轮未修改 tiangong_kernel 源码。
+
+六、验证结果摘要
+
+1. compileall：PASS
+   python3 -m compileall -q tiangong_agent_runtime tiangong_agent_shell tiangong_kernel tests
+
+2. runtime/shell/kernel 模块 import：PASS
+   imported_module_count=822
+   import_failure_count=0
+
+3. AST 源码体检：PASS
+   python_file_count=822
+   syntax_error_count=0
+   explicit_source_signature_mismatch_count=0
+   source_silent_except_pass_count=0
+
+4. 接口接线专项：PASS
+   tests/test_l6_49_3_runtime_interface_wiring_audit.py
+   3 passed
+
+5. 受影响接口回归：PASS
+   59 passed
+
+6. L6.37-L6.49.3 冻结段回归：PASS
+   92 passed
+
+7. CLI smoke：PASS
+   run_agent.py --status
+   run_agent.py --mock --once "接口接线总体验证 smoke"
+
+七、剩余风险
+
+1. 本轮未跑 full pytest，不声明全量通过。
+2. 静态签名扫描是轻量 AST 扫描，不能替代 pyright/mypy 的完整类型推断。
+3. MemoryRecall / ForgetReview 只有在 RuntimeEntry 注入 MemoryStoreBridge 后才会产生真实记录级结果；未注入 store 时保持空投影，不伪造运行。
+4. 本轮未做真实 DeepSeek Provider 在线连通性测试。
+
+八、边界声明
+
+1. 未新增第二 Runtime。
+2. 未绕过 Runtime 调工具。
+3. 未让前端/投影写记忆。
+4. 未让生命周期系统执行补丁、热切换或自我迭代合入。
+5. 未修改 tiangong_kernel。
+6. A5 硬边界仍保留，A0-A4 低摩擦只进入提示/预检，不直接越过执行链。

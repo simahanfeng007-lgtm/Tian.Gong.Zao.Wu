@@ -1,0 +1,23 @@
+天工造物 L5 第四阶段回归证据索引
+
+1. L0-L4 回归保护
+   结果：501 unchanged，0 added，0 modified，0 deleted。
+
+2. L5 第一至第三阶段对象保护
+   结果：56 unchanged，新增 5 个第四阶段文件，声明性扩展 3 个共享文件，0 deleted。
+   共享扩展说明：__init__.py、invariants.py、registry_conflict.py 仅追加第四阶段导出、invariant suite 与 conflict kind。
+
+3. Manifest / RegistryEntry / RegistrySnapshot 兼容性
+   结果：phase1-phase3 public export backward compatibility 测试通过。
+
+4. no-live-action
+   结果：保持；forbidden scan 0 blocking findings。
+
+5. no-L6-implementation
+   结果：保持；未新增 MemoryPlugin、LearningPlugin、EvolutionPlugin、RecoveryPlugin、AffectivePlugin、ContextPlugin、MathEnginePlugin 等 L6 实现。
+
+6. no-legacy-runtime
+   结果：保持；未恢复旧 Runtime / 神枢 / AbilityPackage / CapabilityPort / AbilityPackagePort 主链。
+
+7. 测试清单保护
+   结果：未删除测试、未修改旧测试、未新增 skip/xfail、未弱化断言。

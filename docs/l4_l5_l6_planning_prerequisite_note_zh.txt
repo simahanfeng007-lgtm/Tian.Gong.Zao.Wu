@@ -1,0 +1,25 @@
+天工造物 L4/L5/L6 策划前置说明
+生成日期：2026-06-04
+
+一、总体前提
+L3 是编排层。L4/L5/L6 后续策划必须消费 L3 已冻结的交接对象，不能反向污染 L3，也不能要求 L3 执行、裁决或实现子系统。
+
+二、L4 执行层前置说明
+L4 未来接收：ExecutionRequest、ExecutionDispatchRequest、ExecutionPlanRef、ExecutionStepRef、ExecutionTokenRef。
+L4 未来返回：ExecutionResultRef、ExecutionFailureRef、ExecutionResumeRef、ExecutionCancelRef。
+L4 负责真实模型/工具/文件/网络/终端/桌面执行。L3 不执行、不签发真实执行令牌、不持有执行器。
+L4 开发前必须读取 L3ToL4HandoffEnvelope、L3ToL4InterfaceFreezeNote、L3ToL4NonExecutionGuarantee。
+
+三、L5 边界层前置说明
+L5 未来接收：BoundaryCheckRequest、RiskReviewRequest、PermissionReviewRequest、ConfirmationRequest、LeaseRequest。
+L5 未来返回：BoundaryDecisionRef、PolicyDecisionRef、DenialReasonRef。
+L5 负责真实权限、风险、确认、租约、凭据、审计门禁。L3 不裁决、不放行、不签票、不授予租约、不读取凭据、不写审计。
+L5 开发前必须读取 L3ToL5HandoffEnvelope、L3ToL5InterfaceFreezeNote、L3ToL5NonDecisionGuarantee。
+
+四、L6 子系统层前置说明
+L6 未来接收：SubsystemServiceRequest、MemoryServiceRequest、RetrievalServiceRequest、LearningServiceRequest、AffectiveServiceRequest、ObservationServiceRequest、ValidationServiceRequest、RecoveryServiceRequest、IterationServiceRequest、EvolutionServiceRequest。
+L6 负责真实记忆、检索、学习、情感、观察、验证、恢复、迭代、进化子系统。L3 不实现子系统、不调用插件宿主、不生成真实 Skill/Tool/Knowledge。
+L6 开发前必须读取 L3ToL6HandoffEnvelope、L3ToL6InterfaceFreezeNote、L3ToL6NonImplementationGuarantee。
+
+五、后续建议
+L3 总质检通过后，再分别做 L4/L5/L6 总策划。不要在未冻结 L3 前直接开 L4/L5/L6。

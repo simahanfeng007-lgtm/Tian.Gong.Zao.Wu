@@ -1,0 +1,25 @@
+天工造物 L4 第三阶段质检前自查表
+生成日期：2026-06-04
+
+1. 是否把 L4 写成执行智能体：否。
+2. 是否进入 L4 第四阶段：否。
+3. 是否开发 L5：否。
+4. 是否开发 L6：否。
+5. 是否修改 L0/L1/L2/L3：否，hash compare 为 MATCH。
+6. 是否调用真实模型 API：否。
+7. 是否调用真实工具：否。
+8. 是否执行真实文件/网络/shell/桌面动作：否。
+9. 是否实现插件宿主或自动扫描：否。
+10. 是否恢复旧能力包、CapabilityPort、AbilityPackagePort、神枢或旧 Runtime 主链：否。
+11. 是否让 AdapterSelector 做权限裁决：否，只做结构匹配。
+12. 是否让 AdapterSelector 做风险放行：否。
+13. 是否让 AdapterRegistry 自动注册真实外部动作：否。
+14. 是否让 RealActionAdapterStub enabled_by_default：否。
+15. 是否让 RealActionAdapterStub production_enabled：否。
+16. 是否让 RealActionAdapterStub.invoke() 执行真实动作：否，返回 production_disabled failure。
+17. 是否让 fake adapter 进入 production path：否，selector 返回 TEST_ONLY_MODE failure。
+18. 是否让缺少 L5 permit/gate 的 requires_l5_permit adapter 通过：否，selector 返回 PERMIT_REQUIRED failure。
+19. 是否让 permit scope mismatch 通过：否，selector 返回 SCOPE_MISMATCH failure。
+20. 是否让数学/情感/动态驱动字段绕过禁用规则：否。
+
+结论：建议进入 L4 第三阶段专项质检。质检通过后可建议进入 L4 第四阶段，但第四阶段不得调用真实模型 API、不得调用真实工具、不得启用真实外部动作。

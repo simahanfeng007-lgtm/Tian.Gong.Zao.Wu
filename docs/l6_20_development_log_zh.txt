@@ -1,0 +1,100 @@
+天工造物 / 临渊者 L6.20 经验沉淀与 Skill / Tool 候选转化系统开发日志
+
+一、阶段定位
+
+L6.20 接在 L6.19 产品交付系统标准化之后。目标不是让临渊者直接生成真实 Skill 或真实 Tool，而是补齐“任务经验 → 安全摘要 → 教训候选 → Skill 候选 / Tool 缺口候选 → 治理转交”的前半闭环。
+
+本阶段继续遵守 L6 边界：
+- 不写 tiangong_kernel 主体。
+- 不注册 Skill。
+- 不写 Skill 注册表。
+- 不生产 Tool。
+- 不释放工具句柄。
+- 不修改源码。
+- 不应用自迭代变更。
+- 不绕过 L3/L4/L5/L6 治理链。
+
+二、新增 Runtime 侧组件
+
+1. tiangong_agent_runtime/experience_synthesis.py
+
+新增对象：
+- ExperienceSignal：经验信号。
+- LessonCandidate：可复用教训候选。
+- SkillCandidate：Skill 候选，不注册、不写入、不可见。
+- ToolGapCandidate：Tool 缺口候选，不生产、不释放、不调用。
+- GovernanceTransferItem：治理转交项，不应用变更、不允许自动演化。
+- ExperienceSynthesisReport：候选报告。
+- ExperienceSynthesisBridge：进程内状态桥。
+- build_synthesize_experience_adapter：Runtime Adapter 构造函数。
+
+2. RuntimeEntry 接入
+
+新增：
+- self.experience = ExperienceSynthesisBridge()
+- synthesize_experience_candidates 工具注册，默认 A2。
+- experience_snapshot()
+- export_experience_json()
+- reset_experience()
+- run_experience_synthesis()
+- planner hint 中加入最近经验沉淀摘要。
+
+3. RiskClassifier 接入
+
+新增 synthesize_experience_candidates 为 A2 受治理工具：
+- 只生成候选。
+- 不注册 Skill。
+- 不生产 Tool。
+
+4. PlanBridge / PlanSchema 接入
+
+显式触发词：
+- reflect
+- experience
+- 沉淀经验
+- 经验沉淀
+- 总结经验
+- 转化成技能
+- 转化成工具
+
+模型计划 schema 允许 synthesize_experience_candidates，但仅允许 notes/manual_notes/max_candidates 等安全参数。
+
+5. CLI 接入
+
+新增命令：
+- /reflect [备注]
+- /experience
+- /experience-save <路径>
+- /experience-reset
+
+CLI 显示升级为 L6.20，同时保留 L6.19 /release 标准发布流程。
+
+三、候选转化规则
+
+输入来源：
+- 当前进程上下文摘要。
+- L6.17 工程诊断摘要。
+- L6.18 质量门裁决。
+- L6.19 交付 Manifest / Release Gate。
+- 人工复盘备注。
+
+输出类型：
+- 缺少测试、pytest/compileall 相关信号 → 质量验证类 Lesson + 最小复测脚手架 Tool 缺口候选。
+- 缺少 README / 入口说明 → 项目入口说明 Skill 候选 + README 提纲 Tool 缺口候选。
+- 质量门/发布门 warn/fail/blocked → Gate 治理 Skill 候选 + 质量门证据归档 Tool 缺口候选。
+- 人工复盘 → 人工复盘沉淀 Skill 候选。
+- Runtime 非 OK 或风险摘要 → 运行失败排障 Skill 候选。
+
+四、安全边界
+
+所有候选对象均有硬断言：
+- SkillCandidate(registers_skill=True) 会报错。
+- SkillCandidate(writes_skill=True) 会报错。
+- ToolGapCandidate(produces_tool=True) 会报错。
+- ToolGapCandidate(releases_tool_handle=True) 会报错。
+- GovernanceTransferItem(applies_change=True) 会报错。
+- ExperienceSynthesisReport(candidate_only=False 或任意副作用标志为 True) 会报错。
+
+五、结论
+
+L6.20 使临渊者可以正式进行“经验总结与候选转化”，但没有给它直接自我增殖 Skill / Tool 的权限。它现在可以把经验变成治理链可审阅的候选材料，仍由后续 Skill 版本化、Tool 沙箱生产、质量门、发布门和人工确认完成正式落地。

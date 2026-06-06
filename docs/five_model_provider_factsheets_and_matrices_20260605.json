@@ -1,0 +1,655 @@
+{
+  "provider_budget_matrix": {
+    "deepseek_v4": {
+      "budget_envelope": "l5-budget-permit-ref:deepseek_v4",
+      "cache_supported": true,
+      "pricing_policy_ref": "official-ref:deepseek-models-pricing-v4"
+    },
+    "glm_5_1": {
+      "budget_envelope": "l5-budget-permit-ref:glm_5_1",
+      "cache_supported": true,
+      "pricing_policy_ref": "official-ref:zai-glm-5.1-pricing-input-cached-output"
+    },
+    "gpt_5_5": {
+      "budget_envelope": "l5-budget-permit-ref:gpt_5_5",
+      "cache_supported": true,
+      "pricing_policy_ref": "official-ref:openai-gpt-5.5-pricing"
+    },
+    "mimo": {
+      "budget_envelope": "l5-budget-permit-ref:mimo",
+      "cache_supported": true,
+      "pricing_policy_ref": "official-ref:mimo-pay-as-you-go-and-token-plan-pricing; ordinary API and Token Plan credentials are independent"
+    },
+    "minimax_m3": {
+      "budget_envelope": "l5-budget-permit-ref:minimax_m3",
+      "cache_supported": true,
+      "pricing_policy_ref": "official-ref:minimax-m3-pay-as-you-go-pricing"
+    }
+  },
+  "provider_capability_matrix": {
+    "deepseek_v4": {
+      "capability_flags": [
+        "streaming",
+        "tool_calling",
+        "structured_output",
+        "json_mode",
+        "reasoning_control",
+        "thinking_mode",
+        "multimodal_input:unknown",
+        "file_input:unknown",
+        "image_input:unknown",
+        "audio_input:unknown",
+        "video_input:unknown",
+        "cache",
+        "batch:unknown"
+      ],
+      "context_window_tokens": 1000000,
+      "max_output_tokens": "384K",
+      "model_ids": [
+        "deepseek-v4-flash",
+        "deepseek-v4-pro"
+      ],
+      "unknown": [
+        "multimodal_input_supported",
+        "file_input_supported",
+        "image_input_supported",
+        "audio_input_supported",
+        "video_input_supported",
+        "batch_supported",
+        "safety_refusal_shape"
+      ]
+    },
+    "glm_5_1": {
+      "capability_flags": [
+        "streaming",
+        "tool_calling",
+        "structured_output",
+        "json_mode:unknown",
+        "reasoning_control",
+        "thinking_mode",
+        "file_input:unknown",
+        "cache",
+        "batch:unknown"
+      ],
+      "context_window_tokens": 200000,
+      "max_output_tokens": 131072,
+      "model_ids": [
+        "glm-5.1"
+      ],
+      "unknown": [
+        "json_mode_supported",
+        "file_input_supported",
+        "batch_supported",
+        "rate_limit_policy_ref",
+        "safety_refusal_shape"
+      ]
+    },
+    "gpt_5_5": {
+      "capability_flags": [
+        "streaming",
+        "tool_calling",
+        "structured_output",
+        "json_mode",
+        "reasoning_control",
+        "multimodal_input",
+        "file_input",
+        "image_input",
+        "audio_input:unknown",
+        "video_input:unknown",
+        "cache",
+        "batch"
+      ],
+      "context_window_tokens": 1050000,
+      "max_output_tokens": 128000,
+      "model_ids": [
+        "gpt-5.5"
+      ],
+      "unknown": [
+        "openai_chat_completions_compatibility",
+        "audio_input_supported",
+        "video_input_supported",
+        "rate_limit_policy_ref_exact_numbers"
+      ]
+    },
+    "mimo": {
+      "capability_flags": [
+        "streaming",
+        "tool_calling",
+        "structured_output",
+        "json_mode:unknown",
+        "reasoning_control",
+        "thinking_mode:unknown",
+        "multimodal_input",
+        "file_input:unknown",
+        "image_input",
+        "audio_input",
+        "video_input",
+        "cache",
+        "batch:unknown",
+        "local_deployment"
+      ],
+      "context_window_tokens": 1000000,
+      "max_output_tokens": 128000,
+      "model_ids": [
+        "mimo-v2.5-pro",
+        "mimo-v2.5",
+        "mimo-v2.5-asr",
+        "mimo-v2-flash",
+        "mimo-v2-pro",
+        "mimo-v2-omni"
+      ],
+      "unknown": [
+        "json_mode_supported",
+        "thinking_mode_supported",
+        "file_input_supported",
+        "batch_supported",
+        "ordinary_api_exact_endpoint",
+        "safety_refusal_shape"
+      ]
+    },
+    "minimax_m3": {
+      "capability_flags": [
+        "streaming",
+        "tool_calling",
+        "structured_output:unknown",
+        "json_mode:unknown",
+        "reasoning_control",
+        "thinking_mode",
+        "multimodal_input",
+        "file_input:unknown",
+        "image_input",
+        "audio_input:unknown",
+        "video_input",
+        "cache",
+        "batch:unknown"
+      ],
+      "context_window_tokens": 1000000,
+      "max_output_tokens": "recommended 128K; max 512K per official parameter docs",
+      "model_ids": [
+        "MiniMax-M3"
+      ],
+      "unknown": [
+        "structured_output_supported",
+        "json_mode_supported",
+        "file_input_supported",
+        "audio_input_supported",
+        "batch_supported",
+        "safety_refusal_shape"
+      ]
+    }
+  },
+  "provider_endpoint_matrix": {
+    "deepseek_v4": {
+      "auth_scheme_ref": "credential-handle:bearer",
+      "base_url_ref": "official-ref:deepseek-base-url-openai-and-anthropic",
+      "protocol_family": [
+        "openai_chat_completions",
+        "anthropic_messages"
+      ],
+      "request_api_style": "OpenAI Chat Completions compatible / Anthropic compatible"
+    },
+    "glm_5_1": {
+      "auth_scheme_ref": "credential-handle:bearer",
+      "base_url_ref": "official-ref:zai-general-and-coding-paas-v4-endpoints",
+      "protocol_family": [
+        "openai_chat_completions",
+        "provider_native"
+      ],
+      "request_api_style": "OpenAI-compatible chat.completions with Z.AI parameters"
+    },
+    "gpt_5_5": {
+      "auth_scheme_ref": "credential-handle:bearer",
+      "base_url_ref": "official-ref:openai-responses-api-base-url",
+      "protocol_family": [
+        "openai_responses",
+        "openai_chat_completions:compatibility_unknown"
+      ],
+      "request_api_style": "OpenAI Responses API"
+    },
+    "mimo": {
+      "auth_scheme_ref": "credential-handle:token_plan_api_or_ordinary_api",
+      "base_url_ref": "official-ref:mimo-api-platform; supports token_plan_api and ordinary_api via credential scoped endpoint ref, never hardcoded",
+      "protocol_family": [
+        "provider_native",
+        "openai_chat_completions:api-platform-compatible",
+        "local_service_port"
+      ],
+      "request_api_style": "MiMo API Platform; supports token_plan_api and ordinary_api; open-weight local service port reservation"
+    },
+    "minimax_m3": {
+      "auth_scheme_ref": "credential-handle:bearer",
+      "base_url_ref": "official-ref:minimax-openai-v1-and-anthropic-base-url",
+      "protocol_family": [
+        "openai_chat_completions",
+        "anthropic_messages",
+        "provider_native"
+      ],
+      "request_api_style": "OpenAI-compatible or Anthropic-compatible chat/messages"
+    }
+  },
+  "provider_error_taxonomy_matrix": {
+    "deepseek_v4": {
+      "error_code_shape": "HTTP status + provider error message",
+      "retry_policy_hint": "retry transient 5xx/503/429 with L5 budget; never retry auth/balance/invalid params",
+      "standard_failure_envelope": "ModelProviderFailureEnvelope:deepseek_v4"
+    },
+    "glm_5_1": {
+      "error_code_shape": "HTTP status + Z.AI error code/message",
+      "retry_policy_hint": "retry transient 5xx/429 only under L5 budget; do not retry auth/invalid params",
+      "standard_failure_envelope": "ModelProviderFailureEnvelope:glm_5_1"
+    },
+    "gpt_5_5": {
+      "error_code_shape": "HTTP status + OpenAI error object",
+      "retry_policy_hint": "retry transient 5xx/429 after L5 budget/rate permit; do not retry auth/invalid request",
+      "standard_failure_envelope": "ModelProviderFailureEnvelope:gpt_5_5"
+    },
+    "mimo": {
+      "error_code_shape": "HTTP status table 400/401/402/403/404/421/429/500/503 with MiMo platform error guidance",
+      "retry_policy_hint": "unknown; only L5-governed transient retry allowed after factsheet refresh",
+      "standard_failure_envelope": "ModelProviderFailureEnvelope:mimo"
+    },
+    "minimax_m3": {
+      "error_code_shape": "HTTP status + MiniMax error body/code",
+      "retry_policy_hint": "retry transient 5xx/429 under L5 budget; do not retry invalid/auth errors",
+      "standard_failure_envelope": "ModelProviderFailureEnvelope:minimax_m3"
+    }
+  },
+  "provider_factsheets": {
+    "deepseek_v4": {
+      "audio_input_supported": "unknown",
+      "auth_scheme_ref": "credential-handle:bearer",
+      "base_url_ref": "official-ref:deepseek-base-url-openai-and-anthropic",
+      "batch_supported": "unknown",
+      "cache_supported": true,
+      "context_window_tokens": 1000000,
+      "credential_handle_required": true,
+      "default_model_id": "deepseek-v4-flash",
+      "error_code_shape": "HTTP status + provider error message",
+      "fallback_compatibility": "OpenAI-compatible branch can fall back to compatible text/tool-call providers when L5 permits",
+      "file_input_supported": "unknown",
+      "image_input_supported": "unknown",
+      "json_mode_supported": true,
+      "known_deprecations": [
+        "deepseek-chat and deepseek-reasoner retire after 2026-07-24 15:59 UTC per official V4 notice"
+      ],
+      "local_deployment_supported": false,
+      "max_output_tokens": "384K",
+      "multimodal_input_supported": "unknown",
+      "official_doc_url_ref": "https://api-docs.deepseek.com/news/news260424",
+      "pricing_policy_ref": "official-ref:deepseek-models-pricing-v4",
+      "protocol_family": [
+        "openai_chat_completions",
+        "anthropic_messages"
+      ],
+      "provider_display_name": "DeepSeek V4",
+      "provider_id": "deepseek_v4",
+      "provider_specific_parameters": {
+        "context_caching": "default_on",
+        "strict_tool_mode": "supported",
+        "thinking": "supported"
+      },
+      "rate_limit_policy_ref": "official-ref:deepseek-rate-limit-concurrency-and-429",
+      "reasoning_control_supported": true,
+      "request_api_style": "OpenAI Chat Completions compatible / Anthropic compatible",
+      "retry_policy_hint": "retry transient 5xx/503/429 with L5 budget; never retry auth/balance/invalid params",
+      "safety_refusal_shape": "unknown",
+      "schema_version": "0.1.hotfix3-five-model",
+      "streaming_supported": true,
+      "structured_output_supported": true,
+      "supported_model_ids": [
+        "deepseek-v4-flash",
+        "deepseek-v4-pro"
+      ],
+      "thinking_mode_supported": true,
+      "tool_calling_supported": true,
+      "unknown_or_unverified_fields": [
+        "multimodal_input_supported",
+        "file_input_supported",
+        "image_input_supported",
+        "audio_input_supported",
+        "video_input_supported",
+        "batch_supported",
+        "safety_refusal_shape"
+      ],
+      "verified_at": "2026-06-05",
+      "video_input_supported": "unknown"
+    },
+    "glm_5_1": {
+      "audio_input_supported": false,
+      "auth_scheme_ref": "credential-handle:bearer",
+      "base_url_ref": "official-ref:zai-general-and-coding-paas-v4-endpoints",
+      "batch_supported": "unknown",
+      "cache_supported": true,
+      "context_window_tokens": 200000,
+      "credential_handle_required": true,
+      "default_model_id": "glm-5.1",
+      "error_code_shape": "HTTP status + Z.AI error code/message",
+      "fallback_compatibility": "OpenAI-compatible text/function-call provider fallback if L5 permits",
+      "file_input_supported": "unknown",
+      "image_input_supported": false,
+      "json_mode_supported": "unknown",
+      "known_deprecations": [],
+      "local_deployment_supported": false,
+      "max_output_tokens": 131072,
+      "multimodal_input_supported": false,
+      "official_doc_url_ref": "https://docs.z.ai/cn/guides/llm/glm-5.1; https://docs.z.ai/cn/api-reference/model-api",
+      "pricing_policy_ref": "official-ref:zai-glm-5.1-pricing-input-cached-output",
+      "protocol_family": [
+        "openai_chat_completions",
+        "provider_native"
+      ],
+      "provider_display_name": "Z.AI GLM-5.1",
+      "provider_id": "glm_5_1",
+      "provider_specific_parameters": {
+        "coding_endpoint": "separate endpoint",
+        "thinking.type": "enabled/disabled",
+        "tool_stream": "supported"
+      },
+      "rate_limit_policy_ref": "official-ref:zai-quota/rate-limit unknown in public factsheet",
+      "reasoning_control_supported": true,
+      "request_api_style": "OpenAI-compatible chat.completions with Z.AI parameters",
+      "retry_policy_hint": "retry transient 5xx/429 only under L5 budget; do not retry auth/invalid params",
+      "safety_refusal_shape": "unknown",
+      "schema_version": "0.1.hotfix3-five-model",
+      "streaming_supported": true,
+      "structured_output_supported": true,
+      "supported_model_ids": [
+        "glm-5.1"
+      ],
+      "thinking_mode_supported": true,
+      "tool_calling_supported": true,
+      "unknown_or_unverified_fields": [
+        "json_mode_supported",
+        "file_input_supported",
+        "batch_supported",
+        "rate_limit_policy_ref",
+        "safety_refusal_shape"
+      ],
+      "verified_at": "2026-06-05",
+      "video_input_supported": false
+    },
+    "gpt_5_5": {
+      "audio_input_supported": "unknown",
+      "auth_scheme_ref": "credential-handle:bearer",
+      "base_url_ref": "official-ref:openai-responses-api-base-url",
+      "batch_supported": true,
+      "cache_supported": true,
+      "context_window_tokens": 1050000,
+      "credential_handle_required": true,
+      "default_model_id": "gpt-5.5",
+      "error_code_shape": "HTTP status + OpenAI error object",
+      "fallback_compatibility": "OpenAI Responses-compatible fallback via L3/L5/L4 envelopes",
+      "file_input_supported": true,
+      "image_input_supported": true,
+      "json_mode_supported": true,
+      "known_deprecations": [],
+      "local_deployment_supported": false,
+      "max_output_tokens": 128000,
+      "multimodal_input_supported": true,
+      "official_doc_url_ref": "https://developers.openai.com/api/docs/models/gpt-5.5; https://developers.openai.com/api/docs/guides/latest-model; https://developers.openai.com/api/docs/pricing",
+      "pricing_policy_ref": "official-ref:openai-gpt-5.5-pricing",
+      "protocol_family": [
+        "openai_responses",
+        "openai_chat_completions:compatibility_unknown"
+      ],
+      "provider_display_name": "OpenAI GPT-5.5",
+      "provider_id": "gpt_5_5",
+      "provider_specific_parameters": {
+        "prompt_cache_retention": "supported",
+        "reasoning.effort": "none/low/medium/high/xhigh",
+        "tools": "functions/web/file/computer_use"
+      },
+      "rate_limit_policy_ref": "official-ref:openai-rate-limits-account-tier-dependent",
+      "reasoning_control_supported": true,
+      "request_api_style": "OpenAI Responses API",
+      "retry_policy_hint": "retry transient 5xx/429 after L5 budget/rate permit; do not retry auth/invalid request",
+      "safety_refusal_shape": "Responses API refusal/output envelope",
+      "schema_version": "0.1.hotfix3-five-model",
+      "streaming_supported": true,
+      "structured_output_supported": true,
+      "supported_model_ids": [
+        "gpt-5.5"
+      ],
+      "thinking_mode_supported": false,
+      "tool_calling_supported": true,
+      "unknown_or_unverified_fields": [
+        "openai_chat_completions_compatibility",
+        "audio_input_supported",
+        "video_input_supported",
+        "rate_limit_policy_ref_exact_numbers"
+      ],
+      "verified_at": "2026-06-05",
+      "video_input_supported": "unknown"
+    },
+    "mimo": {
+      "audio_input_supported": true,
+      "auth_scheme_ref": "credential-handle:token_plan_api_or_ordinary_api",
+      "base_url_ref": "official-ref:mimo-api-platform; supports token_plan_api and ordinary_api via credential scoped endpoint ref, never hardcoded",
+      "batch_supported": "unknown",
+      "cache_supported": true,
+      "context_window_tokens": 1000000,
+      "credential_handle_required": true,
+      "default_model_id": "mimo-v2.5-pro",
+      "error_code_shape": "HTTP status table 400/401/402/403/404/421/429/500/503 with MiMo platform error guidance",
+      "fallback_compatibility": "token_plan_api, ordinary_api, or open-weight local branch only through L3/L5/L4 envelopes",
+      "file_input_supported": "unknown",
+      "image_input_supported": true,
+      "json_mode_supported": "unknown",
+      "known_deprecations": [],
+      "local_deployment_supported": true,
+      "max_output_tokens": 128000,
+      "multimodal_input_supported": true,
+      "official_doc_url_ref": "https://mimo.mi.com/; https://platform.xiaomimimo.com/docs/en-US/quick-start/model; https://platform.xiaomimimo.com/docs/en-US/updates/model; https://platform.xiaomimimo.com/docs/en-US/price/pay-as-you-go; https://platform.xiaomimimo.com/docs/en-US/price/tokenplan/quick-access; https://platform.xiaomimimo.com/docs/en-US/price/tokenplan/price-comparison; https://platform.xiaomimimo.com/docs/en-US/quick-start/error-codes; https://platform.xiaomimimo.com/docs/en-US/quick-start/model-hyperparameters",
+      "pricing_policy_ref": "official-ref:mimo-pay-as-you-go-and-token-plan-pricing; ordinary API and Token Plan credentials are independent",
+      "protocol_family": [
+        "provider_native",
+        "openai_chat_completions:api-platform-compatible",
+        "local_service_port"
+      ],
+      "provider_display_name": "Xiaomi MiMo",
+      "provider_id": "mimo",
+      "provider_specific_parameters": {
+        "api_surface_selection": "selected by L5 credential/provider scope, not by plugin code",
+        "api_surfaces": [
+          "token_plan_api",
+          "ordinary_api"
+        ],
+        "local_open_weight": "supported via service port only",
+        "model_id_case_policy": "all MiMo model ids are normalized to lowercase",
+        "official_refs": {
+          "error_codes": "https://platform.xiaomimimo.com/docs/en-US/quick-start/error-codes",
+          "model_and_rate_limits": "https://platform.xiaomimimo.com/docs/en-US/quick-start/model",
+          "model_hyperparameters": "https://platform.xiaomimimo.com/docs/en-US/quick-start/model-hyperparameters",
+          "model_release": "https://platform.xiaomimimo.com/docs/en-US/updates/model",
+          "pay_as_you_go_pricing": "https://platform.xiaomimimo.com/docs/en-US/price/pay-as-you-go",
+          "token_plan_price_comparison": "https://platform.xiaomimimo.com/docs/en-US/price/tokenplan/price-comparison",
+          "token_plan_quick_access": "https://platform.xiaomimimo.com/docs/en-US/price/tokenplan/quick-access"
+        },
+        "ordinary_api_key_format_ref": "official ordinary-api key prefix; pay-as-you-go API only; cannot be mixed with Token Plan",
+        "token_plan_key_format_ref": "official token-plan key prefix; token_plan_api only; cannot be mixed with ordinary API",
+        "token_plan_multiplier": "v2.5=1x; v2.5-pro=2x"
+      },
+      "rate_limit_policy_ref": "official-ref:mimo-model-and-rate-limits; per-model RPM/TPM and account concurrency; 429 on excess",
+      "reasoning_control_supported": true,
+      "request_api_style": "MiMo API Platform; supports token_plan_api and ordinary_api; open-weight local service port reservation",
+      "retry_policy_hint": "unknown; only L5-governed transient retry allowed after factsheet refresh",
+      "safety_refusal_shape": "unknown",
+      "schema_version": "0.1.hotfix3-five-model",
+      "streaming_supported": true,
+      "structured_output_supported": true,
+      "supported_model_ids": [
+        "mimo-v2.5-pro",
+        "mimo-v2.5",
+        "mimo-v2.5-asr",
+        "mimo-v2-flash",
+        "mimo-v2-pro",
+        "mimo-v2-omni"
+      ],
+      "thinking_mode_supported": "unknown",
+      "tool_calling_supported": true,
+      "unknown_or_unverified_fields": [
+        "json_mode_supported",
+        "thinking_mode_supported",
+        "file_input_supported",
+        "batch_supported",
+        "ordinary_api_exact_endpoint",
+        "safety_refusal_shape"
+      ],
+      "verified_at": "2026-06-05",
+      "video_input_supported": true
+    },
+    "minimax_m3": {
+      "audio_input_supported": "unknown",
+      "auth_scheme_ref": "credential-handle:bearer",
+      "base_url_ref": "official-ref:minimax-openai-v1-and-anthropic-base-url",
+      "batch_supported": "unknown",
+      "cache_supported": true,
+      "context_window_tokens": 1000000,
+      "credential_handle_required": true,
+      "default_model_id": "MiniMax-M3",
+      "error_code_shape": "HTTP status + MiniMax error body/code",
+      "fallback_compatibility": "OpenAI/Anthropic-compatible coding/agentic fallback when L5 permits",
+      "file_input_supported": "unknown",
+      "image_input_supported": true,
+      "json_mode_supported": "unknown",
+      "known_deprecations": [],
+      "local_deployment_supported": false,
+      "max_output_tokens": "recommended 128K; max 512K per official parameter docs",
+      "multimodal_input_supported": true,
+      "official_doc_url_ref": "https://platform.minimax.io/docs/guides/models-intro; https://platform.minimax.io/docs/guides/text-ai-coding-tools; https://platform.minimax.io/docs/guides/pricing-token-plan",
+      "pricing_policy_ref": "official-ref:minimax-m3-pay-as-you-go-pricing",
+      "protocol_family": [
+        "openai_chat_completions",
+        "anthropic_messages",
+        "provider_native"
+      ],
+      "provider_display_name": "MiniMax M3",
+      "provider_id": "minimax_m3",
+      "provider_specific_parameters": {
+        "reasoning_split": "OpenAI-compatible option",
+        "strict_model_name": "MiniMax-M3",
+        "thinking": "supported"
+      },
+      "rate_limit_policy_ref": "official-ref:minimax-rpm-tpm-rate-limit-definitions",
+      "reasoning_control_supported": true,
+      "request_api_style": "OpenAI-compatible or Anthropic-compatible chat/messages",
+      "retry_policy_hint": "retry transient 5xx/429 under L5 budget; do not retry invalid/auth errors",
+      "safety_refusal_shape": "unknown",
+      "schema_version": "0.1.hotfix3-five-model",
+      "streaming_supported": true,
+      "structured_output_supported": "unknown",
+      "supported_model_ids": [
+        "MiniMax-M3"
+      ],
+      "thinking_mode_supported": true,
+      "tool_calling_supported": true,
+      "unknown_or_unverified_fields": [
+        "structured_output_supported",
+        "json_mode_supported",
+        "file_input_supported",
+        "audio_input_supported",
+        "batch_supported",
+        "safety_refusal_shape"
+      ],
+      "verified_at": "2026-06-05",
+      "video_input_supported": true
+    }
+  },
+  "provider_feature_gap_matrix": {
+    "deepseek_v4": {
+      "fallback_compatibility": "OpenAI-compatible branch can fall back to compatible text/tool-call providers when L5 permits",
+      "unknown_or_unverified_fields": [
+        "multimodal_input_supported",
+        "file_input_supported",
+        "image_input_supported",
+        "audio_input_supported",
+        "video_input_supported",
+        "batch_supported",
+        "safety_refusal_shape"
+      ]
+    },
+    "glm_5_1": {
+      "fallback_compatibility": "OpenAI-compatible text/function-call provider fallback if L5 permits",
+      "unknown_or_unverified_fields": [
+        "json_mode_supported",
+        "file_input_supported",
+        "batch_supported",
+        "rate_limit_policy_ref",
+        "safety_refusal_shape"
+      ]
+    },
+    "gpt_5_5": {
+      "fallback_compatibility": "OpenAI Responses-compatible fallback via L3/L5/L4 envelopes",
+      "unknown_or_unverified_fields": [
+        "openai_chat_completions_compatibility",
+        "audio_input_supported",
+        "video_input_supported",
+        "rate_limit_policy_ref_exact_numbers"
+      ]
+    },
+    "mimo": {
+      "fallback_compatibility": "token_plan_api, ordinary_api, or open-weight local branch only through L3/L5/L4 envelopes",
+      "unknown_or_unverified_fields": [
+        "json_mode_supported",
+        "thinking_mode_supported",
+        "file_input_supported",
+        "batch_supported",
+        "ordinary_api_exact_endpoint",
+        "safety_refusal_shape"
+      ]
+    },
+    "minimax_m3": {
+      "fallback_compatibility": "OpenAI/Anthropic-compatible coding/agentic fallback when L5 permits",
+      "unknown_or_unverified_fields": [
+        "structured_output_supported",
+        "json_mode_supported",
+        "file_input_supported",
+        "audio_input_supported",
+        "batch_supported",
+        "safety_refusal_shape"
+      ]
+    }
+  },
+  "provider_risk_surface_matrix": {
+    "deepseek_v4": {
+      "audit": "l5_audit_required",
+      "budget": "l5_budget_permit_required",
+      "credential": "credential_handle_required",
+      "live_call": "disabled_without_l5_permit",
+      "policy": "l5_policy_required",
+      "raw_response": "normalize_to_l4_envelope"
+    },
+    "glm_5_1": {
+      "audit": "l5_audit_required",
+      "budget": "l5_budget_permit_required",
+      "credential": "credential_handle_required",
+      "live_call": "disabled_without_l5_permit",
+      "policy": "l5_policy_required",
+      "raw_response": "normalize_to_l4_envelope"
+    },
+    "gpt_5_5": {
+      "audit": "l5_audit_required",
+      "budget": "l5_budget_permit_required",
+      "credential": "credential_handle_required",
+      "live_call": "disabled_without_l5_permit",
+      "policy": "l5_policy_required",
+      "raw_response": "normalize_to_l4_envelope"
+    },
+    "mimo": {
+      "audit": "l5_audit_required",
+      "budget": "l5_budget_permit_required",
+      "credential": "credential_handle_required",
+      "live_call": "disabled_without_l5_permit",
+      "policy": "l5_policy_required",
+      "raw_response": "normalize_to_l4_envelope"
+    },
+    "minimax_m3": {
+      "audit": "l5_audit_required",
+      "budget": "l5_budget_permit_required",
+      "credential": "credential_handle_required",
+      "live_call": "disabled_without_l5_permit",
+      "policy": "l5_policy_required",
+      "raw_response": "normalize_to_l4_envelope"
+    }
+  }
+}

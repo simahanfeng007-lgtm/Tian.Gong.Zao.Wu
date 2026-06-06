@@ -1,0 +1,7 @@
+﻿L4 phase7 temp artifact cleanup
+root: 
+C:\Users\77571\Documents\天工造物重生\project_l4_phase7
+removed targets: 
+8
+remaining temp artifacts: 
+0

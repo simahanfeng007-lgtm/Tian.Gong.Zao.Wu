@@ -1,0 +1,61 @@
+﻿天工造物 / 临渊者 L6.31 统一 Planner 接入 / 执行主链收口 交付报告
+生成日期：2026-06-06
+
+一、阶段结论
+本次已从 L6.30【治理执行力化外壳】推进到 L6.31【统一 Planner 接入 / 执行主链收口】。
+L6.31 的核心不是继续堆散报告，而是把 L6.24-L6.30 已装外壳输出压缩成 Planner 可直接消费的 UnifiedPlannerContext，并同步生成 ExecutionStepDraft 与 PlannerResumeEnvelope。
+本次实现保持外壳层接入，不污染 tiangong_kernel；不执行真实工具副作用、不注册 Tool/Skill/Provider、不读取密钥、不裸调 Provider。
+
+二、主链收口结果
+输入链：ProjectRadarHint / PatchPlanHint / DeliveryHint / ProviderHint / LearningHint / RecoveryHint / GovernanceHint / BudgetHint / RollbackHint。
+统一对象：UnifiedPlannerContext。
+执行草案：ExecutionStepDraft。
+续接信封：PlannerResumeEnvelope。
+公开报告：PlannerContextReport。
+执行口径：A0-A4 草案 / 分析 / smoke / 续接保持快车道；A5、凭证、内核路径、Provider 裸调、正式发布 / 注册 / 激活保持硬边界或确认护栏。
+
+三、修改清单
+新增：tests/test_l6_31_planner_context_integration.py
+新增：tiangong_agent_runtime/planner_context_integration.py
+修改：tiangong_agent_runtime/plan_bridge.py
+修改：tiangong_agent_runtime/plan_schema.py
+修改：tiangong_agent_runtime/risk_classifier.py
+修改：tiangong_agent_runtime/runtime_entry.py
+修改：tiangong_agent_shell/cli_loop.py
+修改：tiangong_agent_shell/cli_main.py
+删除：无
+
+四、关键实现
+1. 新增 tiangong_agent_runtime/planner_context_integration.py：实现 PlannerContextIntegrationBridge、UnifiedPlannerHint、ExecutionStepDraft、PlannerResumeEnvelope、UnifiedPlannerContext、PlannerContextReport 与稳定 digest。
+2. RuntimeEntry 接入 build_planner_context 工具，新增 planner_context_snapshot / export_planner_context_json / reset_planner_context / run_planner_context_build。
+3. PlanBridge 支持 L6.31 / 统一 Planner / UnifiedPlannerContext 等自然语言触发，自动串接 L6.24-L6.30 前置外壳并最终构建 build_planner_context。
+4. PlanSchema 允许结构化计划调用 build_planner_context，并限制 max_items 到 1-60。
+5. RiskClassifier 将 build_planner_context 归为 A2，原因明确为只生成 UnifiedPlannerContext / ExecutionStepDraft / PlannerResumeEnvelope，不执行、不注册、不读密钥、不改内核。
+6. CLI 增加 /planner-context-build、/planner-context、/planner-context-save、/planner-context-reset，并同步更新 /status、/tools、/policy 口径到 L6.31。
+7. 新增 tests/test_l6_31_planner_context_integration.py，覆盖桥空态、聚合构建、边界拒绝、Runtime 接入、风险分级、PlanBridge/PlanSchema、CLI 导出与密钥脱敏。
+
+五、验证结果
+compileall：通过，日志 docs/l6_31_validation/compileall_l6_31.log。
+定向回归：通过，合计 65 passed。
+- docs/l6_31_validation/test_l6_24_shell_system_mount.log: 7 passed in 2.85s
+- docs/l6_31_validation/test_l6_25_project_repair_plan.log: 8 passed in 15.11s
+- docs/l6_31_validation/test_l6_26_delivery_standardization.log: 8 passed in 26.35s
+- docs/l6_31_validation/test_l6_27_provider_adaptation_shell.log: 8 passed in 9.18s
+- docs/l6_31_validation/test_l6_28_learning_convergence.log: 9 passed in 3.02s
+- docs/l6_31_validation/test_l6_29_recovery_coordination.log: 9 passed in 3.67s
+- docs/l6_31_validation/test_l6_30_governance_execution.log: 8 passed in 10.11s
+- docs/l6_31_validation/test_l6_31_planner_context_integration.log: 8 passed in 10.43s
+
+六、边界与污染检查
+forbidden scan：passed，finding_count=0，范围为本次 changed/new Python 文件的高置信副作用旗标与 Provider SDK/network import。
+tiangong_kernel hash compare：passed，changed=0，added=0，removed=0。
+
+七、未执行 / 未完成事项
+1. 未跑完整全量 pytest；本轮只跑 compileall 与 L6.24-L6.31 定向回归。
+2. 未做真实 GUI 全路径点击。
+3. 未做 Windows 原生运行验证。
+4. 未做安装包级验证。
+5. 未做真实 Provider 网络调用；L6.31 只保留 Provider 声明式上下文，不触网、不读密钥。
+
+八、建议下一步
+L6.32 建议进入“Planner 执行策略压缩 / 自动续接质量门”：让 UnifiedPlannerContext 在 /run 和模型计划模式中更稳定地转成最小执行链，并把失败续接、质量门、交付证据自动回灌到下一轮 Planner。

@@ -1,0 +1,14 @@
+{
+  "round": "L6.51.1",
+  "name": "后端产品身份元数据固化",
+  "unique_developer": "于泳翔",
+  "angel_investor": "胖胖龙",
+  "compileall": "PASS",
+  "product_identity_tests": "PASS: 4 passed",
+  "frontend_contract_tests": "PASS: 10 passed",
+  "target_regression": "PASS: 18 passed, 2035 deselected",
+  "secret_leak_scan": "PASS: changed files strict_finding_count=0",
+  "bare_except_scan": "PASS: finding_count=0",
+  "core_chain_changed": false,
+  "kernel_changed": false
+}

@@ -1,0 +1,142 @@
+天工造物新版 L5 插件宿主层第七阶段质检诊断书
+
+日期：2026-06-04
+质检对象：天工造物_L5第七阶段_宿主边界门交接闭环_交付包_20260604.zip
+质检性质：只质检，不开发，不修代码，不生成补丁。
+
+一、总诊断结论
+
+不建议通过 L5 第七阶段交付包验收。
+
+代码层 P0 未发现，full pytest 真实通过；但交付包存在 P1 级前置证据阻断，因此暂不允许进入 L5 第八阶段，也暂不允许开始 L6 具体插件规划。
+
+Product Artifact Factory 当前仅为 L5 声明级预留，这一点合格；但它只能进入 L6 专项规划，不能写入 L5 核心。
+
+二、P0 诊断
+
+未发现 P0。
+
+实测与源码核查未发现：
+- 真实 L6 插件实现。
+- 真实成品生产、文件生成、构建、打包、发布、导出。
+- 裸调工具、裸调 L4 adapter、裸写文件、裸访问网络、裸访问凭据、裸分配资源。
+- L6Entry 暴露 module path / import path / entry point / callable。
+- Route / Hook / Subscription 暴露真实 handler、事件总线、后台任务。
+- PublicProjection 泄露真实路径、URL、shell command、token、api key、明文凭据。
+- 恢复旧 Runtime / 神枢 / AbilityPackage / CapabilityPort / AbilityPackagePort 主链。
+
+三、P1 阻断项
+
+1. 第六阶段前置验收证据不闭合。
+
+第七阶段包内缺少：
+- docs/l5_phase6_validation_closure_report_zh.txt
+- docs/l5_phase6_full_pytest_rerun_result_zh.txt
+
+同时包内 docs/l5_phase6_quality_gate_decision_zh.txt 仍写着：
+- collect_only_passed=False
+- full_pytest_passed=False
+- allow_enter_l5_phase7=False
+- blocking reason 为 full pytest 未完整通过
+
+这与第七阶段报告声称“以 L5 第六阶段完整工程包为直接输入 / phase6_compatibility_passed=True”矛盾。按质检标准，不能用聊天结论代替包内测试证据。
+
+四、P2 问题
+
+1. Windows 通配符命令证据不严谨。
+
+原命令真实执行：
+python -m pytest -q tests/test_l5_phase7_*.py
+
+在当前 Windows 环境结果为：
+ERROR: file or directory not found: tests/test_l5_phase7_*.py
+no tests ran
+
+展开同一批 31 个 phase7 测试文件后通过：
+42 passed in 5.86s
+
+这是 Windows 通配符兼容问题，不是断言失败；但第七阶段报告把原命令直接写成 passed，证据表述不严谨。
+
+2. 未找到实际的“L5 第七阶段确认修正版提示词”文件。
+
+docs/l5_phase7_development_log_zh.md 引用了：
+天工造物_L5第七阶段开发提示词_20260604_确认修正版.txt
+
+但交付包内未找到该文件；只找到了 Codex 质检提示词。
+
+3. zip 包含运行产物。
+
+原始 zip CRC 通过，但包含：
+- PYCACHE_ENTRY_COUNT=1935
+- PYC_ENTRY_COUNT=1935
+
+这不影响源码测试，但交付包完整性和可审计性不干净。
+
+五、P3 观察项
+
+1. docs/l5_phase7_zip_integrity_zh.txt 只写 zip_integrity=passed，缺少 entry count、pycache/pyc 排查、必需报告存在性、SHA256 等细项。
+
+2. test inventory 报告按 test_*.py 口径是正确的：
+- 639 -> 670
+- 新增 31
+- 删除 0
+- skip/xfail 0
+
+但 helper/factory/builder 文件新增未在该报告里说明，建议注明统计口径。
+
+六、实测验证结果
+
+compileall:
+passed
+
+collect-only:
+1229 tests collected，exit_code=0
+
+phase7 targeted exact command:
+Windows wildcard 未展开，命令失败。
+
+phase7 targeted expanded:
+31 个 phase7 测试文件，42 passed。
+
+l5 and plugin subset:
+19 passed, 1210 deselected。
+
+full pytest:
+1229 passed in 6.60s。
+
+forbidden scan expanded:
+2 passed。
+
+L0-L4 hash compare:
+added=0 modified=0 deleted=0 unchanged=501。
+
+L5 phase1-phase6 hash compare:
+added=1 modified=1 deleted=0 unchanged=65。
+新增：tiangong_kernel/l5_plugin_host/phase7_boundary_gate.py。
+修改：tiangong_kernel/l5_plugin_host/__init__.py。
+
+test inventory:
+新增 test_*.py=31，删除=0，skip/xfail=0。
+
+zip CRC:
+passed。
+
+七、是否允许
+
+是否通过 L5 第七阶段：
+不通过，交付包级 P1 阻断。
+
+是否允许进入 L5 第八阶段：
+不允许。
+
+是否允许开始 L6 具体插件规划：
+暂不允许，需先重打第七阶段包并补齐第六阶段闭合证据。
+
+Product Artifact Factory：
+只能进入 L6 专项规划，不能写入 L5 核心。当前源码中只是声明级预留，这一点合格。
+
+八、最小修复建议
+
+不改代码优先。
+
+用已验证通过的 L5 第六阶段收口包作为输入重新打第七阶段包，补入第六阶段收口报告，移除旧的 phase6 false 质量门文档或更新为收口后版本；补入确认修正版开发提示词；重新记录 Windows 下 targeted pytest 的展开执行证据；清理 __pycache__/.pyc 后重打 zip，并重新生成 zip integrity 细项。

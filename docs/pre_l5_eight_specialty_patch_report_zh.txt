@@ -1,0 +1,30 @@
+天工造物 L4→L5/L6 前置 8 专项最小补丁报告
+日期：2026-06-04
+
+一、补丁范围
+
+本轮根据 8 份专项审阅报告逐项修复：
+1. 审计证据责任链。
+2. L5 插件宿主语义。
+3. 外部适配面与沙箱。
+4. 测试验证回归质量门。
+5. 版本迁移回滚热切换。
+6. 数据治理隐私密钥凭证。
+7. 资源预算成本限流。
+8. 通信 Handoff 多智能体协作。
+
+二、关键修复
+
+1. L1 新增 audit_chain_ports、plugin_host_ports、external_adapter_ports、version_switch_ports、resource_cost_ports、communication_handoff_envelope_ports。
+2. L2 新增 audit_chain_state、plugin_state、external_adapter_state、version_switch_state、data_governance_state、resource_boundary_binding_state、communication_handoff_state。
+3. L3 新增 audit_chain_projection、l3_to_l5_plugin_host_handoff、external_action_boundary_advice、version_migration_switch_flow、data_governance_review_advice、resource_budget_advice、communication_handoff_advice。
+4. L4 action grounding 新增审计链、沙箱策略、外部 surface 契约、数据治理、热切换、通信 Handoff 绑定对象。
+5. L4 execution 新增 L5 插件宿主 handoff、质量门、测试/回归证据索引、L5/L6 验证评估回归 requirement、审计链 handoff、版本切换 requirement。
+
+三、边界声明
+
+本轮补丁不实现 L5/L6，不启用真实外部动作，不加载插件，不写插件注册表，不创建真实沙箱，不读取真实凭据，不写 L2 状态，不写真实审计/证据存储。
+
+四、当前结论
+
+8 个专项 P1/P2 结构缺口已完成最小补齐。仍建议先进行全量回归和专项复检，再决定是否进入 L5 插件宿主工程。

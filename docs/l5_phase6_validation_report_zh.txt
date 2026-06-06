@@ -1,0 +1,10 @@
+验证报告
+compileall：passed。
+collect-only：观察到 1187 tests collected in 18.62s，但 pytest 退出阶段在本环境需超时终止，未取得干净退出码。
+L5 phase6 targeted pytest：16 passed，退出码 0。
+plugin_host subset：11 selected，11 passed，退出码 0（按 collect-only 筛选出的 nodeid 显式执行）。
+full pytest：未完整取得通过结果；长时间运行未能在工具时限内完成。
+forbidden scan：0 blocking findings。
+L0-L4 hash compare：0 added / 0 modified / 0 deleted。
+L5 phase1-phase5 hash compare：1 added / 2 shared compatible modified / 0 deleted。
+结论：代码级 P0/P1 未发现，但因 full pytest 未完整通过，不建议进入 L5 第七阶段。

@@ -1,0 +1,55 @@
+L6.49 模拟 LLM 任务发布与四系统运行验证交付报告
+====================================================
+
+【本轮目标】
+模拟 LLM 作为任务发布者，输出 JSON Plan，并让计划进入 Runtime 执行链；同时验证四主路径是否可正常工作：
+1. 执行链 / Runtime / PlannerExecutionController
+2. 记忆与遗忘路径 / MemoryStoreBridge + MemoryRecallRouter
+3. 情感路径 / AffectiveStateEngine + AffectiveExecutionRouter
+4. 生命周期路径 / LifecycleCoordinator（自愈、自主学习、自由意志、自我迭代候选）
+
+【本轮结论】
+- 四主路径均可在当前包内正常构造、投影、被 Planner 上下文消费，并随 LLM 任务发布进入 Runtime 执行链。
+- 未发现 P0 / P1 阻断问题。
+- 未改 Runtime 核心主链、执行脊柱、质量门、审计、回滚、Provider、记忆正式写入口。
+- 本轮新增一条 L6.49 回归测试，用于固化“模拟 LLM 发布任务 + 四系统运行验证”。
+
+【模拟方式】
+- 使用离线 FakeLLMTaskPublisher 模拟模型，不触网、不读凭证。
+- FakeLLMTaskPublisher 返回 {"output":{"steps":[...]}} 包装层，验证 L6.47 P0 修复路径仍有效。
+- 生成的计划包含：
+  1. build_l6_39_memory_integration
+  2. build_l6_38_budget_snapshot
+  3. build_l6_39_quality_gate_integration
+  4. build_l6_39_recovery_integration
+  5. return_analysis
+- 所有步骤均通过 Runtime -> PlannerExecutionController -> LongChainRunner -> ExecutionSpine -> Audit 链路执行。
+
+【四系统验证结果】
+1. 执行链：5/5 步执行成功，failure_count=0，stopped_reason=completed。
+2. 记忆/遗忘：MemoryRecallRoute 可返回摘要级 hint；summary_only=True；no_raw_memory_body=True；no_long_term_write=True；no_memory_deletion=True。
+3. 情感系统：AffectiveExecutionRoute 可生成语言状态与同风险排序提示；not_authorization=True；not_refusal=True；no_tool_dispatch=True；no_quality_gate_override=True。
+4. 生命周期系统：LifecycleCoordinator 可生成自愈/学习/自由意志/自迭代候选；当前用户任务优先；no_direct_execution=True；no_memory_write=True；no_patch_apply=True；no_hot_switch=True。
+5. 四路径统一投影：FourPathContextRouter preflight 通过；execution_first=True；A5 hard boundary 保留；no_tool_invocation=True；no_memory_write=True。
+6. 前端只读投影：DesktopDashboardProjection 保持 frontend_readonly / projection_only / no_direct_tool_call / no_provider_sdk / no_memory_write / no_self_iteration_merge / no_plain_endpoint / no_plain_token 全为 True。
+
+【新增测试】
+- tests/test_l6_49_llm_task_publish_four_systems.py
+
+【验证命令】
+1. python3 -m compileall -q tiangong_agent_runtime tiangong_agent_shell tiangong_kernel tests
+2. pytest -q tests/test_l6_40_memory_math_store.py tests/test_l6_41_affective_state_route.py tests/test_l6_42_lifecycle_coordinator.py tests/test_l6_42_1_lifecycle_supplement.py tests/test_l6_43_four_path_context_router.py tests/test_l6_47_four_path_freeze_baseline.py tests/test_l6_48_desktop_public_projection_contract.py tests/test_l6_49_llm_task_publish_four_systems.py
+3. pytest -q tests/test_l6_37_execution_chain_freeze.py tests/test_l6_38_p0_system_integration.py tests/test_l6_39_p0_system_integration_two.py tests/test_l6_40_memory_math_store.py tests/test_l6_41_affective_state_route.py tests/test_l6_42_lifecycle_coordinator.py tests/test_l6_42_1_lifecycle_supplement.py tests/test_l6_43_1_planner_unified_consumption.py tests/test_l6_43_four_path_context_router.py tests/test_l6_44_budget_low_friction_governance.py tests/test_l6_45_rollback_audit_binding.py tests/test_l6_46_long_chain_failure_injection.py tests/test_l6_47_four_path_freeze_baseline.py tests/test_l6_48_desktop_public_projection_contract.py tests/test_l6_49_llm_task_publish_four_systems.py
+4. python3 run_agent.py --status
+5. python3 run_agent.py --mock --once "模拟 LLM 任务发布状态检查"
+
+【验证结果】
+- compileall：PASS
+- L6.40-L6.49 四主路径定向回归：43 passed
+- L6.37-L6.49 冻结段回归：84 passed
+- CLI smoke：PASS
+
+【剩余风险】
+- 当前 L6.49 验证使用离线 FakeLLMTaskPublisher，不代表真实 DeepSeek API 在线可用性；真实 Provider 仍需设置页/后端受控配置后另测。
+- 当前四路径进入模型规划使用 external_context_hint 注入方式；这符合现有 Runtime 接口，但还不是后台自动周期触发。
+- CLI status 标题仍是“L6.38 P0 系统接入启动器状态”，属于文案滞后，不影响本轮四系统运行。

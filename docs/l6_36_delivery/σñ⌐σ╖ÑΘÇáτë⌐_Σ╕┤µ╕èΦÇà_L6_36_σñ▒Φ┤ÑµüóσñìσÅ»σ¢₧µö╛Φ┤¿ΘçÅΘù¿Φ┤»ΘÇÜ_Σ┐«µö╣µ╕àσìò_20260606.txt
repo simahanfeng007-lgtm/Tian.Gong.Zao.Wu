@@ -1,0 +1,38 @@
+天工造物 / 临渊者 L6.36 修改清单
+生成日期：2026-06-06
+
+一、新增文件
+
+1. tiangong_agent_runtime/recovery_replay_quality.py
+- 新增 L6.36 失败恢复、可回放、执行质量门贯通模块。
+- 提供 FailureClassification / RecoveryPlan / ReplayReport / QualityGateResult / ReplayCorpusReport。
+- 提供 run_l6_36_replay_corpus 离线语料回放。
+
+2. tests/test_l6_36_recovery_replay_quality.py
+- 新增 6 个 L6.36 定向测试。
+- 覆盖 completed / failed / blocked / confirmation_required / timeout / replay corpus。
+
+3. reports/l6_36_validation/*
+- 新增 L6.36 验证证据。
+- 包含 replay corpus、pytest 日志、compileall、分片汇总、hash compare、changed-file forbidden scan。
+
+4. docs/l6_36_delivery/*
+- 新增交付报告、修改清单、验证结果、未做事项。
+
+二、修改文件
+
+1. tiangong_agent_runtime/planner_execution_controller.py
+- PlannerExecutionReport.public_dict() 新增 L6.36 enrich。
+- 在不改变 L6.35 schema 兼容性的前提下，增加 l6_36 安全公开字段。
+
+2. tiangong_agent_runtime/runtime_entry.py
+- 新增 run_recovery_replay_quality_corpus(workspace, export_dir=None)。
+- 只作为离线 replay corpus 入口，不触网、不读密钥、不改内核。
+
+三、未修改
+
+1. tiangong_kernel：未修改。
+2. Provider 真实调用链：未接入。
+3. Skill 正式激活链：未接入。
+4. Handoff 多智能体执行链：未接入。
+5. GUI / Windows / 安装包：未接入。

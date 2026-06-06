@@ -1,0 +1,10 @@
+# L6.35 长链压力回放报告
+
+schema: `tiangong.l6_35.long_chain_pressure_probe.v1`
+ok: `True`
+
+| case | steps | status | executed | progress | replay | stopped | resume |
+|---|---:|---|---:|---:|---:|---|---|
+| pressure_20 | 20 | completed | 20 | 4 | 80 | completed | completed |
+| pressure_50 | 50 | completed | 50 | 10 | 200 | completed | completed |
+| pressure_100 | 100 | completed | 100 | 20 | 400 | completed | completed |

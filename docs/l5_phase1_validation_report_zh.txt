@@ -1,0 +1,31 @@
+天工造物 L5 第一阶段验证报告
+生成日期：2026-06-04
+
+一、验证命令与状态
+- compileall：passed，return_code=0。
+- collect-only：passed，963 tests collected，return_code=0。
+- L5 定向测试：passed，34 passed，return_code=0。
+- 插件宿主相关子集：passed，36 passed, 927 deselected，return_code=0。
+- 全量 pytest：passed，963 passed，return_code=0。
+- L0-L4 hash compare：passed，0 added / 0 deleted / 0 changed。
+- test inventory compare：passed，新增 15 个 L5 测试文件，删除 0，skip/xfail 变更 0。
+- forbidden scan：passed，阻断命中 0。
+- zip integrity：见 docs/l5_phase1_zip_integrity_zh.txt。
+
+二、边界验证
+- ManifestView 只接受白名单字段与声明型 entry ref。
+- RegistrySnapshot 为 frozen dataclass，不提供修改型注册方法。
+- HandoffIndex 只保存调用方传入元数据，不读取真实 handoff 文件。
+- 审计证据责任链只保存轻量引用与摘要。
+- 质量门对象只记录验证结果，不执行命令或扫描。
+- import tiangong_kernel.l5_plugin_host 无插件发现、无文件访问、无外部连接、无注册表写入。
+
+三、P0/P1/P2/P3
+- P0：0。
+- P1：0。
+- P2：0。
+- P3：1，原前置包 zip 条目数历史口径存在轻微差异；本阶段重新生成 zip integrity 报告收口。
+
+四、结论
+建议进入 L5 第二阶段：是。
+前提：第二阶段仍不得开放真实插件加载、真实凭据、真实外部动作或真实沙箱执行。

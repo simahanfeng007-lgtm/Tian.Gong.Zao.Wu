@@ -1,0 +1,19 @@
+天工造物 L5 第二阶段 L0-L4 哈希对比报告
+
+pre_entries: 1002
+post_entries: 1002
+unchanged: 1002
+added: 0
+modified: 0
+deleted: 0
+
+结论：L0-L4 未发生新增、删除或修改。
+
+[ADDED]
+无
+
+[MODIFIED]
+无
+
+[DELETED]
+无

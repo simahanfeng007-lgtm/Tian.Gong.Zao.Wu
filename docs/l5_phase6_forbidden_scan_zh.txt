@@ -1,0 +1,10 @@
+L5 第六阶段 forbidden scan
+范围：tiangong_kernel/l5_plugin_host/**/*.py + tests/test_l5_phase6_*.py
+扫描文件数：74
+结构化阻断命中：0
+结论：通过，0 blocking findings。
+
+blocking findings:
+
+
+inert pattern / governance token mentions：84，均作为字段名、枚举、冲突类型、测试样本或文档语义存在，不构成真实执行结构。

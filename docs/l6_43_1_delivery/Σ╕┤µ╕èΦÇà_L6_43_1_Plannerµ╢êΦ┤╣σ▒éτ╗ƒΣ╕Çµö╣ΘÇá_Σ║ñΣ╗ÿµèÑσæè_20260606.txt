@@ -1,0 +1,48 @@
+临渊者 L6.43.1 Planner消费层统一改造 交付报告
+日期：2026-06-06
+基线：L6.43 FourPathContextRouter 四主路径统一投影完整包
+
+一、完成内容
+1. 新增 tiangong_agent_runtime/planner_unified_consumption.py
+2. 新增 PlannerUnifiedConsumptionBridge
+3. 新增 PlannerUnifiedContextHint
+4. 新增 PlannerPlanPreflightDecision
+5. 新增 PlannerConsumptionReport
+6. 新增 tests/test_l6_43_1_planner_unified_consumption.py
+
+二、核心设计
+1. Planner 只消费 L6.43 UnifiedPlannerContextPack。
+2. 不再直接消费 Memory / Affective / Lifecycle 散对象。
+3. 上下文提示只包含 summary/ref/digest，不含原始记忆正文、密钥、完整证据正文。
+4. 计划进入执行链前增加只读 preflight。
+5. A0-A4 保持低摩擦，A5 预检阻断，A4 标记确认。
+6. 本层不执行、不调工具、不改预算、不写记忆、不改核心组。
+
+三、验证
+compileall：PASS
+L6.37 回归：7 passed
+L6.38 回归：6 passed
+L6.39 回归：6 passed
+L6.40 回归：6 passed
+L6.41 回归：7 passed
+L6.42 回归：6 passed
+L6.42.1 回归：11 passed
+L6.43 回归：4 passed
+L6.43.1 新增测试：5 passed
+合计定向测试：58 passed
+
+四、核心污染检查
+checked_core_files：584
+changed_core_files：0
+status：PASS
+
+五、静态边界扫描
+status：PASS
+
+六、问题
+未发现 P0/P1 问题。
+未跑完整全量 pytest，不声明全量通过。
+
+七、下一阶段建议
+进入 L6.44：预算治理低摩擦改造。
+目标：A0-A4 更顺滑进入执行链；A5、凭证、隐私、不可逆副作用、发布/激活/合入继续强卡。

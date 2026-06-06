@@ -1,0 +1,23 @@
+天工造物 / 临渊者 L6.39【P0 系统接入二】未做事项
+日期：2026-06-06
+
+一、未做事项
+1. 未运行完整全量 pytest，只完成 L6.31-L6.39 相关核心分组回归与 L6.39 定向测试。
+2. 未做真实长期记忆写入验证；本轮只做 Memory 安全摘要路由。
+3. 未做审计 JSONL 持久化链路压力测试；本轮只读 AuditBridge 进程内安全摘要。
+4. 未做真实补丁应用、子智能体派生、预算改写；Recovery 只生成恢复续接票据。
+5. 未做完整质量门发布流程；QualityGateEvidence 只引用已有质量门状态，不自动放行发布。
+6. 未做 GUI 全路径点击验证。
+7. 未做 Windows 原生验证。
+8. 未做真实 Provider 网络调用或凭证读取。
+
+二、下一步建议
+L6.40【P0 系统接入三：Context / Projection / Governance / Delivery】。
+建议继续保持：
+RuntimeEntry → PlannerExecutionController → LongChainRunner → ExecutionSpine 的冻结执行链唯一入口。
+
+L6.40 重点：
+1. Context：把上下文/世界状态/任务状态压缩为 Planner 可消费执行上下文，不直接注入原文。
+2. Projection：统一公共投影字段，给 CLI/GUI/报告消费，不暴露隐私和完整执行计划。
+3. Governance：把 A0-A4 快车道、A5 硬边界、确认票据和审计引用进一步接入主链。
+4. Delivery：把交付标准、manifest、integrity、todo、artifact hint 接入执行链，但不自动发布。

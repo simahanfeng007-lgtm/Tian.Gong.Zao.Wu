@@ -1,0 +1,146 @@
+天工造物 L4→L6 交接说明
+
+日期：2026-06-04
+
+一、L6 后续需要提供
+
+1. 真实模型适配器。
+2. 真实工具适配器。
+3. 真实文件适配器。
+4. 真实网络适配器。
+5. 真实终端适配器。
+6. 真实桌面适配器。
+7. 观察系统适配器。
+8. 审计系统适配器。
+9. 证据存储适配器。
+10. 验证系统适配器。
+11. 恢复系统适配器。
+12. 回放系统适配器。
+13. 记忆、检索、学习、情感反馈 sink。
+14. 插件、连接器、UI 动作、资源观测适配器。
+
+二、L4 允许提交给 L6
+
+1. L4ToL6AdapterRequirement。
+2. L4ToL6ObservationRequirement。
+3. L4ToL6RecoveryRequirement。
+4. L4ToL6ReplayRequirement。
+5. L4ToL6ExecutionServiceNeed。
+6. adapter_descriptor、adapter_capability_descriptor、adapter_risk_surface_descriptor。
+7. recovery_requirement_ref、replay_requirement_ref、observation_requirement_ref。
+
+三、L4 禁止实现
+
+1. SkillRegistry、ToolRegistry、ToolGroupRegistry。
+2. ModelClient、FileSystemClient、NetworkClient、ShellRunner、DesktopController。
+3. MemorySystem、RetrievalSystem、LearningSystem、AffectiveSystem。
+4. RecoverySystem、ReplaySystem、PluginHost、ConnectorPlatform、UI 前端。
+
+四、结论
+
+L4→L6 交接口径已冻结。L4 不实现 L6。
+
+五、记忆与遗忘 sink 专项补丁说明
+
+新增代码 surface：
+1. memory_sink。
+2. forgetting_sink。
+3. retrieval_sink。
+4. learning_sink。
+5. affective_feedback_sink。
+6. privacy_retention_sink。
+
+新增 requirement：
+1. L4ToL6MemorySinkRequirement。
+2. L4ToL6ForgettingSinkRequirement。
+
+链路口径：
+动作结果 / 观察结果 / 用户反馈
+→ L4 标准化结果与 ActionResultCognitiveSinkHint
+→ L5 审查记忆写入、隐私、保留、删除、审计和 Tombstone 边界
+→ L6 记忆/遗忘插件执行真实存储、召回、巩固、修订、遗忘或删除
+→ 返回引用与审计摘要
+→ L3/L2 记录状态建议与状态事实。
+
+边界：
+L4 不写记忆，不执行遗忘，不实现 MemorySystem / ForgettingSystem / RetrievalSystem / LearningSystem。
+
+六、自我学习 / 自我迭代 / 自我进化专项补丁说明
+
+新增 L6 requirement：
+1. L4ToL6SelfLearningSinkRequirement。
+2. L4ToL6EvolutionValidationRequirement。
+3. L4ToL6EvolutionCommitRequirement。
+4. L4ToL6PostCommitObservationRequirement。
+
+链路口径：
+学习信号 / 候选 / 验证结果 / 人工复核
+→ L3 CandidateValidatedToCommitAdvice 与 EvolutionCommitFlowAdvice
+→ L5 边界许可、人工确认、租约、审计和回滚锚点
+→ L4 requirement-only 承载
+→ L6 后续真实学习、验证、提交、观察或回滚服务
+→ 返回引用与审计摘要
+→ L3/L2 记录建议与状态事实。
+
+边界：
+L4 不生成 patch，不应用 patch，不提交，不热切换，不回滚，不实现真实学习或进化系统。
+
+七、自愈系统专项补丁说明
+
+新增 L4 handoff：
+1. L4SelfHealingHandoffRef。
+2. L4FailureRecoveryRequirementBundle。
+3. L4PostRecoveryValidationRequirement。
+
+链路口径：
+ActionFailureReturnEnvelope / failure_ref
+→ L1 FailureDiagnosisRequest
+→ L2 FailureDiagnosisState / RecoveryPlanState
+→ L3 SelfHealingFlowEnvelope
+→ L5 RecoveryPermission / RollbackPermission / AuditGate
+→ L4 L4SelfHealingHandoffRef
+→ L6 future RecoveryExecutor / ValidationRunner / RegressionRunner
+→ PostRecoveryValidation / RegressionOutcome
+→ Postmortem / RepairSuggestion / LearningCandidate。
+
+边界：
+L4 不执行恢复、不执行回滚、不写审计、不写 L2。ready handoff 必须具备 checkpoint、validation 和 regression 引用。
+
+八、Context / BeliefState / WorldState 安全边界专项补丁说明
+
+新增 L4 投影：
+1. L4ContextSafetyProjection。
+2. L4ToolOutputContextProjection。
+3. L4ModelOutputContextProjection。
+4. L4ObservationBeliefWorldProjection。
+
+链路口径：
+ToolResultEnvelope / ModelActionResult / ObservationReturnEnvelope
+→ L4 context safety projection
+→ L5 权限、隐私、信任、taint 和指令资格边界审查
+→ L6 future context assembler / belief updater / world state reconciler
+→ L2/L3 只记录状态事实和建议。
+
+边界：
+L4 投影默认 untrusted_output=True、instruction_eligible=False、system_instruction_eligible=False、context_injection_allowed=False。
+L4 不装配上下文、不更新 BeliefState、不同步 WorldState。
+
+九、L4→L5/L6 前置 8 专项补丁说明
+
+L6 真实插件和高级算法只能在 L5 插件宿主注册、隔离、许可和健康治理下实现。真实外部适配器仍必须经 L4 外部动作 surface 契约、沙箱策略、审计证据链、资源预算和数据治理引用承载。
+
+L4 新增 L6 requirement：
+1. L4ToL6ValidationRequirement。
+2. L4ToL6EvaluationRequirement。
+3. L4ToL6RegressionRequirement。
+4. L4ToL6MigrationSwitchRequirement。
+
+L4ToL6AdapterRequirement 已补充：
+1. sandbox_requirement_ref。
+2. quality_gate_requirement_ref。
+3. migration_switch_requirement_ref。
+4. data_access_manifest_requirement_ref。
+5. external_disclosure_manifest_requirement_ref。
+
+新增外部 surface：
+database、browser、git、build、test、sandbox、storage。后续 L6 不得把这些动作伪装成 generic terminal/network/file。

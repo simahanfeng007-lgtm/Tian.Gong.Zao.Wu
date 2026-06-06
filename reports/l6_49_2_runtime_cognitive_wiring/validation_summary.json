@@ -1,0 +1,26 @@
+{
+  "schema": "tiangong.l6_49_2.runtime_cognitive_wiring.validation.v1",
+  "conclusion": "P1 Runtime wiring bug confirmed and repaired: affective previous_state is now carried across turns; forgetting review is invoked with review(record, vector) signature without silent swallow.",
+  "p0_found": false,
+  "p1_found": true,
+  "core_chain_modified": false,
+  "modified_files": [
+    "tiangong_agent_runtime/runtime_entry.py",
+    "tests/test_l6_49_2_runtime_cognitive_wiring.py",
+    "docs/L6_49_2_Runtime情志遗忘接活修复报告_20260606.txt",
+    "reports/l6_49_2_runtime_cognitive_wiring/validation_summary.json"
+  ],
+  "validation": {
+    "compileall": "PASS: python3 -m compileall -q tiangong_agent_runtime tiangong_agent_shell tiangong_kernel tests",
+    "affected_tests": "PASS: 19 passed",
+    "freeze_segment_regression": "PASS: 89 passed",
+    "smoke": "PASS: run_agent.py --status; run_agent.py --mock --once",
+    "full_pytest_l6_all": "TIMEOUT: pytest -q tests/test_l6_*.py timed out before final result; no full-pass claim"
+  },
+  "boundary": {
+    "affective_is_planner_hint_only": true,
+    "forgetting_review_no_physical_delete": true,
+    "forgetting_review_no_memory_mutation": true,
+    "runtime_not_bypassed": true
+  }
+}

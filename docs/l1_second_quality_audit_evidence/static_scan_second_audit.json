@@ -1,0 +1,75 @@
+{
+  "counts": {
+    "tiangong_kernel/l0_primitives": 58,
+    "tiangong_kernel/l1_ports": 49,
+    "tests": 134,
+    "docs": 41,
+    "l1_py": 49,
+    "tests_py": 134,
+    "l0_py": 58
+  },
+  "imports_l1_ports": [
+    "__future__",
+    "abc",
+    "base",
+    "candidate_ports",
+    "control_boundary_ports",
+    "dataclasses",
+    "enum",
+    "envelope",
+    "evolution_ports",
+    "learning_ports",
+    "model_envelope_ports",
+    "model_feedback_ports",
+    "model_ports",
+    "model_reflection_ports",
+    "port_boundary",
+    "port_error",
+    "port_health",
+    "port_lifecycle",
+    "port_result",
+    "self_iteration_ports",
+    "skill_evolution_ports",
+    "skill_ports",
+    "tiangong_kernel",
+    "tool_gap_ports",
+    "tool_release_ports",
+    "typing"
+  ],
+  "l1_banned_hits": {},
+  "tests_files_with_banned_sentinel_strings": 50,
+  "same_module_duplicates": [],
+  "cross_module_duplicates": {
+    "CandidatePromotionHint": [
+      "tiangong_kernel/l1_ports/candidate_ports.py",
+      "tiangong_kernel/l1_ports/validation_ports.py"
+    ],
+    "CandidatePromotionHintPort": [
+      "tiangong_kernel/l1_ports/candidate_ports.py",
+      "tiangong_kernel/l1_ports/validation_ports.py"
+    ],
+    "CandidatePromotionHintRequest": [
+      "tiangong_kernel/l1_ports/candidate_ports.py",
+      "tiangong_kernel/l1_ports/validation_ports.py"
+    ],
+    "CandidatePromotionHintResponse": [
+      "tiangong_kernel/l1_ports/candidate_ports.py",
+      "tiangong_kernel/l1_ports/validation_ports.py"
+    ]
+  },
+  "class_count": 967,
+  "port_count": 247,
+  "dataclass_count": 708,
+  "method_count": 267,
+  "dataclass_bad": [],
+  "notabc": [],
+  "noabs": [],
+  "return_issues": [],
+  "implementation_shape_issues": [],
+  "candidate_shape": "fields=['candidate_ref', 'learning_candidate', 'iteration_candidate', 'evolution_candidate', 'validation_refs', 'verification_refs', 'schema_version']; request_payload_is_candidate=True",
+  "missing": {
+    "l1": [],
+    "docs": [],
+    "tests": []
+  }
+}

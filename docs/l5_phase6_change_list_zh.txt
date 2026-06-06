@@ -1,0 +1,13 @@
+修改清单
+新增：tiangong_kernel/l5_plugin_host/phase6_health.py
+修改：tiangong_kernel/l5_plugin_host/__init__.py（新增安全导出）
+修改：tiangong_kernel/l5_plugin_host/invariants.py（新增 L5Phase6InvariantSuite）
+新增测试：
+tests/test_l5_phase6_disposition_and_projection.py
+tests/test_l5_phase6_forbidden_scan_semantics.py
+tests/test_l5_phase6_handoff_to_phase7.py
+tests/test_l5_phase6_health_declarations.py
+tests/test_l5_phase6_permission_preconditions.py
+tests/test_l5_phase6_public_export_backward_compatibility.py
+tests/test_l5_phase6_quality_gate_and_audit_index.py
+tests/test_l5_phase6_read_only_and_no_lower_layer_imports.py

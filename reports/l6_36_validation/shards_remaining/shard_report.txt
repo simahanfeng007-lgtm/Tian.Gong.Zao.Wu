@@ -1,0 +1,33 @@
+# L6.33 分片回归执行器报告
+
+- schema: `tiangong.l6_33.test_shard_runner.v1`
+- status: `passed`
+- total_shards: 2
+- passed: 2
+- failed: 0
+- timeout: 0
+- skipped: 0
+- required_failed_or_timeout: 0
+- output_dir: `/mnt/data/l636_work/project/reports/l6_36_validation/shards_remaining`
+
+## Shards
+
+### l6_35_step_state
+- status: `passed`
+- returncode: `0`
+- duration_seconds: 4.171
+- timeout_seconds: 90.0
+- required: True
+- rerun: `/opt/pyvenv/bin/python -m pytest tests/test_l6_35_step_state_machine_long_chain.py`
+- stdout: `/mnt/data/l636_work/project/reports/l6_36_validation/shards_remaining/l6_35_step_state/stdout.log`
+- stderr: `/mnt/data/l636_work/project/reports/l6_36_validation/shards_remaining/l6_35_step_state/stderr.log`
+
+### l6_36_recovery_replay
+- status: `passed`
+- returncode: `0`
+- duration_seconds: 5.781
+- timeout_seconds: 90.0
+- required: True
+- rerun: `/opt/pyvenv/bin/python -m pytest tests/test_l6_36_recovery_replay_quality.py`
+- stdout: `/mnt/data/l636_work/project/reports/l6_36_validation/shards_remaining/l6_36_recovery_replay/stdout.log`
+- stderr: `/mnt/data/l636_work/project/reports/l6_36_validation/shards_remaining/l6_36_recovery_replay/stderr.log`

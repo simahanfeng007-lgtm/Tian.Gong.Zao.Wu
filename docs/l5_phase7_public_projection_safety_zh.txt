@@ -1,0 +1,10 @@
+L5 第七阶段 PublicProjection 安全报告
+
+结论：通过。
+
+控制点：
+- 只输出 summary / counts / refs / digest / redacted_evidence_refs。
+- 不输出完整 Manifest、完整 ProductSpec、完整 BuildPlan、完整 ArtifactBuild、完整 DeliveryPlan。
+- 不输出真实路径、URL、socket、database URI、module path、entry point、function repr、shell command。
+- 不输出 tool_schema、function_schema、callable_ref、handler、endpoint。
+- 不输出 token、api key、password、secret、permit/lease/confirmation ticket 实体。

@@ -1,0 +1,16 @@
+{
+  "name": "l6_31_32_model",
+  "command": [
+    "/opt/pyvenv/bin/python3",
+    "-m",
+    "pytest",
+    "tests/test_l6_31_model_suggest_shape_hotfix.py",
+    "tests/test_l6_32_p1_model_suggest_repair.py",
+    "-q"
+  ],
+  "cwd": "/mnt/data/l635_work/project",
+  "timeout_seconds": 90,
+  "purpose": "pytest shard",
+  "required": true,
+  "rerun_command": "/opt/pyvenv/bin/python3 -m pytest tests/test_l6_31_model_suggest_shape_hotfix.py tests/test_l6_32_p1_model_suggest_repair.py -q"
+}

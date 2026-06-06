@@ -1,0 +1,23 @@
+天工造物 L5 第八阶段 hotfix1 最终索引
+
+修复依据：桌面 L5 质检报告文件夹。
+修复目标：按严重程度修复第八阶段最终冻结包 P1/P2/P3 问题。
+
+主要结果：
+- P1 已修复：final quality gate、public projection、redacted evidence、handoff/audit chain。
+- P2 已修复：capability/governance matrix、L3 Run Loop flow completeness、communication handoff direct tests、专项 handoff refs。
+- P3 已修复：pytest pythonpath、phase8 语义根目录重打包、最终文档更新。
+
+验证：
+- compileall passed。
+- collect-only 1308 tests collected。
+- L5 phase8 targeted 69 passed。
+- L5/plugin subset 21 passed。
+- full pytest 1308 passed。
+- pytest -q 1308 passed。
+- forbidden scan 0 blocking findings。
+
+交付结论：
+建议 L5 最终冻结。
+允许进入 L6 一般插件规划。
+Product Artifact Factory 仅允许 L6 专项规划，不允许直接真实实现。

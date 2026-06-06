@@ -1,0 +1,26 @@
+天工造物 Context-Belief-World 安全边界专项补丁修改清单
+日期：2026-06-04
+
+新增源码：
+1. tiangong_kernel/l1_ports/context_belief_world_ports.py
+2. tiangong_kernel/l2_state/belief_state.py
+3. tiangong_kernel/l2_state/world_state.py
+4. tiangong_kernel/l2_state/context_safety_state.py
+5. tiangong_kernel/l3_orchestration/belief_world_context_transition.py
+6. tiangong_kernel/l4_action_grounding/context_safety_projection.py
+
+修改源码：
+1. tiangong_kernel/l1_ports/__init__.py
+2. tiangong_kernel/l2_state/__init__.py
+3. tiangong_kernel/l3_orchestration/__init__.py
+4. tiangong_kernel/l4_action_grounding/__init__.py
+5. docs/l4_to_l5_handoff_zh.txt
+6. docs/l4_to_l6_handoff_zh.txt
+7. tests/test_l3_phase1_does_not_modify_l0_l1_l2.py
+
+新增测试：
+1. tests/test_l1_context_belief_world_ports_are_protocol_only.py
+2. tests/test_l2_context_belief_world_states_are_safe_facts.py
+3. tests/test_l3_belief_world_context_transition_advice_only.py
+4. tests/test_l4_context_safety_projection_defaults.py
+5. tests/test_context_belief_world_chain_safety.py

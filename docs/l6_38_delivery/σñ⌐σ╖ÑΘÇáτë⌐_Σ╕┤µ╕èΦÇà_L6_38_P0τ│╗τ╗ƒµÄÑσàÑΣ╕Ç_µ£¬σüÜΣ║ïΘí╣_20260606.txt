@@ -1,0 +1,6 @@
+临渊者 L6.38 未做事项 / 后续建议
+
+1. 完整全量 pytest 尚未执行。当前已执行 L6.38 定向验收、L6.31-L6.38 核心链回归、Provider/Skill/恢复/执行链关键回归。
+2. 真实 Provider smoke 未做；当前 Provider 接入严格保持 dry-run / sample replay，不触网、不读凭证。后续如要 real-call，需要 L5 许可票据、凭证句柄治理、日志脱敏和失败降级全链验收。
+3. Windows 原生、桌面端、安装包级验收未做。
+4. L6.39 建议进入 P0 系统接入二：Memory / Audit / Recovery / QualityGate，把输出继续压缩成 Planner 可消费 Hint / Ticket / Evidence / Report，并保持 L6.37 冻结执行链唯一入口。

@@ -1,0 +1,4 @@
+$ python -m pytest -q tests/test_l2_phase1_*.py tests/test_l2_phase2_*.py tests/test_l2_phase3_*.py tests/test_l2_phase4_*.py tests/test_l2_phase5_*.py tests/test_l2_phase6_*.py
+........................................................................ [ 60%]
+................................................                         [100%]
+120 passed in 2.76s

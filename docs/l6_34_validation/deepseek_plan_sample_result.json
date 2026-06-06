@@ -1,0 +1,210 @@
+{
+  "schema": "tiangong.l6_34.deepseek_plan_replay.v1",
+  "ok": true,
+  "total": 14,
+  "accepted": 12,
+  "rejected": 2,
+  "matched_expectations": 14,
+  "pass_rate": 1.0,
+  "accepted_expected_total": 12,
+  "accepted_expected_matched": 12,
+  "accepted_expected_rate": 1.0,
+  "results": [
+    {
+      "name": "steps_basic",
+      "accepted": true,
+      "expected_accept": true,
+      "matched_expectation": true,
+      "tools": [
+        "read_file"
+      ],
+      "expected_tools": [
+        "read_file"
+      ],
+      "message": "模型计划生成成功：1 steps。",
+      "issue_codes": []
+    },
+    {
+      "name": "nested_plan_steps",
+      "accepted": true,
+      "expected_accept": true,
+      "matched_expectation": true,
+      "tools": [
+        "scan_project",
+        "read_file"
+      ],
+      "expected_tools": [
+        "scan_project",
+        "read_file"
+      ],
+      "message": "模型计划生成成功：2 steps。",
+      "issue_codes": []
+    },
+    {
+      "name": "plan_as_string_json",
+      "accepted": true,
+      "expected_accept": true,
+      "matched_expectation": true,
+      "tools": [
+        "read_file"
+      ],
+      "expected_tools": [
+        "read_file"
+      ],
+      "message": "模型计划生成成功：1 steps。",
+      "issue_codes": []
+    },
+    {
+      "name": "tool_calls_function_arguments",
+      "accepted": true,
+      "expected_accept": true,
+      "matched_expectation": true,
+      "tools": [
+        "run_python_quality_check"
+      ],
+      "expected_tools": [
+        "run_python_quality_check"
+      ],
+      "message": "模型计划生成成功：1 steps。",
+      "issue_codes": []
+    },
+    {
+      "name": "actions_direct_aliases",
+      "accepted": true,
+      "expected_accept": true,
+      "matched_expectation": true,
+      "tools": [
+        "list_dir",
+        "read_file"
+      ],
+      "expected_tools": [
+        "list_dir",
+        "read_file"
+      ],
+      "message": "模型计划生成成功：2 steps。",
+      "issue_codes": []
+    },
+    {
+      "name": "execution_steps_chinese",
+      "accepted": true,
+      "expected_accept": true,
+      "matched_expectation": true,
+      "tools": [
+        "read_file"
+      ],
+      "expected_tools": [
+        "read_file"
+      ],
+      "message": "模型计划生成成功：1 steps。",
+      "issue_codes": []
+    },
+    {
+      "name": "single_step_object",
+      "accepted": true,
+      "expected_accept": true,
+      "matched_expectation": true,
+      "tools": [
+        "read_file"
+      ],
+      "expected_tools": [
+        "read_file"
+      ],
+      "message": "模型计划生成成功：1 steps。",
+      "issue_codes": []
+    },
+    {
+      "name": "single_code_object",
+      "accepted": true,
+      "expected_accept": true,
+      "matched_expectation": true,
+      "tools": [
+        "return_code"
+      ],
+      "expected_tools": [
+        "return_code"
+      ],
+      "message": "模型计划生成成功：1 steps。",
+      "issue_codes": []
+    },
+    {
+      "name": "plain_code_block",
+      "accepted": true,
+      "expected_accept": true,
+      "matched_expectation": true,
+      "tools": [
+        "return_code"
+      ],
+      "expected_tools": [
+        "return_code"
+      ],
+      "message": "模型计划生成成功：1 steps。",
+      "issue_codes": []
+    },
+    {
+      "name": "plain_analysis_text",
+      "accepted": true,
+      "expected_accept": true,
+      "matched_expectation": true,
+      "tools": [
+        "return_analysis"
+      ],
+      "expected_tools": [
+        "return_analysis"
+      ],
+      "message": "模型计划生成成功：1 steps。",
+      "issue_codes": []
+    },
+    {
+      "name": "mixed_text_fenced_json",
+      "accepted": true,
+      "expected_accept": true,
+      "matched_expectation": true,
+      "tools": [
+        "scan_project"
+      ],
+      "expected_tools": [
+        "scan_project"
+      ],
+      "message": "模型计划生成成功：1 steps。",
+      "issue_codes": []
+    },
+    {
+      "name": "answer_json_no_steps",
+      "accepted": true,
+      "expected_accept": true,
+      "matched_expectation": true,
+      "tools": [
+        "return_analysis"
+      ],
+      "expected_tools": [
+        "return_analysis"
+      ],
+      "message": "模型计划生成成功：1 steps。",
+      "issue_codes": []
+    },
+    {
+      "name": "unsafe_shell_rejected",
+      "accepted": false,
+      "expected_accept": false,
+      "matched_expectation": true,
+      "tools": [],
+      "expected_tools": [],
+      "message": "模型计划未通过安全校验：tool_not_allowed。",
+      "issue_codes": [
+        "tool_not_allowed"
+      ]
+    },
+    {
+      "name": "unsafe_absolute_path_rejected",
+      "accepted": false,
+      "expected_accept": false,
+      "matched_expectation": true,
+      "tools": [],
+      "expected_tools": [],
+      "message": "模型计划未通过安全校验：unsafe_path。",
+      "issue_codes": [
+        "unsafe_path"
+      ]
+    }
+  ]
+}

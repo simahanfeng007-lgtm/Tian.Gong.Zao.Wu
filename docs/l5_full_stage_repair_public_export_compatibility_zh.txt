@@ -1,0 +1,27 @@
+Public export compatibility hotfix1 -> hotfix2
+original_export_count=255
+current_export_count=272
+deleted_or_renamed_exports=0
+added_exports=17
+status=pass
+
+ADDED_EXPORTS
+AFFECTIVE_ALLOWED_MODULATION_REFS
+AFFECTIVE_CAPABILITY_KIND_REFS
+AFFECTIVE_FORBIDDEN_MISUSE_REFS
+AFFECTIVE_MOUNT_KIND_REF
+AFFECTIVE_PLUGIN_KIND_REF
+AffectiveAuditBinding
+AffectiveCapabilityDeclaration
+AffectiveL6HandoffRef
+AffectiveModulationContractBinding
+AffectivePluginMountDeclaration
+AffectivePublicProjectionSummary
+AffectiveSafetyBoundaryRef
+Phase7AffectivePluginMountDeclaration
+PluginAffectiveMountValidator
+affective_declaration_digest
+has_affective_live_locator
+has_forbidden_affective_field_name
+
+DELETED_EXPORTS

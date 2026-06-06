@@ -1,0 +1,3 @@
+﻿L4 phase7 forbidden module import scan
+files: 29
+result: PASS, no forbidden imports found

@@ -1,0 +1,4 @@
+﻿L4 第三阶段动作适配器越界关键词扫描
+pattern=subprocess|socket|requests|urllib|httpx|open\(|write_text|write_bytes|call_model|call_tool|invoke_tool|Popen|\.get\(|\.post\(|\.request\(|\.connect\(|Runtime|神枢|AbilityPackage|CapabilityPort|AbilityPackagePort|allowed_by_l4|ToolRegistry|SkillRegistry
+scope=tiangong_kernel/l4_action_grounding
+result=NO_MATCH

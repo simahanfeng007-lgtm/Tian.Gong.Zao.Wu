@@ -1,0 +1,26 @@
+天工造物 L4 第八阶段修改清单
+
+工程目录：project_l4_phase8
+日期：2026-06-04
+
+一、代码变更
+
+1. 新增 tiangong_kernel/l4_execution 包，合计 25 个 Python 文件。
+2. 新增第八阶段公共导出入口 tiangong_kernel/l4_execution/__init__.py。
+3. 新增 L4ModuleInventory、L4PublicExportMap、L4ObjectFamilyIndex、L4ComponentRegistrySummary。
+4. 新增 L4BoundaryInvariantSuite 与四类边界保证对象。
+5. 新增 L4→L5 交接冻结对象 6 类。
+6. 新增 L4→L6 交接冻结对象 5 类。
+7. 新增 L4FinalFreezeReadinessReport、L4FinalQualityChecklist、L4ClosureProjection 与第八阶段不变量。
+8. 新增第八阶段测试 builder 与 17 个测试文件。
+
+二、未变更内容
+
+1. 未修改 L0/L1/L2/L3。
+2. 未修改 tiangong_kernel/l4_action_grounding 前七阶段代码。
+3. 未修改前七阶段测试。
+4. 未新增第三方依赖。
+
+三、兼容性说明
+
+第八阶段新包是静态收口层，不替代 l4_action_grounding，也不改变前七阶段公共接口。外部如需引用总收口对象，可从 tiangong_kernel.l4_execution 导入。

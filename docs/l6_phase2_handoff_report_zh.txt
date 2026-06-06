@@ -1,0 +1,29 @@
+天工造物 L6 第二阶段 Handoff 报告
+生成日期：2026-06-05
+
+一、交接范围
+本阶段交接 L6 公共运行关系体系，不交接任何业务插件实现。
+
+二、已冻结的能力边界
+- 生命周期：状态只读声明，active/ready/registered 不等于 permit。
+- 事件：ref-only/summary-only/digest-only，不执行，不 action replay。
+- 状态投影：candidate-only，不写 L2，不改 memory/affective/budget/audit/credential。
+- Handoff：要求 trace/policy/evidence/responsibility/tamper，不自动合并，不直连插件。
+- 插件间协作：只能 event/projection/handoff/host-mediated invocation。
+- 调用回流：L3 只能经 L5 宿主治理发现与调用，L6 输出回 L5 校验后再进入 L3 continuation。
+- 新插件准入：普通插件、新类型插件、公共契约破坏插件三类 SOP 已编码。
+
+三、对 L6 第三阶段的使用建议
+1. 第三阶段可以基于 L6PluginAdmissionDecision 做一般插件准入样板。
+2. 业务插件必须先提交 Manifest + VersionedContractSet + Requirement + Lifecycle/Event/Projection/Handoff/Invocation/OutputReturn。
+3. 任何新增插件不得绕过 L5，不得把 requirement/readiness/projection/handoff 当授权。
+4. 如出现公共契约破坏需求，必须走 L6PublicContractPatchProposal + ImpactAssessment + CompatibilityMatrix + Migration + Rollback + Replay + L5 review。
+
+四、验证索引
+- full pytest：1453 passed in 13.06s
+- phase2 targeted：39 passed in 1.37s
+- forbidden scan：passed=True
+- L0-L5 hash compare：passed=True
+
+五、进入第三阶段建议
+建议进入，但第三阶段不得直接开发高危 live provider、真实模型调用、真实工具调用、真实状态写入或真实迁移/回滚/热切换/replay。

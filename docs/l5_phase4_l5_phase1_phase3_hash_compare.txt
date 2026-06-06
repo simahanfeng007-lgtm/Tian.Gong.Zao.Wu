@@ -1,0 +1,25 @@
+unchanged=56
+added=5
+modified=3
+deleted=0
+
+[ADDED]
+tiangong_kernel/l5_plugin_host/lifecycle_audit_index.py
+tiangong_kernel/l5_plugin_host/lifecycle_declaration.py
+tiangong_kernel/l5_plugin_host/lifecycle_projection.py
+tiangong_kernel/l5_plugin_host/lifecycle_validation.py
+tiangong_kernel/l5_plugin_host/self_healing_declaration.py
+
+[MODIFIED]
+tiangong_kernel/l5_plugin_host/__init__.py
+tiangong_kernel/l5_plugin_host/invariants.py
+tiangong_kernel/l5_plugin_host/registry_conflict.py
+
+[DELETED]
+
+
+说明：
+- added 5 为第四阶段新增文件。
+- modified 3 为共享文件声明性扩展：__init__.py 增加安全导出，invariants.py 增加 L5Phase4InvariantSuite，registry_conflict.py 增加第四阶段 conflict kind。
+- 未删除 phase1-phase3 对象，未重命名既有公开对象。
+- backward compatibility 测试已通过。

@@ -1,0 +1,39 @@
+{
+  "changed": [
+    "tiangong_agent_runtime/long_chain_runner.py",
+    "tiangong_agent_runtime/planner_execution_controller.py",
+    "tiangong_agent_runtime/runtime_entry.py",
+    "tiangong_agent_runtime/tool_result.py"
+  ],
+  "added": [
+    "reports/l6_35_shards/l6_31_32_model/result.json",
+    "reports/l6_35_shards/l6_31_32_model/spec.json",
+    "reports/l6_35_shards/l6_31_32_model/stderr.log",
+    "reports/l6_35_shards/l6_31_32_model/stdout.log",
+    "reports/l6_35_shards/l6_31_32_model/worker_stderr.log",
+    "reports/l6_35_shards/l6_31_32_model/worker_stdout.log",
+    "reports/l6_35_shards/l6_32_controller/result.json",
+    "reports/l6_35_shards/l6_32_controller/spec.json",
+    "reports/l6_35_shards/l6_32_controller/stderr.log",
+    "reports/l6_35_shards/l6_32_controller/stdout.log",
+    "reports/l6_35_shards/l6_32_controller/worker_stderr.log",
+    "reports/l6_35_shards/l6_32_controller/worker_stdout.log",
+    "reports/l6_35_shards/l6_33_34_chain/result.json",
+    "reports/l6_35_shards/l6_33_34_chain/spec.json",
+    "reports/l6_35_shards/l6_33_34_chain/stderr.log",
+    "reports/l6_35_shards/l6_33_34_chain/stdout.log",
+    "reports/l6_35_shards/l6_33_34_chain/worker_stderr.log",
+    "reports/l6_35_shards/l6_33_34_chain/worker_stdout.log",
+    "reports/l6_35_shards/l6_35_self/result.json",
+    "reports/l6_35_shards/l6_35_self/spec.json",
+    "reports/l6_35_shards/l6_35_self/stderr.log",
+    "reports/l6_35_shards/l6_35_self/stdout.log",
+    "reports/l6_35_shards/l6_35_self/worker_stderr.log",
+    "reports/l6_35_shards/l6_35_self/worker_stdout.log",
+    "reports/l6_35_shards/shard_report.txt",
+    "reports/l6_35_shards/shard_summary.json",
+    "tests/test_l6_35_step_state_machine_long_chain.py",
+    "tiangong_agent_runtime/long_chain_pressure_probe.py"
+  ],
+  "removed": []
+}

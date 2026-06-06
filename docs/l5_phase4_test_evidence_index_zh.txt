@@ -1,0 +1,37 @@
+天工造物 L5 第四阶段测试证据索引
+
+1. command: python -m compileall -q tiangong_kernel tests
+   purpose: 编译检查
+   runtime_summary: 真实执行
+   observed: passed
+   evidence_ref: evidence:l5_phase4_compileall
+
+2. command: python -m pytest --collect-only -q tests
+   purpose: 测试收集检查
+   runtime_summary: 真实执行
+   observed: 1102 tests collected
+   evidence_ref: evidence:l5_phase4_collect_only
+
+3. command: python -m pytest -q tests/test_l5_phase4_*.py
+   purpose: 第四阶段定向测试
+   runtime_summary: 真实执行
+   observed: 50 passed
+   evidence_ref: evidence:l5_phase4_targeted_pytest
+
+4. command: python -m pytest -q tests -k 'l5_phase4 or plugin_host'
+   purpose: plugin_host 相关子集回归
+   runtime_summary: 真实执行
+   observed: 53 passed, 1049 deselected
+   evidence_ref: evidence:l5_phase4_plugin_host_subset
+
+5. command: python -m pytest -q tests
+   purpose: 全量测试回归
+   runtime_summary: 真实执行
+   observed: 1102 passed
+   evidence_ref: evidence:l5_phase4_full_pytest
+
+6. command: forbidden scan
+   purpose: no-live-action / no-L6 / no-legacy-runtime / no real file scan
+   runtime_summary: 真实执行
+   observed: 0 blocking findings
+   evidence_ref: evidence:l5_phase4_forbidden_scan

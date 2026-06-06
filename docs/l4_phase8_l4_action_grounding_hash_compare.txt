@@ -1,0 +1,8 @@
+﻿L4 phase8 l4_action_grounding hash comparison
+baseline: project_l4_phase7/tiangong_kernel/l4_action_grounding
+candidate: project_l4_phase8/tiangong_kernel/l4_action_grounding
+excluded: __pycache__, *.pyc
+phase7 files: 162
+phase8 files: 162
+overall: 
+IDENTICAL

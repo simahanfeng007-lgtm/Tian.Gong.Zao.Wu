@@ -1,0 +1,47 @@
+天工造物 L2 第八阶段交付 manifest
+
+交付包名称：天工造物_L2_第八阶段_组件兼容迁移状态投影总收口_交付包_20260603.zip
+
+交付内容：
+1. 完整 project 工作目录。
+2. tiangong_kernel/ 全量源码。
+3. tests/ 全量测试。
+4. docs/ 全量文档。
+5. L2 第八阶段新增源码、测试、报告、日志。
+6. L2 第一至第八阶段收口报告。
+
+关键新增源码：
+- tiangong_kernel/l2_state/component_state.py
+- tiangong_kernel/l2_state/compatibility_state.py
+- tiangong_kernel/l2_state/projection_state.py
+- tiangong_kernel/l2_state/state_catalog.py
+- tiangong_kernel/l2_state/l2_closure_state.py
+
+关键修改源码：
+- tiangong_kernel/l2_state/state_identity.py
+- tiangong_kernel/l2_state/__init__.py
+
+关键测试：
+- tests/test_l2_phase8_component_compatibility_state.py
+- tests/test_l2_phase8_projection_state.py
+- tests/test_l2_phase8_catalog_and_closure_state.py
+- tests/test_l2_phase8_state_serialization_and_hash.py
+- tests/test_l2_phase8_boundary_no_execution.py
+- tests/test_l2_phase8_full_l2_integration.py
+
+关键报告：
+- docs/l2_phase8_development_log_zh.md
+- docs/l2_phase8_handoff_report_zh.txt
+- docs/l2_phase8_validation_report_zh.txt
+- docs/l2_phase8_total_closure_report_zh.txt
+- docs/l2_phase8_change_list_zh.txt
+- docs/l2_phase8_test_results_zh.txt
+- docs/l2_phase8_todo_zh.txt
+
+验证摘要：
+- compileall：通过。
+- 第八阶段专项测试：24 passed。
+- L2 第1-8阶段测试：157 passed。
+- 完整 pytest：483 passed。
+
+建议下一步：进入 L2 全阶段总质检。

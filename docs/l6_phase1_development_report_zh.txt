@@ -1,0 +1,70 @@
+天工造物 L6 第一阶段开发报告
+生成日期：2026-06-05
+
+一、阶段定位
+本阶段为 L6 公共插件底座冻结工程，不进入任何具体业务插件开发。工程只新增 L6 common 契约层，供后续记忆、遗忘、情志、上下文、自学习、自愈、Skill、工具释放、成品生产、审计、预算、多智能体等 L6 插件共用。
+
+二、开发结论
+已完成 L6 公共插件底座第一版实现，工程落点为：
+- tiangong_kernel/l6_plugins/
+- tiangong_kernel/l6_plugins/common/
+
+三、核心新增对象
+1. Manifest / Lifecycle
+- L6PluginManifest
+- L6PluginLifecycleDeclaration
+- L6PluginLifecycleState
+
+2. Envelope
+- L6PluginInvocationEnvelope
+- L6PluginOutputEnvelope
+
+3. Capability / Requirement
+- L6CapabilityRequirement
+- L6ModelCapabilityRequirement
+- L6ToolCapabilityRequirement
+- L6PermissionRequirement
+- L6BudgetRequirement
+- L6AuditRequirement
+- L6CredentialRequirement
+- L6ContextRequirement
+
+4. Event / Projection / Handoff
+- L6EventContract
+- L6StateProjectionContract
+- L6PublicProjection
+- L6HandoffContract
+
+5. Failure / Degradation / Migration / Rollback / HotSwitch
+- L6FailureContract
+- L6DegradationContract
+- L6MigrationContract
+- L6RollbackContract
+- L6HotSwitchReadinessContract
+
+6. Quality / Invariant / Forbidden Scan
+- L6QualityGateDecision
+- L6InvariantRule / L6InvariantSuite
+- L6ForbiddenScanRule / L6ForbiddenScanReport
+
+四、边界实现
+- Requirement 不是 Permit：所有 governance requirement 默认 requirement_only=True，且 grant/allocation/write/read 类布尔位为 False。
+- Readiness 不是 Authorization：Lifecycle、HotSwitch、QualityGate 均不签发授权。
+- L6 不裸调模型：ModelCapabilityRequirement 只允许 provider-neutral hints，拒绝 provider selection、SDK import、raw HTTP、L4 adapter 直连。
+- L6 不裸调工具：ToolCapabilityRequirement 只声明工具意图、类别和治理需求，拒绝 tool handle、raw schema、shell/file/network/database direct action。
+- L6 不直接写状态：StateProjectionContract 只允许投影/提案/事件，不允许写 L2 fact。
+- L6 不泄露公开投影：PublicProjection 拒绝 credential、provider locator、raw prompt、tool_schema、function_schema、endpoint、真实路径和完整内部计划。
+
+五、验证摘要
+- L6 定向测试：19 passed。
+- L4/L5/L6 边界回归子集：173 passed。
+- full pytest：1414 passed。
+- compileall：通过。
+- L0-L5 hash compare：unchanged_l0_l5=True.
+- forbidden scan AST import 检查：ast_forbidden_imports_passed=True.
+
+六、未进入范围
+未实现具体业务插件、真实 provider、真实工具调用、真实状态写入、真实审计落库、真实预算扣减、真实凭证读取、真实迁移/回滚/热切换/replay。
+
+七、建议
+建议将本包作为 L6 第一阶段公共插件底座候选冻结包；下一阶段可在此基础上继续 Manifest/Lifecycle/Event/Projection 与 L5 宿主注册治理对接，但仍应保持插件业务实现后置。

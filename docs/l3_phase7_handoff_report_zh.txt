@@ -1,0 +1,27 @@
+《天工造物 L3 第七阶段 handoff 报告》
+
+一、交接基线
+本阶段基于 L3 第六阶段交付包继续开发。第七阶段完成后，L3 编排层已具备验证、恢复、实验、迭代、进化、自我改进入口的纯编排对象与轻量评分建议。
+
+二、新增能力范围
+1. ValidationRequest / ValidationFlowAdvice / ValidationResultRef。
+2. RecoveryRequest / RecoveryFlowAdvice / RecoveryResultRef。
+3. RollbackAdvice / ReversibilityScore / RollbackNeedScore。
+4. ExperimentFlowRequest / ExperimentValueScore。
+5. IterationFlowRequest / IterationNeedScore。
+6. EvolutionFlowRequest / EvolutionPressureScore。
+7. SelfLearningFlowEntryAdvice / SelfIterationFlowEntryAdvice / SelfEvolutionFlowEntryAdvice。
+8. CandidateChangeRef / CandidatePatchRef / CandidateEvidenceChainRef。
+9. ValidationRecoveryRecommendation / IterationEvolutionRecommendation。
+10. ObservationToValidationAdvice / ExecutionFailureToRecoveryAdvice 等前六阶段接线对象。
+
+三、边界说明
+1. ValidationRequest 只是请求未来层验证，不执行测试。
+2. RecoveryRequest 只是请求未来层恢复，不执行回滚。
+3. RollbackAdvice 只是建议，不调用 git、shell 或文件系统。
+4. CandidatePatchRef 只是引用，不生成、不应用 patch。
+5. Experiment / Iteration / Evolution 对象只表达流程入口和评分建议，不实现真实算法。
+6. SelfImprovementFlowEntryAdvice 不自动执行、不热切换、不提升权限。
+
+四、后续建议
+先进行 L3 第七阶段专项质检。通过或修复后，再进入第八阶段总收口，不得跳过质检。

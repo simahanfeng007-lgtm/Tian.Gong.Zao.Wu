@@ -1,0 +1,97 @@
+天工造物 L2 第六阶段 handoff 报告
+生成日期：2026-06-03
+
+一、阶段结论
+
+已完成 L2 第六阶段“记忆、上下文、检索、学习状态”。本阶段新增 5 个源码模块，形成记忆状态、上下文状态、检索状态、学习状态和知识引用状态。
+
+本阶段成果仍然是纯状态层：只记录状态事实，不读取真实资源，不执行真实召回、压缩、检索、学习或知识生产，不调用模型或工具，不进入第七阶段候选/实验/验证/恢复，不进入第八阶段投影与总收口。
+
+二、输入基线
+
+1. L2 第五阶段观察面状态交付包。
+2. L2 第六阶段工程员提示词包。
+3. 前五阶段现有源码、测试、开发日志、handoff 报告、validation 报告。
+
+三、修改清单
+
+新增源码：
+- tiangong_kernel/l2_state/memory_state.py
+- tiangong_kernel/l2_state/context_state.py
+- tiangong_kernel/l2_state/retrieval_state.py
+- tiangong_kernel/l2_state/learning_state.py
+- tiangong_kernel/l2_state/knowledge_reference_state.py
+
+修改源码：
+- tiangong_kernel/l2_state/__init__.py
+
+新增测试：
+- tests/test_l2_phase6_memory_context_retrieval_learning_state.py
+- tests/test_l2_phase6_state_serialization_and_hash.py
+- tests/test_l2_phase6_boundary_no_execution.py
+- tests/test_l2_phase6_integration_with_phase1_to_phase5.py
+- tests/test_l2_phase6_chinese_docstrings.py
+
+新增文档与日志：
+- docs/l2_phase6_development_log_zh.md
+- docs/l2_phase6_handoff_report_zh.txt
+- docs/l2_phase6_validation_report_zh.txt
+- docs/l2_phase6_change_list_zh.txt
+- docs/l2_phase6_test_results_zh.txt
+- docs/l2_phase6_todo_zh.txt
+- docs/l2_phase6_compileall.log
+- docs/l2_phase6_pytest_phase6.log
+- docs/l2_phase6_pytest_l2_phase1_to_phase6.log
+- docs/l2_phase6_pytest_full.log
+
+四、对象作用与边界
+
+Memory 系列状态：记录记忆引用、层级、可见性、召回结果引用、注入事实和健康计数；不执行记忆库读取、召回、遗忘、晋升、embedding、检索或 Skill 生产。
+
+Context 系列状态：记录上下文片段、窗口、预算、压缩引用、注入事实和连续性；不拼接 prompt，不执行压缩，不计算真实 token，不写入对话历史，不调用模型。
+
+Retrieval 系列状态：记录检索通道、请求、查询、结果引用、覆盖和质量；不执行文件搜索、网页搜索、数据库查询、向量检索、embedding、重排或 RAG。
+
+Learning 系列状态：记录学习信号、学习需要、材料引用、准备度、边界和可见性；不实现学习算法，不生成 Skill、Tool、补丁、实验、验证、回滚或进化策略。
+
+KnowledgeReferenceState：记录知识引用、来源、类型、hash、摘要、可见性、新鲜度和可信度；不抽取知识，不写知识库，不生成 SkillSeed、SkillVersion、SkillPatch 或 Tool 需求。
+
+五、前置阶段接线
+
+- MemoryRefState 可引用 Phase5 ObservationFrameState，并连接 Phase3 Run / Task / Skill 状态引用。
+- ContextSegmentState 可引用 Phase3 Skill 状态引用，ContextWindowState 可引用 Phase3 ModelRequestState。
+- RetrievalResultRefState 可引用 Phase5 ObservationFrameState。
+- LearningSignalState 可引用 Phase5 ObservationQualityState 和 ObservationFrameState。
+- L2StateSnapshot 可纳入第六阶段状态引用集合。
+
+所有接线只使用 `TypedRef` / `identity.state_ref`。
+
+六、测试结果
+
+- `python -m compileall -q tiangong_kernel tests`：通过。
+- `python -m pytest -q tests/test_l2_phase6_*.py`：12 passed。
+- `python -m pytest -q tests/test_l2_phase1_*.py tests/test_l2_phase2_*.py tests/test_l2_phase3_*.py tests/test_l2_phase4_*.py tests/test_l2_phase5_*.py tests/test_l2_phase6_*.py`：120 passed。
+- `python -m pytest -q`：446 passed。
+
+七、边界确认
+
+- 第六阶段只做记忆、上下文、检索、学习和知识引用状态。
+- 未进入第七阶段候选、变更、迭代、进化、实验、验证、恢复状态。
+- 未进入第八阶段组件、兼容迁移、状态投影与总收口。
+- 未实现真实记忆、真实上下文管理、真实检索、真实 RAG、真实学习、真实知识生产、真实模型调用或真实工具调用。
+- 未引入第三方库。
+- 未导入 L3-L6。
+- 未恢复旧能力包 / CapabilityPort / AbilityPackagePort / “神枢” / 旧 Runtime 主链。
+- L0 未变更。
+- L1 未变更。
+- L2 第一至第五阶段公共骨架未重构。
+
+八、未做事项
+
+- 未开发第七阶段候选、变更、迭代、进化、实验、验证、恢复状态。
+- 未开发第八阶段组件、兼容迁移、状态投影与 L2 总收口。
+- 未实现任何真实记忆库、上下文管理器、检索器、向量库、embedding、RAG、学习算法、知识系统、Skill 生成、Tool 生成、模型调用、工具调用、调度器、运行循环、插件宿主或存储层。
+
+九、是否建议进入第七阶段
+
+可以在用户提供第七阶段提示词后进入第七阶段。第六阶段已经提供学习信号、学习需要、检索结果、上下文和记忆引用基础，但没有提前创建第七阶段候选、变更、实验、验证或恢复对象。

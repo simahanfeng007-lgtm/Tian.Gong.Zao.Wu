@@ -1,0 +1,26 @@
+{
+  "name": "l632_exec",
+  "status": "passed",
+  "returncode": 0,
+  "duration_seconds": 6.842545,
+  "timeout_seconds": 40.0,
+  "started_at": 1780730070.0361192,
+  "finished_at": 1780730076.8786645,
+  "command": [
+    "/opt/pyvenv/bin/python",
+    "-m",
+    "pytest",
+    "tests/test_l6_32_planner_execution_controller.py"
+  ],
+  "cwd": "/mnt/data/work_l637/project",
+  "purpose": "single",
+  "required": true,
+  "rerun_command": "/opt/pyvenv/bin/python -m pytest tests/test_l6_32_planner_execution_controller.py",
+  "stdout_path": "/mnt/data/work_l637/project/reports/l6_37_shards_single/l632_exec/stdout.log",
+  "stderr_path": "/mnt/data/work_l637/project/reports/l6_37_shards_single/l632_exec/stderr.log",
+  "stdout_tail": "============================= test session starts ==============================\nplatform linux -- Python 3.13.5, pytest-9.0.2, pluggy-1.6.0\nrootdir: /mnt/data/work_l637/project\nconfigfile: pytest.ini\nplugins: Faker-40.1.2, asyncio-1.3.0, cov-7.0.0, json-report-1.5.0, metadata-3.1.1, anyio-4.13.0\nasyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 7 items\n\ntests/test_l6_32_planner_execution_controller.py .......                 [100%]\n\n============================== 7 passed in 3.04s ===============================\n",
+  "stderr_tail": "",
+  "error_message": "",
+  "timed_out": false,
+  "process_group_reaped": false
+}

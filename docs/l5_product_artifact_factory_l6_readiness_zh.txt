@@ -1,0 +1,13 @@
+Product Artifact Factory L6 Readiness
+
+结论：可以进入 L6 专项规划，不得进入 L5 实现。
+依据：
+- 第七阶段 generic plugin host precheck：PASS_WITH_COMPATIBLE_EXTENSION。
+- 第七阶段 production mount readiness：声明级可预留。
+- 第八阶段 final quality gate：allow_enter_l6_product_artifact_factory=True。
+
+L6 特别限制：
+- 不得裸调工具。
+- 不得裸调 L4 adapter。
+- 不得裸写文件、裸访问网络、裸读取凭据、裸分配资源。
+- 必须经过 L1-L4 与 L5 治理链。

@@ -1,0 +1,9 @@
+L5 第八阶段 hotfix1 关键文件 SHA256
+
+tiangong_kernel/l5_plugin_host/phase8_closure.py b384844cebee973b930a7a702ac6ba57572281e90db926daebfa791504ddf624
+tiangong_kernel/l3_orchestration/orchestration_flow.py 7eb5fb8f5a2dd51a66d845fd1529434f36383161e5d6893d30977021de11db7e
+tiangong_kernel/l3_orchestration/__init__.py bd3a2341bac34755b3bc4bf518b54e8072eb2417f16cb2e651d9d5b64b6a114f
+
+说明：
+本目录不是 git 仓库，无法生成 git diff 状态。
+L0-L4 原报告中的 hash compare 仍可作为历史基线证据；本 hotfix1 的直接修改集中在 L5 phase8 与 L3 Run Loop 补丁范围。

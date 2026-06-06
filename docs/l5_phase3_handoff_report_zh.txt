@@ -1,0 +1,22 @@
+天工造物 L5 第三阶段 Handoff 报告
+
+一、第四阶段可消费对象
+1. RegistrySnapshot：声明式注册表快照，支持 records、revision_ref、snapshot_digest。
+2. RegistryIndex：按 plugin_id、namespace、kind、version、mount surface、permission/resource tag、source trust、compatibility、version_slot、migration、rollback、hot_switch、replay、breaking_change、schema_version、api_version 检索。
+3. ConflictReport：只表达冲突报告，含 rule_source_ref、detected_by_ref、trace_ref、evidence_refs、responsibility_chain_ref。
+4. PublicProjection：最小披露安全摘要，包含 migration / rollback / hot-switch / replay compatibility / breaking change summary。
+5. AuditIndex：只保存 event_kind、trace_ref、evidence_ref、responsibility_chain_ref、summary、severity。
+6. Delta：只描述 added / removed / changed / unchanged，不自动应用。
+7. Revision：只表达 revision_id、parent_revision_id、reason_ref、actor_ref 与 evidence refs。
+
+二、禁止第四阶段误用
+1. 不得把 Registry 当真实插件加载器。
+2. 不得把 status_ref 当生命周期状态机。
+3. 不得把 PublicProjection 当完整 Manifest。
+4. 不得把 Delta 当可执行 patch。
+5. 不得把 RegistryIndex 当真实权限索引。
+6. 不得把 ConflictReport 当自动修复指令。
+7. 不得把 hot_switch_decl_ref / migration_ref / replay_compatibility_ref / breaking_change_policy_ref 当执行入口。
+
+三、进入第四阶段建议
+P0=0，P1=0，P2=0。建议进入 L5 第四阶段，但第四阶段仍必须只做生命周期状态机与挂载声明，不得开放真实插件执行。

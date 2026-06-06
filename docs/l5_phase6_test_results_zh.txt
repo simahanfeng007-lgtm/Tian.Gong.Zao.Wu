@@ -1,0 +1,6 @@
+测试结果
+1. compileall：python -m compileall -q tiangong_kernel tests -> passed。
+2. collect-only：观察到 1187 tests collected in 18.62s；退出阶段被 timeout 中断，未记为 clean pass。
+3. targeted pytest：tests/test_l5_phase6_*.py -> 16 passed in 9.76s / 12.92s（多次复跑，退出码 0）。
+4. plugin host 子集：11 selected -> 11 passed in 11.54s，退出码 0。
+5. full pytest：尝试执行 python -m pytest -q tests；未在可用工具时限内完成，状态 not_passed/not_complete。

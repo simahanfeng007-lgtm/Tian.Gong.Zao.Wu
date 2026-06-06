@@ -1,0 +1,41 @@
+临渊者 L6.47 四主路径冻结基线 交付报告
+日期：2026-06-06
+基线：L6.46 长链压力与失败注入测试
+
+一、完成内容
+- 汇总 L6.40-L6.46 四主路径建设成果。
+- 生成 21 步冻结矩阵。
+- 生成 freeze_baseline_manifest.json。
+- 生成 l6_47_freeze_index.md。
+- 生成 l6_47_freeze_handoff.txt。
+- 新增 tests/test_l6_47_four_path_freeze_baseline.py。
+
+二、核心污染检查
+- checked_core_files：586
+- changed_core_files：0
+- status：PASS
+
+三、静态边界扫描
+- status：PASS
+- offender_count：0
+
+四、验证结果
+- compileall：PASS
+- L6.37-L6.46 定向回归：75 passed
+- L6.47 冻结测试：5 passed
+- 合计定向验证：80 passed
+- 未跑完整全量 pytest，不声明全量通过。
+
+五、是否有问题
+未发现 P0/P1 问题。
+
+六、冻结结论
+四主路径冻结为：
+- 执行链：唯一真实执行器。
+- 记忆系统：长期经验与上下文压缩器。
+- 情志系统：语言状态逻辑与做事方式调制器。
+- 生命周期系统：自愈、学习、自由意志、自迭代候选生产器。
+- FourPathContextRouter：统一投影到 Planner 消费层。
+
+七、下一阶段建议
+L6.48 封装启动前总交接：前端自我迭代区、四路径状态可视化、安装/封装/内测包链路。

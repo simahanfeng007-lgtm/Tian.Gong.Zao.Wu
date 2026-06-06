@@ -1,0 +1,27 @@
+《天工造物 L3 第五阶段 Handoff 报告》
+
+一、交接结论
+L3 第五阶段已完成，可交给专项质检员做第五阶段质检。不得直接进入第六阶段开发。
+
+二、核心新增能力
+1. 面向未来 L5 的 BoundaryCheckRequest / RiskReviewRequest / PermissionReviewRequest / ConfirmationRequest / LeaseRequest 纯请求对象。
+2. 面向未来 L5 的 Denial / Degrade / Confirm / Retry / Pending / Clarification / Fallback / Resume 路径建议。
+3. 面向未来 L4 的 ExecutionRequest / ExecutionDispatchRequest 纯请求对象。
+4. ExecutionResultRef / ExecutionFailureRef / ExecutionResumeRef / ExecutionCancelRef / ExecutionObservationRef / ExecutionAuditRef 纯引用对象。
+5. BoundaryRouteRanking / ExecutionRouteRanking 稳定排序。
+6. BoundaryExecutionMathInput / BoundaryExecutionMathResult / BoundaryExecutionRecommendation。
+7. 与 Run/Task/Turn/Step、Skill/ToolGroup、Intent 的引用接线建议。
+
+三、质检重点建议
+1. 检查 Request 是否被误写成 Decision。
+2. 检查 ConfirmationRequest 是否签发真实票据。
+3. 检查 LeaseRequest 是否授予真实租约。
+4. 检查 CredentialRequirementHint 是否读取凭据。
+5. 检查 AuditRequirementHint / ExecutionAuditRef 是否写审计。
+6. 检查 ExecutionRequest / ExecutionDispatchRequest 是否调用 L4 或工具。
+7. 检查数学评分是否只给建议。
+8. 检查情感与动态驱动是否只影响倾向。
+9. 检查 L0/L1/L2 是否未被修改。
+
+四、后续阶段边界提醒
+第六阶段才能做 Observation / Memory / Retrieval / Learning / Affective 服务请求编排；第五阶段不得提前实现这些内容。

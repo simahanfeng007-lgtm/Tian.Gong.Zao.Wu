@@ -1,0 +1,27 @@
+天工造物 L2 第六阶段测试结果
+生成日期：2026-06-03
+
+一、测试命令
+
+1. python -m compileall -q tiangong_kernel tests
+2. python -m pytest -q tests/test_l2_phase6_*.py
+3. python -m pytest -q tests/test_l2_phase1_*.py tests/test_l2_phase2_*.py tests/test_l2_phase3_*.py tests/test_l2_phase4_*.py tests/test_l2_phase5_*.py tests/test_l2_phase6_*.py
+4. python -m pytest -q
+
+二、测试结果
+
+1. compileall：通过。
+2. 第六阶段分片：12 passed。
+3. L2 第一至第六阶段回归：120 passed。
+4. 完整 pytest：446 passed。
+
+三、日志文件
+
+- docs/l2_phase6_compileall.log
+- docs/l2_phase6_pytest_phase6.log
+- docs/l2_phase6_pytest_l2_phase1_to_phase6.log
+- docs/l2_phase6_pytest_full.log
+
+四、说明
+
+本次确实运行了完整 pytest，并得到 `446 passed`。未运行 GUI、真实外部系统、真实模型、真实工具、真实检索、真实学习链路，因为这些不属于 L2 第六阶段状态层边界。

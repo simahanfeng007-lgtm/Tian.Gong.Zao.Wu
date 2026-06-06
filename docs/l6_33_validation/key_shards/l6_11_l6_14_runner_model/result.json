@@ -1,0 +1,28 @@
+{
+  "name": "l6_11_l6_14_runner_model",
+  "status": "passed",
+  "returncode": 0,
+  "duration_seconds": 11.098019,
+  "timeout_seconds": 120.0,
+  "started_at": 1780723879.635291,
+  "finished_at": 1780723890.7333093,
+  "command": [
+    "/opt/pyvenv/bin/python",
+    "-m",
+    "pytest",
+    "tests/test_l6_11_long_chain_runner.py",
+    "tests/test_l6_14_model_planner.py",
+    "-q"
+  ],
+  "cwd": "/mnt/data/l633_work/project",
+  "purpose": "long chain runner and model planner regression",
+  "required": true,
+  "rerun_command": "/opt/pyvenv/bin/python -m pytest tests/test_l6_11_long_chain_runner.py tests/test_l6_14_model_planner.py -q",
+  "stdout_path": "/mnt/data/l633_work/project/docs/l6_33_validation/key_shards/l6_11_l6_14_runner_model/stdout.log",
+  "stderr_path": "/mnt/data/l633_work/project/docs/l6_33_validation/key_shards/l6_11_l6_14_runner_model/stderr.log",
+  "stdout_tail": ".........                                                                [100%]\n9 passed in 7.30s\n",
+  "stderr_tail": "",
+  "error_message": "",
+  "timed_out": false,
+  "process_group_reaped": false
+}

@@ -1,0 +1,50 @@
+# L6 第五阶段 Test Inventory Compare 报告
+
+- 旧测试数：853
+- 新测试数：894
+- 新增测试：41
+- 删除测试：0
+
+## 新增测试
+
+- test_l6_phase5_audit_evidence_chain_required.py
+- test_l6_phase5_audit_requirement_not_audit_write.py
+- test_l6_phase5_bridge_reviews_inert.py
+- test_l6_phase5_budget_exhaustion_requires_governance_reason.py
+- test_l6_phase5_budget_requirement_not_allocation.py
+- test_l6_phase5_confirmation_should_batch_when_safe.py
+- test_l6_phase5_credential_ref_not_secret_access.py
+- test_l6_phase5_degradation_suggestion_not_command.py
+- test_l6_phase5_execution_first_does_not_bypass_hard_boundaries.py
+- test_l6_phase5_forbidden_scan_blocks_sdk_http_secret_write.py
+- test_l6_phase5_full_pytest_not_faked.py
+- test_l6_phase5_governance_plugin_is_not_l5.py
+- test_l6_phase5_governance_review_request_ref_only.py
+- test_l6_phase5_governance_should_summarize_not_interrupt.py
+- test_l6_phase5_hash_digest_canonicalization.py
+- test_l6_phase5_human_gate_not_confirmation_ticket.py
+- test_l6_phase5_humanized_budget_message_requires_reason.py
+- test_l6_phase5_long_chain_checkpoint_hint_not_scheduler_state.py
+- test_l6_phase5_long_chain_should_degrade_not_abort.py
+- test_l6_phase5_low_risk_should_continue.py
+- test_l6_phase5_no_direct_audit_write.py
+- test_l6_phase5_no_direct_budget_charge.py
+- test_l6_phase5_no_direct_l2_write.py
+- test_l6_phase5_no_direct_l4_adapter_call.py
+- test_l6_phase5_no_direct_memory_delete.py
+- test_l6_phase5_no_direct_memory_write.py
+- test_l6_phase5_no_model_sdk_or_raw_http.py
+- test_l6_phase5_no_old_runtime_abilitypackage_backflow.py
+- test_l6_phase5_no_parallel_runtime.py
+- test_l6_phase5_no_plugin_direct_import_call_state_write.py
+- test_l6_phase5_no_raw_secret_or_provider_locator.py
+- test_l6_phase5_no_tool_shell_file_network_call.py
+- test_l6_phase5_permission_requirement_not_authorization.py
+- test_l6_phase5_privacy_requirement_not_data_access.py
+- test_l6_phase5_public_projection_minimal_disclosure.py
+- test_l6_phase5_public_projection_safety_no_sensitive_leak.py
+- test_l6_phase5_requirement_is_not_permit.py
+- test_l6_phase5_reversible_candidate_should_continue.py
+- test_l6_phase5_risk_projection_is_not_decision.py
+- test_l6_phase5_risk_score_does_not_block_by_default.py
+- test_l6_phase5_test_inventory_compare_blocks_deleted_tests.py

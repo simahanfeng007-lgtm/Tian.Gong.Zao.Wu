@@ -1,0 +1,11 @@
+天工造物 L5 第三阶段测试结果
+
+- collect-only：1052 tests collected in 4.59s
+- targeted phase3：46 passed in 7.53s
+- plugin_host subset：49 passed, 1003 deselected in 4.89s
+- full pytest：1052 passed in 11.31s
+
+第三阶段新增测试文件数量：45
+删除旧测试：0
+新增 skip / xfail：0
+断言弱化：0

@@ -1,0 +1,42 @@
+天工造物 L5 第一阶段测试证据索引
+生成日期：2026-06-04
+
+record: compileall
+command: python -m compileall -q tiangong_kernel tests
+scope: syntax_import_validation
+expected_purpose: 语法与导入层验证
+observed_summary: passed, return_code=0
+report_ref: docs/l5_phase1_compileall_result.txt
+evidence_ref: evidence:l5_phase1_compileall
+
+record: collect_only
+command: python -m pytest --collect-only -q tests
+scope: test_collection
+expected_purpose: 测试收集完整性验证
+observed_summary: 963 tests collected, return_code=0
+report_ref: docs/l5_phase1_collect_only_result.txt
+evidence_ref: evidence:l5_phase1_collect_only
+
+record: targeted_pytest
+command: python -m pytest -q tests/test_l5_phase1_*.py 等价定向文件集合
+scope: l5_phase1_targeted
+expected_purpose: 第一阶段新增对象、边界、证据链、质量门验证
+observed_summary: 34 passed, return_code=0
+report_ref: docs/l5_phase1_targeted_pytest_result.txt
+evidence_ref: evidence:l5_phase1_targeted_pytest
+
+record: subset_pytest
+command: python -m pytest -q tests -k 'l5_phase1 or plugin_host'
+scope: plugin_host_related
+expected_purpose: 插件宿主相关测试子集验证
+observed_summary: 36 passed, 927 deselected, return_code=0
+report_ref: docs/l5_phase1_subset_pytest_result.txt
+evidence_ref: evidence:l5_phase1_subset_pytest
+
+record: full_pytest
+command: python -m pytest -q tests
+scope: full_regression
+expected_purpose: 全量回归验证
+observed_summary: 963 passed, return_code=0
+report_ref: docs/l5_phase1_full_pytest_result.txt
+evidence_ref: evidence:l5_phase1_full_pytest

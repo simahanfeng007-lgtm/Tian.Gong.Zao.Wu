@@ -1,0 +1,80 @@
+{
+  "scope": "tiangong_kernel/l6_plugins/common/*.py",
+  "actual_forbidden_findings": [],
+  "actual_forbidden_count": 0,
+  "inert_pattern_mentions": [
+    {
+      "file": "tiangong_kernel/l6_plugins/common/_common.py",
+      "pattern": "requests.",
+      "inert_context": true
+    },
+    {
+      "file": "tiangong_kernel/l6_plugins/common/_common.py",
+      "pattern": "Path.write_text",
+      "inert_context": true
+    },
+    {
+      "file": "tiangong_kernel/l6_plugins/common/forbidden_scan.py",
+      "pattern": "import openai",
+      "inert_context": true
+    },
+    {
+      "file": "tiangong_kernel/l6_plugins/common/forbidden_scan.py",
+      "pattern": "requests.",
+      "inert_context": true
+    },
+    {
+      "file": "tiangong_kernel/l6_plugins/common/forbidden_scan.py",
+      "pattern": "Path.write_text",
+      "inert_context": true
+    },
+    {
+      "file": "tiangong_kernel/l6_plugins/common/forbidden_scan.py",
+      "pattern": "write_l2_fact",
+      "inert_context": true
+    },
+    {
+      "file": "tiangong_kernel/l6_plugins/common/forbidden_scan.py",
+      "pattern": "direct_call_plugin",
+      "inert_context": true
+    },
+    {
+      "file": "tiangong_kernel/l6_plugins/common/forbidden_scan.py",
+      "pattern": "AbilityPackagePort",
+      "inert_context": true
+    },
+    {
+      "file": "tiangong_kernel/l6_plugins/common/forbidden_scan.py",
+      "pattern": "CapabilityPort",
+      "inert_context": true
+    },
+    {
+      "file": "tiangong_kernel/l6_plugins/common/forbidden_scan.py",
+      "pattern": "UnifiedRuntimeEntry",
+      "inert_context": true
+    },
+    {
+      "file": "tiangong_kernel/l6_plugins/common/forbidden_scan.py",
+      "pattern": "direct_model_client",
+      "inert_context": true
+    },
+    {
+      "file": "tiangong_kernel/l6_plugins/common/forbidden_scan.py",
+      "pattern": "direct_tool_registry",
+      "inert_context": true
+    },
+    {
+      "file": "tiangong_kernel/l6_plugins/common/interoperation.py",
+      "pattern": "direct_model_client",
+      "inert_context": true
+    },
+    {
+      "file": "tiangong_kernel/l6_plugins/common/interoperation.py",
+      "pattern": "direct_tool_registry",
+      "inert_context": true
+    }
+  ],
+  "inert_pattern_count": 14,
+  "passed": true,
+  "note": "字符串枚举、规则样本和 forbidden_scan 规则本身按设计视为 inert pattern；本扫描阻断真实 import/call/敏感赋值。"
+}

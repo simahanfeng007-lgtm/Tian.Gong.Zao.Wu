@@ -1,0 +1,14 @@
+天工造物 L5 第四阶段 Forbidden Scan 报告
+
+扫描范围：tiangong_kernel/l5_plugin_host/*.py
+扫描结果：0 blocking findings
+
+扫描口径：
+- 禁止真实 importlib 动态加载、exec/eval、subprocess、socket、requests/httpx/urllib、sqlite3/redis/pymongo/sqlalchemy、真实文件读写删改、真实目录扫描、真实并发执行、真实 sandbox、真实外部动作。
+- 允许 inert pattern 字符串作为规则 catalog、检测样本或测试样本存在。
+- 对 secret/token/api_key/password 只禁止疑似真实凭据值，不误杀治理字段名或检测规则字符串。
+
+原始扫描摘要：
+scanned_files 64
+blocking_findings 0
+inert_pattern_findings_allowed 0

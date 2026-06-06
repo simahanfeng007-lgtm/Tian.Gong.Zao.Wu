@@ -1,0 +1,6 @@
+﻿编号,等级,质检问题,处理状态,修复/说明位置,验证方式,是否仍阻断
+P2-001,P2,交付包存在 5 个 mojibake 文件名,已修复,文件名已恢复为 UTF-8 中文名；最终打包前执行乱码扫描,乱码扫描 0 命中,否
+P2-002,P2,l2_state/__init__.py 顶层 docstring 过期,已修复,tiangong_kernel/l2_state/__init__.py,人工核查 + full pytest,否
+P3-001,P3,__all__ 同行排版异常,已修复,tiangong_kernel/l2_state/__init__.py,人工核查 + full pytest,否
+P3-002,P3,独立历史包未单独提供，影响历史差分级审计,已做替代说明,docs/l2_phase9_final_archive_source_index_zh.txt,文档核查,否
+P3-003,P3,第九阶段边界静态测试未覆盖全部修改源码,已修复,tests/test_l2_phase9_boundary_no_execution.py,专项测试 19 passed,否

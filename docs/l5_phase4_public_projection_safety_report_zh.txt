@@ -1,0 +1,14 @@
+天工造物 L5 第四阶段 PublicProjection 安全报告
+
+结论：通过。
+
+规则：
+- PluginLifecyclePublicProjection 只暴露 summary、risk_tags、counts、refs、status_text、conflict summary、redacted evidence refs、quality gate summary。
+- 不暴露完整 Manifest、完整 RegistryRecord、完整 lifecycle declaration、完整 mount declaration、完整 self-healing / recovery plan。
+- 不暴露真实文件路径、真实插件入口、import path、module path、callable repr、URL/socket/database connection、明文凭据、真实用户身份明文、外部系统连接信息。
+
+测试证据：
+- test_l5_phase4_public_projection_minimal_disclosure.py
+- test_l5_phase4_switch_projection_minimal_disclosure.py
+- test_l5_phase4_self_healing_public_projection_minimal_disclosure.py
+- test_l5_phase4_status_text_is_redacted.py

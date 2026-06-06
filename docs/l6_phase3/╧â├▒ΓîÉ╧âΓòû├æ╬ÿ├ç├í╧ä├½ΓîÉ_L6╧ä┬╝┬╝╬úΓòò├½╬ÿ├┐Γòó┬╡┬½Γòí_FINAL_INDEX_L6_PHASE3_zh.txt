@@ -1,0 +1,30 @@
+天工造物 L6 第三阶段 FINAL INDEX
+
+工程包：天工造物_L6第三阶段_心智与状态插件组_完整工程包_20260605.zip
+
+核心报告：
+- 天工造物_L6第三阶段_l6_phase3_design_report_zh.txt
+- 天工造物_L6第三阶段_l6_phase3_development_log_zh.txt
+- 天工造物_L6第三阶段_l6_phase3_handoff_report_zh.txt
+- 天工造物_L6第三阶段_l6_phase3_validation_report_zh.txt
+- 天工造物_L6第三阶段_l6_phase3_change_list_zh.txt
+- 天工造物_L6第三阶段_l6_phase3_test_results_zh.txt
+- 天工造物_L6第三阶段_l6_phase3_risk_list_zh.txt
+- 天工造物_L6第三阶段_l6_phase3_todo_zh.txt
+
+验证证据：
+- 天工造物_L6第三阶段_forbidden_scan_20260605.md
+- 天工造物_L6第三阶段_hash_compare_20260605.md
+- 天工造物_L6第三阶段_test_inventory_compare_20260605.md
+- 天工造物_L6第三阶段_public_projection_safety_20260605.md
+- 天工造物_L6第三阶段_audit_evidence_chain_20260605.md
+- 天工造物_L6第三阶段_invariant_suite_20260605.md
+- 天工造物_L6第三阶段_quality_gate_20260605.md
+- 天工造物_L6第三阶段_zip_integrity_20260605.json
+
+结果：
+- targeted：35 passed in 8.09s
+- L6 phase files：93 passed in 11.22s
+- full pytest：1488 passed in 14.89s
+- P0=0，P1=0
+- 建议进入 L6 第四阶段。

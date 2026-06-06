@@ -1,0 +1,15 @@
+# L5 Phase8 / hotfix2 Forbidden Scan 结果
+
+## 范围
+- source_root=tiangong_kernel/l5_plugin_host
+- source_files_scanned=69
+
+## 结果
+- blocking_findings=0
+- 分类口径：只将真实 import、真实 callable、真实 locator、真实凭据、真实外部动作链、真实工具/adapter 调用视为阻断项。
+- inert enum names、forbidden catalog、测试非法样本、文档警示语不视为阻断项，除非它们暴露可触发外部动作的信息。
+
+## 情志专项结论
+- 未发现 AffectivePlugin / AffectiveCapability 相关真实执行入口。
+- 未发现 tool_schema / function_schema / callable / handler / endpoint / module_path / import_path / plugin_instance 泄露。
+- 未发现情感状态被当作授权、permit、lease、confirmation ticket 或风险裁决覆盖依据。

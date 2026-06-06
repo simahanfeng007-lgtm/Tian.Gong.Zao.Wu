@@ -1,0 +1,52 @@
+天工造物 L2 第九阶段 validation 报告
+
+一、验证范围
+本次验证覆盖第九阶段新增数学模型状态、情感 / 情志状态、动态驱动状态、公共导出、最小兼容扩展、边界禁止项、稳定序列化、稳定 hash，以及 L2 第一至第九阶段整合。
+
+二、验证命令与结果
+
+1. 编译验证
+命令：python -m compileall -q tiangong_kernel tests
+结果：通过。
+日志：docs/l2_phase9_compileall.log
+
+2. 第九阶段专项测试
+命令：python -m pytest -q tests/test_l2_phase9_math_state.py tests/test_l2_phase9_affective_state.py tests/test_l2_phase9_dynamic_drive_state.py tests/test_l2_phase9_serialization_and_hash.py tests/test_l2_phase9_boundary_no_execution.py tests/test_l2_phase9_integration_with_l2_phase1_to_phase8.py
+结果：19 passed。
+日志：docs/l2_phase9_pytest_phase9.log
+
+3. L2 分片测试
+命令：python -m pytest -q -k "l2"
+结果：177 passed, 325 deselected。
+日志：docs/l2_phase9_pytest_l2.log
+
+4. 完整测试
+命令：python -m pytest -q tests
+结果：502 passed。
+日志：docs/l2_phase9_pytest_full.log
+
+三、关键断言结果
+1. 新增状态对象均可实例化。
+2. 新增状态对象均为 dataclass。
+3. 新增状态对象均 frozen。
+4. 新增状态对象均启用 slots。
+5. 新增状态对象可稳定序列化。
+6. 新增状态对象可稳定 hash。
+7. 默认字段未使用可变默认值。
+8. 数学状态不计算、不排序、不裁决、不执行。
+9. 情感状态不执行、不越权、不提升权限、不绕过边界和动作层。
+10. 动态驱动状态不执行、不选择 Skill、不释放工具、不做裁决。
+11. 第九阶段源码未 import L3-L6。
+12. 第九阶段源码未引入第三方依赖。
+13. 第九阶段源码未包含文件 IO、网络 IO、数据库连接、模型调用、工具调用或命令执行。
+14. __init__.py 新增导出可用且未删除前八阶段导出。
+15. L2 第一至第九阶段对象可共同参与稳定序列化和稳定 hash。
+
+四、兼容性结论
+第九阶段对前八阶段只做追加式兼容扩展：新增 L2StateKind、L2StateDomain、投影引用字段和公共导出。现有测试未出现回退。
+
+五、未运行项
+无。本地完整 tests 目录已运行并通过。
+
+六、验证结论
+第九阶段补充工程通过本地验证。建议进入第九阶段专项质检。

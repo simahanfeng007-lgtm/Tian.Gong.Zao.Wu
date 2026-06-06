@@ -1,0 +1,10 @@
+{
+  "scope": "tiangong_kernel only",
+  "original_zip": "天工造物_L6第八阶段_总修复师最终收口修复包_20260605.zip",
+  "kernel_file_count_original": 725,
+  "kernel_file_count_current": 725,
+  "added_in_kernel": [],
+  "removed_from_kernel": [],
+  "changed_in_kernel": [],
+  "pollution_conclusion": "PASS: tiangong_kernel existing files unchanged; no kernel files added/removed/changed."
+}

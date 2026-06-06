@@ -1,0 +1,32 @@
+《天工造物 L3 第三阶段 handoff 报告》
+
+一、阶段定位
+本阶段完成 Skill 直显与 ToolGroup 释放编排评分。它只组织流程建议、排序建议、状态转移建议与数学评分事实，不实现真实 Skill 系统，不实现真实 ToolGroup 系统，不释放真实工具，不授予真实租约。
+
+二、交接给质检员的重点
+1. 检查新增五个源码文件是否仍为纯数据 / 纯逻辑建议对象。
+2. 检查 __init__.py 第三阶段公共导出是否完整。
+3. 检查 SkillDisplayAdvice / SkillSelectionAdvice / SkillActivationAdvice 是否不调用模型、不调用真实 Skill 系统。
+4. 检查 ToolGroupReleaseAdvice / ToolGroupLeaseAdvice 是否不释放真实工具、不授予真实租约。
+5. 检查 SkillToolMathInput / SkillToolMathResult / SkillToolRecommendation 是否只输出 recommendation / advice / suggestion。
+6. 检查情感输入和动态驱动输入是否只改变评分/排序倾向。
+7. 检查 L0/L1/L2 未被修改。
+8. 检查未进入 L4/L5/L6。
+
+三、核心对象族
+1. Skill 直显对象族：SkillVisibilityRequestRef、SkillDisplayCandidate、SkillDisplayRanking、SkillDisplayAdvice、SkillSelectionAdvice、SkillActivationAdvice、SkillDeactivationAdvice、SkillMismatchAdvice、SkillNeedClarificationAdvice、SkillStateTransitionAdvice。
+2. ToolGroup 释放对象族：ToolGroupResolveRequestRef、ToolGroupReleaseCandidate、ToolGroupReleaseRanking、ToolGroupReleaseAdvice、ToolGroupMinimalReleaseAdvice、ToolGroupLeaseAdvice、ToolGroupStateTransitionAdvice。
+3. 数学评分对象族：SkillMatchScore、ToolGroupMinimalityScore、ToolExposureCostScore、ToolGroupSufficiencyScore、ReversibilityIndex、StabilityIndex 等。
+4. 接线对象族：RunSkillDisplayAdvice、TaskSkillSelectionAdvice、TurnSkillActivationAdvice、StepToolGroupReleaseAdvice、SkillToolResumeAdvice、SkillToolInterruptionAdvice、SkillToolContinuityAdvice。
+5. 状态转移对象族：SkillToolStateTransitionSuggestion。
+
+四、未做事项
+1. 未实现真实 Skill 注册、加载、解析或执行。
+2. 未实现真实 ToolGroup 注册、解析、释放或执行。
+3. 未实现真实 ToolLease 治理或授权。
+4. 未实现 L5 边界裁决。
+5. 未实现 L4 执行请求。
+6. 未进入第四阶段 ModelIntent / ToolIntent / ActionIntent。
+
+五、建议
+建议进入 L3 第三阶段专项质检，不建议直接进入第四阶段开发。

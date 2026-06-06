@@ -1,0 +1,16 @@
+L5 第八阶段 hotfix1 zip integrity
+
+zip_name=天工造物_L5第八阶段_总收口公共投影L5L6交接冻结_hotfix1_修复包_20260605.zip
+expected_root_dir=project_l5_phase8_final_public_projection_l5_l6_handoff_freeze_hotfix1
+root_dir_match=True
+zip_entries=1980
+pycache_entries=0
+pyc_entries=0
+crc_check=passed
+zipfile_testzip=None
+phase7_prompt_at_root=0
+utf8_chinese_path_compatible=True
+
+说明：
+- 第七阶段历史提示词已归档到 docs/archived_prompts，不再位于根目录。
+- 最终 zip sha256 在最终回复中给出，避免 zip 自身包含自身 hash 造成递归变化。

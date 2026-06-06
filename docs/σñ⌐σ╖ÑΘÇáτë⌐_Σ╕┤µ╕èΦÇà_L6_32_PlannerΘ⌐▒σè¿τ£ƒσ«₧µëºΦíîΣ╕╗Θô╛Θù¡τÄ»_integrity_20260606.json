@@ -1,0 +1,59 @@
+{
+  "name": "天工造物_临渊者_L6_32_Planner驱动真实执行主链闭环",
+  "date": "20260606",
+  "schema": "tiangong.delivery.integrity.v1",
+  "source_package": "天工造物_临渊者_L6_31_P0_DeepSeekPlanShape热修复_完整交付包_20260606.zip",
+  "changed_files": {
+    "changed": [
+      "tiangong_agent_runtime/runtime_entry.py",
+      "tiangong_agent_runtime/runtime_report.py",
+      "tiangong_agent_shell/cli_loop.py",
+      "tiangong_agent_shell/cli_main.py"
+    ],
+    "added": [
+      "tests/test_l6_32_planner_execution_controller.py",
+      "tiangong_agent_runtime/planner_execution_controller.py"
+    ],
+    "removed": []
+  },
+  "kernel_hash_compare": {
+    "changed": [],
+    "added": [],
+    "removed": []
+  },
+  "validation": {
+    "compileall": "passed: python3 -m compileall -q tiangong_agent_runtime tiangong_agent_shell tests",
+    "l6_32_new_tests": "7 passed: pytest -q tests/test_l6_32_planner_execution_controller.py",
+    "l6_30_to_l6_32_regression": "34 passed: pytest -q tests/test_l6_31_planner_context_integration.py tests/test_l6_31_model_suggest_shape_hotfix.py tests/test_l6_30_governance_execution.py tests/test_l6_32_planner_execution_controller.py",
+    "l6_10_11_13_14_23_split": "22 passed across per-file split runs",
+    "l6_20_to_l6_29_split": "82 passed across per-file split runs",
+    "cli_smoke": "passed: /planner-execute read README.md + /planner-execution-save",
+    "kernel_hash_compare": {
+      "changed": 0,
+      "added": 0,
+      "removed": 0
+    },
+    "forbidden_scan": {
+      "blocking_findings": 0,
+      "allowlisted_text_mentions": 2
+    },
+    "aggregate_pytest_note": "未声明完整全量 pytest；大聚合运行在当前环境仍可能出现 pytest 子进程/管道超时不回收，已分片验证。"
+  },
+  "forbidden_scan": {
+    "blocking_findings": [],
+    "allowlisted": [
+      {
+        "file": "tiangong_agent_shell/cli_main.py",
+        "line": 22,
+        "pattern": "network_or_provider_sdk",
+        "match": "openai"
+      },
+      {
+        "file": "tiangong_agent_shell/cli_main.py",
+        "line": 23,
+        "pattern": "network_or_provider_sdk",
+        "match": "OpenAI"
+      }
+    ]
+  }
+}

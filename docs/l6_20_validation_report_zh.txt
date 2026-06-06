@@ -1,0 +1,26 @@
+天工造物 / 临渊者 L6.20 验证报告
+
+结论：L6.20 可作为 L6.19 之后的最新可继续开发基线。
+
+已验证能力：
+1. 经验信号可从人工备注、上下文摘要、工程诊断、质量门、交付 Manifest 中提取。
+2. 可形成 LessonCandidate、SkillCandidate、ToolGapCandidate、GovernanceTransferItem。
+3. 所有输出保持 candidate_only。
+4. SkillCandidate 不允许注册 Skill、不允许写 Skill、不允许变成可见能力。
+5. ToolGapCandidate 不允许生产 Tool、不允许释放工具句柄、不允许直接调用工具。
+6. GovernanceTransferItem 不允许应用变更、不允许自动演化。
+7. Runtime 工具 synthesize_experience_candidates 注册为 A2。
+8. CLI /reflect、/experience、/experience-save、/experience-reset 已接入。
+9. tiangong_kernel 哈希对比无新增、无删除、无修改。
+10. forbidden scan 未发现原始密钥、私钥块或长令牌。
+
+边界确认：
+- L6.20 不是 Skill 真实生成系统。
+- L6.20 不是 Tool 沙箱生产系统。
+- L6.20 不负责把候选发布成正式能力。
+- L6.20 的输出必须继续交给后续治理链。
+
+下一阶段建议：
+- L6.21：Skill 候选版本化与审阅队列。
+- L6.22：Tool 生产请求沙箱化与安全验证前置。
+- L6.23：候选验证、发布、回滚闭环。

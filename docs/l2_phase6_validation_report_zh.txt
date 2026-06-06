@@ -1,0 +1,98 @@
+天工造物 L2 第六阶段 validation 报告
+生成日期：2026-06-03
+
+一、验证范围
+
+本次验证覆盖：
+
+1. 第六阶段新增状态对象实例化。
+2. 第六阶段新增状态对象 frozen / slots。
+3. 第六阶段新增状态对象稳定序列化与稳定 hash。
+4. 默认值安全性，无 list / dict / set 可变默认值污染。
+5. MemoryRefState / MemoryRecallState 不执行真实召回。
+6. ContextCompressionState 不执行真实压缩。
+7. RetrievalRequestState 不执行真实检索。
+8. LearningSignalState / LearningNeedState 不生成变更候选。
+9. 第六阶段不定义第七阶段对象。
+10. 第六阶段源码不包含真实 IO、网络、进程、模型、工具、embedding、检索或学习调用。
+11. 与 L2 第一至第五阶段状态对象通过引用兼容。
+12. `__init__.py` 新增导出完整且无副作用。
+13. compileall。
+14. 第六阶段分片 pytest。
+15. L2 第一至第六阶段 pytest。
+16. 完整 pytest。
+
+二、命令与结果
+
+1. 编译验证
+
+命令：
+`python -m compileall -q tiangong_kernel tests`
+
+结果：通过。
+日志：`docs/l2_phase6_compileall.log`
+
+2. 第六阶段测试
+
+命令：
+`python -m pytest -q tests/test_l2_phase6_*.py`
+
+结果：12 passed。
+日志：`docs/l2_phase6_pytest_phase6.log`
+
+3. L2 第一至第六阶段回归
+
+命令：
+`python -m pytest -q tests/test_l2_phase1_*.py tests/test_l2_phase2_*.py tests/test_l2_phase3_*.py tests/test_l2_phase4_*.py tests/test_l2_phase5_*.py tests/test_l2_phase6_*.py`
+
+结果：120 passed。
+日志：`docs/l2_phase6_pytest_l2_phase1_to_phase6.log`
+
+4. 完整 pytest
+
+命令：
+`python -m pytest -q`
+
+结果：446 passed。
+日志：`docs/l2_phase6_pytest_full.log`
+
+三、边界验证结论
+
+通过 AST 扫描确认第六阶段新增源码未导入：
+
+- aiohttp / httpx / requests / urllib / socket
+- os / pathlib / sqlite3 / subprocess / threading / multiprocessing / asyncio
+- tiangong_kernel.l3_ / l4_ / l5_ / l6_
+- runtime / agent_core / ability / capability / plugin_host
+
+通过 AST 扫描确认第六阶段新增源码未定义真实执行方法或调用：
+
+- open / print / eval / exec / input / compile
+- read / write / request / send / connect / run
+- compress / retrieve / search / query / embed / rank / learn / train / promote / validate / rollback / recover / evolve / experiment
+
+通过类名扫描确认未定义：
+
+- CandidateState
+- ChangeState
+- IterationState
+- EvolutionState
+- ExperimentState
+- ValidationState
+- RecoveryState
+
+四、兼容性验证结论
+
+- 新增状态对象可被 `stable_json_dumps` 稳定序列化。
+- 新增状态对象可被 `stable_hash` 生成稳定 digest。
+- 新增状态对象可纳入 `L2StateSnapshot`。
+- 新增状态对象与 Phase3 / Phase4 / Phase5 状态通过 `TypedRef` 接线。
+- 新增导出不破坏第一至第五阶段导出。
+
+五、未验证事项
+
+无未执行的本阶段必要验证。
+
+六、注意事项
+
+虽然完整 pytest 已通过，但本阶段仍然没有做 GUI、真实模型、真实工具、真实检索、真实学习或外部系统级验证，因为这些不属于 L2 第六阶段状态层边界。

@@ -1,0 +1,28 @@
+天工造物 L4→L5/L6 前置连续修复总修改清单
+日期：2026-06-04
+
+新增 / 修改重点目录：
+1. tiangong_kernel/l1_ports
+2. tiangong_kernel/l2_state
+3. tiangong_kernel/l3_orchestration
+4. tiangong_kernel/l4_action_grounding
+5. tiangong_kernel/l4_execution
+6. tests
+7. docs
+
+新增专项文件族：
+1. math_engine_contract_ports / math_model_governance_state / math_model_engine_flow / math_model_adapter。
+2. memory_governance_ports / memory_forgetting_state / forgetting_service_request / cognitive_sink_hint / memory sink requirements。
+3. self_evolution_commit_ports / self_evolution_commit_state / self_evolution_commit_flow / self evolution requirements。
+4. self_healing_ports / self_healing_state / self_healing_flow / self_healing_handoff。
+5. context_belief_world_ports / belief_state / world_state / context_safety_state / belief_world_context_transition / context_safety_projection。
+
+新增测试：
+覆盖数学模型、记忆/遗忘、自我进化、自愈、Context-Belief-World 以及跨层 ref-only 链路。
+
+修改既有交接文档：
+1. docs/l4_to_l5_handoff_zh.txt
+2. docs/l4_to_l6_handoff_zh.txt
+
+修改既有安全白名单：
+1. tests/test_l3_phase1_does_not_modify_l0_l1_l2.py

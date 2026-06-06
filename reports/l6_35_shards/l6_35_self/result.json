@@ -1,0 +1,27 @@
+{
+  "name": "l6_35_self",
+  "status": "passed",
+  "returncode": 0,
+  "duration_seconds": 4.178514,
+  "timeout_seconds": 60.0,
+  "started_at": 1780726343.174618,
+  "finished_at": 1780726347.3531325,
+  "command": [
+    "/opt/pyvenv/bin/python3",
+    "-m",
+    "pytest",
+    "tests/test_l6_35_step_state_machine_long_chain.py",
+    "-q"
+  ],
+  "cwd": "/mnt/data/l635_work/project",
+  "purpose": "pytest shard",
+  "required": true,
+  "rerun_command": "/opt/pyvenv/bin/python3 -m pytest tests/test_l6_35_step_state_machine_long_chain.py -q",
+  "stdout_path": "/mnt/data/l635_work/project/reports/l6_35_shards/l6_35_self/stdout.log",
+  "stderr_path": "/mnt/data/l635_work/project/reports/l6_35_shards/l6_35_self/stderr.log",
+  "stdout_tail": ".......                                                                  [100%]\n7 passed in 0.80s\n",
+  "stderr_tail": "",
+  "error_message": "",
+  "timed_out": false,
+  "process_group_reaped": false
+}

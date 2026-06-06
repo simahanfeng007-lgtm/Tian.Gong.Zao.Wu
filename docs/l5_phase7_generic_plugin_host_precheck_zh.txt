@@ -1,0 +1,19 @@
+L5 第七阶段通用插件宿主能力前置检查
+
+结论：PASS_WITH_COMPATIBLE_EXTENSION
+
+检查项：
+1. PluginManifest / Registry 已具备 plugin_kind 一类通用声明字段。
+2. 第七阶段新增 PluginCapabilityMountBindingDeclaration，以 capability_kind_refs / capability_metadata_ref / capability_contract_ref 表达通用能力挂载。
+3. 第七阶段新增 PluginContractBindingDeclaration / PluginServiceMountBindingDeclaration / PluginL6EntryDeclaration，避免 tool_schema-only 挂载。
+4. PublicProjection 只暴露摘要与 redacted_evidence_refs，不暴露 tool_schema、function_schema、callable、endpoint。
+5. 未发现必须把 ProductionPlugin 伪装成 ToolPlugin 的结构。
+
+判定：L5 phase1-phase6 基本通用，但缺少第七阶段所需的 capability_kind / production kind / contract binding 声明样例，因此按向后兼容扩展处理。
+
+处理：
+- 允许继续第七阶段。
+- 允许启用成品生产类插件的声明级预留。
+- 不回补 L1-L4。
+- 不回补 L5 phase1-phase6 核心对象。
+- 不实现 Product Artifact Factory。

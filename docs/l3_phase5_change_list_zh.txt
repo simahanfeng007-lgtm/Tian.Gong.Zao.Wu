@@ -1,0 +1,46 @@
+《天工造物 L3 第五阶段修改清单》
+
+一、新增源码文件
+1. tiangong_kernel/l3_orchestration/boundary_request.py
+2. tiangong_kernel/l3_orchestration/boundary_review_advice.py
+3. tiangong_kernel/l3_orchestration/boundary_route_advice.py
+4. tiangong_kernel/l3_orchestration/execution_request.py
+5. tiangong_kernel/l3_orchestration/execution_routing_advice.py
+6. tiangong_kernel/l3_orchestration/boundary_execution_math.py
+7. tiangong_kernel/l3_orchestration/boundary_execution_transition.py
+
+二、修改源码文件
+1. tiangong_kernel/l3_orchestration/__init__.py
+   - 增加第五阶段对象、评分函数、排序函数和接线建议对象公共导出。
+
+三、新增测试文件
+1. tests/l3_phase5_builders.py
+2. tests/test_l3_phase5_imports_and_compatibility.py
+3. tests/test_l3_phase5_boundary_request_advice.py
+4. tests/test_l3_phase5_execution_request_advice.py
+5. tests/test_l3_phase5_route_advice_and_transition.py
+6. tests/test_l3_phase5_boundary_execution_math.py
+7. tests/test_l3_phase5_boundary_no_execution.py
+8. tests/test_l3_phase5_serialization_hash_stability.py
+9. tests/test_l3_phase5_l0_l1_l2_compatibility.py
+
+四、新增文档 / 证据
+1. docs/l3_phase5_precheck_report_zh.txt
+2. docs/l3_phase5_development_log_zh.md
+3. docs/l3_phase5_handoff_report_zh.txt
+4. docs/l3_phase5_validation_report_zh.txt
+5. docs/l3_phase5_change_list_zh.txt
+6. docs/l3_phase5_test_results_zh.txt
+7. docs/l3_phase5_unfinished_items_zh.txt
+8. docs/l3_phase5_summary_report_zh.txt
+9. docs/l3_phase5_manifest_zh.txt
+10. docs/l3_phase5_l0_l1_l2_hash_before.txt
+11. docs/l3_phase5_l0_l1_l2_hash_current.txt
+12. docs/l3_phase5_l0_l1_l2_hash_compare.txt
+13. docs/l3_phase5_engineer_prompt_zh.txt
+
+五、未修改内容
+1. 未修改 L0。
+2. 未修改 L1。
+3. 未修改 L2。
+4. 未修改第一至第四阶段既有源码逻辑，仅在 __init__.py 追加导出。

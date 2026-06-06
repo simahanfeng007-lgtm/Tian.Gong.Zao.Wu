@@ -1,0 +1,35 @@
+天工造物 L4 第一阶段 handoff 报告
+生成日期：2026-06-04
+
+一、交付结论
+L4 第一阶段已完成动作落地基础骨架与安全默认拒绝骨架。当前实现只提供结构承载、默认拒绝、稳定序列化、L3 请求引用兼容与 fake/dry-run/no-op 测试替身。
+
+二、交付源码
+新增目录：tiangong_kernel/l4_action_grounding/
+核心文件：__init__.py、identity.py、status.py、request_intake.py、context.py、session.py、step.py、result.py、failure.py、error.py、invariant.py、serialization.py、projection.py、disabled.py、fake.py、dry_run.py。
+
+三、L3 接线
+已兼容 L3 的 ExecutionRequest、ExecutionDispatchRequest、ExecutionPlanRef、ExecutionStepRef。
+ActionRequestIntake 直接承载 L3 请求对象和引用，source_request_ref 返回最接近的 L3 request TypedRef。
+未修改 L3 源码、未修改 L3 __all__、未反向改变 L3 对象字段。
+
+四、默认拒绝
+1. ExecutionDisabledByDefaultFailure 表达缺少未来 L5 permit ref 时的默认拒绝。
+2. BoundaryPermitRequiredInvariant 只检查 permit ref 是否存在，不做权限、风险或确认裁决。
+3. NoLiveExecutionWithoutL5Invariant 保证无未来 L5 permit ref 不进入真实动作路径。
+4. NoL4AutonomousExecutionInvariant 保证 L4 不拥有任务意图，不主动推进下一步。
+
+五、runner 行为
+1. FakeActionGroundingRunner：无 permit ref 返回 REJECTED；有 permit ref 返回 SIMULATED。
+2. DryRunActionGroundingRunner：无 permit ref 返回 REJECTED；有 permit ref 返回 DRY_RUN。
+3. NoOpActionGroundingRunner：无 permit ref 返回 REJECTED；有 permit ref 返回 NO_OP。
+4. 三类 runner 的 produces_real_actions 均为 False，结果的 real_action_performed 均为 False。
+
+六、验证结果
+compileall 通过；targeted pytest 18 passed；tests -k l4_phase1 为 18 passed, 628 deselected；完整 tests 为 646 passed；L0/L1/L2/L3 hash compare 为 MATCH；越界扫描为 NO_MATCH。
+
+七、未做事项
+未进入 L4 第二阶段；未实现完整 L5 permit 对象、scope、expiry 或验证；未实现 L6 adapter protocol、registry、selector 或真实适配器；未调用真实模型、工具、文件、网络、终端或桌面动作；未写审计存储，未写 L2 状态。
+
+八、建议
+建议进入 L4 第二阶段规划/开发准备；第一阶段仅完成动作落地基础骨架与安全默认拒绝骨架，未启用任何真实外部动作。

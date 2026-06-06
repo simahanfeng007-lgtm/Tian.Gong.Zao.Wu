@@ -1,0 +1,39 @@
+天工造物 L4 第三阶段 validation 报告
+生成日期：2026-06-04
+
+一、验证范围
+1. L4 包可导入。
+2. Adapter descriptor/capability/risk surface/input/output/failure envelope 可创建、序列化、投影。
+3. AdapterRegistry 可注册 fake/in-memory/dry-run/no-op/real_stub。
+4. AdapterRegistry 拒绝重复 adapter_id、malformed descriptor、test-only production descriptor、real_stub enabled_by_default。
+5. AdapterSelector 可选择 fake/dry-run/no-op/in-memory 结构路径，并拒绝 production path 下 test-only adapter。
+6. AdapterSelector 在缺少 L5 gate 或 scope mismatch 时返回标准失败。
+7. RealActionAdapterStub.invoke() 永远返回 production_disabled failure。
+8. Fake/InMemory/DryRun/NoOp 不产生真实外部动作。
+9. Adapter invariant 与第一阶段对象接线可用。
+10. L0/L1/L2/L3 未修改。
+11. L4 包未导入真实动作依赖、旧能力包、旧 Runtime、神枢、插件宿主或 L5/L6 真实实现。
+
+二、实际执行命令与结果
+1. python -m compileall -q tiangong_kernel tests
+   结果：通过。日志：docs/l4_phase3_compileall.log
+2. python -m pytest -q tests/test_l4_phase3_adapter_protocol.py tests/test_l4_phase3_adapter_registry.py tests/test_l4_phase3_adapter_selector.py tests/test_l4_phase3_adapter_disabled.py tests/test_l4_phase3_adapter_fake_dryrun_noop.py tests/test_l4_phase3_adapter_invariants.py tests/test_l4_phase3_no_real_actions.py tests/test_l4_phase3_l0_l3_compat.py
+   结果：27 passed in 2.03s。日志：docs/l4_phase3_pytest_targeted.log
+3. python -m pytest -q L4 第一阶段与第二阶段回归测试集合
+   结果：41 passed in 2.85s。日志：docs/l4_phase3_pytest_phase1_phase2_regression.log
+4. python -m pytest -q tests -k "l4_phase1 or l4_phase2 or l4_phase3"
+   结果：68 passed, 628 deselected in 3.68s。日志：docs/l4_phase3_pytest_l4_phase1_phase2_phase3.log
+5. python -m pytest -q tests
+   结果：696 passed in 5.43s。日志：docs/l4_phase3_pytest_full.log
+
+三、hash 与静态扫描
+1. L0/L1/L2/L3 Python 源码 hash 比对：MATCH。日志：docs/l4_phase3_l0_l1_l2_l3_hash_compare.txt
+2. L4 包越界关键词扫描：NO_MATCH。日志：docs/l4_phase3_static_scan_forbidden_terms.txt
+3. L4 包禁止模块名与真实语义扫描：NO_MATCH。日志：docs/l4_phase3_forbidden_module_scan.txt
+
+四、自检问题
+P0/P1/P2：无。
+P3：无阻断项。独立 L4 八阶段规划本体文件未在累计工程中定位到，已在前置核对报告中列为材料缺失；本阶段依据第三阶段执行提示词和累计工程前置说明施工。
+
+五、验证结论
+验证通过。建议进入 L4 第三阶段专项质检；质检通过后可建议进入 L4 第四阶段，但第四阶段只能做模型/工具执行适配骨架，不得调用真实模型 API，不得调用真实工具，不得启用真实外部动作。

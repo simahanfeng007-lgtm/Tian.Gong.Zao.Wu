@@ -1,0 +1,48 @@
+{
+  "schema": "tiangong.l6_33.test_shard_runner.v1",
+  "source_version": "L6.33-test-shard-runner",
+  "status": "timeout",
+  "total_shards": 1,
+  "passed_shards": 0,
+  "failed_shards": 0,
+  "timeout_shards": 1,
+  "skipped_shards": 0,
+  "required_failed_or_timeout": 1,
+  "output_dir": "/mnt/data/l633_work/project/docs/l6_33_validation/timeout_probe",
+  "started_at": 1780723987.4530087,
+  "finished_at": 1780723990.4627097,
+  "duration_seconds": 3.009701,
+  "timeout_reaper_enabled": true,
+  "shard_isolation_enabled": true,
+  "no_kernel_mutation": true,
+  "no_secret_read": true,
+  "no_network_call": true,
+  "no_shell_string_execution": true,
+  "results": [
+    {
+      "name": "forced_timeout",
+      "status": "timeout",
+      "returncode": 124,
+      "duration_seconds": 1.0711,
+      "timeout_seconds": 0.2,
+      "started_at": 1780723989.1387134,
+      "finished_at": 1780723990.2098136,
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "-c",
+        "import time; time.sleep(5)"
+      ],
+      "cwd": "/mnt/data/l633_work/project",
+      "purpose": "forced timeout reaper probe",
+      "required": true,
+      "rerun_command": "/opt/pyvenv/bin/python -c 'import time; time.sleep(5)'",
+      "stdout_path": "/mnt/data/l633_work/project/docs/l6_33_validation/timeout_probe/forced_timeout/stdout.log",
+      "stderr_path": "/mnt/data/l633_work/project/docs/l6_33_validation/timeout_probe/forced_timeout/stderr.log",
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "error_message": "timeout after 0.2 seconds",
+      "timed_out": true,
+      "process_group_reaped": true
+    }
+  ]
+}

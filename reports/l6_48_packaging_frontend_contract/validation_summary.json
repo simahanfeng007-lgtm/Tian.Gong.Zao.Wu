@@ -1,0 +1,19 @@
+{
+  "schema": "tiangong.l6_48.packaging_frontend_contract.validation.v1",
+  "status": "PASS",
+  "p0_found": false,
+  "p1_found": true,
+  "p1_fixed": true,
+  "frontend_source_present": false,
+  "desktop_projection_contract_added": true,
+  "runtime_core_chain_modified": false,
+  "sensitive_status_output": "digest_only",
+  "tests": {
+    "compileall": "PASS",
+    "targeted": "41 passed",
+    "l6_37_to_l6_48_plus_shell": "105 passed",
+    "cli_smoke": "PASS",
+    "full_pytest_attempt": "timeout_at_67_percent_no_failure_before_timeout"
+  },
+  "next_step": "L6.49 desktop readonly cockpit shell"
+}

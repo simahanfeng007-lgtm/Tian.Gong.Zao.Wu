@@ -1,0 +1,12 @@
+天工造物 L5 第二阶段未做事项
+
+1. 未实现真实插件动态加载。
+2. 未写真实插件注册表。
+3. 未执行真实签名验签、真实证书读取或真实可信源查询。
+4. 未读取、解析、轮换、撤销真实凭据。
+5. 未签发 permit、lease、confirmation ticket、rollback permission、hot-switch permission 或 capability token。
+6. 未创建真实 sandbox。
+7. 未实现 L6 记忆/学习/进化/自愈/情感/上下文/数学等业务插件。
+8. 未实现第三阶段 Registry 冲突检测、delta、decision 和登记流程。
+
+这些均符合第二阶段边界，应由后续阶段在受控边界下继续推进。

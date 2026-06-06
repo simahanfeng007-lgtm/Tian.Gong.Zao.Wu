@@ -1,0 +1,31 @@
+L5 情感 / 情志系统基础挂载预留最小补丁说明（hotfix2）
+
+修复依据：hotfix1 + 情志专项总质检报告中 P2-01 至 P2-04。
+
+修复范围：
+- 只改 L5 插件宿主声明层、phase7/phase8 收口、public projection、handoff、audit index、quality gate 与测试。
+- 未修改 L0。
+- 未改 L1-L4 核心语义。
+- 未实现 L6 情感插件。
+- 未实现情感模型、七情六欲算法或情绪驱动执行器。
+
+新增声明：
+1. AffectiveCapabilityDeclaration。
+2. AffectivePluginMountDeclaration。
+3. AffectiveModulationContractBinding。
+4. AffectiveSafetyBoundaryRef。
+5. AffectiveAuditBinding。
+6. AffectivePublicProjectionSummary。
+7. AffectiveL6HandoffRef。
+
+允许影响范围：
+表达方式、注意力分配、优先级排序、记忆权重、风险敏感度、学习动机。
+
+绝对禁止：
+直接执行工具、调用 L4 adapter、绕过权限/确认/HumanGate/Policy/Lease/Contract/Audit、修改核心、提交副作用、直接写/删/晋升记忆、触发成品生产链、触发自愈/自我进化/自我迭代。
+
+质量门：
+新增 affective_plugin_l5_ready、affective_governance_matrix_passed、affective_capability_readiness_matrix_passed、affective_public_projection_passed、affective_l6_handoff_freeze_passed、affective_audit_binding_passed、affective_targeted_pytest_passed、no_affective_direct_execution_passed、no_affective_authorization_bypass_passed、no_affective_core_mutation_passed。任一失败均派生 blocking_reasons 并阻断 freeze/L6 planning。
+
+结论：
+该补丁只提供 L5 情志插件挂载预留与 L6 规划前置证据，不提供任何执行授权。

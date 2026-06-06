@@ -1,0 +1,21 @@
+天工造物 L4 Skill 直显与工具释放链路专项 Handoff 报告
+
+一、交接对象
+
+1. ReleasedToolSchemaView：供模型可见工具 schema 的只读引用视图使用。
+2. ModelVisibleReleasedToolView：供模型侧可见 schema 引用使用。
+3. SkillToolReleaseSessionContext：串联 skill_ref、tool_group_ref、release_ref、permit_ref、l5_review_hint_ref。
+4. ToolResultReturnContext：串联 tool_call_ref、tool_result_ref、model_continuation_ref、l3_replan_suggestion_ref、l2_state_update_suggestion_ref。
+5. SkillToolReleaseChainIndex：列出 L1/L2/L3/L4 链路顺序与对象映射。
+
+二、L5 接管范围
+
+SkillAuthorization、ToolGroupReleasePermit、ToolVisibilityPermission、ToolInvocationPermission、ToolResultAuditGate、Confirmation、Lease、Risk、Policy、BoundaryDecision。
+
+三、L6 接管范围
+
+真实工具 schema 生成、真实工具适配器、真实模型适配器、真实工具执行来源、真实结果封装来源、ToolRegistry、SkillRegistry、PluginHost。
+
+四、结论
+
+Skill 直显与工具释放链路契约显式度已补齐；建议进入 L4 总质检/修复或 L5 总策划，但仍不得直接启用真实动作。

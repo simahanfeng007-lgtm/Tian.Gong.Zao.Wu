@@ -1,0 +1,17 @@
+天工造物 L5 第二阶段需求-测试追踪矩阵
+
+需求 | 代码对象 | 测试文件 | 状态
+Manifest Schema 必填字段 | PluginManifestSchema | test_l5_phase2_manifest_schema_required_fields.py | passed
+Manifest Validation Report | PluginManifestValidationIssue / Report | test_l5_phase2_manifest_validation_report.py | passed
+Manifest QualityGate | PluginManifestQualityGate | test_l5_phase2_manifest_quality_gate.py | passed
+Manifest hash canonical | calculate_manifest_digest | test_l5_phase2_manifest_hash_canonicalization.py | passed
+EntryReference 非执行化 | PluginEntryReference | test_l5_phase2_manifest_view_integration.py | passed
+SourceTrust/Signature refs only | PluginSourceTrustReference / PluginSignatureReference | test_l5_phase2_source_trust_and_signature_are_refs_only.py | passed
+Permission declarative | PluginPermissionDeclaration | test_l5_phase2_permission_declaration_is_declarative.py | passed
+Resource budget declarative | PluginResourceDeclaration | test_l5_phase2_resource_decl_requires_budget_owner_and_scopes.py | passed
+Credential no plain value | PluginCredentialDeclaration | test_l5_phase2_credential_declaration_no_plain_secret.py | passed
+Data Governance consent/purpose/lifecycle | PluginDataGovernanceDeclaration | test_l5_phase2_data_governance_requires_consent_purpose_lifecycle.py | passed
+Audit responsibility chain | PluginAuditDeclaration | test_l5_phase2_manifest_audit_chain_required_fields.py | passed
+CapabilityToken declarative | PluginCapabilityTokenDeclaration | test_l5_phase2_capability_token_declaration.py | passed
+TrustBoundary declarative | PluginTrustBoundaryDeclaration | test_l5_phase2_trust_boundary_declaration.py | passed
+No live action / no old chain | __all__ / forbidden scan | test_l5_phase2_forbidden_no_dynamic_loading_or_live_action.py | passed

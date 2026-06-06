@@ -1,0 +1,13 @@
+L5 第七阶段 zip 完整性报告（质检后修复版）
+
+zip_integrity=待最终 zipfile.testzip 校验后由外部修复报告记录。
+content_entry_count=1928
+content_tree_sha256=690d2e786cd9a6d15cb8d336f0b4a87a138aafe60c3da95c52289605dc9b8018
+pycache_entry_count=0
+pyc_entry_count=0
+required_report_missing_count=0
+required_report_missing=[]
+
+说明：
+- 本报告记录包内内容树完整性，避免在包内写入最终 zip sha256 造成自引用循环。
+- 最终 zip sha256 由包外《天工造物_L5第七阶段_质检后修复报告_20260604.txt》和最终聊天交付记录。

@@ -1,0 +1,96 @@
+天工造物 / 临渊者 L6.48 封装启动前只读驾驶舱契约核验交付报告
+================================================================
+
+一、本轮定位
+
+本轮不是重新规划，也不是接入真实桌面端前端。当前包体未发现独立 frontend / desktop / electron 源码目录，只有 CLI 外壳与 Runtime 公共投影。因此本轮按“封装启动前核验”处理：
+
+1. 保持 RuntimeEntry / PlannerExecutionController / ExecutionSpine 执行主链不变。
+2. 在既有 public_projection_bridge.py 中补充桌面端可读的只读驾驶舱投影契约。
+3. 修复 CLI 状态与配置输出中 endpoint / key 仍可能展示部分原文的问题，统一改为 digest 态。
+4. 增加 L6.48 回归测试，验证前端未来只能读取 projection，不获得工具调用、Provider SDK、记忆写入、自我迭代合入口。
+
+二、本轮发现
+
+P0：未发现。
+P1：发现 1 个封装前敏感信息显示风险。
+- 原状态：CLI status / show-config 可展示 base_url 原文，api_key 采用前后缀遮罩。
+- 风险：与“endpoint、token、key 等敏感信息只保存 digest，不展示原文”的前端/封装口径不一致。
+- 修复：base_url / endpoint / api_key 均改为 <已配置:digest:xxxx>。
+
+三、本轮修复
+
+1. tiangong_agent_runtime/public_projection_bridge.py
+   - 新增 L6_48_DESKTOP_PUBLIC_PROJECTION_SCHEMA。
+   - 新增 DesktopDashboardProjection。
+   - 新增 build_desktop_dashboard_projection()。
+   - 输出结构固定包含：task_snapshot、quality_gate、audit_summary、conversation_guide、status_bar。
+   - 强制边界旗标：frontend_readonly、projection_only、no_direct_tool_call、no_provider_sdk、no_memory_write、no_self_iteration_merge、no_plain_endpoint、no_plain_token。
+   - 对 summary、quality_gate、audit、context、budget、conversation guide 中的 secret / endpoint / path 做摘要或占位，不输出原文。
+
+2. tiangong_agent_shell/safe_logging.py
+   - 新增 redact_endpoint()。
+   - api_key 从“前缀+星号+后缀”改为 digest 态。
+   - sanitize_mapping() 对 base_url / endpoint 等 locator 字段输出 digest 态。
+
+3. tiangong_agent_shell/cli_loop.py
+   - status 输出由 base_url 原文改为 endpoint_state digest。
+
+4. tests/test_l6_48_desktop_public_projection_contract.py
+   - 新增只读驾驶舱投影契约测试。
+   - 新增 CLI status / show-config 不泄露 endpoint/key 原文测试。
+   - 新增 run_agent.py 只委派 shell main、不直接构造第二 Runtime 或 Provider Client 的启动入口测试。
+
+5. tests/test_l6_9_api_key_redaction.py
+   - 更新密钥脱敏期望为 digest 态。
+
+6. tests/test_l6_13_model_chat_runtime_audit.py
+   - 更新模型错误脱敏期望为 digest 态。
+
+四、验证结果
+
+1. compileall
+   命令：python3 -m compileall -q tiangong_agent_runtime tiangong_agent_shell tiangong_kernel tests
+   结果：PASS
+
+2. 定向回归
+   命令：pytest -q tests/test_l6_48_desktop_public_projection_contract.py tests/test_l6_9_agent_shell_cli.py tests/test_l6_9_api_key_redaction.py tests/test_l6_13_model_chat_runtime_audit.py tests/test_l6_47_four_path_freeze_baseline.py tests/test_l6_37_execution_chain_freeze.py tests/test_l6_43_four_path_context_router.py tests/test_l6_31_model_suggest_shape_hotfix.py
+   结果：41 passed
+
+3. L6.37-L6.48 + shell / model audit 回归
+   命令：pytest -q tests/test_l6_9_agent_shell_cli.py tests/test_l6_9_api_key_redaction.py tests/test_l6_13_model_chat_runtime_audit.py tests/test_l6_31_model_suggest_shape_hotfix.py tests/test_l6_37_execution_chain_freeze.py tests/test_l6_38_p0_system_integration.py tests/test_l6_39_p0_system_integration_two.py tests/test_l6_40_memory_math_store.py tests/test_l6_41_affective_state_route.py tests/test_l6_42_1_lifecycle_supplement.py tests/test_l6_42_lifecycle_coordinator.py tests/test_l6_43_1_planner_unified_consumption.py tests/test_l6_43_four_path_context_router.py tests/test_l6_44_budget_low_friction_governance.py tests/test_l6_45_rollback_audit_binding.py tests/test_l6_46_long_chain_failure_injection.py tests/test_l6_47_four_path_freeze_baseline.py tests/test_l6_48_desktop_public_projection_contract.py
+   结果：105 passed
+
+4. CLI smoke
+   命令：
+   - python3 run_agent.py --status --base-url https://api.secret-provider.example/v1 --api-key sk-l6-48-secret-credential-123456
+   - python3 run_agent.py --show-config --base-url https://api.secret-provider.example/v1 --api-key sk-l6-48-secret-credential-123456
+   - python3 run_agent.py --mock --once 你好
+   结果：PASS，endpoint 与 key 均只显示 digest 态。
+
+5. full pytest 尝试
+   命令：pytest -q
+   结果：运行到 67% 外部超时中断；超时前未出现失败。不声明全量通过。
+
+五、未动边界
+
+1. 未修改 ExecutionSpine。
+2. 未修改 PlannerExecutionController。
+3. 未修改 PermitGateway / RiskClassifier。
+4. 未修改 QualityGate / Audit / Rollback 语义。
+5. 未新增真实前端，不伪称已接入桌面端。
+6. 未新增 Provider SDK 调用。
+7. 未新增记忆写入口。
+8. 未新增自我迭代合入口。
+
+六、剩余风险
+
+1. 当前包体仍没有真实桌面端源码；L6.48 只交付可被前端消费的只读投影契约。
+2. CLI 状态标题仍显示“L6.38 P0 系统接入启动器状态”，属于文案滞后，不影响执行链；建议下轮统一为“临渊者 Runtime 启动器状态”。
+3. full pytest 仍受外部时限影响，未完成全量跑完。
+
+七、下一步建议
+
+下一步编号：L6.49
+下一步目标：桌面端驾驶舱只读接入壳。
+原因：L6.48 已给出 Runtime→前端的安全投影契约；下一步可以让桌面端只读取 DesktopDashboardProjection fixture / public projection，不接 Provider SDK、不写记忆、不裸调工具。

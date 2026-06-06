@@ -1,0 +1,14 @@
+天工造物 自愈系统最小补丁测试结果
+日期：2026-06-04
+
+命令：
+python -m compileall -q tiangong_kernel tests
+
+结果：
+通过。
+
+命令：
+python -m pytest -q tests/test_l1_self_healing_ports_are_protocol_only.py tests/test_l2_self_healing_states_are_facts_only.py tests/test_l3_self_healing_flow_lifecycle.py tests/test_l4_self_healing_handoff_ref_only.py tests/test_self_healing_chain_refs_only.py
+
+结果：
+6 passed。

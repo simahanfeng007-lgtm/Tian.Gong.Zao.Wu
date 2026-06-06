@@ -1,0 +1,37 @@
+临渊者 L6.45 回滚审计全链绑定 交付报告
+日期：2026-06-06
+基线：L6.44 预算治理低摩擦改造
+
+完成内容：
+1. 新增 tiangong_agent_runtime/rollback_audit_binding.py
+2. 新增 StateDeltaLedger：记录每步状态变化 ref/digest/summary。
+3. 新增 ToolDependencyGraph：绑定工具步骤依赖、失败影响范围。
+4. 新增 RecoveryCheckpoint：绑定断点续接、回滚复核、验证要求。
+5. 新增 AuditEvidenceEnvelope：绑定审计引用、状态变化引用、依赖图、检查点。
+6. 新增 RollbackAuditBindingReport：输出 Planner 可消费的回滚审计绑定报告。
+7. 新增 tests/test_l6_45_rollback_audit_binding.py
+
+边界：
+- 不执行回滚。
+- 不调工具。
+- 不改预算。
+- 不绕过质量门。
+- 不注册 Tool/Skill。
+- 不污染 tiangong_kernel L0-L5。
+- 不修改执行脊柱、PlannerExecutionController、LongChainRunner、Registry、Adapter、PermitGateway、RiskClassifier、BudgetGuard、Provider、QualityGate。
+
+验证：
+- compileall：PASS
+- L6.37-L6.45 定向回归：69 passed
+- 记忆/遗忘边界：6 passed
+- 情志边界：14 passed
+- 学习/恢复/回放关键链：24 passed
+- 定向合计：113 passed
+- 核心污染检查：PASS，checked_core_files=597，changed_core_files=0
+- 静态边界扫描：PASS
+
+未声明：
+- 未跑完整全量 pytest。
+
+下一阶段建议：
+L6.46 长链压力测试与失败注入测试：用真实长链场景压测 FourPath、Planner 消费、预算低摩擦、回滚审计绑定的稳定性。

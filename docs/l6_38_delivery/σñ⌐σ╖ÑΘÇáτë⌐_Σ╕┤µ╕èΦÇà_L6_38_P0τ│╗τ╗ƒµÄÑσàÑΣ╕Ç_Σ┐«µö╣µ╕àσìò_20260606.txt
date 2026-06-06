@@ -1,0 +1,27 @@
+临渊者 L6.38【P0 系统接入一：Provider / Budget / Skill / Handoff】修改清单
+
+一、新增文件
+- tests/test_l6_38_p0_system_integration.py
+- tiangong_agent_runtime/p0_system_integration.py
+
+二、修改文件
+- tiangong_agent_runtime/plan_bridge.py
+- tiangong_agent_runtime/plan_schema.py
+- tiangong_agent_runtime/risk_classifier.py
+- tiangong_agent_runtime/runtime_entry.py
+- tiangong_agent_shell/cli_loop.py
+
+三、核心变更
+1. 新增 p0_system_integration 外壳模块，提供 ProviderProfile / ProviderExecutionTicket / CredentialRef、StepBudgetLedger / ChainBudgetLease / TimeoutBudget / FailureBudget / BudgetSnapshot、SkillCandidateRoute / SkillReviewTicket / SkillActivationIntent / SkillExecutionHint、SubtaskTicket / HandoffEnvelope / ParentChainCollectReport。
+2. RuntimeEntry 注册五个 L6.38 A2 工具：build_l6_38_provider_integration、build_l6_38_budget_snapshot、build_l6_38_skill_integration、build_l6_38_handoff_integration、build_l6_38_p0_integration。
+3. run_l6_38_p0_system_integration 通过 execute_plan 进入 PlannerExecutionController，不新增第二 Runtime。
+4. plan_schema / plan_bridge / risk_classifier 接入 L6.38 工具、别名、规则计划和 A2 风险说明。
+5. CLI 新增 /p0-system-build、/p0-system、/p0-system-save、/p0-system-reset。
+6. 新增 tests/test_l6_38_p0_system_integration.py，覆盖边界拒绝、执行链、CLI、schema/risk、内核未污染。
+
+四、未改动边界
+1. tiangong_kernel 无变更。
+2. 未新增 Provider SDK 调用、网络调用、凭证明文读取。
+3. 未直接注册/激活 Skill。
+4. 未自动派生子智能体。
+5. 未直接修改预算。

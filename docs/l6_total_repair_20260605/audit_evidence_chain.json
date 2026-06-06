@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "checked_count": 10,
+  "checked_classes": [
+    "L6AuditTraceEnvelope",
+    "L6Phase2QualityGateDecision",
+    "L6Phase3MindQualityGateDecision",
+    "CognitiveOutputBase",
+    "L6Phase4CognitiveContinuityQualityGateDecision",
+    "L6Phase5GovernanceQualityGateDecision",
+    "EvidenceCompletenessScore",
+    "GovernanceEvidenceIndex",
+    "ResponsibilityChainRef",
+    "TamperEvidenceHint"
+  ],
+  "findings": []
+}

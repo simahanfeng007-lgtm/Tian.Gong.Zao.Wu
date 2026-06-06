@@ -1,0 +1,16 @@
+{
+  "checked_objects": [
+    "L6PublicProjection",
+    "L6PublicProjection",
+    "L6PluginDiscoverableProjection",
+    "L6ContractPatchPublicProjection"
+  ],
+  "leaks": [],
+  "passed": true,
+  "negative_constructor_checks": {
+    "raw_credential_rejected": true,
+    "external_endpoint_rejected": true,
+    "execution_marker_rejected": true
+  },
+  "note": "检查具体泄露值/URL/凭证赋值/执行 marker；字段名如 contains_external_endpoint 属于安全布尔声明，不视为泄露。"
+}

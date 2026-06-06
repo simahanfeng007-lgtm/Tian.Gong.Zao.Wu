@@ -1,0 +1,3 @@
+审计证据索引报告
+PluginPhase6AuditIndex 包含 health_event_refs、disposition_event_refs、permission_event_refs、conflict_event_refs、validation_event_refs、quality_gate_event_ref、handoff_event_ref。
+所有字段均为声明级 ref，不 emit 真实事件，不写真实审计库。

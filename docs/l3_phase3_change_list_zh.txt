@@ -1,0 +1,40 @@
+《天工造物 L3 第三阶段修改清单》
+
+一、新增源码文件
+1. tiangong_kernel/l3_orchestration/skill_visibility.py
+2. tiangong_kernel/l3_orchestration/tool_group_release_advice.py
+3. tiangong_kernel/l3_orchestration/skill_tool_math.py
+4. tiangong_kernel/l3_orchestration/skill_tool_route.py
+5. tiangong_kernel/l3_orchestration/skill_tool_transition.py
+
+二、修改源码文件
+1. tiangong_kernel/l3_orchestration/__init__.py
+   - 追加第三阶段公共导出。
+
+三、新增测试文件
+1. tests/l3_phase3_builders.py
+2. tests/test_l3_phase3_imports_and_compatibility.py
+3. tests/test_l3_phase3_skill_visibility_advice.py
+4. tests/test_l3_phase3_tool_group_release_advice.py
+5. tests/test_l3_phase3_math_scoring_and_ranking.py
+6. tests/test_l3_phase3_serialization_hash_stability.py
+7. tests/test_l3_phase3_boundary_no_execution.py
+
+四、新增文档文件
+1. docs/l3_phase3_engineer_prompt_20260603.txt
+2. docs/l3_phase3_precheck_report_zh.txt
+3. docs/l3_phase3_development_log_zh.md
+4. docs/l3_phase3_handoff_report_zh.txt
+5. docs/l3_phase3_validation_report_zh.txt
+6. docs/l3_phase3_change_list_zh.txt
+7. docs/l3_phase3_test_results_zh.txt
+8. docs/l3_phase3_unfinished_items_zh.txt
+9. docs/l3_phase3_summary_report_zh.txt
+10. docs/l3_phase3_manifest_zh.txt
+
+五、未修改
+1. 未修改 tiangong_kernel/l0_primitives/。
+2. 未修改 tiangong_kernel/l1_ports/。
+3. 未修改 tiangong_kernel/l2_state/。
+4. 未修改 L3 第一阶段已有源码文件。
+5. 未修改 L3 第二阶段已有源码文件。

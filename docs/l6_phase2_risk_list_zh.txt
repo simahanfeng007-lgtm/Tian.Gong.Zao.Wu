@@ -1,0 +1,24 @@
+天工造物 L6 第二阶段 P0/P1/P2/P3 风险清单
+生成日期：2026-06-05
+
+P0：0
+- 未发现裸调模型 SDK。
+- 未发现 raw HTTP。
+- 未发现 subprocess/shell/file write/delete 真实调用。
+- 未发现直接写 L2。
+- 未发现插件间裸 import/call/state write。
+- 未发现平行 Runtime 或旧 CapabilityPort/AbilityPackagePort 自动执行链回流。
+
+P1：0
+- 未发现质量门硬门失效。
+- 未发现 public projection 泄露真实 endpoint/secret/token/path。
+- 未发现 audit evidence chain 缺失。
+
+P2：0
+- 当前没有阻断级设计遗漏。
+
+P3：2
+1. 本阶段只建立公共运行关系体系，未提供真实业务插件样板；第三阶段应补普通插件接入样板。
+2. forbidden scan 当前采用 AST 真实 import/call + inert pattern 区分策略，后续可以继续增强为更细粒度规则源索引。
+
+结论：无 P0/P1 阻断项。

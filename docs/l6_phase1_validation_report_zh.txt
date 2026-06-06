@@ -1,0 +1,44 @@
+天工造物 L6 第一阶段验证报告
+生成日期：2026-06-05
+
+一、验证结论
+建议通过 L6 第一阶段公共插件底座候选冻结。
+
+二、验证项目
+1. L6 common 代码编译
+结果：通过。
+证据：docs/l6_phase1_compileall_20260605.log
+
+2. L6 定向测试
+结果：通过，19 passed。
+覆盖：Manifest、Lifecycle、InvocationEnvelope、OutputEnvelope、ModelCapabilityRequirement、ToolCapabilityRequirement、Permission/Budget/Audit/Credential/Context Requirement、EventContract、StateProjectionContract、PublicProjection、Handoff、Failure、Migration、Rollback、HotSwitch、QualityGate、ForbiddenScan、source boundary。
+
+3. L4/L5/L6 边界回归子集
+结果：通过，173 passed。
+证据：docs/l6_phase1_targeted_boundary_pytest_20260605.log
+
+4. full pytest
+结果：通过，1414 passed。
+证据：docs/l6_phase1_full_pytest_20260605.log
+
+5. L0-L5 非破坏性 hash compare
+结果：unchanged_l0_l5=True。
+changed_files=[]
+missing_in_work=[]
+extra_in_work=[]
+证据：docs/l6_phase1_hash_compare_l0_l5_20260605.json
+
+6. Forbidden scan / source boundary
+结果：ast_forbidden_imports_passed=True。
+默认 forbidden rule 数量：20。
+危险样本触发 P0 数：5。
+证据：docs/forbidden_scan_l6_phase1_20260605.json
+
+三、关键边界验证
+- L6 不导入 L3/L4/L5 执行层。
+- L6 common 不导入 os/pathlib/socket/subprocess/requests/httpx/urllib/importlib/provider SDK。
+- L6 public dataclasses 不暴露 entrypoint、handler、shell_command、provider_base_url、api_key、token、secret、file_path、database_uri、tool_handle、model_client、l4_adapter、state_writer、audit_writer 等字段。
+- L6 public dataclasses 不暴露 execute/run/apply/commit/migrate/rollback/hot_switch/replay/write_state/write_audit/fetch_secret/call_model/call_tool/invoke_tool 等方法。
+
+四、限制说明
+本阶段没有进行真实 GUI 验收、Windows 原生验收、安装包验收、live provider 验收、真实插件动态加载验收；这些不属于第一阶段公共契约底座范围。

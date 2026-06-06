@@ -1,0 +1,482 @@
+{
+  "affective_turn_count_final": 10,
+  "boundaries": {
+    "forgetting_no_physical_delete": true,
+    "no_budget_mutation": true,
+    "no_kernel_mutation": true,
+    "no_second_runtime": true,
+    "projection_only": true
+  },
+  "cli_smoke": "PASS",
+  "compileall": "PASS",
+  "emotion_delta_unique_count": 10,
+  "focused_runtime_pressure_pytest": "1 passed",
+  "forget_review_count_each_turn": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+  ],
+  "four_path_unique_digest_count": 10,
+  "freeze_regression_l6_37_to_l6_49_4": "93 passed",
+  "full_pytest": "not_run",
+  "memory_store_event_count_after": 3,
+  "memory_store_event_count_before": 3,
+  "memory_store_unchanged": true,
+  "planner_consumption_unique_digest_count": 10,
+  "result": "PASS",
+  "risk_attention_max": 0.430902,
+  "risk_attention_min": 0.242469,
+  "risk_attention_unique_rounded_4": 10,
+  "runtime_wiring_pytest": "6 passed",
+  "schema": "tiangong.l6_49_4.runtime_pressure_validation.v1",
+  "turn_count": 10,
+  "turns": [
+    {
+      "affective_turn_count": 1,
+      "budget_no_mutation": true,
+      "dominant_desire": "achievement",
+      "dominant_emotion": "thoughtfulness",
+      "emotion_delta": {
+        "anger": -0.014269760000000001,
+        "fear": 0.01043024000000001,
+        "joy": -0.06311040000000002,
+        "sadness": -0.030919839999999987,
+        "surprise": 0.0021751200000000026,
+        "thoughtfulness": 0.04400400000000001,
+        "worry": 0.050225360000000004
+      },
+      "forget_actions": {
+        "mem_l6_49_4_old_interface_mismatch": [
+          "compress",
+          "demote"
+        ],
+        "mem_l6_49_4_runtime_wiring_baseline": [
+          "keep"
+        ],
+        "mem_l6_49_4_user_forget_request": [
+          "suppress_active_recall",
+          "tombstone",
+          "delete_review"
+        ]
+      },
+      "forget_review_count": 3,
+      "four_path_digest": "eb74675a842c93b57a7124fb",
+      "four_path_status": "four_path_context_ready",
+      "lifecycle_hint_count": 5,
+      "memory_modulation": 0.452021,
+      "memory_recall_count": 1,
+      "memory_recall_top": "mem_l6_49_4_runtime_wiring_baseline",
+      "no_kernel_mutation": true,
+      "no_second_runtime": true,
+      "pacing": 0.204477,
+      "planner_consumption_digest": "4fc00d533c13389fe05578af",
+      "planner_consumption_status": "planner_consumption_ready",
+      "recovery_patience": 0.462786,
+      "risk_attention": 0.30618,
+      "turn": 1
+    },
+    {
+      "affective_turn_count": 2,
+      "budget_no_mutation": true,
+      "dominant_desire": "achievement",
+      "dominant_emotion": "thoughtfulness",
+      "emotion_delta": {
+        "anger": -0.028288023835415524,
+        "fear": -0.01791407120168073,
+        "joy": -0.16772032697554884,
+        "sadness": -0.04783744150618048,
+        "surprise": 0.0009381702288538166,
+        "thoughtfulness": 0.07128639561517676,
+        "worry": -0.03925157311529239
+      },
+      "forget_actions": {
+        "mem_l6_49_4_old_interface_mismatch": [
+          "compress",
+          "demote"
+        ],
+        "mem_l6_49_4_runtime_wiring_baseline": [
+          "keep"
+        ],
+        "mem_l6_49_4_user_forget_request": [
+          "suppress_active_recall",
+          "tombstone",
+          "delete_review"
+        ]
+      },
+      "forget_review_count": 3,
+      "four_path_digest": "a2739bc26b926de1dfdb1dc7",
+      "four_path_status": "four_path_context_ready",
+      "lifecycle_hint_count": 5,
+      "memory_modulation": 0.451611,
+      "memory_recall_count": 1,
+      "memory_recall_top": "mem_l6_49_4_runtime_wiring_baseline",
+      "no_kernel_mutation": true,
+      "no_second_runtime": true,
+      "pacing": 0.195696,
+      "planner_consumption_digest": "4a00d4b2c2f91f1963139bef",
+      "planner_consumption_status": "planner_consumption_ready",
+      "recovery_patience": 0.450767,
+      "risk_attention": 0.266184,
+      "turn": 2
+    },
+    {
+      "affective_turn_count": 3,
+      "budget_no_mutation": true,
+      "dominant_desire": "achievement",
+      "dominant_emotion": "thoughtfulness",
+      "emotion_delta": {
+        "anger": -0.03538332355185192,
+        "fear": -0.033891491704879026,
+        "joy": -0.23523829900411208,
+        "sadness": -0.05726232710615335,
+        "surprise": 0.0009692638429793482,
+        "thoughtfulness": 0.011061436190580962,
+        "worry": -0.09233310425174643
+      },
+      "forget_actions": {
+        "mem_l6_49_4_old_interface_mismatch": [
+          "compress",
+          "demote"
+        ],
+        "mem_l6_49_4_runtime_wiring_baseline": [
+          "keep"
+        ],
+        "mem_l6_49_4_user_forget_request": [
+          "suppress_active_recall",
+          "tombstone",
+          "delete_review"
+        ]
+      },
+      "forget_review_count": 3,
+      "four_path_digest": "787d6e6d21a790ffbd569c9f",
+      "four_path_status": "four_path_context_ready",
+      "lifecycle_hint_count": 5,
+      "memory_modulation": 0.416127,
+      "memory_recall_count": 1,
+      "memory_recall_top": "mem_l6_49_4_runtime_wiring_baseline",
+      "no_kernel_mutation": true,
+      "no_second_runtime": true,
+      "pacing": 0.251777,
+      "planner_consumption_digest": "2110a6e771e717f8139ac76a",
+      "planner_consumption_status": "planner_consumption_ready",
+      "recovery_patience": 0.429665,
+      "risk_attention": 0.242469,
+      "turn": 3
+    },
+    {
+      "affective_turn_count": 4,
+      "budget_no_mutation": true,
+      "dominant_desire": "achievement",
+      "dominant_emotion": "thoughtfulness",
+      "emotion_delta": {
+        "anger": 0.1280578260950182,
+        "fear": 0.04416675919670322,
+        "joy": -0.2990663685541315,
+        "sadness": -0.05431892534034231,
+        "surprise": 0.13221865386516873,
+        "thoughtfulness": 0.05086207083794643,
+        "worry": 0.07510277497274258
+      },
+      "forget_actions": {
+        "mem_l6_49_4_old_interface_mismatch": [
+          "compress",
+          "demote"
+        ],
+        "mem_l6_49_4_runtime_wiring_baseline": [
+          "keep"
+        ],
+        "mem_l6_49_4_user_forget_request": [
+          "suppress_active_recall",
+          "tombstone",
+          "delete_review"
+        ]
+      },
+      "forget_review_count": 3,
+      "four_path_digest": "faea9155159d7ac587bb02b4",
+      "four_path_status": "four_path_context_ready",
+      "lifecycle_hint_count": 5,
+      "memory_modulation": 0.444672,
+      "memory_recall_count": 1,
+      "memory_recall_top": "mem_l6_49_4_runtime_wiring_baseline",
+      "no_kernel_mutation": true,
+      "no_second_runtime": true,
+      "pacing": 0.247275,
+      "planner_consumption_digest": "1f328923859fc73f734b3768",
+      "planner_consumption_status": "planner_consumption_ready",
+      "recovery_patience": 0.463877,
+      "risk_attention": 0.355375,
+      "turn": 4
+    },
+    {
+      "affective_turn_count": 5,
+      "budget_no_mutation": true,
+      "dominant_desire": "achievement",
+      "dominant_emotion": "thoughtfulness",
+      "emotion_delta": {
+        "anger": 0.06512586133901486,
+        "fear": 0.03781355108596979,
+        "joy": -0.32263100939984846,
+        "sadness": -0.05889747579450465,
+        "surprise": 0.08415044705610718,
+        "thoughtfulness": 0.07553839223442232,
+        "worry": 0.09678894510116146
+      },
+      "forget_actions": {
+        "mem_l6_49_4_old_interface_mismatch": [
+          "compress",
+          "demote"
+        ],
+        "mem_l6_49_4_runtime_wiring_baseline": [
+          "keep"
+        ],
+        "mem_l6_49_4_user_forget_request": [
+          "suppress_active_recall",
+          "tombstone",
+          "delete_review"
+        ]
+      },
+      "forget_review_count": 3,
+      "four_path_digest": "6319f100c98a382735f0c323",
+      "four_path_status": "four_path_context_ready",
+      "lifecycle_hint_count": 5,
+      "memory_modulation": 0.452005,
+      "memory_recall_count": 1,
+      "memory_recall_top": "mem_l6_49_4_runtime_wiring_baseline",
+      "no_kernel_mutation": true,
+      "no_second_runtime": true,
+      "pacing": 0.232665,
+      "planner_consumption_digest": "14740397522f9f069abf5c32",
+      "planner_consumption_status": "planner_consumption_ready",
+      "recovery_patience": 0.468691,
+      "risk_attention": 0.343049,
+      "turn": 5
+    },
+    {
+      "affective_turn_count": 6,
+      "budget_no_mutation": true,
+      "dominant_desire": "order",
+      "dominant_emotion": "thoughtfulness",
+      "emotion_delta": {
+        "anger": 0.02253311943173525,
+        "fear": 0.0006595351348416684,
+        "joy": -0.33128265811157775,
+        "sadness": -0.0641195313538919,
+        "surprise": 0.05256072909979851,
+        "thoughtfulness": 0.09083767026452073,
+        "worry": -0.007988224351548924
+      },
+      "forget_actions": {
+        "mem_l6_49_4_old_interface_mismatch": [
+          "compress",
+          "demote"
+        ],
+        "mem_l6_49_4_runtime_wiring_baseline": [
+          "keep"
+        ],
+        "mem_l6_49_4_user_forget_request": [
+          "suppress_active_recall",
+          "tombstone",
+          "delete_review"
+        ]
+      },
+      "forget_review_count": 3,
+      "four_path_digest": "41d166038ca02bf8f8f9e7ac",
+      "four_path_status": "four_path_context_ready",
+      "lifecycle_hint_count": 5,
+      "memory_modulation": 0.446504,
+      "memory_recall_count": 1,
+      "memory_recall_top": "mem_l6_49_4_runtime_wiring_baseline",
+      "no_kernel_mutation": true,
+      "no_second_runtime": true,
+      "pacing": 0.274654,
+      "planner_consumption_digest": "fa98576be4bef9c73426eaa9",
+      "planner_consumption_status": "planner_consumption_ready",
+      "recovery_patience": 0.465015,
+      "risk_attention": 0.290261,
+      "turn": 6
+    },
+    {
+      "affective_turn_count": 7,
+      "budget_no_mutation": true,
+      "dominant_desire": "survival",
+      "dominant_emotion": "thoughtfulness",
+      "emotion_delta": {
+        "anger": 0.007990814828332044,
+        "fear": 0.18100923063566784,
+        "joy": -0.35642187142510406,
+        "sadness": -0.05944711783808974,
+        "surprise": 0.16354772055887767,
+        "thoughtfulness": 0.023183197459225938,
+        "worry": 0.1254237948057035
+      },
+      "forget_actions": {
+        "mem_l6_49_4_old_interface_mismatch": [
+          "compress",
+          "demote"
+        ],
+        "mem_l6_49_4_runtime_wiring_baseline": [
+          "keep"
+        ],
+        "mem_l6_49_4_user_forget_request": [
+          "suppress_active_recall",
+          "tombstone",
+          "delete_review"
+        ]
+      },
+      "forget_review_count": 3,
+      "four_path_digest": "c8b2d039618e04d26b3b5a31",
+      "four_path_status": "four_path_context_ready",
+      "lifecycle_hint_count": 6,
+      "memory_modulation": 0.439792,
+      "memory_recall_count": 1,
+      "memory_recall_top": "mem_l6_49_4_runtime_wiring_baseline",
+      "no_kernel_mutation": true,
+      "no_second_runtime": true,
+      "pacing": 0.266492,
+      "planner_consumption_digest": "c071b20fb6d2d4439a575d4b",
+      "planner_consumption_status": "planner_consumption_ready",
+      "recovery_patience": 0.482961,
+      "risk_attention": 0.417923,
+      "turn": 7
+    },
+    {
+      "affective_turn_count": 8,
+      "budget_no_mutation": true,
+      "dominant_desire": "order",
+      "dominant_emotion": "thoughtfulness",
+      "emotion_delta": {
+        "anger": -0.012890508927024796,
+        "fear": 0.08944060313220926,
+        "joy": -0.3522329304495041,
+        "sadness": -0.06446030801045168,
+        "surprise": 0.10178689774088143,
+        "thoughtfulness": 0.058377541457628676,
+        "worry": 0.00976533114280656
+      },
+      "forget_actions": {
+        "mem_l6_49_4_old_interface_mismatch": [
+          "compress",
+          "demote"
+        ],
+        "mem_l6_49_4_runtime_wiring_baseline": [
+          "keep"
+        ],
+        "mem_l6_49_4_user_forget_request": [
+          "suppress_active_recall",
+          "tombstone",
+          "delete_review"
+        ]
+      },
+      "forget_review_count": 3,
+      "four_path_digest": "687c19ccf8f3bbea8e4d4516",
+      "four_path_status": "four_path_context_ready",
+      "lifecycle_hint_count": 5,
+      "memory_modulation": 0.431681,
+      "memory_recall_count": 1,
+      "memory_recall_top": "mem_l6_49_4_runtime_wiring_baseline",
+      "no_kernel_mutation": true,
+      "no_second_runtime": true,
+      "pacing": 0.295368,
+      "planner_consumption_digest": "c25acafbc38409e69d32f12c",
+      "planner_consumption_status": "planner_consumption_ready",
+      "recovery_patience": 0.475584,
+      "risk_attention": 0.33795,
+      "turn": 8
+    },
+    {
+      "affective_turn_count": 9,
+      "budget_no_mutation": true,
+      "dominant_desire": "survival",
+      "dominant_emotion": "thoughtfulness",
+      "emotion_delta": {
+        "anger": -0.01397177218503727,
+        "fear": 0.23605333193030045,
+        "joy": -0.36941097884805474,
+        "sadness": -0.05965839420382702,
+        "surprise": 0.06942785222374251,
+        "thoughtfulness": 0.08019796995932944,
+        "worry": 0.13643096761973272
+      },
+      "forget_actions": {
+        "mem_l6_49_4_old_interface_mismatch": [
+          "compress",
+          "demote"
+        ],
+        "mem_l6_49_4_runtime_wiring_baseline": [
+          "keep"
+        ],
+        "mem_l6_49_4_user_forget_request": [
+          "suppress_active_recall",
+          "tombstone",
+          "delete_review"
+        ]
+      },
+      "forget_review_count": 3,
+      "four_path_digest": "b66d76da20462fba4a91ea71",
+      "four_path_status": "four_path_context_ready",
+      "lifecycle_hint_count": 5,
+      "memory_modulation": 0.442202,
+      "memory_recall_count": 1,
+      "memory_recall_top": "mem_l6_49_4_runtime_wiring_baseline",
+      "no_kernel_mutation": true,
+      "no_second_runtime": true,
+      "pacing": 0.280495,
+      "planner_consumption_digest": "cc3314d46362b7b67e427f8e",
+      "planner_consumption_status": "planner_consumption_ready",
+      "recovery_patience": 0.514642,
+      "risk_attention": 0.430902,
+      "turn": 9
+    },
+    {
+      "affective_turn_count": 10,
+      "budget_no_mutation": true,
+      "dominant_desire": "order",
+      "dominant_emotion": "thoughtfulness",
+      "emotion_delta": {
+        "anger": -0.02133623416139859,
+        "fear": 0.1583788902921446,
+        "joy": -0.36890455664300714,
+        "sadness": -0.06114393939476582,
+        "surprise": 0.046018266170765806,
+        "thoughtfulness": 0.033458600209105724,
+        "worry": 0.1372063197763836
+      },
+      "forget_actions": {
+        "mem_l6_49_4_old_interface_mismatch": [
+          "compress",
+          "demote"
+        ],
+        "mem_l6_49_4_runtime_wiring_baseline": [
+          "keep"
+        ],
+        "mem_l6_49_4_user_forget_request": [
+          "suppress_active_recall",
+          "tombstone",
+          "delete_review"
+        ]
+      },
+      "forget_review_count": 3,
+      "four_path_digest": "cddc105d3af121466e8644fc",
+      "four_path_status": "four_path_context_ready",
+      "lifecycle_hint_count": 5,
+      "memory_modulation": 0.432883,
+      "memory_recall_count": 1,
+      "memory_recall_top": "mem_l6_49_4_runtime_wiring_baseline",
+      "no_kernel_mutation": true,
+      "no_second_runtime": true,
+      "pacing": 0.313215,
+      "planner_consumption_digest": "001283e406adf289011f4493",
+      "planner_consumption_status": "planner_consumption_ready",
+      "recovery_patience": 0.515267,
+      "risk_attention": 0.393094,
+      "turn": 10
+    }
+  ]
+}

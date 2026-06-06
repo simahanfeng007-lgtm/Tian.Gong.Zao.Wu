@@ -1,0 +1,14 @@
+{
+  "name": "l635_pressure",
+  "command": [
+    "/opt/pyvenv/bin/python",
+    "-m",
+    "pytest",
+    "tests/test_l6_35_step_state_machine_long_chain.py"
+  ],
+  "cwd": "/mnt/data/work_l637/project",
+  "timeout_seconds": 60,
+  "purpose": "single",
+  "required": true,
+  "rerun_command": "/opt/pyvenv/bin/python -m pytest tests/test_l6_35_step_state_machine_long_chain.py"
+}

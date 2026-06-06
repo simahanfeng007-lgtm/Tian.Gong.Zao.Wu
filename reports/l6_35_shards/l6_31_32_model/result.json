@@ -1,0 +1,28 @@
+{
+  "name": "l6_31_32_model",
+  "status": "passed",
+  "returncode": 0,
+  "duration_seconds": 4.399356,
+  "timeout_seconds": 90.0,
+  "started_at": 1780726349.293926,
+  "finished_at": 1780726353.6932817,
+  "command": [
+    "/opt/pyvenv/bin/python3",
+    "-m",
+    "pytest",
+    "tests/test_l6_31_model_suggest_shape_hotfix.py",
+    "tests/test_l6_32_p1_model_suggest_repair.py",
+    "-q"
+  ],
+  "cwd": "/mnt/data/l635_work/project",
+  "purpose": "pytest shard",
+  "required": true,
+  "rerun_command": "/opt/pyvenv/bin/python3 -m pytest tests/test_l6_31_model_suggest_shape_hotfix.py tests/test_l6_32_p1_model_suggest_repair.py -q",
+  "stdout_path": "/mnt/data/l635_work/project/reports/l6_35_shards/l6_31_32_model/stdout.log",
+  "stderr_path": "/mnt/data/l635_work/project/reports/l6_35_shards/l6_31_32_model/stderr.log",
+  "stdout_tail": "...................                                                      [100%]\n19 passed in 0.98s\n",
+  "stderr_tail": "",
+  "error_message": "",
+  "timed_out": false,
+  "process_group_reaped": false
+}

@@ -1,0 +1,107 @@
+天工造物 L4 第四阶段接口索引
+
+阶段名称：第四阶段，模型动作、工具动作、ToolGroup 动作承载骨架
+工程目录：project_l4_phase4
+日期：2026-06-04
+
+一、模型动作接口
+
+1. ModelActionRequest
+   文件：tiangong_kernel/l4_action_grounding/model_action_request.py
+   作用：承载模型动作请求结构。
+
+2. ModelActionResult
+   文件：tiangong_kernel/l4_action_grounding/model_action_result.py
+   作用：承载模型动作本地结构化结果。
+
+3. ModelActionFailure
+   文件：tiangong_kernel/l4_action_grounding/model_action_failure.py
+   作用：承载模型动作失败信息。
+
+4. ModelActionFailureKind
+   文件：tiangong_kernel/l4_action_grounding/model_action_failure.py
+   作用：枚举模型动作失败类型。
+
+5. ModelActionAdapterPort
+   文件：tiangong_kernel/l4_action_grounding/model_action_port.py
+   作用：定义模型动作适配器结构协议。
+
+二、工具动作与 ToolGroup 接口
+
+1. ToolArgumentEnvelope
+   文件：tiangong_kernel/l4_action_grounding/tool_argument_envelope.py
+   作用：承载工具参数并隔离明文凭证。
+
+2. ToolCallEnvelope
+   文件：tiangong_kernel/l4_action_grounding/tool_call_envelope.py
+   作用：承载工具调用描述。
+
+3. ToolResultEnvelope
+   文件：tiangong_kernel/l4_action_grounding/tool_result_envelope.py
+   作用：承载工具动作结果。
+
+4. ToolFailureEnvelope
+   文件：tiangong_kernel/l4_action_grounding/tool_failure_envelope.py
+   作用：承载工具调用失败信息。
+
+5. ToolGroupActionContext
+   文件：tiangong_kernel/l4_action_grounding/tool_group_action_context.py
+   作用：承载 ToolGroup 动作上下文，不做注册和解析。
+
+6. ToolActionRequest
+   文件：tiangong_kernel/l4_action_grounding/tool_action_request.py
+   作用：承载工具动作请求。
+
+7. ToolActionResult
+   文件：tiangong_kernel/l4_action_grounding/tool_action_result.py
+   作用：承载工具动作结果。
+
+8. ToolActionFailure
+   文件：tiangong_kernel/l4_action_grounding/tool_action_failure.py
+   作用：承载工具动作失败信息。
+
+9. ToolActionFailureKind
+   文件：tiangong_kernel/l4_action_grounding/tool_action_failure.py
+   作用：枚举工具动作失败类型。
+
+10. ToolActionAdapterPort
+    文件：tiangong_kernel/l4_action_grounding/tool_action_port.py
+    作用：定义工具动作适配器结构协议。
+
+三、适配器与禁用占位
+
+1. FakeModelAdapter
+   文件：tiangong_kernel/l4_action_grounding/model_fake_adapter.py
+   作用：测试专用确定性假模型适配器。
+
+2. DryRunModelAdapter
+   文件：tiangong_kernel/l4_action_grounding/model_dry_run_adapter.py
+   作用：模型动作空跑预览适配器。
+
+3. FakeToolAdapter
+   文件：tiangong_kernel/l4_action_grounding/tool_fake_adapter.py
+   作用：测试专用确定性假工具适配器。
+
+4. DryRunToolAdapter
+   文件：tiangong_kernel/l4_action_grounding/tool_dry_run_adapter.py
+   作用：工具动作空跑预览适配器。
+
+5. DisabledRealModelToolAdapterStub
+   文件：tiangong_kernel/l4_action_grounding/model_tool_disabled_stub.py
+   作用：真实模型和真实工具默认禁用占位。
+
+四、结构绑定与归一化
+
+1. L3IntentBinding
+   文件：tiangong_kernel/l4_action_grounding/l3_intent_binding.py
+   作用：从 L3 意图引用构造 L4 请求信封，保持结构绑定。
+
+2. ModelToolNormalization
+   文件：tiangong_kernel/l4_action_grounding/model_tool_normalization.py
+   作用：归一化本阶段模型/工具结果与失败信封。
+
+五、公共导出
+
+文件：tiangong_kernel/l4_action_grounding/__init__.py
+
+第四阶段对象已加入 __all__，供后续阶段稳定引用。

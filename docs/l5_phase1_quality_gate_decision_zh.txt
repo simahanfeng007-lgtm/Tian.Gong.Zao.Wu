@@ -1,0 +1,34 @@
+天工造物 L5 第一阶段质量门决策
+生成日期：2026-06-04
+
+gate_id: quality_gate:l5_phase1
+phase: L5.phase1
+baseline_refs:
+- docs/l5_phase1_pre_change_hash_manifest.txt
+- docs/l5_phase1_test_inventory_compare_zh.txt
+required_checks:
+- 前置文档存在性与可读性核验
+- L0-L4 哈希基线与后置对比
+- compileall
+- collect-only
+- L5 定向测试
+- 插件宿主相关子集测试
+- 全量 pytest
+- forbidden scan
+- test inventory compare
+- zip integrity
+observed_results:
+- 前置核验 passed
+- L0-L4 hash compare passed: 0 added / 0 deleted / 0 changed
+- compileall passed
+- collect-only passed: 963 tests collected
+- L5 定向测试 passed: 34 passed
+- 插件宿主相关子集 passed: 36 passed, 927 deselected
+- 全量 pytest passed: 963 passed
+- forbidden scan passed: 0 blocking findings
+- test inventory compare passed: 新增 15，删除 0，skip/xfail 变更 0
+blocking_findings: 0
+non_blocking_findings:
+- P3: 前置包 zip 条目数历史口径差异，本阶段已重新生成 zip integrity 报告。
+decision: allow_next_phase
+reason: P0/P1/P2 均为 0，全部必要验证已实际执行并通过。

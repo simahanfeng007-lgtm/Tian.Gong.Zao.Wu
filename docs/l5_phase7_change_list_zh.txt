@@ -1,0 +1,25 @@
+修改清单
+
+新增：
+- tiangong_kernel/l5_plugin_host/phase7_boundary_gate.py
+- tests/l5_phase7_builders.py
+- tests/test_l5_phase7_*.py 共 31 个
+- docs/l5_phase7_*.txt / .md 阶段报告
+
+修改：
+- tiangong_kernel/l5_plugin_host/__init__.py：新增第七阶段安全导出。
+
+未修改：
+- L0-L4 源码未修改。
+- L5 phase1-phase6 核心对象未删除、未重命名。
+
+
+质检后修复新增/修改：
+- 新增 docs/l5_phase6_validation_closure_report_zh.txt。
+- 新增 docs/l5_phase6_full_pytest_rerun_result_zh.txt。
+- 更新 docs/l5_phase6_quality_gate_decision_zh.txt。
+- 新增 docs/l5_phase7_development_prompt_confirmed_revised_20260604.txt。
+- 更新 docs/l5_phase7_test_results_zh.txt，记录 Windows 下展开执行的 targeted pytest 证据。
+- 更新 docs/l5_phase7_validation_report_zh.txt / delivery / development_log / handoff。
+- 新增 docs/l5_phase7_repair_report_zh.txt。
+- 清理 __pycache__ 与 .pyc，重打 zip。

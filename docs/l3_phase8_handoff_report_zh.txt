@@ -1,0 +1,19 @@
+天工造物 L3 第八阶段：组件收口、数学模型收口、投影交接、L4-L6接口冻结
+生成日期：2026-06-04
+
+handoff 报告
+
+一、交接对象
+- L3 → L2：OrchestrationProjection / OrchestrationStateUpdateSuggestion / OrchestrationSummaryProjection / OrchestrationMathProjection / OrchestrationRouteProjection。
+- L3 → L4：L3ToL4HandoffEnvelope / L3ToL4ExecutionRequestBundle / L3ToL4ExecutionRefBundle / L3ToL4NonExecutionGuarantee。
+- L3 → L5：L3ToL5HandoffEnvelope / L3ToL5BoundaryRequestBundle / L3ToL5BoundaryRefBundle / L3ToL5NonDecisionGuarantee。
+- L3 → L6：L3ToL6HandoffEnvelope / L3ToL6SubsystemRequestBundle / L3ToL6SubsystemRefBundle / L3ToL6NonImplementationGuarantee。
+
+二、后续使用要求
+- L4 只能消费 L3 执行请求对象，不得反向污染 L3 编排对象。
+- L5 只能消费 L3 边界请求对象并返回引用，不得要求 L3 直接裁决。
+- L6 只能消费 L3 子系统服务请求对象，不得要求 L3 实现真实子系统。
+- L2 只记录状态，不承担 L3 编排计算。
+
+三、推荐下一步
+进入 L3 全阶段总质检。质检通过后再讨论 L4/L5/L6 总策划。

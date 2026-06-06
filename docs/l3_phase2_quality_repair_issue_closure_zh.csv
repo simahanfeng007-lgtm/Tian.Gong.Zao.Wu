@@ -1,0 +1,4 @@
+issue_id,level,status,repair_action,verification
+P2-001,P2,closed,Repacked zip with ASCII-only internal paths and added filename mapping.,ASCII internal path check passed; mojibake check passed.
+P3-001,P3,recorded,Recorded as future final archive item.,Not blocking phase2 repair package.
+P3-002,P3,recorded,Recorded as future __all__ organization improvement.,Not blocking phase2 repair package.

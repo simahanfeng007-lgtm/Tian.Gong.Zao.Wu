@@ -1,0 +1,34 @@
+天工造物 L3 第二阶段开发日志
+生成日期：2026-06-03
+阶段名称：Run / Task / Turn / Step 编排与连续性评分
+
+一、开发边界
+本阶段只开发 L3 第二阶段。目标是建立 Run、Task、Turn、Step 的纯数据编排对象、生命周期建议、连续性评分、暂停/等待/取消/失败/续接建议和状态转移建议。未进入 L3 第三阶段，未进入 L4/L5/L6。
+
+二、前置核对
+已读取第二阶段工程员提示词、L3 第一阶段质检后修复版工程包、L3 总策划四件套、L3 第一阶段报告、L3 第一阶段质检报告与修复报告、L2 第八阶段总收口报告、L2 第九阶段数学/情感/动态驱动状态相关日志与修复材料。独立 L0/L1/L2 冻结 zip 未单独出现，但基座包内含完整源码与验证证据，不阻断本阶段。
+
+三、源码开发
+1. 新增 orchestration_lifecycle.py：生命周期枚举 OrchestrationLifecycleKind、LifecycleTransitionIntent、LifecycleTransitionCandidate。
+2. 新增 orchestration_progress.py：ProgressMarker、RunProgressSnapshot、TaskProgressSnapshot、StepProgressSnapshot、progress_ratio_from_counts。
+3. 新增 orchestration_step_sequence.py：StepSequence、StepTransitionCandidate、StepTransitionAdvice、StepReadinessEvaluation。
+4. 新增 orchestration_turn.py：TurnOrchestrationRef、TurnSequenceRef、TurnCarryoverHint、TurnContinuityEvaluation、TurnOrchestrationPlan。
+5. 新增 orchestration_continuity.py：ContinuityIndex、ResumabilityIndex、InterruptionSeverityScore、StepReadinessScore、ProgressCoherenceScore、ContextCarryoverScore、RecoveryPriorityScore、CancellationSuitabilityScore、ContinuityEvaluationSet，以及确定性轻量评分函数。
+6. 新增 orchestration_transition_advice.py：L2StateUpdateSuggestion、ProcessStateTransitionAdvice、l2_status_hint_for_lifecycle、build_process_state_transition_advice。
+7. 新增 orchestration_resume.py：StepResumeAdvice、TaskResumeAdvice、TaskInterruptionAdvice、RunResumeAdvice。
+8. 新增 orchestration_run.py：RunOrchestrationRef、RunOrchestrationStateView、RunContinuityEvaluation、RunOrchestrationPlan、build_run_state_view_from_context。
+9. 新增 orchestration_task.py：TaskOrchestrationRef、TaskContinuityEvaluation、TaskOrchestrationPlan。
+10. 修改 __init__.py：导出第二阶段公共对象与纯函数。
+
+四、测试开发
+新增 tests/l3_phase2_builders.py 与 7 个专项测试文件，覆盖导入、frozen+slots、生命周期枚举、状态转移建议、连续性评分、续接建议、边界静态扫描、L0/L1/L2 兼容、稳定序列化和 stable hash。
+
+五、边界保持
+1. 未修改 L0/L1/L2 源码。
+2. 未导入 L4/L5/L6。
+3. 未调用模型。
+4. 未调用工具。
+5. 未实现真实文件 IO、网络、数据库或 shell。
+6. 未做权限裁决、风险放行、确认票据、执行令牌或状态存储。
+7. 未恢复旧能力包、CapabilityPort、AbilityPackagePort、旧 Runtime 主链或“神枢”新版核心概念。
+8. 未做 Skill 编排、ToolGroup 编排或 L3 第三阶段内容。

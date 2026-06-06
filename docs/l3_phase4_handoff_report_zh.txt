@@ -1,0 +1,22 @@
+天工造物 L3 第四阶段 handoff 报告
+生成日期：2026-06-03
+
+一、阶段定位
+本阶段完成 ModelIntent / ToolIntent / ActionIntent 编排评分。所有新增对象均为 frozen + slots dataclass，作为纯数据、纯建议、纯评分结构，不持有模型客户端、工具执行器、网络连接、数据库连接、文件句柄或插件宿主。
+
+二、核心新增能力
+1. ModelIntentRef / ModelIntentEnvelope / ModelIntentAdvice 等模型意图编排对象。
+2. ToolIntentRef / ToolIntentEnvelope / ToolIntentAdvice / ToolIntentBoundaryPreparationHint 等工具意图编排对象。
+3. ActionIntentRef / ActionIntentEnvelope / ActionIntentAdvice 等动作意图编排对象。
+4. IntentStructureValidationResult、IntentMissingFieldAdvice、IntentConflictAdvice、IntentClarificationQuestionAdvice、IntentRejectPathAdvice、IntentDegradePathAdvice、IntentRetryPathAdvice。
+5. IntentCompletenessScore、IntentAmbiguityScore、IntentReadinessScore、IntentDegradeScore、IntentClarificationNeedScore 等评分对象。
+6. IntentRouteCandidate / IntentRouteRanking / IntentRecommendation 及 Run/Task/Turn/Step/Skill/ToolGroup 接线建议。
+
+三、边界说明
+1. ToolIntentBoundaryPreparationHint 只是未来边界审查准备提示，不是 BoundaryCheckRequest。
+2. ActionIntentReadinessScore 只是准备度评分，不是 ExecutionRequest 或执行授权。
+3. IntentRecommendation 只允许 RecommendationMode.SUGGEST。
+4. 情感权重与动态驱动只影响澄清/降级/排序倾向，不提升权限，不触发执行。
+
+四、后续建议
+建议先进入 L3 第四阶段专项质检，不建议直接进入第五阶段开发。

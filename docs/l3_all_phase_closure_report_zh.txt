@@ -1,0 +1,37 @@
+天工造物 L3 全阶段总收口报告
+生成日期：2026-06-04
+
+一、总收口结论
+L3 编排层第一至第八阶段已形成完整闭环：基础编排对象、Run/Task/Turn/Step 连续性、Skill/ToolGroup 编排、Intent 编排、边界/执行请求编排、观察/上下文/L6 服务请求编排、验证/恢复/迭代/进化流程编排，以及第八阶段组件/数学/投影/接口冻结收口。
+
+二、L3 最终定位
+L3 是编排层，只生成请求、引用、建议、评分、排序、投影、交接对象；不执行工具，不调用模型，不做权限裁决，不实现存储，不实现 L6 子系统，不绕过 L5，不替代 L4，不污染 L2。
+
+三、核心对象族
+1. 基础对象：OrchestrationIdentity / Status / Request / Context / Step / Plan / Result / Transition。
+2. 连续性对象：Run / Task / Turn / Step 编排计划、进度快照、续接建议与连续性评分。
+3. Skill/ToolGroup 对象：SkillDisplayAdvice / SkillSelectionAdvice / ToolGroupReleaseAdvice / ToolGroupLeaseAdvice。
+4. Intent 对象：ModelIntent / ToolIntent / ActionIntent envelope、advice、validation、gap、downgrade 与 ranking。
+5. Boundary/Execution 对象：BoundaryCheckRequest / RiskReviewRequest / PermissionReviewRequest / ConfirmationRequest / LeaseRequest / ExecutionRequest / ExecutionDispatchRequest。
+6. Observation/Context/L6 Service 对象：ObservationFeedbackAdvice / ContextCarryoverAdvice / SubsystemServiceRequest / MemoryServiceRequest / RetrievalServiceRequest / LearningServiceRequest / AffectiveServiceRequest。
+7. Validation/Recovery/Iteration/Evolution 对象：ValidationRequest / RecoveryRequest / RollbackAdvice / ExperimentFlowRequest / IterationFlowRequest / EvolutionFlowRequest / SelfImprovementFlowEntryAdvice。
+8. 收口对象：OrchestrationProjection / OrchestrationMathCatalog / L3ToL4HandoffEnvelope / L3ToL5HandoffEnvelope / L3ToL6HandoffEnvelope / L3FinalFreezeReadinessReport。
+
+四、数学模型收口
+L3 数学模型统一为 advisory-only。分数范围保持 0.0-1.0；reason_codes 为 lower_snake_case；情感权重只影响倾向；动态驱动只影响排序；所有 recommendation/advice/suggestion 都不能变成执行令、权限放行、确认票据或租约授予。
+
+五、接口冻结
+- L3 → L2：只输出投影和状态更新建议，不写 L2。
+- L3 → L4：只输出执行请求和执行引用，不执行。
+- L3 → L5：只输出边界请求和边界引用，不裁决。
+- L3 → L6：只输出服务请求和服务引用，不实现子系统。
+
+六、验证结果
+- compileall：通过。
+- L3 第八阶段专项测试：16 passed。
+- L3 第一至第八阶段分片测试：126 passed, 502 deselected。
+- 完整 tests：628 passed。
+- L0/L1/L2 hash：MATCH。
+
+七、冻结建议
+建议进入 L3 全阶段总质检。总质检通过后，可将当前包作为 L3 冻结候选基线。不得跳过总质检直接进入 L4/L5/L6 开发。

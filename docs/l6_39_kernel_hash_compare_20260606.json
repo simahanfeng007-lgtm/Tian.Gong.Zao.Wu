@@ -1,0 +1,11 @@
+{
+  "scope": "tiangong_kernel_py_only",
+  "baseline": "L6.38完整交付包",
+  "current": "L6.39工作区",
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "added_count": 0,
+  "removed_count": 0,
+  "changed_count": 0
+}

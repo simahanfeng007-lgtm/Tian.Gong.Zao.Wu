@@ -1,0 +1,98 @@
+{
+  "stage": "L6.31 统一 Planner 接入 / 执行主链收口",
+  "generated_at": "2026-06-06",
+  "changed_files": [
+    "tiangong_agent_runtime/plan_bridge.py",
+    "tiangong_agent_runtime/plan_schema.py",
+    "tiangong_agent_runtime/risk_classifier.py",
+    "tiangong_agent_runtime/runtime_entry.py",
+    "tiangong_agent_shell/cli_loop.py",
+    "tiangong_agent_shell/cli_main.py"
+  ],
+  "added_files": [
+    "tests/test_l6_31_planner_context_integration.py",
+    "tiangong_agent_runtime/planner_context_integration.py"
+  ],
+  "removed_files": [],
+  "validation": {
+    "selected_regression_status": "passed",
+    "selected_regression_total_passed": 65,
+    "items": [
+      {
+        "log": "docs/l6_31_validation/test_l6_24_shell_system_mount.log",
+        "passed": 7,
+        "seconds": 2.85,
+        "status": "passed"
+      },
+      {
+        "log": "docs/l6_31_validation/test_l6_25_project_repair_plan.log",
+        "passed": 8,
+        "seconds": 15.11,
+        "status": "passed"
+      },
+      {
+        "log": "docs/l6_31_validation/test_l6_26_delivery_standardization.log",
+        "passed": 8,
+        "seconds": 26.35,
+        "status": "passed"
+      },
+      {
+        "log": "docs/l6_31_validation/test_l6_27_provider_adaptation_shell.log",
+        "passed": 8,
+        "seconds": 9.18,
+        "status": "passed"
+      },
+      {
+        "log": "docs/l6_31_validation/test_l6_28_learning_convergence.log",
+        "passed": 9,
+        "seconds": 3.02,
+        "status": "passed"
+      },
+      {
+        "log": "docs/l6_31_validation/test_l6_29_recovery_coordination.log",
+        "passed": 9,
+        "seconds": 3.67,
+        "status": "passed"
+      },
+      {
+        "log": "docs/l6_31_validation/test_l6_30_governance_execution.log",
+        "passed": 8,
+        "seconds": 10.11,
+        "status": "passed"
+      },
+      {
+        "log": "docs/l6_31_validation/test_l6_31_planner_context_integration.log",
+        "passed": 8,
+        "seconds": 10.43,
+        "status": "passed"
+      }
+    ],
+    "compileall_log": "docs/l6_31_validation/compileall_l6_31.log",
+    "compileall_status": "passed"
+  },
+  "forbidden_scan": {
+    "status": "passed",
+    "finding_count": 0,
+    "findings": [],
+    "scanned_files": [
+      "tests/test_l6_31_planner_context_integration.py",
+      "tiangong_agent_runtime/plan_bridge.py",
+      "tiangong_agent_runtime/plan_schema.py",
+      "tiangong_agent_runtime/planner_context_integration.py",
+      "tiangong_agent_runtime/risk_classifier.py",
+      "tiangong_agent_runtime/runtime_entry.py",
+      "tiangong_agent_shell/cli_loop.py",
+      "tiangong_agent_shell/cli_main.py"
+    ],
+    "scan_scope": "changed/new python files only; high-confidence positive side-effect flags and provider SDK/network imports"
+  },
+  "kernel_hash_compare": {
+    "kernel_changed": [],
+    "kernel_added": [],
+    "kernel_removed": [],
+    "kernel_changed_count": 0,
+    "kernel_added_count": 0,
+    "kernel_removed_count": 0,
+    "status": "passed"
+  }
+}

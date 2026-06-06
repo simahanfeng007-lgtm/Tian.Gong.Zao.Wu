@@ -1,0 +1,17 @@
+《天工造物 L3 第五阶段交付清单》
+
+1. L3 第五阶段完整工程 zip。
+2. ASCII 文件名备用 zip。
+3. docs/l3_phase5_precheck_report_zh.txt
+4. docs/l3_phase5_development_log_zh.md
+5. docs/l3_phase5_handoff_report_zh.txt
+6. docs/l3_phase5_validation_report_zh.txt
+7. docs/l3_phase5_change_list_zh.txt
+8. docs/l3_phase5_test_results_zh.txt
+9. docs/l3_phase5_unfinished_items_zh.txt
+10. docs/l3_phase5_summary_report_zh.txt
+11. docs/l3_phase5_manifest_zh.txt
+12. docs/l3_phase5_l0_l1_l2_hash_before.txt
+13. docs/l3_phase5_l0_l1_l2_hash_current.txt
+14. docs/l3_phase5_l0_l1_l2_hash_compare.txt
+15. docs/l3_phase5_engineer_prompt_zh.txt

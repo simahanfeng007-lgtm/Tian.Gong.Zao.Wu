@@ -1,0 +1,5 @@
+回归证据索引
+L0-L4：hash compare clean。
+L5 phase1-phase5：新增 phase6_health.py；__init__.py 与 invariants.py 为共享声明性兼容扩展；未删除前序公开对象。
+前序对象只读消费：phase6 targeted tests 覆盖。
+full pytest：未完成，不将结果标记为 passed。

@@ -1,0 +1,44 @@
+# L5 hotfix2 情志专项修复修改清单
+
+## 新增文件
+- tiangong_kernel/l5_plugin_host/affective_plugin_declaration.py
+- tests/test_affective_plugin_mount_is_declarative.py
+- tests/test_affective_plugin_cannot_execute_tools.py
+- tests/test_affective_modulation_is_not_authorization.py
+- tests/test_affective_modulation_cannot_bypass_policy_humangate_audit.py
+- tests/test_affective_public_projection_minimal_disclosure.py
+- tests/test_affective_l6_handoff_forbids_live_execution.py
+- tests/test_affective_state_only_modulates_expression_attention_priority_memory_risk_learning.py
+- tests/test_affective_no_core_mutation_no_side_effect.py
+- docs/l5_affective_plugin_mount_repair_zh.txt
+- docs/l5_full_stage_repair_report_zh.md
+- docs/l5_full_stage_repair_change_list_zh.txt
+- docs/l5_full_stage_repair_test_results_zh.txt
+- docs/l5_full_stage_repair_forbidden_scan_zh.txt
+- docs/l5_full_stage_repair_hash_compare_l0_l4.txt
+- docs/l5_full_stage_repair_hash_compare_l5_all.txt
+- docs/l5_full_stage_repair_test_inventory_compare_zh.txt
+- docs/l5_full_stage_repair_public_export_compatibility_zh.txt
+- docs/l5_full_stage_repair_zip_integrity_zh.txt
+- docs/l5_full_stage_repair_unfinished_items_zh.txt
+- docs/l5_product_artifact_factory_mount_repair_zh.txt
+
+## 修改文件
+- tiangong_kernel/l5_plugin_host/__init__.py
+- tiangong_kernel/l5_plugin_host/phase7_boundary_gate.py
+- tiangong_kernel/l5_plugin_host/phase8_closure.py
+- tests/l5_phase8_factories.py
+- docs/l5_governance_coverage_matrix_zh.txt
+- docs/l5_capability_readiness_matrix_zh.txt
+- docs/l5_final_public_projection_zh.txt
+- docs/l5_l6_handoff_freeze_zh.txt
+- docs/l5_phase8_final_quality_gate_decision_zh.txt
+- docs/l5_final_unfinished_items_zh.txt
+- docs/l5_phase8_test_results_zh.txt
+- docs/l5_phase8_final_forbidden_scan_zh.txt
+
+## 未修改
+- L0 源码。
+- L1-L4 核心语义。
+- L6 插件实现。
+- 真实工具、adapter、凭据、网络、文件、终端、数据库、沙箱执行链。

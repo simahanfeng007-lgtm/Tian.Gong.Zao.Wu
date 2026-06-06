@@ -1,0 +1,14 @@
+{
+  "name": "l636_replay",
+  "command": [
+    "/opt/pyvenv/bin/python",
+    "-m",
+    "pytest",
+    "tests/test_l6_36_recovery_replay_quality.py"
+  ],
+  "cwd": "/mnt/data/work_l637/project",
+  "timeout_seconds": 80,
+  "purpose": "L6.37 key regression tests/test_l6_36_recovery_replay_quality.py",
+  "required": true,
+  "rerun_command": "/opt/pyvenv/bin/python -m pytest tests/test_l6_36_recovery_replay_quality.py"
+}

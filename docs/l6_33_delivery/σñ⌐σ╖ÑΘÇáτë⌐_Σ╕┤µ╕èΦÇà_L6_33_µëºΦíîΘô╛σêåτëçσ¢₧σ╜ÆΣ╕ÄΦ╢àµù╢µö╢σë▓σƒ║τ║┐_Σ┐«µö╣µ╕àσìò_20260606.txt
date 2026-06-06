@@ -1,0 +1,25 @@
+天工造物_临渊者_L6_33_执行链分片回归与超时收割基线 修改清单
+生成日期：20260606
+
+新增文件：
+1. project/tiangong_agent_runtime/test_shard_runner.py
+   - L6.33 分片回归执行器与超时收割主模块。
+
+2. project/tests/test_l6_33_test_shard_runner.py
+   - L6.33 分片器单元测试。
+
+3. project/docs/l6_33_validation/compileall.log
+4. project/docs/l6_33_validation/compileall.rc
+5. project/docs/l6_33_validation/key_shards/shard_summary.json
+6. project/docs/l6_33_validation/key_shards/shard_report.txt
+7. project/docs/l6_33_validation/key_shards/*/result.json / stdout.log / stderr.log / spec.json
+8. project/docs/l6_33_validation/timeout_probe/shard_summary.json
+9. project/docs/l6_33_validation/timeout_probe/shard_report.txt
+10. project/docs/l6_33_validation/kernel_hash_compare.json
+11. project/docs/l6_33_validation/forbidden_scan.json
+
+修改文件：
+无旧业务文件修改；本轮仅新增 L6.33 验证外壳模块与测试、验证证据。
+
+tiangong_kernel：
+changed=0 / added=0 / removed=0。

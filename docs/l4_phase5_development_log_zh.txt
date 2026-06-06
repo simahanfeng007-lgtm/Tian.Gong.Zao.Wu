@@ -1,0 +1,134 @@
+天工造物 L4 第五阶段开发日志
+
+阶段名称：第五阶段，文件、网络、终端、桌面动作适配骨架与危险面隔离
+工程目录：project_l4_phase5
+开发日期：2026-06-04
+
+一、工程基线
+
+1. 从 project_l4_phase4 复制生成 project_l4_phase5。
+2. 保留 L4 第一至第四阶段全部源码、测试和文档。
+3. 第五阶段仅在 tiangong_kernel/l4_action_grounding 内追加外部动作骨架。
+4. L0、L1、L2、L3 未修改。
+
+二、共享危险面对象
+
+新增：
+
+1. SideEffectDescriptor / SideEffectKind
+2. ReversibilityDescriptor / ReversibilityKind
+3. ResourceUsageDescriptor
+4. ExternalActionScope / ExternalActionSurface
+5. ExternalActionRiskSurface
+6. ExternalActionDisabledByDefault
+7. ExternalActionEnvelope
+8. FileActionEnvelope
+9. NetworkActionEnvelope
+10. TerminalActionEnvelope
+11. DesktopActionEnvelope
+
+这些对象只做结构表达，不授权、不裁决、不执行、不写状态。
+
+三、四类外部动作骨架
+
+文件动作：
+
+1. FileActionRequest
+2. FileActionAdapterPort
+3. FileActionResult
+4. FileActionFailure
+5. FileActionFailureKind
+
+网络动作：
+
+1. NetworkActionRequest
+2. NetworkActionAdapterPort
+3. NetworkActionResult
+4. NetworkActionFailure
+5. NetworkActionFailureKind
+
+终端动作：
+
+1. TerminalActionRequest
+2. TerminalActionAdapterPort
+3. TerminalActionResult
+4. TerminalActionFailure
+5. TerminalActionFailureKind
+
+桌面动作：
+
+1. DesktopActionRequest
+2. DesktopActionAdapterPort
+3. DesktopActionResult
+4. DesktopActionFailure
+5. DesktopActionFailureKind
+
+四、适配器族
+
+fake：
+
+1. FakeFileAdapter
+2. FakeNetworkAdapter
+3. FakeTerminalAdapter
+4. FakeDesktopAdapter
+
+dry-run：
+
+1. DryRunFileAdapter
+2. DryRunNetworkAdapter
+3. DryRunTerminalAdapter
+4. DryRunDesktopAdapter
+
+no-op：
+
+1. NoOpFileAdapter
+2. NoOpNetworkAdapter
+3. NoOpTerminalAdapter
+4. NoOpDesktopAdapter
+
+disabled real stub：
+
+1. DisabledRealFileAdapterStub
+2. DisabledRealNetworkAdapterStub
+3. DisabledRealTerminalAdapterStub
+4. DisabledRealDesktopAdapterStub
+
+五、不变量与归一化
+
+新增：
+
+1. ExternalActionHardSafetyInvariant
+2. NoRealFileSystemMutationInvariant
+3. NoRealNetworkAccessInvariant
+4. NoRealShellExecutionInvariant
+5. NoRealDesktopControlInvariant
+6. ExternalActionRequiresL5PermitInvariant
+7. A5LikeHardSafetyInvariant
+8. ExternalActionNormalization
+
+六、测试补充
+
+新增 18 个第五阶段测试文件，覆盖：
+
+1. 四类 ActionRequest 可创建、可序列化、可稳定哈希。
+2. SideEffectDescriptor 只描述副作用，不授权。
+3. ReversibilityDescriptor 只描述可逆性，不执行恢复。
+4. ResourceUsageDescriptor 只描述资源摘要，不分配资源。
+5. fake adapter 返回确定性测试结果。
+6. dry-run adapter 返回预览结果。
+7. no-op adapter 明确不动作。
+8. disabled real stub 默认拒绝。
+9. 无 L5 permit 不得进入文件、网络、终端、桌面真实动作。
+10. 不读取真实敏感凭据，不写 L2，不写审计存储。
+11. 不恢复旧主链，不导入 L5/L6 真实实现。
+
+七、修正记录
+
+1. 首次 L0/L1/L2/L3 哈希对照误把编译缓存纳入比较，已排除 __pycache__ 和 .pyc 后重跑，结果为 MATCH。
+2. 静态扫描首次误把 Python typing 的 runtime_checkable 字符串识别为旧 Runtime 片段，已去除第五阶段端口协议上的该装饰，结果为 NO_MATCH。
+
+八、开发结论
+
+第五阶段工程目标已完成。
+
+所有外部动作仍然是结构承载、fake、dry-run、no-op 或默认禁用 stub；不存在真实文件、网络、终端、桌面动作能力。

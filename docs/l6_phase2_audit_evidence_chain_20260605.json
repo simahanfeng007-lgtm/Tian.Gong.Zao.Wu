@@ -1,0 +1,68 @@
+{
+  "checks": [
+    {
+      "object": "L6AuditTraceEnvelope",
+      "has_trace": true,
+      "has_evidence": true,
+      "has_responsibility": true,
+      "has_tamper": true,
+      "has_audit_ref_or_trace": true,
+      "passed": true
+    },
+    {
+      "object": "VersionedPluginEventEnvelope",
+      "has_trace": true,
+      "has_evidence": true,
+      "has_responsibility": true,
+      "has_tamper": true,
+      "has_audit_ref_or_trace": true,
+      "passed": true
+    },
+    {
+      "object": "VersionedStateProjectionEnvelope",
+      "has_trace": true,
+      "has_evidence": true,
+      "has_responsibility": true,
+      "has_tamper": true,
+      "has_audit_ref_or_trace": true,
+      "passed": true
+    },
+    {
+      "object": "VersionedPluginHandoffEnvelope",
+      "has_trace": true,
+      "has_evidence": true,
+      "has_responsibility": true,
+      "has_tamper": true,
+      "has_audit_ref_or_trace": true,
+      "passed": true
+    },
+    {
+      "object": "L6PluginInvocationRequest",
+      "has_trace": true,
+      "has_evidence": true,
+      "has_responsibility": true,
+      "has_tamper": true,
+      "has_audit_ref_or_trace": true,
+      "passed": true
+    },
+    {
+      "object": "L6PluginOutputReturnEnvelope",
+      "has_trace": true,
+      "has_evidence": true,
+      "has_responsibility": true,
+      "has_tamper": true,
+      "has_audit_ref_or_trace": true,
+      "passed": true
+    },
+    {
+      "object": "L6Phase2QualityGateDecision",
+      "has_trace": true,
+      "has_evidence": true,
+      "has_responsibility": true,
+      "has_tamper": true,
+      "has_audit_ref_or_trace": true,
+      "passed": true
+    }
+  ],
+  "passed": true
+}

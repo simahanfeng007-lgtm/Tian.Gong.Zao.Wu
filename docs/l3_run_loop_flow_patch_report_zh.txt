@@ -1,0 +1,25 @@
+天工造物 L3 主运行编排 Flow 最小补丁开发报告
+
+工程目录：project_pre_l5_sequential_patch
+日期：2026-06-04
+
+一、修复结论
+
+已为 L3 增加主运行编排 / Run Loop Flow 显式骨架。新增对象是被动 flow spec，不是真实运行循环，不执行、不调度、不调用模型或工具、不写状态、不裁决权限。
+
+二、新增对象
+
+新增 tiangong_kernel/l3_orchestration/orchestration_flow.py，包含：
+OrchestrationFlowKind、OrchestrationFlowNodeRef、OrchestrationFlowEdge、OrchestrationFlowInvariant、OrchestrationFlowSpec、RunOrchestrationFlow、StepOrchestrationFlow、ContextPreparationFlow、ModelIntentFlow、ActionIntentFlow、EffectRequestFlow、DecisionFlow、LeaseValidationFlow、EventAppendFlow、StateTransitionFlow、RecoveryFlow、AuditFlow、ScheduleTriggerTimerFlow、HumanApprovalFlow、CanonicalRunLoopFlowBundle、MainRunLoopFlowSpec。
+
+三、兼容扩展
+
+1. L3ToL4HandoffEnvelope 新增 flow_refs。
+2. L3ToL5HandoffEnvelope 新增 flow_refs。
+3. L3ToL6HandoffEnvelope 新增 flow_refs。
+4. OrchestrationIndexKind 新增 FLOW。
+5. L3ClosureCheckKind 新增 FLOW_COMPLETENESS。
+
+四、边界声明
+
+本补丁未修改 L0/L1/L2，未修改 L4 行为，未进入 L5/L6，未启用真实外部动作，未恢复旧 Runtime / 神枢 / 能力包主链。

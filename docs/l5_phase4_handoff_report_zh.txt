@@ -1,0 +1,66 @@
+天工造物 L5 第四阶段 Handoff 报告
+
+一、第五阶段可消费对象
+1. PluginLifecycleStateRef
+2. PluginLifecycleTransitionRule
+3. PluginLifecycleStateMachine
+4. PluginMountDeclaration
+5. PluginMountSurfaceRef
+6. PluginLifecycleValidationReport
+7. PluginMountDeclarationConflictReport
+8. PluginLifecycleQualityGateDecision
+9. PluginLifecyclePublicProjection
+10. PluginLifecycleAuditIndex
+11. switch_readiness_ref
+12. pre_switch_checkpoint_ref
+13. post_switch_observation_ref
+14. switch_rollback_route_ref
+15. compatibility_check_ref
+16. breaking_change_check_ref
+17. PluginSelfHealingDeclaration
+18. PluginRecoveryPlanDeclaration
+19. PluginSelfHealingValidationReport
+20. PluginSelfHealingQualityGateDecision
+21. 自愈相关 conflict kinds
+22. 自愈相关 public projection summary
+23. 自愈相关 audit index refs
+24. 自愈相关 evidence refs
+25. 自愈相关 regression refs
+
+二、禁止第五阶段误用内容
+1. 不得把 Registry 当真实插件加载器。
+2. 不得把 status_ref 当生命周期状态机。
+3. 不得把 PublicProjection 当完整 Manifest。
+4. 不得把 Delta 当可执行 patch。
+5. 不得把 MountDeclaration 转换为真实凭据获取。
+6. 不得把 resource_decl_refs 转换为真实资源占用。
+7. 不得把 isolate_declared 转换为沙箱创建。
+8. 不得把 health_decl_ref 转换为真实健康检查执行。
+9. 不得把 policy_refs 转换为授权裁决结果。
+10. 不得把 lifecycle 状态转换结果写回真实 registry/store。
+11. 不得把 switch_readiness_ref 当真实就绪检查结果。
+12. 不得把 pre_switch_checkpoint_ref 当真实 checkpoint。
+13. 不得把 post_switch_observation_ref 当真实观察器。
+14. 不得把 switch_rollback_route_ref 当真实回滚路线执行。
+15. 不得把 compatibility_check_ref 当真实兼容性检查完成。
+16. 不得把 breaking_change_check_ref 当真实破坏性变更修复。
+17. 不得把 hot_switch_declared 当真实热切换状态。
+18. 不得把 migration_declared 当真实迁移状态。
+19. 不得把 replay_declared 当真实 replay 状态。
+20. 不得把 rollback_declared 当真实回滚状态。
+21. 不得把 PluginSelfHealingDeclaration 当真实自愈执行器。
+22. 不得把 PluginRecoveryPlanDeclaration 当真实恢复计划执行器。
+23. 不得把 recovery_plan_ref 当已执行恢复。
+24. 不得把 checkpoint_ref 当已创建 checkpoint。
+25. 不得把 recovery_point_ref 当已完成恢复。
+26. 不得把 transaction_ref 当已开启事务。
+27. 不得把 compensation_ref 当已执行补偿。
+28. 不得把 validation_ref 当复检已通过。
+29. 不得把 regression_ref 当回归测试已通过。
+30. 不得把 postmortem_ref 当已沉淀长期记忆。
+31. 不得把 repair_suggestion_ref 当自动修复指令。
+32. 不得绕过权限、租约、预算、审计、证据、恢复、回滚与验证链路。
+
+三、是否建议进入 L5 第五阶段
+建议进入 L5 第五阶段。
+条件：P0=0，P1=0，compileall / collect-only / targeted pytest / plugin_host subset / full pytest / forbidden scan / hash compare / inventory compare / zip integrity 均通过。

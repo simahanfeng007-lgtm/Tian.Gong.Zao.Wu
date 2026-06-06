@@ -1,0 +1,36 @@
+L5 第八阶段最终质量门决定（hotfix2 情志专项补丁后）
+
+phase=L5_PHASE8_FINAL_FREEZE
+p0_count=0
+p1_count=0
+p2_count=0
+p3_count=0
+
+硬门派生口径：
+1. P0/P1/P2/P3 必须全部为 0。
+2. blocking_reasons 必须为空；若调用方传入阻断理由或任一硬门失败，系统会自动派生 quality_gate_failed:*。
+3. phase1-phase7、generic host precheck、final public projection、L5/L6 handoff freeze、governance matrix、capability readiness matrix 必须全部通过。
+4. no_live_plugin_execution、no_live_l4_adapter_call、no_live_tool_call、no_live_artifact_build、no_legacy_runtime、no_l6_implementation 必须全部通过。
+5. public_projection_safety 与 public_projection_second_leak_test 必须全部通过。
+6. Context/Belief/World 边界、L4ContextSafetyProjection、L6 Context Assembler 前置、Belief/Event 优先级、WorldState evidence/staleness、Tool/Model output demotion、MemoryInjectionBoundary 必须全部通过。
+7. audit evidence chain、forbidden scan、compileall、collect-only、targeted pytest、plugin host subset、full pytest、hash compare、test inventory compare、zip integrity 必须全部通过。
+8. 情志专项硬门必须全部通过：affective_plugin_l5_ready、affective_governance_matrix_passed、affective_capability_readiness_matrix_passed、affective_public_projection_passed、affective_l6_handoff_freeze_passed、affective_audit_binding_passed、affective_targeted_pytest_passed、no_affective_direct_execution_passed、no_affective_authorization_bypass_passed、no_affective_core_mutation_passed。
+
+当前决定：
+allow_freeze_l5=True
+allow_enter_l6_general_plugins=True
+allow_enter_l6_product_artifact_factory=True
+allow_plan_l6_product_artifact_factory=True
+allow_execute_product_artifact_factory=False
+product_artifact_factory_scope=l6_planning_only
+allow_enter_l6_affective_plugin=True
+allow_plan_l6_affective_plugin=True
+allow_execute_l6_affective_plugin=False
+affective_plugin_scope=l6_planning_only
+blocking_reasons=()
+
+说明：
+- allow_enter_l6_product_artifact_factory / allow_plan_l6_product_artifact_factory 只表示允许进入 L6 Product Artifact Factory 专项规划。
+- allow_enter_l6_affective_plugin / allow_plan_l6_affective_plugin 只表示允许进入 L6 AffectivePlugin 专项规划。
+- 不表示 L5 具备成品生产或情感模型执行能力。
+- allow_execute_product_artifact_factory 与 allow_execute_l6_affective_plugin 固定为 False。

@@ -1,0 +1,130 @@
+{
+  "scan_scope": [
+    "tiangong_kernel/l1_ports",
+    "tiangong_kernel/l2_state",
+    "tiangong_kernel/l3_orchestration",
+    "tiangong_kernel/l4_action_grounding",
+    "tiangong_kernel/l4_execution",
+    "tiangong_kernel/l5_plugin_host"
+  ],
+  "python_files_scanned": 517,
+  "blocking_findings": [],
+  "inert_findings": [
+    {
+      "file": "tiangong_kernel/l1_ports/model_provider_governance_ports.py",
+      "type": "secret_like_text",
+      "detail": "sk-"
+    },
+    {
+      "file": "tiangong_kernel/l1_ports/model_provider_governance_ports.py",
+      "type": "secret_like_text",
+      "detail": "bearer "
+    },
+    {
+      "file": "tiangong_kernel/l2_state/model_interaction_state.py",
+      "type": "secret_like_text",
+      "detail": "sk-"
+    },
+    {
+      "file": "tiangong_kernel/l2_state/model_interaction_state.py",
+      "type": "secret_like_text",
+      "detail": "bearer "
+    },
+    {
+      "file": "tiangong_kernel/l3_orchestration/model_invocation_flow.py",
+      "type": "secret_like_text",
+      "detail": "sk-"
+    },
+    {
+      "file": "tiangong_kernel/l3_orchestration/model_invocation_flow.py",
+      "type": "secret_like_text",
+      "detail": "bearer "
+    },
+    {
+      "file": "tiangong_kernel/l4_action_grounding/adapter_risk_surface.py",
+      "type": "secret_like_text",
+      "detail": "sk-"
+    },
+    {
+      "file": "tiangong_kernel/l4_action_grounding/external_action_risk_surface.py",
+      "type": "secret_like_text",
+      "detail": "sk-"
+    },
+    {
+      "file": "tiangong_kernel/l5_plugin_host/affective_plugin_declaration.py",
+      "type": "secret_like_text",
+      "detail": "sk-"
+    },
+    {
+      "file": "tiangong_kernel/l5_plugin_host/affective_plugin_declaration.py",
+      "type": "secret_like_text",
+      "detail": "bearer "
+    },
+    {
+      "file": "tiangong_kernel/l5_plugin_host/lifecycle_declaration.py",
+      "type": "secret_like_text",
+      "detail": "api_key=\""
+    },
+    {
+      "file": "tiangong_kernel/l5_plugin_host/phase6_health.py",
+      "type": "secret_like_text",
+      "detail": "api_key=\""
+    },
+    {
+      "file": "tiangong_kernel/l5_plugin_host/phase6_health.py",
+      "type": "secret_like_text",
+      "detail": "sk-"
+    },
+    {
+      "file": "tiangong_kernel/l5_plugin_host/phase6_health.py",
+      "type": "secret_like_text",
+      "detail": "bearer "
+    },
+    {
+      "file": "tiangong_kernel/l5_plugin_host/phase7_boundary_gate.py",
+      "type": "secret_like_text",
+      "detail": "api_key=\""
+    },
+    {
+      "file": "tiangong_kernel/l5_plugin_host/phase7_boundary_gate.py",
+      "type": "secret_like_text",
+      "detail": "sk-"
+    },
+    {
+      "file": "tiangong_kernel/l5_plugin_host/phase7_boundary_gate.py",
+      "type": "secret_like_text",
+      "detail": "bearer "
+    },
+    {
+      "file": "tiangong_kernel/l5_plugin_host/phase8_closure.py",
+      "type": "secret_like_text",
+      "detail": "sk-"
+    },
+    {
+      "file": "tiangong_kernel/l5_plugin_host/registry_conflict_rules.py",
+      "type": "secret_like_text",
+      "detail": "api_key=\""
+    },
+    {
+      "file": "tiangong_kernel/l5_plugin_host/registry_conflict_rules.py",
+      "type": "secret_like_text",
+      "detail": "sk-"
+    },
+    {
+      "file": "tiangong_kernel/l5_plugin_host/registry_conflict_rules.py",
+      "type": "secret_like_text",
+      "detail": "bearer "
+    },
+    {
+      "file": "tiangong_kernel/l5_plugin_host/model_capability_invariants.py",
+      "type": "secret_like_text",
+      "detail": "sk-"
+    },
+    {
+      "file": "tiangong_kernel/l5_plugin_host/model_capability_invariants.py",
+      "type": "secret_like_text",
+      "detail": "bearer "
+    }
+  ],
+  "blocking_count": 0
+}

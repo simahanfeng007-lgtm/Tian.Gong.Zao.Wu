@@ -1,0 +1,31 @@
+L5 final unfinished items（hotfix2 情志专项补丁后）
+
+L5 阻断项：无。
+P0=0，P1=0。
+
+已在 hotfix1 闭合：
+1. Final quality gate 漏纳关键硬门。
+2. blocking_reasons 非空仍允许 freeze/L6。
+3. PublicProjection dangerous key/value/path/secret-like 泄露。
+4. PublicProjectionBuilder 暴露非 redacted evidence refs。
+5. HandoffFreeze / AuditIndex 可放行空责任链、审计链。
+6. L5CapabilityReadinessMatrix 空矩阵和 Product Artifact Factory ready 误读。
+7. L3 Run Loop 三个 canonical flow kind 缺专用被动规格。
+
+已在 hotfix2 闭合：
+1. 情志专项未纳入 L5 final governance matrix / capability readiness matrix。
+2. L5→L6 handoff freeze 未单列情感插件禁止误用清单。
+3. L5 public projection / audit index 未包含 Affective 摘要、AffectiveSafetyBoundaryRef、AffectiveAuditBinding。
+4. 缺 L5 情志专项测试。
+5. final public projection 正文危险 key 名称改为 redacted catalog ref。
+
+后续不属于 L5 的事项：
+1. L6 具体插件规划。
+2. Product Artifact Factory L6 专项规划。
+3. AffectivePlugin / 情感情志插件 L6 专项规划。
+4. L6 插件真实执行边界设计。
+5. L6 插件质检、修复、回归链路。
+
+注意：
+Product Artifact Factory 只能进入 L6 专项规划，不能依据 L5 readiness 直接开始真实 build / generate / render / export / package / deliver 实现。
+AffectivePlugin 只能进入 L6 专项规划，不能依据 L5 readiness 直接实现情感模型、七情六欲算法、工具执行、权限绕过、核心修改、记忆写删晋升或副作用提交。

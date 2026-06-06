@@ -1,0 +1,14 @@
+{
+  "name": "l632_exec",
+  "command": [
+    "/opt/pyvenv/bin/python",
+    "-m",
+    "pytest",
+    "tests/test_l6_32_planner_execution_controller.py"
+  ],
+  "cwd": "/mnt/data/work_l637/project",
+  "timeout_seconds": 40,
+  "purpose": "single",
+  "required": true,
+  "rerun_command": "/opt/pyvenv/bin/python -m pytest tests/test_l6_32_planner_execution_controller.py"
+}

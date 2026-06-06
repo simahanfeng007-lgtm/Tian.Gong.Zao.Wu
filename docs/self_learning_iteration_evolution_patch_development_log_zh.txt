@@ -1,0 +1,14 @@
+天工造物 自我学习 / 自我迭代 / 自我进化 P2 最小补丁开发日志
+日期：2026-06-04
+
+完成内容：
+1. L1 新增 self_evolution_commit_ports.py。
+2. L2 新增 self_evolution_commit_state.py。
+3. L3 新增 self_evolution_commit_flow.py。
+4. L4 新增 L4ToL5SelfEvolutionBoundaryRequirement、L4ToL5SelfEvolutionPermitRequirement。
+5. L4 新增 L4ToL6SelfLearningSinkRequirement、L4ToL6EvolutionValidationRequirement、L4ToL6EvolutionCommitRequirement、L4ToL6PostCommitObservationRequirement。
+6. 新增边界矩阵 docs/self_learning_iteration_evolution_boundary_matrix_zh.txt。
+7. 更新 L4→L5 / L4→L6 交接文档。
+
+边界：
+不生成 patch，不应用 patch，不提交，不热切换，不回滚，不实现 L5/L6。

@@ -1,0 +1,7 @@
+天工造物 L5 第三阶段未做事项
+
+1. 未实现 L5 第四阶段生命周期状态机与挂载声明。
+2. 未实现真实插件加载、启用、禁用、隔离、热切换、回滚、迁移或 replay。
+3. 未实现 L6 业务插件。
+4. 未实现真实审计库、真实凭据解析、真实签名验签、真实沙箱。
+5. 第四阶段应继续消费 RegistrySnapshot、RegistryIndex、ConflictReport、PublicProjection、AuditIndex、Delta、Revision，但不得把它们误用为真实插件加载器或执行指令。

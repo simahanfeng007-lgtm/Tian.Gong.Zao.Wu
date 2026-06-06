@@ -1,0 +1,19 @@
+天工造物 L3 第二阶段交付清单
+生成日期：2026-06-03
+
+1. L3 第二阶段完整工程 zip。
+2. docs/l3_phase2_precheck_report_zh.txt
+3. docs/l3_phase2_development_log_zh.txt
+4. docs/l3_phase2_handoff_report_zh.txt
+5. docs/l3_phase2_validation_report_zh.txt
+6. docs/l3_phase2_change_list_zh.txt
+7. docs/l3_phase2_test_results_zh.txt
+8. docs/l3_phase2_todo_zh.txt
+9. docs/l3_phase2_summary_report_zh.txt
+10. docs/l3_phase2_compileall.log
+11. docs/l3_phase2_pytest_targeted.log
+12. docs/l3_phase2_pytest_k_l3_phase1_l3_phase2.log
+13. docs/l3_phase2_pytest_full.log
+14. docs/l3_phase2_l0_l1_l2_hash_after.txt
+15. docs/l3_phase2_l0_l1_l2_hash_compare.txt
+16. 第二阶段新增源码与测试。

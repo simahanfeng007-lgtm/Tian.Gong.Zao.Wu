@@ -1,0 +1,2 @@
+command: python3 -m compileall -q tiangong_kernel tests
+result: passed; no stdout/stderr

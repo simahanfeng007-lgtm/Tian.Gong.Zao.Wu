@@ -1,0 +1,45 @@
+天工造物 L4→L5/L6 前置连续修复总报告
+日期：2026-06-04
+
+一、工程基线
+
+工作副本：
+project_pre_l5_sequential_patch
+
+本工作副本在既有 L4 八阶段、数学模型发动机最小兼容补丁基础上，继续连续修复以下输入：
+1. L3 run loop patch。
+2. L4 Skill 直显工具释放专项补丁。
+3. 权限治理副作用安全 P1 最小补丁。
+4. 数学模型发动机 L1-L4 100 分前置基础方案包。
+5. 记忆系统与遗忘系统专项审阅报告。
+6. 自我学习 / 自我迭代 / 自我进化专项审阅报告。
+7. L4 自愈系统专项审阅报告。
+8. Context / BeliefState / WorldState 专项审阅报告。
+
+二、完成结论
+
+已按“修好一个再修下一个”的顺序完成连续补丁。
+
+完成范围：
+1. L3 主运行循环 Flow 被动规格。
+2. L4 Skill 直显与 ToolGroup 工具释放链路。
+3. 权限治理与副作用安全 P1 链路。
+4. 数学模型发动机 L1-L4 100 分前置基础。
+5. 记忆/遗忘治理 L1-L4 接口链。
+6. 自我学习/迭代/进化提交闭环 P2 链。
+7. 自愈主生命周期 L1-L4 接口链。
+8. Context-Belief-World 安全边界 L1-L4 接口链。
+
+三、总边界
+
+本交付包仍保持 L4 及前置补丁边界：
+1. 不实现 L5。
+2. 不实现 L6。
+3. 不启用真实模型、真实工具、真实文件、真实网络、真实终端、真实桌面。
+4. 不写真实 L2 状态。
+5. 不写真实审计库。
+6. 不恢复旧 Runtime、神枢、AbilityPackage、CapabilityPort、AbilityPackagePort 主链。
+
+四、进入 L5/L6 前置建议
+
+建议先由规划师进行专项总质检，再进入 L5 边界层策划。L5 必须优先覆盖 permit、risk、human confirmation、lease、audit gate、context safety、memory/privacy/forgetting、self-healing recovery permissions 与 self-evolution commit permissions。

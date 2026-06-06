@@ -1,0 +1,35 @@
+天工造物新版 L3 第一阶段测试结果
+生成日期：2026-06-03
+
+一、compileall
+命令：python -m compileall -q tiangong_kernel tests
+结果：通过。
+日志：docs/l3_phase1_compileall.log。
+
+二、L3 第一阶段目标测试
+命令：python -m pytest -q tests/test_l3_phase1_imports.py tests/test_l3_phase1_frozen_slots.py tests/test_l3_phase1_serialization_and_hash.py tests/test_l3_phase1_no_real_io_or_execution.py tests/test_l3_phase1_no_upper_layer_imports.py tests/test_l3_phase1_l0_l1_l2_wiring.py tests/test_l3_phase1_math_recommendation_only.py tests/test_l3_phase1_no_forbidden_files.py tests/test_l3_phase1_does_not_modify_l0_l1_l2.py
+结果：13 passed。
+日志：docs/l3_phase1_pytest_targeted.log。
+
+三、L3 phase1 选择性测试
+命令：python -m pytest -q tests -k "l3_phase1"
+结果：13 passed, 502 deselected。
+日志：docs/l3_phase1_pytest_k_l3_phase1.log。
+
+四、完整 tests 目录测试
+命令：python -m pytest -q tests
+结果：515 passed。
+日志：docs/l3_phase1_pytest_full.log。
+
+五、L0/L1/L2 未修改证据
+命令：对 tiangong_kernel/l0_primitives、tiangong_kernel/l1_ports、tiangong_kernel/l2_state 全部 .py 文件计算 sha256 前后对比。
+结果：MATCH。
+证据：docs/l3_phase1_l0_l1_l2_hash_before.txt、docs/l3_phase1_l0_l1_l2_hash_after.txt、docs/l3_phase1_l0_l1_l2_hash_compare.txt。
+
+质检后修复测试补充（2026-06-03）
+1. python -m compileall -q tiangong_kernel tests：通过。
+2. L3 第一阶段目标测试：14 passed in 4.73s。
+3. python -m pytest -q tests -k "l3_phase1"：14 passed, 502 deselected in 5.30s。
+4. python -m pytest -q tests：516 passed in 9.10s。
+5. L0/L1/L2 hash compare：MATCH。
+6. 新增测试 tests/test_l3_phase1_runtime_projection_whitelist.py：通过。

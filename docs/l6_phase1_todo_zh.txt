@@ -1,0 +1,24 @@
+天工造物 L6 第一阶段未做事项
+生成日期：2026-06-05
+
+本阶段按边界刻意未做：
+1. 未开发任何具体业务插件。
+2. 未实现真实插件动态加载。
+3. 未接入真实 L5 注册流程或真实 permit 签发。
+4. 未启用 live model provider。
+5. 未实现 L4 live adapter 调用。
+6. 未调用任何真实工具。
+7. 未写 L2 状态事实。
+8. 未写审计库。
+9. 未扣减预算。
+10. 未读取、保存、刷新、解密凭证。
+11. 未执行真实 migration / rollback / hot-switch / replay。
+12. 未做 GUI 全路径点击。
+13. 未做 Windows 原生验收。
+14. 未做安装包级验收。
+
+建议第二阶段：
+1. 将 L6 common manifest/lifecycle/event/projection 与 L5 宿主的声明式注册视图对齐。
+2. 增加 L6 plugin suite 模板，但仍只生成 declaration，不生成业务实现。
+3. 建立 L6 总质量门对接 L5 freeze/handoff 的桥接测试。
+4. 为后续 17 个专项插件建立统一 scaffold 规范。

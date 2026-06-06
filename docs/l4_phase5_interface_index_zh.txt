@@ -1,0 +1,106 @@
+天工造物 L4 第五阶段接口索引
+
+阶段名称：第五阶段，文件、网络、终端、桌面动作适配骨架与危险面隔离
+工程目录：project_l4_phase5
+日期：2026-06-04
+
+一、共享描述接口
+
+1. SideEffectDescriptor / SideEffectKind
+   文件：tiangong_kernel/l4_action_grounding/side_effect_descriptor.py
+   作用：描述外部动作副作用，不授权。
+
+2. ReversibilityDescriptor / ReversibilityKind
+   文件：tiangong_kernel/l4_action_grounding/reversibility_descriptor.py
+   作用：描述动作可逆性，不执行恢复。
+
+3. ResourceUsageDescriptor
+   文件：tiangong_kernel/l4_action_grounding/resource_usage_descriptor.py
+   作用：描述资源使用摘要，不分配资源。
+
+4. ExternalActionScope / ExternalActionSurface
+   文件：tiangong_kernel/l4_action_grounding/external_action_scope.py
+   作用：表达文件、网络、终端、桌面作用域，不裁决。
+
+5. ExternalActionRiskSurface
+   文件：tiangong_kernel/l4_action_grounding/external_action_risk_surface.py
+   作用：表达危险面，不评分、不放行。
+
+6. ExternalActionDisabledByDefault
+   文件：tiangong_kernel/l4_action_grounding/external_action_disabled.py
+   作用：统一声明真实外部动作默认禁用。
+
+二、动作 envelope
+
+1. ExternalActionEnvelope
+2. FileActionEnvelope
+3. NetworkActionEnvelope
+4. TerminalActionEnvelope
+5. DesktopActionEnvelope
+
+文件：tiangong_kernel/l4_action_grounding/external_action_envelope.py
+
+三、文件动作接口
+
+1. FileActionRequest
+2. FileActionResult
+3. FileActionFailure
+4. FileActionFailureKind
+5. FileActionAdapterPort
+6. FakeFileAdapter
+7. DryRunFileAdapter
+8. NoOpFileAdapter
+9. DisabledRealFileAdapterStub
+
+四、网络动作接口
+
+1. NetworkActionRequest
+2. NetworkActionResult
+3. NetworkActionFailure
+4. NetworkActionFailureKind
+5. NetworkActionAdapterPort
+6. FakeNetworkAdapter
+7. DryRunNetworkAdapter
+8. NoOpNetworkAdapter
+9. DisabledRealNetworkAdapterStub
+
+五、终端动作接口
+
+1. TerminalActionRequest
+2. TerminalActionResult
+3. TerminalActionFailure
+4. TerminalActionFailureKind
+5. TerminalActionAdapterPort
+6. FakeTerminalAdapter
+7. DryRunTerminalAdapter
+8. NoOpTerminalAdapter
+9. DisabledRealTerminalAdapterStub
+
+六、桌面动作接口
+
+1. DesktopActionRequest
+2. DesktopActionResult
+3. DesktopActionFailure
+4. DesktopActionFailureKind
+5. DesktopActionAdapterPort
+6. FakeDesktopAdapter
+7. DryRunDesktopAdapter
+8. NoOpDesktopAdapter
+9. DisabledRealDesktopAdapterStub
+
+七、不变量与归一化
+
+1. ExternalActionHardSafetyInvariant
+2. NoRealFileSystemMutationInvariant
+3. NoRealNetworkAccessInvariant
+4. NoRealShellExecutionInvariant
+5. NoRealDesktopControlInvariant
+6. ExternalActionRequiresL5PermitInvariant
+7. A5LikeHardSafetyInvariant
+8. ExternalActionNormalization
+
+八、公共导出
+
+文件：tiangong_kernel/l4_action_grounding/__init__.py
+
+第五阶段对象已加入 __all__，供第六阶段稳定引用。

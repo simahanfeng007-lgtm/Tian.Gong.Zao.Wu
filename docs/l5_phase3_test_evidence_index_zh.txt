@@ -1,0 +1,38 @@
+天工造物 L5 第三阶段测试证据索引
+
+1. command=python -m compileall -q tiangong_kernel tests
+   purpose=语法与导入可编译性验证
+   runtime_summary=exit_code=0
+   status=passed
+   evidence_ref=evidence:l5_phase3_compileall
+   是否为真实执行结果=true
+
+2. command=python -m pytest --collect-only -q tests
+   purpose=测试收集验证
+   runtime_summary=1052 tests collected in 4.59s
+   status=passed
+   evidence_ref=evidence:l5_phase3_collect_only
+   是否为真实执行结果=true
+
+3. command=python -m pytest -q tests/test_l5_phase3_*.py
+   purpose=第三阶段定向测试
+   runtime_summary=46 passed in 7.53s
+   status=passed
+   evidence_ref=evidence:l5_phase3_targeted_pytest
+   related_tests=test_l5_phase3_*.py
+   related_requirements=Registry/Conflict/Snapshot/Delta/PublicProjection/QualityGate
+   是否为真实执行结果=true
+
+4. command=python -m pytest -q tests -k 'l5_phase3 or plugin_host'
+   purpose=插件宿主相关回归
+   runtime_summary=49 passed, 1003 deselected in 4.89s
+   status=passed
+   evidence_ref=evidence:l5_phase3_plugin_host_subset
+   是否为真实执行结果=true
+
+5. command=python -m pytest -q tests
+   purpose=全量回归
+   runtime_summary=1052 passed in 11.31s
+   status=passed
+   evidence_ref=evidence:l5_phase3_full_pytest
+   是否为真实执行结果=true

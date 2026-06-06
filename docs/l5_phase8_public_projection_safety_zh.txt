@@ -1,0 +1,6 @@
+L5 Final PublicProjection 安全报告
+
+L5FinalPublicProjection 仅暴露 summary、counts、refs、status_text、redacted_evidence_refs、digest。
+禁止字段测试覆盖：真实路径、URL、数据库 URI、module path、import path、entry point、function repr、shell command、raw credential、tool_schema、function_schema、callable_ref、handler、endpoint、artifact output path、package path、repository path、deploy target、real build command、real validation command、real delivery command。
+二次泄露测试：通过。
+结论：公共投影最小披露通过。

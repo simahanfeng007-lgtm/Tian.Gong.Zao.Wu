@@ -1,0 +1,29 @@
+{
+  "name": "l6_31_l6_32_model_and_controller",
+  "status": "passed",
+  "returncode": 0,
+  "duration_seconds": 7.530094,
+  "timeout_seconds": 120.0,
+  "started_at": 1780723853.906057,
+  "finished_at": 1780723861.4361517,
+  "command": [
+    "/opt/pyvenv/bin/python",
+    "-m",
+    "pytest",
+    "tests/test_l6_31_model_suggest_shape_hotfix.py",
+    "tests/test_l6_32_p1_model_suggest_repair.py",
+    "tests/test_l6_32_planner_execution_controller.py",
+    "-q"
+  ],
+  "cwd": "/mnt/data/l633_work/project",
+  "purpose": "L6.31/L6.32 key model and planner regression",
+  "required": true,
+  "rerun_command": "/opt/pyvenv/bin/python -m pytest tests/test_l6_31_model_suggest_shape_hotfix.py tests/test_l6_32_p1_model_suggest_repair.py tests/test_l6_32_planner_execution_controller.py -q",
+  "stdout_path": "/mnt/data/l633_work/project/docs/l6_33_validation/key_shards/l6_31_l6_32_model_and_controller/stdout.log",
+  "stderr_path": "/mnt/data/l633_work/project/docs/l6_33_validation/key_shards/l6_31_l6_32_model_and_controller/stderr.log",
+  "stdout_tail": "..........................                                               [100%]\n26 passed in 3.67s\n",
+  "stderr_tail": "",
+  "error_message": "",
+  "timed_out": false,
+  "process_group_reaped": false
+}

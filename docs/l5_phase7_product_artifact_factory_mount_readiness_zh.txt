@@ -1,0 +1,16 @@
+Product Artifact Factory 挂载就绪声明
+
+结论：声明级可预留，不实现。
+
+前置检查：PASS_WITH_COMPATIBLE_EXTENSION。
+启用对象：PluginArtifactProductionMountBindingDeclaration。
+能力类型：ArtifactFactoryCapability / ProductBuilderCapability / ProductSpecCapability / BuildPlanCapability / ArtifactBuildCapability / ArtifactValidationCapability / ArtifactDeliveryCapability 等，仅为 kind / contract / metadata / boundary / evidence refs。
+
+明确禁止：
+- 不生成 ProductSpec 实体。
+- 不执行 BuildPlan。
+- 不构建 ArtifactBuild。
+- 不生成 PDF/DOCX/PPT/图片/App/安装包。
+- 不写文件、不调用工具、不调用 L4 adapter、不发布交付物。
+
+建议：Product Artifact Factory 可进入 L6 专项规划，但不得写入 L5 核心。

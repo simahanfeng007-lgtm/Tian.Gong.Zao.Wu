@@ -1,0 +1,73 @@
+天工造物 L2 第六阶段修改清单
+生成日期：2026-06-03
+
+一、新增源码
+
+1. tiangong_kernel/l2_state/memory_state.py
+   - 新增记忆层级、可见性、召回、注入、健康状态枚举。
+   - 新增 MemoryLayerState / MemoryRefState / MemoryRecallState / MemoryInjectionState / MemoryHealthState。
+
+2. tiangong_kernel/l2_state/context_state.py
+   - 新增上下文片段类型、可见性、溢出、压缩、注入、连续性状态枚举。
+   - 新增 ContextSegmentState / ContextBudgetState / ContextWindowState / ContextCompressionState / ContextInjectionState / ContextContinuityState。
+
+3. tiangong_kernel/l2_state/retrieval_state.py
+   - 新增检索通道、通道状态、检索请求状态、查询类型、隐私等级、质量状态枚举。
+   - 新增 RetrievalChannelState / RetrievalRequestState / RetrievalQueryState / RetrievalResultRefState / RetrievalCoverageState / RetrievalQualityState。
+
+4. tiangong_kernel/l2_state/learning_state.py
+   - 新增学习信号、材料类型、准备状态、边界状态、可见性状态枚举。
+   - 新增 LearningSignalState / LearningNeedState / LearningMaterialRefState / LearningReadinessState / LearningBoundaryState / LearningVisibilityState。
+
+5. tiangong_kernel/l2_state/knowledge_reference_state.py
+   - 新增知识引用类型、知识引用可见性枚举。
+   - 新增 KnowledgeReferenceState。
+
+二、修改源码
+
+1. tiangong_kernel/l2_state/__init__.py
+   - 增加第六阶段模块导入。
+   - 增加第六阶段对象 `__all__` 导出。
+   - 未删除、改名或重构已有导出。
+
+三、新增测试
+
+1. tests/test_l2_phase6_memory_context_retrieval_learning_state.py
+   - 覆盖 24 个第六阶段新增状态对象实例化、枚举、frozen、slots、默认值安全和数值保护。
+
+2. tests/test_l2_phase6_state_serialization_and_hash.py
+   - 覆盖新增对象稳定序列化、稳定 hash 和 hash 变更敏感性。
+
+3. tests/test_l2_phase6_boundary_no_execution.py
+   - 覆盖新增源码无真实 IO、网络、检索、学习、模型、工具调用。
+   - 覆盖未定义第七阶段状态对象。
+
+4. tests/test_l2_phase6_integration_with_phase1_to_phase5.py
+   - 覆盖第六阶段对象与 Phase1 / Phase3 / Phase4 / Phase5 状态引用接线。
+   - 覆盖 `__init__.py` 新导出。
+
+5. tests/test_l2_phase6_chinese_docstrings.py
+   - 覆盖新增模块和公共类中文 docstring，以及“作用 / 边界”结构。
+
+四、新增文档与日志
+
+- docs/l2_phase6_development_log_zh.md
+- docs/l2_phase6_handoff_report_zh.txt
+- docs/l2_phase6_validation_report_zh.txt
+- docs/l2_phase6_change_list_zh.txt
+- docs/l2_phase6_test_results_zh.txt
+- docs/l2_phase6_todo_zh.txt
+- docs/l2_phase6_compileall.log
+- docs/l2_phase6_pytest_phase6.log
+- docs/l2_phase6_pytest_l2_phase1_to_phase6.log
+- docs/l2_phase6_pytest_full.log
+
+五、最小兼容修复
+
+无。
+
+六、未修改
+
+- 未修改 L0。
+- 未修改 L1。
+- 未重构 L2 第一至第五阶段公共骨架。

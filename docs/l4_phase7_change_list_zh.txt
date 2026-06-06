@@ -1,0 +1,24 @@
+天工造物 L4 第七阶段变更清单
+
+工程目录：project_l4_phase7
+日期：2026-06-04
+
+一、代码变更
+
+1. 在 tiangong_kernel/l4_action_grounding 下新增 29 个第七阶段模块。
+2. 在 tiangong_kernel/l4_action_grounding/__init__.py 中追加第七阶段导入与 __all__ 导出。
+3. 新增 tests/l4_phase7_builders.py。
+4. 新增 15 个第七阶段测试文件，覆盖 25 个测试用例。
+
+二、边界变更
+
+1. 未修改 L0、L1、L2、L3。
+2. 未改写 L4 第一至第六阶段已存在对象的语义。
+3. 未新增对 tiangong_kernel.l5 或 tiangong_kernel.l6 的真实导入。
+4. 未新增真实外部动作库、线程库、进程库、数据库库或网络库调用。
+
+三、兼容性说明
+
+1. 第二阶段已有 L5ResourceBudgetPort 保持原名。
+2. 第七阶段新增的资源预算占位端口在公共入口导出为 L5Phase7ResourceBudgetPort。
+3. 该别名只用于避免名称冲突，不表示 L4 实现了 L5 资源预算系统。

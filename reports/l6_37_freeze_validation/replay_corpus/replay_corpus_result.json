@@ -1,0 +1,125 @@
+{
+  "schema": "tiangong.l6_36.replay_corpus.v1",
+  "source_version": "L6.36-recovery-replay-quality-gate",
+  "ok": true,
+  "case_count": 9,
+  "passed_cases": 9,
+  "cases": [
+    {
+      "case_name": "code_generation",
+      "status": "passed",
+      "execution_status": "completed",
+      "source_report_digest": "e62d3c5ab9a74e25648bdc42",
+      "failure_types": [],
+      "recovery_mode": "completed",
+      "quality_decision": "pass",
+      "reconstructable": true,
+      "can_resume": false,
+      "next_action": "执行链已完成，无需恢复。"
+    },
+    {
+      "case_name": "code_analysis",
+      "status": "passed",
+      "execution_status": "completed",
+      "source_report_digest": "f314b3bf53ed21906c9e698b",
+      "failure_types": [],
+      "recovery_mode": "completed",
+      "quality_decision": "pass",
+      "reconstructable": true,
+      "can_resume": false,
+      "next_action": "执行链已完成，无需恢复。"
+    },
+    {
+      "case_name": "file_read",
+      "status": "passed",
+      "execution_status": "completed",
+      "source_report_digest": "3339a498948b6fb286746117",
+      "failure_types": [],
+      "recovery_mode": "completed",
+      "quality_decision": "pass",
+      "reconstructable": true,
+      "can_resume": false,
+      "next_action": "执行链已完成，无需恢复。"
+    },
+    {
+      "case_name": "project_diagnosis",
+      "status": "passed",
+      "execution_status": "completed",
+      "source_report_digest": "29b8d295586515304cf96b20",
+      "failure_types": [],
+      "recovery_mode": "completed",
+      "quality_decision": "pass",
+      "reconstructable": true,
+      "can_resume": false,
+      "next_action": "执行链已完成，无需恢复。"
+    },
+    {
+      "case_name": "recoverable_failure",
+      "status": "passed",
+      "execution_status": "failed_with_resume",
+      "source_report_digest": "8f84ea867b2610abfc0b7c08",
+      "failure_types": [
+        "budget_exhausted",
+        "tool_failed"
+      ],
+      "recovery_mode": "recover_failed_step",
+      "quality_decision": "fail",
+      "reconstructable": true,
+      "can_resume": true,
+      "next_action": "retry_or_generate_repair_plan"
+    },
+    {
+      "case_name": "safety_blocked",
+      "status": "passed",
+      "execution_status": "blocked",
+      "source_report_digest": "bcd26210163cc10098c44981",
+      "failure_types": [
+        "risk_blocked",
+        "skipped_after_stop"
+      ],
+      "recovery_mode": "blocked_replan",
+      "quality_decision": "blocked",
+      "reconstructable": true,
+      "can_resume": false,
+      "next_action": "stop_for_safety_and_replan"
+    },
+    {
+      "case_name": "confirmation_required",
+      "status": "passed",
+      "execution_status": "confirmation_required",
+      "source_report_digest": "142d4a6893050f397c19963d",
+      "failure_types": [
+        "confirmation_required"
+      ],
+      "recovery_mode": "await_confirmation",
+      "quality_decision": "warn",
+      "reconstructable": true,
+      "can_resume": true,
+      "next_action": "ask_confirmation"
+    },
+    {
+      "case_name": "delivery_package",
+      "status": "passed",
+      "execution_status": "completed",
+      "source_report_digest": "d45ae44a3138b5214915b4ec",
+      "failure_types": [],
+      "recovery_mode": "completed",
+      "quality_decision": "pass",
+      "reconstructable": true,
+      "can_resume": false,
+      "next_action": "执行链已完成，无需恢复。"
+    },
+    {
+      "case_name": "quality_compileall",
+      "status": "passed",
+      "execution_status": "completed",
+      "source_report_digest": "8f0d87b7d4a2a9f90432379f",
+      "failure_types": [],
+      "recovery_mode": "completed",
+      "quality_decision": "pass",
+      "reconstructable": true,
+      "can_resume": false,
+      "next_action": "执行链已完成，无需恢复。"
+    }
+  ]
+}

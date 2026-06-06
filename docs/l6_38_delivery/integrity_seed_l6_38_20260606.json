@@ -1,0 +1,44 @@
+{
+  "schema": "tiangong.l6_38.delivery.integrity.seed.v1",
+  "phase": "L6.38",
+  "title": "P0 系统接入一：Provider / Budget / Skill / Handoff",
+  "source_baseline": "L6.37 执行链全线贯通冻结基线",
+  "code_diff": {
+    "changed": [
+      "tiangong_agent_runtime/plan_bridge.py",
+      "tiangong_agent_runtime/plan_schema.py",
+      "tiangong_agent_runtime/risk_classifier.py",
+      "tiangong_agent_runtime/runtime_entry.py",
+      "tiangong_agent_shell/cli_loop.py"
+    ],
+    "added": [
+      "tests/test_l6_38_p0_system_integration.py",
+      "tiangong_agent_runtime/p0_system_integration.py"
+    ],
+    "removed": [],
+    "changed_count": 5,
+    "added_count": 2,
+    "removed_count": 0
+  },
+  "kernel_hash_compare": {
+    "changed": [],
+    "added": [],
+    "removed": [],
+    "changed_count": 0,
+    "added_count": 0,
+    "removed_count": 0
+  },
+  "forbidden_scan": {
+    "kernel_blocking_count": 0,
+    "direct_sdk_import_blocking_count": 0,
+    "blocking_findings_total": 0
+  },
+  "validation": {
+    "compileall": "passed",
+    "pytest_l6_37_l6_38": "13 passed",
+    "pytest_l6_31_l6_38_core": "55 passed",
+    "pytest_provider_skill_chain_l6_38": "42 passed",
+    "full_pytest": "not_run"
+  },
+  "no_full_pytest_claim": true
+}

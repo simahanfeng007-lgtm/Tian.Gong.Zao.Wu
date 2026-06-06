@@ -1,0 +1,34 @@
+L5 第五阶段 Handoff 报告
+
+## 第六阶段可消费对象
+1. PluginIsolationDeclaration
+2. PluginDependencyDeclaration
+3. PluginDependencyGraphSnapshot
+4. PluginCredentialRequirementDeclaration
+5. PluginDataGovernanceDeclaration（Phase5 模块内声明模型；顶层包保留 Phase2 同名对象，Phase5 以 PluginPhase5DataGovernanceDeclaration 别名导出）
+6. PluginResourceBoundaryDeclaration
+7. PluginPhase5SwitchBoundaryDeclaration
+8. PluginCapabilityTokenBoundaryDeclaration
+9. PluginTrustBoundaryDeclaration（Phase5 模块内声明模型；顶层包以 PluginPhase5TrustBoundaryDeclaration 别名导出）
+10. PluginPhase5BoundaryValidationReport
+11. PluginPhase5QualityGateDecision
+12. PluginPhase5PublicProjection
+13. PluginPhase5AuditIndex
+14. privacy / credential / capability token / trust boundary / resource / switch conflict kinds
+15. redacted evidence refs、boundary refs、policy refs、audit refs、provenance refs
+
+## 禁止第六阶段误用
+- 第五阶段质量门结果不是执行授权、permit、lease、confirmation ticket、credential grant、sandbox grant、resource quota grant 或 data access grant。
+- 不得把 IsolationDeclaration 当真实沙箱或真实隔离器。
+- 不得把 DependencyDeclaration 当真实依赖安装器。
+- 不得把 DependencyGraphSnapshot 当真实包管理器解析结果。
+- 不得把 CredentialRequirementDeclaration 当真实凭据获取授权。
+- 不得把 DataGovernanceDeclaration 当真实数据访问授权。
+- 不得把 ResourceBoundaryDeclaration 当真实资源配额。
+- 不得把 PluginCapabilityTokenBoundaryDeclaration 当真实 token、真实权限、真实授权或真实执行票据。
+- 不得把 PluginTrustBoundaryDeclaration 当真实沙箱、真实隔离器、真实网络边界、真实凭据边界或真实工具边界。
+- 不得把 PluginPhase5SwitchBoundaryDeclaration 当真实热切换、迁移、replay、rollback、checkpoint 或观察器。
+- 第六阶段如需真实执行，必须重新经过 L1-L4 事件、状态、权限、租约、预算、审计、恢复和验证链路，并接受后续阶段真实执行边界设计。
+
+## 进入第六阶段建议
+P0/P1/P2/P3 均为 0，建议进入 L5 第六阶段。

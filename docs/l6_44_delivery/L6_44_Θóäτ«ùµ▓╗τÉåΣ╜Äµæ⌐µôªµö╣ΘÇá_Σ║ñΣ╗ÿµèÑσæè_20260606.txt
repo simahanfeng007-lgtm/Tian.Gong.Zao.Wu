@@ -1,0 +1,41 @@
+临渊者 L6.44 预算治理低摩擦改造交付报告
+日期：2026-06-06
+基线：L6.43.1 Planner消费层统一改造
+
+一、完成内容
+1. 新增 tiangong_agent_runtime/budget_low_friction_governance.py
+2. 新增 tests/test_l6_44_budget_low_friction_governance.py
+3. 完成 A0-A4 低摩擦预算治理提示层。
+4. A5、凭证/隐私明文、不可逆副作用、发布/激活/合入保留强边界。
+5. 预算压力只生成降级/续租建议，不直接扣费、不直接阻断 A0-A4。
+6. 不改 PermitGateway、不改 ExecutionPolicy、不改 BudgetGuard、不改执行脊柱。
+
+二、边界
+- 不直接执行工具。
+- 不调 Adapter。
+- 不改预算。
+- 不覆盖 PermitGateway。
+- 不覆盖 QualityGate。
+- 不污染 tiangong_kernel/l0-l5。
+- 不修改 execution_spine / planner_execution_controller / long_chain_runner / runtime_tool_registry / permit_gateway / risk_classifier / execution_policy / budget_guard。
+
+三、验证
+- compileall：PASS
+- L6.44 新增测试：5 passed
+- L6.37 回归：7 passed
+- L6.38 回归：5 passed, 1 deselected（CLI 子用例未纳入本轮定向回归）
+- L6.39 回归：6 passed
+- L6.40 回归：6 passed
+- L6.41 回归：7 passed
+- L6.42 / L6.42.1 回归：17 passed
+- L6.43 / L6.43.1 回归：9 passed
+- 核心污染检查：PASS，changed_core_files=0
+- 静态边界扫描：PASS
+
+四、未发现问题
+未发现 P0/P1 问题。
+未跑完整全量 pytest，不声明全量通过。
+
+五、下一阶段
+L6.45 建议进入：回滚审计全链绑定。
+重点：StateDeltaLedger、ToolDependencyGraph、RecoveryCheckpoint、AuditEvidenceEnvelope，把每个长链动作的状态变化、依赖、回滚点和审计证据绑定起来。

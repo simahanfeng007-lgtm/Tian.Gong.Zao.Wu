@@ -1,0 +1,16 @@
+{
+  "compileall": "PASS: python3 -m compileall -q tiangong_agent_runtime tiangong_agent_shell tiangong_kernel tests",
+  "l6_51_targeted": "PASS: 6 passed",
+  "runtime_frontend_contract_subset": "PASS: 14 passed (L6.51 + L6.49.3 + L6.49.5)",
+  "l6_49_to_l6_51_targeted": "PASS: 30 passed",
+  "l0_segment": "PASS: 117 passed",
+  "l1_segment": "PASS: 231 passed",
+  "l2_segment": "PASS: 193 passed",
+  "l3_segment": "PASS: 170 passed",
+  "l4_segment": "PASS: 237 passed across 3 chunks",
+  "l5_segment": "PASS: 377 passed across 4 chunks",
+  "docs_filename_hotfix": "PASS after restoring readable 五模型 docs/hash aliases",
+  "secret_leak_scan": "PASS: strict_finding_count=0; marker labels classified as non-secret fixtures/references",
+  "bare_except_pass_scan": "PASS: finding_count=0",
+  "full_pytest": "NOT COMPLETED: repository-wide pytest timed out in this environment around L6 long CLI/subprocess tests; no additional failure observed before timeout after docs filename repair"
+}

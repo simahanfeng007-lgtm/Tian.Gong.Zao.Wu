@@ -1,0 +1,19 @@
+《天工造物 L3 第二阶段质检后修复修改清单》
+生成时间：2026-06-03 16:01:04
+
+一、交付包路径修复
+将原 zip 内 10 个 mojibake/非 UTF-8 标记路径替换为 ASCII 稳定路径。详见 project/docs/l3_phase2_filename_mapping_zh.csv。
+
+二、新增交付文档
+1. project/docs/l3_phase2_quality_repair_report_zh.txt
+2. project/docs/l3_phase2_quality_repair_validation_report_zh.txt
+3. project/docs/l3_phase2_quality_repair_test_results_zh.txt
+4. project/docs/l3_phase2_quality_repair_change_list_zh.txt
+5. project/docs/l3_phase2_quality_repair_handoff_report_zh.txt
+6. project/docs/l3_phase2_quality_repair_summary_report_zh.txt
+7. project/docs/l3_phase2_quality_repair_todo_zh.txt
+8. project/docs/l3_phase2_quality_repair_issue_closure_zh.csv
+9. project/docs/l3_phase2_filename_mapping_zh.csv
+
+三、源码修改
+无。第二阶段核心 Python 源码未改。

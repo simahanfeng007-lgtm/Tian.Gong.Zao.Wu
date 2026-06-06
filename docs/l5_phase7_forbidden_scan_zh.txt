@@ -1,0 +1,28 @@
+L5 Phase7 forbidden scan
+范围：tiangong_kernel/l5_plugin_host/*.py 与 tests/test_l5_phase7_*.py
+结构化扫描：AST import/function/call + inert pattern 分类
+blocking_findings=0
+inert_pattern_findings=18
+
+BLOCKING
+
+
+INERT PATTERNS
+('tiangong_kernel/l5_plugin_host/registry_conflict_rules.py', 'importlib.import_module')
+('tiangong_kernel/l5_plugin_host/phase7_boundary_gate.py', 'importlib.import_module')
+('tiangong_kernel/l5_plugin_host/phase7_boundary_gate.py', 'call_tool')
+('tiangong_kernel/l5_plugin_host/phase7_boundary_gate.py', 'build_artifact')
+('tiangong_kernel/l5_plugin_host/phase7_boundary_gate.py', 'generate_artifact')
+('tiangong_kernel/l5_plugin_host/phase7_boundary_gate.py', 'deliver_artifact')
+('tiangong_kernel/l5_plugin_host/phase7_boundary_gate.py', 'tool_schema')
+('tiangong_kernel/l5_plugin_host/phase7_boundary_gate.py', 'function_schema')
+('tests/test_l5_phase7_generic_plugin_host_precheck.py', 'tool_schema')
+('tests/test_l5_phase7_l6_entry_cannot_load_or_invoke_plugin.py', 'importlib.import_module')
+('tests/test_l5_phase7_capability_mount_is_not_tool_schema_release.py', 'tool_schema')
+('tests/test_l5_phase7_capability_mount_is_not_tool_schema_release.py', 'function_schema')
+('tests/test_l5_phase7_product_builder_does_not_expose_live_tool_execution.py', 'call_tool')
+('tests/test_l5_phase7_forbidden_scan_allows_inert_patterns.py', 'importlib.import_module')
+('tests/test_l5_phase7_forbidden_scan_allows_inert_patterns.py', 'call_tool')
+('tests/test_l5_phase7_forbidden_scan_allows_inert_patterns.py', 'build_artifact')
+('tests/test_l5_phase7_forbidden_scan_blocks_live_l3_l4_l6_artifact_actions.py', 'importlib.import_module')
+('tests/test_l5_phase7_forbidden_scan_blocks_live_l3_l4_l6_artifact_actions.py', 'build_artifact')

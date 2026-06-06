@@ -1,0 +1,15 @@
+L5 Final Audit/Evidence Index
+
+L5FinalAuditIndex 覆盖：
+- consumed_phase_refs
+- public_projection_refs
+- quality_gate_refs
+- handoff_refs
+- governance_matrix_refs
+- capability_readiness_refs
+- registry_refs / manifest_refs / lifecycle_refs / mount_refs / boundary_refs / health_refs / permission_refs
+- validation_report_refs / conflict_report_refs / test_report_refs / forbidden_scan_refs / hash_compare_refs / zip_integrity_refs
+- event_refs / evidence_refs / provenance_refs / accountability_ref / tamper_evidence_ref
+
+audit_digest 使用 canonical serialization，不包含自身 digest、真实路径、真实时间、对象 id、函数 repr、网络连接或真实构建输出。
+结论：event-first 审计证据链完整。

@@ -1,0 +1,12 @@
+天工造物 自愈系统最小补丁未做事项
+日期：2026-06-04
+
+未做事项：
+1. 未实现真实诊断服务。
+2. 未实现真实恢复计划器。
+3. 未实现真实 checkpoint store、rollback executor、replay executor、validation runner 或 regression runner。
+4. 未实现 L5 RecoveryPermission / RollbackPermission / ReplayPermission。
+5. 未实现 L6 自愈插件。
+
+建议：
+进入 L5/L6 前继续保持恢复、回滚、回放、补偿、验证、回归和复盘的审计链。

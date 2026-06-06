@@ -1,0 +1,57 @@
+# 天工造物 L6 第一至第五阶段总修复报告
+
+生成日期：2026-06-05
+
+## 总结论
+
+本次按 L6 阶段总修复师口径完成工程级总修复。结论：**建议冻结 L6 第一至第五阶段当前修复版，建议进入下一阶段规划/开发前以本包为新基线**。
+
+理由：
+- P0 未发现。
+- 各规划师意见中的 P1 已完成最小侵入式修复并有测试覆盖。
+- P2 中与对象字段、scan、PublicProjection、安全证据链相关的高价值项已修；真实执行适配、trace matrix 深化、产品/插件执行契约等延后项未抢跑。
+- full pytest 已真实执行，exit 0；未用 targeted tests 冒充 full pytest。
+
+## 已修复重点
+
+1. 第二至第五阶段质量门：`full_pytest_passed_for_freeze=False` 不再允许进入下一阶段；新增 `allow_planning_continuation` 区分规划继续与冻结准入。
+2. Handoff 返回契约：修复 `ResultReturnEnvelopeContract` / `FailureReturnEnvelopeContract` 构造失败。
+3. 公共契约补丁质量门：补齐 compileall/collect/targeted/full pytest/hash/test inventory/public projection/audit evidence 等冻结级证据字段。
+4. 记忆遗忘：新增 canonical memory 子包与对象，硬化显式忘记请求优先级。
+5. 数学评分：新增公式/权重/版本/回放/降级与 GoalPriorityScore，明确 score 不是 decision。
+6. 资源预算：补 run/goal/actor scope、budget_owner、no live limiter/resource/quota/decrement/bypass 硬门。
+7. 自愈与自学习：补 validation/regression need、学习证据、候选成熟度、NoAutoEvolutionGuard，禁止自动执行。
+8. 上下文/信念/世界状态：补 ContextReentryEnvelope、CandidateFactProposal、belief event precedence、world freshness/staleness/trust。
+9. 成品生产桥接：补 ProductSpecSeedCandidate、ProductContextSafetyProjection 字段，统一 seed ref，保持不构建。
+10. 审计/公开投影：补 tamper_evidence_ref 与 EvidenceCompletenessScore 证据链字段，新增 safety/audit 检查报告。
+
+## 是否修改 L0-L5
+
+未修改 L0-L5。修改范围限定在：
+- `tiangong_kernel/l6_plugins/common/`
+- `tiangong_kernel/l6_plugins/mind/` 质量门
+- `tiangong_kernel/l6_plugins/cognitive_continuity/`
+- `tiangong_kernel/l6_plugins/governance_control/`
+- `tests/`
+- `docs/l6_total_repair_20260605/`
+
+## 验证摘要
+
+- compileall：exit 0。
+- collect-only：exit 0，收集 1585 条测试。
+- L6 targeted：exit 0，`277 passed, 1308 deselected in 5.18s`。
+- full pytest：exit 0，真实执行完成。
+- forbidden scan：PASS。
+- public projection safety：PASS。
+- audit evidence chain：PASS。
+- zip integrity：已在打包后生成。
+
+## 剩余风险
+
+- 情感系统治理原因默认值可进一步收紧，但当前不构成 P1/P0。
+- L3 真实消费适配、插件 trace matrix、产品执行契约、真实成品生产/自愈执行适配均应留到后续阶段，不在 L6 第一至第五阶段抢跑。
+- 后续若进入真实执行链，必须重新过 L3/L4/L5 边界与工具/模型/凭证治理。
+
+## 冻结建议
+
+建议以本次修复包作为 L6 第一至第五阶段冻结候选。若各专项规划师复核无新增 P0/P1，可进入下一阶段。

@@ -1,0 +1,21 @@
+临渊者 L6.38【P0 系统接入一：Provider / Budget / Skill / Handoff】验证结果
+
+一、已执行验证
+1. compileall：python -m compileall tiangong_agent_runtime tiangong_agent_shell tests —— 通过。
+2. L6.37 + L6.38 定向回归：pytest tests/test_l6_37_execution_chain_freeze.py tests/test_l6_38_p0_system_integration.py -q —— 13 passed。
+3. L6.31/L6.32/L6.34/L6.37/L6.38 核心回归：55 passed。
+4. Provider / Skill / L6.35 / L6.36 / L6.37 / L6.38 接入链回归：42 passed。
+5. 内核 hash compare：tiangong_kernel changed=0 added=0 removed=0。
+6. forbidden scan：blocking_findings_total=0。
+
+二、未执行验证
+1. 未执行完整全量 pytest；本次只执行 L6.38 接入相关核心回归与关键上下游回归。
+2. 未执行真实 Provider 网络调用；Provider smoke 按冻结边界使用 dry-run / sample replay，未读取凭证明文。
+3. 未执行 Windows 原生 GUI/安装包级验收。
+
+三、日志文件
+- docs/l6_38_delivery/compileall_l6_38_20260606.log
+- docs/l6_38_delivery/pytest_l6_37_l6_38_20260606.log
+- docs/l6_38_delivery/pytest_l6_31_l6_38_core_20260606.log
+- docs/l6_38_delivery/pytest_provider_skill_chain_l6_38_20260606.log
+- docs/l6_38_scan_and_hash_compare_20260606.json

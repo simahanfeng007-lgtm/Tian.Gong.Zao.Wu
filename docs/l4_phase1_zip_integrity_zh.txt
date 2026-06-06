@@ -1,0 +1,26 @@
+﻿天工造物 L4 第一阶段 zip 完整性说明
+生成日期：2026-06-04
+
+一、打包对象
+工作目录：project_l4_phase1
+zip 名称：天工造物_L4_第一阶段_动作落地基础骨架与默认拒绝_交付包_20260604.zip
+zip 内建议根目录：project/
+
+二、文件与临时产物检查
+文件数：827
+__pycache__ count=0
+pyc/pyo count=0
+.pytest_cache count=0
+非 ASCII 路径文件数：0
+mojibake 可疑路径文件数：0
+
+三、验证日志
+compileall：docs/l4_phase1_compileall.log
+targeted pytest：docs/l4_phase1_pytest_targeted.log
+tests -k l4_phase1：docs/l4_phase1_pytest_k_l4_phase1.log
+full pytest：docs/l4_phase1_pytest_full.log
+hash compare：docs/l4_phase1_l0_l1_l2_l3_hash_compare.txt
+static scan：docs/l4_phase1_static_scan_forbidden_terms.txt 与 docs/l4_phase1_forbidden_module_scan.txt
+
+四、说明
+最终 zip 创建后将在包外生成 SHA256 记录；该记录不写回 zip 内，以免改变 zip 自身 hash。

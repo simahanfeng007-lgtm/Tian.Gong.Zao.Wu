@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "checked_files": [
+    "tiangong_agent_runtime/rollback_audit_binding.py",
+    "tests/test_l6_45_rollback_audit_binding.py"
+  ],
+  "findings": []
+}

@@ -1,0 +1,31 @@
+天工造物 L3 第一阶段质检后修复 validation 报告
+生成日期：2026-06-03
+
+一、修复验证结论
+P2-001 与 P3-001 已按专项质检报告完成修复。修复版未引入 P0/P1 风险。
+
+二、P2-001 验证
+1. docs/l3_total_planning/ 已存在。
+2. L3 总策划书、第一阶段工程员提示词、工程交付规范与质检清单、总策划交接说明均已纳入。
+3. handoff 已列明四件套位置。
+
+三、P3-001 验证
+1. handoff 已明确 RuntimeSliceProjectionState 是 L2 状态投影引用，不是旧 Runtime 主链。
+2. 新增 tests/test_l3_phase1_runtime_projection_whitelist.py，限定 Runtime/runtime 字样只允许出现在 RuntimeSliceProjectionState 与 runtime_slice_projection 白名单语境。
+3. 原有 upper-layer import 测试继续保留，不放宽 L4/L5/L6、runtime、agent_core、ability、capability、plugin_host 等禁令。
+
+四、边界验证
+1. 未修改 L0/L1/L2 源码。
+2. 未修改 L3 第一阶段源码对象。
+3. 未新增第二阶段或上层编排器。
+4. 未引入 IO、网络、数据库、shell、模型调用、工具调用、权限裁决、状态存储或插件宿主。
+5. L0/L1/L2 hash compare 为 MATCH。
+
+五、测试验证
+1. compileall：通过。
+2. L3 第一阶段目标测试：14 passed。
+3. tests -k "l3_phase1"：14 passed, 502 deselected。
+4. 完整 tests：516 passed。
+
+六、建议
+建议将本修复版提交给 L3 第一阶段复检；复检通过后进入第二阶段前置准备。

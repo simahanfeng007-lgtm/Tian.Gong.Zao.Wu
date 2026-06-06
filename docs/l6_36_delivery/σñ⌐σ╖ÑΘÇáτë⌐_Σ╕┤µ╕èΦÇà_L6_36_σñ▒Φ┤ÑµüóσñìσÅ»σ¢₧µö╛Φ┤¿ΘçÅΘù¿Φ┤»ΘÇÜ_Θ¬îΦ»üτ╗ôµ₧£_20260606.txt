@@ -1,0 +1,68 @@
+天工造物 / 临渊者 L6.36 验证结果
+生成日期：2026-06-06
+
+一、直接测试
+
+1. L6.36 新增测试
+命令：python -m pytest tests/test_l6_36_recovery_replay_quality.py -q
+结果：6 passed
+日志：reports/l6_36_validation/pytest_l6_36_self.log
+
+2. L6.31-L6.36 关键回归
+命令：python -m pytest tests/test_l6_31_model_suggest_shape_hotfix.py tests/test_l6_32_p1_model_suggest_repair.py tests/test_l6_34_model_cli_continuity.py tests/test_l6_35_step_state_machine_long_chain.py tests/test_l6_36_recovery_replay_quality.py -q
+结果：40 passed
+日志：reports/l6_36_validation/pytest_l6_31_to_l6_36_key.log
+
+二、分片回归
+
+L6.36 关键分片回归汇总：
+- total_shards：4
+- passed_shards：4
+- failed_shards：0
+- timeout_shards：0
+
+分片：
+- l6_31_32_model：passed
+- l6_33_34_runner_cli：passed
+- l6_35_step_state：passed
+- l6_36_recovery_replay：passed
+
+汇总：reports/l6_36_validation/combined_shard_summary.json
+报告：reports/l6_36_validation/combined_shard_report.txt
+
+三、Replay Corpus
+
+命令：run_l6_36_replay_corpus(...)
+结果：9/9 passed
+覆盖：
+- code_generation
+- code_analysis
+- file_read
+- project_diagnosis
+- recoverable_failure
+- safety_blocked
+- confirmation_required
+- delivery_package
+- quality_compileall
+
+输出：
+- reports/l6_36_validation/replay_corpus_result.json
+- reports/l6_36_validation/replay_corpus_report.txt
+
+四、compileall
+
+命令：python -m compileall tiangong_agent_runtime tiangong_agent_shell tests
+结果：通过，returncode=0
+日志：reports/l6_36_validation/compileall_l6_36.log
+
+五、内核 hash compare
+
+结果：changed=0 / added=0 / removed=0
+文件：reports/l6_36_validation/kernel_hash_compare.json
+
+六、forbidden scan
+
+本轮新增/变更 Python 文件 forbidden scan：blocking_findings=0
+文件：reports/l6_36_validation/forbidden_scan_changed_files.json
+
+说明：未声明完整全量 pytest 通过。GUI、Windows、安装包级验证、真实 Provider 网络调用仍未执行。

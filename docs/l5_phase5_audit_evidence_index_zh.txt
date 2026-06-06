@@ -1,0 +1,17 @@
+L5 第五阶段审计证据索引报告
+
+PluginPhase5AuditIndex 已预留：
+- isolation_event_refs
+- dependency_event_refs
+- credential_event_refs
+- data_governance_event_refs
+- resource_boundary_event_refs
+- switch_boundary_event_refs
+- capability_token_event_refs
+- trust_boundary_event_refs
+- conflict_event_refs
+- validation_event_refs
+- quality_gate_event_ref
+- handoff_event_ref
+
+本阶段不 emit 真实事件，不写真实审计库，不连接外部审计系统；所有字段均为声明级 ref。

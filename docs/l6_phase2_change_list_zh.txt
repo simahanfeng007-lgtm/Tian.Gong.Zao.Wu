@@ -1,0 +1,47 @@
+天工造物 L6 第二阶段修改清单
+生成日期：2026-06-05
+
+一、新增源码文件
+- tiangong_kernel/l6_plugins/common/admission.py
+- tiangong_kernel/l6_plugins/common/audit.py
+- tiangong_kernel/l6_plugins/common/events.py
+- tiangong_kernel/l6_plugins/common/handoff_phase2.py
+- tiangong_kernel/l6_plugins/common/interoperation.py
+- tiangong_kernel/l6_plugins/common/invocation_return.py
+- tiangong_kernel/l6_plugins/common/phase2_quality.py
+- tiangong_kernel/l6_plugins/common/projections_phase2.py
+- tiangong_kernel/l6_plugins/common/versioning.py
+
+二、修改源码文件
+- tiangong_kernel/l6_plugins/common/__init__.py
+- tiangong_kernel/l6_plugins/common/forbidden_scan.py
+- tiangong_kernel/l6_plugins/common/invariants.py
+- tiangong_kernel/l6_plugins/common/lifecycle.py
+
+三、新增测试文件
+- tests/test_l6_phase2_audit_context_public.py
+- tests/test_l6_phase2_handoff_interoperation.py
+- tests/test_l6_phase2_invocation_return_admission.py
+- tests/test_l6_phase2_lifecycle_event_projection.py
+- tests/test_l6_phase2_version_quality_scan.py
+
+四、未修改范围
+- L0-L5 全部 Python 源码未变化。
+- 未修改既有测试文件。
+- 未删除任何测试。
+
+五、主要新增对象
+- L6AuditTraceEnvelope
+- L6PluginLifecycleContract
+- VersionedPluginEventEnvelope
+- VersionedStateProjectionEnvelope
+- VersionedPluginHandoffEnvelope
+- ResultReturnEnvelope / FailureReturnEnvelope / AckEnvelope / NackEnvelope / CancelEnvelope / TimeoutEnvelope / AggregationEnvelope
+- PluginInteroperationBoundaryContract / InteroperationBoundaryCheck
+- L6PluginDiscoverableProjection / L3PluginCandidateView / L6PluginInvocationRequest / L6PluginOutputReturnEnvelope
+- L6Phase2QualityGateDecision / L6Phase2TestEvidenceIndex / L6Phase2RegressionMatrix
+- ContextRequirement / BeliefRequirement / WorldRequirement / ContextView / ContextProjection / BeliefCandidateProjection / WorldCandidateProjection / ContextSafetyProjection
+- L6VersionedContractRef / L6VersionedContractSet / L6CompatibilityMatrix
+- L6PluginAdmissionDecision / L6PluginAdmissionReport / L6MiniSpecialtyDesignEnvelope / L6PublicContractPatchProposal / L6PublicContractPatchImpactAssessment
+- L6MigrationPlanDeclaration / L6RollbackRouteDeclaration / L6HotSwitchReadinessDeclaration / L6ReplayCompatibilityDeclaration / L6BreakingChangeAssessment
+- L6ContractPatchQualityGateDecision / L6ContractPatchPublicProjection / L6ContractPatchAuditIndex

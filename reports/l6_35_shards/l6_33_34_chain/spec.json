@@ -1,0 +1,16 @@
+{
+  "name": "l6_33_34_chain",
+  "command": [
+    "/opt/pyvenv/bin/python3",
+    "-m",
+    "pytest",
+    "tests/test_l6_33_test_shard_runner.py",
+    "tests/test_l6_34_model_cli_continuity.py",
+    "-q"
+  ],
+  "cwd": "/mnt/data/l635_work/project",
+  "timeout_seconds": 120,
+  "purpose": "pytest shard",
+  "required": true,
+  "rerun_command": "/opt/pyvenv/bin/python3 -m pytest tests/test_l6_33_test_shard_runner.py tests/test_l6_34_model_cli_continuity.py -q"
+}

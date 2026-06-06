@@ -1,0 +1,23 @@
+L5 Final PublicProjection 摘要（hotfix2 情志专项补丁后）
+
+- closure summary：consumed_phase_count=7，closure_phase=phase8_final。
+- generic plugin host readiness：PASS_WITH_COMPATIBLE_EXTENSION。
+- production mount readiness：L6 planning ready only；execution/build/delivery/tool_call 全部 forbidden。
+- affective plugin readiness：L6 planning only；execution/authorization/policy_bypass/memory_mutation 全部 forbidden；projection 仅允许 redacted refs。
+- affective modulation：只允许 expression / attention / priority / memory weight / risk sensitivity / learning motivation 六类调制引用；不得产生执行令、授权或副作用。
+- governance coverage：Event / Effect / Lease / Policy / Contract / RiskDecision / HumanGate / AuditEvidence / ResourceBudget / PrivacySecret / VersionMigration / TestValidationRegression / TransactionCompensation / ArtifactProvenanceIntegrity / ContextSafety / CommunicationHandoff / SelfHealing / SelfEvolution / MemoryForgetting / SkillToolRelease / AffectiveBoundary。
+- Context/Belief/World：boundary refs only；L6 Context Assembler required。
+- Communication Handoff：MessageEnvelope required；ResultReturn required。
+- SkillToolRelease：contract refs only；L5 review hint required。
+- SelfHealing / RecoveryPlan：declaration refs only；not executor。
+- SelfEvolution：L6 planning only；commit requires boundary。
+- Memory/Forgetting：governance refs only；deletion tombstone audit required。
+- ResourceBudget：phase5 boundary digest ref only。
+- VersionMigration：rollback / hot-switch / replay boundary required。
+- L6 handoff：冻结声明，不是执行授权。
+- redacted evidence refs：只暴露 evidence:redacted:* 等脱敏引用。
+
+公共投影安全：
+- 同时检查 summary key 与 value。
+- 危险 key / live locator / secret-like token 的具体目录不在 public projection 正文展开，只引用 policy_ref:redacted_forbidden_key_catalog。
+- 禁止真实路径、外部地址、动态加载线索、命令文本、凭据材料、完整情感模型、用户敏感心理状态、心理画像原文或可识别个人敏感信息。

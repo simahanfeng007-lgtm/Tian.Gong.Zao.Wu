@@ -1,0 +1,76 @@
+天工造物新版 L5 插件宿主层第一阶段开发日志
+生成日期：2026-06-04
+阶段：L5 第一阶段，插件宿主底座与不可执行结构壳
+
+一、前置核验
+- 必读前置文档存在性与可读性：通过。
+- L0-L4 开发前哈希基线：已生成 docs/l5_phase1_pre_change_hash_manifest.txt。
+- 开发前测试清单摘要：已记录于 docs/l5_phase1_test_inventory_compare_zh.txt。
+- 可编辑路径白名单：本阶段仅新增 tiangong_kernel/l5_plugin_host/**、tests/test_l5_phase1_*.py、docs/l5_phase1_*.txt。
+
+二、本阶段新增代码目录
+- tiangong_kernel/l5_plugin_host/
+
+三、新增代码文件
+- tiangong_kernel/l5_plugin_host/__init__.py
+- tiangong_kernel/l5_plugin_host/_common.py
+- tiangong_kernel/l5_plugin_host/audit_anchor.py
+- tiangong_kernel/l5_plugin_host/boundary_baseline.py
+- tiangong_kernel/l5_plugin_host/context.py
+- tiangong_kernel/l5_plugin_host/edit_scope.py
+- tiangong_kernel/l5_plugin_host/error.py
+- tiangong_kernel/l5_plugin_host/handoff_index.py
+- tiangong_kernel/l5_plugin_host/identity.py
+- tiangong_kernel/l5_plugin_host/invariants.py
+- tiangong_kernel/l5_plugin_host/manifest_view.py
+- tiangong_kernel/l5_plugin_host/no_l6_implementation_guarantee.py
+- tiangong_kernel/l5_plugin_host/no_legacy_runtime_guarantee.py
+- tiangong_kernel/l5_plugin_host/no_live_external_action_guarantee.py
+- tiangong_kernel/l5_plugin_host/no_lower_layer_mutation_guarantee.py
+- tiangong_kernel/l5_plugin_host/package_descriptor.py
+- tiangong_kernel/l5_plugin_host/public_export_map.py
+- tiangong_kernel/l5_plugin_host/quality_gate.py
+- tiangong_kernel/l5_plugin_host/readiness.py
+- tiangong_kernel/l5_plugin_host/registry_entry.py
+- tiangong_kernel/l5_plugin_host/registry_snapshot.py
+- tiangong_kernel/l5_plugin_host/result.py
+- tiangong_kernel/l5_plugin_host/serialization.py
+- tiangong_kernel/l5_plugin_host/test_evidence.py
+
+四、新增测试文件
+- tests/test_l5_phase1_audit_anchor_refs_only.py
+- tests/test_l5_phase1_boundary_baseline_requires_refs.py
+- tests/test_l5_phase1_edit_scope_and_hash_manifest.py
+- tests/test_l5_phase1_forbidden_no_dynamic_loading.py
+- tests/test_l5_phase1_handoff_index_refs_only.py
+- tests/test_l5_phase1_identity_and_context.py
+- tests/test_l5_phase1_import_has_no_side_effects.py
+- tests/test_l5_phase1_manifest_view_is_data_only.py
+- tests/test_l5_phase1_no_l6_implementation.py
+- tests/test_l5_phase1_public_exports_and_serialization.py
+- tests/test_l5_phase1_quality_gate_decision.py
+- tests/test_l5_phase1_registry_accountability_fields.py
+- tests/test_l5_phase1_registry_snapshot_is_immutable.py
+- tests/test_l5_phase1_requirement_traceability.py
+- tests/test_l5_phase1_test_and_regression_evidence_index.py
+
+五、核心实现
+1. 建立 L5 插件宿主身份、上下文、边界基线、Manifest 视图、包描述、RegistryEntry、RegistrySnapshot、handoff 证据索引。
+2. 建立审计证据责任链锚点：audit anchor、evidence ref、provenance ref、accountability ref、tamper evidence ref。
+3. 建立四类禁止越界保证对象：无 L6 业务逻辑、无真实外部动作、无下层变更、无旧主链恢复。
+4. 建立 L5Phase1Readiness、L5Phase1InvariantSuite、L5PublicExportMap。
+5. 建立 L5Phase1QualityGateDecision/Summary、BlockingFinding、NonBlockingFinding。
+6. 建立测试证据索引与回归证据索引对象。
+7. 建立编辑范围与哈希清单数据壳。
+
+六、第一阶段边界
+- 未实现真实插件生命周期调度。
+- 未实现真实插件加载。
+- 未创建真实沙箱。
+- 未读取真实凭据。
+- 未签发真实许可、租约、确认、回滚或切换票据。
+- 未导入、实例化或调用 L4 真实动作实现。
+- 未修改 L0-L4 公共语义。
+
+七、阶段结论
+L5 第一阶段开发完成，当前验证结果见 docs/l5_phase1_validation_report_zh.txt 与 docs/l5_phase1_test_results_zh.txt。

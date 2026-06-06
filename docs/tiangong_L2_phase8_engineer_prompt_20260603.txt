@@ -1,0 +1,882 @@
+﻿你是“天工造物新版 L2 状态层”第八阶段开发工程师。
+
+本阶段只开发 L2 第八阶段：组件、兼容迁移、状态投影与 L2 总收口。
+
+不得开发 L3。
+不得开发 L4。
+不得开发 L5。
+不得开发 L6。
+不得回改 L0。
+不得回改 L1。
+不得重构 L2 第一至第七阶段公共骨架，除非发现明确阻断第八阶段总收口的 import/export、类型命名、序列化、hash、快照、增量或测试兼容问题；如必须修复，只允许做最小兼容修复，并在报告中逐项说明。
+不得实现真实组件运行器、真实插件宿主、真实迁移执行器、真实状态存储、真实投影渲染服务、真实模型调用、真实工具调用、调度器、运行循环、外部 IO 或第三方依赖。
+
+你必须先读取并遵守用户上传的：
+1. L1 最终冻结归档包；
+2. L2 第一阶段交付包、开发日志、handoff 报告；
+3. L2 第二阶段交付包、开发日志、handoff 报告；
+4. L2 第三阶段交付包、开发日志、handoff 报告；
+5. L2 第四阶段交付包、开发日志、handoff 报告；
+6. L2 第五阶段交付包、开发日志、handoff 报告；
+7. L2 第六阶段交付包、开发日志、handoff 报告；
+8. L2 第七阶段交付包、开发日志、handoff 报告；
+9. 本提示词。
+
+如果前置文件缺失，先明确列出缺失项，不得臆造已有代码结构。
+如果前置文件齐全，进入 L2 第八阶段工程。
+
+────────────────────────────────
+一、本阶段定位
+────────────────────────────────
+
+L2 是状态层。
+第八阶段是 L2 的总收口阶段。
+
+本阶段只做四件事：
+
+1. 组件状态：
+   定义 L2 内部组件、状态包、状态域、模块健康、版本、依赖、导出关系的状态对象。
+
+2. 兼容迁移状态：
+   定义状态 schema 兼容、旧状态映射、迁移提示、弃用提示、兼容风险的状态对象。
+   注意：只记录迁移状态，不执行真实迁移。
+
+3. 状态投影：
+   定义面向人类、面向大模型、面向调试、面向审计、面向后续层的结构化状态投影对象。
+   注意：只定义投影数据结构，不实现真实 UI、不生成自然语言聊天、不调用模型。
+
+4. L2 总收口：
+   整理 __init__.py 导出、状态总索引、全阶段兼容测试、冻结报告、未做事项、L3 交接边界。
+   注意：只做 L2 层冻结收口，不启动 L3 开发。
+
+这些对象只回答：
+
+1. L2 有哪些状态组件？
+2. 各状态组件版本、健康、依赖、导出是否清晰？
+3. 状态 schema 是否存在兼容或迁移提示？
+4. 某个完整生命体运行切片可以如何被投影给人、人类审计、大模型或后续层？
+5. L2 全阶段是否可稳定序列化、稳定 hash、可快照、可增量、可冻结交接？
+6. L2 与 L0/L1/L3-L6 的边界是否清楚？
+
+这些对象不回答：
+
+1. 后续 L3 应该如何调度；
+2. 后续 L4 应该如何执行；
+3. 后续 L5 应该如何裁决；
+4. 后续 L6 子系统应该如何实现；
+5. 如何真实迁移旧数据；
+6. 如何真实投影到 UI；
+7. 如何让模型实时读取或执行；
+8. 如何调用工具、运行命令、访问文件、访问网络或执行插件。
+
+第八阶段的核心边界是：
+
+投影状态可以存在；
+真实投影服务不得存在。
+兼容迁移状态可以存在；
+真实迁移执行不得存在。
+组件状态可以存在；
+真实组件宿主不得存在。
+总收口可以存在；
+L3 开发不得开始。
+
+────────────────────────────────
+二、必须继承的新版主链口径
+────────────────────────────────
+
+新版主链仍然是：
+
+大模型 → Skill 直显 → Skill 选中 → 工具组释放 → 模型提出工具调用意图 → 观察结果 → 反馈 → 候选 / 验证 / 回滚状态
+
+L2 第八阶段要把第一至第七阶段形成的状态层完整收口，为后续 L3 编排层提供稳定状态基座。
+
+不得恢复旧能力包体系。
+不得恢复 CapabilityPort / AbilityPackagePort 作为主链概念。
+不得恢复“神枢”作为新版核心概念。
+不得恢复旧 Runtime 调度口径。
+不得把旧版身体系统、知识系统、能力系统的执行逻辑塞入 L2。
+不得让 L2 状态层承担 L3 编排、L4 执行、L5 边界、L6 子系统职责。
+不得让状态投影变成模型执行权限。
+不得让兼容迁移状态变成真实迁移器。
+
+────────────────────────────────
+三、本阶段建议新增文件
+────────────────────────────────
+
+你应优先在已有 L2 状态包目录内新增文件。
+若前七阶段已经确定实际目录名，请以现有目录为准。
+若前七阶段采用推荐目录，则继续使用：
+
+tiangong_kernel/l2_state/
+
+建议新增或补充以下模块：
+
+1. component_state.py
+   - L2 状态组件状态；
+   - 状态域状态；
+   - 模块健康状态；
+   - 依赖状态；
+   - 导出状态；
+   - 版本状态。
+
+2. compatibility_state.py
+   - 状态 schema 兼容状态；
+   - 旧状态映射状态；
+   - 弃用状态；
+   - 迁移提示状态；
+   - 兼容风险状态；
+   - 兼容门禁状态。
+
+3. projection_state.py
+   - 人类可读投影状态；
+   - 大模型可见投影状态；
+   - 调试投影状态；
+   - 审计投影状态；
+   - L3 交接投影状态；
+   - 运行切片投影状态。
+
+4. state_catalog.py
+   - L2 状态对象目录；
+   - 状态域索引；
+   - 状态对象元信息；
+   - 状态版本索引；
+   - 注意：只做静态目录或纯数据结构，不扫描文件系统。
+
+5. l2_closure_state.py
+   - L2 冻结状态；
+   - L2 总验收状态；
+   - L2 未做事项状态；
+   - L2 L3 交接状态；
+   - L2 稳定性整修提示状态。
+
+6. __init__.py
+   - 汇总导出第一至第八阶段公共对象；
+   - 不得制造副作用；
+   - 不得执行扫描、注册、读取、写入。
+
+如前七阶段已有相近文件名，优先复用既有命名体系，避免重复概念。
+
+────────────────────────────────
+四、核心对象设计要求
+────────────────────────────────
+
+所有状态对象必须满足：
+
+1. 使用 @dataclass(frozen=True, slots=True)。
+2. 字段必须可稳定序列化。
+3. 字段默认值必须安全，不使用可变默认值。
+4. 不持有真实文件句柄、数据库连接、网络连接、模型客户端、工具对象、回调函数、协程、线程、锁或运行时执行器。
+5. 只记录 id、ref、status、kind、scope、timestamp、boundary、summary、hash、版本号、依赖、导出、投影片段、质量指标等状态事实。
+6. 对可能很长的内容要克制。优先记录摘要、hash、引用、长度、来源、可见性，而不是保存全文。
+7. 必须能参与快照、增量、稳定 hash、等值比较。
+8. 必须有中文 docstring。
+9. 必须与 L0/L1 类型边界保持兼容。
+10. 禁止 import L3、L4、L5、L6 或任何未来层实现。
+11. 禁止使用第三方依赖。
+12. 禁止任何真实 IO、模型调用、工具调用或外部副作用。
+
+建议字段类型优先使用：
+
+- str
+- int
+- float
+- bool
+- tuple
+- frozenset
+- enum
+- datetime 字符串或 L0 时间类型
+- L0/L1 已定义的引用对象
+- 本阶段状态对象
+
+避免使用：
+
+- dict 的可变嵌套结构；
+- list；
+- set；
+- 任意 object；
+- Callable；
+- Any；
+- 真实外部对象。
+
+如必须使用 dict/list 输入，应在构造或工厂函数中规整为 tuple/frozenset 或稳定映射结构。
+
+────────────────────────────────
+五、component_state.py 参考范围
+────────────────────────────────
+
+该模块只定义组件状态，不实现组件宿主。
+
+建议包含但不限于：
+
+1. L2StateDomain
+   - base；
+   - runtime_continuity；
+   - skill_tool_model_action；
+   - control_resource_environment_safety；
+   - observation；
+   - memory_context_retrieval_learning；
+   - candidate_change_iteration_evolution_validation_recovery；
+   - projection_compatibility_closure。
+
+2. ComponentStatus
+   - declared；
+   - available；
+   - partially_available；
+   - deprecated；
+   - blocked；
+   - failed；
+   - archived。
+
+3. L2ComponentState
+   - component_id；
+   - domain；
+   - module_ref；
+   - version；
+   - status；
+   - public_exports；
+   - dependency_refs；
+   - health_ref；
+   - summary；
+   - created_at；
+   - updated_at。
+
+4. L2ComponentDependencyState
+   - dependency_id；
+   - source_component_ref；
+   - target_component_refs；
+   - dependency_kind；
+   - compatibility_status；
+   - missing_refs；
+   - reason_summary。
+
+5. L2ComponentHealthState
+   - health_id；
+   - component_refs；
+   - import_status；
+   - serialization_status；
+   - hash_status；
+   - test_status；
+   - issue_count；
+   - summary。
+
+6. L2ExportState
+   - export_id；
+   - module_ref；
+   - exported_names；
+   - missing_expected_names；
+   - deprecated_names；
+   - export_status；
+   - summary。
+
+禁止事项：
+
+- 不得实现插件加载；
+- 不得扫描目录；
+- 不得动态 import 所有模块做副作用检查；
+- 不得启动组件；
+- 不得运行服务；
+- 不得读取工程文件生成目录。
+
+────────────────────────────────
+六、compatibility_state.py 参考范围
+────────────────────────────────
+
+该模块只定义兼容迁移状态，不执行迁移。
+
+建议包含但不限于：
+
+1. CompatibilityStatus
+   - compatible；
+   - compatible_with_warning；
+   - migration_needed；
+   - deprecated；
+   - incompatible；
+   - unknown。
+
+2. SchemaVersionState
+   - schema_ref；
+   - version；
+   - domain；
+   - stable_hash；
+   - compatibility_status；
+   - summary。
+
+3. LegacyMappingState
+   - mapping_id；
+   - legacy_ref；
+   - new_ref；
+   - mapping_status；
+   - confidence_hint；
+   - loss_risk；
+   - reason_summary。
+
+4. DeprecationState
+   - deprecation_id；
+   - target_ref；
+   - replacement_ref；
+   - deprecation_status；
+   - remove_after_hint；
+   - reason_summary。
+
+5. MigrationHintState
+   - migration_hint_id；
+   - source_schema_ref；
+   - target_schema_ref；
+   - required_steps_summary；
+   - risk_hint；
+   - validation_need_hint；
+   - recovery_need_hint；
+   - 注意：只记录提示，不执行步骤。
+
+6. CompatibilityGateState
+   - gate_id；
+   - target_refs；
+   - schema_refs；
+   - mapping_refs；
+   - validation_refs；
+   - gate_status；
+   - reason_summary。
+
+禁止事项：
+
+- 不得读取旧数据；
+- 不得执行真实迁移；
+- 不得写入转换结果；
+- 不得删除弃用对象；
+- 不得自动修改 schema；
+- 不得执行兼容脚本；
+- 不得把旧能力包体系迁回主链。
+
+────────────────────────────────
+七、projection_state.py 参考范围
+────────────────────────────────
+
+该模块是第八阶段核心。
+只定义状态投影数据结构，不实现真实投影服务。
+
+建议包含但不限于：
+
+1. ProjectionAudience
+   - human；
+   - model；
+   - debug；
+   - audit；
+   - l3_handoff；
+   - test；
+   - unknown。
+
+2. ProjectionStatus
+   - declared；
+   - ready；
+   - partial；
+   - stale；
+   - blocked；
+   - archived。
+
+3. ProjectionVisibility
+   - hidden；
+   - summary_only；
+   - ref_only；
+   - detailed；
+   - restricted。
+
+4. ProjectionFragmentState
+   - fragment_id；
+   - source_state_refs；
+   - audience；
+   - visibility；
+   - title；
+   - summary；
+   - content_hash；
+   - boundary_status；
+   - freshness；
+   - created_at。
+
+5. ModelVisibleStateProjection
+   - projection_id；
+   - run_ref；
+   - skill_refs；
+   - tool_group_refs；
+   - model_intent_refs；
+   - observation_refs；
+   - memory_context_refs；
+   - candidate_refs；
+   - validation_refs；
+   - recovery_refs；
+   - visible_fragments；
+   - hidden_reason_summary；
+   - status；
+   - created_at。
+
+   注意：
+   该对象只记录“模型可见状态投影”。
+   不给模型执行权限。
+   不释放工具。
+   不构造真实 prompt。
+   不调用模型。
+
+6. HumanReadableStateProjection
+   - projection_id；
+   - title；
+   - lifecycle_summary；
+   - current_run_summary；
+   - active_skill_summary；
+   - tool_group_summary；
+   - observation_summary；
+   - candidate_summary；
+   - validation_summary；
+   - recovery_summary；
+   - risk_summary；
+   - status；
+   - created_at。
+
+   注意：
+   这里只是结构化状态摘要对象，不要求生成自然语言长文。
+
+7. DebugStateProjection
+   - projection_id；
+   - component_refs；
+   - dependency_refs；
+   - failed_invariant_refs；
+   - serialization_issue_refs；
+   - import_issue_refs；
+   - test_result_refs；
+   - status；
+   - created_at。
+
+8. AuditStateProjection
+   - projection_id；
+   - audit_refs；
+   - boundary_refs；
+   - decision_refs；
+   - recovery_refs；
+   - validation_refs；
+   - immutable_summary_hash；
+   - status；
+   - created_at。
+
+9. L3HandoffProjection
+   - projection_id；
+   - l2_version；
+   - stable_state_domains；
+   - public_state_refs；
+   - boundary_refs；
+   - unsupported_items；
+   - l3_allowed_usage_summary；
+   - l3_forbidden_usage_summary；
+   - status；
+   - created_at。
+
+10. RuntimeSliceProjectionState
+   - slice_id；
+   - run_ref；
+   - task_ref；
+   - goal_ref；
+   - skill_ref；
+   - tool_group_ref；
+   - model_intent_ref；
+   - observation_ref；
+   - context_ref；
+   - candidate_ref；
+   - validation_ref；
+   - recovery_ref；
+   - projection_refs；
+   - status；
+   - created_at。
+
+禁止事项：
+
+- 不得实现 UI；
+- 不得生成真实 prompt；
+- 不得调用模型总结；
+- 不得决定模型能看什么；
+- 不得释放工具；
+- 不得执行权限裁决；
+- 不得读取真实状态仓库；
+- 不得写审计日志；
+- 不得创建运行时事件流。
+
+────────────────────────────────
+八、state_catalog.py 参考范围
+────────────────────────────────
+
+该模块只定义静态状态目录和状态元信息，不扫描文件系统。
+
+建议包含但不限于：
+
+1. StateObjectMeta
+   - object_name；
+   - module_ref；
+   - domain；
+   - phase；
+   - version；
+   - public；
+   - deprecated；
+   - summary；
+   - stable_hash_hint。
+
+2. StateDomainCatalog
+   - catalog_id；
+   - domain；
+   - state_objects；
+   - dependency_domains；
+   - export_refs；
+   - summary。
+
+3. L2StateCatalog
+   - catalog_id；
+   - l2_version；
+   - domains；
+   - total_object_count；
+   - public_object_count；
+   - deprecated_object_count；
+   - compatibility_refs；
+   - created_at。
+
+禁止事项：
+
+- 不得自动扫描 Python 文件；
+- 不得动态 import 所有模块；
+- 不得读取 pyproject；
+- 不得读取测试目录；
+- 不得把目录生成当成构建系统。
+
+如果需要自动化目录生成，应留给后续工程工具或 L3/L6，不在 L2 第八阶段实现。
+
+────────────────────────────────
+九、l2_closure_state.py 参考范围
+────────────────────────────────
+
+该模块只定义 L2 冻结与交接状态，不替代真实报告。
+
+建议包含但不限于：
+
+1. L2ClosureStatus
+   - open；
+   - collecting；
+   - validating；
+   - ready_for_freeze；
+   - frozen；
+   - blocked；
+   - reopened。
+
+2. L2ValidationSummaryState
+   - summary_id；
+   - compileall_status；
+   - pytest_status；
+   - serialization_status；
+   - hash_status；
+   - import_status；
+   - boundary_status；
+   - passed_count；
+   - failed_count；
+   - warning_count；
+   - not_run_summary；
+   - created_at。
+
+3. L2KnownIssueState
+   - issue_id；
+   - severity；
+   - affected_refs；
+   - summary；
+   - workaround_summary；
+   - target_followup_layer；
+   - status。
+
+4. L2HandoffState
+   - handoff_id；
+   - l2_version；
+   - frozen_refs；
+   - l3_entry_refs；
+   - l3_allowed_usage_summary；
+   - l3_forbidden_usage_summary；
+   - known_issue_refs；
+   - validation_summary_ref；
+   - status；
+   - created_at。
+
+5. L2FreezeState
+   - freeze_id；
+   - l2_version；
+   - source_archive_ref；
+   - manifest_hash；
+   - validation_summary_ref；
+   - handoff_ref；
+   - freeze_status；
+   - reason_summary；
+   - created_at。
+
+禁止事项：
+
+- 不得打包 zip；
+- 不得生成真实 hash 文件；
+- 不得运行测试；
+- 不得写报告文件；
+- 不得改版本号；
+- 不得启动 L3。
+
+真实 zip、报告、manifest 可以由工程员在交付流程中生成，但 L2 代码内不得执行这些动作。
+
+────────────────────────────────
+十、总导出与包内收口要求
+────────────────────────────────
+
+你必须检查并整理 L2 状态包的公共导出。
+
+要求：
+
+1. __init__.py 导出第一至第八阶段的公共状态对象。
+2. __all__ 如已存在，必须完整且有序。
+3. 不得删除前七阶段已有导出。
+4. 不得改变前七阶段公共对象名称，除非原名称明确错误且有兼容别名。
+5. 如新增兼容别名，必须在 compatibility_state.py 或报告中说明。
+6. 不得在导出时实例化对象。
+7. 不得在导出时读文件、扫描目录、注册插件、启动线程或创建连接。
+8. 导出顺序建议按阶段或状态域排列，便于审计。
+
+────────────────────────────────
+十一、与第一至第七阶段的接线要求
+────────────────────────────────
+
+你必须检查并保持与前七阶段对象的兼容：
+
+1. 与第一阶段基础状态骨架兼容：
+   - 统一状态 id；
+   - 统一状态码；
+   - 统一快照/增量；
+   - 统一不变量；
+   - 统一稳定序列化；
+   - 统一 hash 口径。
+
+2. 与第二阶段生命体运行状态兼容：
+   - RuntimeSliceProjectionState / ModelVisibleStateProjection 可引用 RunState、TaskState、GoalPlanState、ContinuityState 稳定 ref；
+   - 不得导入运行循环；
+   - 不得执行续接或恢复。
+
+3. 与第三阶段 Skill / ToolGroup / Model / Action 状态兼容：
+   - 投影对象可引用 SkillRef、ToolGroupRef、ToolIntentRef、ActionIntentRef、ModelFeedbackRef；
+   - 不得执行 Skill 选择；
+   - 不得释放工具组；
+   - 不得调用模型或工具。
+
+4. 与第四阶段控制面、资源、环境、安全状态兼容：
+   - 投影对象必须能携带 boundary_status、safety_ref、resource_ref、environment_ref；
+   - 不得实现真实裁决；
+   - 不得绕过边界状态。
+
+5. 与第五阶段观察面状态兼容：
+   - 投影对象可引用 ObservationFrame、EventStream、Metric、AuditObservation 的 ref；
+   - 不得读取观察流；
+   - 不得写审计日志。
+
+6. 与第六阶段记忆、上下文、检索、学习状态兼容：
+   - 投影对象可引用 MemoryRefState、ContextWindowState、RetrievalResultRefState、LearningSignalState 等稳定 ref；
+   - 不得执行检索；
+   - 不得执行学习；
+   - 不得生成 Skill。
+
+7. 与第七阶段候选、变更、迭代、进化、实验、验证、恢复状态兼容：
+   - 投影对象可引用 CandidateState、ChangeState、IterationState、EvolutionState、ExperimentState、ValidationState、RecoveryState；
+   - 不得生成补丁；
+   - 不得执行实验；
+   - 不得执行验证；
+   - 不得执行回滚。
+
+────────────────────────────────
+十二、测试要求
+────────────────────────────────
+
+必须新增或补充测试。
+
+建议测试文件：
+
+tests/test_l2_phase8_component_compatibility_state.py
+tests/test_l2_phase8_projection_state.py
+tests/test_l2_phase8_catalog_and_closure_state.py
+tests/test_l2_phase8_state_serialization_and_hash.py
+tests/test_l2_phase8_boundary_no_execution.py
+tests/test_l2_phase8_full_l2_integration.py
+
+至少覆盖：
+
+1. 所有新增状态对象可实例化。
+2. 所有新增状态对象 frozen，不允许修改字段。
+3. 所有新增状态对象 slots 生效。
+4. 所有新增状态对象可稳定序列化。
+5. 所有新增状态对象可稳定 hash。
+6. 所有新增状态对象默认值安全，无可变默认值污染。
+7. ComponentState 不启动组件、不扫描目录。
+8. CompatibilityState 不执行迁移、不读取旧数据。
+9. ProjectionState 不生成真实 prompt、不调用模型、不释放工具。
+10. StateCatalog 不扫描文件系统、不动态 import 造成副作用。
+11. L2ClosureState 不打包、不运行测试、不写报告。
+12. 第八阶段不得 import L3-L6。
+13. 不存在文件 IO、网络 IO、数据库连接、模型调用、工具调用、命令执行。
+14. __init__.py 导出第一至第八阶段公共对象且无副作用。
+15. 第一至第八阶段状态对象可共同参与稳定序列化、稳定 hash、快照/增量。
+16. L2 与 L0/L1 兼容。
+17. compileall 通过。
+18. 相关 pytest 分片通过。
+19. 如完整 pytest 成本可控，建议运行完整 pytest；未运行不得声称完整通过。
+
+推荐命令：
+
+python -m compileall tiangong_kernel tests
+pytest tests/test_l2_phase8_component_compatibility_state.py -q
+pytest tests/test_l2_phase8_projection_state.py -q
+pytest tests/test_l2_phase8_catalog_and_closure_state.py -q
+pytest tests/test_l2_phase8_state_serialization_and_hash.py -q
+pytest tests/test_l2_phase8_boundary_no_execution.py -q
+pytest tests/test_l2_phase8_full_l2_integration.py -q
+
+如项目已有统一测试入口，优先按项目已有入口运行。
+如果完整 pytest 成本可控，可以运行完整 pytest。
+如果没有运行完整 pytest，不得声称完整 pytest 通过。
+
+────────────────────────────────
+十三、L2 总冻结验收要求
+────────────────────────────────
+
+第八阶段不仅要完成本阶段代码，还要做 L2 总冻结前的工程验收。
+
+必须检查：
+
+1. L2 第一至第八阶段目录结构是否清晰。
+2. L2 所有公共对象是否导出明确。
+3. L2 所有状态对象是否 frozen + slots。
+4. L2 是否仍然保持纯状态层。
+5. L2 是否没有真实 IO。
+6. L2 是否没有模型调用。
+7. L2 是否没有工具调用。
+8. L2 是否没有调度器。
+9. L2 是否没有插件宿主。
+10. L2 是否没有第三方依赖。
+11. L2 是否没有 import L3-L6。
+12. L2 是否没有恢复旧能力包主链。
+13. L2 是否没有恢复 CapabilityPort / AbilityPackagePort 主链概念。
+14. L2 是否没有恢复“神枢”作为新版核心概念。
+15. L2 是否没有让状态层承担执行、裁决、调度、学习、进化职责。
+16. L2 是否可以作为 L3 编排层的稳定输入基础。
+17. L2 是否保留了自我学习、自我迭代、自我进化所需的状态入口，但没有实现算法。
+18. L2 是否有明确未做事项和 L3 交接边界。
+
+必须输出中文总收口报告，至少包括：
+
+1. L2 第八阶段完成内容；
+2. L2 第一至第八阶段总览；
+3. L2 新增文件清单；
+4. L2 公共对象清单；
+5. L2 测试结果；
+6. L2 未运行测试说明；
+7. L2 兼容性说明；
+8. L2 禁止越界项自检；
+9. L2 已知问题；
+10. L2 未做事项；
+11. 是否建议进入 L2 全阶段总质检；
+12. 是否建议进入 L3 策划，不得直接开始 L3 开发。
+
+注意：
+第八阶段完成后，推荐下一步是“L2 全阶段总质检”，不是直接 L3 开发。
+如果用户明确要进入 L3 策划，也应基于 L2 冻结报告进行。
+
+────────────────────────────────
+十四、禁止项硬边界
+────────────────────────────────
+
+本阶段严禁：
+
+1. 修改 L0。
+2. 修改 L1。
+3. 重构 L2 第一至第七阶段公共骨架。
+4. 开发 L3。
+5. 开发 L4。
+6. 开发 L5。
+7. 开发 L6。
+8. 实现真实组件运行器。
+9. 实现真实插件宿主。
+10. 实现真实状态存储。
+11. 实现真实迁移执行器。
+12. 实现真实投影服务。
+13. 实现真实 UI。
+14. 生成真实 prompt。
+15. 调用模型。
+16. 调用工具。
+17. 执行文件 IO。
+18. 执行网络 IO。
+19. 执行命令。
+20. 访问数据库。
+21. 新增第三方依赖。
+22. 引入旧 Runtime 执行口径。
+23. 恢复旧能力包主链。
+24. 恢复 CapabilityPort / AbilityPackagePort 主链概念。
+25. 恢复“神枢”作为新版核心概念。
+26. 让投影对象授予执行权限。
+27. 让兼容迁移状态执行真实迁移。
+28. 让 L2 冻结状态执行打包、测试或写报告。
+29. 声称完整 pytest 通过，除非确实完整跑完。
+30. 删除前七阶段公共对象或破坏兼容。
+
+如果发现必须触碰禁止项，停止开发并写入阻断报告，不得自行越界。
+
+────────────────────────────────
+十五、本阶段完成标准
+────────────────────────────────
+
+第八阶段完成时，必须达到：
+
+1. L2 状态层新增组件、兼容迁移、状态投影、状态目录、L2 总收口状态对象。
+2. 所有新增对象均为冻结状态对象。
+3. 所有新增对象均稳定序列化、稳定 hash。
+4. 所有新增对象均无 IO、无执行、无副作用。
+5. 与 L2 第一至第七阶段状态对象兼容。
+6. L2 第一至第八阶段公共导出清晰。
+7. ModelVisibleStateProjection 等投影对象存在，但不授予模型执行权限。
+8. CompatibilityState 等迁移对象存在，但不执行真实迁移。
+9. L2ClosureState 等冻结对象存在，但不打包、不跑测试、不写报告。
+10. 没有进入 L3-L6。
+11. 没有恢复旧能力包、CapabilityPort、神枢或旧 Runtime 口径。
+12. 测试覆盖新增状态对象、边界、序列化、hash、兼容性、全阶段整合。
+13. compileall 通过。
+14. 相关 pytest 通过。
+15. 输出 L2 第八阶段交付包、开发日志、handoff 报告、validation 报告、L2 总收口报告、修改清单、测试结果、未做事项。
+
+────────────────────────────────
+十六、交付物要求
+────────────────────────────────
+
+完成后必须交付：
+
+1. L2 第八阶段完整工程 zip；
+2. L2 第八阶段开发日志；
+3. L2 第八阶段 handoff 报告；
+4. L2 第八阶段 validation 报告；
+5. L2 第一至第八阶段总收口报告；
+6. 修改清单；
+7. 测试结果；
+8. 未做事项；
+9. 如有最小兼容修复，必须单独列出：
+   - 修复文件；
+   - 修复原因；
+   - 是否影响前七阶段；
+   - 对应测试结果；
+10. 是否建议进入 L2 全阶段总质检。
+
+报告必须中文。
+不要在聊天框展开大量细节。
+将详细内容写入 txt / md 文件。
+交付 zip 必须是完整工程包，不要只给 patch。
+
+────────────────────────────────
+十七、给工程员的开工口令
+────────────────────────────────
+
+开始 L2 第八阶段工程。
+
+请先读取我上传的 L1 最终冻结归档包、L2 第一至第七阶段交付包、L2 第八阶段工程员提示词，以及前七阶段开发日志和 handoff 报告。
+
+先检查前置文件是否齐全。
+如果齐全，只做第八阶段：组件、兼容迁移、状态投影与 L2 总收口。
+
+本阶段不得开发 L3-L6；不得实现真实组件运行器、插件宿主、状态存储、迁移执行器、投影服务、UI、prompt 生成、模型调用、工具调用、调度器、运行循环或任何外部 IO；不得恢复旧能力包、CapabilityPort、神枢或旧 Runtime 主链。
+
+完成后交付完整 zip、开发日志、handoff 报告、validation 报告、L2 总收口报告、修改清单、测试结果、未做事项，并明确是否建议进入 L2 全阶段总质检。

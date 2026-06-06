@@ -1,0 +1,15 @@
+{
+  "name": "l6_34_model_cli_continuity",
+  "command": [
+    "/opt/pyvenv/bin/python",
+    "-m",
+    "pytest",
+    "tests/test_l6_34_model_cli_continuity.py",
+    "-q"
+  ],
+  "cwd": "/mnt/data/l634_work/project",
+  "timeout_seconds": 60,
+  "purpose": "L6.34新增模型/CLI连续性测试",
+  "required": true,
+  "rerun_command": "/opt/pyvenv/bin/python -m pytest tests/test_l6_34_model_cli_continuity.py -q"
+}

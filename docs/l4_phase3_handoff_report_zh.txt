@@ -1,0 +1,32 @@
+天工造物 L4 第三阶段 handoff 报告
+生成日期：2026-06-04
+
+一、交付范围
+本阶段交付动作适配器承载框架：adapter protocol、descriptor、capability、risk surface、input/output/failure envelope、registry、selector、selection result、disabled reason、normalizer、invariant、projection，以及 fake/in-memory/dry-run/no-op/real_stub adapter。
+
+二、核心边界
+1. L4 不是执行智能体；LLM 仍是连续执行主控者。
+2. Adapter 只是 LLM 工具调用意图的动作落地承载端口。
+3. Registry 不是插件宿主，不自动扫描，不动态导入。
+4. Selector 只做结构匹配，不做权限裁决，不做风险放行。
+5. RealActionAdapterStub 永远禁用，第三阶段不可能执行真实动作。
+6. L5 permit gate 结构通过不等于 L4 授权真实动作。
+
+三、主要接口
+1. ActionAdapterProtocol / ExecutionAdapterProtocol
+2. AdapterDescriptor / AdapterCapabilityDescriptor / AdapterRiskSurfaceDescriptor
+3. AdapterInputEnvelope / AdapterOutputEnvelope / AdapterFailureEnvelope
+4. AdapterRegistry / AdapterRegistrySnapshot / AdapterRegistryProjection
+5. AdapterSelector / AdapterSelectionRequest / AdapterSelectionResult
+6. FakeActionAdapter / InMemoryActionAdapter / DryRunActionAdapter / NoOpActionAdapter / RealActionAdapterStub
+7. AdapterResultNormalizer / AdapterFailureNormalizer
+8. NoRealAdapterActivationWithoutL5Invariant / FakeAdapterNeverProductionInvariant / AdapterCannotHoldPlainCredentialInvariant / AdapterCannotBypassL3Invariant / AdapterCannotBypassL5Invariant / AdapterCannotImplementL6SubsystemInvariant
+
+四、与前置阶段接线
+1. 第一阶段 context/session/step/result/failure/projection 已新增 adapter ref 字段。
+2. 第二阶段 gate_result 可由 AdapterSelectionRequest 与 AdapterInputEnvelope 引用。
+3. Selector 使用 gate_result.allowed_for_grounding 与 PermitValidationStatus.ACCEPTED 做结构检查，但不做 L4 授权。
+4. Permit scope mismatch 返回 AdapterScopeMismatchFailure。
+
+五、后续阶段注意
+第四阶段如继续，只能做模型/工具执行适配骨架，不得调用真实模型 API，不得调用真实工具，不得启用真实外部动作，不得跳过 L5。

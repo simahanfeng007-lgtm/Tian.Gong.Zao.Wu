@@ -1,0 +1,28 @@
+天工造物 权限治理与副作用安全链路 P1 最小补丁 Validation 报告
+
+一、验证结论
+
+验证通过。L1/L2/L3/L4 安全链路已显式闭合。L4 gate 在 live_action_requested=True 且缺 safety_chain_ref 时拒绝。
+
+二、边界验证
+
+1. L1 端口只定义协议，不做授权或裁决。
+2. L2 状态只保存引用，不执行、不提交、不回滚、不解析密钥。
+3. L3 Flow request-only/advisory-only/ref-only，不调用 L4/L5/L6。
+4. L4 Gate 只做结构拒绝/结构接受，不授权动作。
+5. production_path=True 且 permit.test_only=True 仍拒绝。
+6. audit_required=True 且缺 audit_requirement_ref 仍拒绝。
+
+三、验证命令与结果
+
+1. compileall：通过。
+2. P1 专项 + L4 gate 回归：29 passed。
+3. 更宽安全链分片：73 passed, 802 deselected。
+
+四、静态扫描结果
+
+新增源码未引入真实网络、shell、文件写入、桌面控制、模型调用、工具调用、L5/L6 实现或旧能力包主链。
+
+五、L0 哈希
+
+本补丁未修改 L0。最终聚合哈希将在总交付报告中统一列出。

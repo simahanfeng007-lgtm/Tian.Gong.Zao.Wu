@@ -1,0 +1,2 @@
+963 tests collected in 7.45s
+RETURN_CODE=0

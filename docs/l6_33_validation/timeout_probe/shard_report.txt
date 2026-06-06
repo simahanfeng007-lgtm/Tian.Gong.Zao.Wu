@@ -1,0 +1,25 @@
+# L6.33 分片回归执行器报告
+
+- schema: `tiangong.l6_33.test_shard_runner.v1`
+- status: `timeout`
+- total_shards: 1
+- passed: 0
+- failed: 0
+- timeout: 1
+- skipped: 0
+- required_failed_or_timeout: 1
+- output_dir: `/mnt/data/l633_work/project/docs/l6_33_validation/timeout_probe`
+
+## Shards
+
+### forced_timeout
+- status: `timeout`
+- returncode: `124`
+- duration_seconds: 1.071
+- timeout_seconds: 0.2
+- required: True
+- rerun: `/opt/pyvenv/bin/python -c 'import time; time.sleep(5)'`
+- stdout: `/mnt/data/l633_work/project/docs/l6_33_validation/timeout_probe/forced_timeout/stdout.log`
+- stderr: `/mnt/data/l633_work/project/docs/l6_33_validation/timeout_probe/forced_timeout/stderr.log`
+- error: timeout after 0.2 seconds
+- note: 该分片被超时收割，不能计为通过。

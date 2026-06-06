@@ -1,0 +1,74 @@
+天工造物 L4 第六阶段接口索引
+
+阶段名称：第六阶段，动作结果、观察回流引用、失败分类、取消超时与恢复建议引用
+工程目录：project_l4_phase6
+日期：2026-06-04
+
+一、结果回传接口
+
+1. ActionOutcomeEnvelope
+   文件：tiangong_kernel/l4_action_grounding/action_outcome_envelope.py
+   作用：统一承载 result_ref 或 failure_ref。
+
+2. ActionResultReturnEnvelope
+   文件：tiangong_kernel/l4_action_grounding/action_result_return_envelope.py
+   作用：标准化成功结果回传。
+
+3. ActionFailureReturnEnvelope
+   文件：tiangong_kernel/l4_action_grounding/action_failure_return_envelope.py
+   作用：标准化失败结果回传。
+
+4. ExecutionReturnProjection
+   文件：tiangong_kernel/l4_action_grounding/execution_return_projection.py
+   作用：把 result/failure return 投影为 outcome envelope，不决定下一步。
+
+二、观察、证据、审计、trace 接口
+
+1. ExecutionObservationRef
+2. ExecutionEvidenceRef
+3. ExecutionAuditRef
+4. ExecutionTraceRef
+5. ObservationReturnEnvelope
+6. FakeObservationReferenceFactory
+
+三、资源、取消、超时接口
+
+1. ExecutionResourceUsage
+2. ExecutionCancellationRequest
+3. ExecutionCancellationResult
+4. ExecutionCancellationStatus
+5. ExecutionTimeoutPolicyRef
+6. ExecutionTimeoutFailure
+7. FakeCancellationTimeoutHelper
+
+四、恢复建议与反馈接口
+
+1. ExecutionRetryAdviceRef
+2. ExecutionResumeRef
+3. ExecutionRollbackHintRef
+4. L3ReplanSuggestionRef
+5. BoundaryFeedbackRef
+6. RecoveryRequirementRef
+
+五、失败分类与归一化失败接口
+
+1. FailureCategory
+2. FailureSeverity
+3. FailureRecoverabilityHint
+4. ResultNormalizationFailure
+5. FailureNormalizationFailure
+
+六、不变量接口
+
+1. Phase6Invariant
+2. NoAuditWriteInL4Invariant
+3. NoPermitIssuanceInL4Invariant
+4. NoRealObservationInL4Invariant
+5. NoRetryRecoveryRollbackInL4Invariant
+6. NoL2StateWriteFromReturnInvariant
+
+七、公共导出
+
+文件：tiangong_kernel/l4_action_grounding/__init__.py
+
+第六阶段对象已加入 __all__，供第七阶段稳定引用。

@@ -1,0 +1,21 @@
+天工造物 L6 第一阶段 Handoff 报告
+生成日期：2026-06-05
+
+一、交接结论
+L6 第一阶段公共插件底座已实现并通过测试，可作为后续 L6 第二阶段继续开发的工程基线。
+
+二、下游可依赖内容
+1. 所有后续 L6 插件应基于 L6PluginManifest 声明身份、生命周期、能力需求、治理需求、事件、投影、handoff、失败、降级、迁移、回滚、热切换、invariant 与 forbidden scan。
+2. 业务插件不得自定义绕过 common 的 provider、tool、permission、budget、audit、credential、context、projection、event、handoff 字段。
+3. ModelCapabilityRequirement 只允许 provider-neutral hints，不得承载 provider selection、base_url、API key、SDK import 或 raw HTTP。
+4. ToolCapabilityRequirement 只允许声明工具需求，不得承载 tool handle、raw tool schema、shell/file/network/database direct action。
+5. PublicProjection 只允许最小摘要与 redacted refs。
+6. QualityGateDecision 不是执行授权；P0/P1 或 blocking reason 存在时不得冻结插件。
+
+三、建议进入 L6 第二阶段的前置条件
+- 保持 L0-L5 hash unchanged。
+- 所有新增 L6 插件必须复用本阶段 common 契约。
+- 第二阶段若接 L5 宿主注册治理，只允许 registry/manifest/lifecycle/event/projection 声明对接，不得进入业务插件真实执行。
+
+四、交接风险
+当前无 P0/P1 阻断项。P2/P3 见风险清单与未做事项。

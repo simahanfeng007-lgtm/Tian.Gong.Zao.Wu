@@ -1,0 +1,29 @@
+L5 第七阶段质检后修复报告
+
+修复类型：交付包级最小修复。
+源码修改：无。
+测试修改：无。
+L0-L4 修改：无。
+L5 phase1-phase6 源码语义修改：无。
+
+对应诊断项：
+1. P1：第六阶段前置验收证据不闭合。已补齐 phase6 validation closure 与 full pytest rerun result，并更新 phase6 quality gate 文档。
+2. P2：Windows 通配符命令证据不严谨。已记录显式展开的 31 个 phase7 测试文件命令与结果。
+3. P2：缺少第七阶段确认修正版提示词。已补入 docs/l5_phase7_development_prompt_confirmed_revised_20260604.txt 与根目录同名副本。
+4. P2：zip 包含 pycache/pyc。已清理并在重打包前确认。
+5. P3：zip integrity 细项不足。已补充 entry count、pycache/pyc 计数、必需报告存在性与内容树摘要。
+
+重跑验证：
+- compileall：passed，exit_code=0。
+- collect-only：1229 tests collected，exit_code=0。
+- phase6 targeted：16 passed，exit_code=0。
+- phase7 targeted expanded：42 passed，exit_code=0。
+- plugin host 子集：19 passed, 1210 deselected，exit_code=0。
+- full pytest：1229 passed，exit_code=0。
+
+阶段结论：
+- P0=0。
+- P1=0。
+- P2=0。
+- P3=0。
+- 建议重新提交 Codex 质检。

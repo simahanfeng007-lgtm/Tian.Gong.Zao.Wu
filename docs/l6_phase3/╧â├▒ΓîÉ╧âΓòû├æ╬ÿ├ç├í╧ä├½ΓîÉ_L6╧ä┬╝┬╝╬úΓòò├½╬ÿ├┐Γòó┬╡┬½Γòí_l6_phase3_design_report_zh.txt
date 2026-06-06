@@ -1,0 +1,76 @@
+天工造物 L6 第三阶段——心智与状态插件组详细功能逻辑设计报告
+生成日期：2026-06-05
+阶段定位：L6 第三阶段，心智与状态插件组详细功能逻辑设计与工程落地
+基线：L6 第二阶段公共运行关系体系完整工程包
+
+一、阶段结论
+本阶段已完成心智与状态插件组的工程化落地。新增 tiangong_kernel/l6_plugins/mind/，作为 L6 心智辅助插件组的 inert contract 层。
+本阶段不引入真实模型调用、真实工具调用、真实状态写入、真实记忆写入、真实审计落库、真实预算扣减、真实凭证读取或平行 Runtime。
+
+二、前置材料确认
+前置材料读取与齐备性确认：
+1. L4-L5 最终完成度报告：在第一阶段开工包内找到。
+2. L6 第一阶段公共插件底座：已以第一阶段正式工程包和第二阶段基线中的 l6_plugins/common 复核。
+3. L6 第二阶段运行关系体系：已以第二阶段正式工程包为本阶段工程基线，并复核生命周期、事件、状态投影、Handoff、准入、版本治理与质量门。
+4. L6 第三阶段心智系统方向填写模板：本轮未收到单独原始模板文件；第三阶段开工提示词内已嵌入用户方向与最终确认口径，本阶段按提示词落实。
+5. L6 第三阶段心智系统方向审查报告：本轮未收到单独审查报告文件；第三阶段开工提示词明确要求采纳所有强制降级建议，本阶段按提示词落实。
+6. 用户最终确认口径：已落实“疲劳/资源压力/人格化拒绝只能作为投影与表达风格，真实拒绝必须来自治理链路或系统边界”。
+
+三、总体架构
+本阶段将 L6 心智系统定义为 LLM 的辅助驾驶层，而不是新的大脑、调度核心或执行中枢。
+核心对象：MindPluginGroupArchitecture、MindPluginDeclaration、MindStateEnvelope、MindOutputBase、MindScoreBase、MindInteroperationMatrix、L6Phase3MindQualityGateDecision。
+所有输出以 Projection / Requirement / Suggestion / Event / Handoff / Report / Score / summary/ref/digest 形式存在。
+
+四、13 个心智插件组
+已落地 13 个插件声明骨架：
+1. ContextMindPlugin：上下文摘要、断裂检测、安全投影。
+2. BeliefMindPlugin：信念候选、置信度、冲突、污染风险。
+3. WorldConstraintMindPlugin：世界约束、规则边界、事实候选。
+4. GoalMindPlugin：目标候选、优先级、任务级别建议。
+5. IntentionMindPlugin：意图候选、计划候选、下一步建议。
+6. AttentionMindPlugin：注意力焦点、风险焦点、缺失信息焦点。
+7. PreferenceMindPlugin：偏好、价值取向、工作方式倾向。
+8. AffectiveMindPlugin：七情六欲、疲劳、资源压力、人格化表达降级。
+9. MemoryCandidateMindPlugin：记忆召回候选、晋升候选、关联候选、安全过滤候选。
+10. ForgettingCandidateMindPlugin：遗忘候选、衰减候选、污染隔离、L5 永不忘保护。
+11. SelfReflectionMindPlugin：回答质量自省、失败归因、缺口报告。
+12. LearningEvolutionMindPlugin：学习需求、修复建议、迭代/演化/迁移/回滚/热切换就绪候选。
+13. MindFusionScoringPlugin：心智评分聚合、冲突分数、置信与不确定性摘要。
+
+五、状态域体系
+已落地 MindStateDomain 与 15 个状态域：MindStateEnvelope、ContextMindState、BeliefMindState、WorldMindState、GoalMindState、IntentionMindState、AttentionMindState、PreferenceMindState、AffectiveMindState、MemoryCandidateMindState、ForgettingCandidateMindState、SelfReflectionMindState、LearningEvolutionMindState、MindFusionState、MindPollutionDefenseState。
+硬边界：MindState 不是 L2 fact，不是授权，不是执行计划，不含凭证、provider locator、工具句柄、模型客户端或 callable。
+
+六、数学模型体系
+已落地 10 类轻量动态评分模型：BeliefConfidenceScore、WorldConstraintScore、GoalPriorityScoreModel、AttentionFocusScoreModel、AffectiveTendencyScoreModel、MemoryPromotionScoreModel、ForgettingScoreModel、SelfReflectionScoreModel、PollutionRiskScoreModel、MindFusionScoreModel。
+所有分数只输出 confidence、uncertainty、risk、priority、focus、promotion、forgetting、reflection、pollution、weighted 等建议性值；分数不是授权、不是决策、不是执行计划。
+
+七、防污染与价值稳定
+已落地 PollutionRiskProjection、ValueStabilityAnchorProjection、NegativeInputExposureScore、HighRiskContentQuarantineProjection、LongTermAffectiveDriftMonitor，并在 PollutionRiskScoreModel 中设计 toxic exposure、negative density、dark pattern exposure、value conflict、affective instability、memory contamination、belief contamination、source reliability、positive signal 等因子。
+边界：防污染是降权、隔离、审计、候选投影机制，不是价值裁决器，不封禁用户，不作为硬编码道德裁决系统。
+
+八、疲劳与人格化拒绝降级
+已落地 FatigueProjection、ResourcePressureProjection、AffectiveDegradationSuggestion、HumanizedRefusalStyleHint。
+规则：疲劳投影不是拒绝权；情志不是权限；人格化拒绝表达必须绑定 GovernanceRefusalReason，例如安全政策、权限治理、预算耗尽、工具不可用、上下文不足、用户要求不明确或系统边界阻断。
+
+九、跨插件协作矩阵
+已落地 MindInteroperationMatrix 和默认规则。允许 Event、StateProjection、Handoff、PublicProjection、Host-mediated invocation、L3/L5 reschedule。
+禁止 direct import、direct call、shared mutable state、direct event queue、直接共享工具或模型客户端。
+
+十、质量门与不变量
+已落地 L6Phase3MindQualityGateDecision、default_l6_phase3_mind_invariant_rules、default_l6_phase3_mind_forbidden_scan_rules。
+P0/P1 阻断进入第四阶段；核心硬阻断包括 mind 非 Runtime、MindState 非 L2 fact、belief 非 fact、world candidate 非 canonical、affective/fatigue/refusal 降级边界、no live model/tool/state/memory/audit/budget/secret/provider/direct plugin/parallel runtime、public projection minimal disclosure。
+
+十一、验证摘要
+compileall：通过。
+collect-only：1488 tests collected。
+第三阶段 targeted tests：35 passed in 8.09s。
+L6 phase 文件组：93 passed in 11.22s。
+-k "l6 and phase3"：37 passed, 1451 deselected in 6.36s。
+full pytest：1488 passed in 14.89s。
+forbidden scan：actual findings = 0。
+hash compare：L0-L5 changed = 0，L6 common changed = 0。
+test inventory：新增 35 个 L6 phase3 targeted tests，删除旧测试 0 个。
+
+十二、是否建议进入第四阶段
+P0=0，P1=0。建议作为 L6 第三阶段候选冻结包，允许进入 L6 第四阶段。

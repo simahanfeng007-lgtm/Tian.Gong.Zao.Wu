@@ -1,0 +1,8 @@
+{
+  "checked_files": [
+    "tiangong_agent_runtime/long_chain_failure_injection_harness.py",
+    "tests/test_l6_46_long_chain_failure_injection.py"
+  ],
+  "forbidden_hits": [],
+  "status": "PASS"
+}

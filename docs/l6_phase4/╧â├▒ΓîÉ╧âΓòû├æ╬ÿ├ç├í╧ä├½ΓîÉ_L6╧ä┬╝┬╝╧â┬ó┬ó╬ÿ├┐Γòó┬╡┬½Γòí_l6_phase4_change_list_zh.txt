@@ -1,0 +1,32 @@
+天工造物 L6 第四阶段修改清单
+
+新增目录：
+- tiangong_kernel/l6_plugins/cognitive_continuity/
+- tiangong_kernel/l6_plugins/cognitive_continuity/affective/
+- docs/l6_phase4/
+
+新增核心文件：
+- common.py
+- state.py
+- projection.py
+- reentry.py
+- score.py
+- interoperation.py
+- quality_gate.py
+- forbidden_scan.py
+- invariants.py
+- affective/vectors.py
+- affective/models.py
+- affective/pollution.py
+- affective/style_hints.py
+- affective/memory_modulation.py
+- affective/context_modulation.py
+- affective/governance_binding.py
+- affective/public_projection.py
+- affective/reentry.py
+- affective/invariants.py
+
+修改文件：
+- tiangong_kernel/l6_plugins/__init__.py：仅追加 cognitive_continuity 到 __all__。
+
+新增测试：40 个 tests/test_l6_phase4_*.py。

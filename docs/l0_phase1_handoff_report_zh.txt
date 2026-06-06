@@ -1,0 +1,107 @@
+天工造物新版 L0 零依赖原语层 - 阶段 1 交付报告
+日期：2026-06-03
+
+一、执行依据
+- 已读取：《天工造物全局架构宪法 v0.1》
+- 已读取：《天工造物 L0 零依赖原语层设计 v0.1》
+- 本阶段严格限定为阶段 1：identity.py、time.py、result.py、errors.py、serialization.py、trace.py
+- 未沿用旧版天工造物代码逻辑
+- 新建路径：tiangong_kernel/l0_primitives/
+
+二、本次新增目录
+- tiangong_kernel/__init__.py
+- tiangong_kernel/l0_primitives/__init__.py
+- tiangong_kernel/l0_primitives/identity.py
+- tiangong_kernel/l0_primitives/time.py
+- tiangong_kernel/l0_primitives/result.py
+- tiangong_kernel/l0_primitives/errors.py
+- tiangong_kernel/l0_primitives/serialization.py
+- tiangong_kernel/l0_primitives/trace.py
+
+三、本次新增测试
+- tests/test_l0_no_outer_imports.py
+- tests/test_l0_no_third_party_imports.py
+- tests/test_l0_no_io.py
+- tests/test_l0_dataclass_frozen.py
+- tests/test_l0_serialization.py
+- tests/test_l0_stable_hash.py
+
+四、阶段 1 主要对象
+1. identity.py
+- CoreId
+- RefId
+- TypedRef
+- IdPrefix
+- new_core_id()
+- validate_core_id()
+
+2. time.py
+- Timestamp
+- Duration
+- Deadline
+- TimeRange
+- TemporalWindow
+- LogicalClock
+- LogicalTime
+- SequenceNo
+- ClockSourceRef
+- ClockKind
+
+3. result.py
+- CoreResult
+- ResultStatus
+- ok()
+- err()
+
+4. errors.py
+- CoreError
+- ErrorCode
+- ErrorSeverity
+
+5. serialization.py
+- StableSerializable
+- stable_json_dumps()
+- stable_hash()
+- to_primitive()
+- from_primitive()
+
+6. trace.py
+- TraceContext
+- CausalEventMetadata
+- TraceId
+- SpanId
+- CorrelationId
+- CausationId
+- ActorId
+- ScopeId
+- SequenceNo 引用
+- new_trace_context()
+
+五、硬规则落实情况
+- L0 只使用 Python 标准库：通过测试
+- L0 不 import L1-L6：通过测试
+- L0 不做真实 IO、网络、进程、模型、工具调用：通过测试
+- L0 dataclass 均为 frozen=True, slots=True：通过测试
+- Canonical JSON 稳定序列化：通过测试
+- stable_hash 可重复：通过测试
+- 普通校验函数 validate_core_id 使用 CoreResult 返回，不把普通错误当异常控制流
+
+六、验证结果
+执行命令：
+python -m compileall -q tiangong_kernel tests
+python -m pytest -q tests
+
+结果：
+12 passed in 0.17s
+
+七、未做事项
+- 未做阶段 2：event.py、observation.py、signal.py、metric.py、content.py、message.py
+- 未做阶段 3-8 任何模块
+- 未引入完整状态机、事件折叠、MemorySystem、ToolSystem、PluginHost、Frontend、Gateway 等上层系统
+- 未实现真实 IO、网络、模型调用、工具调用、插件加载、进程启动
+- 未做全量 L0 最终完整测试清单中的后续测试项：system pollution words、ref objects、enum stability、result-first 深化测试
+
+八、建议下一步
+- 继续阶段 2，仅新增 event.py、observation.py、signal.py、metric.py、content.py、message.py
+- 同步补充 test_l0_no_system_pollution_words.py、test_l0_ref_objects.py、test_l0_enum_stability.py、test_l0_result_first.py
+- 保持 L0 为事实语言，不引入调度、执行器、外部适配器或上层系统概念

@@ -1,0 +1,22 @@
+天工造物 L4 Skill 直显与工具释放链路专项修改清单
+
+一、新增源码
+1. tiangong_kernel/l4_action_grounding/released_tool_schema_view.py
+2. tiangong_kernel/l4_action_grounding/skill_tool_release_session_context.py
+3. tiangong_kernel/l4_action_grounding/skill_tool_release_chain_index.py
+
+二、修改源码
+1. tiangong_kernel/l4_action_grounding/__init__.py
+
+三、新增测试
+1. tests/test_l4_skill_tool_release_chain_contract.py
+2. tests/test_l4_released_tool_schema_view_no_real_handle.py
+3. tests/test_l4_skill_tool_release_session_context_refs_only.py
+4. tests/test_l4_skill_tool_release_no_capability_port_revival.py
+5. tests/test_l4_skill_tool_release_result_return_context.py
+
+四、新增文档
+1. docs/skill_direct_tool_release_chain_contract_zh.txt
+2. docs/skill_tool_release_trace_matrix_zh.csv
+3. docs/l4_to_l5_skill_tool_release_handoff_zh.txt
+4. docs/l4_to_l6_released_tool_schema_requirement_zh.txt

@@ -1,0 +1,18 @@
+天工造物 L6 第四阶段设计报告
+
+阶段名称：认知连续性、记忆遗忘与状态回流插件组详细设计。
+
+本阶段落地：
+1. 新增 tiangong_kernel/l6_plugins/cognitive_continuity/。
+2. 新增 ContextContinuity / MemoryCandidate / ForgettingCandidate / BeliefWorldReview / SelfReflectionLearning / CognitiveReentryFusion / ProductBridgeSeed 公共对象。
+3. 新增 affective 子组：七情向量、六欲向量、情志投影、疲劳投影、资源压力投影、情志污染风险、价值稳定锚、长期漂移监控、人格化拒绝风格、记忆权重调制、上下文调制、治理原因绑定、最小公开投影、情感回流信封。
+4. 新增 CognitiveReentryEnvelope，所有 L6 第四阶段输出必须经 L3/L5 审查后才能进入 L2 / 记忆系统 / 遗忘系统合法链路。
+5. 新增质量门、forbidden scan、invariant suite 与 40 个 targeted tests。
+
+边界确认：
+- 情感系统是调制层、投影层、防污染层、表达风格层；不是权限裁决器、执行器、记忆写入器或拒绝引擎。
+- FatigueProjection 不能单独生成 refusal。
+- HumanizedRefusalStyleHint 必须绑定 GovernanceReasonRef。
+- AffectiveMemoryWeightHint 不是 MemoryUpdateProposal。
+- AffectivePollutionRiskProjection 不是删除命令。
+- ProductSpecSeedCandidate 不是 ProductSpec，不做真实成品生产。

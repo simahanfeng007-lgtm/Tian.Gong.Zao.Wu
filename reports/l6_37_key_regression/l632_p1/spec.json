@@ -1,0 +1,14 @@
+{
+  "name": "l632_p1",
+  "command": [
+    "/opt/pyvenv/bin/python",
+    "-m",
+    "pytest",
+    "tests/test_l6_32_p1_model_suggest_repair.py"
+  ],
+  "cwd": "/mnt/data/work_l637/project",
+  "timeout_seconds": 80,
+  "purpose": "L6.37 key regression tests/test_l6_32_p1_model_suggest_repair.py",
+  "required": true,
+  "rerun_command": "/opt/pyvenv/bin/python -m pytest tests/test_l6_32_p1_model_suggest_repair.py"
+}

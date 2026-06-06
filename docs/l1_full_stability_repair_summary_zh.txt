@@ -1,0 +1,48 @@
+天工造物新版 L1 全阶段稳定性整修摘要
+生成时间：2026-06-03
+
+一句话结论：已修复第一次总质检报告指出的 P1；已补关键 P2/P3 的测试与文档收口；完整 compileall 与 pytest 通过；建议进入二次质检，二次质检通过后再冻结 L1。
+
+一、修复数量
+- P0：0/0，无 P0。
+- P1：1/1，已修复。
+- P2：7/8 已修复或文档收口；P2-08 因本轮未收到侧载同名文档原件，仅做最终归档口径收口。
+- P3：2/4 已修复或收口；P3-03、P3-04 暂不做大面积整洁重构。
+
+二、核心修复
+- 修复 tiangong_kernel/l1_ports/candidate_ports.py 中 CandidatePromotionHint 重复定义覆盖。
+- 合并字段：candidate_ref、learning_candidate、iteration_candidate、evolution_candidate、validation_refs、verification_refs。
+- 保持候选晋升提示只表达协议，不真实晋升、不合入、不修改系统。
+
+三、新增测试
+- tests/test_l1_no_duplicate_public_class_names.py
+- tests/test_l1_phase8_candidate_promotion_hint_shape.py
+
+四、新增 / 更新文档
+- docs/l1_full_stability_repair_report_zh.md
+- docs/l1_full_stability_repair_summary_zh.txt
+- docs/l1_total_port_index_zh.md
+- docs/l1_l2_l6_reference_matrix_zh.md
+- docs/l1_legacy_migration_compatibility_notes_zh.md
+- docs/l1_stability_repair_pending_zh.md
+
+五、边界确认
+- L0：未修改。与原始交接包内 tiangong_kernel/l0_primitives/*.py hash 对比无变化。
+- L2-L6 import：未发现。
+- 第三方库：未发现。
+- 真实 IO / 网络 / 模型 / 工具 / 插件宿主：未发现。
+- 旧能力包体系：未恢复。
+
+六、测试结果
+- python3 -m compileall -q tiangong_kernel tests：通过，无错误输出。
+- python3 -m pytest -q tests：326 passed in 7.59s。
+- L1 必测 + 第八阶段专项 + 新增测试集合：63 passed in 5.22s。
+
+七、建议
+- 建议进入二次质检。
+- 不建议立即冻结；建议二次质检通过后再冻结 L1。
+
+八、zip 完整性
+- 最终文件：天工造物_L1_全阶段稳定性整修包_20260603.zip。
+- zip -T：通过。
+- 重新解压关键文件检查：通过。

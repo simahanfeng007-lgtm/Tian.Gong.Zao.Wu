@@ -1,0 +1,183 @@
+天工造物 L1 第八阶段交接报告（2026-06-03）
+
+1. 本阶段一句话结论
+第八阶段横切收口协议已完成，可进入 L1 全阶段稳定性整修。
+
+2. 修改清单
+新增 10 个源码模块、10 个专项测试文件、4 份文档；未修改 L0；未进入 L2-L6；未调整 `l1_ports/__init__.py`。
+
+3. 新增文件清单
+源码：
+- `validation_ports.py`：验证、复核、测试、候选验证、回退验证、恢复验证、候选晋升提示
+- `schedule_ports.py`：调度意图、调度边界、触发意图、触发边界、定时引用、节律提示、延后行动提示
+- `state_continuity_ports.py`：快照、检查点、恢复点、状态连续性边界、恢复提示、连续性证据
+- `action_effect_ports.py`：行动意图、副作用报告、事务边界、补偿意图、变更回退提示、删除意图和删除边界
+- `security_boundary_ports.py`：秘密引用、凭据引用、信任边界、隐私边界、敏感内容边界、数据外露边界
+- `component_registry_ports.py`：组件引用、包引用、注册意图、注册查询、插件 manifest、插件生命周期和隔离边界
+- `compatibility_migration_ports.py`：兼容检查、版本兼容、端口兼容映射、迁移提示、迁移边界、废弃通知、Schema 迁移边界
+- `candidate_ports.py`：统一候选引用、候选来源、候选证据、候选边界、候选复核、候选生命周期、候选晋升和拒绝提示
+- `change_ports.py`：变更集意图、变更边界、影响提示、可逆性提示、变更证据、变更复核、补丁意图边界、变更回退提示
+- `experiment_ports.py`：实验意图、实验边界、实验设计提示、实验观察、实验结果、实验对比提示、实验回退提示
+
+测试：
+- `tests/test_l1_phase8_validation_ports.py`
+- `tests/test_l1_phase8_schedule_ports.py`
+- `tests/test_l1_phase8_state_continuity_ports.py`
+- `tests/test_l1_phase8_action_effect_ports.py`
+- `tests/test_l1_phase8_security_boundary_ports.py`
+- `tests/test_l1_phase8_component_registry_ports.py`
+- `tests/test_l1_phase8_compatibility_migration_ports.py`
+- `tests/test_l1_phase8_candidate_ports.py`
+- `tests/test_l1_phase8_change_ports.py`
+- `tests/test_l1_phase8_experiment_ports.py`
+
+文档：
+- docs/l1_phase8_development_log_zh.md
+- docs/l1_phase8_handoff_report_zh.txt
+- docs/l1_phase8_closure_report_zh.txt
+- docs/l1_stability_repair_pending_zh.md
+
+4. 新增端口清单
+- `ValidationReferencePort`
+- `ValidationRequestPort`
+- `VerificationPort`
+- `TestReferencePort`
+- `TestPlanIntentPort`
+- `QualityBoundaryPort`
+- `CandidateValidationPort`
+- `LearningTestPort`
+- `IterationVerificationPort`
+- `EvolutionValidationPort`
+- `RollbackVerificationPort`
+- `RestoreVerificationPort`
+- `CandidatePromotionHintPort`
+- `ScheduleIntentPort`
+- `ScheduleBoundaryPort`
+- `TriggerIntentPort`
+- `TriggerBoundaryPort`
+- `TimerReferencePort`
+- `TimerBoundaryPort`
+- `CadenceHintPort`
+- `DeferredActionHintPort`
+- `SnapshotReferencePort`
+- `SnapshotIntentPort`
+- `CheckpointReferencePort`
+- `CheckpointIntentPort`
+- `RestorePointReferencePort`
+- `RecoveryPointPort`
+- `StateContinuityBoundaryPort`
+- `StateRecoveryHintPort`
+- `ContinuityEvidencePort`
+- `ActionIntentPort`
+- `ActionBoundaryPort`
+- `EffectReportPort`
+- `SideEffectBoundaryPort`
+- `TransactionBoundaryPort`
+- `TransactionIntentPort`
+- `CompensationIntentPort`
+- `ChangeRevertHintPort`
+- `DeletionIntentPort`
+- `DeletionBoundaryPort`
+- `SecretReferencePort`
+- `SecretBoundaryPort`
+- `CredentialReferencePort`
+- `CredentialBoundaryPort`
+- `TrustBoundaryPort`
+- `PrivacyBoundaryPort`
+- `SensitiveContentBoundaryPort`
+- `DataExposureBoundaryPort`
+- `ExternalDisclosureBoundaryPort`
+- `ComponentReferencePort`
+- `ComponentBoundaryPort`
+- `ComponentLifecycleBoundaryPort`
+- `PackageReferencePort`
+- `PackageBoundaryPort`
+- `RegistryIntentPort`
+- `RegistryQueryPort`
+- `PluginManifestPort`
+- `PluginLifecycleBoundaryPort`
+- `PluginIsolationBoundaryPort`
+- `CompatibilityCheckPort`
+- `VersionCompatibilityPort`
+- `PortCompatibilityMapPort`
+- `MigrationHintPort`
+- `MigrationBoundaryPort`
+- `DeprecationNoticePort`
+- `SchemaMigrationBoundaryPort`
+- `BackwardCompatibilityHintPort`
+- `ForwardCompatibilityHintPort`
+- `CandidateReferencePort`
+- `CandidateSourcePort`
+- `CandidateEvidencePort`
+- `CandidateBoundaryPort`
+- `CandidateReviewIntentPort`
+- `CandidateLifecycleHintPort`
+- `CandidatePromotionHintPort`
+- `CandidateRejectionHintPort`
+- `ChangeSetIntentPort`
+- `ChangeSetBoundaryPort`
+- `ChangeImpactHintPort`
+- `ChangeReversibilityHintPort`
+- `ChangeEvidencePort`
+- `ChangeReviewIntentPort`
+- `PatchIntentBoundaryPort`
+- `ChangeRollbackHintPort`
+- `ExperimentIntentPort`
+- `ExperimentBoundaryPort`
+- `ExperimentDesignHintPort`
+- `ExperimentObservationPort`
+- `ExperimentResultPort`
+- `ExperimentComparisonHintPort`
+- `ExperimentRollbackHintPort`
+
+合计新增 91 个抽象端口。
+
+5. 新增测试清单
+- `tests/test_l1_phase8_validation_ports.py`
+- `tests/test_l1_phase8_schedule_ports.py`
+- `tests/test_l1_phase8_state_continuity_ports.py`
+- `tests/test_l1_phase8_action_effect_ports.py`
+- `tests/test_l1_phase8_security_boundary_ports.py`
+- `tests/test_l1_phase8_component_registry_ports.py`
+- `tests/test_l1_phase8_compatibility_migration_ports.py`
+- `tests/test_l1_phase8_candidate_ports.py`
+- `tests/test_l1_phase8_change_ports.py`
+- `tests/test_l1_phase8_experiment_ports.py`
+
+6. 实际运行的测试命令
+- python3 -m compileall -q tiangong_kernel tests
+- python3 -m pytest -q tests
+- L1 八个必测项逐项运行
+- 第八阶段十个专项测试逐项运行
+
+7. 实际测试结果
+- `python3 -m compileall -q tiangong_kernel tests`：通过。
+- `python3 -m pytest -q tests`：通过，`322 passed in 10.32s`。
+- L1 必测项逐项补跑：`test_l1_no_l2_imports.py` 1 passed；`test_l1_no_third_party_imports.py` 1 passed；`test_l1_no_real_io.py` 1 passed；`test_l1_ports_are_abstract.py` 1 passed；`test_l1_ports_return_core_result.py` 2 passed；`test_l1_uses_l0_primitives.py` 1 passed；`test_l1_no_execution_keywords.py` 1 passed；`test_l1_chinese_docstrings.py` 1 passed。
+- 第八阶段专项测试逐项补跑：10 个测试文件均为 5 passed，合计 50 passed。
+- 第七阶段交接包压缩完整性校验通过；普通解压遇到一个历史乱码超长单文件名，本阶段使用安全解压方式保留内容并改名为 `sanitized_long_filename_ee371242e542.txt`，已记录为稳定性整修待办。
+- L0 与第七阶段输入基线对比：排除缓存后无源码差异。
+
+8. 未运行测试说明
+无。第八阶段要求内测试均已运行。个别批量串行命令曾被容器中断，已改为逐项补跑并通过。
+
+9. 未做事项
+未做真实验证器、真实调度器、真实回退、真实迁移、真实候选合入、真实插件加载、真实密钥读取、真实工具调用、真实模型调用、真实学习、真实自我迭代、真实自我进化；未进入 L2-L6；未进行 L1 全阶段稳定性整修。
+
+10. 风险点
+- 第七阶段原交接包存在一个历史乱码超长文件名，普通解压在部分文件系统会失败；本阶段安全解压时已保留内容并改名，建议稳定性整修中重新规范历史文件名。
+- `__init__.py` 仍保持第一阶段导出策略，后续需决定是否增加分阶段导出清单。
+- `CandidatePromotionHintPort` 在验证族和候选族中均存在，语义分别为验证晋升提示与统一候选晋升提示，稳定性整修应复核是否保留双入口。
+- 部分横切对象字段风格仍需全阶段统一。
+
+11. 是否建议进入 L1 全阶段稳定性整修
+建议进入。
+
+12. 交接 zip 文件名
+天工造物_L1_第8阶段_交接包_20260603.zip
+
+13. 第八阶段横切收口说明
+第八阶段补齐验证、调度、状态连续性、行动副作用、安全边界、组件注册、兼容迁移、候选、变更和实验协议，为后续 L2-L6 提供统一的高影响动作候选化、证据化、验证化和可恢复协议。
+
+14. 候选 / 变更 / 验证 / 回退 / 兼容 / 实验预留接口说明
+候选由 `candidate_ports.py` 统一收束；变更由 `change_ports.py` 表达；验证与复核由 `validation_ports.py` 接收；回退验证与恢复验证留在验证族和状态连续性族中；兼容与迁移由 `compatibility_migration_ports.py` 预留；实验由 `experiment_ports.py` 表达。

@@ -1,0 +1,109 @@
+天工造物 L4 第五阶段变更清单
+
+阶段名称：第五阶段，文件、网络、终端、桌面动作适配骨架与危险面隔离
+工程目录：project_l4_phase5
+日期：2026-06-04
+
+一、新增源码文件
+
+1. tiangong_kernel/l4_action_grounding/side_effect_descriptor.py
+2. tiangong_kernel/l4_action_grounding/reversibility_descriptor.py
+3. tiangong_kernel/l4_action_grounding/resource_usage_descriptor.py
+4. tiangong_kernel/l4_action_grounding/external_action_scope.py
+5. tiangong_kernel/l4_action_grounding/external_action_risk_surface.py
+6. tiangong_kernel/l4_action_grounding/external_action_disabled.py
+7. tiangong_kernel/l4_action_grounding/external_action_envelope.py
+8. tiangong_kernel/l4_action_grounding/file_action_request.py
+9. tiangong_kernel/l4_action_grounding/file_action_port.py
+10. tiangong_kernel/l4_action_grounding/file_action_result.py
+11. tiangong_kernel/l4_action_grounding/file_action_failure.py
+12. tiangong_kernel/l4_action_grounding/network_action_request.py
+13. tiangong_kernel/l4_action_grounding/network_action_port.py
+14. tiangong_kernel/l4_action_grounding/network_action_result.py
+15. tiangong_kernel/l4_action_grounding/network_action_failure.py
+16. tiangong_kernel/l4_action_grounding/terminal_action_request.py
+17. tiangong_kernel/l4_action_grounding/terminal_action_port.py
+18. tiangong_kernel/l4_action_grounding/terminal_action_result.py
+19. tiangong_kernel/l4_action_grounding/terminal_action_failure.py
+20. tiangong_kernel/l4_action_grounding/desktop_action_request.py
+21. tiangong_kernel/l4_action_grounding/desktop_action_port.py
+22. tiangong_kernel/l4_action_grounding/desktop_action_result.py
+23. tiangong_kernel/l4_action_grounding/desktop_action_failure.py
+24. tiangong_kernel/l4_action_grounding/external_adapter_common.py
+25. tiangong_kernel/l4_action_grounding/file_fake_adapter.py
+26. tiangong_kernel/l4_action_grounding/network_fake_adapter.py
+27. tiangong_kernel/l4_action_grounding/terminal_fake_adapter.py
+28. tiangong_kernel/l4_action_grounding/desktop_fake_adapter.py
+29. tiangong_kernel/l4_action_grounding/file_dry_run_adapter.py
+30. tiangong_kernel/l4_action_grounding/network_dry_run_adapter.py
+31. tiangong_kernel/l4_action_grounding/terminal_dry_run_adapter.py
+32. tiangong_kernel/l4_action_grounding/desktop_dry_run_adapter.py
+33. tiangong_kernel/l4_action_grounding/external_no_op_adapter.py
+34. tiangong_kernel/l4_action_grounding/external_real_disabled_stub.py
+35. tiangong_kernel/l4_action_grounding/external_action_invariant.py
+36. tiangong_kernel/l4_action_grounding/external_action_normalization.py
+
+二、修改源码文件
+
+1. tiangong_kernel/l4_action_grounding/__init__.py
+
+修改说明：
+
+1. 追加第五阶段公共导出。
+2. 未重构第一至第四阶段既有公共骨架。
+3. 未修改 L0、L1、L2、L3。
+
+三、新增测试文件
+
+1. tests/l4_phase5_builders.py
+2. tests/test_l4_phase5_file_action_envelopes.py
+3. tests/test_l4_phase5_network_action_envelopes.py
+4. tests/test_l4_phase5_terminal_action_envelopes.py
+5. tests/test_l4_phase5_desktop_action_envelopes.py
+6. tests/test_l4_phase5_side_effect_descriptor.py
+7. tests/test_l4_phase5_reversibility_descriptor.py
+8. tests/test_l4_phase5_resource_usage_descriptor.py
+9. tests/test_l4_phase5_fake_external_adapters.py
+10. tests/test_l4_phase5_dry_run_external_adapters.py
+11. tests/test_l4_phase5_no_op_external_adapters.py
+12. tests/test_l4_phase5_real_external_disabled_by_default.py
+13. tests/test_l4_phase5_no_file_write_without_l5.py
+14. tests/test_l4_phase5_no_network_without_l5.py
+15. tests/test_l4_phase5_no_shell_without_l5.py
+16. tests/test_l4_phase5_no_desktop_without_l5.py
+17. tests/test_l4_phase5_no_sensitive_credential_or_state_write.py
+18. tests/test_l4_phase5_no_legacy_runtime_or_ability_package.py
+
+四、新增报告与日志
+
+1. docs/l4_phase5_precheck_report_zh.txt
+2. docs/l4_phase5_development_log_zh.txt
+3. docs/l4_phase5_handoff_report_zh.txt
+4. docs/l4_phase5_validation_report_zh.txt
+5. docs/l4_phase5_change_list_zh.txt
+6. docs/l4_phase5_test_results_zh.txt
+7. docs/l4_phase5_todo_zh.txt
+8. docs/l4_phase5_interface_index_zh.txt
+9. docs/l4_phase5_self_check_zh.txt
+10. docs/l4_phase5_compileall.log
+11. docs/l4_phase5_pytest_targeted.log
+12. docs/l4_phase5_pytest_phase1_phase2_phase3_phase4_regression.log
+13. docs/l4_phase5_pytest_l4_phase1_to_phase5.log
+14. docs/l4_phase5_pytest_full.log
+15. docs/l4_phase5_l0_l1_l2_l3_hash_compare.txt
+16. docs/l4_phase5_static_scan_forbidden_terms.txt
+17. docs/l4_phase5_forbidden_module_scan.txt
+
+五、未做变更
+
+1. 未修改 L0、L1、L2、L3。
+2. 未实现 L5。
+3. 未实现 L6。
+4. 未恢复旧 Runtime、神枢、AbilityPackage、CapabilityPort、AbilityPackagePort 主链。
+5. 未加入真实文件动作。
+6. 未加入真实网络动作。
+7. 未加入真实终端动作。
+8. 未加入真实桌面动作。
+9. 未读取真实敏感数据。
+10. 未写 L2 状态。
+11. 未写审计存储。

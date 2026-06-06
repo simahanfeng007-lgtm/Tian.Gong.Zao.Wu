@@ -1,0 +1,35 @@
+天工造物 数学模型发动机最小兼容补丁 Validation 报告
+
+工程目录：project_math_engine_patch
+日期：2026-06-04
+
+一、验证结论
+
+验证通过。本补丁保持 L0 不变，新增 L1/L2/L3/L4 数学模型发动机兼容入口，并保持新增内容 advisory-only / ref-only / protocol-only / disabled-by-default。
+
+二、边界验证
+
+1. L1 math_model_ports.py 只导入 L0/L1/stdlib，无 L2-L6 import，无 IO/网络/shell 入口。
+2. L2 math_engine_state.py 无 L3-L6 import，只记录状态，可 stable_json_dumps 与 stable_hash。
+3. L3 math Flow 无 L4/L5/L6 import，不产生执行令，不写 L2，不绕过 L5。
+4. L3 旧启发式评分已标记为 LegacyHeuristicCompatibility / DefaultHeuristicScoringProfile，compatibility-only。
+5. L4 数学适配器全部 disabled_by_default=True、requires_l5_permit=True，无 numpy/scipy/sklearn import，无真实外部调用。
+6. L0 聚合哈希不变：D06957DCCF3253660AC0F27980D1FBC922505F8B5CEBD897C083252F6FC8EF5F。
+
+三、执行验证
+
+1. 新增专项测试：14 passed。
+2. L4 原有动作落地分片：196 passed, 642 deselected。
+3. 完整 pytest：838 passed。
+4. compileall：通过。
+
+四、风险分级
+
+P0：0。
+P1：0。
+P2：0。
+P3：0。
+
+五、质检建议
+
+仍需数学专项质检。该补丁可以作为专项质检候选和 L5 前置兼容基线候选，但不建议跳过专项质检直接进入 L5/L6 真实实现。

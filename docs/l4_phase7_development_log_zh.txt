@@ -1,0 +1,36 @@
+天工造物 L4 第七阶段开发日志
+
+工程目录：project_l4_phase7
+日期：2026-06-04
+
+一、工程创建
+
+1. 从 project_l4_phase6 复制生成 project_l4_phase7。
+2. 保留 L0/L1/L2/L3 与第六阶段一致。
+3. 保留 L4 第一至第六阶段实现，仅追加第七阶段对象与导出。
+
+二、新增实现范围
+
+1. 事务引用：ExecutionTransactionRef、ExecutionTransactionScope。
+2. 提交与回滚意图：ExecutionCommitIntent、ExecutionRollbackIntent。
+3. 资源预算引用：ResourceBudgetRef、ResourceUsageReport、ResourceBudgetConsumptionSummary、ResourceBudgetExhaustedFailure。
+4. 并发隔离：ConcurrencyScope、ExecutionIsolationContext、ExecutionLockRef。
+5. 回放与复核摘要：ExecutionReplaySummary、ExecutionDeterminismHint、ExecutionIdempotencyHint、ExecutionSideEffectSummary、ExecutionReconciliationAdvice。
+6. 检查点与快照引用：ExecutionCheckpointRef、ExecutionSnapshotRef。
+7. 运行摘要与交接引用：ExecutionOperationalSummary、L4ToL5ResourceFeedback、L4ToL6RecoveryReplayRequirement。
+8. 未来层占位端口：L5Phase7ResourceBudgetPort、L5ConcurrencyBudgetPort、L6RecoveryServicePort、L6ReplayServicePort。
+9. fake/dry-run/no-op 支持：FakeTransactionResourceSupport、DryRunTransactionResourceSupport、NoOpTransactionResourceSupport。
+10. 第七阶段不变量：Phase7Invariant 及九个边界不变量。
+
+三、关键修正
+
+1. 为兼容前置阶段全包静态扫描，将资源预算失败字段命名为 budget_extension_requested，避免误触 HTTP requests 禁用词。
+2. 第七阶段 L5 资源预算占位端口在包入口导出为 L5Phase7ResourceBudgetPort，避免与第二阶段已有 L5ResourceBudgetPort 名称冲突。
+
+四、未进入范围
+
+1. 未开发第八阶段能力。
+2. 未实现真实事务提交、回滚或恢复。
+3. 未实现真实资源管理、并发调度、锁、回放、快照或检查点。
+4. 未导入 L5/L6 真实实现。
+5. 未恢复旧主链。

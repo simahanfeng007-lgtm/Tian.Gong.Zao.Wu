@@ -1,0 +1,49 @@
+{
+  "blocking_findings": [],
+  "inert_text_notes": [
+    {
+      "path": "tiangong_kernel/l1_ports/model_provider_governance_ports.py",
+      "kind": "inert_secret_marker_string_for_detection_only"
+    },
+    {
+      "path": "tiangong_kernel/l2_state/model_interaction_state.py",
+      "kind": "inert_secret_marker_string_for_detection_only"
+    },
+    {
+      "path": "tiangong_kernel/l3_orchestration/model_invocation_flow.py",
+      "kind": "inert_secret_marker_string_for_detection_only"
+    },
+    {
+      "path": "tiangong_kernel/l4_action_grounding/model_provider_adapter.py",
+      "kind": "inert_secret_marker_string_for_detection_only"
+    },
+    {
+      "path": "tiangong_kernel/l5_plugin_host/lifecycle_declaration.py",
+      "kind": "inert_secret_marker_string_for_detection_only"
+    },
+    {
+      "path": "tiangong_kernel/l5_plugin_host/phase6_health.py",
+      "kind": "inert_secret_marker_string_for_detection_only"
+    },
+    {
+      "path": "tiangong_kernel/l5_plugin_host/phase7_boundary_gate.py",
+      "kind": "inert_secret_marker_string_for_detection_only"
+    },
+    {
+      "path": "tiangong_kernel/l5_plugin_host/registry_conflict_rules.py",
+      "kind": "inert_secret_marker_string_for_detection_only"
+    },
+    {
+      "path": "tiangong_kernel/l5_plugin_host/model_capability_invariants.py",
+      "kind": "inert_secret_marker_string_for_detection_only"
+    }
+  ],
+  "scanned_roots": [
+    "tiangong_kernel/l1_ports",
+    "tiangong_kernel/l2_state",
+    "tiangong_kernel/l3_orchestration",
+    "tiangong_kernel/l4_action_grounding",
+    "tiangong_kernel/l5_plugin_host"
+  ],
+  "status": "pass"
+}

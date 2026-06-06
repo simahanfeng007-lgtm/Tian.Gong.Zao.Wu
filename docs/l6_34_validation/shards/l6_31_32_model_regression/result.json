@@ -1,0 +1,28 @@
+{
+  "name": "l6_31_32_model_regression",
+  "status": "passed",
+  "returncode": 0,
+  "duration_seconds": 4.602624,
+  "timeout_seconds": 90.0,
+  "started_at": 1780725111.1495323,
+  "finished_at": 1780725115.7521572,
+  "command": [
+    "/opt/pyvenv/bin/python",
+    "-m",
+    "pytest",
+    "tests/test_l6_31_model_suggest_shape_hotfix.py",
+    "tests/test_l6_32_p1_model_suggest_repair.py",
+    "-q"
+  ],
+  "cwd": "/mnt/data/l634_work/project",
+  "purpose": "L6.31/L6.32 model_suggest回归",
+  "required": true,
+  "rerun_command": "/opt/pyvenv/bin/python -m pytest tests/test_l6_31_model_suggest_shape_hotfix.py tests/test_l6_32_p1_model_suggest_repair.py -q",
+  "stdout_path": "/mnt/data/l634_work/project/docs/l6_34_validation/shards/l6_31_32_model_regression/stdout.log",
+  "stderr_path": "/mnt/data/l634_work/project/docs/l6_34_validation/shards/l6_31_32_model_regression/stderr.log",
+  "stdout_tail": "...................                                                      [100%]\n19 passed in 1.08s\n",
+  "stderr_tail": "",
+  "error_message": "",
+  "timed_out": false,
+  "process_group_reaped": false
+}

@@ -1,0 +1,107 @@
+天工造物 数学模型发动机最小兼容补丁 开发日志
+
+工程目录：project_math_engine_patch
+日期：2026-06-04
+
+一、基线
+
+从 project_l4_phase8 复制生成 project_math_engine_patch，保留 L4 第八阶段冻结候选的全部源码、测试和文档。
+
+二、L1 补丁
+
+新增 tiangong_kernel/l1_ports/math_model_ports.py。
+
+补齐对象：
+- MathematicalModelPort
+- ScoringPort
+- MemoryModelPort
+- ForgettingModelPort
+- RetentionModelPort
+- DecayModelPort
+- ReinforcementModelPort
+- InterferenceModelPort
+- HealthModelPort
+- HomeostasisModelPort
+- RiskModelPort
+- ResourcePressureModelPort
+- EvolutionAssessmentPort
+- RegressionRiskModelPort
+- LearningAssessmentPort
+- AdaptationDecisionPort
+
+所有 request/response 均为 frozen + slots dataclass。所有 port 均为 ABC abstractmethod。返回类型使用 PortResult 或 CoreResult。L1 只导入 L0/L1/stdlib。
+
+三、L2 补丁
+
+新增 tiangong_kernel/l2_state/math_engine_state.py。
+
+补齐对象：
+- MathematicalModelState
+- ModelParameterState
+- ModelWeightState
+- ModelThresholdState
+- ModelCalibrationState
+- ModelVersionState
+- ScoreState
+- AssessmentState
+- ModelInputSnapshot
+- ModelOutputSnapshot
+- ModelTraceState
+- ModelConfidenceState
+- ModelDriftState
+
+该模块只记录状态，不计算、不排序、不训练、不校准、不检测漂移。不导入 L3-L6。提供 math_engine_state_stable_json 与 math_engine_state_stable_hash 作为稳定序列化/哈希便捷入口。
+
+四、L3 补丁
+
+新增：
+- tiangong_kernel/l3_orchestration/math_formula_profile_ref.py
+- tiangong_kernel/l3_orchestration/math_model_flow.py
+- tiangong_kernel/l3_orchestration/scoring_flow.py
+- tiangong_kernel/l3_orchestration/domain_scoring_flow.py
+
+新增正式 Flow 路径：
+- MathModelOrchestrationFlow
+- ScoringFlow
+- MemoryScoringFlow
+- ForgettingScoringFlow
+- HealthScoringFlow
+- RiskScoringFlow
+- ResourcePressureFlow
+- EvolutionAssessmentFlow
+- RegressionRiskFlow
+- LearningAssessmentFlow
+- AdaptationDecisionFlow
+
+新增公式外置引用：
+- MathFormulaProfileRef
+- MathModelPortCallRef
+- MathModelResultRef
+
+旧 L3 启发式评分保留，不删除函数；新增 LegacyHeuristicCompatibility 与 DefaultHeuristicScoringProfile 标记其 compatibility-only，不作为正式数学模型发动机路径。
+
+五、L4 补丁
+
+新增：
+- math_adapter_protocol.py
+- math_adapter_descriptor.py
+- python_math_adapter.py
+- external_scoring_adapter.py
+- local_model_scoring_adapter.py
+- llm_judge_adapter.py
+- statistics_adapter.py
+- custom_formula_adapter.py
+- model_evaluation_adapter.py
+- optional_third_party_math_adapter_descriptor.py
+
+所有适配器默认 disabled_by_default=True、requires_l5_permit=True、production_enabled=False。所有 invoke/dry_run 返回 disabled dry-run/no-op 引用，不做真实计算、不访问外部服务、不导入第三方依赖、不把评分结果转成行动。
+
+六、测试补丁
+
+新增 4 个专项测试文件：
+- tests/test_math_engine_patch_l1_ports.py
+- tests/test_math_engine_patch_l2_states.py
+- tests/test_math_engine_patch_l3_flows.py
+- tests/test_math_engine_patch_l4_adapters.py
+
+调整旧 L3 phase1 基线测试：L0 仍严格保持哈希不变；L1/L2 仅允许本补丁白名单文件变化。

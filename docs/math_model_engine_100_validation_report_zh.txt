@@ -1,0 +1,20 @@
+天工造物 数学模型发动机 L1-L4 100 分前置基础验证报告
+日期：2026-06-04
+
+验证结论：通过专项自检。
+
+验证范围：
+1. L1 端口对象均为契约对象或抽象协议。
+2. L2 状态对象保持 frozen + slots，可稳定序列化。
+3. L3 Flow 保持 request_only / advisory_only / evidence_only / disabled_safe。
+4. L3 公式参数、权重、阈值外置，不写死认知公式。
+5. L4 适配器默认禁用，需要未来 L5 permit，不联网、不执行 shell、不写状态、不实现 L6。
+6. 模型输出不能直接转成动作、权限或最终裁决。
+
+已执行：
+1. python -m compileall -q tiangong_kernel tests
+2. python -m pytest -q tests/test_l1_math_model_ports.py ... tests/test_math_model_cross_layer_contract.py
+
+结果：
+1. compileall 通过。
+2. 数学模型发动机专项测试 21 passed。

@@ -1,0 +1,14 @@
+天工造物 L4 Skill 直显与工具释放链路专项测试结果
+
+实际执行：
+
+1. python -m compileall -q tiangong_kernel tests
+   结果：通过。
+
+2. python -m pytest -q tests -k "l4_skill_tool_release or l4_phase4 or l4_phase8"
+   结果：53 passed, 809 deselected。
+
+3. python -m pytest -q tests -k "l1_phase5_skill_ports or l1_phase5_tool_release_ports or l2_phase3_skill_chain or l2_phase3_tool_group_chain or l3_phase3_skill_visibility_advice or l3_phase3_tool_group_release_advice or l4_phase4_no_live_model_or_tool_without_l5 or l4_phase8_no_ability_package_runtime_symbols"
+   结果：22 passed, 840 deselected。
+
+说明：本阶段不单独声明全量 pytest 通过；全量测试将在所有输入文件修复完成后统一执行。

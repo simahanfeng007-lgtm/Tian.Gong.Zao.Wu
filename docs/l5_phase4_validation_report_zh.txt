@@ -1,0 +1,32 @@
+天工造物 L5 第四阶段验证报告
+
+一、验证命令与结果
+1. python -m compileall -q tiangong_kernel tests
+   结果：passed
+2. python -m pytest --collect-only -q tests
+   结果：1102 tests collected
+3. python -m pytest -q tests/test_l5_phase4_*.py
+   结果：50 passed
+4. python -m pytest -q tests -k 'l5_phase4 or plugin_host'
+   结果：53 passed, 1049 deselected
+5. python -m pytest -q tests
+   结果：1102 passed
+6. forbidden scan
+   结果：0 blocking findings
+7. L0-L4 hash compare
+   结果：0 added / 0 modified / 0 deleted
+8. L5 phase1-phase3 hash compare
+   结果：新增 5 个 phase4 文件；声明性扩展 3 个共享文件；删除 0
+9. test inventory compare
+   结果：新增 44 个测试/辅助文件；删除 0；修改 0；skip/xfail 新增 0
+10. zip integrity
+   结果：见 docs/l5_phase4_zip_integrity_zh.txt 与外部交付报告
+
+二、边界结论
+- no-live-action：保持。
+- no-L6-implementation：保持。
+- no-lower-layer-mutation：保持。
+- no-legacy-runtime：保持。
+- Registry 仍只读消费，不被误用为真实加载器。
+- LifecycleStateMachine 只表达声明规则，不持有运行期当前状态。
+- MountDeclaration 只表达挂载声明，不暴露 Skill/Tool/模型可见入口。

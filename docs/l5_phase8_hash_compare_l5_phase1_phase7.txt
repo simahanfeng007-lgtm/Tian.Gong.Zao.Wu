@@ -1,0 +1,15 @@
+L5 phase1-phase7 hash compare
+
+added=1
+modified=1
+deleted=0
+unchanged=66
+
+added=['tiangong_kernel/l5_plugin_host/phase8_closure.py']
+modified=['tiangong_kernel/l5_plugin_host/__init__.py']
+deleted=[]
+
+分类：
+- 新增：tiangong_kernel/l5_plugin_host/phase8_closure.py，第八阶段最终收口声明模型。
+- 共享文件声明性扩展：tiangong_kernel/l5_plugin_host/__init__.py，新增 phase8 安全导出，未删除前序导出。
+- 异常修改：无。

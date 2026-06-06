@@ -1,0 +1,27 @@
+天工造物 权限治理与副作用安全链路 P1 最小补丁开发日志
+
+日期：2026-06-04
+
+一、修复结论
+
+已补齐“模型意图 → ActionIntent → Effect/SideEffect → Risk/Policy/Contract/Constraint → Permission/Confirmation/Lease → Secret/Privacy Guard → Transaction/Compensation → Audit/Evidence Requirement → L4 Gate”的显式结构链路。
+
+二、L1
+
+新增 approval_human_gate_ports.py、effect_authorization_ports.py、contract_constraint_ports.py。所有端口为协议端口，不实现算法、不授权、不裁决、不调用上层。
+
+三、L2
+
+新增 side_effect_governance_state.py，包含 SideEffectGovernanceChainState、PolicyBindingState、ContractBindingState、ApprovalState、HumanGateState、TransactionState、CompensationState、DataGovernanceState、SecretExposureGuardState、PrivacyGuardState。
+
+四、L3
+
+新增 side_effect_safety_flow.py，包含副作用安全链 Flow 与 dispatch 前置不变量。扩展 L3ToL4HandoffEnvelope 与 L3ToL5HandoffEnvelope 的安全链引用字段。
+
+五、L4
+
+新增 safety_chain_ref.py。ActionGroundingGateInput 增加 safety_chain_ref、transaction_requirement_ref、secret_privacy_guard_ref。ActionGroundingGateValidator 对 live_action_requested=True 且缺 safety_chain_ref 的请求执行结构拒绝。
+
+六、边界
+
+未修改 L0，未实现 L5/L6，未启用真实外部动作，未让 L4 做权限/风险/策略/确认/凭据/审计/资源/并发裁决。

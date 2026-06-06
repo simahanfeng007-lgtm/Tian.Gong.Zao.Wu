@@ -1,0 +1,56 @@
+天工造物 L2 第九阶段修复后 manifest
+
+交付包内容：完整 project 工作目录。
+说明：本 manifest 已按质检后稳定性整修结果更新；为避免自引用，不记录本 manifest 自身 sha256。
+
+关键文件：
+- tiangong_kernel/l2_state/math_state.py | bytes=14132 | sha256=8c93fbb6268dcb24ab12a77a59b3ebedec7fd37503512d9d07aa464546e3352c
+- tiangong_kernel/l2_state/affective_state.py | bytes=12624 | sha256=23e0109c779a1f949457df12bb795f265ddb890c9be55549e67c0a262055d7dc
+- tiangong_kernel/l2_state/dynamic_drive_state.py | bytes=13146 | sha256=c8500f29d61de3e6d631bdb8cc95cd26a85d6babcc44e7f3e563f36ca98b0eda
+- tiangong_kernel/l2_state/state_identity.py | bytes=1781 | sha256=d97bc5667b6a4fe672280c8d70582a465302767e87ae7417f8d98bb8c061792e
+- tiangong_kernel/l2_state/component_state.py | bytes=7947 | sha256=d8d5cd0d77ca1bf67a84a4c8f7cc88f4e881f8ee6f3a3552c6453228f28eccc0
+- tiangong_kernel/l2_state/projection_state.py | bytes=13195 | sha256=6df032a68f9dc5ad50f977a097a638cdc65f8ad972e74f6c825976141a5ad1a2
+- tiangong_kernel/l2_state/__init__.py | bytes=18157 | sha256=8a5130a891d0c5c40da88486aea891dc88c28eae7179709426aec587a42b47e8
+- tests/l2_phase9_builders.py | bytes=12970 | sha256=b6cac14565b535eb49c255f0bf17ccf1cde92db014ee28023166d82717652e0b
+- tests/test_l2_phase9_math_state.py | bytes=1641 | sha256=7679d53ffe218a5cc9124c651332eab0a55fc29c78e8540ec6d5150aff1f164e
+- tests/test_l2_phase9_affective_state.py | bytes=1461 | sha256=6bb9eba56c333bd70209aa341ee41720af0601fa900a60d2e0ec1c4fda726516
+- tests/test_l2_phase9_dynamic_drive_state.py | bytes=1535 | sha256=72825d24f9ad1899736aede92f881516b88bcf2967bd75ab07b03d238d5f9606
+- tests/test_l2_phase9_serialization_and_hash.py | bytes=1004 | sha256=c04c98be048772c92f7355f64495afe04cf5f5a4bb022f8f672e9a32d5e279d3
+- tests/test_l2_phase9_boundary_no_execution.py | bytes=4139 | sha256=12814305b16d4ec4df9459cc15fbdaeee7f15b9e8a18d6954a072ad195208449
+- tests/test_l2_phase9_integration_with_l2_phase1_to_phase8.py | bytes=3901 | sha256=d8a666b6a9def0888ea166fb0f4dfb651f8f1f927068c58ccb79f9063a8202e4
+- docs/l2_phase9_development_log_zh.md | bytes=7745 | sha256=00daaf490a25ef6b40c5c7e79fea4937c5820739a1a9a347e2f1678261236f00
+- docs/l2_phase9_handoff_report_zh.txt | bytes=4014 | sha256=22aaefc3579de69685ec02aadd0a377a514718fd81a3cd15ab882192c52b6f4f
+- docs/l2_phase9_validation_report_zh.txt | bytes=2367 | sha256=26b6df856a4280bac7766d08842680b09bd364aaf571723b6c614d5d7d840943
+- docs/l2_phase9_change_list_zh.txt | bytes=1807 | sha256=e12c4c1fb64d2d92eb15cf9afeea708f59523bbc02c3a9b735c7a4b091ff89bc
+- docs/l2_phase9_test_results_zh.txt | bytes=661 | sha256=0379e59d009cc12dd72732ba60ffd4ececb6ba6d00d2b96473fa1ea2355e67db
+- docs/l2_phase9_todo_zh.txt | bytes=766 | sha256=45800a4484a98825c7def89b748158543a9d36fdaed06e4513cd8392aa6727f8
+- docs/l2_phase9_compileall.log | bytes=0 | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+- docs/l2_phase9_pytest_phase9.log | bytes=99 | sha256=acc71575032ef5e67597ae3b7d23bf6f6609cb07046cd7b27a025087d481a401
+- docs/l2_phase9_pytest_l2.log | bytes=276 | sha256=a521322f299644eae88ca673606f460ee8200f499e73da432eb0535fa86a8f59
+- docs/l2_phase9_pytest_full.log | bytes=580 | sha256=da871ba419413df0b068f4477aed38222c37c4df2f456d97557601a74bdfb0c3
+- docs/天工造物_L2第九阶段工程员提示词_20260603.txt | bytes=28550 | sha256=d0b8d06407448de856288f1c6775ad86bb1fee943a575dcd493130ec049bef69
+- docs/l2_phase9_quality_repair_report_zh.md | bytes=5741 | sha256=4898bdc6bc5e5b919ca08c8c58c2b151643560a414a713acb3a0449107d4b05b
+- docs/l2_phase9_quality_repair_summary_zh.txt | bytes=771 | sha256=7e063d2153a513029b20544a09eac201e0843e3fca4e8fc67c1a7214310d0744
+- docs/l2_phase9_quality_repair_change_list_zh.txt | bytes=1453 | sha256=5c867c4121c54621dbc6650dc7153d864f48c186e11e45ec5e8563193f74edc3
+- docs/l2_phase9_quality_repair_validation_report_zh.txt | bytes=2347 | sha256=2330962a2a00419b31e19ef53e26725fd75e2eb1aa7faa49a7f6863faf60d5a3
+- docs/l2_phase9_quality_repair_test_results_zh.txt | bytes=962 | sha256=3f2ba84da2f87b859020e85fa26598cb3b1eb9746647964cd51927992c466554
+- docs/l2_phase9_quality_repair_todo_zh.txt | bytes=652 | sha256=650952a7e53ca2fd0b9a3f2b0363e4ea16421e3163f0c07be53614a67ead8e41
+- docs/l2_phase9_quality_repair_issue_closure_zh.csv | bytes=814 | sha256=7f3b866394809fb207b3c9bad8377484adb598bcaa84fc539972fd3438b0ace6
+- docs/l2_phase9_final_archive_source_index_zh.txt | bytes=1464 | sha256=5c2d89f85159201f120129b6d6d8bc5f1f1756401516c2accc62590d62ce4304
+- docs/l2_phase9_repair_compileall.log | bytes=0 | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+- docs/l2_phase9_repair_pytest_phase9.log | bytes=99 | sha256=fbad0b7e221ea76e7873cc8b2c82f49029c51b6b7e2d31916b1d4baa86a13f87
+- docs/l2_phase9_repair_pytest_l2.log | bytes=260 | sha256=5c0f7fea340603e50c8e0adc19ab5965d4e664be5e626793211889601058f369
+- docs/l2_phase9_repair_pytest_l2_k.log | bytes=276 | sha256=948784f046073f9430e181ba159f1e8d55d6ffc9799595e95cef3aba97f41896
+- docs/l2_phase9_repair_pytest_full.log | bytes=580 | sha256=6359077d0ec38b9b18c4c4cc2d7e9155e8aa98603c0b64a57b7ae64e3230b0fb
+
+文件名整修：
+- 已恢复 5 个 mojibake 文件名为 UTF-8 中文名。
+- 最终打包前应排除 __pycache__、*.pyc、.pytest_cache。
+
+测试摘要：
+- compileall：通过
+- 第九阶段专项测试：19 passed
+- L2 分片测试：176 passed, 326 deselected
+- 完整 tests：502 passed
+
+建议：可作为 L2 第九阶段修复后冻结候选包；进入 L3 前建议轻量二次质检。

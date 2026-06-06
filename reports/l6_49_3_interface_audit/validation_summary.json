@@ -1,0 +1,207 @@
+{
+  "affected_regression": "59 passed",
+  "cli_smoke": "PASS",
+  "compileall": "PASS",
+  "delivery_report": "docs/L6_49_3_全程序接口体检与Runtime接活修复报告_20260606.txt",
+  "explicit_source_signature_mismatch_count": 0,
+  "freeze_regression_l6_37_to_l6_49_3": "92 passed",
+  "full_pytest": "not_run",
+  "generated_at": 1780759351.0610406,
+  "import_failure_count": 0,
+  "import_failures": [],
+  "imported_module_count": 822,
+  "interface_bridge_inventory": [
+    {
+      "class": "tiangong_agent_runtime.affective_state.AffectiveStateEngine",
+      "methods": [
+        "evolve"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.budget_low_friction_governance.BudgetLowFrictionGovernanceBridge",
+      "methods": [
+        "build_planner_hint",
+        "evaluate"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.context_memory_bridge.ContextMemoryBridge",
+      "methods": [
+        "build_planner_hint"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.delivery_standardization.DeliveryStandardizationBridge",
+      "methods": [
+        "build",
+        "build_planner_hint"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.execution_exoskeleton.ExecutionExoskeletonBridge",
+      "methods": [
+        "build_planner_hint"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.experience_synthesis.ExperienceSynthesisBridge",
+      "methods": [
+        "build_planner_hint"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.forgetting_review_router.ForgetReviewRouter",
+      "methods": [
+        "review"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.four_path_context_router.FourPathContextRouter",
+      "methods": [
+        "build",
+        "build_planner_hint"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.governance_execution.GovernanceExecutionBridge",
+      "methods": [
+        "build",
+        "build_planner_hint"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.learning_convergence.LearningConvergenceBridge",
+      "methods": [
+        "build_planner_hint"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.lifecycle_coordinator.LifecycleCoordinator",
+      "methods": [
+        "build_bundle",
+        "build_planner_hint"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.memory_recall_router.MemoryRecallRouter",
+      "methods": [
+        "route"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.p0_system_integration.L638P0SystemIntegrationBridge",
+      "methods": [
+        "build_planner_hint"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.p0_system_integration_two.L639P0SystemIntegrationBridge",
+      "methods": [
+        "build_planner_hint"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.planner_context_integration.PlannerContextIntegrationBridge",
+      "methods": [
+        "build",
+        "build_planner_hint"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.planner_execution_controller.PlannerExecutionController",
+      "methods": [
+        "build_planner_hint"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.planner_unified_consumption.PlannerUnifiedConsumptionBridge",
+      "methods": [
+        "build_planner_hint",
+        "consume"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.project_index_bridge.ProjectIndexBridge",
+      "methods": [
+        "build_planner_hint"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.project_repair_plan.ProjectRepairPlanBridge",
+      "methods": [
+        "build",
+        "build_planner_hint"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.provider_adaptation_shell.ProviderAdaptationBridge",
+      "methods": [
+        "build",
+        "build_planner_hint"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.recovery_coordination.RecoveryCoordinationBridge",
+      "methods": [
+        "build",
+        "build_planner_hint"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.shell_system_mount.ShellSystemMountBridge",
+      "methods": [
+        "build",
+        "build_planner_hint"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.skill_review_queue.SkillReviewQueueBridge",
+      "methods": [
+        "build_planner_hint"
+      ]
+    },
+    {
+      "class": "tiangong_agent_runtime.tool_production_request.ToolProductionRequestBridge",
+      "methods": [
+        "build_planner_hint"
+      ]
+    }
+  ],
+  "interface_bridge_inventory_count": 24,
+  "interface_wiring_tests": "3 passed",
+  "module_import": "PASS",
+  "python_file_count": 822,
+  "remaining_risks": [
+    "full pytest not run",
+    "static signature audit is lightweight and not a full type checker",
+    "real DeepSeek provider online smoke not run"
+  ],
+  "runtime_repaired_interfaces": [
+    "MemoryRecallRouter.route(query, top_k, now)",
+    "ForgetReviewRouter.review(record, vector)",
+    "AffectiveStateEngine.evolve(... previous_state ...)",
+    "BudgetLowFrictionGovernanceBridge.evaluate(plan, budget_snapshot)",
+    "LifecycleCoordinator.build_bundle(...)",
+    "FourPathContextRouter.build(...)",
+    "PlannerUnifiedConsumptionBridge.consume(four_path_report, plan)"
+  ],
+  "runtime_smoke_interfaces": [
+    "RuntimeEntry.interface_wiring_snapshot()",
+    "RuntimeEntry.memory_recall_runtime_snapshot()",
+    "RuntimeEntry.forgetting_review_runtime_snapshot()",
+    "RuntimeEntry.affective_runtime_snapshot()",
+    "RuntimeEntry.lifecycle_runtime_snapshot()",
+    "RuntimeEntry.four_path_runtime_snapshot()",
+    "RuntimeEntry.planner_unified_consumption_snapshot()"
+  ],
+  "schema": "tiangong.l6_49_3.interface_audit_summary.v1",
+  "source_roots": [
+    "tiangong_agent_runtime",
+    "tiangong_agent_shell",
+    "tiangong_kernel"
+  ],
+  "source_silent_except_pass": [],
+  "source_silent_except_pass_count": 0,
+  "syntax_error_count": 0,
+  "syntax_errors": []
+}

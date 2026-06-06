@@ -1,0 +1,37 @@
+天工造物 L6 第五阶段开发日志
+日期：2026-06-05
+基线：L6 第四阶段补全修正版
+
+一、前置材料确认
+1. L6 第一阶段公共插件底座：已在基线中确认存在 l6_plugins/common。
+2. L6 第二阶段公共运行关系体系：已在基线中确认存在 lifecycle/event/projection/handoff/admission 等公共对象。
+3. L6 第三阶段心智与状态插件组：已确认存在 l6_plugins/mind。
+4. L6 第四阶段认知连续性、记忆遗忘与状态回流插件组：已确认存在 l6_plugins/cognitive_continuity，采用补全修正版为基线。
+5. L6 第五阶段开工提示词：已读取，按“执行力第一、硬边界内超长链优先”执行。
+
+二、开发范围
+新增目录：tiangong_kernel/l6_plugins/governance_control/
+新增模块数：17 个 Python 文件。
+新增测试：41 个 tests/test_l6_phase5_*.py。
+
+三、核心工程口径
+1. ExecutionFirstWithinHardBoundaries 已固化为第五阶段核心不变量。
+2. A0-A3、低风险、可逆、只读、可审计、无凭证、无不可逆副作用候选默认生成 continuation / degradation / review request，而不是默认打断。
+3. A5、凭证、隐私、不可逆副作用、真实外部动作、真实模型/工具调用、真实写状态、真实写/删记忆、真实预算扣减、系统边界破坏仍保留硬边界。
+
+四、实现对象
+- RiskAssessmentSystem
+- PermissionRequirementSystem
+- BudgetPressureSystem
+- AuditEvidenceSystem
+- CredentialBoundarySystem
+- PrivacyRedactionSystem
+- GovernanceReviewSystem
+- HumanGateSystem
+- DegradationPolicySystem
+- PublicProjectionSafetySystem
+- LongChainGovernanceSystem
+- Product / Learning / Healing 桥接治理审查对象
+
+五、边界
+未签发 permit；未扣预算；未写审计库；未读取凭证；未调用模型/工具/L4 adapter；未写 L2；未写/删记忆；未自建 Runtime；未恢复旧 CapabilityPort / AbilityPackage 自动执行链。

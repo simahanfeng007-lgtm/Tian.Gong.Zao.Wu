@@ -1,0 +1,27 @@
+{
+  "name": "l6_32_controller",
+  "status": "passed",
+  "returncode": 0,
+  "duration_seconds": 6.013103,
+  "timeout_seconds": 90.0,
+  "started_at": 1780726355.6170406,
+  "finished_at": 1780726361.630143,
+  "command": [
+    "/opt/pyvenv/bin/python3",
+    "-m",
+    "pytest",
+    "tests/test_l6_32_planner_execution_controller.py",
+    "-q"
+  ],
+  "cwd": "/mnt/data/l635_work/project",
+  "purpose": "pytest shard",
+  "required": true,
+  "rerun_command": "/opt/pyvenv/bin/python3 -m pytest tests/test_l6_32_planner_execution_controller.py -q",
+  "stdout_path": "/mnt/data/l635_work/project/reports/l6_35_shards/l6_32_controller/stdout.log",
+  "stderr_path": "/mnt/data/l635_work/project/reports/l6_35_shards/l6_32_controller/stderr.log",
+  "stdout_tail": ".......                                                                  [100%]\n7 passed in 2.58s\n",
+  "stderr_tail": "",
+  "error_message": "",
+  "timed_out": false,
+  "process_group_reaped": false
+}

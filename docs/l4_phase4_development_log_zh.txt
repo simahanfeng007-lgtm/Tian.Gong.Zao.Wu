@@ -1,0 +1,104 @@
+天工造物 L4 第四阶段开发日志
+
+阶段名称：第四阶段，模型动作、工具动作、ToolGroup 动作承载骨架
+工程目录：project_l4_phase4
+开发日期：2026-06-04
+
+一、工程基线
+
+1. 从 project_l4_phase3 复制生成 project_l4_phase4。
+2. 保留 L4 第一至第三阶段既有代码、测试和文档。
+3. 第四阶段仅在 tiangong_kernel/l4_action_grounding 内追加模型动作、工具动作和 ToolGroup 动作承载骨架。
+
+二、模型动作骨架
+
+新增内容：
+
+1. ModelActionRequest：模型动作请求信封，只保存请求形态，不携带真实模型客户端。
+2. ModelActionResult：模型动作结果信封，只保存本地结构化结果。
+3. ModelActionFailure 与 ModelActionFailureKind：模型动作失败信封和失败类型。
+4. ModelActionAdapterPort：模型动作适配器协议，只定义结构接口。
+5. FakeModelAdapter：测试专用确定性假模型适配器。
+6. DryRunModelAdapter：空跑模型适配器，只返回预览结果。
+
+边界：
+
+1. 没有真实模型 API 调用。
+2. 没有模型凭证处理。
+3. 没有网络访问。
+4. 没有把 L4 变成模型执行控制器。
+
+三、工具动作与 ToolGroup 骨架
+
+新增内容：
+
+1. ToolArgumentEnvelope：工具参数信封，显式拒绝明文凭证标记。
+2. ToolCallEnvelope：工具调用信封，只描述调用意图。
+3. ToolResultEnvelope：工具结果信封。
+4. ToolFailureEnvelope：工具失败信封。
+5. ToolGroupActionContext：ToolGroup 动作上下文，只保存结构化分组上下文。
+6. ToolActionRequest：工具动作请求信封。
+7. ToolActionResult：工具动作结果信封。
+8. ToolActionFailure 与 ToolActionFailureKind：工具动作失败信封和失败类型。
+9. ToolActionAdapterPort：工具动作适配器协议。
+10. FakeToolAdapter：测试专用确定性假工具适配器。
+11. DryRunToolAdapter：空跑工具适配器，只返回预览结果。
+
+边界：
+
+1. 没有真实工具调用。
+2. 没有真实 Skill 解析。
+3. 没有真实 Tool 注册。
+4. 没有 ToolGroup 注册实现。
+5. 没有把 Tool 暴露给模型。
+
+四、禁用真实链路占位
+
+新增 DisabledRealModelToolAdapterStub。
+
+用途：
+
+1. 明确表达真实模型和真实工具路径目前默认禁用。
+2. 返回 disabled failure envelope。
+3. 标记需要 L5 才能继续。
+4. 不提供生产可用执行入口。
+
+五、L3 结构绑定与归一化
+
+新增内容：
+
+1. L3IntentBinding：只从 L3 意图引用构造 L4 请求信封，不生成、不修改、不解析 L3 意图。
+2. ModelToolNormalization：只对第四阶段本地结果和失败信封做结构归一化。
+
+边界：
+
+1. 没有绕过 L3。
+2. 没有写入 L2。
+3. 没有引入 L5/L6。
+
+六、测试补充
+
+新增 11 个第四阶段测试文件，覆盖：
+
+1. 模型动作信封。
+2. 工具动作信封。
+3. ToolGroup 动作上下文。
+4. 假模型与假工具适配器。
+5. 空跑模型与空跑工具适配器。
+6. 真实模型/工具禁用占位。
+7. 没有 L5 时不得真实执行。
+8. L3 意图绑定只做结构转换。
+9. 不实现真实 Skill/Tool/ToolGroup 注册。
+10. 不恢复旧 Runtime/神枢/能力包链路。
+
+七、调试修正记录
+
+1. 初次目标测试发现测试期望的 invariant 名称过窄，已改为前缀匹配，避免把实现类名固定死。
+2. 静态扫描发现源码注释中存在容易误判的复数英文词和方法名片段，已替换为不误导扫描的表述。
+3. 禁用 stub 中工具禁用方法改名为 disabled_tool_action，以避免被误判为真实工具调用入口。
+
+八、开发结论
+
+第四阶段工程目标已完成。
+
+新增骨架保持 L4 的动作落地层定位，只承载结构、约束、禁用状态、假适配与空跑适配，不执行真实外部动作。

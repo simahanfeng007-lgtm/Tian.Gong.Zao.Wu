@@ -1,0 +1,2 @@
+$ python -m compileall -q tiangong_kernel tests
+compileall: passed

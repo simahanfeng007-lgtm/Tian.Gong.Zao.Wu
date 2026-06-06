@@ -1,0 +1,17 @@
+# L5 hotfix2 修复包 zip integrity
+
+## 打包对象
+- root=project_l5_phase8_final_public_projection_l5_l6_handoff_freeze_hotfix2_affective_repair
+- source=hotfix1 工程包 + hotfix2 情志专项最小补丁
+
+## 打包硬门
+- 不包含 __pycache__。
+- 不包含 .pytest_cache。
+- 不包含 .pyc / .pyo。
+- 不包含 repair_validation_logs 临时目录。
+- 中文路径 / UTF-8 文件名保留。
+- zip CRC 通过，以交付后 testzip=None 为准。
+
+## 注意
+- 外部 zip sha256 由最终封装完成后计算，见最终交付答复。
+- 本文件随工程包交付；由于 zip 自身哈希不能自包含，本文件不写入自身所在 zip 的最终 sha256。

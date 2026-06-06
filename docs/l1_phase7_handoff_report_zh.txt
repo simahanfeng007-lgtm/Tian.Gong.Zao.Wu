@@ -1,0 +1,105 @@
+天工造物 L1 第七阶段交接报告
+
+1. 本阶段一句话结论
+L1 第七阶段已完成：新增记忆、上下文、检索、学习、自我学习、自我迭代、自我进化 7 类端口协议，未修改 L0，未实现任何真实外部能力。
+
+2. 修改清单
+新增源码：
+- tiangong_kernel/l1_ports/memory_ports.py
+- tiangong_kernel/l1_ports/context_ports.py
+- tiangong_kernel/l1_ports/retrieval_ports.py
+- tiangong_kernel/l1_ports/learning_ports.py
+- tiangong_kernel/l1_ports/self_learning_ports.py
+- tiangong_kernel/l1_ports/self_iteration_ports.py
+- tiangong_kernel/l1_ports/evolution_ports.py
+
+兼容补充：
+- tiangong_kernel/l1_ports/tool_gap_ports.py：P1 兼容补充 ToolFunctionMismatchReport，仅为工具功能不匹配报告对象，不新增真实能力。
+
+新增测试：
+- tests/test_l1_phase7_memory_ports.py
+- tests/test_l1_phase7_context_ports.py
+- tests/test_l1_phase7_retrieval_ports.py
+- tests/test_l1_phase7_learning_ports.py
+- tests/test_l1_phase7_self_learning_ports.py
+- tests/test_l1_phase7_self_iteration_ports.py
+- tests/test_l1_phase7_evolution_ports.py
+
+新增文档：
+- docs/l1_phase5_hotfix1_report_zh.txt
+- docs/l1_phase7_development_log_zh.md
+- docs/l1_phase7_handoff_report_zh.txt
+
+3. 新增文件清单
+同上。
+
+4. 新增端口清单
+记忆端口：MemoryReferencePort、MemoryWriteIntentPort、MemoryReadIntentPort、MemoryTracePort、MemoryPromotionHintPort、MemoryRetentionBoundaryPort、ForgettingIntentPort。
+上下文端口：ContextReferencePort、ContextWindowPort、ContextAssemblyIntentPort、ContextBoundaryPort、ContextCompressionHintPort、ContextCarryoverPort。
+检索端口：RetrievalIntentPort、RetrievalQueryPort、RetrievalResultPort、RetrievalEvidencePort、RetrievalBoundaryPort、RetrievalFeedbackPort。
+学习端口：LearningIntentPort、LearningTaskPort、LearningEvidencePort、LearningResultPort、LearningBoundaryPort、LearningFeedbackPort。
+自我学习端口：SelfLearningCandidatePort、KnowledgeIngestionIntentPort、SkillLearningHintPort、SelfLearningEvidencePort、SelfLearningReviewPort、SelfLearningBoundaryPort。
+自我迭代端口：IterationCandidatePort、IterationPatchIntentPort、IterationReviewPort、IterationRollbackHintPort、IterationEvidencePort、IterationBoundaryPort。
+自我进化端口：EvolutionIntentPort、EvolutionCandidatePort、EvolutionBoundaryPort、EvolutionEvidencePort、EvolutionDecisionHintPort、EvolutionRollbackHintPort、EvolutionContinuityPort。
+合计新增 44 个端口。
+
+5. 新增测试清单
+- test_l1_phase7_memory_ports.py：5 passed
+- test_l1_phase7_context_ports.py：5 passed
+- test_l1_phase7_retrieval_ports.py：5 passed
+- test_l1_phase7_learning_ports.py：5 passed
+- test_l1_phase7_self_learning_ports.py：5 passed
+- test_l1_phase7_self_iteration_ports.py：5 passed
+- test_l1_phase7_evolution_ports.py：5 passed
+第七阶段专项测试合计：35 passed。
+
+6. 实际运行的测试命令
+python3 -m compileall -q tiangong_kernel tests
+python3 -m pytest -q tests
+python3 -m pytest -q tests/test_l1_no_l2_imports.py
+python3 -m pytest -q tests/test_l1_no_third_party_imports.py
+python3 -m pytest -q tests/test_l1_no_real_io.py
+python3 -m pytest -q tests/test_l1_ports_are_abstract.py tests/test_l1_ports_return_core_result.py tests/test_l1_uses_l0_primitives.py tests/test_l1_no_execution_keywords.py tests/test_l1_chinese_docstrings.py
+python3 -m pytest -q tests/test_l1_phase7_memory_ports.py tests/test_l1_phase7_context_ports.py tests/test_l1_phase7_retrieval_ports.py tests/test_l1_phase7_learning_ports.py tests/test_l1_phase7_self_learning_ports.py tests/test_l1_phase7_self_iteration_ports.py tests/test_l1_phase7_evolution_ports.py
+
+7. 实际测试结果
+- compileall：通过。
+- 全量 pytest：272 passed in 4.48s。
+- 第七阶段专项测试：7 个文件均单独运行通过，每个 5 passed，合计 35 passed；合并专项重跑结果为 35 passed in 1.92s。
+- L1 必测静态项：9 passed in 2.12s。
+- 第七阶段模块导入检查：38 modules import OK；12 docs present。
+- L0 对比检查：与第六阶段输入包相比，排除缓存后无差异。
+
+8. 未运行测试说明
+无未运行测试。一次串行单项测试循环命令曾被容器超时截断；相关测试已合并补跑并通过，必测项为 9 passed in 2.12s，第七阶段专项测试为 35 passed in 1.92s。
+
+9. 未做事项
+- 未开发第八阶段。
+- 未实现 ValidationPort、VerificationPort、TestPort、SchedulePort、TriggerPort、TimerPort、CandidatePromotionPort。
+- 未实现真实记忆、真实上下文拼接、真实检索、真实学习、真实自我学习、真实自我迭代、真实自我进化。
+- 未实现真实代码修改、真实 Skill 修改、真实工具生产、真实合入、真实回滚。
+- 未实现真实模型调用、真实工具调用、真实插件加载。
+
+10. 风险点
+- 第七阶段端口数量较多，后续第八阶段质检需重点检查是否有同义对象重复。
+- 第七阶段包含回滚提示端口，但仅为提示协议，不是第八阶段的回滚验证协议。
+- 已补充 docs/l1_phase5_hotfix1_report_zh.txt 作为前置命名补丁，后续交接应保留该文件。当前基线还补齐了 ToolFunctionMismatchReport，用于承接第七阶段提示词中列出的工具功能不匹配报告语义。
+
+11. 是否建议进入第八阶段
+建议进入 L1 第八阶段。
+
+12. 交接 zip 文件名
+天工造物_L1_第7阶段_交接包_20260603.zip
+
+13. 自我学习 / 自我迭代 / 自我进化端口说明
+自我学习端口只提交候选、知识摄入意图、Skill 学习提示、证据、复核和边界声明，不启动学习。
+自我迭代端口只提交迭代候选、补丁意图、复核、回滚提示、证据和边界声明，不生成补丁、不改文件、不合入。
+自我进化端口只提交进化意图、候选、边界、证据、决策提示、回滚提示和连续性声明，不修改架构、不生成插件、不生产工具。
+
+14. 与第五阶段、第六阶段的衔接说明
+第七阶段复用第五阶段 Skill / ToolGroup 缺口对象：SkillGapReport、ToolNeedReport、ToolGroupGapReport、SkillEvolutionHint、SkillIterationHint、SkillCorrectionHint。
+第七阶段复用第六阶段模型反馈 / 反思对象：ModelLearningIntent、ModelFailureFeedback、ModelCorrectionHint、ModelSkillGapFeedback、ModelToolNeedFeedback、ModelReflection、ModelOutcomeAssessment、ModelEvolutionHint、ModelIterationHint。
+这些对象只作为候选来源和证据入口，不触发真实动作。
+
+15. 为什么本阶段没有实现真实学习、迭代、进化
+第七阶段是端口协议层，只负责表达边界、输入、输出、候选和证据。真实学习、迭代、进化会触及系统状态、文件、Skill 版本、工具生产、合入和回滚，必须留给后续层在验证、复核、边界和回滚协议下处理。

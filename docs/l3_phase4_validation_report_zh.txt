@@ -1,0 +1,30 @@
+天工造物 L3 第四阶段 validation 报告
+生成日期：2026-06-03
+
+一、验证命令与结果
+1. python -m compileall -q tiangong_kernel tests
+结果：通过。
+
+2. python -m pytest -q tests/test_l3_phase4_imports_and_compatibility.py tests/test_l3_phase4_model_tool_action_intent_advice.py tests/test_l3_phase4_intent_validation_and_gap_advice.py tests/test_l3_phase4_intent_math_and_ranking.py tests/test_l3_phase4_serialization_hash_stability.py tests/test_l3_phase4_boundary_no_execution.py tests/test_l3_phase4_l0_l1_l2_compatibility.py
+结果：13 passed。
+
+3. python -m pytest -q tests -k 'l3_phase1 or l3_phase2 or l3_phase3 or l3_phase4'
+结果：60 passed, 502 deselected。
+
+4. python -m pytest -q tests
+结果：562 passed。
+
+二、哈希复核
+与 L3 第三阶段工作基座相比：
+1. tiangong_kernel/l0_primitives：58 个 .py 文件，MATCH。
+2. tiangong_kernel/l1_ports：49 个 .py 文件，MATCH。
+3. tiangong_kernel/l2_state：53 个 .py 文件，MATCH。
+
+三、zip 检查
+1. zip 完整性：通过。
+2. zip 内部非 ASCII 路径：0。
+3. mojibake 路径：0。
+4. 临时产物：0。
+
+四、未验证事项
+未做 GUI、Windows 原生、安装包、真实外部服务、真实模型、真实工具、真实 L4/L5/L6 联调；这些均不属于 L3 第四阶段职责。

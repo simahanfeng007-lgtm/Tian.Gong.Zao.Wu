@@ -1,0 +1,15 @@
+{
+  "name": "l6_33_self",
+  "command": [
+    "/opt/pyvenv/bin/python",
+    "-m",
+    "pytest",
+    "tests/test_l6_33_test_shard_runner.py",
+    "-q"
+  ],
+  "cwd": "/mnt/data/l633_work/project",
+  "timeout_seconds": 90,
+  "purpose": "L6.33 shard runner self tests",
+  "required": true,
+  "rerun_command": "/opt/pyvenv/bin/python -m pytest tests/test_l6_33_test_shard_runner.py -q"
+}

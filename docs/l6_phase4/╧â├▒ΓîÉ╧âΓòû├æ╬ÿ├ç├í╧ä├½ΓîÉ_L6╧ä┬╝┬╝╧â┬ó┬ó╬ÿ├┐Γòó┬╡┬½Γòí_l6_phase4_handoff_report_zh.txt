@@ -1,0 +1,17 @@
+天工造物 L6 第四阶段 Handoff 报告
+
+交接给后续阶段的稳定对象：
+- CognitiveContinuityPluginDeclaration
+- CognitiveContinuityGroupArchitecture
+- CognitiveContinuityStateEnvelope 及各状态域派生类
+- CognitiveOutputBase 及记忆、遗忘、上下文、信念世界、学习候选对象
+- CognitiveReentryEnvelope
+- AffectiveReentryEnvelope
+- AffectiveProjection / FatigueProjection / ResourcePressureProjection / AffectiveDegradationSuggestion
+- HumanizedRefusalStyleHint / AffectiveGovernanceBinding
+- AffectivePollutionRiskProjection / ValueStabilityAnchorProjection / LongTermAffectiveDriftMonitor
+- AffectiveMemoryWeightHint / AffectiveContextModulationHint
+- CognitivePublicProjection / AffectivePublicProjection
+- L6Phase4CognitiveContinuityQualityGateDecision
+
+后续阶段可基于这些对象继续深化具体插件实现，但不得把它们升级为执行器、权限器、状态写入器或记忆写入器。

@@ -1,0 +1,10 @@
+{
+  "provider": "openai_compatible",
+  "base_url": "https://api.example.com/v1",
+  "api_key": "PLEASE_SET_YOUR_API_KEY",
+  "model": "example-model",
+  "timeout": 60,
+  "stream": false,
+  "tool_execution_mode": "disabled",
+  "planner_mode": "rule_only"
+}

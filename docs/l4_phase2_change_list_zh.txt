@@ -1,0 +1,57 @@
+天工造物 L4 第二阶段修改清单
+生成日期：2026-06-04
+
+一、新增源码
+tiangong_kernel/l4_action_grounding/permit_scope.py
+tiangong_kernel/l4_action_grounding/permit_expiry.py
+tiangong_kernel/l4_action_grounding/permit_ref.py
+tiangong_kernel/l4_action_grounding/boundary_ref.py
+tiangong_kernel/l4_action_grounding/credential_ref.py
+tiangong_kernel/l4_action_grounding/audit_requirement.py
+tiangong_kernel/l4_action_grounding/resource_limit_ref.py
+tiangong_kernel/l4_action_grounding/permit_failure.py
+tiangong_kernel/l4_action_grounding/boundary_failure.py
+tiangong_kernel/l4_action_grounding/permit_validation.py
+tiangong_kernel/l4_action_grounding/gate_input.py
+tiangong_kernel/l4_action_grounding/gate_result.py
+tiangong_kernel/l4_action_grounding/gate_validator.py
+tiangong_kernel/l4_action_grounding/l5_ports.py
+tiangong_kernel/l4_action_grounding/fake_boundary_permit.py
+tiangong_kernel/l4_action_grounding/permit_invariant.py
+
+二、补充源码
+tiangong_kernel/l4_action_grounding/context.py：新增 boundary/policy/audit/resource ref 字段。
+tiangong_kernel/l4_action_grounding/session.py：新增 gate_result_refs。
+tiangong_kernel/l4_action_grounding/failure.py：新增 permit_failure_ref 与 boundary_feedback_ref。
+tiangong_kernel/l4_action_grounding/result.py：新增 gate_result_ref 与 gate_status_hint。
+tiangong_kernel/l4_action_grounding/__init__.py：导出第二阶段公共对象。
+
+三、新增测试
+tests/l4_phase2_builders.py
+tests/test_l4_phase2_permit_refs.py
+tests/test_l4_phase2_gate_validation.py
+tests/test_l4_phase2_test_only_permit_isolation.py
+tests/test_l4_phase2_no_live_action_without_l5.py
+tests/test_l4_phase2_no_l5_l6_import.py
+
+四、新增文档与日志
+docs/l4_phase2_development_log_zh.txt
+docs/l4_phase2_handoff_report_zh.txt
+docs/l4_phase2_validation_report_zh.txt
+docs/l4_phase2_change_list_zh.txt
+docs/l4_phase2_test_results_zh.txt
+docs/l4_phase2_todo_zh.txt
+docs/l4_phase2_interface_index_zh.txt
+docs/l4_phase2_self_check_zh.txt
+docs/l4_phase2_compileall.log
+docs/l4_phase2_pytest_targeted.log
+docs/l4_phase2_pytest_phase1_regression.log
+docs/l4_phase2_pytest_l4_phase1_phase2.log
+docs/l4_phase2_pytest_full.log
+docs/l4_phase2_l0_l1_l2_l3_hash_compare.txt
+docs/l4_phase2_static_scan_forbidden_terms.txt
+docs/l4_phase2_forbidden_module_scan.txt
+docs/l4_phase2_zip_integrity_zh.txt
+
+五、未修改内容
+未修改 tiangong_kernel/l0_primitives、tiangong_kernel/l1_ports、tiangong_kernel/l2_state、tiangong_kernel/l3_orchestration。未新增 L5/L6 源码目录。未新增真实外部动作实现。

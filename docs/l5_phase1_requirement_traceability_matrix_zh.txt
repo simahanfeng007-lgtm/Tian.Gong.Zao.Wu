@@ -1,0 +1,20 @@
+天工造物 L5 第一阶段需求-测试追踪矩阵
+生成日期：2026-06-04
+
+| 需求项 | 代码对象 | 测试文件 | 文档证据 | 验证命令 | 状态 |
+|---|---|---|---|---|---|
+| 插件宿主底座 | PluginHostIdentity / PluginHostContext | tests/test_l5_phase1_identity_and_context.py | docs/l5_phase1_development_log_zh.txt | compileall + targeted pytest | passed |
+| Manifest/Registry 数据壳 | PluginManifestView / PluginRegistryEntry / PluginRegistrySnapshot | tests/test_l5_phase1_manifest_view_is_data_only.py; tests/test_l5_phase1_registry_snapshot_is_immutable.py | docs/l5_phase1_change_list_zh.txt | targeted pytest | passed |
+| handoff refs only | PluginHandoffEvidenceIndex | tests/test_l5_phase1_handoff_index_refs_only.py | docs/l5_phase1_handoff_report_zh.txt | targeted pytest | passed |
+| no dynamic loading | Manifest/Registry 无加载入口 | tests/test_l5_phase1_forbidden_no_dynamic_loading.py | docs/l5_phase1_forbidden_scan_zh.txt | targeted pytest + forbidden scan | passed |
+| no live external action | L5NoLiveExternalActionGuarantee | tests/test_l5_phase1_no_l6_implementation.py | docs/l5_phase1_forbidden_scan_zh.txt | targeted pytest + forbidden scan | passed |
+| no lower layer mutation | L5NoLowerLayerMutationGuarantee / hash compare | tests/test_l5_phase1_no_l6_implementation.py; tests/test_l5_phase1_edit_scope_and_hash_manifest.py | docs/l5_phase1_l0_l1_l2_l3_l4_hash_compare.txt | hash compare | passed |
+| no legacy main chain | L5NoLegacyRuntimeGuarantee | tests/test_l5_phase1_no_l6_implementation.py | docs/l5_phase1_forbidden_scan_zh.txt | targeted pytest + forbidden scan | passed |
+| public exports | __all__ / L5PublicExportMap | tests/test_l5_phase1_public_exports_and_serialization.py | docs/l5_phase1_development_log_zh.txt | targeted pytest | passed |
+| serialization | to_l5_primitive / to_l5_json / to_l5_digest | tests/test_l5_phase1_public_exports_and_serialization.py | docs/l5_phase1_test_results_zh.txt | targeted pytest | passed |
+| boundary baseline | PluginHostBoundaryBaseline | tests/test_l5_phase1_boundary_baseline_requires_refs.py | docs/l5_phase1_validation_report_zh.txt | targeted pytest | passed |
+| readiness | L5Phase1Readiness / PluginHostReadinessSummary | tests/test_l5_phase1_requirement_traceability.py | docs/l5_phase1_quality_gate_decision_zh.txt | targeted pytest | passed |
+| zip integrity | zip integrity report | 外部 Python zip 检查 | docs/l5_phase1_zip_integrity_zh.txt | zip integrity | pending until final packaging |
+| L0-L4 hash compare | pre/post hash manifests | tests/test_l5_phase1_edit_scope_and_hash_manifest.py | docs/l5_phase1_l0_l1_l2_l3_l4_hash_compare.txt | hash compare | passed |
+| audit responsibility chain | PluginHostAuditAnchor / Evidence / Provenance / Accountability / Tamper refs | tests/test_l5_phase1_audit_anchor_refs_only.py; tests/test_l5_phase1_registry_accountability_fields.py | docs/l5_phase1_test_evidence_index_zh.txt | targeted pytest | passed |
+| quality gate | L5Phase1QualityGateDecision / Summary | tests/test_l5_phase1_quality_gate_decision.py | docs/l5_phase1_quality_gate_decision_zh.txt | targeted pytest | passed |

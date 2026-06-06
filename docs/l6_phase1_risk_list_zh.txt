@@ -1,0 +1,16 @@
+天工造物 L6 第一阶段风险清单
+生成日期：2026-06-05
+
+P0：无。
+
+P1：无。
+
+P2：
+1. 当前 common 契约已覆盖第一阶段范围，但尚未与真实 L5 registry/handoff 对接。该项应在第二阶段处理。
+2. Forbidden scan 当前提供规则与文本扫描能力，尚未接入全工程强制质量门。该项应在后续冻结流程中统一纳入。
+3. Migration/Rollback/HotSwitch 目前是声明对象，尚未接真实版本槽治理。符合第一阶段边界，但第二阶段以后需要补 bridge。
+
+P3：
+1. 文档级字段解释仍可继续细化，尤其是每个后续专项插件如何组合 common contracts。
+2. 当前测试覆盖以契约边界为主，后续业务插件出现后需增加插件间 event/projection/handoff 兼容矩阵。
+3. PublicProjection 当前实现为通用最小披露对象，后续可按插件类型增加更细粒度 projection policy。

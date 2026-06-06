@@ -1,0 +1,42 @@
+天工造物_临渊者_L6_33_执行链分片回归与超时收割基线 验证结果
+生成日期：20260606
+
+一、编译验证
+- python -m compileall -q tiangong_agent_runtime tiangong_agent_shell tests
+- rc=0
+
+二、L6.33 自测
+- tests/test_l6_33_test_shard_runner.py
+- 6 passed
+
+三、关键分片回归
+- summary_path: project/docs/l6_33_validation/key_shards/shard_summary.json
+- status: passed
+- total_shards: 4
+- passed_shards: 4
+- failed_shards: 0
+- timeout_shards: 0
+- required_failed_or_timeout: 0
+
+分片明细：
+- l6_11_l6_14_runner_model: status=passed, returncode=0, duration=11.098019s, rerun=/opt/pyvenv/bin/python -m pytest tests/test_l6_11_long_chain_runner.py tests/test_l6_14_model_planner.py -q
+- l6_30_governance: status=passed, returncode=0, duration=14.172233s, rerun=/opt/pyvenv/bin/python -m pytest tests/test_l6_30_governance_execution.py -q
+- l6_31_l6_32_model_and_controller: status=passed, returncode=0, duration=7.530094s, rerun=/opt/pyvenv/bin/python -m pytest tests/test_l6_31_model_suggest_shape_hotfix.py tests/test_l6_32_p1_model_suggest_repair.py tests/test_l6_32_planner_execution_controller.py -q
+- l6_33_self: status=passed, returncode=0, duration=19.5722s, rerun=/opt/pyvenv/bin/python -m pytest tests/test_l6_33_test_shard_runner.py -q
+
+四、timeout probe
+- summary_path: project/docs/l6_33_validation/timeout_probe/shard_summary.json
+- status: timeout
+- timeout_shards: 1
+- required_failed_or_timeout: 1
+- 说明：该分片预期超时，用于验证 timeout 不被误报为 passed。
+
+五、内核污染检查
+- tiangong_kernel changed=0 / added=0 / removed=0
+
+六、forbidden scan
+- blocking_findings=0
+
+七、未声明项
+- 未声明完整全量 pytest 通过。
+- 未声明 GUI / Windows / 安装包级验证通过。

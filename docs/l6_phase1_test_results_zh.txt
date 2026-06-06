@@ -1,0 +1,31 @@
+天工造物 L6 第一阶段测试结果
+生成日期：2026-06-05
+
+1. L6 定向测试
+命令：pytest -q tests/test_l6_phase1_*.py
+结果：19 passed。
+
+2. L4/L5/L6 边界回归子集
+命令：pytest -q tests/test_l5_phase8_*.py tests/test_l5_phase7_*.py tests/test_l4_phase8_*.py tests/test_l4_phase1_no_l5_l6_imports.py tests/test_l4_phase2_no_l5_l6_import.py tests/test_l6_plugin_*.py tests/test_l6_phase1_*.py
+结果：173 passed。
+
+3. full pytest
+命令：pytest -q
+结果：1414 passed。
+
+4. compileall
+命令：python3 -m compileall tiangong_kernel tests
+结果：通过。
+
+5. L0-L5 hash compare
+结果：unchanged_l0_l5=True。
+
+6. forbidden scan / source boundary
+结果：ast_forbidden_imports_passed=True；危险样本 P0 命中数=5。
+
+日志文件：
+- docs/l6_phase1_full_pytest_20260605.log
+- docs/l6_phase1_targeted_boundary_pytest_20260605.log
+- docs/l6_phase1_compileall_20260605.log
+- docs/l6_phase1_hash_compare_l0_l5_20260605.json
+- docs/forbidden_scan_l6_phase1_20260605.json

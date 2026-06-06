@@ -1,0 +1,34 @@
+﻿phase8 delivery zip verification
+zip: 
+C:\Users\77571\Documents\天工造物重生\天工造物_L4_第八阶段_总收口交接冻结_交付包_20260604.zip
+file entries: 
+1237
+roots: 
+project
+phase8 modules found: 
+25
+phase8 test files found: 
+17
+phase8 builder files found: 
+1
+temp entries found: 
+0
+
+final freeze candidate zip verification
+zip: 
+C:\Users\77571\Documents\天工造物重生\天工造物_L4_最终冻结候选包_20260604.zip
+file entries: 
+1237
+roots: 
+project
+phase8 modules found: 
+25
+phase8 test files found: 
+17
+phase8 builder files found: 
+1
+temp entries found: 
+0
+
+sha256 delivery: 72FD70AAF5732068B490023E3BE2A9B848AA831BEB5C3142F64EDAD77B0EE0D3
+sha256 final freeze: 72FD70AAF5732068B490023E3BE2A9B848AA831BEB5C3142F64EDAD77B0EE0D3

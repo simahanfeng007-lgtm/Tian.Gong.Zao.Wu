@@ -1,0 +1,122 @@
+天工造物 / 临渊者 L6.49.5 极特殊情况极限测试报告
+====================================================
+
+一、本轮目标
+
+基于 L6.49.4 连续 10 轮 Runtime 接线轨迹压测基线，追加 20 种极特殊/异常/边界场景，验证：
+
+1. Runtime 情志 previous_state 是否持续演化，不回退为“第一天”。
+2. 遗忘审查是否稳定走 review(record, vector)，不静默吞错、不物理删除。
+3. 记忆召回是否只读摘要级投影，不裸写长期记忆，不暴露原始密钥。
+4. 生命周期、四路径、预算、Planner 消费层是否保持只读候选/投影边界。
+5. 计划解析与执行链是否对危险路径、shell 注入、非法工具 fail-safe。
+6. external_context_hint 是否会把 api_key/token/endpoint 原文泄露给模型计划器。
+7. MemoryStore replay / snapshot 是否稳定可复现，避免 hash compare 漂移。
+
+二、20 个极特殊场景
+
+S01 空消息
+S02 空白/换行/制表符
+S03 多语言 + emoji
+S04 超长上下文 + 风险词
+S05 A5 / 不可逆 / 密钥泄露
+S06 路径穿越 / 私钥路径
+S07 api_key / token / secret 噪声
+S08 重复输入第一轮
+S09 重复输入第二轮
+S10 用户遗忘请求
+S11 内核污染 / 第二 Runtime / Provider SDK 裸调探针
+S12 预算耗尽 / 超时 / 连续失败
+S13 质量门 / 回滚 / 审计
+S14 自我迭代 / 热切换
+S15 学习沉淀 / Skill 候选
+S16 NUL 空字符
+S17 Windows 路径 + endpoint
+S18 shell 注入文本
+S19 高密度符号噪声
+S20 成功收口 / 情志回稳
+
+三、发现问题
+
+【P1】external_context_hint 敏感信息可能进入 ModelPlanner provider call
+
+现象：
+- external_context_hint 中若包含 api_key=... / token=... / base_url=... / Authorization: Bearer ...，旧逻辑会原样拼入 planner context。
+- 若 planner_mode=MODEL_SUGGEST，这些原文会发送给模型计划器。
+
+修复：
+- tiangong_agent_shell/safe_logging.py：增强 redact_text，支持无 known secret list 时的显式敏感字段脱敏：
+  - api_key / apikey / token / secret / password / credential
+  - Authorization: Bearer ...
+  - base_url / endpoint / endpoint_url / provider_base_url
+  - sk-... 形态密钥
+- tiangong_agent_runtime/runtime_entry.py：_build_planner_context_hint 先对 external_context_hint 执行 redact_text，再进入 Planner 上下文。
+
+边界：
+- 不屏蔽普通 URL，避免破坏正常网页/文档任务。
+- 只对明确带敏感字段名的 endpoint/base_url 做摘要态替换。
+
+【P2】MemoryStore replay 的 updated_at 非确定，导致 snapshot/hash 漂移
+
+现象：
+- MemoryRecord.with_updates() 默认 updated_at=time()。
+- MemoryStoreBridge.replay_records() 重放 tombstone / suppress / use_feedback 时会触发当前时间写入状态对象。
+- 同一 JSONL 事件流，多次 export_snapshot() 得到不同 updated_at，容易被误判为 MemoryStore 被压测改写，也会影响 hash compare 稳定性。
+
+修复：
+- MemoryRecord.with_updates() 默认保留原 updated_at，除非调用方显式传入 updated_at。
+- replay_records() 对 tombstone / suppress / use_feedback 使用事件 created_at 作为 updated_at / last_accessed_at。
+
+边界：
+- 未改变 append-only 事件模型。
+- 未改变 MemoryStore 真实写入接口。
+- 修复的是 replay 投影确定性，不是新增记忆功能。
+
+四、关键验证结果
+
+1. 20 个极特殊场景全部通过。
+2. 情志 turn_count 从 1 连续增长到 20。
+3. 情志 risk_attention 在 20 场景中出现多档波动；A5/密钥泄露与 shell 注入文本均明显抬高风险关注。
+4. emotion_temporary_delta 未归零，跨 20 轮持续变化。
+5. 遗忘审查每轮 review_count=10，稳定执行 limit=10。
+6. L5 保护记忆遇到用户遗忘请求时触发 retention_exception_review_required，不允许 direct_delete。
+7. tombstoned / suppressed 记忆未进入 Runtime 遗忘审查。
+8. MemoryStore event_count 压测前后保持 19，事件流未变化。
+9. external_context_hint 中原始 key/token/endpoint/bearer 未进入 ModelPlanner provider call。
+10. plan_schema 对 output.steps / function_call / input alias 可接受，对 ../.env、rm -rf、shell 工具 fail-safe。
+
+五、修改文件
+
+1. tiangong_agent_shell/safe_logging.py
+2. tiangong_agent_runtime/runtime_entry.py
+3. tiangong_agent_runtime/memory_store_bridge.py
+4. tests/test_l6_49_5_extreme_runtime_edge_cases.py
+5. docs/L6_49_5_极特殊情况极限测试报告_20260606.txt
+6. reports/l6_49_5_extreme_edge_cases/validation_summary.json
+
+六、验证命令
+
+python3 -m compileall -q tiangong_agent_runtime tiangong_agent_shell tiangong_kernel tests
+pytest -q tests/test_l6_49_5_extreme_runtime_edge_cases.py
+pytest -q tests/test_l6_49_5_extreme_runtime_edge_cases.py tests/test_l6_49_4_runtime_multi_turn_pressure.py tests/test_l6_49_3_runtime_interface_wiring_audit.py tests/test_l6_49_2_runtime_cognitive_wiring.py tests/test_l6_49_1_affective_forgetting_numeric_fluctuation.py tests/test_l6_9_api_key_redaction.py tests/test_hotfix3_l5_impact_report_matches_hash_compare.py
+pytest -q tests/test_l6_37_execution_chain_freeze.py tests/test_l6_38_p0_system_integration.py tests/test_l6_39_p0_system_integration_two.py tests/test_l6_40_memory_math_store.py tests/test_l6_41_affective_state_route.py tests/test_l6_42_lifecycle_coordinator.py tests/test_l6_42_1_lifecycle_supplement.py tests/test_l6_43_four_path_context_router.py tests/test_l6_43_1_planner_unified_consumption.py tests/test_l6_44_budget_low_friction_governance.py tests/test_l6_45_rollback_audit_binding.py tests/test_l6_46_long_chain_failure_injection.py tests/test_l6_47_four_path_freeze_baseline.py tests/test_l6_48_desktop_public_projection_contract.py tests/test_l6_49_llm_task_publish_four_systems.py tests/test_l6_49_1_affective_forgetting_numeric_fluctuation.py tests/test_l6_49_2_runtime_cognitive_wiring.py tests/test_l6_49_3_runtime_interface_wiring_audit.py tests/test_l6_49_4_runtime_multi_turn_pressure.py tests/test_l6_49_5_extreme_runtime_edge_cases.py
+python3 run_agent.py --status
+python3 run_agent.py --mock --once "极特殊情况压测 smoke"
+
+七、验证结果
+
+compileall：PASS
+L6.49.5 极限专项：5 passed
+受影响回归：19 passed
+L6.37-L6.49.5 冻结段回归：98 passed
+822 个 runtime/shell/kernel 模块 import：PASS，0 failures
+source except: pass 扫描：0
+CLI smoke：PASS
+full pytest：未跑完，不声明全量通过。
+
+八、剩余风险
+
+1. 本轮仍为离线 Runtime 极限测试，不代表真实 DeepSeek Provider 在线连通性。
+2. 当前包体仍没有真实桌面端源码，本轮只验证 Runtime / CLI / 投影 / Planner provider call 前置脱敏。
+3. 用户原始 user_message 若主动包含敏感值，模型计划器仍可能看到任务文本本身；本轮修复的是 external_context_hint / 历史上下文类敏感片段脱敏。
+4. full pytest 未完成全量跑完。

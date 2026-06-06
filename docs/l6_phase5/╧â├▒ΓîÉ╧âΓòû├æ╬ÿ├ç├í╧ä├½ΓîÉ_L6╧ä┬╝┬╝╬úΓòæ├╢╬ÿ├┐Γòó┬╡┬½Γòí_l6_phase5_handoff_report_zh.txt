@@ -1,0 +1,37 @@
+天工造物 L6 第五阶段 Handoff 报告
+
+一、交接对象
+第五阶段新增 governance_control 插件组，用于治理辅助、风险预审、Requirement 与 ReviewRequest 生成。
+
+二、交接给 L3
+- L3GovernanceContinuationHint
+- GovernanceReviewRequest
+- LongChainContinuationHint
+- DegradationSuggestion
+- HumanGateRequirement
+
+三、交接给 L5
+- PermissionRequirement
+- BudgetRequirement
+- AuditRequirement
+- CredentialRequirementRef
+- PrivacyRiskProjection / RedactionRequirement
+- GovernanceReviewBundle
+
+四、交接给 L2 / 记忆 / 遗忘合法链路
+只提供治理辅助摘要，不直接写状态，不写记忆，不删记忆。
+
+五、交接给后续阶段
+- ProductSpecSeedGovernanceReview
+- ProductContextPrivacyCheck
+- ArtifactIntentRiskProjection
+- BuildPlanRequirementHint
+- LearningNeedGovernanceReview
+- RepairSuggestionRiskReview
+- EvolutionCandidateSafetyReview
+- RollbackSuggestionGovernanceReview
+- MigrationSuggestionGovernanceReview
+- HotSwitchReadinessGovernanceReview
+
+六、后续注意
+第六阶段如果接入真实业务插件，必须继续保持：L6 只声明需求和 review request，真实 permit / budget / audit / credential / execution 仍归 L5/L4/L3 合法链路。

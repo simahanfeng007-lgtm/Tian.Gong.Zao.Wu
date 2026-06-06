@@ -1,0 +1,56 @@
+天工造物 / 临渊者 L6.20 测试结果
+
+一、编译检查
+
+命令：python -m compileall tiangong_agent_runtime tiangong_agent_shell tests/test_l6_20_experience_synthesis.py
+结果：通过。
+日志：/mnt/data/l6_20_compileall.log
+
+二、L6.20 定向测试
+
+命令：PYTHONPATH=<work> pytest -q tests/test_l6_20_experience_synthesis.py
+结果：9 passed。
+覆盖：
+- ExperienceSynthesisBridge 空状态。
+- 人工复盘生成 Skill 候选。
+- SkillCandidate / ToolGapCandidate 副作用标志硬拒绝。
+- Runtime 从质量门/诊断结果生成候选。
+- synthesize_experience_candidates 注册为 A2。
+- PlanBridge / PlanSchema 支持经验沉淀工具。
+- 手工备注凭证脱敏。
+- CLI /reflect /experience /experience-save 冒烟。
+- tiangong_kernel 未出现 L6.20 Runtime 侧对象污染。
+
+三、回归测试
+
+1. L6.19 非 CLI 回归
+命令：PYTHONPATH=<work> pytest -q tests/test_l6_19_delivery_release.py -k 'not cli_release_delivery_and_export'
+结果：8 passed, 1 deselected。
+
+2. L6.19 CLI 回归
+命令：PYTHONPATH=<work> pytest -q tests/test_l6_19_delivery_release.py::test_l6_19_cli_release_delivery_and_export
+结果：1 passed。
+
+3. L6.18 质量门回归
+命令：PYTHONPATH=<work> pytest -q tests/test_l6_18_quality_gate.py
+结果：5 passed。
+
+4. L6.17 非 CLI 回归
+命令：PYTHONPATH=<work> pytest -q tests/test_l6_17_engineering_diagnosis_loop.py -k 'not cli_diagnose_and_repair_loop'
+结果：5 passed, 1 deselected。
+
+5. L6.17 CLI 回归
+命令：PYTHONPATH=<work> pytest -q tests/test_l6_17_engineering_diagnosis_loop.py::test_cli_diagnose_and_repair_loop
+结果：1 passed。
+
+6. L6.16 项目雷达回归
+命令：PYTHONPATH=<work> pytest -q tests/test_l6_16_project_index_bridge.py
+结果：5 passed。
+
+7. L6.14/L6.15 计划器与上下文回归
+命令：PYTHONPATH=<work> pytest -q tests/test_l6_15_context_memory_bridge.py tests/test_l6_14_model_planner.py
+结果：11 passed。
+
+四、未声明事项
+
+没有声明 full pytest。原因：当前阶段改动集中在 Runtime 外壳、CLI 和定向候选链；已执行 L6.14-L6.20 关键触达回归。全量测试可在预算更稳定环境中继续跑。

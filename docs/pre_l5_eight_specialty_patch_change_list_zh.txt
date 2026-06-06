@@ -1,0 +1,51 @@
+天工造物 L4→L5/L6 前置 8 专项补丁修改清单
+日期：2026-06-04
+
+新增 L1：
+- tiangong_kernel/l1_ports/audit_chain_ports.py
+- tiangong_kernel/l1_ports/plugin_host_ports.py
+- tiangong_kernel/l1_ports/external_adapter_ports.py
+- tiangong_kernel/l1_ports/version_switch_ports.py
+- tiangong_kernel/l1_ports/resource_cost_ports.py
+- tiangong_kernel/l1_ports/communication_handoff_envelope_ports.py
+
+新增 L2：
+- tiangong_kernel/l2_state/audit_chain_state.py
+- tiangong_kernel/l2_state/plugin_state.py
+- tiangong_kernel/l2_state/external_adapter_state.py
+- tiangong_kernel/l2_state/version_switch_state.py
+- tiangong_kernel/l2_state/data_governance_state.py
+- tiangong_kernel/l2_state/resource_boundary_binding_state.py
+- tiangong_kernel/l2_state/communication_handoff_state.py
+
+新增 L3：
+- tiangong_kernel/l3_orchestration/audit_chain_projection.py
+- tiangong_kernel/l3_orchestration/l3_to_l5_plugin_host_handoff.py
+- tiangong_kernel/l3_orchestration/external_action_boundary_advice.py
+- tiangong_kernel/l3_orchestration/version_migration_switch_flow.py
+- tiangong_kernel/l3_orchestration/data_governance_review_advice.py
+- tiangong_kernel/l3_orchestration/resource_budget_advice.py
+- tiangong_kernel/l3_orchestration/communication_handoff_advice.py
+
+新增 L4：
+- tiangong_kernel/l4_action_grounding/audit_chain_binding.py
+- tiangong_kernel/l4_action_grounding/sandbox_policy_ref.py
+- tiangong_kernel/l4_action_grounding/external_surface_contract.py
+- tiangong_kernel/l4_action_grounding/version_switch_requirement.py
+- tiangong_kernel/l4_action_grounding/data_governance_ref.py
+- tiangong_kernel/l4_action_grounding/communication_handoff_binding.py
+- tiangong_kernel/l4_execution/l4_to_l5_plugin_host_handoff.py
+- tiangong_kernel/l4_execution/l4_quality_gate_handoff.py
+- tiangong_kernel/l4_execution/l4_test_evidence_index.py
+- tiangong_kernel/l4_execution/l4_regression_evidence_index.py
+- tiangong_kernel/l4_execution/l4_to_l5_quality_gate_summary.py
+- tiangong_kernel/l4_execution/l4_to_l6_validation_evaluation_requirement.py
+- tiangong_kernel/l4_execution/l4_to_l5_audit_chain_handoff.py
+- tiangong_kernel/l4_execution/l4_to_l5_version_switch_requirement.py
+- tiangong_kernel/l4_execution/l4_to_l6_migration_switch_requirement.py
+
+扩展文件：
+- L4 gate/input/result/model/tool/handoff/resource 字段。
+- L2 memory/context/security/run/goal/agent 可选治理和资源引用。
+- L1 security boundary consent/purpose/retention/token/revocation 槽位。
+- L4 execution surfaces：移除 plugin_host，新增 L5_PLUGIN_HOST_SURFACES。

@@ -1,0 +1,25 @@
+天工造物 L5 第三阶段回归证据索引
+
+1. L0-L4 回归保护结果
+   - hash compare：unchanged=501, added=0, modified=0, deleted=0。
+   - 结论：未修改 L0-L4。
+
+2. L5 第一阶段对象
+   - registry_entry.py、registry_snapshot.py 存在计划内向后兼容增强，用于承接第三阶段 RegistryRecord/Snapshot 要求。
+   - 旧 phase1 测试未删除、未弱化，full pytest 通过。
+
+3. L5 第二阶段对象
+   - __init__.py、invariants.py 存在计划内导出和 invariant suite 增强。
+   - Manifest / RegistryEntry / RegistrySnapshot 兼容性保持。
+
+4. 边界保持
+   - no-live-action：保持。
+   - no-L6-implementation：保持。
+   - no-legacy-runtime：保持。
+   - forbidden scan：无 blocking findings。
+
+5. 测试清单保护
+   - 新增测试 45 个。
+   - 删除测试 0。
+   - skip/xfail 新增 0。
+   - 断言弱化 0。

@@ -1,0 +1,43 @@
+﻿天工造物 L6.9 外壳式最小智能体启动器验证结果
+生成日期：2026-06-05
+
+一、Smoke 验证
+
+1. python run_agent.py --help
+结果：通过。
+
+2. python run_agent.py --mock --once "你好"
+结果：通过，输出包含：[MOCK] 已收到：你好
+
+3. python -m tiangong_agent_shell --mock --once "你好"
+结果：通过，输出包含：[MOCK] 已收到：你好
+
+4. python run_agent.py --status
+结果：通过，显示 kernel_importable=True，tool_execution_mode=disabled。
+
+5. API Key 脱敏显示
+命令：python run_agent.py --show-config --api-key sk-1234567890abcdef --provider openai_compatible --base-url https://api.example.com/v1 --model demo
+结果：通过，输出为 sk-12************cdef，未输出完整 key。
+
+二、编译验证
+
+命令：python -m compileall tiangong_kernel tiangong_agent_shell run_agent.py
+结果：通过。
+日志：engine/docs/l6_9_compileall.log
+
+三、测试验证
+
+命令：pytest -q
+结果：1720 passed in 21.78s
+日志：engine/docs/l6_9_pytest_full.log
+
+四、防污染验证
+
+范围：engine/tiangong_kernel/**
+结果：原始文件数 725，当前文件数 725；新增 0，删除 0，变更 0。
+日志：engine/docs/l6_9_kernel_hash_compare.json / .md
+
+五、真实 API 联调
+
+未执行。原因：当前环境未提供真实 API Key、真实 Base URL 与模型名。
+当前只能确认代码路径存在，不能确认某个外部服务商实际可用。

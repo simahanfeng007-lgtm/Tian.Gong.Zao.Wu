@@ -1,0 +1,183 @@
+临渊者 L6.42.1 自由意志时间系统与自我迭代前端区补丁交付报告
+日期：2026-06-06
+基线：L6.42 LifecycleCoordinator 生命周期统一协调器完整包
+
+一、结论
+本轮完成 L6.42.1 补丁。
+目标不是进入 L6.43，而是在 L6.42 生命周期协调器之上补齐：
+1. 自由意志时间系统 / 时间表。
+2. 每 3-15 分钟 tick 的候选生成机制。
+3. 自主目标队列。
+4. 自我迭代前端“自我迭代区”投影。
+5. 用户确认迭代票据。
+6. 与 LifecycleCoordinator 的受控接入。
+
+本轮没有新增第二 Runtime，没有启动后台线程，没有工具调用，没有预算变更，没有自动写记忆，没有自动 patch，没有自动合入，没有热切换，没有核心组污染。
+
+二、本轮新增文件
+1. tiangong_agent_runtime/lifecycle_clock.py
+   - LifecycleClockTick
+   - FreeWillTimeTable
+   - build_free_will_timetable
+   - 3-15 分钟动态 interval 计算
+   - tick 只触发候选生成，不执行
+
+2. tiangong_agent_runtime/autonomous_goal_queue.py
+   - AutonomousGoal
+   - AutonomousGoalQueue
+   - build_autonomous_goal
+   - build_autonomous_goal_queue
+   - 支持 learning / task / maintenance / review / iteration 五类自主目标候选
+
+3. tiangong_agent_runtime/self_iteration_frontend_projection.py
+   - SelfIterationFrontendItem
+   - SelfIterationFrontendProjection
+   - UserConfirmedIterationTicket
+   - build_self_iteration_frontend_projection
+   - build_user_confirmed_iteration_ticket
+   - 前端“自我迭代区”展示候选，不执行候选
+
+4. tests/test_l6_42_1_lifecycle_supplement.py
+   - L6.42.1 新增测试 11 条
+
+三、本轮修改文件
+1. tiangong_agent_runtime/free_will_candidate_route.py
+   - AutonomyLease 增加 tick_ref / lease_started_at / max_duration_seconds / max_budget_score / max_tool_steps / interruptible / grants_background_execution。
+   - FreeWillCandidateRoute 增加 time_tick_ref / autonomous_goal_refs。
+   - build_autonomy_lease 与 build_free_will_route 保持向后兼容。
+   - 继续禁止 execution / background execution / tool invocation / budget mutation / policy bypass / kernel mutation。
+
+2. tiangong_agent_runtime/lifecycle_coordinator.py
+   - LifecycleRouteBundle 增加 clock_tick / autonomous_goal_queue / iteration_frontend_projection / user_confirmed_iteration_ticket。
+   - build_bundle 支持 clock_tick 输入；若有 tick 且未传 queue，则自动生成 AutonomousGoalQueue。
+   - 自我迭代候选自动生成前端“自我迭代区”投影。
+   - Planner hint 明确：自我迭代必须先展示给用户确认，确认后才允许 Planner 生成改造计划。
+
+四、自由意志时间系统设计
+1. FreeWillTimeTable 不创建后台线程。
+2. Runtime 可在安全时机调用 build_tick。
+3. interval_seconds 被硬限制在 180-900 秒，即 3-15 分钟。
+4. 数学模型：
+   - curiosity / achievement / order / low_rest 提高自主推进驱动力，使 interval 变短。
+   - resource_pressure / failure_pressure / rest 提高压力，使 interval 变长。
+5. tick 的 can_generate_goal 必须同时满足：
+   - due=True。
+   - autonomy_enabled=True。
+   - 无活跃用户任务，或用户允许自治推进。
+   - 无长链任务占用。
+   - 无恢复优先任务。
+   - budget_pressure < 0.88。
+   - context_pressure < 0.88。
+
+五、自主目标队列设计
+每次有效 tick 最多生成候选目标，不执行目标。
+目标类型：
+1. learning：学习目标。
+2. task：任务推进目标。
+3. maintenance：维护目标。
+4. review：复盘目标。
+5. iteration：迭代候选目标。
+
+目标字段包含：
+- goal_id
+- goal_type
+- summary
+- source_tick_id
+- source_refs
+- expected_value_score
+- risk_level
+- budget_estimate_score
+- requires_confirmation
+- status
+- planner_hint
+- no_direct_execution
+- no_background_execution
+- no_tool_invocation
+- no_budget_mutation
+- no_memory_write
+- no_kernel_mutation
+
+规则：
+- A0-A2 可作为 Planner 候选。
+- A3/A4 必须 requires_confirmation=True。
+- A5 必须 blocked。
+- 队列只排序候选，不执行候选。
+
+六、自我迭代前端专区设计
+新增 SelfIterationFrontendProjection，供前端展示“自我迭代区”。
+展示内容：
+- 发现的问题 / 沟通需求
+- 建议改进方向
+- 预计改动范围
+- 风险等级
+- 验证要求
+- 回滚要求
+- 是否需要用户确认
+
+用户点击确认后，只生成 UserConfirmedIterationTicket。
+该票据只允许 Planner 生成改造计划，不允许直接执行：
+- permits_planner_draft_generation=True
+- permits_execution=False
+- requires_quality_gate=True
+- requires_rollback_checkpoint=True
+- requires_core_pollution_check=True
+- no_patch_apply=True
+- no_merge=True
+- no_hot_switch=True
+- no_core_mutation=True
+
+七、核心污染检查
+检查范围：tiangong_kernel L0-L5 + 关键 runtime 执行核心文件。
+检查文件数：586
+changed_core_files：0
+结果：PASS
+
+本轮允许调用核心数据 / contract / schema / report，但没有修改核心组。
+
+八、静态边界扫描
+扫描文件：
+- lifecycle_clock.py
+- autonomous_goal_queue.py
+- self_iteration_frontend_projection.py
+- free_will_candidate_route.py
+- lifecycle_coordinator.py
+
+扫描项：subprocess / os.system / requests / httpx / socket / direct_adapter_call / provider naked SDK / Path.write_text / open write / sqlite connect / thread start。
+结果：PASS
+findings：0
+
+九、测试结果
+1. compileall：通过
+2. L6.37 回归：7 passed
+3. L6.38 回归：6 passed
+4. L6.39 回归：6 passed
+5. L6.40 回归：6 passed
+6. L6.41 回归：7 passed
+7. L6.42 + L6.42.1：17 passed
+8. 记忆/遗忘边界：6 passed
+9. 情感边界：20 passed
+10. 生命周期/学习/愈合/迭代/恢复链：28 passed
+
+合计定向测试：103 passed。
+未跑完整全量 pytest，因此不声明全量通过。
+
+十、未做事项
+1. 未实现真实前端 UI，仅提供前端可消费的 projection 对象。
+2. 未启动真实后台定时器，当前是 Runtime 可调用的时间节律模型。
+3. 未接 L6.43 FourPathContextRouter。
+4. 未自动执行自由意志目标。
+5. 未自动执行自我迭代。
+
+十一、下一步建议
+进入 L6.43：四主路径统一投影 FourPathContextRouter。
+L6.43 应把以下对象压缩进 UnifiedPlannerContextPack：
+- MemoryRecallRoute
+- AffectiveExecutionRoute
+- LifecycleRouteBundle
+- LifecycleClockTick
+- AutonomousGoalQueue
+- SelfIterationFrontendProjection
+- Provider / Budget / Skill / Handoff / Audit / QualityGate envelope
+
+硬规则继续保持：
+任何系统想做事，必须把意图变成 Planner 可消费对象，再交给 L6.37 执行链。

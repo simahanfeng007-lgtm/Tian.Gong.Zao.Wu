@@ -1,0 +1,13 @@
+天工造物 自愈系统最小补丁开发日志
+日期：2026-06-04
+
+完成内容：
+1. L1 新增 self_healing_ports.py。
+2. L2 新增 self_healing_state.py。
+3. L3 新增 self_healing_flow.py。
+4. L4 新增 self_healing_handoff.py。
+5. 新增 l4_self_healing_handoff_zh.txt。
+6. 更新 L4→L5 / L4→L6 handoff 文档。
+
+边界：
+不诊断真实故障，不执行恢复，不执行回滚，不运行验证，不写审计库，不写 L2，不实现 L5/L6。

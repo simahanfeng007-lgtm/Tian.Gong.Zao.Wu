@@ -1,0 +1,27 @@
+《天工造物 L3 第六阶段 handoff 报告》
+
+一、交接结论
+L3 第六阶段工程已完成，建议进入 L3 第六阶段专项质检。
+
+二、当前新增能力
+1. 观察结果回流编排：ObservationResultRef、ObservationEnvelope、ObservationFeedbackAdvice、ObservationRoutingAdvice。
+2. 上下文续接编排：ContextCarryoverAdvice、ContextWindowAdvice、ContextCompressionNeedAdvice、ContextRetentionAdvice、ContextDropAdvice、ContextPriorityAdvice。
+3. 未来 L6 服务请求编排：SubsystemServiceRequest、SubsystemServiceEnvelope、SubsystemServiceRouteRanking、SubsystemServiceResultRef、SubsystemServiceFailureRef。
+4. 记忆服务请求：MemoryServiceRequest、MemoryRecallRequestHint、MemoryWriteSuggestion、MemoryPromotionSignalAdvice、MemoryConflictReviewAdvice。
+5. 检索服务请求：RetrievalServiceRequest、RetrievalQueryHint、RetrievalScopeHint、RetrievalPriorityAdvice、RetrievalResultRef、RetrievalResultUseAdvice。
+6. 学习服务请求：LearningServiceRequest、LearningSignalAdvice、LearningCandidateAdvice、LearningEvidenceRef、LearningResultRef。
+7. 情感服务请求与权重接入：AffectiveServiceRequest、AffectiveWeightInputRef、AffectiveTendencyAdvice、AffectiveExpressionAdvice、AffectiveBehaviorTendencyAdvice。
+8. 候选提议流程：CandidateProposalAdvice、CandidateSignalAdvice、CandidateReviewRequestHint、CandidateEvidenceRef、CandidatePromotionAdvice、CandidateRejectAdvice。
+9. 数学评分与排序：ObservationCredibilityScore、ContextValueScore、MemoryNeedScore、RetrievalNeedScore、LearningSignalValueScore、AffectiveNeedScore、CandidatePriorityScore、SubsystemServiceReadinessScore、ObservationContextSubsystemRouteRanking、SubsystemServiceRecommendation。
+10. 与前五阶段接线：ExecutionToObservationAdvice、ExecutionResultContextAdvice、IntentObservationFeedbackAdvice、SkillToolContextCarryoverAdvice、Run/Task/Turn/Step ObservationAdvice 与 SubsystemServiceAdvice。
+
+三、边界说明
+1. 未修改 L0/L1/L2。
+2. 未进入 L4/L5/L6 真实实现。
+3. 未调用模型、工具、网络、shell、数据库或真实外部服务。
+4. 未实现真实观察器、上下文存储、记忆、检索、学习、情感系统。
+5. 未生成真实 Skill / Tool / Knowledge。
+6. 数学评分只给建议，不产生执行令或服务授权。
+
+四、下一步建议
+进入 L3 第六阶段专项质检。不得直接进入第七阶段开发。

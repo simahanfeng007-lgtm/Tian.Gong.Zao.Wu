@@ -1,0 +1,53 @@
+# L6.33 分片回归执行器报告
+
+- schema: `tiangong.l6_33.test_shard_runner.v1`
+- status: `passed`
+- total_shards: 4
+- passed: 4
+- failed: 0
+- timeout: 0
+- skipped: 0
+- required_failed_or_timeout: 0
+- output_dir: `/mnt/data/l635_work/project/reports/l6_35_shards`
+
+## Shards
+
+### l6_31_32_model
+- status: `passed`
+- returncode: `0`
+- duration_seconds: 4.399
+- timeout_seconds: 90.0
+- required: True
+- rerun: `/opt/pyvenv/bin/python3 -m pytest tests/test_l6_31_model_suggest_shape_hotfix.py tests/test_l6_32_p1_model_suggest_repair.py -q`
+- stdout: `/mnt/data/l635_work/project/reports/l6_35_shards/l6_31_32_model/stdout.log`
+- stderr: `/mnt/data/l635_work/project/reports/l6_35_shards/l6_31_32_model/stderr.log`
+
+### l6_32_controller
+- status: `passed`
+- returncode: `0`
+- duration_seconds: 6.013
+- timeout_seconds: 90.0
+- required: True
+- rerun: `/opt/pyvenv/bin/python3 -m pytest tests/test_l6_32_planner_execution_controller.py -q`
+- stdout: `/mnt/data/l635_work/project/reports/l6_35_shards/l6_32_controller/stdout.log`
+- stderr: `/mnt/data/l635_work/project/reports/l6_35_shards/l6_32_controller/stderr.log`
+
+### l6_33_34_chain
+- status: `passed`
+- returncode: `0`
+- duration_seconds: 23.605
+- timeout_seconds: 120.0
+- required: True
+- rerun: `/opt/pyvenv/bin/python3 -m pytest tests/test_l6_33_test_shard_runner.py tests/test_l6_34_model_cli_continuity.py -q`
+- stdout: `/mnt/data/l635_work/project/reports/l6_35_shards/l6_33_34_chain/stdout.log`
+- stderr: `/mnt/data/l635_work/project/reports/l6_35_shards/l6_33_34_chain/stderr.log`
+
+### l6_35_self
+- status: `passed`
+- returncode: `0`
+- duration_seconds: 4.179
+- timeout_seconds: 60.0
+- required: True
+- rerun: `/opt/pyvenv/bin/python3 -m pytest tests/test_l6_35_step_state_machine_long_chain.py -q`
+- stdout: `/mnt/data/l635_work/project/reports/l6_35_shards/l6_35_self/stdout.log`
+- stderr: `/mnt/data/l635_work/project/reports/l6_35_shards/l6_35_self/stderr.log`

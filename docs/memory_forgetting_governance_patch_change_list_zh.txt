@@ -1,0 +1,31 @@
+天工造物 记忆系统与遗忘系统专项补丁修改清单
+日期：2026-06-04
+
+新增源码：
+1. tiangong_kernel/l1_ports/memory_governance_ports.py
+2. tiangong_kernel/l2_state/memory_forgetting_state.py
+3. tiangong_kernel/l3_orchestration/forgetting_service_request.py
+4. tiangong_kernel/l4_execution/l4_to_l6_memory_sink_requirement.py
+5. tiangong_kernel/l4_execution/l4_to_l6_forgetting_sink_requirement.py
+6. tiangong_kernel/l4_action_grounding/cognitive_sink_hint.py
+
+修改源码：
+1. tiangong_kernel/l1_ports/__init__.py
+2. tiangong_kernel/l2_state/__init__.py
+3. tiangong_kernel/l2_state/memory_state.py
+4. tiangong_kernel/l3_orchestration/__init__.py
+5. tiangong_kernel/l4_execution/_common.py
+6. tiangong_kernel/l4_execution/__init__.py
+7. tiangong_kernel/l4_action_grounding/__init__.py
+8. tiangong_kernel/l4_action_grounding/adapter_envelope.py
+9. docs/l4_to_l5_handoff_zh.txt
+10. docs/l4_to_l6_handoff_zh.txt
+11. tests/test_l3_phase1_does_not_modify_l0_l1_l2.py
+
+新增测试：
+1. tests/test_l1_memory_governance_ports_are_protocol_only.py
+2. tests/test_l2_memory_forgetting_state_objects_are_ref_only.py
+3. tests/test_l2_memory_kind_dimension_preserved.py
+4. tests/test_l3_forgetting_service_request_is_advisory_only.py
+5. tests/test_l4_memory_forgetting_sink_requirement.py
+6. tests/test_memory_forgetting_governance_chain_refs_only.py

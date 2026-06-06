@@ -1,0 +1,46 @@
+L5→L6 Handoff Freeze（hotfix2 情志专项补丁后）
+
+L6 可消费对象：
+1. Manifest / capability declaration / registry / index / lifecycle / mount / boundary / health / permission precondition 等 L5 冻结对象。
+2. GovernanceCoverageMatrix / CapabilityReadinessMatrix / L5FinalPublicProjection / L5FinalAuditIndex。
+3. Context/Belief/World boundary refs、L4ContextSafetyProjection、L6 Context Assembler precondition。
+4. MessageEnvelope / Conversation / Channel / Protocol / ReplyTo / ACK / NACK / ResultReturn / FailureReturn refs。
+5. SkillToolRelease contract / trace matrix / L4-to-L5 handoff / L4-to-L6 released tool view requirement refs。
+6. SelfHealingDeclaration / RecoveryPlanDeclaration / self-healing validation report / self-healing quality gate / recovery permission preconditions。
+7. SelfEvolution commit boundary / post-commit observation / validation refs。
+8. Memory/Forgetting governance / deletion tombstone audit refs。
+9. Phase5 resource budget boundary digest refs。
+10. Version migration / rollback / hot-switch / replay boundary refs。
+11. AffectivePluginMountDeclaration / AffectiveModulationContractBinding / AffectiveSafetyBoundaryRef / AffectiveAuditBinding / AffectivePublicProjectionSummary refs。
+
+L6 通用禁止误用：
+- 不得把 L5 声明对象当真实执行器。
+- 不得把 L5 handoff 当 L3/L4 调用。
+- 不得把 L5 L6Entry 当真实插件入口。
+- 不得把 Route / Hook / EventSubscription 当真实路由、回调或事件订阅。
+- 不得把 ContractBinding / ServiceMountBinding / CapabilityMountBinding 当真实服务或工具释放入口。
+- 不得把 ArtifactProductionMountBinding 当真实成品生产器。
+- 不得凭 L5 声明直接生成文件、构建项目、渲染图片、打包安装包、发布网站、上传交付物。
+- 不得绕过 L1-L4 的事件、状态、权限、租约、预算、审计、恢复和验证链路。
+- 不得让 L6 插件凭 L5 声明直接执行工具或外部动作。
+- 不得把 L5 freeze 当 permit / lease / confirmation ticket / token。
+- 不得绕过 L4ContextSafetyProjection 进行上下文装配。
+- ToolResult / ModelResult 默认非指令，不能成为 SystemInstruction。
+- BeliefState 不得覆盖 Event 事实。
+- WorldState 必须具备 evidence / observation / trust / staleness 引用。
+- MemoryInjection 未经边界审查不得 injected。
+- 多智能体通信必须 MessageEnvelope-first，结果必须通过 handoff/result-return 链路回流。
+
+Product Artifact Factory：
+- 可进入 L6 专项规划。
+- 不得把 L5 readiness 解释为执行授权。
+- L5 内仍禁止 build/generate/render/export/package/deliver。
+
+AffectivePlugin / 情感情志插件：
+- 可进入 L6 专项规划。
+- 不得把情感状态当授权、permit、lease、confirmation ticket、预算豁免或风险裁决覆盖依据。
+- 不得绕过权限、确认、HumanGate、Policy、Lease、Contract、Audit、预算、隐私或风险治理。
+- 不得直接执行工具、调用 L4 adapter、触发成品生产链、触发自愈/自我进化/自我迭代。
+- 不得直接写记忆、删记忆、晋升记忆或注入未审查记忆。
+- 不得提交核心修改或任何副作用。
+- 只能影响表达方式、注意力分配、优先级排序、记忆权重、风险敏感度、学习动机。

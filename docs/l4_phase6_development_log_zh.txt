@@ -1,0 +1,137 @@
+天工造物 L4 第六阶段开发日志
+
+阶段名称：第六阶段，动作结果、观察回流引用、失败分类、取消超时与恢复建议引用
+工程目录：project_l4_phase6
+开发日期：2026-06-04
+
+一、工程基线
+
+1. 从 project_l4_phase5 复制生成 project_l4_phase6。
+2. 保留 L4 第一至第五阶段全部源码、测试和文档。
+3. 第六阶段仅在 tiangong_kernel/l4_action_grounding 内追加结果回传、观察引用、失败分类、取消超时和恢复建议引用骨架。
+4. L0、L1、L2、L3 未修改。
+
+二、结果与失败回传
+
+新增：
+
+1. ActionOutcomeEnvelope
+2. ActionResultReturnEnvelope
+3. ActionFailureReturnEnvelope
+4. ExecutionReturnProjection
+
+边界：
+
+1. outcome 只能携带 result_ref 或 failure_ref 之一。
+2. state_update_suggestion_ref 只是建议引用，不写 L2。
+3. failure return 中 retry、resume、rollback、replan 都只是 ref。
+
+三、观察、证据、审计与 trace 引用
+
+新增：
+
+1. ExecutionObservationRef
+2. ExecutionEvidenceRef
+3. ExecutionAuditRef
+4. ExecutionTraceRef
+5. ObservationReturnEnvelope
+6. FakeObservationReferenceFactory
+
+边界：
+
+1. 不采样真实观察。
+2. 不读取屏幕、文件或网络作为观察。
+3. 不存储真实证据。
+4. 不写真实审计。
+5. 不创建旧 trace 链。
+
+四、资源、取消与超时
+
+新增：
+
+1. ExecutionResourceUsage
+2. ExecutionCancellationRequest
+3. ExecutionCancellationResult
+4. ExecutionCancellationStatus
+5. ExecutionTimeoutPolicyRef
+6. ExecutionTimeoutFailure
+7. FakeCancellationTimeoutHelper
+
+边界：
+
+1. 资源使用只做摘要，不分配资源，不做资源政策。
+2. 取消请求不杀进程，不终止真实外部动作。
+3. 取消结果不推进恢复。
+4. 超时失败不自动取消，不自动重试。
+
+五、恢复建议与边界反馈引用
+
+新增：
+
+1. ExecutionRetryAdviceRef
+2. ExecutionResumeRef
+3. ExecutionRollbackHintRef
+4. L3ReplanSuggestionRef
+5. BoundaryFeedbackRef
+6. RecoveryRequirementRef
+
+边界：
+
+1. retry advice 不自动重试。
+2. resume ref 不执行续接，不改 L3 计划。
+3. rollback hint 不执行回滚，不恢复文件、网络或桌面状态。
+4. L3ReplanSuggestionRef 不重排 L3 计划。
+5. BoundaryFeedbackRef 不裁决边界、不签发 permit。
+6. RecoveryRequirementRef 不实现恢复系统。
+
+六、失败分类与归一化失败
+
+新增：
+
+1. FailureCategory
+2. FailureSeverity
+3. FailureRecoverabilityHint
+4. ResultNormalizationFailure
+5. FailureNormalizationFailure
+
+边界：
+
+1. severity 不替代 L5 风险裁决。
+2. recoverability hint 不执行动作。
+3. normalization failure 保留 error_ref 和 trace_ref，不吞错误。
+
+七、不变量
+
+新增：
+
+1. Phase6Invariant
+2. NoAuditWriteInL4Invariant
+3. NoPermitIssuanceInL4Invariant
+4. NoRealObservationInL4Invariant
+5. NoRetryRecoveryRollbackInL4Invariant
+6. NoL2StateWriteFromReturnInvariant
+
+八、测试补充
+
+新增 15 个第六阶段测试文件，覆盖：
+
+1. outcome/result/failure envelope。
+2. observation/evidence/audit/trace refs。
+3. resource usage。
+4. cancellation/timeout。
+5. failure category/severity/recoverability。
+6. retry/resume/rollback refs。
+7. observation return envelope。
+8. L3 replan suggestion ref。
+9. boundary feedback ref。
+10. no real observation/audit write。
+11. no retry/recovery/rollback execution。
+12. no L2 state write。
+13. normalization failure refs。
+14. no legacy runtime or ability package chain。
+
+九、开发结论
+
+第六阶段工程目标已完成。
+
+本阶段所有对象均只返回 ref/advice/hint/envelope，不执行观察、审计、证据存储、重试、恢复、回滚或状态写入。

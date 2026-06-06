@@ -1,0 +1,25 @@
+L6.34 DeepSeek plan 样本回放报告
+
+ok: True
+total: 14
+accepted: 12
+rejected: 2
+matched_expectations: 14
+pass_rate: 1.0
+accepted_expected_rate: 1.0
+
+样本明细:
+- steps_basic: accepted=True expected=True tools=['read_file'] issues=[]
+- nested_plan_steps: accepted=True expected=True tools=['scan_project', 'read_file'] issues=[]
+- plan_as_string_json: accepted=True expected=True tools=['read_file'] issues=[]
+- tool_calls_function_arguments: accepted=True expected=True tools=['run_python_quality_check'] issues=[]
+- actions_direct_aliases: accepted=True expected=True tools=['list_dir', 'read_file'] issues=[]
+- execution_steps_chinese: accepted=True expected=True tools=['read_file'] issues=[]
+- single_step_object: accepted=True expected=True tools=['read_file'] issues=[]
+- single_code_object: accepted=True expected=True tools=['return_code'] issues=[]
+- plain_code_block: accepted=True expected=True tools=['return_code'] issues=[]
+- plain_analysis_text: accepted=True expected=True tools=['return_analysis'] issues=[]
+- mixed_text_fenced_json: accepted=True expected=True tools=['scan_project'] issues=[]
+- answer_json_no_steps: accepted=True expected=True tools=['return_analysis'] issues=[]
+- unsafe_shell_rejected: accepted=False expected=False tools=[] issues=['tool_not_allowed']
+- unsafe_absolute_path_rejected: accepted=False expected=False tools=[] issues=['unsafe_path']

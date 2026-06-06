@@ -1,0 +1,16 @@
+{
+  "name": "l6_31_32_model_regression",
+  "command": [
+    "/opt/pyvenv/bin/python",
+    "-m",
+    "pytest",
+    "tests/test_l6_31_model_suggest_shape_hotfix.py",
+    "tests/test_l6_32_p1_model_suggest_repair.py",
+    "-q"
+  ],
+  "cwd": "/mnt/data/l634_work/project",
+  "timeout_seconds": 90,
+  "purpose": "L6.31/L6.32 model_suggest回归",
+  "required": true,
+  "rerun_command": "/opt/pyvenv/bin/python -m pytest tests/test_l6_31_model_suggest_shape_hotfix.py tests/test_l6_32_p1_model_suggest_repair.py -q"
+}

@@ -1,0 +1,20 @@
+# 临渊者 L6.36 Replay Corpus 报告
+
+- schema: `tiangong.l6_36.replay_corpus.v1`
+- source_version: `L6.36-recovery-replay-quality-gate`
+- ok: `True`
+- cases: `9`
+
+## 用例
+
+- `code_generation` status=`passed` execution=`completed` quality=`pass` recovery=`completed` action=`执行链已完成，无需恢复。`
+- `code_analysis` status=`passed` execution=`completed` quality=`pass` recovery=`completed` action=`执行链已完成，无需恢复。`
+- `file_read` status=`passed` execution=`completed` quality=`pass` recovery=`completed` action=`执行链已完成，无需恢复。`
+- `project_diagnosis` status=`passed` execution=`completed` quality=`pass` recovery=`completed` action=`执行链已完成，无需恢复。`
+- `recoverable_failure` status=`passed` execution=`failed_with_resume` quality=`fail` recovery=`recover_failed_step` action=`retry_or_generate_repair_plan`
+- `safety_blocked` status=`passed` execution=`blocked` quality=`blocked` recovery=`blocked_replan` action=`stop_for_safety_and_replan`
+- `confirmation_required` status=`passed` execution=`confirmation_required` quality=`warn` recovery=`await_confirmation` action=`ask_confirmation`
+- `delivery_package` status=`passed` execution=`completed` quality=`pass` recovery=`completed` action=`执行链已完成，无需恢复。`
+- `quality_compileall` status=`passed` execution=`completed` quality=`pass` recovery=`completed` action=`执行链已完成，无需恢复。`
+
+> L6.36 replay corpus 只使用 RuntimeEntry / PlannerExecutionController 公开摘要，不裸调工具、不读取密钥、不修改内核。

@@ -1,0 +1,189 @@
+临渊者 L6.43 FourPathContextRouter 四主路径统一投影交付报告
+日期：2026-06-06
+基线输入：L6.42.1【自由意志时间系统与自我迭代前端区】完整交付包
+本轮目标：把执行链、记忆、情志、生命周期、P0支撑系统压缩为 Planner 单入口 UnifiedPlannerContextPack；不新增第二 Runtime，不污染核心组。
+
+一、完成内容
+
+1. 新增 tiangong_agent_runtime/four_path_public_projection.py
+- 提供四主路径公共投影工具。
+- 将输入对象压缩为 ref / digest / summary。
+- 对 api_key / token / secret / password / credential / private_key 等敏感标记脱敏。
+- 对本地路径做 redacted-path 处理。
+- 输出 RedactedEvidenceRef 和 FourPathPublicProjection。
+- 明确 no_raw_prompt / no_plain_secret / no_full_evidence_body / no_execution_plan_body。
+
+2. 新增 tiangong_agent_runtime/four_path_priority_policy.py
+- 固化四路径冲突仲裁。
+- Memory vs UserTask：当前用户任务优先。
+- Affective vs PermitGateway：PermitGateway 优先。
+- Lifecycle vs UserTask：当前用户任务优先。
+- Learning vs Delivery：交付闭环优先。
+- Iteration vs Stability：稳定、回滚、验证优先。
+- QualityGate vs Package/Activation：质量门优先。
+- 新增硬边界：唯一执行链、核心组不可污染、投影层只给 PlannerContext。
+
+3. 新增 tiangong_agent_runtime/four_path_context_router.py
+- 新增 UnifiedPlannerContextPack。
+- 新增 FourPathContextRouter。
+- 新增 FourPathContextReport。
+- 新增 PlanPreflightCheck。
+- 支持输入：
+  - user_task
+  - execution_contract_ref
+  - memory_route
+  - affective_route
+  - lifecycle_bundle
+  - provider_envelope
+  - budget_snapshot
+  - skill_envelope
+  - handoff_envelope
+  - audit_evidence
+  - recovery_ticket
+  - quality_gate
+- 输出字段：
+  - user_task_summary
+  - execution_contract_ref
+  - top_memory_hints
+  - affective_style_hint
+  - affective_candidate_bias
+  - lifecycle_next_action_hints
+  - recovery_hints
+  - quality_gate_constraints
+  - budget_constraints
+  - provider_constraints
+  - skill_hints
+  - handoff_hints
+  - hard_boundaries
+  - redacted_evidence_refs
+  - context_digest
+
+二、关键边界
+
+1. Memory
+- 最多 5 条 top_memory_hints。
+- 只保留 sanitized_summary / recall_score / evidence_refs。
+- 不注入原始记忆正文。
+- 不写 memory。
+- 不删 memory。
+
+2. Affective
+- 只输出 affective_style_hint 与 affective_candidate_bias。
+- 七情只影响语言状态逻辑。
+- 六欲只影响同风险等级内做事方式排序。
+- 不授权。
+- 不拒绝。
+- 不调工具。
+- 不调模型。
+- 不改预算。
+- 不覆盖质量门。
+
+3. Lifecycle
+- 最多 3 条 lifecycle_next_action_hints。
+- 自愈、学习、自由意志、自迭代均为候选。
+- 不抢当前用户任务。
+- 不自动修复。
+- 不自动合入。
+- 不自动热切换。
+
+4. Execution/P0
+- 执行链 contract 永远优先。
+- Provider 只给声明式约束，不裸调 SDK，不读明文凭证。
+- Budget 只给低摩擦约束，不扣预算。
+- Skill 只给 draft/hint，不激活。
+- Handoff 只给父链回收提示，不自动递归派生。
+- QualityGate 只阻断发布、打包、激活、注册、合入、热切换等边界。
+
+三、核心污染检查
+
+检查范围：
+- tiangong_kernel/l0_primitives
+- tiangong_kernel/l1_ports
+- tiangong_kernel/l2_state
+- tiangong_kernel/l3_orchestration
+- tiangong_kernel/l4_action_grounding
+- tiangong_kernel/l4_execution
+- tiangong_kernel/l5_plugin_host
+- tiangong_agent_runtime/execution_spine.py
+- tiangong_agent_runtime/planner_execution_controller.py
+- tiangong_agent_runtime/long_chain_runner.py
+- tiangong_agent_runtime/runtime_tool_registry.py
+- tiangong_agent_runtime/permit_gateway.py
+- tiangong_agent_runtime/risk_classifier.py
+- tiangong_agent_runtime/provider_adaptation_shell.py
+- tiangong_agent_runtime/budget_guard.py
+- tiangong_agent_runtime/quality_gate_bridge.py
+
+结果：
+- checked_core_files：584
+- changed_core_files：0
+- status：PASS
+
+结论：本轮没有污染核心组。
+
+四、静态边界扫描
+
+扫描新增文件：
+- tiangong_agent_runtime/four_path_public_projection.py
+- tiangong_agent_runtime/four_path_priority_policy.py
+- tiangong_agent_runtime/four_path_context_router.py
+
+检查项：
+- direct_adapter_call
+- provider_naked_sdk
+- subprocess_shell
+- memory_direct_delete
+- tool_invocation_execution
+- kernel_mutation
+
+结果：PASS
+发现数：0
+
+五、验证结果
+
+1. 编译检查
+- python3 -m compileall -q tiangong_agent_runtime tests
+- 结果：PASS
+
+2. L6.43 新增测试
+- tests/test_l6_43_four_path_context_router.py
+- 结果：4 passed
+
+3. 回归测试
+- L6.37 执行链冻结：7 passed
+- L6.38 P0 接入一：6 passed
+- L6.39 P0 接入二：6 passed
+- L6.40 记忆数学核与 MemoryStoreBridge：6 passed
+- L6.41 情志动态模型与 AffectiveExecutionRoute：7 passed
+- L6.42 LifecycleCoordinator：6 passed
+- L6.42.1 自由意志时间系统与自我迭代前端区：11 passed
+
+4. 边界回归
+- 记忆/遗忘边界：6 passed
+- 情志边界：20 passed
+- 生命周期/学习/愈合/迭代/恢复链：28 passed
+
+合计定向测试：107 passed
+说明：未跑完整全量 pytest，因此不声明全量通过。
+
+六、本轮未做内容
+
+1. 未把 FourPathContextRouter 改进 PlannerExecutionController 主流程。
+原因：L6.43 只做统一投影对象，Planner 消费层统一改造应放到下一步 L6.44 或你指定的“Planner 消费层统一改造”阶段。
+
+2. 未新增真实后台任务。
+原因：FourPath 只做上下文投影，不应启动后台线程。
+
+3. 未修改核心组。
+原因：遵守“可调用核心数据，不能污染核心”的边界。
+
+七、下一步建议
+
+建议下一步进入：L6.44 Planner 消费层统一改造 + 长链认知状态准备
+
+建议落点：
+1. PlanPreflightChecker 正式接 Planner 输入前预检。
+2. Planner 只消费 UnifiedPlannerContextPack，不再直接吃 Memory/Affective/Lifecycle 散对象。
+3. 增加 LongChainCognitiveState 的输入挂点。
+4. 保留 A0-A4 低摩擦，A5/凭证/隐私/不可逆/发布/激活/合入强卡。
+5. 继续做核心 hash 对比，确保不污染核心组。

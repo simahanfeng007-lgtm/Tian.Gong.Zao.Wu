@@ -1,0 +1,24 @@
+天工造物 L4 Skill 直显与工具释放链路专项补丁开发日志
+
+日期：2026-06-04
+
+一、修复结论
+
+已补齐 Skill 直显 → Skill 请求/授权 → ToolGroup 释放 → 模型可见工具 schema → 模型工具调用 → 工具结果返回 → 模型继续推理/L3 续接 → L2 状态更新建议 的显式契约。
+
+二、新增源码
+
+1. released_tool_schema_view.py：ReleasedToolSchemaView、ModelVisibleReleasedToolView。
+2. skill_tool_release_session_context.py：SkillToolReleaseSessionContext、ToolResultReturnContext。
+3. skill_tool_release_chain_index.py：SkillToolReleaseChainIndex。
+
+三、新增文档
+
+1. skill_direct_tool_release_chain_contract_zh.txt。
+2. skill_tool_release_trace_matrix_zh.csv。
+3. l4_to_l5_skill_tool_release_handoff_zh.txt。
+4. l4_to_l6_released_tool_schema_requirement_zh.txt。
+
+四、边界
+
+L4 仍只是动作落地承载层。本补丁未进入 L5/L6，未启用真实动作，未恢复旧能力包主链，未解析 SkillRegistry，未注册 ToolRegistry，未调用模型或工具，未签发 permit。

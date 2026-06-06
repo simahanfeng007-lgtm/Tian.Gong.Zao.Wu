@@ -1,0 +1,30 @@
+天工造物 L3 第二阶段 validation 报告
+生成日期：2026-06-03
+
+一、验证结论
+L3 第二阶段工程通过源码编译、专项测试、L3 第一/第二阶段分片测试、完整 tests、L0/L1/L2 哈希对比和边界静态扫描。建议进入 L3 第二阶段专项质检。
+
+二、边界验证
+1. 是否修改 L0：否。哈希对比 MATCH。
+2. 是否修改 L1：否。哈希对比 MATCH。
+3. 是否修改 L2：否。哈希对比 MATCH。
+4. 是否导入 L4/L5/L6：否。静态扫描未发现。
+5. 是否调用模型：否。静态扫描未发现 client.chat、chat.completions、model_client 等模式。
+6. 是否调用工具：否。静态扫描未发现 invoke_tool、tool.execute、call_tool、release_tool 等模式。
+7. 是否做真实 IO：否。第二阶段源码未导入 pathlib/os/subprocess/socket/requests/sqlite3 等外部副作用相关模块，也未调用 open/read_text/write_text 等接口。
+8. 是否做权限裁决：否。所有状态转移均为 advice/suggestion，不产生确认票据、执行令牌或边界放行。
+9. 是否实现状态存储：否。L2StateUpdateSuggestion 只是建议事实，不写入 L2。
+10. 是否恢复旧链路：否。未恢复旧能力包、CapabilityPort、AbilityPackagePort、旧 Runtime 或“神枢”新版核心概念。
+
+三、功能验证
+1. RunOrchestrationRef / RunOrchestrationStateView / RunOrchestrationPlan / RunContinuityEvaluation 可构造、可序列化、可哈希。
+2. TaskOrchestrationRef / TaskOrchestrationPlan / TaskContinuityEvaluation / TaskResumeAdvice / TaskInterruptionAdvice 可构造、可序列化、可哈希。
+3. TurnOrchestrationRef / TurnSequenceRef / TurnCarryoverHint / TurnContinuityEvaluation / TurnOrchestrationPlan 可构造、可序列化、可哈希。
+4. StepSequence / StepTransitionCandidate / StepTransitionAdvice / StepReadinessEvaluation / StepResumeAdvice 可构造、可序列化、可哈希。
+5. 生命周期枚举包含 created/prepared/active/waiting/paused/blocked/failed/cancelled/completed/resumable/abandoned。
+6. 连续性评分八项均可确定性输出 0.0-1.0 范围内数值和解释项。
+7. RecoveryPriorityScore 中情感权重和动态驱动权重只影响评分数值，不产生执行请求。
+8. build_math_score_vector_from_continuity 只把连续性评分映射到 MathScoreVector，未改变第一阶段数学建议边界。
+
+四、结论
+验证通过。建议进入 L3 第二阶段专项质检，不建议直接进入第三阶段开发。

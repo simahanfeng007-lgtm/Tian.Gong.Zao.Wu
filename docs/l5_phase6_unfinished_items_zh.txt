@@ -1,0 +1,4 @@
+未完成事项
+1. full pytest 未在当前工具时限内取得完整通过结果。
+2. collect-only 虽观察到 1187 tests collected，但未取得 clean exit。
+3. 建议先执行专项验证补丁：优化/分片全量 pytest，并补充 clean exit 证据后再进入 L5 第七阶段。

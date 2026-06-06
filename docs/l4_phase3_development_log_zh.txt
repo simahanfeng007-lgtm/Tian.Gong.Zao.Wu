@@ -1,0 +1,35 @@
+天工造物 L4 第三阶段开发日志
+生成日期：2026-06-04
+
+一、阶段名称
+L4 第三阶段：动作适配器协议、注册表骨架与禁用态真实适配器。
+
+二、实际完成内容
+1. 新增 ActionAdapterProtocol / ExecutionAdapterProtocol，定义 adapter_descriptor、supports、prepare、invoke、normalize_result、normalize_failure 等结构协议。
+2. 新增 AdapterIdentity、AdapterDescriptor、AdapterCapabilityDescriptor、AdapterRiskSurfaceDescriptor，描述适配器身份、能力与风险面，不授予权限、不做风险放行。
+3. 新增 AdapterInputEnvelope、AdapterOutputEnvelope、AdapterFailureEnvelope、AdapterExecutionEnvelope、AdapterObservationHint。
+4. 新增 AdapterMode、AdapterExecutionMode、AdapterModePolicy、AdapterStatus、AdapterDisabledReason。
+5. 新增 AdapterRegistry、AdapterRegistryEntry、AdapterRegistrySnapshot、AdapterRegistryRegistrationResult；注册表仅接收显式传入对象，不扫描插件、不动态导入、不调用 adapter。
+6. 新增 AdapterSelector、AdapterSelectionRequest、AdapterSelectionResult；选择器只做结构选择，不做权限/风险裁决。
+7. 新增 FakeActionAdapter、InMemoryActionAdapter、DryRunActionAdapter、NoOpActionAdapter。
+8. 新增 RealActionAdapterStub；默认 enabled_by_default=False、production_enabled=False，invoke 永远返回 production_disabled failure。
+9. 新增 AdapterResultNormalizer、AdapterFailureNormalizer，标准化输出与失败，不暴露异常堆栈或敏感路径。
+10. 新增 adapter invariant 与 projection 对象。
+11. 将 adapter 相关 ref 接入 ActionGroundingContext、ActionGroundingSession、ActionGroundingStep、ActionGroundingResult、ActionGroundingFailure、ActionGroundingProjection。
+12. 更新 L4 包公共导出。
+13. 新增第三阶段专项测试 8 个文件与 builder。
+
+三、开发中发现并修复的问题
+1. 初始 AdapterSelector 在多个 adapter 支持同一 action_kind 时，没有先按 requested mode 缩小候选集，导致 production path 下 fake adapter 测试收到 mode_mismatch。已修复为先按 requested mode 过滤。
+2. 一期静态回归测试禁止任意 .get() 属性调用。AdapterRegistry 初始使用 dict.get()，已改为显式 in 判断后索引。
+
+四、边界声明
+1. 未进入 L4 第四阶段。
+2. 未开发 L5。
+3. 未开发 L6。
+4. 未修改 L0/L1/L2/L3。
+5. 未调用真实模型 API。
+6. 未调用真实工具。
+7. 未执行真实文件、网络、shell、桌面动作。
+8. 未恢复旧能力包、CapabilityPort、AbilityPackagePort、神枢或旧 Runtime 主链。
+9. 未把 L4 写成新的执行智能体。

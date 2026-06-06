@@ -1,0 +1,39 @@
+天工造物 L4 第二阶段 validation 报告
+生成日期：2026-06-04
+
+一、验证范围
+1. 第二阶段新增对象可创建和序列化。
+2. PermitScope 可表达动作范围并做结构匹配。
+3. PermitExpiry 可表达 expiry 与显式过期。
+4. 缺 permit_ref、malformed、expired、scope mismatch、test-only production misuse 均返回标准拒绝。
+5. boundary denied、confirmation required、lease/credential/audit/resource 缺失均不触发真实动作。
+6. allowed_for_grounding=True 不等于 L4 授权。
+7. fake/dry-run/no-op 回归不产生真实动作。
+8. 不导入 L5/L6，不恢复旧主链，不修改 L0/L1/L2/L3。
+
+二、实际执行命令与结果
+1. python -m compileall -q tiangong_kernel tests
+   结果：通过。日志：docs/l4_phase2_compileall.log
+
+2. python -m pytest -q tests/test_l4_phase2_permit_refs.py tests/test_l4_phase2_gate_validation.py tests/test_l4_phase2_test_only_permit_isolation.py tests/test_l4_phase2_no_live_action_without_l5.py tests/test_l4_phase2_no_l5_l6_import.py
+   结果：23 passed in 2.00s。日志：docs/l4_phase2_pytest_targeted.log
+
+3. python -m pytest -q tests/test_l4_phase1_imports_and_basic_objects.py tests/test_l4_phase1_serialization_and_hash.py tests/test_l4_phase1_disabled_by_default.py tests/test_l4_phase1_fake_dry_run_noop.py tests/test_l4_phase1_l3_compatibility.py tests/test_l4_phase1_boundary_no_real_actions.py tests/test_l4_phase1_no_l5_l6_imports.py
+   结果：18 passed in 2.29s。日志：docs/l4_phase2_pytest_phase1_regression.log
+
+4. python -m pytest -q tests -k "l4_phase1 or l4_phase2"
+   结果：41 passed, 628 deselected in 2.81s。日志：docs/l4_phase2_pytest_l4_phase1_phase2.log
+
+5. python -m pytest -q tests
+   结果：669 passed in 5.30s。日志：docs/l4_phase2_pytest_full.log
+
+三、hash 与静态扫描
+1. L0/L1/L2/L3 Python 源码 hash 比对：MATCH。日志：docs/l4_phase2_l0_l1_l2_l3_hash_compare.txt
+2. L4 包越界关键词扫描：NO_MATCH。日志：docs/l4_phase2_static_scan_forbidden_terms.txt
+3. 第一/二阶段禁止模块名扫描：NO_MATCH。日志：docs/l4_phase2_forbidden_module_scan.txt
+
+四、边界结论
+未修改 L0/L1/L2/L3；未导入 L5/L6；未实现真实外部动作；未让 L4 自行裁决；未发现 test-only permit 泄露到 production path；完整 tests 已实际执行。
+
+五、验证结论
+验证通过。建议进入 L4 第二阶段专项质检；不得直接进入第三阶段开发。
