@@ -122,6 +122,9 @@ class BridgeState:
         # Keep values in process memory only. Do not write raw values to files or reports.
         self.provider_base = base
         self.provider_key = key
+        # Auto-switch to provider mode when valid credentials are configured
+        if self.provider_key and self.provider_base:
+            self.backend_mode = "provider"
         self.last_audit_id = f"audit_local_provider_{_digest(str(time.time()))}"
         projection = self.provider_projection()
         projection.update({

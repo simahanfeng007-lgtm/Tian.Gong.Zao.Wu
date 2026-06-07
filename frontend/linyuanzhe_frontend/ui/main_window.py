@@ -314,6 +314,8 @@ class LinyuanzheDesktopApp(tk.Tk):
         body.tag_config("meta", foreground=COLORS["text_sub"], font=FONTS["small"])
         body.tag_config("body", foreground=COLORS["text_main"], font=FONTS["body"])
         body.configure(state="disabled")
+        # 自动滚动到底部
+        body.see("end")
 
         input_shell = tk.Frame(card, bg=COLORS["bg_card"], highlightbackground=COLORS["border_soft"], highlightthickness=1)
         input_shell.grid(row=2, column=0, sticky="ew", padx=14, pady=(0, 14))

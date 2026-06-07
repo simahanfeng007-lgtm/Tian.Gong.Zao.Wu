@@ -583,6 +583,8 @@ class SseRuntimeClient:
                 self._delta_merger.push(content)
                 self._flush_pending_assistant_delta(force=False)
             self._snapshot.current_stage = "Runtime 正在流式输出"
+            self._snapshot.chat_messages = self._transcript.visible_messages()
+            self._snapshot.visible_message_count = self._transcript.visible_message_count
         elif name == "assistant_final":
             self._seen_assistant_final = True
             self._flush_pending_assistant_delta(force=True)
