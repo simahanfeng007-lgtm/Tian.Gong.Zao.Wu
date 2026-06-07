@@ -157,3 +157,46 @@ def make_readonly_banner(master: tk.Misc, text: str) -> tk.Frame:
     tk.Label(frame, text="◆", bg=COLORS["accent_soft"], fg=COLORS["accent_line"], font=FONTS["small_bold"]).grid(row=0, column=0, padx=(10, 6), pady=7)
     tk.Label(frame, text=text, bg=COLORS["accent_soft"], fg=COLORS["text_sub"], font=FONTS["small"]).grid(row=0, column=1, sticky="w", pady=7)
     return frame
+
+
+class CollapsibleFrame(tk.Frame):
+    """可折叠内容块，点击标题展开/收起。"""
+
+    def __init__(self, master: tk.Misc, title: str, content: str, *, collapsed: bool = True, max_lines: int = 4) -> None:
+        super().__init__(master, bg=COLORS["bg_card"])
+        self.grid_columnconfigure(0, weight=1)
+        self._collapsed = collapsed
+        self._title = title
+        self._full_content = content
+        self._max_lines = max_lines
+        # 标题栏（可点击）
+        self._header = tk.Frame(self, bg=COLORS["bg_card_2"], highlightbackground=COLORS["border_soft"], highlightthickness=1)
+        self._header.grid(row=0, column=0, sticky="ew", pady=(4, 0))
+        self._header.grid_columnconfigure(0, weight=1)
+        self._toggle_icon = tk.Label(self._header, text="▶" if collapsed else "▼", bg=COLORS["bg_card_2"], fg=COLORS["text_sub"], font=FONTS["small"], padx=8, pady=4)
+        self._toggle_icon.grid(row=0, column=0, sticky="w")
+        tk.Label(self._header, text=title, bg=COLORS["bg_card_2"], fg=COLORS["text_sub"], font=FONTS["small"]).grid(row=0, column=1, sticky="w", padx=(0, 8))
+        # 内容区
+        self._body = tk.Frame(self, bg=COLORS["bg_card"])
+        self._body.grid_columnconfigure(0, weight=1)
+        self._text = tk.Text(self._body, bg=COLORS["bg_card_2"], fg=COLORS["text_main"], relief="flat", wrap="none", font=FONTS["mono"], padx=8, pady=6, height=1, width=60)
+        self._text.insert("1.0", content)
+        self._text.configure(state="disabled")
+        # 绑定点击
+        for widget in (self._header, self._toggle_icon):
+            widget.bind("<Button-1>", lambda _e: self._toggle())
+        self._apply_state()
+
+    def _apply_state(self) -> None:
+        if self._collapsed:
+            self._body.grid_forget()
+            self._toggle_icon.configure(text="▶")
+        else:
+            self._body.grid(row=1, column=0, sticky="ew", pady=(2, 6))
+            line_count = min(self._full_content.count("\n") + 1, 20)
+            self._text.configure(height=max(3, min(line_count, 12)))
+            self._toggle_icon.configure(text="▼")
+
+    def _toggle(self) -> None:
+        self._collapsed = not self._collapsed
+        self._apply_state()

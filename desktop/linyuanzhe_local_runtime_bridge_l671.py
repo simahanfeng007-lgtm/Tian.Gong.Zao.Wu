@@ -158,6 +158,49 @@ def _redact_output(text: str, state: BridgeState) -> str:
     return out.strip()
 
 
+def _format_chat_reply(raw: str) -> str:
+    """智能格式化后端输出：摘要置顶，代码日志折叠。"""
+    if not raw or not raw.strip():
+        return "(空回复)"
+    lines = raw.strip().split("\n")
+    # 摘要行（计划器、长链、产物）
+    summary_lines: list[str] = []
+    # 代码/日志行（compileall、文件列表等）
+    code_lines: list[str] = []
+    tool_results: list[str] = []
+    in_code = False
+    for line in lines:
+        stripped = line.strip()
+        if not stripped:
+            continue
+        if stripped.startswith("[计划器]") or stripped.startswith("[长链]") or stripped.startswith("产物") or stripped.startswith("- ") and ("ok" in stripped or "fail" in stripped or "executed" in stripped):
+            summary_lines.append(stripped)
+            in_code = False
+        elif stripped.startswith("Compiling") or stripped.startswith("Listing") or "__pycache__" in stripped or stripped.startswith("dir") or stripped.startswith("file"):
+            code_lines.append(stripped)
+            in_code = True
+        elif in_code:
+            code_lines.append(stripped)
+        else:
+            summary_lines.append(stripped)
+    parts: list[str] = []
+    if summary_lines:
+        parts.append("\n".join(summary_lines[:12]))
+    if code_lines:
+        count = len(code_lines)
+        preview = "\n".join(code_lines[:3])
+        parts.append(f"\n--- 执行详情（共 {count} 行，已折叠） ---\n{preview}")
+        if count > 3:
+            parts.append(f"… 还有 {count - 3} 行 …")
+    if tool_results:
+        parts.append("\n".join(tool_results))
+    result = "\n".join(parts) if parts else raw[:600]
+    # 安全截断
+    if len(result) > 2000:
+        result = result[:1900] + "\n… 回复过长，已截断。完整输出见执行页。"
+    return result
+
+
 def _run_backend_once(message: str, state: BridgeState) -> tuple[str, int, str]:
     if not RUN_AGENT.exists():
         return "后端入口不存在：backend/project/run_agent.py", 1, "missing_backend_entry"
@@ -384,8 +427,9 @@ class LinyuanzheBridgeHandler(BaseHTTPRequestHandler):
             task_id = f"local_task_{STATE.chat_count:04d}"
             audit_id = f"audit_local_{uuid.uuid4().hex[:10]}"
             STATE.last_audit_id = audit_id
-            answer, returncode, elapsed = _run_backend_once(message, STATE)
-            answer = _safe_text(answer, 4000)
+            answer_raw, returncode, elapsed = _run_backend_once(message, STATE)
+            answer_full = _safe_text(answer_raw, 4000)
+            answer = _format_chat_reply(answer_full)
             ok = returncode == 0
             status = "ok" if ok else "failed"
             session = {
@@ -435,8 +479,9 @@ class LinyuanzheBridgeHandler(BaseHTTPRequestHandler):
                 run_id = f"local_run_{uuid.uuid4().hex[:12]}"
                 task_id = f"local_task_{STATE.chat_count + 1:04d}"
                 audit_id = f"audit_confirm_{_digest(str(time.time()))}"
-                answer, returncode, elapsed = _run_backend_once(STATE.last_message, STATE)
-                answer = _safe_text(answer, 4000)
+                answer_raw, returncode, elapsed = _run_backend_once(STATE.last_message, STATE)
+                answer_full = _safe_text(answer_raw, 4000)
+                answer = _format_chat_reply(answer_full)
                 ok = returncode == 0
                 events = [
                     {"event": "run_started", "seq": 1, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"runtime_status": "active", "provider_model": STATE.model, "backend_mode": STATE.effective_backend_mode, "resumed_after_confirmation": True, "ticket_id": ticket_id}},

@@ -14,7 +14,7 @@ from linyuanzhe_frontend.contracts.runtime_snapshot import RuntimeSnapshot, Step
 from linyuanzhe_frontend.contracts.streaming_render import RenderScheduler
 from .page_specs import ALL_PAGE_DEFINITIONS, DEFAULT_PAGE, PAGE_BY_KEY, PAGE_DEFINITIONS
 from .theme import COLORS, DIMENS, FONTS, STATUS_COLORS
-from .widgets import Card, Chip, MetricRow, StepItem, LabeledValue, StatusPill, configure_ttk_style, make_button, make_hint, make_readonly_banner, make_section_title
+from .widgets import Card, Chip, CollapsibleFrame, MetricRow, StepItem, LabeledValue, StatusPill, configure_ttk_style, make_button, make_hint, make_readonly_banner, make_section_title
 
 
 class LinyuanzheDesktopApp(tk.Tk):
@@ -291,10 +291,26 @@ class LinyuanzheDesktopApp(tk.Tk):
         scrollbar = tk.Scrollbar(body_wrap, command=body.yview, bg=COLORS["bg_card"], troughcolor=COLORS["bg_card"])
         scrollbar.grid(row=0, column=1, sticky="ns")
         body.configure(yscrollcommand=scrollbar.set)
+        # 分离摘要和折叠详情
+        import re
+        DETAIL_MARKER = re.compile(r"\n--- 执行详情（(.+?)） ---")
+        detail_widgets: list[tk.Widget] = []
         for msg in s.chat_messages:
             prefix = f"{msg.label}  {msg.time}"
             body.insert("end", prefix + "\n", "meta")
-            body.insert("end", msg.text + "\n\n", "body")
+            m = DETAIL_MARKER.search(msg.text)
+            if m:
+                parts = DETAIL_MARKER.split(msg.text, maxsplit=1)
+                summary = parts[0].strip()
+                meta_text = m.group(1)
+                detail_content = parts[2].strip() if len(parts) > 2 else ""
+                body.insert("end", summary + "\n\n", "body")
+                if detail_content:
+                    cf = CollapsibleFrame(body_wrap, f"▸ {meta_text}", detail_content, collapsed=True)
+                    cf.grid(row=1 + len(detail_widgets), column=0, sticky="ew", padx=4, pady=(0, 6))
+                    detail_widgets.append(cf)
+            else:
+                body.insert("end", msg.text + "\n\n", "body")
         body.tag_config("meta", foreground=COLORS["text_sub"], font=FONTS["small"])
         body.tag_config("body", foreground=COLORS["text_main"], font=FONTS["body"])
         body.configure(state="disabled")
