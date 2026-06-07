@@ -1066,7 +1066,10 @@ class RuntimeSnapshot:
         self.session_manager_state = safe_status or "resume_requested"
         self.session_last_message = safe_message
         self.session_stats = SessionManagerStats.from_sessions(self.task_sessions).to_dict()
-        self.chat_messages.append(ChatMessage("assistant", "临渊者", "任务", f"Session 恢复请求已记录：{safe_session or 'unknown'}。前端未直接恢复工具、写记忆或写审计。"))
+        # 去重：已有同类消息则不重复追加
+        resume_tag = f"恢复请求已记录：{safe_session}"
+        if not any(resume_tag in str(getattr(m, "text", "")) for m in self.chat_messages[-5:]):
+            self.chat_messages.append(ChatMessage("assistant", "临渊者", "任务", f"Session 恢复请求已记录：{safe_session or 'unknown'}。前端未直接恢复工具、写记忆或写审计。"))
 
     def record_session_search(self, query: str) -> None:
         safe_query = safe_text(query, 120)
