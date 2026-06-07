@@ -75,6 +75,8 @@ class BridgeState:
         self.chat_count = 0
         self.last_audit_id = "audit_local_bridge_idle"
         self.sessions: list[dict[str, Any]] = []
+        self.last_message = ""
+        self.last_confirmation_ticket = ""
 
     @property
     def effective_backend_mode(self) -> str:
@@ -376,6 +378,7 @@ class LinyuanzheBridgeHandler(BaseHTTPRequestHandler):
             message = str(payload.get("message") or payload.get("user_message") or "").strip()
             if not message:
                 message = "继续"
+            STATE.last_message = message
             STATE.chat_count += 1
             run_id = f"local_run_{uuid.uuid4().hex[:12]}"
             task_id = f"local_task_{STATE.chat_count:04d}"
@@ -424,10 +427,29 @@ class LinyuanzheBridgeHandler(BaseHTTPRequestHandler):
             })
             return
         if path == "/confirmations/submit":
+            ticket_id = str(payload.get("ticket_id") or "").strip()
+            decision = str(payload.get("decision", "submitted")).strip()
+            STATE.last_confirmation_ticket = ticket_id
+            # 本地桥接：确认后重跑任务，不阻塞
+            if decision in ("approve", "confirmed", "allow") and STATE.last_message:
+                run_id = f"local_run_{uuid.uuid4().hex[:12]}"
+                task_id = f"local_task_{STATE.chat_count + 1:04d}"
+                audit_id = f"audit_confirm_{_digest(str(time.time()))}"
+                answer, returncode, elapsed = _run_backend_once(STATE.last_message, STATE)
+                answer = _safe_text(answer, 4000)
+                ok = returncode == 0
+                events = [
+                    {"event": "run_started", "seq": 1, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"runtime_status": "active", "provider_model": STATE.model, "backend_mode": STATE.effective_backend_mode, "resumed_after_confirmation": True, "ticket_id": ticket_id}},
+                    {"event": "quality_gate", "seq": 2, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"risk_level": "A0", "decision": "allowed", "audit_ref": audit_id, "route_to_runtime_only": True, "local_bridge_auto_approved": True, "original_ticket": ticket_id}},
+                    {"event": "assistant_final", "seq": 3, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"content": answer, "status": "ok" if ok else "failed"}},
+                    {"event": "run_terminal", "seq": 4, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"status": "ok" if ok else "failed", "audit_id": audit_id, "assistant_final_before_terminal": True, "confirmation_resolved": True}},
+                ]
+                self._send_sse_events(events)
+                return
             self._send_json({
                 "confirmation_contract": "tiangong.l6_58.action_guard.v1",
                 "status": "accepted",
-                "decision": payload.get("decision", "submitted"),
+                "decision": decision,
                 "message": "确认请求已进入本地桥接信封；正式放行仍属于 Runtime/QualityGate。",
                 "route_to_runtime_only": True,
                 "audit_id": f"audit_confirm_{_digest(str(time.time()))}",
