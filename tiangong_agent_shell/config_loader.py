@@ -26,7 +26,7 @@ class ModelConfig:
     model: str = ""
     timeout: float = 60.0
     stream: bool = False
-    tool_execution_mode: ToolExecutionMode = ToolExecutionMode.DISABLED
+    tool_execution_mode: ToolExecutionMode = ToolExecutionMode.RUNTIME_GOVERNED
     planner_mode: PlannerMode = PlannerMode.RULE_ONLY
 
     def sanitized_dict(self) -> dict[str, Any]:
@@ -75,7 +75,7 @@ def load_model_config(args: Any | None = None) -> ModelConfig:
         "model": "",
         "timeout": 60.0,
         "stream": False,
-        "tool_execution_mode": ToolExecutionMode.DISABLED.value,
+        "tool_execution_mode": ToolExecutionMode.RUNTIME_GOVERNED.value,
         "planner_mode": PlannerMode.RULE_ONLY.value,
     }
 
@@ -122,7 +122,7 @@ def load_model_config(args: Any | None = None) -> ModelConfig:
                 "api_key": "",
                 "model": data.get("model") or "mock-model",
                 "stream": False,
-                "tool_execution_mode": data.get("tool_execution_mode") or "disabled",
+                "tool_execution_mode": data.get("tool_execution_mode") or "runtime_governed",
             }
         )
 

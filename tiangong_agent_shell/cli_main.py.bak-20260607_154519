@@ -28,8 +28,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--tool-mode",
         dest="tool_mode",
         choices=["disabled", "dry_run", "runtime_governed"],
-        default="runtime_governed",
-        help="工具桥模式；默认 runtime_governed（L6.32 Planner 执行主链）。",
+        help="工具桥模式；默认 disabled。runtime_governed 将启用 L6.32 Planner 执行主链。",
     )
     parser.add_argument("--workspace", help="L6.10 受治理工具工作区；默认当前目录。")
     parser.add_argument(
