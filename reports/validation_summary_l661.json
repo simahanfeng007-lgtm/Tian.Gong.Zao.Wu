@@ -1,0 +1,74 @@
+{
+  "contract_version": "tiangong.l6_61.release_verify.v1",
+  "checked_at": "2026-06-07T03:54:12",
+  "runtime_url_present": false,
+  "results": [
+    {
+      "name": "l661_backend_compileall",
+      "cmd": [
+        "python",
+        "-m",
+        "compileall",
+        "-q",
+        "/mnt/data/临渊者_FE01_STEP22_L661_真实Runtime联调解阻执行包_20260607/backend/project"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/临渊者_FE01_STEP22_L661_真实Runtime联调解阻执行包_20260607/reports/l661_backend_compileall.log"
+    },
+    {
+      "name": "l661_frontend_scripts_compileall",
+      "cmd": [
+        "python",
+        "-m",
+        "compileall",
+        "-q",
+        "/mnt/data/临渊者_FE01_STEP22_L661_真实Runtime联调解阻执行包_20260607/frontend",
+        "/mnt/data/临渊者_FE01_STEP22_L661_真实Runtime联调解阻执行包_20260607/scripts",
+        "/mnt/data/临渊者_FE01_STEP22_L661_真实Runtime联调解阻执行包_20260607/launchers"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/临渊者_FE01_STEP22_L661_真实Runtime联调解阻执行包_20260607/reports/l661_frontend_scripts_compileall.log"
+    },
+    {
+      "name": "l661_rc_preflight_contract_server",
+      "cmd": [
+        "python",
+        "/mnt/data/临渊者_FE01_STEP22_L661_真实Runtime联调解阻执行包_20260607/scripts/rc_preflight_l659.py",
+        "--contract-server",
+        "--out",
+        "/mnt/data/临渊者_FE01_STEP22_L661_真实Runtime联调解阻执行包_20260607/reports/rc_preflight_l661_contract_server.json"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/临渊者_FE01_STEP22_L661_真实Runtime联调解阻执行包_20260607/reports/l661_rc_preflight_contract_server.log"
+    },
+    {
+      "name": "l661_real_runtime_unlock_absent_expected",
+      "cmd": [
+        "python",
+        "/mnt/data/临渊者_FE01_STEP22_L661_真实Runtime联调解阻执行包_20260607/scripts/real_runtime_unlock_l661.py",
+        "--require-real",
+        "--out",
+        "/mnt/data/临渊者_FE01_STEP22_L661_真实Runtime联调解阻执行包_20260607/reports/real_runtime_unlock_l661_absent_expected.json"
+      ],
+      "returncode": 2,
+      "ok": true,
+      "log": "/mnt/data/临渊者_FE01_STEP22_L661_真实Runtime联调解阻执行包_20260607/reports/l661_real_runtime_unlock_absent_expected.log"
+    },
+    {
+      "name": "l661_scan",
+      "cmd": [
+        "python",
+        "/mnt/data/临渊者_FE01_STEP22_L661_真实Runtime联调解阻执行包_20260607/scripts/scan_l659.py"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/临渊者_FE01_STEP22_L661_真实Runtime联调解阻执行包_20260607/reports/l661_scan.log"
+    }
+  ],
+  "ok": true,
+  "ready_for_combine": false,
+  "note": "runtime_url_present=false 时，真实联调缺席返回 2 被视为正确阻断，不代表 RC 已解阻。"
+}

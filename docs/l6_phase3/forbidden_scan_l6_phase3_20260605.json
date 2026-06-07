@@ -1,9 +1,0 @@
-{
-  "scope": "tiangong_kernel/l6_plugins/mind/*.py excluding inert rule declaration file",
-  "scanned_file_count": 22,
-  "actual_findings": [],
-  "actual_findings_count": 0,
-  "passed": true,
-  "rule_declaration_file": "tiangong_kernel/l6_plugins/mind/mind_forbidden_scan.py",
-  "rule_declaration_status": "inert pattern declarations and targeted test samples only"
-}

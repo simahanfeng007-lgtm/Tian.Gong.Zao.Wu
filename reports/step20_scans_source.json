@@ -1,0 +1,3837 @@
+{
+  "secret_scan": {
+    "ok": false,
+    "hit_count": 1458,
+    "hits": [
+      {
+        "root": "project",
+        "file": "docs/L6_48_σ░üΦúàσÉ»σè¿σëìσÅ¬Φ»╗Θ⌐╛Θ⌐╢Φê▒σÑæτ║ªµá╕Θ¬î_Σ║ñΣ╗ÿµèÑσæè_20260606.txt",
+        "line": 66,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "docs/L6_48_σ░üΦúàσÉ»σè¿σëìσÅ¬Φ»╗Θ⌐╛Θ⌐╢Φê▒σÑæτ║ªµá╕Θ¬î_Σ║ñΣ╗ÿµèÑσæè_20260606.txt",
+        "line": 67,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "docs/forbidden_scan_p2p3_final_20260605.json",
+        "line": 66,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "docs/forbidden_scan_p2p3_final_20260605.json",
+        "line": 71,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "docs/forbidden_scan_p2p3_final_20260605.json",
+        "line": 86,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "docs/forbidden_scan_p2p3_final_20260605.json",
+        "line": 106,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "docs/forbidden_scan_Σ║öµ¿íσ₧ïΣ╕ôΘí╣_20260605.md",
+        "line": 8,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "docs/σñ⌐σ╖ÑΘÇáτë⌐_L6_9σñûσú│σ╝Åµ£Çσ░ÅσÉ»σè¿σÖ¿Σ┐«σñìµèÑσæè_20260605.txt",
+        "line": 58,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "docs/σñ⌐σ╖ÑΘÇáτë⌐_L6_9σñûσú│σ╝Åµ£Çσ░ÅσÉ»σè¿σÖ¿Θ¬îΦ»üτ╗ôµ₧£_20260605.txt",
+        "line": 19,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "docs/L6_49_5_µ₧üτë╣µ«èµâàσå╡µ₧üΘÖÉµ╡ïΦ»òµèÑσæè_20260606.txt",
+        "line": 44,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "docs/frontend_backend_contract.md",
+        "line": 272,
+        "pattern": "deepseek_api_key_literal",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "docs/provider_settings_contract.md",
+        "line": 38,
+        "pattern": "deepseek_api_key_literal",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "docs/PROVIDER_SMOKE_RUNBOOK.md",
+        "line": 9,
+        "pattern": "deepseek_api_key_literal",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l5_phase5_credential_live_access_is_p0.py",
+        "line": 6,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l5_phase5_forbidden_scan_blocks_real_secret_like_values.py",
+        "line": 5,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l5_phase8_final_public_projection_minimal_disclosure.py",
+        "line": 23,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_13_model_chat_runtime_audit.py",
+        "line": 20,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_13_model_chat_runtime_audit.py",
+        "line": 41,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_13_model_chat_runtime_audit.py",
+        "line": 62,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_13_model_chat_runtime_audit.py",
+        "line": 63,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_13_model_chat_runtime_audit.py",
+        "line": 68,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_13_model_chat_runtime_audit.py",
+        "line": 83,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_13_model_chat_runtime_audit.py",
+        "line": 20,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_13_model_chat_runtime_audit.py",
+        "line": 68,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_15_context_memory_bridge.py",
+        "line": 36,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_15_context_memory_bridge.py",
+        "line": 45,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_20_experience_synthesis.py",
+        "line": 127,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_25_project_repair_plan.py",
+        "line": 147,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_26_delivery_standardization.py",
+        "line": 163,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_27_provider_adaptation_shell.py",
+        "line": 158,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_28_learning_convergence.py",
+        "line": 257,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_29_recovery_coordination.py",
+        "line": 232,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_30_governance_execution.py",
+        "line": 217,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_31_planner_context_integration.py",
+        "line": 303,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_38_p0_system_integration.py",
+        "line": 40,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_39_p0_system_integration_two.py",
+        "line": 40,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_40_memory_math_store.py",
+        "line": 68,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_43_1_planner_unified_consumption.py",
+        "line": 81,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_43_1_planner_unified_consumption.py",
+        "line": 103,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_43_four_path_context_router.py",
+        "line": 78,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_43_four_path_context_router.py",
+        "line": 82,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_48_desktop_public_projection_contract.py",
+        "line": 15,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_48_desktop_public_projection_contract.py",
+        "line": 34,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_48_desktop_public_projection_contract.py",
+        "line": 16,
+        "pattern": "raw_endpoint_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_9_api_key_redaction.py",
+        "line": 8,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_9_api_key_redaction.py",
+        "line": 17,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_9_api_key_redaction.py",
+        "line": 24,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_9_api_key_redaction.py",
+        "line": 25,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_phase1_manifest_boundary.py",
+        "line": 10,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_phase2_audit_context_public.py",
+        "line": 55,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_phase3_no_raw_secret_or_provider_endpoint.py",
+        "line": 10,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_phase4_forbidden_scan_blocks_model_http_tool_state.py",
+        "line": 9,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_phase5_no_raw_secret_or_provider_locator.py",
+        "line": 8,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_phase6_no_raw_secret_or_provider_locator.py",
+        "line": 4,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_plugin_no_raw_model_http.py",
+        "line": 5,
+        "pattern": "raw_endpoint_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_llm_task_publish_four_systems.py",
+        "line": 124,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_llm_task_publish_four_systems.py",
+        "line": 195,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_llm_task_publish_four_systems.py",
+        "line": 124,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 141,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 208,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 260,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 292,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 318,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 329,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 333,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 343,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 390,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 391,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 394,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 333,
+        "pattern": "bearer_token_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 391,
+        "pattern": "bearer_token_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 141,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 208,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 329,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 332,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 390,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 218,
+        "pattern": "raw_endpoint_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_49_5_extreme_runtime_edge_cases.py",
+        "line": 391,
+        "pattern": "raw_endpoint_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_51_frontend_contract_runtime_events.py",
+        "line": 52,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_51_frontend_contract_runtime_events.py",
+        "line": 62,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_51_frontend_contract_runtime_events.py",
+        "line": 71,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_51_frontend_contract_runtime_events.py",
+        "line": 76,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_51_frontend_contract_runtime_events.py",
+        "line": 80,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_51_frontend_contract_runtime_events.py",
+        "line": 106,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_51_frontend_contract_runtime_events.py",
+        "line": 118,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_51_frontend_contract_runtime_events.py",
+        "line": 52,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_51_frontend_contract_runtime_events.py",
+        "line": 76,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_51_frontend_contract_runtime_events.py",
+        "line": 106,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_51_frontend_contract_runtime_events.py",
+        "line": 120,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_51_frontend_contract_runtime_events.py",
+        "line": 71,
+        "pattern": "deepseek_api_key_literal",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_51_frontend_contract_runtime_events.py",
+        "line": 51,
+        "pattern": "raw_endpoint_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_51_frontend_contract_runtime_events.py",
+        "line": 106,
+        "pattern": "raw_endpoint_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_agent_runtime/budget_low_friction_governance.py",
+        "line": 554,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_agent_runtime/model_planner.py",
+        "line": 68,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_agent_runtime/planner_unified_consumption.py",
+        "line": 450,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_agent_runtime/frontend_contract.py",
+        "line": 162,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_agent_runtime/frontend_contract.py",
+        "line": 148,
+        "pattern": "deepseek_api_key_literal",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_agent_shell/config_loader.py",
+        "line": 146,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_agent_shell/config_loader.py",
+        "line": 158,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_agent_shell/config_loader.py",
+        "line": 62,
+        "pattern": "deepseek_api_key_literal",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_agent_shell/safe_logging.py",
+        "line": 46,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_kernel/l0_primitives/secret.py",
+        "line": 24,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_kernel/l5_plugin_host/lifecycle_declaration.py",
+        "line": 192,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_kernel/l5_plugin_host/phase6_health.py",
+        "line": 264,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_kernel/l5_plugin_host/phase7_boundary_gate.py",
+        "line": 355,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_kernel/l5_plugin_host/registry_conflict_rules.py",
+        "line": 98,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_kernel/l6_plugins/cognitive_continuity/forbidden_scan.py",
+        "line": 22,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_kernel/l6_plugins/common/_common.py",
+        "line": 130,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_kernel/l6_plugins/common/_common.py",
+        "line": 131,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_kernel/l6_plugins/common/forbidden_scan.py",
+        "line": 118,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_kernel/l6_plugins/governance_control/forbidden_scan.py",
+        "line": 23,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_kernel/l6_plugins/mind/mind_forbidden_scan.py",
+        "line": 28,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_kernel/l6_plugins/product_delivery/forbidden_scan.py",
+        "line": 23,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "tiangong_agent_runtime/adapters/model_chat_adapter.py",
+        "line": 40,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "reports/l6_51_backend_contract_freeze/l6_51_frontend_backend_contract.json",
+        "line": 216,
+        "pattern": "deepseek_api_key_literal",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "reports/l6_51_1_product_identity_freeze/l6_51_1_frontend_backend_contract.json",
+        "line": 227,
+        "pattern": "deepseek_api_key_literal",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "reports/l6_51_1_product_identity_freeze/l6_51_1_secret_leak_scan.json",
+        "line": 15,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "reports/l6_51_1_product_identity_freeze/l6_51_1_secret_leak_scan.json",
+        "line": 21,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "reports/l6_51_1_product_identity_freeze/l6_51_1_secret_leak_scan.json",
+        "line": 27,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "reports/l6_51_1_product_identity_freeze/l6_51_1_secret_leak_scan.json",
+        "line": 33,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "reports/l6_51_1_product_identity_freeze/l6_51_1_secret_leak_scan.json",
+        "line": 39,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "reports/l6_51_1_product_identity_freeze/l6_51_1_secret_leak_scan.json",
+        "line": 45,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "reports/l6_51_1_product_identity_freeze/l6_51_1_secret_leak_scan.json",
+        "line": 51,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "reports/l6_51_1_product_identity_freeze/l6_51_1_secret_leak_scan.json",
+        "line": 63,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "reports/l6_51_1_product_identity_freeze/l6_51_1_secret_leak_scan.json",
+        "line": 9,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "reports/l6_51_1_product_identity_freeze/l6_51_1_secret_leak_scan.json",
+        "line": 57,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "reports/l6_51_1_product_identity_freeze/l6_51_1_secret_leak_scan.json",
+        "line": 63,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "project",
+        "file": "reports/l6_51_1_product_identity_freeze/l6_51_1_secret_leak_scan.json",
+        "line": 69,
+        "pattern": "raw_endpoint_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "contracts/model_settings.py",
+        "line": 76,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "contracts/provider_settings.py",
+        "line": 42,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "contracts/provider_settings.py",
+        "line": 54,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "clients/runtime_integration_probe.py",
+        "line": 24,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "tests/smoke_test_frontend.py",
+        "line": 183,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "tests/test_l6_52_sse_runtime_client.py",
+        "line": 66,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "tests/test_l6_52_sse_runtime_client.py",
+        "line": 127,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "tests/test_l6_53_streaming_controls.py",
+        "line": 42,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "tests/test_l6_53_streaming_controls.py",
+        "line": 60,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "tests/test_l6_53_streaming_controls.py",
+        "line": 114,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "tests/test_l6_53_streaming_controls.py",
+        "line": 60,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "tests/test_l6_54_smooth_agent_ui.py",
+        "line": 67,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "tests/test_l6_55_action_guard_cards.py",
+        "line": 62,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "tests/test_l6_55_action_guard_cards.py",
+        "line": 101,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step13.json",
+        "line": 8,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step13.json",
+        "line": 20,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step13.json",
+        "line": 38,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step13.json",
+        "line": 44,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 20,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 26,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 32,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 38,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 44,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 50,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 56,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 62,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 68,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 74,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 80,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 86,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 92,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 98,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 104,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 110,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 116,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 122,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 128,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 140,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 152,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 14,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 50,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 134,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 140,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 146,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 152,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step14.json",
+        "line": 158,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 23,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 30,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 44,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 51,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 58,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 65,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 72,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 79,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 86,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 121,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 128,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 135,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 142,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 149,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 156,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 163,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 170,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 177,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 184,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 191,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 198,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 205,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 212,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 219,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 226,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 233,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 240,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 247,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 254,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 261,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 275,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 289,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 303,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 317,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 324,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 331,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 338,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 345,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 352,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 359,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 366,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 373,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 380,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 387,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 394,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 401,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 408,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 415,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 422,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 429,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 436,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 443,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 450,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 457,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 464,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 471,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 478,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 485,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 492,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 499,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 506,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 513,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 520,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 527,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 534,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 541,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 548,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 555,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 562,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 569,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 576,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 583,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 590,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 597,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 604,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 611,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 618,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 625,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 632,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 639,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 646,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 653,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 660,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 667,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 674,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 681,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 688,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 695,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 702,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 709,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 716,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 723,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 730,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 737,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 744,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 751,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 758,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 765,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 772,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 779,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 786,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 793,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 800,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 807,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 814,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 835,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 877,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 891,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 905,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 933,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 975,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 989,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 1003,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 9,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 37,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 79,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 93,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 100,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 107,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 114,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 268,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 275,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 282,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 289,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 296,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 303,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 310,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 821,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 828,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 835,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 842,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 849,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 856,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 863,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 870,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 877,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 884,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 891,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 898,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 905,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 912,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 919,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 926,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 933,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 940,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 947,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 954,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 961,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 968,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 975,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 982,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 989,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 996,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 1003,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step15.json",
+        "line": 1010,
+        "pattern": "api_key_assignment",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 28,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 36,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 44,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 52,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 60,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 68,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 76,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 84,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 92,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 140,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 148,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 156,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 164,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 172,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 180,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 188,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 196,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 204,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 212,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 220,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 228,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 236,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 244,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 252,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 260,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 268,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 276,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 284,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 292,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 308,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 316,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 332,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 340,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 372,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 380,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 388,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 396,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 404,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 412,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 420,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 428,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 468,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 476,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 484,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 492,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 500,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 508,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 516,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 524,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 532,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 540,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 548,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 556,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 564,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 572,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 580,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 588,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 596,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 604,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 612,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 620,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 628,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 644,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 652,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 668,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 676,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 692,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 700,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 716,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 724,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 732,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 740,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 748,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 756,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 764,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 772,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 780,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 788,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 796,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 804,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 812,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 820,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 828,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 836,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 844,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 852,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 860,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 868,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 876,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 884,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 892,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 900,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 908,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 916,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 924,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 932,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 940,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 948,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 956,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 964,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 972,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 980,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 988,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 996,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1004,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1012,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1020,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1028,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1036,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1044,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1052,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1060,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1068,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1076,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1084,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1092,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1100,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1108,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1116,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1124,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1132,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1140,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1148,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1156,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1164,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1172,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1180,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1188,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1196,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1204,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1212,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1220,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1228,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1236,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1260,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1268,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1316,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1324,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1340,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1348,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1364,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1372,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1404,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1412,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1460,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1468,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1484,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1492,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1508,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1516,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1548,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1556,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1564,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1604,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1612,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1620,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1628,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1676,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1684,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1692,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1700,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1708,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1716,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1724,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1732,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1740,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1748,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1756,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1764,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1772,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      },
+      {
+        "root": "linyuanzhe_frontend",
+        "file": "docs/secret_scan_step16.json",
+        "line": 1780,
+        "pattern": "real_sk_key_like",
+        "match_redacted": "<redacted>"
+      }
+    ]
+  },
+  "provider_sdk_import_scan": {
+    "ok": true,
+    "hit_count": 0,
+    "hits": []
+  },
+  "bare_except_pass_scan": {
+    "ok": false,
+    "hit_count": 53,
+    "hits": [
+      {
+        "root": "project",
+        "file": "tests/test_l0_action.py",
+        "line": 13,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_actor.py",
+        "line": 13,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_content.py",
+        "line": 40,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_context.py",
+        "line": 48,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_dataclass_frozen.py",
+        "line": 37,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_decision.py",
+        "line": 15,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_deletion.py",
+        "line": 25,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_effect.py",
+        "line": 33,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_event.py",
+        "line": 33,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_failure.py",
+        "line": 25,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_forgetting.py",
+        "line": 50,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_goal.py",
+        "line": 22,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_grant_lease.py",
+        "line": 15,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_health.py",
+        "line": 55,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_learning.py",
+        "line": 55,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_lifecycle.py",
+        "line": 25,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_memory.py",
+        "line": 42,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_message.py",
+        "line": 34,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_metric.py",
+        "line": 29,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_observation.py",
+        "line": 28,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_phase4_serialization.py",
+        "line": 25,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_phase4_stable_hash.py",
+        "line": 25,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_plan.py",
+        "line": 14,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_risk.py",
+        "line": 14,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_scope.py",
+        "line": 16,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_self_identity.py",
+        "line": 43,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_signal.py",
+        "line": 19,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_state.py",
+        "line": 25,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l0_transaction.py",
+        "line": 25,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_20_experience_synthesis.py",
+        "line": 59,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_20_experience_synthesis.py",
+        "line": 71,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_21_skill_review_queue.py",
+        "line": 57,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_21_skill_review_queue.py",
+        "line": 67,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_22_tool_production_request.py",
+        "line": 64,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_22_tool_production_request.py",
+        "line": 73,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_22_tool_production_request.py",
+        "line": 84,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_23_execution_exoskeleton.py",
+        "line": 79,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_23_execution_exoskeleton.py",
+        "line": 90,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_28_learning_convergence.py",
+        "line": 138,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_28_learning_convergence.py",
+        "line": 151,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_28_learning_convergence.py",
+        "line": 163,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_29_recovery_coordination.py",
+        "line": 121,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_29_recovery_coordination.py",
+        "line": 135,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_29_recovery_coordination.py",
+        "line": 145,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_30_governance_execution.py",
+        "line": 101,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_30_governance_execution.py",
+        "line": 114,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_30_governance_execution.py",
+        "line": 130,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_31_planner_context_integration.py",
+        "line": 172,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_31_planner_context_integration.py",
+        "line": 185,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_31_planner_context_integration.py",
+        "line": 201,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_31_planner_context_integration.py",
+        "line": 210,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_32_planner_execution_controller.py",
+        "line": 144,
+        "kind": "except_pass"
+      },
+      {
+        "root": "project",
+        "file": "tests/test_l6_32_planner_execution_controller.py",
+        "line": 154,
+        "kind": "except_pass"
+      }
+    ]
+  }
+}

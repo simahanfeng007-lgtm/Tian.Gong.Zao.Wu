@@ -1,0 +1,102 @@
+{
+  "contract_version": "tiangong.l6_69.startup_self_check.v1",
+  "checked_at": "2026-06-07T10:11:02",
+  "ok": true,
+  "checks": [
+    {
+      "check_id": "backend_layout",
+      "name": "后端目录与 run_agent 入口",
+      "status": "pass",
+      "severity": "info",
+      "message": "后端入口存在",
+      "last_run": "2026-06-07T10:11:02",
+      "blocks_startup": false,
+      "remediation_hint": "确认 backend/project/run_agent.py 随包存在。"
+    },
+    {
+      "check_id": "frontend_layout",
+      "name": "前端桌面端与 RuntimeClient",
+      "status": "pass",
+      "severity": "info",
+      "message": "前端入口存在",
+      "last_run": "2026-06-07T10:11:02",
+      "blocks_startup": false,
+      "remediation_hint": "确认 frontend/linyuanzhe_frontend/app.py 随包存在。"
+    },
+    {
+      "check_id": "launcher_layout",
+      "name": "统一启动器",
+      "status": "pass",
+      "severity": "info",
+      "message": "统一启动器存在",
+      "last_run": "2026-06-07T10:11:02",
+      "blocks_startup": false,
+      "remediation_hint": "确认 launchers/start_linyuanzhe_rc.py 随包存在。"
+    },
+    {
+      "check_id": "installer_l668_manifest",
+      "name": "L6.68 安装 manifest",
+      "status": "pass",
+      "severity": "info",
+      "message": "L6.68 manifest 存在",
+      "last_run": "2026-06-07T10:11:02",
+      "blocks_startup": false,
+      "remediation_hint": "确认 installer/installer_manifest_l668.json 随包存在。"
+    },
+    {
+      "check_id": "installer_l669_manifest",
+      "name": "L6.69 打包器 manifest",
+      "status": "pass",
+      "severity": "info",
+      "message": "L6.69 manifest 存在",
+      "last_run": "2026-06-07T10:11:02",
+      "blocks_startup": false,
+      "remediation_hint": "确认 installer/installer_manifest_l669.json 随包存在。"
+    },
+    {
+      "check_id": "build_plan",
+      "name": "Windows 打包计划",
+      "status": "pass",
+      "severity": "info",
+      "message": "打包计划存在",
+      "last_run": "2026-06-07T10:11:02",
+      "blocks_startup": false,
+      "remediation_hint": "确认 installer/build/build_plan_l669.json 随包存在。"
+    },
+    {
+      "check_id": "release_manifest",
+      "name": "发布 manifest",
+      "status": "pass",
+      "severity": "info",
+      "message": "发布 manifest 存在",
+      "last_run": "2026-06-07T10:11:02",
+      "blocks_startup": false,
+      "remediation_hint": "确认 installer/release/release_manifest_l669.json 随包存在。"
+    },
+    {
+      "check_id": "signing_policy",
+      "name": "签名策略占位",
+      "status": "pass",
+      "severity": "info",
+      "message": "签名策略占位存在",
+      "last_run": "2026-06-07T10:11:02",
+      "blocks_startup": false,
+      "remediation_hint": "确认 installer/signing/signing_policy_l669.json 随包存在。"
+    },
+    {
+      "check_id": "reports_writable",
+      "name": "报告目录可写",
+      "status": "pass",
+      "severity": "info",
+      "message": "报告目录存在",
+      "last_run": "2026-06-07T10:11:02",
+      "blocks_startup": false,
+      "remediation_hint": "确认 reports/ 目录可写。"
+    }
+  ],
+  "final_installer_build_allowed": false,
+  "windows_installer_artifact_emitted": false,
+  "frontend_applied_update": false,
+  "frontend_applied_rollback": false,
+  "runtime_core_mutation": false
+}

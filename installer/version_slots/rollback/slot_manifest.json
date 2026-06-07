@@ -1,0 +1,8 @@
+{
+  "slot_name": "rollback",
+  "version_label": "FE01 STEP28 / L6.67",
+  "state": "rollback",
+  "path_digest": "SLOT-ROLLBACK-L667",
+  "rollback_capable": true,
+  "message": "L6.67 回滚槽占位，真实恢复必须由安装器控制器执行。"
+}

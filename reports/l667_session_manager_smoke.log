@@ -1,0 +1,15 @@
+{
+  "ok": true,
+  "checks": {
+    "sessions_page_registered": true,
+    "home_has_session_entry": true,
+    "session_contract_present": true,
+    "session_count_nonzero": true,
+    "search_recorded": true,
+    "resume_recorded": true,
+    "stats_total_present": true,
+    "no_frontend_execution_claim": true
+  },
+  "session_count": 4,
+  "target_session": "071a46bfdb2d03b1"
+}

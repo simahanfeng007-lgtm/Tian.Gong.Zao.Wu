@@ -1,0 +1,110 @@
+{
+  "contract_version": "tiangong.l6_63.release_verify.v1",
+  "checked_at": "2026-06-07T04:46:33",
+  "runtime_url_present": false,
+  "results": [
+    {
+      "name": "l663_backend_compileall",
+      "cmd": [
+        "python",
+        "-m",
+        "compileall",
+        "-q",
+        "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/backend/project"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/reports/l663_backend_compileall.log"
+    },
+    {
+      "name": "l663_frontend_scripts_compileall",
+      "cmd": [
+        "python",
+        "-m",
+        "compileall",
+        "-q",
+        "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/frontend",
+        "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/scripts",
+        "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/launchers"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/reports/l663_frontend_scripts_compileall.log"
+    },
+    {
+      "name": "l663_observability_preflight",
+      "cmd": [
+        "python",
+        "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/scripts/observability_preflight_l662.py"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/reports/l663_observability_preflight.log"
+    },
+    {
+      "name": "l663_hookbus_preflight",
+      "cmd": [
+        "python",
+        "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/scripts/hookbus_preflight_l663.py"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/reports/l663_hookbus_preflight.log"
+    },
+    {
+      "name": "l663_rc_preflight_contract_server",
+      "cmd": [
+        "python",
+        "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/scripts/rc_preflight_l659.py",
+        "--contract-server",
+        "--out",
+        "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/reports/rc_preflight_l663_contract_server.json"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/reports/l663_rc_preflight_contract_server.log"
+    },
+    {
+      "name": "l663_real_runtime_unlock_absent_expected",
+      "cmd": [
+        "python",
+        "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/scripts/real_runtime_unlock_l661.py",
+        "--require-real",
+        "--out",
+        "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/reports/real_runtime_unlock_l663_absent_expected.json"
+      ],
+      "returncode": 2,
+      "ok": true,
+      "log": "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/reports/l663_real_runtime_unlock_absent_expected.log"
+    },
+    {
+      "name": "l663_scan",
+      "cmd": [
+        "python",
+        "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/scripts/scan_l659.py"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/reports/l663_scan.log"
+    }
+  ],
+  "ok": true,
+  "ready_for_combine": false,
+  "note": "L6.63 完成 HookBus 确定性规则层；真实 Runtime 解阻状态仍由 L6.61 报告决定。",
+  "target_test_results": [
+    {
+      "name": "l663_backend_target_tests",
+      "returncode": 0,
+      "ok": true,
+      "summary_line": "10 passed in 1.20s",
+      "log": "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/reports/l663_backend_target_tests.log"
+    },
+    {
+      "name": "l663_frontend_target_tests_overlay",
+      "returncode": 0,
+      "ok": true,
+      "summary_line": "37 passed, 2 skipped in 17.59s",
+      "log": "/mnt/data/临渊者_FE01_STEP24_L663_HookBus确定性规则层_RC前置总包_20260607/reports/l663_frontend_target_tests.log"
+    }
+  ]
+}

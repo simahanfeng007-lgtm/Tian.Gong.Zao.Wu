@@ -1,0 +1,9 @@
+{
+  "ok": false,
+  "ready_for_combine": false,
+  "blockers": [
+    "real Runtime instance smoke not executed",
+    "LINYUANZHE_RUNTIME_URL not provided"
+  ],
+  "report": "/mnt/data/临渊者_FE01_STEP22_L661_真实Runtime联调解阻执行包_20260607/reports/real_runtime_unlock_l661_absent_expected.json"
+}

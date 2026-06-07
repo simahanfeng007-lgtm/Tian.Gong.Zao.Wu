@@ -1,0 +1,87 @@
+{
+  "contract_version": "tiangong.l6_68.installer_rc_preflight.v1",
+  "checked_at": "2026-06-07T09:57:24",
+  "ok": true,
+  "manifest_ok": true,
+  "manifest_summary": {
+    "contract_version": "tiangong.l6_68.installer_rc.v1",
+    "version_label": "FE01 STEP29 / L6.68",
+    "slot_count": 3,
+    "startup_check_count": 4,
+    "installer_build_allowed": false,
+    "updater_skeleton_only": true
+  },
+  "runs": [
+    {
+      "name": "installer_rc_smoke",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l670_work/reports/l668_installer_rc_smoke.log",
+      "payload": {
+        "ok": true,
+        "checks": {
+          "installer_page_registered": true,
+          "home_has_installer_entry": true,
+          "forbidden_auto_update_present": true,
+          "installer_contract_present": true,
+          "identity_preserved": true,
+          "version_slots_present": true,
+          "startup_checks_present": true,
+          "crash_report_local_only": true,
+          "repair_actions_no_frontend_apply": true,
+          "policy_blocks_frontend_apply": true,
+          "snapshot_serializes": true
+        },
+        "startup_summary": {
+          "total": 4,
+          "pass": 0,
+          "warn": 0,
+          "fail": 0,
+          "blocked": 0,
+          "pending": 4
+        },
+        "slot_count": 3
+      }
+    },
+    {
+      "name": "startup_self_check",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l670_work/reports/l668_startup_self_check.log",
+      "payload": {
+        "ok": true,
+        "report": "/mnt/data/l670_work/reports/installer_startup_self_check_l668.json"
+      }
+    },
+    {
+      "name": "offline_repair_dry_run",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l670_work/reports/l668_offline_repair_dry_run.log",
+      "payload": {
+        "ok": true,
+        "report": "/mnt/data/l670_work/reports/offline_repair_l668.json"
+      }
+    },
+    {
+      "name": "rollback_plan",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l670_work/reports/l668_rollback_plan.log",
+      "payload": {
+        "ok": true,
+        "blocked": false,
+        "report": "/mnt/data/l670_work/reports/rollback_plan_l668.json"
+      }
+    }
+  ],
+  "boundaries": {
+    "not_final_installer": true,
+    "frontend_does_not_build_installer": true,
+    "frontend_does_not_apply_update": true,
+    "frontend_does_not_restore_rollback_slot": true,
+    "frontend_does_not_upload_crash_report": true,
+    "offline_repair_defaults_to_dry_run": true,
+    "runtime_core_not_mutated": true
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "ok": false,
+  "ready_for_combine": false,
+  "real_runtime_executed": true,
+  "blockers": [
+    "required Runtime endpoints did not all pass",
+    "chat stream did not complete assistant_final -> run_terminal",
+    "product identity metadata mismatch"
+  ],
+  "report": "reports/real_runtime_gate_l670_argcompat_dummy.json"
+}

@@ -1,3 +1,0 @@
-issue_id,level,source,problem,repair_action,status,verification
-P2-001,P2,L3 第一阶段专项质检报告,L3 总策划正式交付物四件套未纳入第一阶段交付包,新增 docs/l3_total_planning/ 并纳入四个正式策划文件,CLOSED,文件存在且已打入修复版工程包
-P3-001,P3,L3 第一阶段专项质检报告,RuntimeSliceProjectionState/runtime_slice_projection 容易被误判为旧 Runtime 主链,在 handoff 中追加白名单说明并新增 runtime projection whitelist 测试,CLOSED,新增测试通过且完整 tests 通过

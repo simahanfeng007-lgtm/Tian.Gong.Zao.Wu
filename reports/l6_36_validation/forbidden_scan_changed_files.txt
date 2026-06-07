@@ -1,2 +1,0 @@
-blocking_findings=0
-scanned_files=5

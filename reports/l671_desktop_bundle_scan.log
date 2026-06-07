@@ -1,0 +1,18 @@
+{
+  "secret_scan": {
+    "ok": true,
+    "hit_count": 0
+  },
+  "source_marker_reference_scan": {
+    "ok": true,
+    "hit_count": 20
+  },
+  "provider_sdk_import_scan": {
+    "ok": true,
+    "hit_count": 0
+  },
+  "bare_except_pass_scan": {
+    "ok": true,
+    "hit_count": 0
+  }
+}

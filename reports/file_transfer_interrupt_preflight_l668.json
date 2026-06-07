@@ -1,0 +1,56 @@
+{
+  "contract_version": "tiangong.l6_64.file_transfer_guide_interrupt_preflight.v1",
+  "checked_at": "2026-06-07T08:43:43",
+  "ok": true,
+  "returncode": 0,
+  "smoke_log": "/mnt/data/work_l668/reports/l664_file_transfer_interrupt_smoke.log",
+  "payload": {
+    "ok": true,
+    "contract": "tiangong.l6_64.file_transfer_request.v1",
+    "runtime_url": "http://127.0.0.1:36983",
+    "file_record": {
+      "transfer_id": "ft_l664_contract",
+      "direction": "upload",
+      "file_name": "用户附件_烟测.txt",
+      "size_bytes": 62,
+      "sha256_digest": "a63aaf4399f7d0f8",
+      "mime_type": "text/plain",
+      "purpose": "user_attachment",
+      "status": "accepted",
+      "message": "Runtime contract server accepted sanitized file transfer request.",
+      "audit_id": "audit_l664_file_transfer",
+      "frontend_only_fallback": false,
+      "route_to_runtime_only": true,
+      "no_frontend_path_exposure": true
+    },
+    "control_state": "interrupt_accepted",
+    "guide": {
+      "intent_summary": "当前 Runtime 状态：READY",
+      "missing_information": [],
+      "suggested_questions": [
+        "请基于附件继续分析",
+        "请列出附件中的风险点",
+        "请生成下一步执行计划"
+      ],
+      "recommended_actions": [
+        "让临渊者读取附件摘要",
+        "确认文件用途",
+        "必要时中断任务"
+      ],
+      "risk_hint": "A1 allowed",
+      "continue_hint": "可以继续下一步",
+      "can_enter_long_chain": true
+    },
+    "raw_path_exposed": false,
+    "raw_content_exposed": false
+  },
+  "boundaries": {
+    "file_transfer_route_to_runtime_only": true,
+    "frontend_does_not_execute_tools": true,
+    "frontend_does_not_write_memory": true,
+    "frontend_does_not_write_audit": true,
+    "frontend_does_not_apply_rollback": true,
+    "interrupt_is_control_request_only": true,
+    "conversation_guide_is_user_confirmed_prompt_only": true
+  }
+}

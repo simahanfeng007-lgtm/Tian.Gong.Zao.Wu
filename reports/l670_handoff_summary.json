@@ -1,0 +1,23 @@
+{
+  "contract_version": "tiangong.l6_70.handoff_summary.v1",
+  "checked_at": "2026-06-07T09:59:59",
+  "done_l670": false,
+  "real_runtime_smoke_passed": false,
+  "ready_for_combine": false,
+  "p0_found": false,
+  "p1_found_fixed": [
+    "rc_preflight_l659 did not accept provider-write-mode passed by real_runtime_gate_l660"
+  ],
+  "core_runtime_mutation": false,
+  "blockers": [
+    "real Runtime instance smoke not executed",
+    "LINYUANZHE_RUNTIME_URL not provided"
+  ],
+  "reports": {
+    "combine_report": "reports/l670_combine_report.md",
+    "blockers_report": "reports/l670_blockers_report.md",
+    "validation_summary": "reports/validation_summary_l670.json",
+    "real_runtime_unlock": "reports/real_runtime_unlock_l670.json",
+    "endpoint_smoke": "reports/real_runtime_endpoint_smoke_l670.json"
+  }
+}

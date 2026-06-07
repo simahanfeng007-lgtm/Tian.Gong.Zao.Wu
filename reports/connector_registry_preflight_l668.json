@@ -1,0 +1,25 @@
+{
+  "contract_version": "tiangong.l6_66.connector_registry_preflight.v1",
+  "checked_at": "2026-06-07T08:44:20",
+  "ok": true,
+  "returncode": 0,
+  "smoke_log": "/mnt/data/work_l668/reports/l666_connector_registry_smoke.log",
+  "payload": {
+    "ok": true,
+    "contract": "tiangong.l6_66.connector_registry.v1",
+    "hook_verdict": "allow",
+    "record_status": "frontend_only_recorded",
+    "market_install_disabled": true,
+    "frontend_execute_allowed": false,
+    "raw_secret_leaked": false
+  },
+  "boundaries": {
+    "frontend_does_not_install_mcp_server": true,
+    "frontend_does_not_execute_connector": true,
+    "frontend_does_not_store_connector_secret": true,
+    "frontend_does_not_display_raw_endpoint": true,
+    "market_install_disabled": true,
+    "registry_requests_route_to_runtime_only": true,
+    "runtime_quality_gate_workspace_authority_required": true
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "contract_version": "tiangong.l6_68.updater_skeleton.v1",
+  "update_channel": "internal_rc",
+  "auto_download": false,
+  "auto_apply": false,
+  "requires_signature_verification": true,
+  "requires_sha256_verification": true,
+  "requires_startup_self_check_after_update": true,
+  "current_stage": "skeleton_only",
+  "message": "L6.68 only reserves updater structure. No update is downloaded or applied by the frontend."
+}

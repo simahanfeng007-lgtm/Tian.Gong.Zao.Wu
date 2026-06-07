@@ -1,2 +1,0 @@
-issue_id,level,status,repair_scope,verification,note
-P3-001,P3,closed,update tiangong_kernel/l3_orchestration/__init__.py module docstring only,compileall passed; phase8 16 passed; l3_phase 126 passed; full tests 628 passed,used Chinese term 旧运行时主链 to avoid Runtime whitelist regression

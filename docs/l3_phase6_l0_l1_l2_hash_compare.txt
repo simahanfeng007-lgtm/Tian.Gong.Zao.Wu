@@ -1,3 +1,0 @@
-tiangong_kernel/l0_primitives: 58 python files, MATCH
-tiangong_kernel/l1_ports: 49 python files, MATCH
-tiangong_kernel/l2_state: 53 python files, MATCH

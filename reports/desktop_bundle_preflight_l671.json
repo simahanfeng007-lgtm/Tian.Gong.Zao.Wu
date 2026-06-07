@@ -1,0 +1,159 @@
+{
+  "contract_version": "tiangong.l6_70_1.desktop_bundle_preflight.v1",
+  "checked_at": "2026-06-07T10:10:23",
+  "ok": true,
+  "desktop_all_in_one_ready": true,
+  "frontend_backend_bundled": true,
+  "local_desktop_bridge_ready": true,
+  "real_runtime_smoke_passed": false,
+  "ready_for_combine": false,
+  "final_installer_allowed": false,
+  "windows_installer_artifact_emitted": false,
+  "runtime_core_mutation": false,
+  "compileall": {
+    "name": "l671_desktop_bundle_compileall",
+    "ok": true,
+    "returncode": 0,
+    "latency_ms": 3603,
+    "log": "/mnt/data/l671_work/reports/l671_desktop_bundle_compileall.log",
+    "exit": "/mnt/data/l671_work/reports/l671_desktop_bundle_compileall.exit"
+  },
+  "local_bridge_probe": {
+    "ok": true,
+    "latency_ms": 7138,
+    "bridge_url_digest": "b506da5d6de82f76",
+    "startup_lines": [
+      "LINYUANZHE_LOCAL_RUNTIME_URL=http://127.0.0.1:45417"
+    ],
+    "runtime_kind": "local_desktop_bridge",
+    "read_endpoint_results": [
+      {
+        "path": "/health/runtime",
+        "ok": true,
+        "status": 200,
+        "keys": [
+          "payload"
+        ]
+      },
+      {
+        "path": "/metadata/product",
+        "ok": true,
+        "status": 200,
+        "keys": [
+          "angel_investor",
+          "endpoint",
+          "frontend_permission",
+          "local_desktop_bridge",
+          "product_name",
+          "public",
+          "runtime_semantics",
+          "schema",
+          "unique_developer"
+        ]
+      },
+      {
+        "path": "/settings/provider",
+        "ok": true,
+        "status": 200,
+        "keys": [
+          "api_key_configured",
+          "api_key_digest",
+          "audit_id",
+          "base_url_configured",
+          "base_url_digest",
+          "config_error_code",
+          "frontend_contract",
+          "local_desktop_bridge",
+          "message",
+          "model",
+          "official_real_runtime_smoke_target",
+          "planner_mode",
+          "provider",
+          "provider_config_state",
+          "stream",
+          "tool_execution_mode"
+        ]
+      },
+      {
+        "path": "/workspace/policy",
+        "ok": true,
+        "status": 200,
+        "keys": [
+          "frontend_may_apply_rollback",
+          "frontend_may_copy_files",
+          "frontend_may_read_paths",
+          "frontend_may_write_audit",
+          "frontend_may_write_memory",
+          "policy",
+          "route_to_runtime_only",
+          "workspace_contract",
+          "workspace_state"
+        ]
+      },
+      {
+        "path": "/connectors/registry",
+        "ok": true,
+        "status": 200,
+        "keys": [
+          "connector_manifests",
+          "connector_registration_records",
+          "connector_registry_contract",
+          "connector_registry_projection",
+          "connector_registry_state"
+        ]
+      },
+      {
+        "path": "/sessions/list",
+        "ok": true,
+        "status": 200,
+        "keys": [
+          "session_last_message",
+          "session_manager_contract",
+          "session_manager_state",
+          "session_stats",
+          "task_sessions"
+        ]
+      },
+      {
+        "path": "/installer/manifest",
+        "ok": true,
+        "status": 200,
+        "keys": [
+          "installer_last_message",
+          "installer_manifest",
+          "installer_rc_contract"
+        ]
+      }
+    ],
+    "chat_stream_result": {
+      "path": "/chat/stream-events",
+      "ok": true,
+      "status": 200,
+      "events": [
+        "run_started",
+        "planner_started",
+        "quality_gate",
+        "assistant_delta",
+        "audit_event",
+        "assistant_final",
+        "run_terminal"
+      ],
+      "assistant_final_before_run_terminal": true,
+      "assistant_final_digest": "bac7ed10f585e087",
+      "assistant_final_length": 27
+    },
+    "official_real_runtime_smoke_target": false
+  },
+  "scan": {
+    "name": "l671_desktop_bundle_scan",
+    "ok": true,
+    "returncode": 0,
+    "latency_ms": 7619,
+    "log": "/mnt/data/l671_work/reports/l671_desktop_bundle_scan.log",
+    "exit": "/mnt/data/l671_work/reports/l671_desktop_bundle_scan.exit"
+  },
+  "merge_blockers": [
+    "official real Runtime RC unlock not executed in this desktop all-in-one package"
+  ],
+  "note": "本报告证明桌面端前端与本地桥接后端可一键启动；它不替代正式 TiangongWangguan/Runtime 真实联调。"
+}

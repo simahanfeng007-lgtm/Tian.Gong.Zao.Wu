@@ -1,0 +1,80 @@
+{
+  "backend_compileall": {
+    "exit": 0
+  },
+  "frontend_compileall": {
+    "exit": 0
+  },
+  "frontend_smoke_test": {
+    "exit": 0
+  },
+  "frontend_pytest_l6_52_l6_58": {
+    "exit": 0
+  },
+  "frontend_rc_preflight_contract_server": {
+    "exit": 0
+  },
+  "backend_pytest_l6_51_l6_51_1": {
+    "exit": 0
+  },
+  "real_runtime_url_present": false,
+  "real_runtime_executed": false,
+  "ready_for_combine": false,
+  "blockers": [
+    "real Runtime instance smoke not executed"
+  ],
+  "final_backend_compileall": {
+    "exit": 0
+  },
+  "final_frontend_compileall": {
+    "exit": 0
+  },
+  "final_rc_preflight_contract_server": {
+    "exit": 0
+  },
+  "final_scan_l659": {
+    "exit": 0
+  },
+  "final_scan_summary": {
+    "secret_scan": {
+      "ok": true,
+      "hit_count": 0
+    },
+    "source_marker_reference_scan": {
+      "ok": true,
+      "hit_count": 19
+    },
+    "provider_sdk_import_scan": {
+      "ok": true,
+      "hit_count": 0
+    },
+    "bare_except_pass_scan": {
+      "ok": true,
+      "hit_count": 0
+    }
+  },
+  "final_preflight_summary": {
+    "ok": true,
+    "ready_for_combine": false,
+    "real_runtime_executed": false,
+    "contract_server_used": true,
+    "merge_blockers": [
+      "real Runtime instance smoke not executed"
+    ]
+  },
+  "reunpack_zip_integrity": {
+    "exit": 0
+  },
+  "reunpack_backend_compileall": {
+    "exit": 0
+  },
+  "reunpack_frontend_compileall": {
+    "exit": 0
+  },
+  "reunpack_scan_l659": {
+    "exit": 0
+  },
+  "reunpack_rc_preflight_l659": {
+    "exit": 0
+  }
+}

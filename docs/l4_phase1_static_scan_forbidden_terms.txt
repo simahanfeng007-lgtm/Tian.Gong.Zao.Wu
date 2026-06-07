@@ -1,4 +1,0 @@
-﻿L4 第一阶段动作落地包越界关键词扫描
-pattern=subprocess|socket|requests|urllib|httpx|open\(|write_text|write_bytes|call_model|call_tool|invoke_tool|Runtime|神枢|AbilityPackage|CapabilityPort|AbilityPackagePort
-scope=tiangong_kernel/l4_action_grounding
-result=NO_MATCH

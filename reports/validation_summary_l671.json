@@ -1,0 +1,38 @@
+{
+  "contract_version": "tiangong.l6_70_1.desktop_bundle_verify.v1",
+  "checked_at": "2026-06-07T10:10:33",
+  "ok": true,
+  "desktop_all_in_one_ready": true,
+  "frontend_backend_bundled": true,
+  "local_desktop_bridge_ready": true,
+  "real_runtime_smoke_passed": false,
+  "ready_for_combine": false,
+  "final_installer_allowed": false,
+  "windows_installer_artifact_emitted": false,
+  "runtime_core_mutation": false,
+  "results": [
+    {
+      "name": "desktop_bundle_preflight_l671",
+      "ok": true,
+      "report": "/mnt/data/l671_work/reports/desktop_bundle_preflight_l671.json"
+    },
+    {
+      "name": "l671_desktop_bundle_compileall",
+      "ok": true,
+      "returncode": 0,
+      "exit": "/mnt/data/l671_work/reports/l671_desktop_bundle_compileall.exit",
+      "log": "/mnt/data/l671_work/reports/l671_desktop_bundle_compileall.log"
+    },
+    {
+      "name": "l671_desktop_bundle_scan",
+      "ok": true,
+      "returncode": 0,
+      "exit": "/mnt/data/l671_work/reports/l671_desktop_bundle_scan.exit",
+      "log": "/mnt/data/l671_work/reports/l671_desktop_bundle_scan.log"
+    }
+  ],
+  "merge_blockers": [
+    "official real Runtime RC unlock not executed; desktop local bridge is not final RC evidence"
+  ],
+  "note": "L6.70.1 是桌面端前后端一体化启动包，不是正式 exe/msi 安装器，也不把本地桥接冒充真实 Runtime。"
+}

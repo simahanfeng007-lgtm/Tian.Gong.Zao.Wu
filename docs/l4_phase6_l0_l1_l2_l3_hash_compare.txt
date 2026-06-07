@@ -1,8 +1,0 @@
-﻿天工造物 L4 第六阶段 L0/L1/L2/L3 哈希对照
-
-MATCH tiangong_kernel\l0_primitives
-MATCH tiangong_kernel\l1_ports
-MATCH tiangong_kernel\l2_state
-MATCH tiangong_kernel\l3_orchestration
-
-RESULT: MATCH

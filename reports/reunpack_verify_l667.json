@@ -1,0 +1,14 @@
+{
+  "contract_version": "tiangong.l6_67.reunpack_verify.v1",
+  "checked_at": "2026-06-07T08:24:27",
+  "zip_integrity": true,
+  "compileall": true,
+  "session_manager_preflight": true,
+  "secret_scan": true,
+  "provider_sdk_import_scan": true,
+  "bare_except_pass_scan": true,
+  "rc_preflight_contract_server": true,
+  "ready_for_combine": false,
+  "real_runtime_executed": false,
+  "ok": true
+}

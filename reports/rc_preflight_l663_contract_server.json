@@ -1,0 +1,141 @@
+{
+  "contract_version": "tiangong.l6_59.frontend_backend_combine_preflight.v1",
+  "checked_at": "2026-06-07T04:46:26",
+  "backend_static_check": {
+    "ok": true,
+    "runtime_version": "0.1.0-l6.51.1",
+    "product_identity_ok": true,
+    "canonical_entry": "TiangongWangguan",
+    "chat_stream_endpoint": "/chat/stream-events",
+    "terminal_order": [
+      "assistant_final",
+      "run_terminal"
+    ],
+    "frontend_contract_ok": true,
+    "frontend_contract_issues": []
+  },
+  "frontend_runtime_preflight": {
+    "contract_version": "tiangong.l6_58.frontend_backend_rc_preflight.v1",
+    "mode": "contract_server",
+    "real_runtime_requested": false,
+    "real_runtime_executed": false,
+    "contract_server_fallback_used": true,
+    "real_runtime_skipped_reason": "forced contract-server regression mode",
+    "endpoint_contract_ok": true,
+    "provider_write_ack_ok": true,
+    "provider_write_digest_only": true,
+    "chat_stream_terminal_ok": true,
+    "product_identity_ok": true,
+    "status_bar_ok": true,
+    "secret_free": true,
+    "frontend_boundary_ok": true,
+    "ready_for_combine": false,
+    "rc_status": "blocked_before_frontend_backend_combine",
+    "merge_blockers": [
+      "real Runtime instance smoke not executed"
+    ],
+    "next_action": "Start real TiangongWangguan/Runtime and rerun RC preflight with LINYUANZHE_RUNTIME_URL.",
+    "integration_report": {
+      "contract_version": "tiangong.l6_58.frontend_backend_e2e_smoke.v1",
+      "mode": "contract_server",
+      "runtime_url_digest": "d24186243c82ae80",
+      "endpoint_results": [
+        {
+          "path": "/health/runtime",
+          "method": "GET",
+          "ok": true,
+          "status_code": 200,
+          "latency_ms": 18,
+          "content_type": "application/json; charset=utf-8",
+          "error": ""
+        },
+        {
+          "path": "/metadata/product",
+          "method": "GET",
+          "ok": true,
+          "status_code": 200,
+          "latency_ms": 1,
+          "content_type": "application/json; charset=utf-8",
+          "error": ""
+        },
+        {
+          "path": "/settings/provider",
+          "method": "GET",
+          "ok": true,
+          "status_code": 200,
+          "latency_ms": 1,
+          "content_type": "application/json; charset=utf-8",
+          "error": ""
+        }
+      ],
+      "chat_stream_ok": true,
+      "terminal_order_valid": true,
+      "assistant_final_seen": true,
+      "run_terminal_seen": true,
+      "status_bar_fields_ok": true,
+      "product_identity_ok": true,
+      "provider_projection_safe": true,
+      "provider_write_ack_ok": true,
+      "provider_write_request_only": true,
+      "action_guard_request_only": true,
+      "no_frontend_provider_call": true,
+      "no_frontend_tool_execution": true,
+      "no_frontend_memory_write": true,
+      "no_frontend_rollback_apply": true,
+      "rendered_secret_free": true,
+      "event_count": 12,
+      "final_task_status": "COMPLETED",
+      "final_stream_state": "completed",
+      "final_audit_id": "audit_l657_stream",
+      "diagnostic": [
+        "provider_write_mode=fixture",
+        "provider_write_status=accepted"
+      ],
+      "ok": true
+    },
+    "ok": true,
+    "checked_at": "2026-06-07T04:46:25",
+    "policy": {
+      "contract_version": "tiangong.l6_58.frontend_backend_rc_preflight.v1",
+      "formal_combine_requires_real_runtime": true,
+      "contract_server_fallback_allowed_for_regression": true,
+      "allowed_endpoints": [
+        "/health/runtime",
+        "/metadata/product",
+        "/settings/provider",
+        "/chat/stream-events",
+        "/tasks/stop",
+        "/tasks/reset",
+        "/confirmations/submit"
+      ],
+      "runtime_url_in_reports": "digest_only",
+      "frontend_role": "display_submit_request_only",
+      "must_pass_before_step20": [
+        "real_runtime_executed",
+        "endpoint_contract_ok",
+        "provider_write_ack_ok",
+        "provider_write_digest_only",
+        "chat_stream_terminal_ok",
+        "product_identity_ok",
+        "status_bar_ok",
+        "secret_free",
+        "frontend_boundary_ok"
+      ]
+    },
+    "runtime_url_visible": "digest_only",
+    "provider_write_mode": "auto",
+    "provider_write_mutates_real_runtime": false,
+    "note": "本报告不包含 Runtime URL 明文、Provider Key 明文或 Provider Base URL 明文。"
+  },
+  "runtime_url_visible": "digest_only",
+  "runtime_url_digest": "",
+  "real_runtime_url_present": false,
+  "real_runtime_executed": false,
+  "contract_server_used": true,
+  "ready_for_combine": false,
+  "ok": true,
+  "merge_blockers": [
+    "real Runtime instance smoke not executed"
+  ],
+  "note": "不记录 Runtime URL 明文、Provider Key 明文或 Provider Base URL 明文。"
+}

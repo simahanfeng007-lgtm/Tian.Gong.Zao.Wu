@@ -1,0 +1,51 @@
+临渊者桌面端 FE.01 STEP19 / L6.58 真实后端实例联调与 RC 前置收口版
+
+启动方式：
+Mock 演示：
+- Windows：双击 run_desktop_demo.bat
+- macOS / Linux：bash run_desktop_demo.sh
+
+Runtime SSE 接线：
+- 先设置 LINYUANZHE_RUNTIME_URL，例如 http://127.0.0.1:8787
+- Windows：双击 run_runtime_sse_demo.bat
+- macOS / Linux：bash run_runtime_sse_demo.sh
+- 命令行：python -m linyuanzhe_frontend.app --runtime-url http://127.0.0.1:8787
+
+真实后端 RC 前置预检：
+- 契约服务器回归：python -m linyuanzhe_frontend.run_rc_preflight --contract-server
+- 真实 Runtime 预检：LINYUANZHE_RUNTIME_URL=http://127.0.0.1:8787 python -m linyuanzhe_frontend.run_rc_preflight --require-real
+
+验证方式：
+Windows：双击 run_validation.bat
+macOS / Linux：bash run_validation.sh
+
+本版重点：
+1. 保留 STEP12 启动修复、固定聊天输入栏、极简首页和底部 9 字段状态栏。
+2. 保留 STEP13/STEP14 SseRuntimeClient：只连接正式 Runtime 契约端点并支持续接/控制请求。
+3. 保留 L6.54 顺滑层：EventBuffer + DeltaMerger + RenderScheduler + VirtualTranscript。
+4. 保留 L6.55 行动守卫卡：QualityGate / Audit / Rollback 只读展示与确认请求。
+5. 保留 L6.57 Provider 设置页后端写入回执：api_key/base_url 写入后清空，只展示 configured、digest、错误码与 audit_id。
+6. 新增 L6.58 RC 前置预检：真实 Runtime 运行实例存在时可强制预检；无真实地址时只做契约服务器回归并标记合成阻断。
+7. 产品身份元数据继续只读展示：唯一开发者 于泳翔；天使投资人 胖胖龙；公开后端入口 /metadata/product。
+
+安全边界：
+- 真实任务只能提交到 /chat/stream-events。
+- 停止 / 复位只能提交到 Runtime 控制请求端点。
+- Provider 设置只能提交到 /settings/provider，前端不保存或回显明文 key/base_url。
+- 不裸调模型或 Provider SDK。
+- 不调用 Adapter。
+- 不直接执行工具。
+- 不裸写长期记忆。
+- 不裸写审计。
+- 不直接应用回滚或自我迭代合入。
+- 不写 tiangong_kernel。
+- 契约服务器回归不能替代正式前后端合成前的真实 Runtime 预检。
+
+验收重点：
+- python3 -m compileall -q linyuanzhe_frontend
+- python3 linyuanzhe_frontend/tests/smoke_test_frontend.py
+- python3 -m pytest -q linyuanzhe_frontend/tests/test_frontend_contracts.py linyuanzhe_frontend/tests/test_l6_52_sse_runtime_client.py linyuanzhe_frontend/tests/test_l6_53_streaming_controls.py linyuanzhe_frontend/tests/test_l6_54_smooth_agent_ui.py linyuanzhe_frontend/tests/test_l6_55_action_guard_cards.py linyuanzhe_frontend/tests/test_l6_56_e2e_integration_smoke.py linyuanzhe_frontend/tests/test_l6_57_provider_settings_writeback.py linyuanzhe_frontend/tests/test_l6_58_rc_preflight.py
+- xvfb-run -a python3 linyuanzhe_frontend/tests/gui_construct_smoke.py
+- python3 linyuanzhe_frontend/scripts/validate_demo_package.py
+- python3 -m linyuanzhe_frontend.run_rc_preflight --contract-server
+- LINYUANZHE_RUNTIME_URL=http://127.0.0.1:8787 python3 -m linyuanzhe_frontend.run_rc_preflight --require-real

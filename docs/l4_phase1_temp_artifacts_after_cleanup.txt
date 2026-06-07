@@ -1,4 +1,0 @@
-﻿L4 第一阶段临时产物检查（清理后）
-__pycache__ count=0
-pyc/pyo count=0
-.pytest_cache count=0

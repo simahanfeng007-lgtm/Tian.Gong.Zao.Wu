@@ -1,0 +1,57 @@
+{
+  "contract_version": "tiangong.l6_69.windows_packager_build_plan.v1",
+  "product_name": "天工造物 / 临渊者",
+  "version_label": "FE01 STEP30 / L6.69",
+  "stage": "dry_run_only",
+  "unique_developer": "于泳翔",
+  "angel_investor": "胖胖龙",
+  "targets": [
+    {
+      "target_id": "windows_portable_zip",
+      "status": "plan_only",
+      "emitted": false
+    },
+    {
+      "target_id": "windows_exe_installer",
+      "status": "disabled_until_real_runtime_unlock_and_signing",
+      "emitted": false
+    },
+    {
+      "target_id": "windows_msi_installer",
+      "status": "disabled_until_real_runtime_unlock_and_signing",
+      "emitted": false
+    }
+  ],
+  "source_roots": [
+    "backend/project",
+    "frontend/linyuanzhe_frontend",
+    "launchers",
+    "scripts",
+    "installer"
+  ],
+  "required_checks": [
+    "backend_compileall",
+    "frontend_compileall",
+    "rc_preflight_contract_server",
+    "real_runtime_unlock_required_before_rc",
+    "secret_scan",
+    "provider_sdk_import_scan",
+    "bare_except_pass_scan",
+    "version_slot_validation",
+    "startup_self_check",
+    "release_manifest_validation"
+  ],
+  "blocked_outputs": [
+    "exe",
+    "msi",
+    "auto_update_payload"
+  ],
+  "allowed_outputs": [
+    "json_report",
+    "sha256_manifest",
+    "build_plan"
+  ],
+  "runtime_core_mutation": false,
+  "frontend_builds_installer": false,
+  "notes": "L6.69 只生成 Windows 安装包打包计划与发布预检报告，不生成最终安装包。"
+}

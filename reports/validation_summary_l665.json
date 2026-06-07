@@ -1,0 +1,64 @@
+{
+  "contract_version": "tiangong.l6_65.release_verify.v2",
+  "checked_at": "2026-06-07T06:12:05",
+  "runtime_url_present": false,
+  "results": [
+    {
+      "name": "l665_backend_compileall",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l665_work/临渊者_FE01_STEP26_L665_AgentWorkspace沙箱文件授权_RC前置总包_20260607/reports/l665_backend_compileall.log"
+    },
+    {
+      "name": "l665_frontend_scripts_compileall",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l665_work/临渊者_FE01_STEP26_L665_AgentWorkspace沙箱文件授权_RC前置总包_20260607/reports/l665_frontend_scripts_compileall.log"
+    },
+    {
+      "name": "l665_observability_preflight",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l665_work/临渊者_FE01_STEP26_L665_AgentWorkspace沙箱文件授权_RC前置总包_20260607/reports/l665_observability_preflight.log"
+    },
+    {
+      "name": "l665_hookbus_preflight",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l665_work/临渊者_FE01_STEP26_L665_AgentWorkspace沙箱文件授权_RC前置总包_20260607/reports/l665_hookbus_preflight.log"
+    },
+    {
+      "name": "l665_file_transfer_interrupt_preflight",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l665_work/临渊者_FE01_STEP26_L665_AgentWorkspace沙箱文件授权_RC前置总包_20260607/reports/l665_file_transfer_interrupt_preflight.log"
+    },
+    {
+      "name": "l665_workspace_preflight",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l665_work/临渊者_FE01_STEP26_L665_AgentWorkspace沙箱文件授权_RC前置总包_20260607/reports/l665_workspace_preflight.log"
+    },
+    {
+      "name": "l665_rc_preflight_contract_server",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l665_work/临渊者_FE01_STEP26_L665_AgentWorkspace沙箱文件授权_RC前置总包_20260607/reports/rc_preflight_l665_contract_server.json"
+    },
+    {
+      "name": "l665_scan",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l665_work/临渊者_FE01_STEP26_L665_AgentWorkspace沙箱文件授权_RC前置总包_20260607/reports/scan_l659.json"
+    },
+    {
+      "name": "l665_real_runtime_unlock_absent_expected",
+      "returncode": 2,
+      "ok": true,
+      "log": "/mnt/data/l665_work/临渊者_FE01_STEP26_L665_AgentWorkspace沙箱文件授权_RC前置总包_20260607/reports/l665_real_runtime_unlock_absent_expected.log"
+    }
+  ],
+  "ok": true,
+  "ready_for_combine": false,
+  "note": "L6.65 adds Agent Workspace / sandbox and file authorization display/request boundaries. Aggregate verifier consumes generated evidence; standalone scripts rerun each preflight."
+}

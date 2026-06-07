@@ -1,0 +1,15 @@
+{
+  "contract_version": "tiangong.l6_68.offline_repair.v1",
+  "checked_at": "2026-06-07T09:57:20",
+  "ok": true,
+  "dry_run": true,
+  "manifest_present": true,
+  "suggested_actions": [
+    "run startup self-check",
+    "verify package sha256",
+    "verify active and rollback slot manifests",
+    "run RC preflight before launching desktop shell"
+  ],
+  "frontend_applied_fix": false,
+  "runtime_core_mutation": false
+}

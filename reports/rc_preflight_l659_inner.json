@@ -1,0 +1,117 @@
+{
+  "contract_version": "tiangong.l6_58.frontend_backend_rc_preflight.v1",
+  "mode": "real_runtime",
+  "real_runtime_requested": true,
+  "real_runtime_executed": true,
+  "contract_server_fallback_used": false,
+  "real_runtime_skipped_reason": "",
+  "endpoint_contract_ok": false,
+  "provider_write_ack_ok": true,
+  "provider_write_digest_only": true,
+  "chat_stream_terminal_ok": false,
+  "product_identity_ok": false,
+  "status_bar_ok": true,
+  "secret_free": true,
+  "frontend_boundary_ok": true,
+  "ready_for_combine": false,
+  "rc_status": "failed_before_frontend_backend_combine",
+  "merge_blockers": [
+    "required Runtime endpoints did not all pass",
+    "chat stream did not complete assistant_final -> run_terminal",
+    "product identity metadata mismatch"
+  ],
+  "next_action": "Fix failing endpoint/settings/stream/boundary checks before combine.",
+  "integration_report": {
+    "contract_version": "tiangong.l6_58.frontend_backend_e2e_smoke.v1",
+    "mode": "real_runtime",
+    "runtime_url_digest": "59b7003c27a8fce5",
+    "endpoint_results": [
+      {
+        "path": "/health/runtime",
+        "method": "GET",
+        "ok": false,
+        "status_code": 0,
+        "latency_ms": 30,
+        "content_type": "",
+        "error": "<urlopen error [Errno 111] Connection refused>"
+      },
+      {
+        "path": "/metadata/product",
+        "method": "GET",
+        "ok": false,
+        "status_code": 0,
+        "latency_ms": 1,
+        "content_type": "",
+        "error": "<urlopen error [Errno 111] Connection refused>"
+      },
+      {
+        "path": "/settings/provider",
+        "method": "GET",
+        "ok": false,
+        "status_code": 0,
+        "latency_ms": 1,
+        "content_type": "",
+        "error": "<urlopen error [Errno 111] Connection refused>"
+      }
+    ],
+    "chat_stream_ok": false,
+    "terminal_order_valid": true,
+    "assistant_final_seen": false,
+    "run_terminal_seen": false,
+    "status_bar_fields_ok": true,
+    "product_identity_ok": false,
+    "provider_projection_safe": true,
+    "provider_write_ack_ok": true,
+    "provider_write_request_only": true,
+    "action_guard_request_only": true,
+    "no_frontend_provider_call": true,
+    "no_frontend_tool_execution": true,
+    "no_frontend_memory_write": true,
+    "no_frontend_rollback_apply": true,
+    "rendered_secret_free": true,
+    "event_count": 0,
+    "final_task_status": "DISCONNECTED",
+    "final_stream_state": "error",
+    "final_audit_id": "EV-250515-0001",
+    "diagnostic": [
+      "terminal tail unexpected: []",
+      "provider_write_mode=read_only",
+      "provider_write_status=read_only_verified",
+      "health/product/provider refresh did not fully connect"
+    ],
+    "ok": false
+  },
+  "ok": false,
+  "checked_at": "2026-06-07T09:59:11",
+  "policy": {
+    "contract_version": "tiangong.l6_58.frontend_backend_rc_preflight.v1",
+    "formal_combine_requires_real_runtime": true,
+    "contract_server_fallback_allowed_for_regression": true,
+    "allowed_endpoints": [
+      "/health/runtime",
+      "/metadata/product",
+      "/settings/provider",
+      "/chat/stream-events",
+      "/tasks/stop",
+      "/tasks/reset",
+      "/confirmations/submit"
+    ],
+    "runtime_url_in_reports": "digest_only",
+    "frontend_role": "display_submit_request_only",
+    "must_pass_before_step20": [
+      "real_runtime_executed",
+      "endpoint_contract_ok",
+      "provider_write_ack_ok",
+      "provider_write_digest_only",
+      "chat_stream_terminal_ok",
+      "product_identity_ok",
+      "status_bar_ok",
+      "secret_free",
+      "frontend_boundary_ok"
+    ]
+  },
+  "runtime_url_visible": "digest_only",
+  "provider_write_mode": "read_only",
+  "provider_write_mutates_real_runtime": false,
+  "note": "本报告不包含 Runtime URL 明文、Provider Key 明文或 Provider Base URL 明文。"
+}

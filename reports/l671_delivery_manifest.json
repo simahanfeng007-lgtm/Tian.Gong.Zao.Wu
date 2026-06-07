@@ -1,0 +1,18 @@
+{
+  "contract_version": "tiangong.l6_70_1.delivery_manifest.v1",
+  "package_type": "desktop_all_in_one_zip",
+  "version_label": "FE01 STEP31A / L6.70.1",
+  "desktop_all_in_one_ready": true,
+  "frontend_backend_bundled": true,
+  "local_desktop_bridge_ready": true,
+  "ready_for_combine": false,
+  "final_installer_allowed": false,
+  "windows_installer_artifact_emitted": false,
+  "unique_developer": "于泳翔",
+  "angel_investor": "胖胖龙",
+  "root_launchers": [
+    "启动临渊者桌面端.bat",
+    "启动临渊者桌面端_真实模型.bat",
+    "一键自检_L6701.bat"
+  ]
+}

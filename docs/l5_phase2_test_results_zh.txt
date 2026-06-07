@@ -1,9 +1,0 @@
-天工造物 L5 第二阶段测试结果
-
-compileall：passed，exit_code=0
-collect-only：1006 tests collected in 4.78s，exit_code=0
-第二阶段 targeted：43 passed in 5.07s，exit_code=0
-插件宿主相关子集：46 passed, 960 deselected in 5.66s，exit_code=0
-全量 pytest：1006 passed in 13.71s，exit_code=0
-
-说明：L5 第一阶段完成后的 963 passed 不复用为本阶段结论；本阶段完成后重新执行 full pytest，实际结果为 1006 passed in 13.71s。

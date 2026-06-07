@@ -1,0 +1,48 @@
+{
+  "ok": true,
+  "contract": "tiangong.l6_62.trace_observability.v1",
+  "stats": {
+    "total_events": 10,
+    "run_events": 1,
+    "planner_events": 2,
+    "tool_events": 2,
+    "quality_gate_events": 1,
+    "audit_events": 1,
+    "rollback_events": 0,
+    "assistant_events": 1,
+    "error_events": 0,
+    "terminal_events": 1,
+    "pending_confirmations": 1,
+    "terminal_order_valid": true,
+    "last_seq": 10,
+    "last_category": "terminal",
+    "last_event_type": "run_terminal",
+    "last_error_summary": ""
+  },
+  "policy": {
+    "contract_version": "tiangong.l6_62.trace_observability.v1",
+    "render_only": true,
+    "no_frontend_tool_execution": true,
+    "no_frontend_provider_call": true,
+    "no_frontend_memory_write": true,
+    "no_frontend_audit_write": true,
+    "no_frontend_rollback_apply": true,
+    "stores_raw_prompt": false,
+    "stores_raw_secret": false,
+    "uses_digest_for_run_task_ids": true,
+    "max_trace_records": 240,
+    "categories": [
+      "assistant",
+      "audit",
+      "error",
+      "planner",
+      "quality_gate",
+      "rollback",
+      "run",
+      "runtime",
+      "terminal",
+      "tool"
+    ]
+  },
+  "trace_export_digest": "8ef109cdcd17abc7"
+}

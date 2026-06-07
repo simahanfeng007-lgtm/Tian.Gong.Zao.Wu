@@ -1,5 +1,0 @@
-...................                                                      [100%]
-19 passed, 1210 deselected in 3.11s
-
-EXIT_CODE=0
-DURATION_SECONDS=5.63

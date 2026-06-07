@@ -1,0 +1,88 @@
+{
+  "contract_version": "tiangong.l6_60.release_verify.v1",
+  "checked_at": "2026-06-07T03:31:42",
+  "ok": true,
+  "ready_for_combine": false,
+  "real_runtime_executed": false,
+  "merge_blockers": [
+    "real Runtime instance smoke not executed",
+    "LINYUANZHE_RUNTIME_URL not provided"
+  ],
+  "steps": [
+    {
+      "name": "l660_backend_compileall",
+      "cmd": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "/mnt/data/临渊者_FE01_STEP21_L660_真实Runtime接入硬闸口_RC前置总包_20260607/backend/project"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "allowed_failure": false,
+      "log": "/mnt/data/临渊者_FE01_STEP21_L660_真实Runtime接入硬闸口_RC前置总包_20260607/reports/l660_backend_compileall.log",
+      "exit": "/mnt/data/临渊者_FE01_STEP21_L660_真实Runtime接入硬闸口_RC前置总包_20260607/reports/l660_backend_compileall.exit"
+    },
+    {
+      "name": "l660_frontend_compileall",
+      "cmd": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "/mnt/data/临渊者_FE01_STEP21_L660_真实Runtime接入硬闸口_RC前置总包_20260607/frontend/linyuanzhe_frontend",
+        "/mnt/data/临渊者_FE01_STEP21_L660_真实Runtime接入硬闸口_RC前置总包_20260607/launchers",
+        "/mnt/data/临渊者_FE01_STEP21_L660_真实Runtime接入硬闸口_RC前置总包_20260607/scripts"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "allowed_failure": false,
+      "log": "/mnt/data/临渊者_FE01_STEP21_L660_真实Runtime接入硬闸口_RC前置总包_20260607/reports/l660_frontend_compileall.log",
+      "exit": "/mnt/data/临渊者_FE01_STEP21_L660_真实Runtime接入硬闸口_RC前置总包_20260607/reports/l660_frontend_compileall.exit"
+    },
+    {
+      "name": "l660_rc_preflight_contract_server",
+      "cmd": [
+        "python3",
+        "/mnt/data/临渊者_FE01_STEP21_L660_真实Runtime接入硬闸口_RC前置总包_20260607/scripts/rc_preflight_l659.py",
+        "--contract-server",
+        "--out",
+        "/mnt/data/临渊者_FE01_STEP21_L660_真实Runtime接入硬闸口_RC前置总包_20260607/reports/rc_preflight_l660_contract_server.json"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "allowed_failure": false,
+      "log": "/mnt/data/临渊者_FE01_STEP21_L660_真实Runtime接入硬闸口_RC前置总包_20260607/reports/l660_rc_preflight_contract_server.log",
+      "exit": "/mnt/data/临渊者_FE01_STEP21_L660_真实Runtime接入硬闸口_RC前置总包_20260607/reports/l660_rc_preflight_contract_server.exit"
+    },
+    {
+      "name": "l660_scan",
+      "cmd": [
+        "python3",
+        "/mnt/data/临渊者_FE01_STEP21_L660_真实Runtime接入硬闸口_RC前置总包_20260607/scripts/scan_l659.py"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "allowed_failure": false,
+      "log": "/mnt/data/临渊者_FE01_STEP21_L660_真实Runtime接入硬闸口_RC前置总包_20260607/reports/l660_scan.log",
+      "exit": "/mnt/data/临渊者_FE01_STEP21_L660_真实Runtime接入硬闸口_RC前置总包_20260607/reports/l660_scan.exit"
+    },
+    {
+      "name": "l660_real_runtime_gate",
+      "cmd": [
+        "python3",
+        "/mnt/data/临渊者_FE01_STEP21_L660_真实Runtime接入硬闸口_RC前置总包_20260607/scripts/real_runtime_gate_l660.py",
+        "--allow-missing-real",
+        "--out",
+        "/mnt/data/临渊者_FE01_STEP21_L660_真实Runtime接入硬闸口_RC前置总包_20260607/reports/real_runtime_gate_l660.json"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "allowed_failure": false,
+      "log": "/mnt/data/临渊者_FE01_STEP21_L660_真实Runtime接入硬闸口_RC前置总包_20260607/reports/l660_real_runtime_gate.log",
+      "exit": "/mnt/data/临渊者_FE01_STEP21_L660_真实Runtime接入硬闸口_RC前置总包_20260607/reports/l660_real_runtime_gate.exit"
+    }
+  ],
+  "note": "Contract-server regression may pass while ready_for_combine remains false until the real Runtime gate passes."
+}

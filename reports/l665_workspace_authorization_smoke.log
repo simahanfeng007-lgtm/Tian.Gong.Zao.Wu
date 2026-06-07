@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "contract": "tiangong.l6_65.agent_workspace.v1",
+  "hook_verdict": "allow",
+  "record_status": "frontend_only_recorded",
+  "raw_path_leaked": false,
+  "runtime_authority_required": true
+}

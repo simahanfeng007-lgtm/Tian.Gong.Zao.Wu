@@ -1,3 +1,0 @@
-﻿L4 phase7 forbidden term static scan
-files: 29
-result: PASS, no forbidden terms found

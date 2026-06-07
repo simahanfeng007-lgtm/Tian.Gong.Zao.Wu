@@ -1,0 +1,107 @@
+{
+  "contract_version": "tiangong.l6_64.release_verify.v1",
+  "checked_at": "2026-06-07T05:58:06",
+  "runtime_url_present": false,
+  "results": [
+    {
+      "name": "l664_backend_compileall",
+      "cmd": [
+        "python",
+        "-m",
+        "compileall",
+        "-q",
+        "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/backend/project"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/reports/l664_backend_compileall.log"
+    },
+    {
+      "name": "l664_frontend_scripts_compileall",
+      "cmd": [
+        "python",
+        "-m",
+        "compileall",
+        "-q",
+        "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/frontend",
+        "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/scripts",
+        "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/launchers"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/reports/l664_frontend_scripts_compileall.log"
+    },
+    {
+      "name": "l664_observability_preflight",
+      "cmd": [
+        "python",
+        "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/scripts/observability_preflight_l662.py"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/reports/l664_observability_preflight.log"
+    },
+    {
+      "name": "l664_hookbus_preflight",
+      "cmd": [
+        "python",
+        "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/scripts/hookbus_preflight_l663.py"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/reports/l664_hookbus_preflight.log"
+    },
+    {
+      "name": "l664_file_transfer_interrupt_preflight",
+      "cmd": [
+        "python",
+        "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/scripts/file_transfer_interrupt_preflight_l664.py",
+        "--out",
+        "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/reports/file_transfer_interrupt_preflight_l664.json"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/reports/l664_file_transfer_interrupt_preflight.log"
+    },
+    {
+      "name": "l664_rc_preflight_contract_server",
+      "cmd": [
+        "python",
+        "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/scripts/rc_preflight_l659.py",
+        "--contract-server",
+        "--out",
+        "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/reports/rc_preflight_l664_contract_server.json"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/reports/l664_rc_preflight_contract_server.log"
+    },
+    {
+      "name": "l664_real_runtime_unlock_absent_expected",
+      "cmd": [
+        "python",
+        "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/scripts/real_runtime_unlock_l661.py",
+        "--require-real",
+        "--out",
+        "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/reports/real_runtime_unlock_l664_absent_expected.json"
+      ],
+      "returncode": 2,
+      "ok": true,
+      "log": "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/reports/l664_real_runtime_unlock_absent_expected.log"
+    },
+    {
+      "name": "l664_scan",
+      "cmd": [
+        "python",
+        "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/scripts/scan_l659.py"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l664_work/临渊者_FE01_STEP25_L664_文件传输对话引导中断任务_RC前置总包_20260607/reports/l664_scan.log"
+    }
+  ],
+  "ok": true,
+  "ready_for_combine": false,
+  "note": "L6.64 adds frontend file-transfer request UX, conversation guide chips, and task interrupt control request. Real Runtime unblock remains governed by L6.61.",
+  "target_test_note": "No backend/frontend pytest tree is bundled in this RC artifact; L6.51/L6.51.1 and L6.52-L6.58 target-test pass records are preserved from prior reports. This verifier reruns available compile/preflight/smoke/scans inside the artifact."
+}

@@ -1,0 +1,224 @@
+{
+  "contract_version": "tiangong.l6_70.real_runtime_endpoint_smoke.v1",
+  "checked_at": "2026-06-07T09:58:29",
+  "runtime_url_visible": "digest_only",
+  "runtime_url_digest": "",
+  "real_runtime_url_present": false,
+  "real_runtime_executed": false,
+  "read_endpoint_smoke_ok": false,
+  "request_envelope_checks_ok": true,
+  "request_envelope_checks": [
+    {
+      "name": "stop",
+      "endpoint": "/control/task/stop",
+      "ok": true,
+      "required_true_missing_or_false": [],
+      "forbidden_marker_hits": [],
+      "payload_keys": [
+        "action",
+        "frontend_contract",
+        "no_frontend_memory_write",
+        "no_frontend_rollback_apply",
+        "no_frontend_tool_execution",
+        "reason",
+        "run_id",
+        "task_id"
+      ]
+    },
+    {
+      "name": "reset",
+      "endpoint": "/control/task/reset",
+      "ok": true,
+      "required_true_missing_or_false": [],
+      "forbidden_marker_hits": [],
+      "payload_keys": [
+        "action",
+        "frontend_contract",
+        "no_frontend_memory_write",
+        "no_frontend_rollback_apply",
+        "no_frontend_tool_execution",
+        "reason",
+        "run_id",
+        "task_id"
+      ]
+    },
+    {
+      "name": "interrupt",
+      "endpoint": "/control/task/interrupt",
+      "ok": true,
+      "required_true_missing_or_false": [],
+      "forbidden_marker_hits": [],
+      "payload_keys": [
+        "action",
+        "frontend_contract",
+        "no_frontend_memory_write",
+        "no_frontend_rollback_apply",
+        "no_frontend_tool_execution",
+        "reason",
+        "run_id",
+        "task_id"
+      ]
+    },
+    {
+      "name": "file_transfer",
+      "endpoint": "/files/transfer/request",
+      "ok": true,
+      "required_true_missing_or_false": [],
+      "forbidden_marker_hits": [],
+      "payload_keys": [
+        "direction",
+        "file_name",
+        "frontend_contract",
+        "local_path_digest",
+        "mime_type",
+        "no_frontend_audit_write",
+        "no_frontend_memory_write",
+        "no_frontend_path_exposure",
+        "no_frontend_rollback_apply",
+        "no_frontend_tool_execution",
+        "purpose",
+        "raw_content_inline",
+        "route_to_runtime_only",
+        "run_id",
+        "sha256",
+        "size_bytes",
+        "task_id"
+      ]
+    },
+    {
+      "name": "workspace_file_authorize",
+      "endpoint": "/workspace/file/authorize",
+      "ok": true,
+      "required_true_missing_or_false": [],
+      "forbidden_marker_hits": [],
+      "payload_keys": [
+        "file_name",
+        "frontend_contract",
+        "local_path_digest",
+        "mode",
+        "no_frontend_acl_mutation",
+        "no_frontend_audit_write",
+        "no_frontend_file_copy",
+        "no_frontend_memory_write",
+        "no_frontend_path_exposure",
+        "no_frontend_rollback_apply",
+        "no_frontend_workspace_create",
+        "purpose",
+        "raw_content_inline",
+        "route_to_runtime_only",
+        "run_id",
+        "scope",
+        "task_id"
+      ]
+    },
+    {
+      "name": "connector_register",
+      "endpoint": "/connectors/register/request",
+      "ok": true,
+      "required_true_missing_or_false": [],
+      "forbidden_marker_hits": [],
+      "payload_keys": [
+        "default_mode",
+        "display_name",
+        "frontend_contract",
+        "kind",
+        "manifest_digest",
+        "no_frontend_audit_write",
+        "no_frontend_connector_execute",
+        "no_frontend_connector_install",
+        "no_frontend_memory_write",
+        "no_frontend_rollback_apply",
+        "no_frontend_secret_storage",
+        "no_frontend_tool_execution",
+        "no_frontend_workspace_bypass",
+        "no_mcp_market_install",
+        "no_raw_endpoint_display",
+        "purpose",
+        "quality_gate_required",
+        "raw_manifest_inline",
+        "read_only_default",
+        "requested_capabilities",
+        "requested_scopes",
+        "route_to_runtime_only",
+        "run_id",
+        "runtime_authority_required",
+        "signature_digest",
+        "source_digest",
+        "task_id",
+        "trust_level",
+        "version",
+        "workspace_authorization_required"
+      ]
+    },
+    {
+      "name": "session_resume",
+      "endpoint": "/sessions/resume",
+      "ok": true,
+      "required_true_missing_or_false": [],
+      "forbidden_marker_hits": [],
+      "payload_keys": [
+        "action",
+        "frontend_contract",
+        "no_frontend_audit_write",
+        "no_frontend_execute",
+        "no_frontend_memory_write",
+        "no_frontend_rollback_apply",
+        "no_frontend_tool_execution",
+        "reason",
+        "route_to_runtime_only",
+        "session_id_digest"
+      ]
+    },
+    {
+      "name": "session_search",
+      "endpoint": "/sessions/search",
+      "ok": true,
+      "required_true_missing_or_false": [],
+      "forbidden_marker_hits": [],
+      "payload_keys": [
+        "action",
+        "frontend_contract",
+        "no_frontend_audit_write",
+        "no_frontend_execute",
+        "no_frontend_memory_write",
+        "no_frontend_rollback_apply",
+        "no_frontend_tool_execution",
+        "query",
+        "read_only_projection"
+      ]
+    },
+    {
+      "name": "confirmation_submit",
+      "endpoint": "/confirmations/submit",
+      "ok": true,
+      "required_true_missing_or_false": [],
+      "forbidden_marker_hits": [],
+      "payload_keys": [
+        "decision",
+        "frontend_contract",
+        "no_frontend_audit_write",
+        "no_frontend_execute",
+        "no_frontend_gate_bypass",
+        "no_frontend_rollback_apply",
+        "route_to_runtime_only",
+        "run_id",
+        "task_id",
+        "ticket_id",
+        "user_comment"
+      ]
+    }
+  ],
+  "projection_policy_notes": [
+    "observability.trace_projection_from_sse",
+    "hookbus.local_deterministic_guard_projection"
+  ],
+  "ready_for_combine": false,
+  "merge_blockers": [
+    "real Runtime instance smoke not executed",
+    "LINYUANZHE_RUNTIME_URL not provided"
+  ],
+  "final_installer_allowed": false,
+  "windows_installer_artifact_emitted": false,
+  "note": "没有真实 Runtime URL 时，本脚本只产出阻断证据；不使用 contract-server 冒充真实联调。",
+  "report": "reports/real_runtime_endpoint_smoke_l670.json"
+}

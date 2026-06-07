@@ -1,2 +1,0 @@
-command: python3 -m pytest -q <L1 required + phase8 + added tests>
-result: 63 passed in 5.36s

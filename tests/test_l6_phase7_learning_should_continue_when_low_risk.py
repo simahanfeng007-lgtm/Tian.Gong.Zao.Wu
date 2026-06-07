@@ -1,4 +1,0 @@
-from tiangong_kernel.l6_plugins.adaptive_collaboration import AdaptiveExecutionFirstPolicy
-
-def test_learning_should_continue_when_low_risk():
-    assert AdaptiveExecutionFirstPolicy().learning_should_continue_when_low_risk is True

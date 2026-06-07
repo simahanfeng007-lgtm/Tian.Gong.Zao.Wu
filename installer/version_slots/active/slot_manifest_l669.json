@@ -1,0 +1,8 @@
+{
+  "slot_name": "active",
+  "version_label": "FE01 STEP30 / L6.69",
+  "state": "active",
+  "path_digest": "SLOT-ACTIVE-L669",
+  "rollback_capable": true,
+  "message": "活动槽包含 L6.69 Windows 打包器 dry-run 结构；不是最终安装包。"
+}

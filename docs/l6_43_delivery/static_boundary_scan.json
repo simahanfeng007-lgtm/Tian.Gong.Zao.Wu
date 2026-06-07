@@ -1,9 +1,0 @@
-{
-  "files": [
-    "tiangong_agent_runtime/four_path_public_projection.py",
-    "tiangong_agent_runtime/four_path_priority_policy.py",
-    "tiangong_agent_runtime/four_path_context_router.py"
-  ],
-  "findings": [],
-  "status": "PASS"
-}

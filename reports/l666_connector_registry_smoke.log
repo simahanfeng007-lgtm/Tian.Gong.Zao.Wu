@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "contract": "tiangong.l6_66.connector_registry.v1",
+  "hook_verdict": "allow",
+  "record_status": "frontend_only_recorded",
+  "market_install_disabled": true,
+  "frontend_execute_allowed": false,
+  "raw_secret_leaked": false
+}

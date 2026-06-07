@@ -1,0 +1,145 @@
+{
+  "checked_at": "2026-06-07T10:10:23",
+  "secret_scan": {
+    "ok": true,
+    "hit_count": 0,
+    "hits": []
+  },
+  "source_marker_reference_scan": {
+    "ok": true,
+    "hit_count": 20,
+    "note": "source redaction/config marker references only; not logged secrets",
+    "hits": [
+      {
+        "file": "scripts/real_runtime_endpoint_smoke_l670.py",
+        "line": 47,
+        "pattern": "api_key_equals_literal",
+        "match": "<redacted>"
+      },
+      {
+        "file": "scripts/scan_l659.py",
+        "line": 19,
+        "pattern": "provider_key_env_literal",
+        "match": "<redacted>"
+      },
+      {
+        "file": "frontend/linyuanzhe_frontend/clients/runtime_integration_probe.py",
+        "line": 24,
+        "pattern": "api_key_equals_literal",
+        "match": "<redacted>"
+      },
+      {
+        "file": "frontend/linyuanzhe_frontend/contracts/provider_settings.py",
+        "line": 54,
+        "pattern": "api_key_equals_literal",
+        "match": "<redacted>"
+      },
+      {
+        "file": "backend/project/tiangong_agent_runtime/budget_low_friction_governance.py",
+        "line": 554,
+        "pattern": "api_key_equals_literal",
+        "match": "<redacted>"
+      },
+      {
+        "file": "backend/project/tiangong_agent_runtime/frontend_contract.py",
+        "line": 148,
+        "pattern": "provider_key_env_literal",
+        "match": "<redacted>"
+      },
+      {
+        "file": "backend/project/tiangong_agent_runtime/planner_unified_consumption.py",
+        "line": 450,
+        "pattern": "api_key_equals_literal",
+        "match": "<redacted>"
+      },
+      {
+        "file": "backend/project/tiangong_agent_shell/config_loader.py",
+        "line": 158,
+        "pattern": "api_key_equals_literal",
+        "match": "<redacted>"
+      },
+      {
+        "file": "backend/project/tiangong_agent_shell/config_loader.py",
+        "line": 62,
+        "pattern": "provider_key_env_literal",
+        "match": "<redacted>"
+      },
+      {
+        "file": "backend/project/tiangong_agent_shell/safe_logging.py",
+        "line": 46,
+        "pattern": "api_key_equals_literal",
+        "match": "<redacted>"
+      },
+      {
+        "file": "backend/project/tiangong_kernel/l5_plugin_host/lifecycle_declaration.py",
+        "line": 192,
+        "pattern": "api_key_equals_literal",
+        "match": "<redacted>"
+      },
+      {
+        "file": "backend/project/tiangong_kernel/l5_plugin_host/phase6_health.py",
+        "line": 264,
+        "pattern": "api_key_equals_literal",
+        "match": "<redacted>"
+      },
+      {
+        "file": "backend/project/tiangong_kernel/l5_plugin_host/phase7_boundary_gate.py",
+        "line": 355,
+        "pattern": "api_key_equals_literal",
+        "match": "<redacted>"
+      },
+      {
+        "file": "backend/project/tiangong_kernel/l5_plugin_host/registry_conflict_rules.py",
+        "line": 98,
+        "pattern": "api_key_equals_literal",
+        "match": "<redacted>"
+      },
+      {
+        "file": "backend/project/tiangong_kernel/l6_plugins/cognitive_continuity/forbidden_scan.py",
+        "line": 22,
+        "pattern": "api_key_equals_literal",
+        "match": "<redacted>"
+      },
+      {
+        "file": "backend/project/tiangong_kernel/l6_plugins/common/_common.py",
+        "line": 130,
+        "pattern": "api_key_equals_literal",
+        "match": "<redacted>"
+      },
+      {
+        "file": "backend/project/tiangong_kernel/l6_plugins/common/forbidden_scan.py",
+        "line": 118,
+        "pattern": "api_key_equals_literal",
+        "match": "<redacted>"
+      },
+      {
+        "file": "backend/project/tiangong_kernel/l6_plugins/governance_control/forbidden_scan.py",
+        "line": 23,
+        "pattern": "api_key_equals_literal",
+        "match": "<redacted>"
+      },
+      {
+        "file": "backend/project/tiangong_kernel/l6_plugins/mind/mind_forbidden_scan.py",
+        "line": 28,
+        "pattern": "api_key_equals_literal",
+        "match": "<redacted>"
+      },
+      {
+        "file": "backend/project/tiangong_kernel/l6_plugins/product_delivery/forbidden_scan.py",
+        "line": 23,
+        "pattern": "api_key_equals_literal",
+        "match": "<redacted>"
+      }
+    ]
+  },
+  "provider_sdk_import_scan": {
+    "ok": true,
+    "hit_count": 0,
+    "hits": []
+  },
+  "bare_except_pass_scan": {
+    "ok": true,
+    "hit_count": 0,
+    "hits": []
+  }
+}

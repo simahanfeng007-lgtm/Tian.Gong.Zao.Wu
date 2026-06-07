@@ -1,0 +1,53 @@
+{
+  "contract_version": "tiangong.l6_69.release_pipeline_preflight.v1",
+  "checked_at": "2026-06-07T10:11:08",
+  "ok": true,
+  "manifest_checks": {
+    "release_contract_ok": true,
+    "identity_preserved": true,
+    "final_installer_disabled": true,
+    "real_runtime_unlock_required": true,
+    "signing_required_for_final": true,
+    "no_signing_secret_in_package": true,
+    "no_certificate_path_in_package": true
+  },
+  "runs": [
+    {
+      "name": "startup_self_check_l669",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/l669_startup_self_check_l669.log",
+      "payload": {
+        "ok": true,
+        "report": "/mnt/data/l671_work/reports/installer_startup_self_check_l669.json"
+      }
+    },
+    {
+      "name": "version_slot_validation_l669",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/l669_version_slot_validation_l669.log",
+      "payload": {
+        "ok": true,
+        "report": "/mnt/data/l671_work/reports/version_slot_validation_l669.json"
+      }
+    },
+    {
+      "name": "windows_packager_dry_run_l669",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/l669_windows_packager_dry_run_l669.log",
+      "payload": {
+        "ok": true,
+        "report": "/mnt/data/l671_work/reports/windows_packager_dry_run_l669.json"
+      }
+    }
+  ],
+  "final_installer_allowed": false,
+  "windows_installer_artifact_emitted": false,
+  "ready_for_combine": false,
+  "merge_blockers": [
+    "real Runtime instance smoke not executed"
+  ],
+  "runtime_core_mutation": false
+}

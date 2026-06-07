@@ -1,8 +1,0 @@
-L5 第五阶段 PublicProjection 安全报告
-
-结论：通过。
-
-公共投影只暴露 summary、refs、counts、risk_tags、status_text、redacted_evidence_refs、quality gate summary 与 handoff summary。
-禁止项未出现：完整 Manifest、完整 credential/data/resource/dependency/trust boundary 声明、真实路径、URL、socket、database URI、module path、import path、entry point、function repr、shell command、raw credential、secret handle、plaintext identity、permit/lease/confirmation ticket 实体。
-
-二次泄露测试覆盖：credential summary、resource summary、capability token summary、trust boundary summary、switch boundary summary、redacted evidence refs。

@@ -1,3 +1,0 @@
-﻿L4 phase8 total forbidden module import scan
-files: 187
-result: PASS, no forbidden imports found

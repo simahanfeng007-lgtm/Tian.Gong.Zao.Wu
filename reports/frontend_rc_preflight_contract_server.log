@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "ready_for_combine": false,
+  "rc_status": "blocked_before_frontend_backend_combine",
+  "mode": "contract_server",
+  "report": "/mnt/data/step20_l659_work/reports/rc_preflight_contract_server_step20.json"
+}

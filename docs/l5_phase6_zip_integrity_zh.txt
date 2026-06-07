@@ -1,4 +1,0 @@
-L5 第六阶段 zip integrity
-zip_file=天工造物_L5第六阶段_健康质量门隔离处置许可声明_交付包_20260604.zip
-status=archive_created; sha256 is recorded in top-level handoff report and final chat because zip cannot contain its own final hash without changing itself.
-utf8_paths=yes

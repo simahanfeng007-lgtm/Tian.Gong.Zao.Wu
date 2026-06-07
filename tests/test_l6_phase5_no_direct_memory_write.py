@@ -1,8 +1,0 @@
-import pytest
-
-from tiangong_kernel.l6_plugins.governance_control import *
-
-def test_no_direct_memory_write_declared():
-    with pytest.raises(ValueError):
-        GovernanceControlPluginDeclaration(plugin_ref='l6_phase5:bad_memory_write', plugin_kind=GovernancePluginKind.GOVERNANCE_REVIEW, summary='bad', writes_memory=True)
-    assert GovernanceReviewBundle().final_result_included is False

@@ -1,0 +1,14 @@
+{
+  "secret_scan": {
+    "ok": false,
+    "hit_count": 1458
+  },
+  "provider_sdk_import_scan": {
+    "ok": true,
+    "hit_count": 0
+  },
+  "bare_except_pass_scan": {
+    "ok": false,
+    "hit_count": 53
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "contract_version": "tiangong.l6_70.release_verify.v1",
+  "checked_at": "2026-06-07T10:10:42",
+  "runtime_url_present": false,
+  "results": [
+    {
+      "name": "l670_backend_compileall",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/l670_backend_compileall.log"
+    },
+    {
+      "name": "l670_frontend_scripts_launchers_installer_compileall",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/l670_frontend_scripts_launchers_installer_compileall.log"
+    },
+    {
+      "name": "l670_observability_preflight",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/l670_observability_preflight.log"
+    },
+    {
+      "name": "l670_hookbus_preflight",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/l670_hookbus_preflight.log"
+    },
+    {
+      "name": "l670_file_transfer_interrupt_preflight",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/l670_file_transfer_interrupt_preflight.log"
+    },
+    {
+      "name": "l670_workspace_preflight",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/l670_workspace_preflight.log"
+    },
+    {
+      "name": "l670_connector_registry_preflight",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/l670_connector_registry_preflight.log"
+    },
+    {
+      "name": "l670_session_manager_preflight",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/l670_session_manager_preflight.log"
+    },
+    {
+      "name": "l670_installer_rc_preflight",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/l670_installer_rc_preflight.log"
+    },
+    {
+      "name": "l670_package_builder_preflight",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/l670_package_builder_preflight.log"
+    },
+    {
+      "name": "l670_rc_preflight_contract_server",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/l670_rc_preflight_contract_server.log"
+    },
+    {
+      "name": "l670_rc_preflight_contract_server_json",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/rc_preflight_l670_contract_server.json",
+      "key": "ok",
+      "value": true
+    },
+    {
+      "name": "l670_scan",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/scan_l659.json",
+      "counts": {
+        "secret_hits": 0,
+        "provider_sdk_import_hits": 0,
+        "bare_except_pass_hits": 0
+      }
+    },
+    {
+      "name": "l670_real_runtime_unlock_absent_expected",
+      "returncode": 2,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/l670_real_runtime_unlock_absent_expected.log"
+    },
+    {
+      "name": "l670_real_runtime_endpoint_smoke_absent_expected",
+      "returncode": 2,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/l670_real_runtime_endpoint_smoke_absent_expected.log"
+    },
+    {
+      "name": "l670_real_runtime_unlock_blocked_json",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/real_runtime_unlock_l670.json",
+      "key": "ready_for_combine",
+      "value": false
+    },
+    {
+      "name": "l670_real_runtime_endpoint_smoke_blocked_json",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l671_work/reports/real_runtime_endpoint_smoke_l670.json",
+      "key": "ready_for_combine",
+      "value": false
+    }
+  ],
+  "ok": true,
+  "ready_for_combine": false,
+  "real_runtime_smoke_passed": false,
+  "final_installer_allowed": false,
+  "windows_installer_artifact_emitted": false,
+  "runtime_core_mutation": false,
+  "merge_blockers": [
+    "real Runtime instance smoke not executed",
+    "LINYUANZHE_RUNTIME_URL not provided"
+  ],
+  "note": "L6.70 is only unblocked when real Runtime unlock and endpoint smoke both pass. Contract-server evidence remains regression-only."
+}

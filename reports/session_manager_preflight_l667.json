@@ -1,0 +1,31 @@
+{
+  "contract_version": "tiangong.l6_67.session_manager_preflight.v1",
+  "checked_at": "2026-06-07T09:56:17",
+  "ok": true,
+  "returncode": 0,
+  "smoke_log": "/mnt/data/l670_work/reports/l667_session_manager_smoke.log",
+  "payload": {
+    "ok": true,
+    "checks": {
+      "sessions_page_registered": true,
+      "home_has_session_entry": true,
+      "session_contract_present": true,
+      "session_count_nonzero": true,
+      "search_recorded": true,
+      "resume_recorded": true,
+      "stats_total_present": true,
+      "no_frontend_execution_claim": true
+    },
+    "session_count": 4,
+    "target_session": "071a46bfdb2d03b1"
+  },
+  "boundaries": {
+    "frontend_displays_sessions_only": true,
+    "resume_routes_to_runtime_only": true,
+    "search_is_read_only_projection": true,
+    "frontend_does_not_resume_tools": true,
+    "frontend_does_not_write_memory_or_audit": true,
+    "frontend_does_not_apply_rollback": true,
+    "hotkeys_submit_requests_only": true
+  }
+}

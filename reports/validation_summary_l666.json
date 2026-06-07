@@ -1,0 +1,70 @@
+{
+  "contract_version": "tiangong.l6_66.release_verify.v1",
+  "checked_at": "2026-06-07T06:28:14",
+  "runtime_url_present": false,
+  "results": [
+    {
+      "name": "l666_backend_compileall",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l666_build/临渊者_FE01_STEP27_L666_MCP连接器注册表前置治理_RC前置总包_20260607/reports/l666_backend_compileall.log"
+    },
+    {
+      "name": "l666_frontend_scripts_compileall",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l666_build/临渊者_FE01_STEP27_L666_MCP连接器注册表前置治理_RC前置总包_20260607/reports/l666_frontend_scripts_compileall.log"
+    },
+    {
+      "name": "l666_observability_preflight",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l666_build/临渊者_FE01_STEP27_L666_MCP连接器注册表前置治理_RC前置总包_20260607/reports/l666_observability_preflight.log"
+    },
+    {
+      "name": "l666_hookbus_preflight",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l666_build/临渊者_FE01_STEP27_L666_MCP连接器注册表前置治理_RC前置总包_20260607/reports/l666_hookbus_preflight.log"
+    },
+    {
+      "name": "l666_file_transfer_interrupt_preflight",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l666_build/临渊者_FE01_STEP27_L666_MCP连接器注册表前置治理_RC前置总包_20260607/reports/l666_file_transfer_interrupt_preflight.log"
+    },
+    {
+      "name": "l666_workspace_preflight",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l666_build/临渊者_FE01_STEP27_L666_MCP连接器注册表前置治理_RC前置总包_20260607/reports/l666_workspace_preflight.log"
+    },
+    {
+      "name": "l666_connector_registry_preflight",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l666_build/临渊者_FE01_STEP27_L666_MCP连接器注册表前置治理_RC前置总包_20260607/reports/l666_connector_registry_preflight.log"
+    },
+    {
+      "name": "l666_rc_preflight_contract_server",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l666_build/临渊者_FE01_STEP27_L666_MCP连接器注册表前置治理_RC前置总包_20260607/reports/rc_preflight_l666_contract_server.json"
+    },
+    {
+      "name": "l666_scan",
+      "returncode": 0,
+      "ok": true,
+      "log": "/mnt/data/l666_build/临渊者_FE01_STEP27_L666_MCP连接器注册表前置治理_RC前置总包_20260607/reports/scan_l659.json"
+    },
+    {
+      "name": "l666_real_runtime_unlock_absent_expected",
+      "returncode": 2,
+      "ok": true,
+      "log": "/mnt/data/l666_build/临渊者_FE01_STEP27_L666_MCP连接器注册表前置治理_RC前置总包_20260607/reports/l666_real_runtime_unlock_absent_expected.log"
+    }
+  ],
+  "ok": true,
+  "ready_for_combine": false,
+  "note": "L6.66 adds MCP / connector registry governance. Aggregate verifier consumes generated evidence; standalone scripts rerun each preflight."
+}

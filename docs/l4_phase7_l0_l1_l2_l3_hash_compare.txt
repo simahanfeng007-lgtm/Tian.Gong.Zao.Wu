@@ -1,9 +1,0 @@
-﻿L4 phase7 L0-L3 hash comparison
-baseline: project_l4_phase6
-candidate: project_l4_phase7
-excluded: __pycache__, *.pyc
-l0_primitives : IDENTICAL (phase6 files=58, phase7 files=58)
-l1_ports : IDENTICAL (phase6 files=49, phase7 files=49)
-l2_state : IDENTICAL (phase6 files=53, phase7 files=53)
-l3_orchestration : IDENTICAL (phase6 files=68, phase7 files=68)
-overall: IDENTICAL

@@ -1,9 +1,0 @@
-{
-  "passed": true,
-  "finding_count": 0,
-  "scan_scope": [
-    "tiangong_kernel/l6_plugins"
-  ],
-  "scanner_note": "AST-based scanner excludes forbidden_scan.py literal pattern catalogs, so inert rule strings are not treated as live calls.",
-  "findings": []
-}

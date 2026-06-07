@@ -1,4 +1,0 @@
-公共投影安全报告
-PluginPhase6PublicProjection 只暴露 health / disposition / permission precondition 的 redacted summary、counts、risk_tags、redacted_evidence_refs、trace_ref、responsibility_chain_ref。
-禁止暴露完整声明、真实日志、真实指标、真实路径、URL、socket、数据库连接、permit/lease/ticket 实体、token、明文凭据、真实插件入口。
-阶段测试覆盖：test_l5_phase6_disposition_and_projection.py。

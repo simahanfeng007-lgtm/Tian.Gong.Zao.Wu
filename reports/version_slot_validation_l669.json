@@ -1,0 +1,57 @@
+{
+  "contract_version": "tiangong.l6_69.version_slot_validation.v1",
+  "checked_at": "2026-06-07T10:11:05",
+  "ok": true,
+  "checks": [
+    {
+      "check_id": "slot_active",
+      "ok": true,
+      "path": "installer/version_slots/active/slot_manifest_l669.json",
+      "state": "active"
+    },
+    {
+      "check_id": "slot_rollback",
+      "ok": true,
+      "path": "installer/version_slots/rollback/slot_manifest_l669.json",
+      "state": "rollback"
+    },
+    {
+      "check_id": "slot_candidate",
+      "ok": true,
+      "path": "installer/version_slots/candidate/slot_manifest_l669.json",
+      "state": "candidate"
+    },
+    {
+      "check_id": "active_rollback_capable",
+      "ok": true
+    },
+    {
+      "check_id": "rollback_ready",
+      "ok": true
+    },
+    {
+      "check_id": "candidate_is_dry_run_only",
+      "ok": true
+    }
+  ],
+  "slot_summary": {
+    "active": {
+      "state": "active",
+      "version_label": "FE01 STEP30 / L6.69",
+      "path_digest": "SLOT-ACTIVE-L669"
+    },
+    "rollback": {
+      "state": "rollback",
+      "version_label": "FE01 STEP29 / L6.68",
+      "path_digest": "SLOT-ROLLBACK-L668"
+    },
+    "candidate": {
+      "state": "candidate",
+      "version_label": "windows-installer-candidate-dry-run",
+      "path_digest": "SLOT-CANDIDATE-L669-DRY-RUN"
+    }
+  },
+  "slot_mutation_performed": false,
+  "frontend_applied_rollback": false,
+  "runtime_core_mutation": false
+}

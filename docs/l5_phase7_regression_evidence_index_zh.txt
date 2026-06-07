@@ -1,9 +1,0 @@
-L5 第七阶段回归证据索引
-
-L0-L4：hash compare clean。
-L5 phase1-phase6：新增 phase7 文件；__init__.py 为公共导出声明性兼容扩展。
-no-live-action：保持。
-no-L6-implementation：保持。
-no-legacy-runtime：保持。
-full pytest：1229 passed。
-forbidden scan：0 blocking findings。

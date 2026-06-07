@@ -1,8 +1,0 @@
-{
-  "schema": "tiangong.l6_20.forbidden_scan.v1",
-  "blocking_findings": [],
-  "passed": true,
-  "notes": [
-    "Redaction vocabulary such as api_key/token may appear in sanitizer tests and code; no raw credential pattern found."
-  ]
-}

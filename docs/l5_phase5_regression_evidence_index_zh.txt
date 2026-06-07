@@ -1,7 +1,0 @@
-L5 第五阶段回归证据索引
-
-L0-L4 回归保护：0 added / 0 modified / 0 deleted。
-L5 phase1-phase4 兼容保护：新增 phase5_boundary.py；__init__.py 为声明性导出扩展；未删除或重命名前序公开对象。
-测试清单：新增 61；删除 0；修改旧测试 0；skip/xfail 新增 0。
-full pytest：1171 passed in 42.36s
-forbidden scan：0 blocking findings。

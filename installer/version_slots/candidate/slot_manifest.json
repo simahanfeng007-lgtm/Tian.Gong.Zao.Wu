@@ -1,0 +1,8 @@
+{
+  "slot_name": "candidate",
+  "version_label": "next-update-candidate",
+  "state": "candidate",
+  "path_digest": "SLOT-CANDIDATE-PENDING",
+  "rollback_capable": false,
+  "message": "候选更新槽骨架，当前禁止自动下载或应用。"
+}

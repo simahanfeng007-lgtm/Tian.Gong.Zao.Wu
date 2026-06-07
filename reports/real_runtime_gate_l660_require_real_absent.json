@@ -1,0 +1,19 @@
+{
+  "contract_version": "tiangong.l6_60.real_runtime_gate.v1",
+  "checked_at": "2026-06-07T03:32:00",
+  "runtime_url_visible": "digest_only",
+  "runtime_url_digest": "",
+  "real_runtime_url_present": false,
+  "real_runtime_executed": false,
+  "contract_server_used": false,
+  "ready_for_combine": false,
+  "ok": false,
+  "exit_code": 2,
+  "merge_blockers": [
+    "real Runtime instance smoke not executed",
+    "LINYUANZHE_RUNTIME_URL not provided"
+  ],
+  "next_action": "Start real TiangongWangguan/Runtime, set LINYUANZHE_RUNTIME_URL, then rerun this gate with --require-real.",
+  "note": "This is a hard gate. Contract-server regression is intentionally not accepted as a real Runtime smoke result.",
+  "report": "reports/real_runtime_gate_l660_require_real_absent.json"
+}

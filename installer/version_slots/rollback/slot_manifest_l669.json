@@ -1,0 +1,8 @@
+{
+  "slot_name": "rollback",
+  "version_label": "FE01 STEP29 / L6.68",
+  "state": "rollback",
+  "path_digest": "SLOT-ROLLBACK-L668",
+  "rollback_capable": true,
+  "message": "回滚槽指向 L6.68 前置结构；真实恢复必须由安装器控制器执行。"
+}

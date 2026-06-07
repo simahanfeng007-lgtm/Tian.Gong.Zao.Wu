@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "checks": {
+    "installer_page_registered": true,
+    "home_has_installer_entry": true,
+    "forbidden_auto_update_present": true,
+    "installer_contract_present": true,
+    "identity_preserved": true,
+    "version_slots_present": true,
+    "startup_checks_present": true,
+    "crash_report_local_only": true,
+    "repair_actions_no_frontend_apply": true,
+    "policy_blocks_frontend_apply": true,
+    "snapshot_serializes": true
+  },
+  "startup_summary": {
+    "total": 4,
+    "pass": 0,
+    "warn": 0,
+    "fail": 0,
+    "blocked": 0,
+    "pending": 4
+  },
+  "slot_count": 3
+}

@@ -1,9 +1,0 @@
-L5 第八阶段回归证据索引
-
-L0-L4：无 added/modified/deleted。
-L5 phase1-phase7：新增 phase8_closure.py；__init__.py 为共享文件声明性兼容扩展；无删除。
-前序对象：未删除、未重命名。
-公共导出：新增 phase8 导出，保留前序导出。
-测试库存：新增 21，删除 0，修改旧测试 0。
-full pytest：1250 passed。
-forbidden scan：0 blocking findings。

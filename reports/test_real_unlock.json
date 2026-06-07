@@ -1,0 +1,19 @@
+{
+  "contract_version": "tiangong.l6_61.real_runtime_unlock.v1",
+  "checked_at": "2026-06-07T08:45:14",
+  "runtime_url_visible": "digest_only",
+  "runtime_url_digest": "",
+  "real_runtime_url_present": false,
+  "real_runtime_executed": false,
+  "direct_read_probe_ok": false,
+  "l660_gate_ok": false,
+  "ready_for_combine": false,
+  "provider_write_mode": "not_started",
+  "confirmation_submit_probe": "not_mutated_without_pending_confirmation",
+  "merge_blockers": [
+    "real Runtime instance smoke not executed",
+    "LINYUANZHE_RUNTIME_URL not provided"
+  ],
+  "next_action": "启动真实 TiangongWangguan/Runtime，设置真实 Runtime 地址后重新运行本脚本。",
+  "report": "reports/test_real_unlock.json"
+}

@@ -1,0 +1,24 @@
+{
+  "contract_version": "tiangong.l6_65.workspace_preflight.v1",
+  "checked_at": "2026-06-07T08:43:48",
+  "ok": true,
+  "returncode": 0,
+  "smoke_log": "/mnt/data/work_l668/reports/l665_workspace_authorization_smoke.log",
+  "payload": {
+    "ok": true,
+    "contract": "tiangong.l6_65.agent_workspace.v1",
+    "hook_verdict": "allow",
+    "record_status": "frontend_only_recorded",
+    "raw_path_leaked": false,
+    "runtime_authority_required": true
+  },
+  "boundaries": {
+    "frontend_does_not_create_workspace": true,
+    "frontend_does_not_mutate_acl": true,
+    "frontend_does_not_copy_file_bytes": true,
+    "frontend_does_not_expose_raw_path": true,
+    "write_authorization_requires_runtime_quality_gate": true,
+    "download_handoff_uses_digest_not_raw_token": true,
+    "runtime_tiangong_wangguan_authority_required": true
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "contract_version": "tiangong.l6_69.windows_packager_dry_run.v1",
+  "checked_at": "2026-06-07T10:11:08",
+  "ok": true,
+  "dry_run": true,
+  "checks": {
+    "required_files_present": true,
+    "build_plan_dry_run_only": true,
+    "release_blocks_final_installer": true,
+    "release_requires_real_runtime_unlock": true,
+    "signing_policy_has_no_key_material": true,
+    "no_windows_installer_emitted": true,
+    "frontend_does_not_build_installer": true,
+    "runtime_core_not_mutated": true
+  },
+  "file_checks": [
+    {
+      "file": "backend/project/run_agent.py",
+      "ok": true
+    },
+    {
+      "file": "frontend/linyuanzhe_frontend/app.py",
+      "ok": true
+    },
+    {
+      "file": "launchers/start_linyuanzhe_rc.py",
+      "ok": true
+    },
+    {
+      "file": "scripts/rc_preflight_l659.py",
+      "ok": true
+    },
+    {
+      "file": "scripts/real_runtime_unlock_l661.py",
+      "ok": true
+    },
+    {
+      "file": "scripts/scan_l659.py",
+      "ok": true
+    },
+    {
+      "file": "installer/installer_manifest_l668.json",
+      "ok": true
+    },
+    {
+      "file": "installer/installer_manifest_l669.json",
+      "ok": true
+    },
+    {
+      "file": "installer/build/build_plan_l669.json",
+      "ok": true
+    },
+    {
+      "file": "installer/build/version_slot_validate_l669.py",
+      "ok": true
+    },
+    {
+      "file": "installer/release/release_manifest_l669.json",
+      "ok": true
+    },
+    {
+      "file": "installer/signing/signing_policy_l669.json",
+      "ok": true
+    }
+  ],
+  "digest_manifest": [
+    {
+      "file": "backend/project/run_agent.py",
+      "sha256": "fbb9af8770e2835a684e88743adf3a4f0e16841600d99dbf453d1f8bed3bc961"
+    },
+    {
+      "file": "frontend/linyuanzhe_frontend/app.py",
+      "sha256": "2d669f25e7b9e6b388816d6481e576ec609760b0ecfdfb3cca9aa3e35579e4e5"
+    },
+    {
+      "file": "launchers/start_linyuanzhe_rc.py",
+      "sha256": "c146385601537805ff3ca4dc54c6333d831c56f0f2ba40a7f95ab58cac56b1ff"
+    },
+    {
+      "file": "scripts/rc_preflight_l659.py",
+      "sha256": "5da097878f8831a417b7757de6d92348749c748e64d1131537608c1693ce188e"
+    },
+    {
+      "file": "scripts/real_runtime_unlock_l661.py",
+      "sha256": "29ddb2424d45961a6faa835051e7f91b1fe3f96711b036f08b6f7177d265be1d"
+    },
+    {
+      "file": "scripts/scan_l659.py",
+      "sha256": "ca0f5e2d4bea18c2a3fb13304ef71c235de76c62e181138e966701ab889fe1e5"
+    },
+    {
+      "file": "installer/installer_manifest_l668.json",
+      "sha256": "54bb2c3278b18c3fc21bcb8873e83ca3099864e4f8c9153a64bd6584390ecbed"
+    },
+    {
+      "file": "installer/installer_manifest_l669.json",
+      "sha256": "d6e18c4a864465663921f27ffc1a209026f167903f66c5b5e9f1e89347699a63"
+    },
+    {
+      "file": "installer/build/build_plan_l669.json",
+      "sha256": "7ff38421421969cc8804ddf482e8cb9adc3daa030688159e18126b30287fdd2e"
+    },
+    {
+      "file": "installer/build/version_slot_validate_l669.py",
+      "sha256": "7685c5b155c1e3ebee564c07b1be2a554e60df66c98d90d135087541439bf4ee"
+    },
+    {
+      "file": "installer/release/release_manifest_l669.json",
+      "sha256": "02292069960fb36ce57c205b6fd1495b873d0f46cedf4d677f9ac2b0e6079af6"
+    },
+    {
+      "file": "installer/signing/signing_policy_l669.json",
+      "sha256": "e1b3db3e6adb4118273674eb8bf4074fdbfb95a72f414cd1c461a97c8ed8021f"
+    }
+  ],
+  "planned_artifacts": [
+    {
+      "name": "windows_installer_exe",
+      "status": "not_emitted"
+    },
+    {
+      "name": "windows_installer_msi",
+      "status": "not_emitted"
+    },
+    {
+      "name": "engineering_rc_zip",
+      "status": "built_by_release_packaging_after_validation"
+    }
+  ],
+  "windows_installer_artifact_emitted": false,
+  "signing_key_material_loaded": false,
+  "frontend_built_installer": false,
+  "runtime_core_mutation": false
+}

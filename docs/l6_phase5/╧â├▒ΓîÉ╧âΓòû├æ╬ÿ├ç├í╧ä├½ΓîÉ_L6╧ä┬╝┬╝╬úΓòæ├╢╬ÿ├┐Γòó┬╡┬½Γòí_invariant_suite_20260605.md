@@ -1,5 +1,0 @@
-# L6 第五阶段 Invariant Suite 报告
-
-结论：通过。
-
-固化不变量共 33 条，包括 ExecutionFirstWithinHardBoundaries、risk_score_does_not_block_by_default、low_risk_should_continue、long_chain_should_degrade_not_abort、no_live_model_call、no_raw_tool_call、no_direct_l2_write、no_direct_memory_write/delete、no_raw_secret、public_projection_minimal_disclosure 等。

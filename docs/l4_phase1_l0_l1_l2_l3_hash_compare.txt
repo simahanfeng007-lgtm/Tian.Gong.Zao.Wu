@@ -1,5 +1,0 @@
-﻿L4 第一阶段 L0/L1/L2/L3 Python 源码 hash 比对
-baseline=C:\Users\77571\Documents\天工造物重生\_l3_freeze_docs\project
-worktree=C:\Users\77571\Documents\天工造物重生\project_l4_phase1
-checked_dirs=tiangong_kernel\l0_primitives, tiangong_kernel\l1_ports, tiangong_kernel\l2_state, tiangong_kernel\l3_orchestration
-result=MATCH

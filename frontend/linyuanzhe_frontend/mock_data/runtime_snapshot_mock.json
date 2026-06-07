@@ -1,0 +1,210 @@
+{
+  "schema_version": "linyuanzhe.frontend.runtime_snapshot.v1",
+  "session_id": "mock-session-fe01",
+  "runtime_status": "运行中",
+  "model_provider": "DeepSeek-R1 32K",
+  "planner_mode": "PlannerExecutionController",
+  "tool_execution_mode": "runtime_governed",
+  "connection_status": "已连接（延迟 32ms）",
+  "current_task_status": "RUNNING",
+  "progress_percent": 67,
+  "plan_id": "plan_20250515_p0_integration",
+  "current_stage": "接口联调与验证",
+  "eta": "2025-05-15 13:30",
+  "success_count": 8,
+  "blocked_count": 2,
+  "pending_confirmation_count": 1,
+  "execution_stage": "接口联调中",
+  "execution_steps": [
+    {
+      "name": "接口对接",
+      "status": "succeeded",
+      "risk_level": "A2",
+      "audit_ref": "AUD-0001",
+      "output_summary": "接口对接完成"
+    },
+    {
+      "name": "权限验证",
+      "status": "succeeded",
+      "risk_level": "A2",
+      "audit_ref": "AUD-0002",
+      "output_summary": "权限验证完成"
+    },
+    {
+      "name": "数据同步",
+      "status": "running",
+      "risk_level": "A2",
+      "audit_ref": "AUD-0003",
+      "output_summary": "数据同步服务已启动"
+    }
+  ],
+  "quality_decision": "CONDITIONAL",
+  "quality_allow_continue": true,
+  "quality_allow_package": false,
+  "quality_gate_status": "warning",
+  "blocking_reasons": [
+    "首页不展示完整阻塞原因，详情页查看"
+  ],
+  "audit_count": 128,
+  "evidence_ref": "EV-250515-0001",
+  "memory_sanitized_summary": "P0 系统接入上下文已读取安全摘要；未展示原始记忆正文。",
+  "memory_digest": "3f2a7c9b8b1d2e40",
+  "memory_evidence_ref": "MEM-EV-0001",
+  "recovery_ticket_id": "RRT-250515-0007",
+  "recovery_failure_count": 1,
+  "recovery_resume_plan_count": 1,
+  "recovery_next_actions": [
+    "按恢复候选生成最小补丁计划，执行前置检查，然后复测。"
+  ],
+  "recovery_requires_human_confirmation": false,
+  "chat_messages": [
+    {
+      "role": "user",
+      "label": "你",
+      "time": "10:24:18",
+      "text": "请继续推进 P0 系统接入。"
+    },
+    {
+      "role": "assistant",
+      "label": "临渊者",
+      "time": "10:24:26",
+      "text": "已推进 P0 系统接入工作。\n接口对接与权限验证已完成，数据同步服务已启动。\n下一步将进行订单推送与回执验证。"
+    }
+  ],
+  "pending_confirmations": [
+    {
+      "ticket_id": "CT-250515-0006",
+      "title": "权限映射策略确认",
+      "risk_level": "A4",
+      "frontend_only": true
+    }
+  ],
+  "delivery_artifacts": [],
+  "source_kind": "mock",
+  "task_snapshot": {
+    "task_id": "TASK-FE01-STEP12-0001",
+    "current_stage": "前端任务快照与设置接入",
+    "current_step": "补齐 TaskSnapshotProjection / ConversationGuideRoute",
+    "completed_steps": [
+      "视觉基线验收",
+      "首页纠偏",
+      "执行页占位"
+    ],
+    "failed_steps": [],
+    "recovery_points": [
+      "FE01_STEP10B_BASELINE"
+    ],
+    "budget_state": "前端占位，不扣后端预算",
+    "tool_state": "工具执行关闭",
+    "waiting_user_confirmation": true,
+    "next_plan": "等待用户确认前端自我迭代候选后，后端再走 Planner / ExecutionSpine / QualityGate。",
+    "snapshot_ref": "TASK-SNAPSHOT-FE01-STEP12"
+  },
+  "conversation_guide": {
+    "intent_summary": "继续前端整合与后端四路径状态对齐",
+    "missing_information": [
+      "真实 Runtime SSE 契约尚未接线"
+    ],
+    "suggested_questions": [
+      "是否进入自我迭代区确认候选？",
+      "是否查看任务快照？"
+    ],
+    "recommended_actions": [
+      "继续下一步",
+      "查看任务快照",
+      "查看自我迭代"
+    ],
+    "risk_hint": "所有真实更新仍需确认与质量门",
+    "continue_hint": "可以先完成前端占位整合，再进入真实 Runtime 接线。",
+    "can_enter_long_chain": true
+  },
+  "four_path_status": {
+    "execution_status": "执行链：L6.47 冻结，前端只读展示状态",
+    "memory_status": "记忆：只展示脱敏摘要、digest、evidence_ref",
+    "affective_status": "情志：动态模型已在后端冻结，前端只展示摘要状态",
+    "lifecycle_status": "生命周期：自由意志时间系统与自我迭代候选已具备投影位",
+    "planner_context_digest": "CTX-FE01-STEP12-MOCK",
+    "hard_boundary_summary": "前端确认只生成占位票据；真实更新必须回到 Planner / ExecutionSpine / QualityGate。"
+  },
+  "self_iteration_projection": {
+    "panel_status": "ready",
+    "pending_count": 2,
+    "last_updated": "2026-06-06",
+    "candidates": [
+      {
+        "candidate_id": "ITER-FE01-001",
+        "title": "补齐任务快照前端输出",
+        "source": "用户明确要求任务栏显示执行快照",
+        "expected_change": "接入 TaskSnapshotProjection，并在首页右栏/执行页展示当前任务阶段、步骤、恢复点和等待确认状态。",
+        "risk_level": "A2",
+        "rollback_plan": "回滚到 FE01 STEP10B 视觉基线",
+        "test_requirement": "compileall + smoke_test_frontend + validate_demo_package",
+        "requires_user_confirmation": true,
+        "status": "pending_user_confirmation"
+      },
+      {
+        "candidate_id": "ITER-FE01-002",
+        "title": "设置页增加 API 输入口与主模型搜索",
+        "source": "用户明确要求 API 输入口放设置页",
+        "expected_change": "在设置页集中提供 Provider、API Base URL、API Key、主模型选择、模型搜索/筛选入口。",
+        "risk_level": "A3",
+        "rollback_plan": "删除设置页新增表单，保留原 RuntimeClient 状态卡",
+        "test_requirement": "验证 API Key 不在首页展示、不写明文到报告",
+        "requires_user_confirmation": true,
+        "status": "pending_user_confirmation"
+      }
+    ]
+  },
+  "provider_model": "deepseek-v4-pro",
+  "budget_pool": "main_task",
+  "budget_used_ratio": "18%",
+  "gate_status": "A1 allowed",
+  "audit_id": "EV-250515-0001",
+  "memory_mode": "read_only_projection",
+  "tools_allowed": 5,
+  "latency_ms": 32,
+  "agent_ui_contract": "tiangong.l6_55.agent_ui_event.v1",
+  "action_guard_contract": "tiangong.l6_55.action_guard_cards.v1",
+  "action_guard_cards": [
+    {
+      "gate_id": "GATE-FE01-0006",
+      "ticket_id": "CT-250515-0006",
+      "risk_level": "A4",
+      "decision": "confirmation_required",
+      "title": "权限映射策略确认",
+      "action_summary": "准备向 Runtime 提交权限映射策略确认请求。",
+      "impact_scope": "影响后端配置投影，不允许前端直接写入 Runtime。",
+      "plan_steps": [
+        "检查 Runtime 状态",
+        "提交确认请求",
+        "等待 Audit 回执"
+      ],
+      "audit_ref": "EV-250515-0001",
+      "rollback_ref": "RRT-250515-0007",
+      "requires_user_confirmation": true,
+      "status": "pending_user_confirmation"
+    }
+  ],
+  "audit_readonly_cards": [
+    {
+      "audit_id": "EV-250515-0001",
+      "event_type": "quality_gate_review",
+      "digest": "audit_digest_mock",
+      "summary": "质量门已生成确认票据；前端只读展示。",
+      "evidence_ref": "EV-250515-0001",
+      "count": 128
+    }
+  ],
+  "rollback_readonly_cards": [
+    {
+      "rollback_ref": "RRT-250515-0007",
+      "ticket_id": "RRT-250515-0007",
+      "status": "available",
+      "summary": "回滚票据可供后端使用；前端不应用回滚。",
+      "affected_scope": "FE.01 桌面壳配置投影",
+      "audit_ref": "EV-250515-0001"
+    }
+  ],
+  "confirmation_request_state": "idle",
+  "last_confirmation_request": {}
+}

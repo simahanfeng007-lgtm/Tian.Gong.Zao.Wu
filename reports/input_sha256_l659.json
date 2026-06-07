@@ -1,0 +1,17 @@
+{
+  "frontend_zip": {
+    "path": "临渊者桌面端_FE01_STEP19_L658真实后端实例联调与RC前置收口_20260607.zip",
+    "size": 196996,
+    "sha256": "3c0acb0ebb3f9ea06a1b83b51d4e33eb666dfee4fd04a09d06190114c66ae057"
+  },
+  "backend_zip": {
+    "path": "天工造物_临渊者_L6_51_1_后端产品身份元数据固化_20260607-1.zip",
+    "size": 4953322,
+    "sha256": "3f5fa81eca4c904abef78ed997419716bbe1a94755810515b5b4bd81a1cf605d"
+  },
+  "step20_prompt": {
+    "path": "临渊者_FE01_STEP20_L659前后端合成新对话提示词_20260607.txt",
+    "size": 4993,
+    "sha256": "0aee3cd3ae96e20cfa9bedec2fef790e484823a7b7b4a6443c86d3090abd711f"
+  }
+}

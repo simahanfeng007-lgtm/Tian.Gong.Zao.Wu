@@ -1,9 +1,0 @@
-链路阶段,输入字段,输出字段,L4职责,禁止事项
-SkillProjection/Exposure,"skill_projection_ref; skill_ref; trace_refs","skill_request_ref; skill_selection_ref","保存只读引用","不得选择 Skill"
-SkillRequest/Selection,"skill_request_ref; skill_selection_ref","skill_authorization_ref; l5_review_hint_ref","承载请求引用","不得授权"
-SkillAuthorization/L5ReviewHint,"skill_authorization_ref; l5_review_hint_ref","tool_group_ref; release_ref; permit_ref","携带未来 L5 审查提示","不得签发 permit"
-ToolGroupRelease,"tool_group_ref; release_ref; permit_ref","released_tool_schema_view_ref","承载释放引用","不得注册工具"
-ReleasedToolSchemaView,"tool_schema_refs; boundary_refs; permit_refs; audit_requirement_refs","visible_tool_schema_refs","形成模型可见 schema 视图","不得保存真实工具句柄"
-ToolCallEnvelope,"model_context_ref; visible_tool_schema_refs","tool_call_ref","承载调用信封引用","不得调用工具"
-ToolResultReturn,"tool_call_ref; tool_action_result_ref; tool_result_envelope_ref","model_continuation_ref; l3_replan_suggestion_ref","封装结果返回上下文","不得调用模型"
-ModelContinuation/L3Replan,"model_continuation_ref; l3_replan_suggestion_ref","l2_state_update_suggestion_ref","交接续接建议引用","不得写 L2"

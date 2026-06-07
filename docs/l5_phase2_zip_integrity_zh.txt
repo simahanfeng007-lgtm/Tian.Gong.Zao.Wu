@@ -1,5 +1,0 @@
-天工造物 L5 第二阶段 zip 完整性说明
-
-本文件在最终打包前写入。最终 zip 外层完整性由交付回复与外部 sha256 校验记录给出。
-打包要求：UTF-8 路径、安全中文文件名、包含完整工程、docs/l5_phase2_* 文档、tests/test_l5_phase2_* 测试、tiangong_kernel/l5_plugin_host 第二阶段代码。
-内部完整性校验项：compileall、collect-only、targeted pytest、plugin_host subset、full pytest、forbidden scan、L0-L4 hash compare 均已通过。

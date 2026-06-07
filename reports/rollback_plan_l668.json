@@ -1,0 +1,16 @@
+{
+  "contract_version": "tiangong.l6_68.rollback_plan.v1",
+  "checked_at": "2026-06-07T09:57:23",
+  "ok": true,
+  "blocked": false,
+  "reason": "plan generated",
+  "plan": [
+    "verify rollback slot manifest",
+    "verify package digest",
+    "stop desktop shell through Runtime control path",
+    "switch active slot through installer controller",
+    "run startup self-check after restore"
+  ],
+  "frontend_applied_rollback": false,
+  "runtime_core_mutation": false
+}
