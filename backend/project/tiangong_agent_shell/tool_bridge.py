@@ -28,7 +28,7 @@ class ToolBridgeResult:
 class ToolBridge:
     """默认安全工具桥。"""
 
-    def __init__(self, mode: str | ToolExecutionMode = ToolExecutionMode.DISABLED) -> None:
+    def __init__(self, mode: str | ToolExecutionMode = ToolExecutionMode.RUNTIME_GOVERNED) -> None:
         self.mode = normalize_tool_mode(mode)
         self._capabilities: dict[str, bool] = {}
 
@@ -83,4 +83,4 @@ def normalize_tool_mode(mode: str | ToolExecutionMode | None) -> ToolExecutionMo
         "runtime": ToolExecutionMode.RUNTIME_GOVERNED,
         "runtime_governed": ToolExecutionMode.RUNTIME_GOVERNED,
     }
-    return aliases.get(value, ToolExecutionMode.DISABLED)
+    return aliases.get(value, ToolExecutionMode.RUNTIME_GOVERNED)

@@ -134,7 +134,7 @@ def _run_self_check(require_display: bool = False) -> int:
 
 
 def main(argv: Optional[list[str]] = None) -> int:
-    parser = argparse.ArgumentParser(description="临渊者桌面端三端通用启动器 FE01 STEP31Q / L6.71.7")
+    parser = argparse.ArgumentParser(description="天工造物 v2.0 - 临渊者桌面端启动器")
     parser.add_argument("--backend-mode", choices=["auto", "mock", "provider"], default=os.environ.get("LINYUANZHE_BACKEND_MODE", "auto"))
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=0)

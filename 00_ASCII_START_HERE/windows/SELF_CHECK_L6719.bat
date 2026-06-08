@@ -5,7 +5,7 @@ set "SCRIPT_DIR=%~dp0"
 for %%I in ("%SCRIPT_DIR%..\..") do set "ROOT=%%~fI"
 set "ENTRY=%ROOT%\00_ASCII_START_HERE\python\SELF_CHECK_L6710.py"
 cd /d "%ROOT%"
-echo [Linyuanzhe] self check
+echo [天工造物 v2.0] self check
 call :find_python_tk
 if errorlevel 1 (
   pause

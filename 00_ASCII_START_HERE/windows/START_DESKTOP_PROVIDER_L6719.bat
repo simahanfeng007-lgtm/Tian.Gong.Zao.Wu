@@ -5,7 +5,7 @@ set "SCRIPT_DIR=%~dp0"
 for %%I in ("%SCRIPT_DIR%..\..") do set "ROOT=%%~fI"
 set "ENTRY=%ROOT%\00_ASCII_START_HERE\python\START_DESKTOP_L6710.py"
 cd /d "%ROOT%"
-echo [Linyuanzhe] FE01 STEP31Q / L6.71.9 - PROVIDER
+echo [天工造物 v2.0] FE01 STEP31Q / L6.71.9 - PROVIDER
 call :find_python_tk
 if errorlevel 1 (
   pause

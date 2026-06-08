@@ -4,7 +4,7 @@ setlocal
 set "SCRIPT_DIR=%~dp0"
 for %%I in ("%SCRIPT_DIR%..\..") do set "ROOT=%%~fI"
 cd /d "%ROOT%"
-echo [Linyuanzhe] DataUp safe update
+echo [天工造物 v2.0] DataUp safe update
 call :find_python
 if errorlevel 1 (
   pause
@@ -13,11 +13,11 @@ if errorlevel 1 (
 "%PYTHON_EXE%" "desktop\dataup_update_helper_l6717.py" --source auto --apply --yes
 set "RC=%ERRORLEVEL%"
 if not "%RC%"=="0" (
-  echo [Linyuanzhe] DataUp failed with exit code %RC%.
+  echo [天工造物 v2.0] DataUp failed with exit code %RC%.
   pause
   exit /b %RC%
 )
-echo [Linyuanzhe] DataUp completed.
+echo [天工造物 v2.0] DataUp completed.
 pause
 exit /b 0
 
