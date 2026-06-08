@@ -387,9 +387,10 @@ class FrontendActionsMixin:
         self.stream_status_var.set(self._stream_status_line(snapshot, finished=finished))
         self._sync_live_stream_indicator(snapshot, finished=finished)
         if self.current_page == "chat":
-            # Keep the transcript pinned to the newest delta immediately. Rebuild
-            # the full page only when the chat Text widget no longer exists.
-            if not self._render_live_chat_transcript(snapshot):
+            if finished:
+                # 流式收口：强制整页重建，确保增量渲染遗漏的消息被补上
+                self.show_page("chat")
+            elif not self._render_live_chat_transcript(snapshot):
                 self.show_page("chat")
             self._render_statusbar(snapshot)
             try:
