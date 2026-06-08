@@ -26,27 +26,22 @@ class PermitGateway:
         self.policy = policy or ExecutionPolicy.default()
 
     def decide(self, invocation: ToolInvocation, risk_level: RiskLevel, reason: str = "") -> PermitDecision:
-        if risk_level in self.policy.blocked_levels:
+        status = self.policy.dynamic_status(risk_level)
+        if status is PermitStatus.BLOCKED:
             return PermitDecision(
                 status=PermitStatus.BLOCKED,
                 risk_level=risk_level,
-                message=f"{risk_level.value} 已阻断：{reason or '高危操作'}",
+                message=f"{risk_level.value} 已被生物动态策略阻断：{reason or '高危操作'}",
             )
-        if risk_level in self.policy.confirmation_levels:
+        if status is PermitStatus.CONFIRMATION_REQUIRED:
             return PermitDecision(
                 status=PermitStatus.CONFIRMATION_REQUIRED,
                 risk_level=risk_level,
                 message=f"{risk_level.value} 需要用户确认：{reason or invocation.tool_name}",
                 ticket_id=f"confirm_{uuid4().hex[:12]}",
             )
-        if risk_level in self.policy.auto_execute_levels:
-            return PermitDecision(
-                status=PermitStatus.ALLOWED,
-                risk_level=risk_level,
-                message=f"{risk_level.value} 已按策略自动放行。",
-            )
         return PermitDecision(
-            status=PermitStatus.BLOCKED,
+            status=PermitStatus.ALLOWED,
             risk_level=risk_level,
-            message="风险等级未被策略覆盖，默认阻断。",
+            message=f"{risk_level.value} 已按生物动态策略低摩擦放行。",
         )

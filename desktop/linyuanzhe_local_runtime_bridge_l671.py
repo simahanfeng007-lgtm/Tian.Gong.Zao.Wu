@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""FE01 STEP31A / L6.70.1 local desktop Runtime bridge.
+"""FE01 STEP31Q / L6.71.7 local desktop Runtime bridge.
 
 This bridge is bundled for the desktop all-in-one package. It exposes the
 frontend Runtime HTTP/SSE contract and delegates chat execution to the bundled
@@ -12,6 +12,7 @@ import argparse
 import hashlib
 import json
 import os
+import platform
 import re
 import subprocess
 import sys
@@ -49,6 +50,55 @@ SENSITIVE_TEXT_PATTERNS = (
 )
 
 
+def _provider_config_path() -> Path:
+    override = os.environ.get("LINYUANZHE_PROVIDER_CONFIG_FILE", "").strip()
+    if override:
+        return Path(override).expanduser().resolve()
+    system = platform.system()
+    if system == "Windows":
+        base = Path(os.environ.get("APPDATA", "") or (Path.home() / "AppData" / "Roaming"))
+        return base / "LinyuanzheDesktop" / "provider_config.json"
+    if system == "Darwin":
+        return Path.home() / "Library" / "Application Support" / "LinyuanzheDesktop" / "provider_config.json"
+    base = Path(os.environ.get("XDG_CONFIG_HOME", "") or (Path.home() / ".config"))
+    return base / "linyuanzhe_desktop" / "provider_config.json"
+
+
+def _read_provider_config() -> dict[str, Any]:
+    path = _provider_config_path()
+    try:
+        if not path.exists():
+            return {}
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
+def _write_provider_config(data: Mapping[str, Any]) -> bool:
+    path = _provider_config_path()
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        payload = {
+            "schema": "tiangong.l6_71_7.local_provider_config.v1",
+            "provider": str(data.get("provider", "") or ""),
+            "model": str(data.get("model", "") or ""),
+            "base_url": str(data.get("base_url", "") or ""),
+            "api_key": str(data.get("api_key", "") or ""),
+            "updated_at": datetime.now().isoformat(timespec="seconds"),
+            "runtime_owned": True,
+            "frontend_raw_secret_visible": False,
+        }
+        path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+        try:
+            os.chmod(path, 0o600)
+        except Exception as exc:
+            _ = exc
+        return True
+    except Exception:
+        return False
+
+
 def _digest(value: Any, length: int = 16) -> str:
     text = str(value or "")
     if not text:
@@ -63,42 +113,144 @@ def _safe_text(value: Any, limit: int = 2000) -> str:
     return text[-limit:]
 
 
+PROVIDER_ERROR_ACTIONS = {
+    "gateway_unreachable": "检查 Tailscale / Base URL / 网关进程后，发送一条短消息复测",
+    "auth_failed": "重新填写 API Key 后保存，再发送短消息复测",
+    "model_not_found": "确认模型名与账号权限，必要时换成可用模型",
+    "provider_timeout": "检查网络与网关负载，或提高 Runtime 超时后重试",
+    "provider_rate_limited": "降低频率或更换额度后重试",
+    "provider_server_error": "稍后重试；若持续出现，检查网关日志",
+    "provider_runtime_error": "查看脱敏错误摘要，修正配置后发送短消息复测",
+}
+
+
+def _classify_provider_error(text: str, returncode: int, elapsed: str) -> str:
+    blob = f"{text}\n{returncode}\n{elapsed}".lower()
+    if returncode == 124 or "timeout" in blob or "timed out" in blob or "超时" in blob:
+        return "provider_timeout"
+    if any(x in blob for x in ("401", "403", "unauthorized", "forbidden", "invalid api key", "invalid_api_key", "authentication", "鉴权", "未授权")):
+        return "auth_failed"
+    if any(x in blob for x in ("404", "model not found", "model_not_found", "unknown model", "模型不存在", "not found")) and "model" in blob:
+        return "model_not_found"
+    if any(x in blob for x in ("429", "rate limit", "too many requests", "quota", "insufficient_quota", "限流", "额度")):
+        return "provider_rate_limited"
+    if any(x in blob for x in ("500", "502", "503", "504", "internal server error", "bad gateway", "service unavailable")):
+        return "provider_server_error"
+    if any(x in blob for x in ("connection refused", "connection reset", "network is unreachable", "name or service not known", "nodename nor servname", "gaierror", "max retries", "ssl", "tls", "cannot connect", "failed to establish")):
+        return "gateway_unreachable"
+    return "provider_runtime_error"
+
+
+def _provider_error_action(code: str) -> str:
+    return PROVIDER_ERROR_ACTIONS.get(code, PROVIDER_ERROR_ACTIONS["provider_runtime_error"])
+
+
 class BridgeState:
     def __init__(self, *, backend_mode: str, timeout: float) -> None:
         self.backend_mode = backend_mode
         self.timeout = timeout
-        self.provider = os.environ.get("LINYUANZHE_PROVIDER", "deepseek").strip() or "deepseek"
-        self.model = os.environ.get("LINYUANZHE_MODEL", "deepseek-reasoner").strip() or "deepseek-reasoner"
-        self.provider_base = os.environ.get("LINYUANZHE_PROVIDER_BASE", "").strip()
-        self.provider_key = os.environ.get("LINYUANZHE_PROVIDER_KEY", "").strip()
+        persisted = _read_provider_config()
+        self.provider = (os.environ.get("TIANGONG_PROVIDER") or os.environ.get("LINYUANZHE_PROVIDER") or str(persisted.get("provider", "")) or "openai_compatible").strip() or "openai_compatible"
+        self.model = (os.environ.get("TIANGONG_MODEL") or os.environ.get("LINYUANZHE_MODEL") or str(persisted.get("model", "")) or "deepseek-v4-pro").strip() or "deepseek-v4-pro"
+        self.provider_base = (os.environ.get("TIANGONG_BASE_URL") or os.environ.get("LINYUANZHE_PROVIDER_BASE") or str(persisted.get("base_url", ""))).strip()
+        self.provider_key = (os.environ.get("TIANGONG_API_KEY") or os.environ.get("LINYUANZHE_PROVIDER_KEY") or str(persisted.get("api_key", ""))).strip()
+        self.provider_config_path = _provider_config_path()
+        self.provider_config_loaded = bool(persisted)
+        self.provider_config_persisted = bool(persisted)
         self.started_at = datetime.now().isoformat(timespec="seconds")
         self.chat_count = 0
         self.last_audit_id = "audit_local_bridge_idle"
         self.sessions: list[dict[str, Any]] = []
-        self.last_message = ""
-        self.last_confirmation_ticket = ""
+        self.file_handoffs: list[dict[str, Any]] = []
+        self.connector_records: list[dict[str, Any]] = []
+        self.last_provider_check_state = "not_tested"
+        self.last_provider_error_code = ""
+        self.last_provider_error_message = ""
+        self.last_provider_next_action = "发送一条短消息完成真实链路联调"
+        self.last_provider_elapsed = ""
+        self.last_provider_audit_id = ""
 
     @property
     def effective_backend_mode(self) -> str:
-        if self.backend_mode == "provider" and self.provider_key and self.provider_base:
+        # auto: offline-safe first boot, but switch to provider immediately after
+        # settings page saves a valid key/base URL. This fixes the previous UX
+        # trap where the default launcher stayed in mock mode even after Key was
+        # persisted successfully.
+        if self.backend_mode == "mock":
+            return "mock"
+        if self.provider_key and self.provider_base:
             return "provider"
         return "mock"
+
+    def record_provider_check(self, *, ok: bool, answer: str, returncode: int, elapsed: str, audit_id: str) -> None:
+        if self.effective_backend_mode != "provider":
+            return
+        self.last_provider_elapsed = _safe_text(elapsed, 40)
+        self.last_provider_audit_id = _safe_text(audit_id, 80)
+        if ok:
+            self.last_provider_check_state = "passed"
+            self.last_provider_error_code = ""
+            self.last_provider_error_message = "最近一次真实 Provider 联调通过。"
+            self.last_provider_next_action = "返回会话继续任务"
+            return
+        code = _classify_provider_error(answer, returncode, elapsed)
+        self.last_provider_check_state = "failed"
+        self.last_provider_error_code = code
+        self.last_provider_error_message = _safe_text(answer, 260)
+        self.last_provider_next_action = _provider_error_action(code)
 
     def provider_projection(self) -> dict[str, Any]:
         base_configured = bool(self.provider_base)
         key_configured = bool(self.provider_key)
-        state = "ready" if self.effective_backend_mode == "provider" else "mock_ready"
-        message = "本地桌面桥接后端已就绪；未配置真实模型时使用 bundled mock 后端。"
-        if self.effective_backend_mode == "provider":
-            message = "本地桌面桥接后端已就绪；真实模型配置仅保存在当前进程内存，不写入磁盘。"
+        missing_fields = []
+        if not base_configured:
+            missing_fields.append("base_url")
+        if not key_configured:
+            missing_fields.append("api_key")
+        config_file_exists = self.provider_config_path.exists()
+        effective_mode = self.effective_backend_mode
+        if self.last_provider_check_state == "failed" and effective_mode == "provider":
+            state = "error"
+            readiness = "provider_check_failed"
+            readiness_label = "Provider 联调失败"
+            next_action = self.last_provider_next_action
+            message = f"配置已保存，但最近一次真实 Provider 联调失败：{self.last_provider_error_code or 'provider_runtime_error'}。"
+        elif effective_mode == "provider" and not missing_fields:
+            state = "ready"
+            readiness = "ready"
+            readiness_label = "真实模型就绪"
+            next_action = "返回会话继续对话" if self.last_provider_check_state == "passed" else "发送一条短消息完成真实链路联调"
+            message = "本地桌面桥接后端已就绪；真实模型配置由本机 Runtime 凭证文件托管。"
+        elif self.backend_mode == "mock":
+            state = "forced_mock"
+            readiness = "forced_mock"
+            readiness_label = "启动参数锁定 Mock"
+            next_action = "用 auto/provider 模式重启桌面端"
+            message = "当前启动参数为 mock；即使存在 Provider 配置也不会调用真实模型。"
+        else:
+            state = "missing_credentials" if missing_fields else "mock_ready"
+            readiness = "missing_credentials" if missing_fields else "saved_waiting_runtime"
+            readiness_label = "缺 Provider 配置" if missing_fields else "配置已保存，等待 provider 模式"
+            next_action = "填写 Base URL 与 API Key 后保存" if missing_fields else "刷新快照或发送一条消息"
+            message = "本地桌面桥接后端已就绪；auto 模式未配置真实模型时使用 bundled mock 后端。"
         return {
-            "frontend_contract": "tiangong.l6_70_1.desktop_provider_projection.v1",
+            "frontend_contract": "tiangong.l6_71_7.desktop_provider_projection.v1",
             "provider": self.provider,
             "model": self.model,
             "provider_config_state": state,
-            "config_error_code": "",
+            "provider_readiness": readiness,
+            "readiness_label": readiness_label,
+            "missing_fields": missing_fields,
+            "next_action": next_action,
+            "config_error_code": self.last_provider_error_code if self.last_provider_check_state == "failed" else "",
             "message": message,
-            "audit_id": self.last_audit_id,
+            "audit_id": self.last_provider_audit_id or self.last_audit_id,
+            "last_provider_check_state": self.last_provider_check_state,
+            "last_provider_error_code": self.last_provider_error_code,
+            "last_provider_error_message": self.last_provider_error_message,
+            "last_provider_next_action": self.last_provider_next_action,
+            "last_provider_elapsed": self.last_provider_elapsed,
+            "last_provider_audit_id": self.last_provider_audit_id,
             "planner_mode": "rule_only",
             "tool_execution_mode": "runtime_governed",
             "stream": True,
@@ -106,7 +258,17 @@ class BridgeState:
             "api_key_digest": _digest(self.provider_key) if key_configured else "",
             "base_url_configured": base_configured,
             "base_url_digest": _digest(self.provider_base) if base_configured else "",
+            "runtime_credential_persisted": bool(self.provider_config_persisted),
+            "runtime_credential_store_digest": _digest(str(self.provider_config_path)) if (key_configured or base_configured) else "",
+            "config_file_exists": config_file_exists,
+            "config_file_state": "exists" if config_file_exists else "missing",
+            "config_location_hint": "system_user_config_dir/LinyuanzheDesktop/provider_config.json",
+            "config_path_digest": _digest(str(self.provider_config_path)),
+            "local_bridge_can_persist": True,
+            "raw_secret_visible_to_frontend": False,
             "local_desktop_bridge": True,
+            "requested_backend_mode": self.backend_mode,
+            "effective_backend_mode": effective_mode,
             "official_real_runtime_smoke_target": False,
         }
 
@@ -119,19 +281,31 @@ class BridgeState:
             self.provider = provider
         if model:
             self.model = model
-        # Keep values in process memory only. Do not write raw values to files or reports.
+        # The frontend never persists or echoes raw values. The local Runtime bridge
+        # owns persistence so settings survive desktop restart.
         self.provider_base = base
         self.provider_key = key
-        # Auto-switch to provider mode when valid credentials are configured
-        if self.provider_key and self.provider_base:
-            self.backend_mode = "provider"
+        self.provider_config_persisted = _write_provider_config({
+            "provider": self.provider,
+            "model": self.model,
+            "base_url": self.provider_base,
+            "api_key": self.provider_key,
+        })
+        self.provider_config_loaded = self.provider_config_loaded or self.provider_config_persisted
+        self.last_provider_check_state = "not_tested"
+        self.last_provider_error_code = ""
+        self.last_provider_error_message = ""
+        self.last_provider_next_action = "发送一条短消息完成真实链路联调"
+        self.last_provider_elapsed = ""
+        self.last_provider_audit_id = ""
         self.last_audit_id = f"audit_local_provider_{_digest(str(time.time()))}"
         projection = self.provider_projection()
         projection.update({
             "status": "accepted",
             "requires_restart": False,
-            "runtime_memory_only": True,
-            "no_secret_persistence": True,
+            "runtime_memory_only": False,
+            "runtime_credential_persisted": bool(self.provider_config_persisted),
+            "no_frontend_secret_persistence": True,
         })
         return {"payload": projection, **projection}
 
@@ -158,50 +332,11 @@ def _redact_output(text: str, state: BridgeState) -> str:
             out = out.replace(raw, "<redacted>")
     out = re.sub(r"(?i)Bearer\s+[A-Za-z0-9_\-.]{8,}", "Bearer <redacted>", out)
     out = re.sub(r"(?i)sk-[A-Za-z0-9_\-]{8,}", "sk-<redacted>", out)
+    # The child Runtime may mention a local handoff path; keep the path available
+    # inside the prompt, but do not echo raw filesystem locations back to UI.
+    out = re.sub(r"[A-Za-z]:\\[^\n\r\t]+", "<local_path_redacted>", out)
+    out = re.sub(r"/(?:home|Users|mnt|tmp|var|etc)/[^\n\r\t]+", "<local_path_redacted>", out)
     return out.strip()
-
-
-def _format_chat_reply(raw: str) -> str:
-    """智能格式化后端输出：摘要置顶，代码日志折叠。"""
-    if not raw or not raw.strip():
-        return "(空回复)"
-    lines = raw.strip().split("\n")
-    # 摘要行（计划器、长链、产物）
-    summary_lines: list[str] = []
-    # 代码/日志行（compileall、文件列表等）
-    code_lines: list[str] = []
-    tool_results: list[str] = []
-    in_code = False
-    for line in lines:
-        stripped = line.strip()
-        if not stripped:
-            continue
-        if stripped.startswith("[计划器]") or stripped.startswith("[长链]") or stripped.startswith("产物") or stripped.startswith("- ") and ("ok" in stripped or "fail" in stripped or "executed" in stripped):
-            summary_lines.append(stripped)
-            in_code = False
-        elif stripped.startswith("Compiling") or stripped.startswith("Listing") or "__pycache__" in stripped or stripped.startswith("dir") or stripped.startswith("file"):
-            code_lines.append(stripped)
-            in_code = True
-        elif in_code:
-            code_lines.append(stripped)
-        else:
-            summary_lines.append(stripped)
-    parts: list[str] = []
-    if summary_lines:
-        parts.append("\n".join(summary_lines[:12]))
-    if code_lines:
-        count = len(code_lines)
-        preview = "\n".join(code_lines[:3])
-        parts.append(f"\n--- 执行详情（共 {count} 行，已折叠） ---\n{preview}")
-        if count > 3:
-            parts.append(f"… 还有 {count - 3} 行 …")
-    if tool_results:
-        parts.append("\n".join(tool_results))
-    result = "\n".join(parts) if parts else raw[:600]
-    # 安全截断
-    if len(result) > 2000:
-        result = result[:1900] + "\n… 回复过长，已截断。完整输出见执行页。"
-    return result
 
 
 def _run_backend_once(message: str, state: BridgeState) -> tuple[str, int, str]:
@@ -215,11 +350,9 @@ def _run_backend_once(message: str, state: BridgeState) -> tuple[str, int, str]:
         "--once",
         message,
         "--tool-mode",
-        "runtime_governed",
+        os.environ.get("LINYUANZHE_TOOL_MODE", "runtime_governed"),
         "--planner-mode",
-        "model_suggest",
-        "--max-steps",
-        "40",
+        os.environ.get("LINYUANZHE_PLANNER_MODE", "rule_only"),
     ]
     if state.effective_backend_mode == "mock":
         cmd.insert(2, "--mock")
@@ -228,6 +361,18 @@ def _run_backend_once(message: str, state: BridgeState) -> tuple[str, int, str]:
         env["TIANGONG_MODEL"] = state.model
         env["TIANGONG_BASE_URL"] = state.provider_base
         env["TIANGONG_API_KEY"] = state.provider_key
+    if state.file_handoffs:
+        recent = state.file_handoffs[-3:]
+        attachment_lines = []
+        for idx, item in enumerate(recent, start=1):
+            path = str(item.get("runtime_handoff_path", "") or "").strip()
+            name = _safe_text(item.get("file_name", "attachment"), 160)
+            if path:
+                attachment_lines.append(f"附件{idx}: {name} | runtime_local_path={path}")
+            else:
+                attachment_lines.append(f"附件{idx}: {name} | sha256_digest={item.get('sha256_digest', '')}")
+        if attachment_lines:
+            cmd[cmd.index("--once") + 1] = message + "\n\n[Runtime本地文件交接]\n" + "\n".join(attachment_lines)
     started = time.time()
     try:
         proc = subprocess.run(
@@ -251,7 +396,7 @@ def _run_backend_once(message: str, state: BridgeState) -> tuple[str, int, str]:
 
 
 class LinyuanzheBridgeHandler(BaseHTTPRequestHandler):
-    server_version = "LinyuanzheLocalDesktopBridge/0.70.1"
+    server_version = "LinyuanzheLocalDesktopBridge/0.71.7"
 
     def log_message(self, fmt: str, *args: Any) -> None:  # noqa: D401 - stdlib signature
         # Keep stdout clean and avoid accidental request-body logging.
@@ -290,7 +435,7 @@ class LinyuanzheBridgeHandler(BaseHTTPRequestHandler):
                     "status": "ok",
                     "runtime_kind": "local_desktop_bridge",
                     "official_real_runtime_smoke_target": False,
-                    "bridge_version": "FE01 STEP31A / L6.70.1",
+                    "bridge_version": "FE01 STEP31Q / L6.71.7",
                     "backend_entry": "backend/project/run_agent.py",
                     "backend_mode": STATE.effective_backend_mode,
                     "current_task_status": "READY",
@@ -340,11 +485,11 @@ class LinyuanzheBridgeHandler(BaseHTTPRequestHandler):
                     "registry_id_digest": _digest("local-bridge-connector-registry"),
                     "registry_state": "ready",
                     "default_mode": "disabled",
-                    "connector_count": 0,
+                    "connector_count": len(STATE.connector_records),
                     "enabled_count": 0,
-                    "read_only_count": 0,
+                    "read_only_count": len(STATE.connector_records),
                     "quarantined_count": 0,
-                    "pending_review_count": 0,
+                    "pending_review_count": len([x for x in STATE.connector_records if x.get("status") == "accepted"]),
                     "allow_market_install": False,
                     "allow_unsigned_connector": False,
                     "runtime_authority_required": True,
@@ -354,8 +499,19 @@ class LinyuanzheBridgeHandler(BaseHTTPRequestHandler):
                     "frontend_may_execute_connector": False,
                     "frontend_may_store_connector_secret": False,
                 },
-                "connector_manifests": [],
-                "connector_registration_records": [],
+                "connector_manifests": [
+                    {
+                        "display_name": rec.get("display_name", ""),
+                        "kind": rec.get("kind", "mcp_server"),
+                        "status": rec.get("status", "accepted"),
+                        "manifest_digest": rec.get("manifest_digest", ""),
+                        "trust_level": "unknown",
+                        "default_mode": "disabled",
+                        "requested_scopes": rec.get("requested_scopes", ["read_public_metadata"]),
+                    }
+                    for rec in STATE.connector_records[-20:]
+                ],
+                "connector_registration_records": list(reversed(STATE.connector_records[-20:])),
             })
             return
         if path == "/sessions/list":
@@ -364,11 +520,16 @@ class LinyuanzheBridgeHandler(BaseHTTPRequestHandler):
                 "session_manager_state": "local_bridge_ready",
                 "task_sessions": list(reversed(STATE.sessions[-20:])),
                 "session_stats": {
+                    "total": len(STATE.sessions),
+                    "running": len([s for s in STATE.sessions if s.get("status") == "running" or s.get("active")]),
+                    "waiting_confirmation": len([s for s in STATE.sessions if s.get("status") == "waiting_confirmation" or s.get("waiting_confirmation")]),
+                    "blocked": len([s for s in STATE.sessions if s.get("status") == "blocked" or s.get("blocked")]),
+                    "recoverable": len([s for s in STATE.sessions if s.get("recoverable")]),
+                    "completed": len([s for s in STATE.sessions if s.get("status") == "completed"]),
+                    "failed": len([s for s in STATE.sessions if s.get("status") == "failed"]),
+                    "queued": len([s for s in STATE.sessions if s.get("status") == "queued"]),
                     "total_count": len(STATE.sessions),
-                    "running_count": 0,
                     "completed_count": len([s for s in STATE.sessions if s.get("status") == "completed"]),
-                    "recoverable_count": 0,
-                    "blocked_count": 0,
                 },
                 "session_last_message": "本地桌面桥接 Session 投影已读取。",
             })
@@ -377,7 +538,7 @@ class LinyuanzheBridgeHandler(BaseHTTPRequestHandler):
             self._send_json({
                 "installer_rc_contract": "tiangong.l6_70_1.desktop_bundle_manifest.v1",
                 "installer_manifest": {
-                    "version_label": "FE01 STEP31A / L6.70.1 桌面端前后端一体化启动包",
+                    "version_label": "FE01 STEP31Q / L6.71.7 三端通用桌面包",
                     "unique_developer": "于泳翔",
                     "angel_investor": "胖胖龙",
                     "startup_self_check_state": "pass",
@@ -424,16 +585,15 @@ class LinyuanzheBridgeHandler(BaseHTTPRequestHandler):
             message = str(payload.get("message") or payload.get("user_message") or "").strip()
             if not message:
                 message = "继续"
-            STATE.last_message = message
             STATE.chat_count += 1
             run_id = f"local_run_{uuid.uuid4().hex[:12]}"
             task_id = f"local_task_{STATE.chat_count:04d}"
             audit_id = f"audit_local_{uuid.uuid4().hex[:10]}"
             STATE.last_audit_id = audit_id
-            answer_raw, returncode, elapsed = _run_backend_once(message, STATE)
-            answer_full = _safe_text(answer_raw, 4000)
-            answer = _format_chat_reply(answer_full)
+            answer, returncode, elapsed = _run_backend_once(message, STATE)
+            answer = _safe_text(answer, 4000)
             ok = returncode == 0
+            STATE.record_provider_check(ok=ok, answer=answer, returncode=returncode, elapsed=elapsed, audit_id=audit_id)
             status = "ok" if ok else "failed"
             session = {
                 "session_id": run_id,
@@ -443,7 +603,7 @@ class LinyuanzheBridgeHandler(BaseHTTPRequestHandler):
                 "progress_percent": 100 if ok else 70,
                 "active": False,
                 "blocked": not ok,
-                "recoverable": True,
+                "recoverable": not ok,
                 "audit_id": audit_id,
                 "tags": ["local_bridge", STATE.effective_backend_mode],
             }
@@ -452,11 +612,21 @@ class LinyuanzheBridgeHandler(BaseHTTPRequestHandler):
                 {"event": "run_started", "seq": 1, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"runtime_status": "active", "provider_model": STATE.model, "backend_mode": STATE.effective_backend_mode}},
                 {"event": "planner_started", "seq": 2, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"planner_mode": "rule_only", "current_stage": "本地桥接后端执行"}},
                 {"event": "quality_gate", "seq": 3, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"risk_level": "A0", "decision": "allowed", "audit_ref": audit_id, "route_to_runtime_only": True}},
-                {"event": "assistant_delta", "seq": 4, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"content": "本地桥接后端已返回结果，正在收口。"}},
-                {"event": "audit_event", "seq": 5, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"audit_id": audit_id, "event": "local_bridge_backend_once", "status": status, "elapsed": elapsed}},
-                {"event": "assistant_final", "seq": 6, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"content": answer, "status": status}},
-                {"event": "run_terminal", "seq": 7, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"status": status, "audit_id": audit_id, "assistant_final_before_terminal": True}},
             ]
+            seq = 4
+            # Stream the sanitized backend answer itself. assistant_final only
+            # closes the run, avoiding duplicate final-answer messages in the
+            # desktop transcript. This remains local bridge output, not a
+            # frontend-side Provider call or tool execution.
+            answer_chunks = [answer[i : i + 360] for i in range(0, len(answer), 360)] or ["本地后端已返回空响应。"]
+            for chunk in answer_chunks:
+                events.append({"event": "assistant_delta", "seq": seq, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"content": chunk}})
+                seq += 1
+            events.extend([
+                {"event": "audit_event", "seq": seq, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"audit_id": audit_id, "event": "local_bridge_backend_once", "status": status, "elapsed": elapsed}},
+                {"event": "assistant_final", "seq": seq + 1, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"content": answer, "status": status}},
+                {"event": "run_terminal", "seq": seq + 2, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"status": status, "audit_id": audit_id, "assistant_final_before_terminal": True}},
+            ])
             self._send_sse_events(events)
             return
         if path == "/settings/provider":
@@ -474,65 +644,87 @@ class LinyuanzheBridgeHandler(BaseHTTPRequestHandler):
             })
             return
         if path == "/confirmations/submit":
-            ticket_id = str(payload.get("ticket_id") or "").strip()
-            decision = str(payload.get("decision", "submitted")).strip()
-            STATE.last_confirmation_ticket = ticket_id
-            # 本地桥接：确认后重跑任务，不阻塞
-            if decision in ("approve", "confirmed", "allow") and STATE.last_message:
-                run_id = f"local_run_{uuid.uuid4().hex[:12]}"
-                task_id = f"local_task_{STATE.chat_count + 1:04d}"
-                audit_id = f"audit_confirm_{_digest(str(time.time()))}"
-                answer_raw, returncode, elapsed = _run_backend_once(STATE.last_message, STATE)
-                answer_full = _safe_text(answer_raw, 4000)
-                answer = _format_chat_reply(answer_full)
-                ok = returncode == 0
-                events = [
-                    {"event": "run_started", "seq": 1, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"runtime_status": "active", "provider_model": STATE.model, "backend_mode": STATE.effective_backend_mode, "resumed_after_confirmation": True, "ticket_id": ticket_id}},
-                    {"event": "quality_gate", "seq": 2, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"risk_level": "A0", "decision": "allowed", "audit_ref": audit_id, "route_to_runtime_only": True, "local_bridge_auto_approved": True, "original_ticket": ticket_id}},
-                    {"event": "assistant_final", "seq": 3, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"content": answer, "status": "ok" if ok else "failed"}},
-                    {"event": "run_terminal", "seq": 4, "run_id": run_id, "task_id": task_id, "timestamp": datetime.now().isoformat(timespec="seconds"), "payload": {"status": "ok" if ok else "failed", "audit_id": audit_id, "assistant_final_before_terminal": True, "confirmation_resolved": True}},
-                ]
-                self._send_sse_events(events)
-                return
             self._send_json({
                 "confirmation_contract": "tiangong.l6_58.action_guard.v1",
                 "status": "accepted",
-                "decision": decision,
+                "ticket_id": payload.get("ticket_id", ""),
+                "decision": payload.get("decision", "submitted"),
                 "message": "确认请求已进入本地桥接信封；正式放行仍属于 Runtime/QualityGate。",
                 "route_to_runtime_only": True,
                 "audit_id": f"audit_confirm_{_digest(str(time.time()))}",
             })
             return
         if path == "/files/transfer/request":
+            file_name = _safe_text(payload.get("file_name", "attachment"), 160)
+            record = {
+                "transfer_id": f"ft_{_digest(str(time.time()))}",
+                "direction": payload.get("direction", "upload"),
+                "file_name": file_name,
+                "size_bytes": int(payload.get("size_bytes", 0) or 0),
+                "sha256_digest": _digest(payload.get("sha256", "")),
+                "mime_type": payload.get("mime_type", "application/octet-stream"),
+                "purpose": payload.get("purpose", "user_attachment"),
+                "status": "accepted",
+                "message": "文件已交给本地 Runtime 桥接；上传后可自动进入 Runtime 文件处理链。",
+                "audit_id": f"audit_file_{_digest(str(time.time()))}",
+                "route_to_runtime_only": True,
+                "no_frontend_path_exposure": True,
+            }
+            STATE.file_handoffs.append({**record, "runtime_handoff_path": payload.get("runtime_handoff_path", "")})
             self._send_json({
                 "file_transfer_contract": "tiangong.l6_64.file_transfer_request.v1",
                 "status": "accepted",
-                "route_to_runtime_only": True,
-                "no_frontend_file_copy": True,
-                "record": {"file_name_digest": _digest(payload.get("file_name", "")), "state": "request_recorded"},
+                "payload": record,
+                **record,
             })
             return
         if path == "/workspace/file/authorize":
+            record = {
+                "authorization_id": f"auth_{_digest(str(time.time()))}",
+                "file_name": _safe_text(payload.get("file_name", "workspace_target"), 160),
+                "mode": payload.get("mode", "read"),
+                "scope": payload.get("scope", "user_selected_file"),
+                "purpose": payload.get("purpose", "user_attachment"),
+                "status": "accepted",
+                "message": "文件授权请求已进入本地 Runtime 桥接；写入/读取仍由 Runtime 工具链执行。",
+                "audit_id": f"audit_auth_{_digest(str(time.time()))}",
+                "path_digest": payload.get("local_path_digest", ""),
+                "runtime_workspace_digest": _digest("local_runtime_workspace"),
+                "route_to_runtime_only": True,
+                "raw_path_visible": False,
+            }
             self._send_json({
                 "workspace_contract": "tiangong.l6_65.file_authorization.v1",
                 "status": "accepted",
-                "route_to_runtime_only": True,
-                "authorization_ref": f"auth_{_digest(str(time.time()))}",
-                "no_frontend_path_exposure": True,
+                "payload": record,
+                **record,
             })
             return
         if path == "/files/download/claim":
             self._send_json({"status": "accepted", "route_to_runtime_only": True, "download_claim_ref": f"claim_{_digest(str(time.time()))}"})
             return
         if path in {"/connectors/register/request", "/connectors/quarantine/request"}:
+            record = {
+                "request_id": f"connector_{_digest(str(time.time()))}",
+                "display_name": _safe_text(payload.get("display_name", payload.get("name", "未命名连接器")), 160),
+                "kind": payload.get("kind", "mcp_server"),
+                "status": "accepted",
+                "message": "连接器注册请求已进入本地 Runtime 桥接；默认禁用，只读待审。",
+                "audit_id": f"audit_connector_{_digest(str(time.time()))}",
+                "manifest_digest": payload.get("manifest_digest", _digest(payload)),
+                "source_digest": payload.get("source_digest", ""),
+                "trust_level": "unknown",
+                "default_mode": "disabled",
+                "requested_scopes": payload.get("requested_scopes", ["read_public_metadata"]),
+                "route_to_runtime_only": True,
+                "quarantined": False,
+            }
+            STATE.connector_records.append(record)
             self._send_json({
                 "connector_registry_contract": "tiangong.l6_66.connector_request.v1",
                 "status": "accepted",
-                "route_to_runtime_only": True,
-                "quality_gate_required": True,
-                "workspace_authorization_required": True,
-                "runtime_authority_required": True,
-                "request_ref": f"connector_{_digest(str(time.time()))}",
+                "payload": record,
+                **record,
             })
             return
         if path == "/sessions/resume":
@@ -543,6 +735,18 @@ class LinyuanzheBridgeHandler(BaseHTTPRequestHandler):
             matches = [s for s in STATE.sessions if not query or query in str(s.get("title", "")).lower()]
             self._send_json({"session_manager_contract": "tiangong.l6_67.session_search.v1", "status": "ok", "read_only_projection": True, "task_sessions": list(reversed(matches[-20:]))})
             return
+        if path in {"/self-iteration/confirm", "/self_iteration/confirm", "/self-iteration/confirm/request"}:
+            self._send_json({
+                "self_iteration_contract": "tiangong.l6_42.self_iteration_confirm.v1",
+                "status": "accepted",
+                "candidate_id": payload.get("candidate_id", ""),
+                "decision": payload.get("decision", "confirmed"),
+                "route_to_runtime_only": True,
+                "no_frontend_self_iteration_apply": True,
+                "message": "自我迭代确认已进入本地 Runtime 桥接；不由前端直接合入。",
+                "audit_id": f"audit_iter_{_digest(str(time.time()))}",
+            })
+            return
         if path in {"/installer/update/check", "/installer/repair/request", "/installer/rollback/plan"}:
             self._send_json({"installer_rc_contract": "tiangong.l6_68.installer_request.v1", "status": "dry_run", "route_to_runtime_only": True, "final_installer_allowed": False})
             return
@@ -550,10 +754,10 @@ class LinyuanzheBridgeHandler(BaseHTTPRequestHandler):
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="临渊者 L6.70.1 本地桌面 Runtime 桥接服务")
+    parser = argparse.ArgumentParser(description="临渊者 L6.71.7 本地桌面 Runtime 桥接服务")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=0)
-    parser.add_argument("--backend-mode", choices=["mock", "provider"], default=os.environ.get("LINYUANZHE_BACKEND_MODE", "mock"))
+    parser.add_argument("--backend-mode", choices=["auto", "mock", "provider"], default=os.environ.get("LINYUANZHE_BACKEND_MODE", "auto"))
     parser.add_argument("--timeout", type=float, default=float(os.environ.get("LINYUANZHE_BACKEND_TIMEOUT", "120") or 120))
     args = parser.parse_args(argv)
 

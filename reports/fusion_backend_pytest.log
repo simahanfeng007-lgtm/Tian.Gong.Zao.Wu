@@ -1,0 +1,18 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.5, pytest-9.0.2, pluggy-1.6.0
+rootdir: /mnt/data/fusion_work/out/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/backend/project
+plugins: cov-7.0.0, metadata-3.1.1, anyio-4.13.0, Faker-40.1.2, json-report-1.5.0, ddtrace-4.4.0, asyncio-1.3.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 22 items
+
+tests/test_codex_runtime_registration.py .....                           [ 22%]
+tests/test_learning_asset_activation.py ..                               [ 31%]
+tests/test_learning_asset_adapter.py ..                                  [ 40%]
+tests/test_learning_asset_candidate_sandbox.py ..                        [ 50%]
+tests/test_learning_asset_contract.py ..                                 [ 59%]
+tests/test_learning_asset_release_gate.py ..                             [ 68%]
+tests/test_learning_asset_sandbox_alignment.py ..                        [ 77%]
+tests/test_runtime_tool_alignment.py ..                                  [ 86%]
+tests/test_v1_clean_import_runtime.py ...                                [100%]
+
+============================== 22 passed in 4.78s ==============================

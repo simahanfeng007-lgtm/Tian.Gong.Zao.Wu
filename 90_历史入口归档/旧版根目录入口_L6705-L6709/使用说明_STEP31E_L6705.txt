@@ -1,0 +1,26 @@
+临渊者桌面端 FE01 STEP31E / L6.70.5 使用说明
+
+1. 推荐启动文件
+   - 启动临渊者桌面端_L6705.bat
+   - 或 START_DESKTOP_L6705.bat
+
+2. 真实模型模式
+   - 启动临渊者桌面端_真实模型_L6705.bat
+   - 或 START_DESKTOP_PROVIDER_L6705.bat
+
+3. 本轮重点修复
+   - 防止误用缺少 Tcl/Tk 的 Python315/minimal/embeddable 后直接闪退。
+   - 启动器会自动尝试 py -3.12、py -3.11、py -3.10、python、python3，只选择 Python 3.10+ 且 Tk 可用的解释器。
+   - 如果仍提示 Can't find a usable tk.tcl，请安装官方 Python 3.12/3.11，并勾选 Tcl/Tk and IDLE。
+   - 写入授权改成选择输出目录，不再像上传文件。
+   - MCP 注册提交会出现明确回执。
+   - 记忆页改为紧凑布局。
+   - 左侧边栏新增：极夜 / 暖灰 / 墨绿 三套配色快捷按钮。
+
+4. 失败报告
+   - 如果启动失败，查看 reports/desktop_startup_failure_l6705.txt。
+   - 自检报告：reports/desktop_bundle_preflight_l671.json。
+
+5. 边界
+   - 前端只提交 Runtime request envelope。
+   - 前端不直接执行工具、不写长期记忆、不写审计、不应用回滚、不安装 MCP。

@@ -1,0 +1,104 @@
+{
+  "schema": "linyuanzhe.l6720.frontend_review_fix_validation.v1",
+  "generated_at": 1780897817.140844,
+  "ok": false,
+  "steps": [
+    {
+      "name": "compileall_frontend_backend_desktop_scripts",
+      "ok": true,
+      "detail": {
+        "returncode": 0,
+        "stderr_tail": ""
+      }
+    },
+    {
+      "name": "codex_runtime_smoke_report",
+      "ok": true,
+      "detail": {
+        "path": "backend/project/reports/l6702_codex_runtime_smoke_report.json",
+        "exists": true,
+        "ok_field": true
+      }
+    },
+    {
+      "name": "asset_activation_smoke_report",
+      "ok": false,
+      "detail": {
+        "path": "backend/project/reports/l6702_learning_asset_activation_smoke_report.json",
+        "exists": false
+      }
+    },
+    {
+      "name": "asset_adapter_smoke_report",
+      "ok": true,
+      "detail": {
+        "path": "backend/project/reports/l6702_r21_learning_asset_adapter_smoke_report.json",
+        "exists": true,
+        "ok_field": true,
+        "runtime_tool_count_after_drill": 154
+      }
+    },
+    {
+      "name": "runtime_tool_alignment_report",
+      "ok": true,
+      "detail": {
+        "path": "backend/project/reports/l6702_r15_runtime_tool_alignment_smoke_report.json",
+        "exists": true,
+        "ok_field": true,
+        "tool_count": null,
+        "usage_cards": null
+      }
+    },
+    {
+      "name": "frontend_codex_bridge_report",
+      "ok": true,
+      "detail": {
+        "path": "frontend/linyuanzhe_frontend/reports/l6702_codex_frontend_bridge_smoke_report.json",
+        "exists": true,
+        "ok_field": true
+      }
+    },
+    {
+      "name": "cross_platform_audit_report",
+      "ok": true,
+      "detail": {
+        "path": "reports/cross_platform_desktop_audit_l6710.json",
+        "exists": true,
+        "ok_field": true
+      }
+    },
+    {
+      "name": "workmode_activation_check",
+      "ok": true,
+      "detail": {
+        "runtime_tools": "158",
+        "usage_cards": "158",
+        "pytest": "22 passed",
+        "active_assets": "9",
+        "source": "launchers/run_workmode_activation_check_l6718.sh executed in session"
+      }
+    }
+  ],
+  "review_checks": {
+    "main_window_split": true,
+    "dead_last_error_fields_removed_or_logged": false,
+    "stop_reset_connected_to_buttons": true,
+    "placeholder_dynamic_hide_show": true,
+    "stream_refresh_interval_reduced_to_24ms": true,
+    "settings_saved_feedback_label": true,
+    "clear_chat_button_frontend_only": true,
+    "submit_confirmation_alias_removed": true,
+    "runtime_version_info_centralized": true,
+    "changed_frontend_static_scan": true
+  },
+  "line_counts": {
+    "main": 638,
+    "chat": 887,
+    "feature": 1192,
+    "actions": 743
+  },
+  "changed_frontend_static_issues": [],
+  "not_run": [
+    "Windows 真机 GUI 点击验收未在当前 Linux 沙箱执行"
+  ]
+}

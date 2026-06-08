@@ -1,0 +1,29 @@
+{
+  "schema": "tiangong.dataup.manifest.v1",
+  "package_id": "linyuanzhe-fe01-step31q-l6717",
+  "version": "FE01 STEP31Q / L6.71.7",
+  "target_min_version": "FE01 STEP31P / L6.71.6",
+  "channel": "community",
+  "risk_level": "A4",
+  "payload_prefix": "payload/",
+  "files": [
+    {
+      "path": "frontend/linyuanzhe_frontend/ui/main_window.py",
+      "sha256": "<payload-file-sha256>",
+      "mode": "replace"
+    }
+  ],
+  "blocked_paths": [
+    "provider_config.json",
+    ".env",
+    "memory/",
+    "logs/",
+    "audit_private/",
+    "credentials/"
+  ],
+  "post_checks": [
+    "compileall",
+    "secret_scan",
+    "desktop_bundle_preflight"
+  ]
+}

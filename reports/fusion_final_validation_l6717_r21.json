@@ -1,0 +1,202 @@
+{
+  "schema": "tiangong.l6717.r21_backend_fusion.final_validation.v1",
+  "created_at": "2026-06-08T04:05:35",
+  "package_name": "临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608",
+  "fusion_result": "PASS",
+  "fusion_strategy": {
+    "frontend_authority": "FE01 STEP31Q / L6.71.7 frontend, desktop launcher, DataUp updater preserved",
+    "backend_authority": "L6.70.2 R21 backend/project replaces old FE backend/project",
+    "conflict_policy": "outside backend/project, FE conflicting files win; R21 non-conflicting Code-X/learning-asset assets added",
+    "contract_patch": "frontend contract server patched to preserve FE and add R21 Code-X bridge smoke branch"
+  },
+  "checks": {
+    "backend_compileall": "0",
+    "frontend_desktop_compileall": "0",
+    "backend_pytest": "0",
+    "codex_runtime_smoke": "0",
+    "learning_activation_smoke": "0",
+    "learning_adapter_smoke": "0",
+    "runtime_alignment_smoke": "0",
+    "codex_frontend_bridge_smoke": "0",
+    "v1_clean_import_smoke": "0",
+    "desktop_bundle_preflight": "0",
+    "verify_l671_release": "0",
+    "scan_l659_no_pollution": "0"
+  },
+  "check_pass_map": {
+    "backend_compileall": true,
+    "frontend_desktop_compileall": true,
+    "backend_pytest": true,
+    "codex_runtime_smoke": true,
+    "learning_activation_smoke": true,
+    "learning_adapter_smoke": true,
+    "runtime_alignment_smoke": true,
+    "codex_frontend_bridge_smoke": true,
+    "v1_clean_import_smoke": true,
+    "desktop_bundle_preflight": true,
+    "verify_l671_release": true,
+    "scan_l659_no_pollution": true
+  },
+  "backend_pytest_summary": "22 passed",
+  "runtime_tool_count": 149,
+  "usage_card_count": 149,
+  "codex_runtime_tool_count": 149,
+  "r21_adapter_template_count": 5,
+  "r21_runtime_tool_count_after_drill": 154,
+  "no_pollution_scan": {
+    "checked_at": "2026-06-08T04:04:53",
+    "secret_scan": {
+      "ok": true,
+      "hit_count": 0,
+      "hits": []
+    },
+    "source_marker_reference_scan": {
+      "ok": true,
+      "hit_count": 20,
+      "note": "source redaction/config marker references only; not logged secrets",
+      "hits": [
+        {
+          "file": "scripts/real_runtime_endpoint_smoke_l670.py",
+          "line": 47,
+          "pattern": "api_key_equals_literal",
+          "match": "<redacted>"
+        },
+        {
+          "file": "scripts/scan_l659.py",
+          "line": 19,
+          "pattern": "provider_key_env_literal",
+          "match": "<redacted>"
+        },
+        {
+          "file": "frontend/linyuanzhe_frontend/clients/runtime_integration_probe.py",
+          "line": 24,
+          "pattern": "api_key_equals_literal",
+          "match": "<redacted>"
+        },
+        {
+          "file": "frontend/linyuanzhe_frontend/contracts/provider_settings.py",
+          "line": 209,
+          "pattern": "api_key_equals_literal",
+          "match": "<redacted>"
+        },
+        {
+          "file": "backend/project/tiangong_agent_runtime/budget_low_friction_governance.py",
+          "line": 554,
+          "pattern": "api_key_equals_literal",
+          "match": "<redacted>"
+        },
+        {
+          "file": "backend/project/tiangong_agent_runtime/frontend_contract.py",
+          "line": 148,
+          "pattern": "provider_key_env_literal",
+          "match": "<redacted>"
+        },
+        {
+          "file": "backend/project/tiangong_agent_runtime/planner_unified_consumption.py",
+          "line": 450,
+          "pattern": "api_key_equals_literal",
+          "match": "<redacted>"
+        },
+        {
+          "file": "backend/project/tiangong_agent_shell/config_loader.py",
+          "line": 158,
+          "pattern": "api_key_equals_literal",
+          "match": "<redacted>"
+        },
+        {
+          "file": "backend/project/tiangong_agent_shell/config_loader.py",
+          "line": 62,
+          "pattern": "provider_key_env_literal",
+          "match": "<redacted>"
+        },
+        {
+          "file": "backend/project/tiangong_agent_shell/safe_logging.py",
+          "line": 46,
+          "pattern": "api_key_equals_literal",
+          "match": "<redacted>"
+        },
+        {
+          "file": "backend/project/tiangong_kernel/l5_plugin_host/lifecycle_declaration.py",
+          "line": 192,
+          "pattern": "api_key_equals_literal",
+          "match": "<redacted>"
+        },
+        {
+          "file": "backend/project/tiangong_kernel/l5_plugin_host/phase6_health.py",
+          "line": 264,
+          "pattern": "api_key_equals_literal",
+          "match": "<redacted>"
+        },
+        {
+          "file": "backend/project/tiangong_kernel/l5_plugin_host/phase7_boundary_gate.py",
+          "line": 355,
+          "pattern": "api_key_equals_literal",
+          "match": "<redacted>"
+        },
+        {
+          "file": "backend/project/tiangong_kernel/l5_plugin_host/registry_conflict_rules.py",
+          "line": 98,
+          "pattern": "api_key_equals_literal",
+          "match": "<redacted>"
+        },
+        {
+          "file": "backend/project/tiangong_kernel/l6_plugins/cognitive_continuity/forbidden_scan.py",
+          "line": 22,
+          "pattern": "api_key_equals_literal",
+          "match": "<redacted>"
+        },
+        {
+          "file": "backend/project/tiangong_kernel/l6_plugins/common/_common.py",
+          "line": 130,
+          "pattern": "api_key_equals_literal",
+          "match": "<redacted>"
+        },
+        {
+          "file": "backend/project/tiangong_kernel/l6_plugins/common/forbidden_scan.py",
+          "line": 118,
+          "pattern": "api_key_equals_literal",
+          "match": "<redacted>"
+        },
+        {
+          "file": "backend/project/tiangong_kernel/l6_plugins/governance_control/forbidden_scan.py",
+          "line": 23,
+          "pattern": "api_key_equals_literal",
+          "match": "<redacted>"
+        },
+        {
+          "file": "backend/project/tiangong_kernel/l6_plugins/mind/mind_forbidden_scan.py",
+          "line": 28,
+          "pattern": "api_key_equals_literal",
+          "match": "<redacted>"
+        },
+        {
+          "file": "backend/project/tiangong_kernel/l6_plugins/product_delivery/forbidden_scan.py",
+          "line": 23,
+          "pattern": "api_key_equals_literal",
+          "match": "<redacted>"
+        }
+      ]
+    },
+    "provider_sdk_import_scan": {
+      "ok": true,
+      "hit_count": 0,
+      "hits": []
+    },
+    "bare_except_pass_scan": {
+      "ok": true,
+      "hit_count": 0,
+      "hits": []
+    }
+  },
+  "desktop_verify_projection": {
+    "ok": true,
+    "desktop_all_in_one_ready": true,
+    "ready_for_combine": false,
+    "merge_blockers": [
+      "official real Runtime RC unlock not executed; desktop local bridge is not final RC evidence"
+    ]
+  },
+  "known_limit": "ready_for_combine remains false only because official real Runtime RC unlock is not executed; local desktop bridge is not claimed as final RC evidence.",
+  "all_llm_runs_ok": true,
+  "updated_at": "2026-06-08T04:05:53"
+}

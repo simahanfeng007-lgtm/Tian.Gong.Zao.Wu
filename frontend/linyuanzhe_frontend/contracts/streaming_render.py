@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""L6.54 streaming render helpers.
+"""L6.71.7 streaming render helpers.
 
 The helpers here are intentionally UI-framework neutral. Tkinter can use them
 now; a later Tauri/React shell can reuse the same semantics. They optimize
@@ -13,7 +13,7 @@ from time import monotonic
 from typing import Deque, Iterable, List, Optional
 
 from .agent_ui_events import AgentUiEvent
-from .runtime_snapshot import ChatMessage, safe_text
+from .runtime_snapshot import ChatMessage, safe_chat_text, safe_text
 
 
 STREAM_RENDER_CONTRACT_VERSION = "tiangong.l6_54.stream_smooth_render.v1"
@@ -52,7 +52,7 @@ class DeltaMerger:
     _last_flush_at: float = field(default_factory=monotonic)
 
     def push(self, text: str) -> None:
-        clean = safe_text(text, self.max_chars)
+        clean = safe_chat_text(text, self.max_chars)
         if clean:
             self._parts.append(clean)
 
@@ -75,7 +75,7 @@ class DeltaMerger:
         text = "".join(self._parts)
         self._parts.clear()
         self._last_flush_at = monotonic()
-        return safe_text(text, max(self.max_chars, len(text) + 1))
+        return safe_chat_text(text, max(self.max_chars, len(text) + 1))
 
 
 @dataclass
@@ -99,7 +99,7 @@ class VirtualTranscript:
         self._trim()
 
     def append_assistant_delta(self, text: str, *, label: str = "临渊者", time: str = "流式") -> None:
-        clean = safe_text(text, 5000)
+        clean = safe_chat_text(text, 5000)
         if not clean:
             return
         idx = self._active_assistant_index
@@ -107,12 +107,22 @@ class VirtualTranscript:
             self._messages.append(ChatMessage("assistant", label, time, clean))
             self._active_assistant_index = len(self._messages) - 1
         else:
-            self._messages[idx].text = safe_text(self._messages[idx].text + clean, 5000)
+            self._messages[idx].text = safe_chat_text(self._messages[idx].text + clean, 5000)
         self._trim()
 
     def finalize_assistant(self, text: str, *, label: str = "临渊者", time: str = "完成") -> None:
-        clean = safe_text(text, 5000)
-        if clean:
+        clean = safe_chat_text(text, 5000)
+        idx = self._active_assistant_index
+        if clean and idx is not None and 0 <= idx < len(self._messages) and self._messages[idx].role == "assistant":
+            current = safe_chat_text(self._messages[idx].text, 5000)
+            if clean == current or clean.endswith(current):
+                self._messages[idx].text = clean
+                self._messages[idx].time = time
+            elif current.endswith(clean):
+                self._messages[idx].time = time
+            else:
+                self._messages.append(ChatMessage("assistant", label, time, clean))
+        elif clean:
             self._messages.append(ChatMessage("assistant", label, time, clean))
         self._active_assistant_index = None
         self._trim()
@@ -155,5 +165,7 @@ def streaming_policy() -> dict:
         "render_strategy": "event_buffer_delta_merge_virtual_transcript",
         "recommended_flush_interval_ms": 45,
         "max_visible_messages_default": 80,
+        "stream_visual_states": ["thinking", "streaming", "reconnecting", "completed", "error", "interrupted"],
+        "thinking_indicator": "ui_only_non_executing",
         "frontend_execution_permission": "none",
     }

@@ -1,0 +1,26 @@
+{
+  "status": "FAIL",
+  "hits": [
+    {
+      "kind": "syntax_error",
+      "path": "backend/project/.r20_activation_smoke_workspace/.linyuanzhe/candidate_sandbox/r18/tool_最小复测脚手架_tool_缺口候选_r18_e3c95b23270f/tests/test_static_contract.py",
+      "error": "invalid syntax (<unknown>, line 3)"
+    },
+    {
+      "kind": "syntax_error",
+      "path": "backend/project/.r20_activation_smoke_workspace/.linyuanzhe/candidate_sandbox/r18/tool_最小复测脚手架_tool_缺口候选_r18_bad10d7e29cf/tests/test_static_contract.py",
+      "error": "invalid syntax (<unknown>, line 3)"
+    },
+    {
+      "kind": "syntax_error",
+      "path": "backend/project/.r20_activation_smoke_workspace/.linyuanzhe/active_assets/r20/tool_最小复测脚手架_tool_缺口候选_65eb4cd242/tests/test_static_contract.py",
+      "error": "invalid syntax (<unknown>, line 3)"
+    },
+    {
+      "kind": "syntax_error",
+      "path": "backend/project/.r20_activation_smoke_workspace/.linyuanzhe/active_assets/r20/tool_最小复测脚手架_tool_缺口候选_ea486bb08e/tests/test_static_contract.py",
+      "error": "invalid syntax (<unknown>, line 3)"
+    }
+  ],
+  "checked_python_files": 868
+}

@@ -1,0 +1,82 @@
+{
+  "schema": "tiangong.fe01.step31q.dataup_update_acceptance.v1",
+  "ok": true,
+  "checks": {
+    "manifest_validate_passes": true,
+    "dry_run_passes": true,
+    "dry_run_does_not_mutate": true,
+    "apply_passes_on_temp_root": true,
+    "apply_mutates_only_temp_root": true,
+    "rollback_point_created": true,
+    "blocked_path_rejected": true,
+    "ui_has_dataup_buttons": true,
+    "ui_has_dual_sources": true,
+    "entry_files_exist": true,
+    "core_script_exists": true,
+    "helper_exists": true
+  },
+  "evidence": {
+    "validate": {
+      "cmd": [
+        "/opt/pyvenv/bin/python3",
+        "dataup_manifest_validate_l6717.py",
+        "--root",
+        "/tmp/linyuanzhe_dataup_acceptance_o3hlnrvp/fake_root",
+        "--package",
+        "/tmp/linyuanzhe_dataup_acceptance_o3hlnrvp/good_dataup.zip"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "stdout_tail": "min_version\": \"FE01 STEP31P / L6.71.6\",\n    \"channel\": \"community\",\n    \"risk_level\": \"A4\",\n    \"source_kind\": \"local_package\",\n    \"signature_verified\": false,\n    \"signature_note\": \"signature slot reserved; no cryptographic verification performed by this stdlib helper\",\n    \"file_count\": 2,\n    \"add_count\": 1,\n    \"replace_count\": 1,\n    \"blocked\": [],\n    \"warnings\": [\n      \"signature file not present; sha256 manifest validation still applied\"\n    ],\n    \"files\": [\n      {\n        \"path\": \"frontend/linyuanzhe_frontend/VERSION_FE01.txt\",\n        \"mode\": \"replace\",\n        \"action\": \"replace\",\n        \"sha256\": \"8d6b99b84fe5298841a5a69e7cf0096c9df4e1df44945268379e9b391dc8e318\",\n        \"size\": 23,\n        \"target_exists\": true,\n        \"target_digest\": \"1b7548f98db9213e\"\n      },\n      {\n        \"path\": \"docs/dataup_acceptance_note.txt\",\n        \"mode\": \"upsert\",\n        \"action\": \"add\",\n        \"sha256\": \"dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22\",\n        \"size\": 3,\n        \"target_exists\": false,\n        \"target_digest\": \"\"\n      }\n    ]\n  },\n  \"report\": \"/tmp/linyuanzhe_dataup_acceptance_o3hlnrvp/fake_root/reports/dataup_manifest_validate_l6717.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    "dry_run": {
+      "cmd": [
+        "/opt/pyvenv/bin/python3",
+        "dataup_update_core_l6717.py",
+        "--root",
+        "/tmp/linyuanzhe_dataup_acceptance_o3hlnrvp/fake_root",
+        "--package",
+        "/tmp/linyuanzhe_dataup_acceptance_o3hlnrvp/good_dataup.zip",
+        "--dry-run"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "stdout_tail": "STEP31P / L6.71.6\",\n    \"channel\": \"community\",\n    \"risk_level\": \"A4\",\n    \"source_kind\": \"local_package\",\n    \"signature_verified\": false,\n    \"signature_note\": \"signature slot reserved; no cryptographic verification performed by this stdlib helper\",\n    \"file_count\": 2,\n    \"add_count\": 1,\n    \"replace_count\": 1,\n    \"blocked\": [],\n    \"warnings\": [\n      \"signature file not present; sha256 manifest validation still applied\"\n    ],\n    \"files\": [\n      {\n        \"path\": \"frontend/linyuanzhe_frontend/VERSION_FE01.txt\",\n        \"mode\": \"replace\",\n        \"action\": \"replace\",\n        \"sha256\": \"8d6b99b84fe5298841a5a69e7cf0096c9df4e1df44945268379e9b391dc8e318\",\n        \"size\": 23,\n        \"target_exists\": true,\n        \"target_digest\": \"1b7548f98db9213e\"\n      },\n      {\n        \"path\": \"docs/dataup_acceptance_note.txt\",\n        \"mode\": \"upsert\",\n        \"action\": \"add\",\n        \"sha256\": \"dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22\",\n        \"size\": 3,\n        \"target_exists\": false,\n        \"target_digest\": \"\"\n      }\n    ]\n  },\n  \"latency_ms\": 1,\n  \"report\": \"/tmp/linyuanzhe_dataup_acceptance_o3hlnrvp/fake_root/reports/dataup_last_update_report_l6717.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    "apply": {
+      "cmd": [
+        "/opt/pyvenv/bin/python3",
+        "dataup_update_core_l6717.py",
+        "--root",
+        "/tmp/linyuanzhe_dataup_acceptance_o3hlnrvp/fake_root",
+        "--package",
+        "/tmp/linyuanzhe_dataup_acceptance_o3hlnrvp/good_dataup.zip",
+        "--apply",
+        "--yes",
+        "--skip-post-checks"
+      ],
+      "returncode": 0,
+      "ok": true,
+      "stdout_tail": "tion performed by this stdlib helper\",\n    \"file_count\": 2,\n    \"add_count\": 1,\n    \"replace_count\": 1,\n    \"blocked\": [],\n    \"warnings\": [\n      \"signature file not present; sha256 manifest validation still applied\"\n    ],\n    \"files\": [\n      {\n        \"path\": \"frontend/linyuanzhe_frontend/VERSION_FE01.txt\",\n        \"mode\": \"replace\",\n        \"action\": \"replace\",\n        \"sha256\": \"8d6b99b84fe5298841a5a69e7cf0096c9df4e1df44945268379e9b391dc8e318\",\n        \"size\": 23,\n        \"target_exists\": true,\n        \"target_digest\": \"1b7548f98db9213e\"\n      },\n      {\n        \"path\": \"docs/dataup_acceptance_note.txt\",\n        \"mode\": \"upsert\",\n        \"action\": \"add\",\n        \"sha256\": \"dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22\",\n        \"size\": 3,\n        \"target_exists\": false,\n        \"target_digest\": \"\"\n      }\n    ]\n  },\n  \"backup\": \"/tmp/linyuanzhe_dataup_acceptance_o3hlnrvp/fake_root/backups/dataup_rollback_20260608_024602\",\n  \"post_checks\": {\n    \"ok\": true,\n    \"skipped\": true,\n    \"checks\": []\n  },\n  \"restart_required\": true,\n  \"latency_ms\": 4,\n  \"report\": \"/tmp/linyuanzhe_dataup_acceptance_o3hlnrvp/fake_root/reports/dataup_last_update_report_l6717.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    "block_bad": {
+      "cmd": [
+        "/opt/pyvenv/bin/python3",
+        "dataup_update_core_l6717.py",
+        "--root",
+        "/tmp/linyuanzhe_dataup_acceptance_o3hlnrvp/fake_root",
+        "--package",
+        "/tmp/linyuanzhe_dataup_acceptance_o3hlnrvp/bad_dataup.zip",
+        "--dry-run"
+      ],
+      "returncode": 1,
+      "ok": false,
+      "stdout_tail": "\": \"dry_run\",\n  \"plan\": {\n    \"ok\": false,\n    \"package_path_digest\": \"da7edb3f8c8f3725\",\n    \"manifest_path\": \"dataup_manifest.json\",\n    \"package_id\": \"acceptance-step31q\",\n    \"version\": \"FE01 STEP31Q / L6.71.7\",\n    \"target_min_version\": \"FE01 STEP31P / L6.71.6\",\n    \"channel\": \"community\",\n    \"risk_level\": \"A4\",\n    \"source_kind\": \"local_package\",\n    \"signature_verified\": false,\n    \"signature_note\": \"signature slot reserved; no cryptographic verification performed by this stdlib helper\",\n    \"file_count\": 1,\n    \"add_count\": 0,\n    \"replace_count\": 1,\n    \"blocked\": [\n      \"provider_config.json: blocked filename\"\n    ],\n    \"warnings\": [\n      \"signature file not present; sha256 manifest validation still applied\"\n    ],\n    \"files\": [\n      {\n        \"path\": \"docs/dataup_acceptance_note.txt\",\n        \"mode\": \"upsert\",\n        \"action\": \"replace\",\n        \"sha256\": \"dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22\",\n        \"size\": 3,\n        \"target_exists\": true,\n        \"target_digest\": \"dc51b8c96c2d745d\"\n      }\n    ]\n  },\n  \"latency_ms\": 1,\n  \"report\": \"/tmp/linyuanzhe_dataup_acceptance_o3hlnrvp/fake_root/reports/dataup_last_update_report_l6717.json\"\n}\n",
+      "stderr_tail": ""
+    }
+  },
+  "note": "Validates local DataUp manifest, dry-run, rollback-point creation, blocked path rejection, and UI/entry wiring. It does not call Provider SDKs, tools, memory, audit, or official Runtime RC."
+}

@@ -1,19 +1,19 @@
 {
-  "schema": "tiangong.l6_54.design_tokens.v1",
+  "schema": "tiangong.l6_71_3.design_tokens.v1",
   "brand": {
     "tiangong": "极昼 / 明亮 / 母品牌",
-    "linyuanzhe": "极夜 / 深色 / 执行驾驶舱"
+    "linyuanzhe": "永夜 / 极昼 / 中性工作台"
   },
-  "theme": "linyuanzhe-dark-night",
+  "theme": "linyuanzhe-neutral-workbench",
   "color": {
-    "night_bg_root": "#070B14",
-    "night_bg_window": "#0B1220",
-    "night_card": "#101A2B",
-    "night_card_alt": "#121F33",
-    "ink_blue": "#10243D",
+    "night_bg_root": "#0C0E11",
+    "night_bg_window": "#101215",
+    "night_card": "#15191E",
+    "night_card_alt": "#1A1F25",
+    "ink_blue": "#102522",
     "cold_gold": "#D6A84F",
-    "qing_white": "#E8EEF8",
-    "accent_blue": "#3B82F6",
+    "qing_white": "#ECEFF3",
+    "accent_blue": "#14B8A6",
     "status_success": "#22C55E",
     "status_warning": "#F59E0B",
     "status_danger": "#EF4444",
@@ -30,13 +30,21 @@
     "avoid_neon_overload": true
   },
   "layout": {
-    "home_principle": "聊天主心骨 + 右侧轻状态 + 底部九字段",
-    "max_home_side_cards": 4,
+    "home_principle": "对话优先 + 会话信息默认折叠 + 底部极简状态",
+    "visible_top_nav_count": 5,
+    "home_side_panel_default": "collapsed",
+    "max_home_side_cards": 1,
+    "bottom_status_fields": [
+      "就绪",
+      "模式",
+      "质量门",
+      "审计"
+    ],
     "dense_dashboard_forbidden": true
   },
   "typography": {
-    "cn_primary": "Microsoft YaHei UI",
-    "latin_primary": "Segoe UI",
-    "monospace": "Consolas"
+    "cn_primary": "TkDefaultFont",
+    "latin_primary": "TkDefaultFont",
+    "monospace": "TkFixedFont"
   }
 }

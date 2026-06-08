@@ -1,0 +1,29 @@
+{
+  "status": "pass",
+  "template_id": "schema_contract_check",
+  "result": {
+    "schema": "tiangong.l6702.r21.learning_asset_adapter_template.v1",
+    "generated_at": 1780892161.6291454,
+    "status": "pass",
+    "smoke_count": 1,
+    "smoke_results": [
+      {
+        "adapter_template_id": "schema_contract_check",
+        "ok": true,
+        "status": "ok",
+        "output_summary": "Schema/Contract 校验完成。",
+        "data_keys": [
+          "arguments",
+          "missing_fields",
+          "schema_type",
+          "valid"
+        ]
+      }
+    ],
+    "issue_count": 0,
+    "issues": [],
+    "next_action_hint": {
+      "next_tool": "learning_asset_adapter_drill"
+    }
+  }
+}

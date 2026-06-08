@@ -84,6 +84,49 @@ from .suggestions import HandoffSuggestion, PlanSuggestion, QualityGateSuggestio
 from .tool_invocation import ToolInvocation
 from .tool_result import ToolResult
 from .turn_context import TurnContext
+from .code_x_runtime_adapters import register_code_x_runtime_tools
+from .v1_clean_import_adapters import register_v1_clean_import_tools
+from .runtime_tool_alignment import build_runtime_llm_drill_adapter, build_runtime_tool_alignment_adapter
+from .learning_asset_contract import (
+    LearningAssetContractBridge,
+    build_learning_asset_contract_guide_adapter,
+    build_learning_asset_contract_normalize_adapter,
+    build_learning_asset_contract_validate_adapter,
+)
+from .learning_asset_sandbox_alignment import (
+    LearningAssetSandboxAlignmentBridge,
+    build_learning_asset_sandbox_guide_adapter,
+    build_learning_asset_sandbox_align_adapter,
+    build_learning_asset_sandbox_validate_adapter,
+)
+from .learning_asset_candidate_sandbox import (
+    LearningAssetCandidateSandboxBridge,
+    build_learning_asset_candidate_sandbox_guide_adapter,
+    build_learning_asset_candidate_sandbox_build_adapter,
+    build_learning_asset_candidate_sandbox_validate_adapter,
+    build_learning_asset_candidate_sandbox_review_adapter,
+)
+from .learning_asset_release_gate import (
+    LearningAssetReleaseGateBridge,
+    build_learning_asset_release_gate_guide_adapter,
+    build_learning_asset_release_gate_check_adapter,
+)
+from .learning_asset_activation import (
+    LearningAssetActivationBridge,
+    build_learning_asset_activation_guide_adapter,
+    build_learning_asset_activation_apply_adapter,
+    build_learning_asset_activation_status_adapter,
+    build_learning_asset_activation_smoke_adapter,
+)
+from .learning_asset_adapter import (
+    LearningAssetAdapterBridge,
+    build_learning_asset_adapter_guide_adapter,
+    build_learning_asset_adapter_template_list_adapter,
+    build_learning_asset_adapter_template_normalize_adapter,
+    build_learning_asset_adapter_template_validate_adapter,
+    build_learning_asset_adapter_template_smoke_adapter,
+    build_learning_asset_adapter_drill_adapter,
+)
 
 
 @dataclass(frozen=True)
@@ -134,6 +177,12 @@ class RuntimeEntry:
         self.delivery_standardization = DeliveryStandardizationBridge()
         self.provider_adaptation = ProviderAdaptationBridge()
         self.learning_convergence = LearningConvergenceBridge()
+        self.learning_asset_contract = LearningAssetContractBridge()
+        self.learning_asset_sandbox = LearningAssetSandboxAlignmentBridge()
+        self.learning_asset_candidate_sandbox = LearningAssetCandidateSandboxBridge()
+        self.learning_asset_release_gate = LearningAssetReleaseGateBridge()
+        self.learning_asset_activation = LearningAssetActivationBridge(self.registry)
+        self.learning_asset_adapter = LearningAssetAdapterBridge(self.learning_asset_activation)
         self.recovery_coordination = RecoveryCoordinationBridge()
         self.governance_execution = GovernanceExecutionBridge()
         self.planner_context = PlannerContextIntegrationBridge()
@@ -314,6 +363,126 @@ class RuntimeEntry:
             ToolDescriptor("build_l6_39_p0_integration", "生成 L6.39 Memory/Audit/Recovery/QualityGate 四系统接入二总报告，统一进入 PlannerExecutionController。", "A2"),
             build_l6_39_p0_report_adapter(self.p0_system_integration_two),
         )
+        # L6.70.2-R15：全局工具注册表 / Skill / LLM 路由对齐。
+        # 仅做元数据检查和路由演练，不执行目标工具、不改注册表、不让 Planner 夺权。
+        self.registry.register(
+            ToolDescriptor("runtime_tool_alignment_check", "全局 Runtime 工具注册表、风险、Skill 使用卡和 LLM 入口对齐检查。", "A2"),
+            build_runtime_tool_alignment_adapter(self.registry.describe),
+        )
+        self.registry.register(
+            ToolDescriptor("runtime_llm_operational_drill", "模拟 LLM 从用户意图到 PlanBridge 到 Runtime 工具名的可用性演练。", "A2"),
+            build_runtime_llm_drill_adapter(self.registry.describe, self.plan_bridge.build_plan),
+        )
+        # L6.70.2-R16：未来自主学习/经验沉淀生产的 Tool/Skill 统一资产契约。
+        # 仅做契约指南、归一化和校验；不写 Skill 注册表、不生产 Tool、不注册、不激活。
+        self.registry.register(
+            ToolDescriptor("learning_asset_contract_guide", "返回未来自主学习与经验总结产生 Tool/Skill 的统一资产契约格式。", "A2"),
+            build_learning_asset_contract_guide_adapter(),
+        )
+        self.registry.register(
+            ToolDescriptor("learning_asset_contract_normalize", "把经验候选、Skill 草案、Tool 请求归一为 R16 统一资产契约。", "A2"),
+            build_learning_asset_contract_normalize_adapter(
+                self.learning_asset_contract,
+                self.experience,
+                self.skill_queue,
+                self.tool_requests,
+                self.registry.describe,
+            ),
+        )
+        self.registry.register(
+            ToolDescriptor("learning_asset_contract_validate", "校验 R16 统一资产契约字段、usage card、chain recipe、风险和 no-pollution 边界。", "A2"),
+            build_learning_asset_contract_validate_adapter(self.learning_asset_contract),
+        )
+        # L6.70.2-R17：对齐已存在的 L6.22 Tool 生产请求沙箱化与验证前置链。
+        # 不新建真实执行沙箱，不生产 Tool，不注册 Tool，不释放句柄。
+        self.registry.register(
+            ToolDescriptor("learning_asset_sandbox_guide", "说明 R16 统一资产契约应如何接入已存在的 L6.22 Tool 生产请求沙箱化与验证前置链。", "A2"),
+            build_learning_asset_sandbox_guide_adapter(),
+        )
+        self.registry.register(
+            ToolDescriptor("learning_asset_sandbox_align", "把 R16 Tool 类统一资产契约映射到 L6.22 ToolProductionRequest / SandboxValidationPlan。", "A2"),
+            build_learning_asset_sandbox_align_adapter(self.learning_asset_sandbox, self.learning_asset_contract, self.tool_requests),
+        )
+        self.registry.register(
+            ToolDescriptor("learning_asset_sandbox_validate", "复核 R16 Tool 类统一资产契约是否已绑定 L6.22 沙箱前置计划；只校验不生产不注册。", "A2"),
+            build_learning_asset_sandbox_validate_adapter(self.learning_asset_sandbox, self.learning_asset_contract, self.tool_requests),
+        )
+        # L6.70.2-R18：真实候选包生产沙箱。
+        # 只在隔离 workspace 写候选包/扫描/smoke/回滚/审阅证据；不注册、不激活、不调用候选工具。
+        self.registry.register(
+            ToolDescriptor("learning_asset_candidate_sandbox_guide", "说明 R18 Tool/Skill 候选包生产沙箱的边界、链路和命令。", "A2"),
+            build_learning_asset_candidate_sandbox_guide_adapter(),
+        )
+        self.registry.register(
+            ToolDescriptor("learning_asset_candidate_sandbox_build", "把已通过 R16/R17 的 Tool/Skill 契约落盘为隔离候选包，并生成静态扫描、smoke、回滚与审阅证据。", "A3"),
+            build_learning_asset_candidate_sandbox_build_adapter(
+                self.learning_asset_candidate_sandbox,
+                self.learning_asset_contract,
+                self.learning_asset_sandbox,
+            ),
+        )
+        self.registry.register(
+            ToolDescriptor("learning_asset_candidate_sandbox_validate", "复核 R18 候选包 manifest、静态扫描、smoke 与边界断言；不注册不激活。", "A2"),
+            build_learning_asset_candidate_sandbox_validate_adapter(self.learning_asset_candidate_sandbox),
+        )
+        self.registry.register(
+            ToolDescriptor("learning_asset_candidate_sandbox_review", "生成 R18 候选包注册审阅结论，仅供 LLM 决定后续质量门/发布门，不自动注册。", "A2"),
+            build_learning_asset_candidate_sandbox_review_adapter(self.learning_asset_candidate_sandbox),
+        )
+        # L6.70.2-R19：执行力优先的轻量发布门。
+        # 只生成质量门/发布门/回滚证据/注册申请四项结论；不注册、不激活。
+        self.registry.register(
+            ToolDescriptor("learning_asset_release_gate_guide", "说明 R19 候选 Tool/Skill 轻量发布门：四项直检，LLM 裁决，不自动注册。", "A2"),
+            build_learning_asset_release_gate_guide_adapter(),
+        )
+        self.registry.register(
+            ToolDescriptor("learning_asset_release_gate_check", "把 R18 候选包审阅证据压成质量门、发布门、回滚证据和注册申请 ready 结论。", "A2"),
+            build_learning_asset_release_gate_check_adapter(self.learning_asset_release_gate, self.learning_asset_candidate_sandbox),
+        )
+        # L6.70.2-R20：学习成功后的受控注册/激活闭环。
+        # 通过 R19 后写 workspace active asset registry，并把 learned_* 注册到当前 Runtime，可立即 smoke 调用；不覆盖内置工具，不复制/导入 v1。
+        self.registry.register(
+            ToolDescriptor("learning_asset_activation_guide", "说明 R20 学习资产激活链：通过 R19 后注册 learned_* 并立即可用。", "A2"),
+            build_learning_asset_activation_guide_adapter(),
+        )
+        self.registry.register(
+            ToolDescriptor("learning_asset_activation_apply", "将通过 R19 的 Tool/Skill 候选包写入 active asset registry，并把 learned_* 动态注册到 Runtime。", "A3"),
+            build_learning_asset_activation_apply_adapter(self.learning_asset_activation, self.learning_asset_release_gate, self.learning_asset_candidate_sandbox),
+        )
+        self.registry.register(
+            ToolDescriptor("learning_asset_activation_status", "读取并加载 workspace 级 active learned assets，确认已激活工具/Skill 是否可用。", "A2"),
+            build_learning_asset_activation_status_adapter(self.learning_asset_activation),
+        )
+        self.registry.register(
+            ToolDescriptor("learning_asset_activation_smoke", "对已激活 learned_* 资产执行受控 smoke 调用，证明 LLM 可立即使用。", "A3"),
+            build_learning_asset_activation_smoke_adapter(self.learning_asset_activation),
+        )
+        # L6.70.2-R21：实用型 learned Tool Adapter 模板层。
+        # 只提供纯函数/契约校验/项目诊断/文档生产辅助/经验复用模板；drill 仍经 R20 受控激活 learned_tool_*。
+        self.registry.register(
+            ToolDescriptor("learning_asset_adapter_guide", "说明 R21 学习资产实用型 Adapter 模板、边界和调用链。", "A2"),
+            build_learning_asset_adapter_guide_adapter(self.learning_asset_adapter),
+        )
+        self.registry.register(
+            ToolDescriptor("learning_asset_adapter_template_list", "列出 R21 五类实用 learned Tool Adapter 模板及 usage card。", "A2"),
+            build_learning_asset_adapter_template_list_adapter(self.learning_asset_adapter),
+        )
+        self.registry.register(
+            ToolDescriptor("learning_asset_adapter_template_normalize", "把模板选择和用户备注归一为 R21 adapter_template_spec。", "A2"),
+            build_learning_asset_adapter_template_normalize_adapter(self.learning_asset_adapter),
+        )
+        self.registry.register(
+            ToolDescriptor("learning_asset_adapter_template_validate", "校验 R21 Adapter 模板 spec、AST、usage card、chain recipe 和无污染边界。", "A2"),
+            build_learning_asset_adapter_template_validate_adapter(self.learning_asset_adapter),
+        )
+        self.registry.register(
+            ToolDescriptor("learning_asset_adapter_template_smoke", "对 R21 Adapter 模板执行参数内 smoke，验证模板不是空壳。", "A2"),
+            build_learning_asset_adapter_template_smoke_adapter(self.learning_asset_adapter),
+        )
+        self.registry.register(
+            ToolDescriptor("learning_asset_adapter_drill", "生成五类 R21 Adapter 候选包并经 R20 激活为可调用 learned_tool_*，再执行 smoke。", "A3"),
+            build_learning_asset_adapter_drill_adapter(self.learning_asset_adapter),
+        )
         self.last_result: RuntimeRunResult | None = None
 
     def run_text(
@@ -329,6 +498,7 @@ class RuntimeEntry:
         external_context_hint: str = "",
     ) -> RuntimeRunResult:
         context = TurnContext.create(user_message, workspace=workspace, tool_mode=tool_mode, max_steps=max_steps)
+        self.learning_asset_activation.load_active_assets(workspace=context.workspace)
         intent = self.intent_bridge.classify(user_message)
         plan, planner_result = self._build_plan_for_text(
             user_message,
@@ -518,6 +688,7 @@ class RuntimeEntry:
         max_steps: int = 20,
     ) -> RuntimeRunResult:
         context = TurnContext.create(user_message, workspace=workspace, tool_mode=tool_mode, max_steps=max_steps)
+        self.learning_asset_activation.load_active_assets(workspace=context.workspace)
         results, chain_summary, planner_execution_report = self._execute_plan_with_planner_controller(
             context,
             plan,
@@ -2006,6 +2177,9 @@ class RuntimeEntry:
             self.tool_requests.build_planner_hint(),
             self.exoskeleton.build_planner_hint(),
             self.learning_convergence.build_planner_hint(),
+            self.learning_asset_candidate_sandbox.build_planner_hint(),
+            self.learning_asset_release_gate.build_planner_hint(),
+            self.learning_asset_activation.build_planner_hint(),
             self.recovery_coordination.build_planner_hint(),
             self.governance_execution.build_planner_hint(),
             self.budget_low_friction.build_planner_hint(),
@@ -2138,5 +2312,10 @@ def build_default_registry() -> RuntimeToolRegistry:
     registry.register(ToolDescriptor("return_analysis", "审计型虚拟分析返回；不执行、不写文件。", "A2"), return_analysis_adapter)
     registry.register(ToolDescriptor("run_python_quality_check", "执行 allowlist 内 Python 质量检查。", "A3"), run_python_quality_check_adapter)
     registry.register(ToolDescriptor("create_zip_package", "在工作区内生成交付 ZIP 与 SHA256。", "A3"), create_zip_package_adapter)
+    # L6.70.2-CodeX：代码执行外骨骼工具为 v2 原生实现；只在 build_default_registry 显式注册，
+    # 不含启动副作用、不导入 v1、不替换 ToolRegistry。
+    register_code_x_runtime_tools(registry)
+    # L6.70.2-R14：v1 非 Code-X 语义按独立纯净导入层注册；不复制/不 import v1，不混入 Code-X。
+    register_v1_clean_import_tools(registry)
     # create_release_bundle / synthesize_experience_candidates / queue_skill_candidates / queue_tool_production_requests / build_execution_exoskeleton / build_shell_system_mount / build_project_repair_plan / build_delivery_standardization / build_provider_adaptation / build_learning_convergence / build_recovery_coordination / build_governance_execution / build_planner_context / L6.38/L6.39 P0 integration tools 需要 RuntimeEntry 内部状态桥，故在 RuntimeEntry.__init__ 中注册。
     return registry

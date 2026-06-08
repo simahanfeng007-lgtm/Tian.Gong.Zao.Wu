@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "report": "reports/l6702_r17_learning_asset_sandbox_alignment_smoke_report.json",
+  "tool_count": 133,
+  "sandbox_status": "pass"
+}

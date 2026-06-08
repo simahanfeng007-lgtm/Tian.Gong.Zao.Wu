@@ -1,0 +1,21 @@
+FE01 STEP31Q / L6.71.7 修复报告
+
+本轮目标：
+1. 真实 Provider 配置后，若网关不可达、Key 错误、模型不存在、超时、限流或服务端错误，UI 给出清楚错误态和下一步动作。
+2. 将永夜 / 极昼两个高频主题选择放入底部状态栏，允许一键切换。
+
+修改范围：
+- frontend/linyuanzhe_frontend/contracts/provider_settings.py
+- frontend/linyuanzhe_frontend/contracts/runtime_snapshot.py
+- frontend/linyuanzhe_frontend/clients/sse_runtime_client.py
+- frontend/linyuanzhe_frontend/ui/main_window.py
+- frontend/linyuanzhe_frontend/ui/theme.py
+- desktop/linyuanzhe_local_runtime_bridge_l671.py
+- scripts/desktop_provider_error_theme_acceptance_l6716.py
+
+边界：
+- 前端未裸调 Provider SDK。
+- 前端未直接执行工具。
+- 前端未写记忆或审计。
+- 本地桥接只记录脱敏错误态，不回显 API Key / Base URL。
+- 底框主题切换只写前端 ui_preferences.json，不影响 Runtime 主链。

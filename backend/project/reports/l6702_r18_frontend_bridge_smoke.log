@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "report": "/mnt/data/r18_work/frontend/linyuanzhe_frontend/reports/l6702_codex_frontend_bridge_smoke_report.json",
+  "code_x_tool_results": [
+    "code_x_runtime_status",
+    "repo_map"
+  ]
+}

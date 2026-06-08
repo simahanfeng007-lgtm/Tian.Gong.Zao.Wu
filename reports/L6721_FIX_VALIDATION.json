@@ -1,0 +1,132 @@
+{
+  "schema": "tiangong.l6721.frontend_and_biodynamic_fix_validation.v1",
+  "generated_at": 1780898759.5708046,
+  "ok": true,
+  "syntax": [
+    {
+      "file": "backend/project/tiangong_agent_runtime/biodynamic_policy_core.py",
+      "ok": true
+    },
+    {
+      "file": "backend/project/tiangong_agent_runtime/execution_policy.py",
+      "ok": true
+    },
+    {
+      "file": "backend/project/tiangong_agent_runtime/permit_gateway.py",
+      "ok": true
+    },
+    {
+      "file": "backend/project/tiangong_agent_runtime/memory_math_core.py",
+      "ok": true
+    },
+    {
+      "file": "backend/project/tiangong_agent_runtime/memory_write_filter.py",
+      "ok": true
+    },
+    {
+      "file": "backend/project/tiangong_agent_runtime/forgetting_review_router.py",
+      "ok": true
+    },
+    {
+      "file": "backend/project/tiangong_agent_runtime/execution_exoskeleton.py",
+      "ok": true
+    },
+    {
+      "file": "backend/project/tiangong_agent_runtime/governance_execution.py",
+      "ok": true
+    },
+    {
+      "file": "backend/project/tiangong_agent_runtime/lifecycle_coordinator.py",
+      "ok": true
+    },
+    {
+      "file": "backend/project/tests/test_biodynamic_policy_core_l6721.py",
+      "ok": true
+    },
+    {
+      "file": "frontend/linyuanzhe_frontend/ui/main_window.py",
+      "ok": true
+    },
+    {
+      "file": "frontend/linyuanzhe_frontend/ui/main_window_chat_runtime.py",
+      "ok": true
+    },
+    {
+      "file": "frontend/linyuanzhe_frontend/ui/main_window_feature_pages.py",
+      "ok": true
+    },
+    {
+      "file": "frontend/linyuanzhe_frontend/ui/main_window_actions.py",
+      "ok": true
+    },
+    {
+      "file": "frontend/linyuanzhe_frontend/version_info.py",
+      "ok": true
+    }
+  ],
+  "frontend_review_checks": {
+    "main_window_split": true,
+    "dead_last_error_fields_removed": true,
+    "stop_reset_connected": true,
+    "placeholder_dynamic_hide_show": true,
+    "stream_refresh_interval_reduced": true,
+    "settings_saved_feedback_label": true,
+    "clear_chat_button_frontend_only": true,
+    "submit_confirmation_alias_removed": true,
+    "version_info_centralized": true
+  },
+  "biodynamic_checks": {
+    "biodynamic_core_exists": true,
+    "memory_write_filter_dynamic": true,
+    "forgetting_router_dynamic": true,
+    "execution_policy_dynamic": true,
+    "a5_hard_boundary_kept": true,
+    "exoskeleton_lexical_activation": true,
+    "governance_fast_lane_dynamic": true,
+    "lifecycle_lease_dynamic": true
+  },
+  "report_checks": {
+    "codex_runtime": {
+      "exists": true,
+      "ok": true,
+      "tool_count": 149
+    },
+    "asset_activation": {
+      "exists": true,
+      "ok": true
+    },
+    "asset_adapter": {
+      "exists": true,
+      "ok": true,
+      "runtime_tool_count_after_drill": 154,
+      "template_count": 5
+    },
+    "runtime_align": {
+      "exists": true,
+      "ok": true
+    },
+    "frontend_bridge": {
+      "exists": true,
+      "ok": true
+    },
+    "cross_platform": {
+      "exists": true,
+      "ok": true
+    }
+  },
+  "line_counts": {
+    "main_window.py": 638,
+    "main_window_chat_runtime.py": 887,
+    "main_window_feature_pages.py": 1192,
+    "main_window_actions.py": 743
+  },
+  "workmode": {
+    "runtime_tools": 158,
+    "usage_cards": 158,
+    "active_assets": 9,
+    "pytest": "27 passed"
+  },
+  "not_run": [
+    "Windows 真机 GUI 点击验收未在当前 Linux 沙箱执行"
+  ]
+}

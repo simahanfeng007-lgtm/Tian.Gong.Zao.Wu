@@ -11,6 +11,7 @@ from typing import Any
 
 from tiangong_kernel.l6_plugins.common._common import ensure_bool
 
+from .biodynamic_policy_core import BioDynamicState, dynamic_threshold
 from .memory_math_core import ForgettingScoreVector, MemoryLevel
 from .memory_store_bridge import MemoryRecord
 
@@ -75,22 +76,46 @@ class ForgetReviewRouter:
         active_recall_suppression_required = False
         retention_exception_review_required = False
 
-        if vector.explicit_user_forget_request or vector.user_forget_signal >= 0.90:
+        state = vector.forgetting_state
+        protected_state = BioDynamicState(
+            evidence=vector.protected_l5_rule_score,
+            drive=vector.user_forget_signal,
+            privacy_pressure=vector.privacy_minimization_need,
+            conflict_pressure=vector.conflict_score,
+            recovery=vector.protected_l5_rule_score,
+            user_intent=vector.user_forget_signal,
+            inertia=vector.protected_l5_rule_score,
+        )
+        forced_user_gate = dynamic_threshold(
+            0.88,
+            load=protected_state.load,
+            drive=state.adaptive_drive,
+            recovery=1.0 - vector.protected_l5_rule_score,
+            minimum=0.70,
+            maximum=0.96,
+        )
+        privacy_gate = state.threshold(0.66, minimum=0.42, maximum=0.88)
+        compress_gate = state.threshold(0.52, minimum=0.30, maximum=0.76)
+        archive_gate = state.threshold(0.72, minimum=0.50, maximum=0.90)
+        demote_gate = state.threshold(0.52, minimum=0.32, maximum=0.76)
+        l5_protect_gate = protected_state.threshold(0.82, minimum=0.62, maximum=0.96)
+
+        if vector.explicit_user_forget_request or vector.user_forget_signal >= forced_user_gate:
             actions.extend(["suppress_active_recall", "tombstone", "delete_review"])
             legal_delete_review_required = True
             tombstone_review_required = True
             active_recall_suppression_required = True
-            retention_exception_review_required = record.memory_level is MemoryLevel.L5 or vector.protected_l5_rule_score >= 0.90
+            retention_exception_review_required = record.memory_level is MemoryLevel.L5 or vector.protected_l5_rule_score >= l5_protect_gate
         else:
             score = vector.forgetting_score
-            if vector.privacy_minimization_need >= 0.70:
+            if vector.privacy_minimization_need >= privacy_gate:
                 actions.append("suppress_active_recall")
                 active_recall_suppression_required = True
-            if vector.compression_gain >= 0.55 or vector.low_reuse_score >= 0.65:
+            if max(vector.compression_gain, vector.low_reuse_score) >= compress_gate:
                 actions.append("compress")
-            if score >= 0.75:
+            if score >= archive_gate:
                 actions.append("archive")
-            elif score >= 0.55:
+            elif score >= demote_gate:
                 actions.append("demote")
             if record.memory_level is MemoryLevel.L5 and actions:
                 retention_exception_review_required = True

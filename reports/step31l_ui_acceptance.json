@@ -1,0 +1,45 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "name": "nav:visible_top_level_5",
+      "ok": true,
+      "detail": "['chat', 'sessions', 'memory', 'four_paths', 'settings']"
+    },
+    {
+      "name": "nav:all_routes_still_addressable",
+      "ok": true,
+      "detail": "13"
+    },
+    {
+      "name": "home:session_info_collapsed_by_default",
+      "ok": true,
+      "detail": "False"
+    },
+    {
+      "name": "statusbar:four_items",
+      "ok": true,
+      "detail": "['runtime_status', 'backend_mode', 'gate_status', 'audit_id']"
+    },
+    {
+      "name": "provider:default_openai_compatible",
+      "ok": true,
+      "detail": "openai_compatible"
+    },
+    {
+      "name": "provider:default_model_gateway",
+      "ok": true,
+      "detail": "deepseek-v4-pro"
+    },
+    {
+      "name": "home:session_info_toggle_expands",
+      "ok": true,
+      "detail": "True"
+    },
+    {
+      "name": "home:session_info_toggle_collapses",
+      "ok": true,
+      "detail": "False"
+    }
+  ]
+}

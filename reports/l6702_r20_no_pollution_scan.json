@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "scanned_py_files": 946,
+  "ast_import_violations": [],
+  "suspicious_v1_source_filenames": [],
+  "assertions": {
+    "no_v1_import_ast": true,
+    "no_v1_source_filename_copy": true,
+    "no_v1_registry_reuse_detected": true,
+    "no_v1_executor_reuse_detected": true,
+    "no_v1_terminal_reuse_detected": true,
+    "no_v1_provider_reuse_detected": true,
+    "no_v1_self_iteration_reuse_detected": true,
+    "no_monkey_patch_added": true,
+    "no_background_loop_added": true
+  }
+}

@@ -51,6 +51,7 @@ class FileTransferRequest:
     run_id: str = ""
     task_id: str = ""
     local_path_digest: str = ""
+    runtime_handoff_path: str = ""
     frontend_contract: str = FILE_TRANSFER_CONTRACT_VERSION
     route_to_runtime_only: bool = True
     no_frontend_tool_execution: bool = True
@@ -87,6 +88,7 @@ class FileTransferRequest:
             run_id=safe_text(run_id, 80),
             task_id=safe_text(task_id, 80),
             local_path_digest=digest_text(str(path.resolve()), 16),
+            runtime_handoff_path=str(path.resolve()),
         )
 
     def to_payload(self) -> Dict[str, Any]:

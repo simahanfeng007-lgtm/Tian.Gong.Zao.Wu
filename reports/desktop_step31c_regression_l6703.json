@@ -1,0 +1,16 @@
+{
+  "provider_persistence": {
+    "config_exists": true,
+    "projection": {
+      "provider": "deepseek",
+      "model": "deepseek-reasoner",
+      "api_key_configured": true,
+      "base_url_configured": true,
+      "runtime_credential_persisted": true
+    }
+  },
+  "chat_autoscroll_source": {
+    "checked_patterns": 6
+  },
+  "ok": true
+}

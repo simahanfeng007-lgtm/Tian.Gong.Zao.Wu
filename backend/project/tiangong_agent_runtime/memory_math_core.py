@@ -15,6 +15,8 @@ from typing import Any
 
 from tiangong_kernel.l6_plugins.common._common import ensure_bool, ensure_score
 
+from .biodynamic_policy_core import BioDynamicState, activation_probability, bounded_growth, dynamic_threshold, weighted_mean
+
 L6_40_MEMORY_MATH_SCHEMA = "tiangong.l6_40.memory_math_core.v1"
 
 
@@ -195,17 +197,50 @@ class RecallScoreVector:
         return clamp01(positive - penalty)
 
     @property
-    def can_enter_planner_context(self) -> bool:
-        return (
-            self.tombstone_state == "none"
-            and not self.active_recall_suppressed
-            and self.privacy_risk < 0.80
-            and self.confidence_score >= 0.45
+    def planner_entry_score(self) -> float:
+        if self.tombstone_state != "none" or self.active_recall_suppressed:
+            return 0.0
+        state = BioDynamicState(
+            evidence=self.confidence_score,
+            drive=weighted_mean(((self.task_relevance, 0.34), (self.semantic_similarity, 0.24), (self.reuse_signal, 0.18), (self.success_signal, 0.14), (self.explicit_user_preference, 0.10))),
+            uncertainty_pressure=self.uncertainty_score,
+            privacy_pressure=self.privacy_risk,
+            pollution_pressure=self.pollution_risk,
+            conflict_pressure=self.conflict_score,
+            recovery=weighted_mean(((self.level_weight, 0.45), (self.freshness_decay, 0.35), (self.procedural_fit, 0.20))),
+            user_intent=self.explicit_user_preference,
         )
+        return state.execution_score
+
+    @property
+    def can_enter_planner_context(self) -> bool:
+        state = BioDynamicState(
+            evidence=self.confidence_score,
+            drive=self.recall_score,
+            uncertainty_pressure=self.uncertainty_score,
+            privacy_pressure=self.privacy_risk,
+            pollution_pressure=self.pollution_risk,
+            conflict_pressure=self.conflict_score,
+            recovery=self.freshness_decay,
+            user_intent=self.explicit_user_preference,
+        )
+        threshold = state.threshold(0.46, minimum=0.30, maximum=0.78)
+        return self.tombstone_state == "none" and not self.active_recall_suppressed and self.planner_entry_score >= threshold
 
     @property
     def review_only(self) -> bool:
-        return self.privacy_risk >= 0.80 or self.confidence_score < 0.45 or self.pollution_risk >= 0.60
+        state = BioDynamicState(
+            evidence=self.confidence_score,
+            drive=self.recall_score,
+            uncertainty_pressure=self.uncertainty_score,
+            privacy_pressure=self.privacy_risk,
+            pollution_pressure=self.pollution_risk,
+            conflict_pressure=self.conflict_score,
+            recovery=self.freshness_decay,
+        )
+        review_threshold = state.threshold(0.58, minimum=0.38, maximum=0.86)
+        risk_load = weighted_mean(((self.privacy_risk, 0.38), (self.pollution_risk, 0.30), (self.conflict_score, 0.20), (self.uncertainty_score, 0.12)))
+        return risk_load >= review_threshold or self.planner_entry_score < state.threshold(0.36, minimum=0.20, maximum=0.62)
 
 
 @dataclass(frozen=True)
@@ -255,12 +290,31 @@ class PromotionScoreVector:
         )
 
     @property
+    def promotion_state(self) -> BioDynamicState:
+        return BioDynamicState(
+            evidence=weighted_mean(((self.evidence_strength, 0.34), (self.confidence_score, 0.24), (self.stability, 0.18), (self.success_rate, 0.14), (self.user_confirmation, 0.10))),
+            drive=weighted_mean(((self.repeated_use, 0.28), (self.procedural_generalization, 0.24), (self.success_rate, 0.24), (self.user_confirmation, 0.24))),
+            privacy_pressure=self.privacy_risk,
+            pollution_pressure=self.pollution_risk,
+            conflict_pressure=self.conflict_score,
+            recovery=weighted_mean(((self.stability, 0.52), (self.evidence_strength, 0.28), (self.success_rate, 0.20))),
+            user_intent=self.user_confirmation,
+        )
+
+    @property
+    def risk_review_score(self) -> float:
+        return weighted_mean(((self.privacy_risk, 0.34), (self.pollution_risk, 0.32), (self.conflict_score, 0.22), (1.0 - self.confidence_score, 0.12)))
+
+    @property
     def cannot_promote(self) -> bool:
-        return self.confidence_score < 0.45 or self.privacy_risk >= 0.80 or self.pollution_risk >= 0.60 or self.conflict_score >= 0.70
+        state = self.promotion_state
+        adaptive_gate = state.threshold(0.62, minimum=0.42, maximum=0.90)
+        return self.risk_review_score >= adaptive_gate or activation_probability(self.promotion_score, state.threshold(0.50, minimum=0.34, maximum=0.78)) < 0.42
 
     @property
     def hysteresis_satisfied(self) -> bool:
-        return self.consecutive_above_threshold >= 2
+        required = dynamic_count_requirement(2, load=self.risk_review_score, drive=self.promotion_score, minimum=1, maximum=4)
+        return self.consecutive_above_threshold >= required
 
 
 @dataclass(frozen=True)
@@ -304,12 +358,37 @@ class ForgettingScoreVector:
         )
 
     @property
+    def forgetting_state(self) -> BioDynamicState:
+        return BioDynamicState(
+            evidence=weighted_mean(((self.expiry_score, 0.26), (self.low_confidence_score, 0.20), (self.conflict_score, 0.18), (self.privacy_minimization_need, 0.18), (self.user_forget_signal, 0.18))),
+            drive=weighted_mean(((self.user_forget_signal, 0.36), (self.privacy_minimization_need, 0.26), (self.compression_gain, 0.18), (self.low_reuse_score, 0.20))),
+            conflict_pressure=self.conflict_score,
+            privacy_pressure=self.privacy_minimization_need,
+            uncertainty_pressure=self.low_confidence_score,
+            recovery=1.0 - self.protected_l5_rule_score,
+            user_intent=self.user_forget_signal,
+            inertia=self.protected_l5_rule_score,
+        )
+
+    @property
     def forced_review_required(self) -> bool:
-        return self.explicit_user_forget_request or self.user_forget_signal >= 0.90
+        if self.explicit_user_forget_request:
+            return True
+        state = self.forgetting_state
+        threshold = state.threshold(0.86, minimum=0.68, maximum=0.96)
+        return state.execution_score >= threshold
 
     @property
     def l5_retention_conflict(self) -> bool:
-        return self.protected_l5_rule_score >= 0.90 and self.forced_review_required
+        state = BioDynamicState(
+            evidence=self.protected_l5_rule_score,
+            drive=self.user_forget_signal,
+            conflict_pressure=self.conflict_score,
+            privacy_pressure=self.privacy_minimization_need,
+            recovery=self.protected_l5_rule_score,
+            user_intent=self.user_forget_signal,
+        )
+        return self.protected_l5_rule_score >= state.threshold(0.82, minimum=0.62, maximum=0.96) and self.forced_review_required
 
 
 @dataclass(frozen=True)
@@ -323,10 +402,22 @@ class RiskCap:
             ensure_score(getattr(self, field_name), f"RiskCap.{field_name}")
 
     def planner_context_allowed(self, vector: RecallScoreVector) -> bool:
+        state = BioDynamicState(
+            evidence=vector.confidence_score,
+            drive=vector.recall_score,
+            privacy_pressure=vector.privacy_risk,
+            pollution_pressure=vector.pollution_risk,
+            conflict_pressure=vector.conflict_score,
+            uncertainty_pressure=vector.uncertainty_score,
+            recovery=vector.freshness_decay,
+        )
+        privacy_limit = dynamic_threshold(self.privacy_block_threshold, load=state.load, drive=state.adaptive_drive, recovery=state.recovery, minimum=0.54, maximum=0.94)
+        pollution_limit = dynamic_threshold(self.pollution_review_threshold, load=state.load, drive=state.adaptive_drive, recovery=state.recovery, minimum=0.36, maximum=0.84)
+        conflict_limit = dynamic_threshold(self.conflict_review_threshold, load=state.load, drive=state.adaptive_drive, recovery=state.recovery, minimum=0.42, maximum=0.88)
         return (
-            vector.privacy_risk < self.privacy_block_threshold
-            and vector.pollution_risk < self.pollution_review_threshold
-            and vector.conflict_score < self.conflict_review_threshold
+            vector.privacy_risk < privacy_limit
+            and vector.pollution_risk < pollution_limit
+            and vector.conflict_score < conflict_limit
             and vector.can_enter_planner_context
         )
 
@@ -342,10 +433,12 @@ class ConfidenceGate:
 
     def can_recall_as_fact(self, confidence_score: float) -> bool:
         ensure_score(confidence_score, "ConfidenceGate.confidence_score")
-        return float(confidence_score) >= self.fact_recall_threshold
+        gate = dynamic_threshold(self.fact_recall_threshold, load=1.0 - confidence_score, drive=confidence_score, recovery=confidence_score, minimum=0.30, maximum=0.74)
+        return float(confidence_score) >= gate
 
     def can_promote(self, vector: PromotionScoreVector) -> bool:
-        return not vector.cannot_promote and vector.confidence_score >= self.promotion_threshold
+        gate = vector.promotion_state.threshold(self.promotion_threshold, minimum=0.36, maximum=0.82)
+        return not vector.cannot_promote and vector.promotion_score >= gate
 
 
 @dataclass(frozen=True)
@@ -364,15 +457,20 @@ class TransitionPolicy:
         forgetting: ForgettingScoreVector,
     ) -> MemoryTransitionAction:
         level = MemoryLevel(current_level)
-        if forgetting.forced_review_required or forgetting.forgetting_score >= 0.75:
+        forgetting_state = forgetting.forgetting_state
+        promotion_state = promotion.promotion_state
+        review_gate = forgetting_state.threshold(0.72, minimum=0.52, maximum=0.92)
+        promotion_gate = promotion_state.threshold(self.profile.promotion_threshold, minimum=0.40, maximum=0.90)
+        demotion_gate = forgetting_state.threshold(self.profile.demotion_threshold, minimum=0.18, maximum=0.66)
+        if forgetting.forced_review_required or forgetting.forgetting_score >= review_gate:
             return MemoryTransitionAction.REVIEW
         if promotion.cannot_promote:
             return MemoryTransitionAction.REVIEW
-        if promotion.promotion_score >= self.profile.promotion_threshold and promotion.hysteresis_satisfied:
+        if promotion.promotion_score >= promotion_gate and promotion.hysteresis_satisfied:
             if level is MemoryLevel.L5:
                 return MemoryTransitionAction.KEEP
             return MemoryTransitionAction.PROMOTE
-        if forgetting.forgetting_score >= self.profile.demotion_threshold:
+        if forgetting.forgetting_score >= demotion_gate:
             if level is MemoryLevel.L1:
                 return MemoryTransitionAction.SUPPRESS
             return MemoryTransitionAction.DEMOTE

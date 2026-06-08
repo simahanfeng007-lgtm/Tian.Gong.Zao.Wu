@@ -1,0 +1,202 @@
+{
+  "schema": "tiangong.l6718.workmode_activation_confirmation.v1",
+  "generated_at": 1780892343.5821166,
+  "status": "pass",
+  "workspace": "/mnt/data/l6718_activate_work/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/backend/project",
+  "runtime": {
+    "registered_tool_count_after_active_load": 158,
+    "active_asset_count": 9,
+    "active_learned_tool_count": 7,
+    "active_learned_skill_count": 2,
+    "builtin_runtime_skill_files": 8,
+    "workspace_skill_files": 2
+  },
+  "active_records": [
+    {
+      "tool_name": "learned_skill_skill_8f262618",
+      "asset_kind": "skill",
+      "status": "active",
+      "adapter_template_id": "project_diagnostic",
+      "callable_now": true,
+      "runtime_registered_now": true,
+      "skill_active_now": true
+    },
+    {
+      "tool_name": "learned_skill_skill_e5ddfa68",
+      "asset_kind": "skill",
+      "status": "active",
+      "adapter_template_id": "project_diagnostic",
+      "callable_now": true,
+      "runtime_registered_now": true,
+      "skill_active_now": true
+    },
+    {
+      "tool_name": "learned_tool_r21_doc_skill_production_adapter_beac5ce8",
+      "asset_kind": "tool",
+      "status": "active",
+      "adapter_template_id": "doc_skill_production",
+      "callable_now": true,
+      "runtime_registered_now": true,
+      "skill_active_now": false
+    },
+    {
+      "tool_name": "learned_tool_r21_experience_reuse_adapter_2f161b65",
+      "asset_kind": "tool",
+      "status": "active",
+      "adapter_template_id": "experience_reuse",
+      "callable_now": true,
+      "runtime_registered_now": true,
+      "skill_active_now": false
+    },
+    {
+      "tool_name": "learned_tool_r21_project_diagnostic_adapter_2036dac3",
+      "asset_kind": "tool",
+      "status": "active",
+      "adapter_template_id": "project_diagnostic",
+      "callable_now": true,
+      "runtime_registered_now": true,
+      "skill_active_now": false
+    },
+    {
+      "tool_name": "learned_tool_r21_pure_transform_adapter_0e391b6f",
+      "asset_kind": "tool",
+      "status": "active",
+      "adapter_template_id": "pure_transform",
+      "callable_now": true,
+      "runtime_registered_now": true,
+      "skill_active_now": false
+    },
+    {
+      "tool_name": "learned_tool_r21_schema_contract_check_adapter_c3f34633",
+      "asset_kind": "tool",
+      "status": "active",
+      "adapter_template_id": "schema_contract_check",
+      "callable_now": true,
+      "runtime_registered_now": true,
+      "skill_active_now": false
+    },
+    {
+      "tool_name": "learned_tool_tool_2c55f368",
+      "asset_kind": "tool",
+      "status": "active",
+      "adapter_template_id": "project_diagnostic",
+      "callable_now": true,
+      "runtime_registered_now": true,
+      "skill_active_now": false
+    },
+    {
+      "tool_name": "learned_tool_tool_53925862",
+      "asset_kind": "tool",
+      "status": "active",
+      "adapter_template_id": "project_diagnostic",
+      "callable_now": true,
+      "runtime_registered_now": true,
+      "skill_active_now": false
+    }
+  ],
+  "direct_call_results": [
+    {
+      "tool_name": "learned_skill_skill_8f262618",
+      "asset_kind": "skill",
+      "adapter_template_id": "project_diagnostic",
+      "status": "ok",
+      "ok": true,
+      "summary": "已调用 R20 active learned asset：learned_skill_skill_8f262618 / 质量门失败复盘与最小复测_skill_候选。"
+    },
+    {
+      "tool_name": "learned_skill_skill_e5ddfa68",
+      "asset_kind": "skill",
+      "adapter_template_id": "project_diagnostic",
+      "status": "ok",
+      "ok": true,
+      "summary": "已调用 R20 active learned asset：learned_skill_skill_e5ddfa68 / 质量门失败复盘与最小复测_skill_候选。"
+    },
+    {
+      "tool_name": "learned_tool_r21_doc_skill_production_adapter_beac5ce8",
+      "asset_kind": "tool",
+      "adapter_template_id": "doc_skill_production",
+      "status": "ok",
+      "ok": true,
+      "summary": "文档/Skill 辅助草案已生成。"
+    },
+    {
+      "tool_name": "learned_tool_r21_experience_reuse_adapter_2f161b65",
+      "asset_kind": "tool",
+      "adapter_template_id": "experience_reuse",
+      "status": "ok",
+      "ok": true,
+      "summary": "经验复用候选已抽取。"
+    },
+    {
+      "tool_name": "learned_tool_r21_project_diagnostic_adapter_2036dac3",
+      "asset_kind": "tool",
+      "adapter_template_id": "project_diagnostic",
+      "status": "ok",
+      "ok": true,
+      "summary": "项目诊断输入摘要已分析。"
+    },
+    {
+      "tool_name": "learned_tool_r21_pure_transform_adapter_0e391b6f",
+      "asset_kind": "tool",
+      "adapter_template_id": "pure_transform",
+      "status": "ok",
+      "ok": true,
+      "summary": "简单统计完成。"
+    },
+    {
+      "tool_name": "learned_tool_r21_schema_contract_check_adapter_c3f34633",
+      "asset_kind": "tool",
+      "adapter_template_id": "schema_contract_check",
+      "status": "ok",
+      "ok": true,
+      "summary": "Schema/Contract 校验完成。"
+    },
+    {
+      "tool_name": "learned_tool_tool_2c55f368",
+      "asset_kind": "tool",
+      "adapter_template_id": "project_diagnostic",
+      "status": "ok",
+      "ok": true,
+      "summary": "项目诊断输入摘要已分析。"
+    },
+    {
+      "tool_name": "learned_tool_tool_53925862",
+      "asset_kind": "tool",
+      "adapter_template_id": "project_diagnostic",
+      "status": "ok",
+      "ok": true,
+      "summary": "项目诊断输入摘要已分析。"
+    }
+  ],
+  "alignment": {
+    "expected_usage_cards": 158,
+    "blocking_issue_groups": 0
+  },
+  "skills": {
+    "runtime_skill_files": [
+      "tiangong_agent_runtime/skills/code_x_execution_workflow/SKILL.md",
+      "tiangong_agent_runtime/skills/learning_asset_activation_workflow/SKILL.md",
+      "tiangong_agent_runtime/skills/learning_asset_candidate_sandbox_workflow/SKILL.md",
+      "tiangong_agent_runtime/skills/learning_asset_contract_workflow/SKILL.md",
+      "tiangong_agent_runtime/skills/learning_asset_release_gate_workflow/SKILL.md",
+      "tiangong_agent_runtime/skills/learning_asset_sandbox_alignment_workflow/SKILL.md",
+      "tiangong_agent_runtime/skills/runtime_tool_alignment_workflow/SKILL.md",
+      "tiangong_agent_runtime/skills/v1_clean_import_workflow/SKILL.md"
+    ],
+    "workspace_skill_files": [
+      ".linyuanzhe/skills/learning_asset_candidate_sandbox_workflow/SKILL.md",
+      ".linyuanzhe/skills/learning_asset_release_gate_workflow/SKILL.md"
+    ]
+  },
+  "no_pollution": {
+    "active_asset_python_files_scanned": 14,
+    "active_asset_violations": [],
+    "package_v1_import_violations": [],
+    "pass": true
+  },
+  "work_mode": {
+    "enabled": true,
+    "activation_registry": "/mnt/data/l6718_activate_work/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/backend/project/.linyuanzhe/active_assets/r20/active_assets_registry.json",
+    "confirmation": "主 backend/project workspace 已固化 active_assets；新 Runtime 进程可加载 learned_* 并直接调用。"
+  }
+}

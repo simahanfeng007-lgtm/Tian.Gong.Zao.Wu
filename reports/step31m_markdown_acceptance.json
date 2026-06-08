@@ -1,0 +1,16 @@
+{
+  "schema": "tiangong.fe01.step31m.markdown_acceptance.v1",
+  "ok": true,
+  "checks": {
+    "markdown_tags_configured": true,
+    "heading_rendered": true,
+    "bold_rendered": true,
+    "list_rendered": true,
+    "code_block_rendered": true,
+    "inline_code_rendered": true,
+    "link_recognized": true,
+    "chat_newlines_preserved": true,
+    "no_frontend_execution_claim": true
+  },
+  "note": "Tk Text tag ranges verify Markdown readability without running Runtime, Provider SDKs, tools, memory or audit writes."
+}

@@ -1,0 +1,66 @@
+{
+  "schema": "linyuanzhe.l6719.fix_validation.v1",
+  "generated_at": "2026-06-08",
+  "source_qc_report": "L6718_质检报告.txt",
+  "ok": true,
+  "fixes": {
+    "p1_finally_return_warning": "fixed: scripts/cross_platform_desktop_audit_l6710.py has no return in finally and py_compile -W error passed",
+    "p1_bat_crlf": {
+      "total": 86,
+      "ok": 86,
+      "bad": []
+    },
+    "p1_bat_chcp_utf8": {
+      "total": 86,
+      "ok": 86,
+      "bad": []
+    },
+    "p2_chinese_path_risk": "fixed by corrected UTF-8 path names plus 00_ASCII_START_HERE aliases; main Windows wrappers call ASCII Python entry",
+    "p2_python_tk_scan": "fixed in current Windows entry and frontend demo/runtime bats; direct leading py -3 invocations removed",
+    "p2_dataup_error_handling": "fixed in 01_启动入口/Windows/05_DataUp一键安全更新_L6717.bat and ASCII alias",
+    "p2_skills_distribution": "kept intentionally: .linyuanzhe/skills contains Code-X and alignment workflow cards required for LLM execution visibility",
+    "p3_macos_alias": "fixed by 00_ASCII_START_HERE/linux_macos aliases"
+  },
+  "main_windows_wrappers": [
+    "01_启动入口/Windows/01_启动临渊者桌面端_自动模式_L6710.bat",
+    "01_启动入口/Windows/02_启动临渊者桌面端_真实模型_L6710.bat",
+    "01_启动入口/Windows/03_启动临渊者桌面端_演示Mock_L6710.bat",
+    "01_启动入口/Windows/04_一键自检_L6710.bat",
+    "01_启动入口/Windows/05_DataUp一键安全更新_L6717.bat"
+  ],
+  "ascii_alias_files": [
+    "00_ASCII_START_HERE/linux_macos/dataup_safe_update_l6719.sh",
+    "00_ASCII_START_HERE/linux_macos/self_check_l6719.sh",
+    "00_ASCII_START_HERE/linux_macos/start_desktop_auto_l6719.sh",
+    "00_ASCII_START_HERE/linux_macos/start_desktop_mock_l6719.sh",
+    "00_ASCII_START_HERE/linux_macos/start_desktop_provider_l6719.sh",
+    "00_ASCII_START_HERE/python/DATAUP_SAFE_UPDATE_L6717.py",
+    "00_ASCII_START_HERE/python/SELF_CHECK_L6710.py",
+    "00_ASCII_START_HERE/python/START_DESKTOP_L6710.py",
+    "00_ASCII_START_HERE/windows/DATAUP_SAFE_UPDATE_L6719.bat",
+    "00_ASCII_START_HERE/windows/SELF_CHECK_L6719.bat",
+    "00_ASCII_START_HERE/windows/START_DESKTOP_AUTO_L6719.bat",
+    "00_ASCII_START_HERE/windows/START_DESKTOP_MOCK_L6719.bat",
+    "00_ASCII_START_HERE/windows/START_DESKTOP_PROVIDER_L6719.bat"
+  ],
+  "direct_leading_py3_invocations": [],
+  "mojibake_names_remaining": [],
+  "validation": {
+    "compileall": "PASS",
+    "pytest": "22 passed",
+    "codex_runtime_smoke": "PASS",
+    "asset_activate_status": "active_count=9",
+    "asset_activate_smoke": "smoke_count=9 issues=0",
+    "runtime_tool_alignment": "158 tools / 158 usage cards",
+    "frontend_bridge_smoke": "PASS",
+    "cross_platform_desktop_audit_l6710": "PASS",
+    "scan_l659": "PASS secret=0 provider_sdk_import=0 bare_except_pass=0"
+  },
+  "llm_execution_preserved": {
+    "runtime_tools": "158 in workmode",
+    "learned_assets": "9 active",
+    "learned_tools": "7",
+    "learned_skills": "2",
+    "skill_files": "2 top-level .linyuanzhe/skills plus 8 runtime Skill files retained"
+  }
+}

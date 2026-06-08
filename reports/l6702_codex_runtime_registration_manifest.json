@@ -1,0 +1,140 @@
+{
+  "files": [
+    {
+      "path": "backend/project/tiangong_agent_runtime/code_x_native/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "backend/project/tiangong_agent_runtime/code_x_native/code_x_engineering_perception.py",
+      "sha256": "53041d61db920acbf0ec25e7d592b9f03b2a81b17ada3bd0d7e799689c7ab52d",
+      "bytes": 35306
+    },
+    {
+      "path": "backend/project/tiangong_agent_runtime/code_x_native/code_x_context_armor.py",
+      "sha256": "464ef7f3c6c0df66aa1886d0d899d714677109923d6458e61b40b327244aed68",
+      "bytes": 16893
+    },
+    {
+      "path": "backend/project/tiangong_agent_runtime/code_x_native/code_x_code_localization.py",
+      "sha256": "056372c8d5ddca52a634c4348805377bc3da622e40501102d6aa6fcd2eb498a5",
+      "bytes": 25629
+    },
+    {
+      "path": "backend/project/tiangong_agent_runtime/code_x_native/code_x_patch_production.py",
+      "sha256": "b0995304bbcc9ddc6fac24439fbe484fbec200fd748cfe1354b9cd4ee2d7304d",
+      "bytes": 23694
+    },
+    {
+      "path": "backend/project/tiangong_agent_runtime/code_x_native/code_x_execution_validation.py",
+      "sha256": "5413e11a6cdc38761b8e035304ec41ec63c6eff6d0b20c502bdcfac5f5072fc7",
+      "bytes": 28648
+    },
+    {
+      "path": "backend/project/tiangong_agent_runtime/code_x_native/code_x_failure_repair.py",
+      "sha256": "98d7269db35da71a7dfdd5224d4d10bc75f5327e676b12c3b626c370279af0be",
+      "bytes": 12852
+    },
+    {
+      "path": "backend/project/tiangong_agent_runtime/code_x_native/code_x_worktree_rollback_packaging.py",
+      "sha256": "261c95254a72b44ffdff8fd78d5f619a510b0638f96cc6e813a281d19b19713e",
+      "bytes": 29363
+    },
+    {
+      "path": "backend/project/tiangong_agent_runtime/code_x_native/code_x_subagents.py",
+      "sha256": "1519a4d52528f7d93f6ab34d3d0b9a8164c39b4f2da0928d8168f4769a9f4bc6",
+      "bytes": 32487
+    },
+    {
+      "path": "backend/project/tiangong_agent_runtime/code_x_native/code_x_package_orchestrator.py",
+      "sha256": "008d87b99cc57b1f276c36aa120f6f27114dbd5467e74145677b506b03d6f8d6",
+      "bytes": 13945
+    },
+    {
+      "path": "backend/project/tiangong_agent_runtime/code_x_runtime_adapters.py",
+      "sha256": "61951a6c827620cd19bd19dbc40cf96a538a6c619474c89167aa7941fdfd357f",
+      "bytes": 22089
+    },
+    {
+      "path": "backend/project/tiangong_agent_runtime/runtime_entry.py",
+      "sha256": "f3179bc37afbb74b74a54d7e0e02a6ff0c4fc27c08d83e5a08f2004b1cbe0a36",
+      "bytes": 104021
+    },
+    {
+      "path": "backend/project/tiangong_agent_runtime/risk_classifier.py",
+      "sha256": "ce942ca24a53ae0d49eff5dffb9742e8279629f6e0b49f87cecc609f450692d3",
+      "bytes": 10759
+    },
+    {
+      "path": "backend/project/tiangong_agent_runtime/execution_policy.py",
+      "sha256": "7ffa086c7cd181152268df06742500613dd176e3301f6b8f3a5f0f56fd85d627",
+      "bytes": 1025
+    },
+    {
+      "path": "backend/project/tiangong_agent_runtime/plan_bridge.py",
+      "sha256": "277a462f8a95f1e28fa599b21a1356d17576f5272a575d6999b1944147f39b29",
+      "bytes": 21566
+    },
+    {
+      "path": "backend/project/run_codex_runtime_smoke.py",
+      "sha256": "7858277daae52189fff1826b70751016cec1205490717b8cc1415c31b4670b94",
+      "bytes": 2832
+    },
+    {
+      "path": "backend/project/tests/test_codex_runtime_registration.py",
+      "sha256": "d8d7d93b6a2a3e74722e280b2d87c977c11f219c890726ae0bd3e458b3c635e8",
+      "bytes": 2618
+    },
+    {
+      "path": "frontend/linyuanzhe_frontend/scripts/runtime_contract_server.py",
+      "sha256": "813e4ffe5c967601a67b478db466c6a7abc87602ca4488db9878df73d265c4b6",
+      "bytes": 28498
+    },
+    {
+      "path": "frontend/linyuanzhe_frontend/run_codex_bridge_smoke.py",
+      "sha256": "13e29d3f1e632062d62e38f2899283192bd112dcc1cfe7632df3a6c803812e0f",
+      "bytes": 1945
+    },
+    {
+      "path": "launchers/run_codex_runtime_smoke_l6702.sh",
+      "sha256": "74e3a2f443bda2e494f3094a38dc74b72a2bc5b649fd30bd3732bf99e04d44b4",
+      "bytes": 156
+    },
+    {
+      "path": "launchers/run_codex_runtime_smoke_l6702.bat",
+      "sha256": "2c9b02b8ddb5aacd68c8597dd0440aa870569f356ddfaffc98f0dfce36fc6db6",
+      "bytes": 93
+    },
+    {
+      "path": "launchers/run_codex_frontend_bridge_smoke_l6702.sh",
+      "sha256": "8de6eb7b429563f854cf9bc79063d8bd64df8c247cc31dc2ac9f3f7c7ed5d500",
+      "bytes": 168
+    },
+    {
+      "path": "launchers/run_codex_frontend_bridge_smoke_l6702.bat",
+      "sha256": "dc4ef0523bf37e7de11cee4f0ecc30995c4c1617a4b8dca41a03e5fc9e3cd6cc",
+      "bytes": 105
+    },
+    {
+      "path": "docs/CODEX_RUNTIME_USAGE_L6702.md",
+      "sha256": "6dd567da419a224d23baf3b4a80ac9543916037210d8b95d8662a10d73d91391",
+      "bytes": 3336
+    },
+    {
+      "path": "docs/CHANGELOG_L6702_CODEX_RUNTIME.md",
+      "sha256": "ca8dad0428f0e6baaeedbb79bf4d3be1c153d096d87894a8efb8e2df13676888",
+      "bytes": 1738
+    },
+    {
+      "path": "docs/R13B_CODEX_RUNTIME_REGISTRATION_REPORT.md",
+      "sha256": "9955bbdcae6ca66323ce621c11d8f8c4e94796e13ca350aa9b9e7e7cb46320d3",
+      "bytes": 962
+    },
+    {
+      "path": "README_L6702_CODEX_RUNTIME.md",
+      "sha256": "a607723442a226add85dadf928c20dc1712eb177ca2626598be278f8124b1539",
+      "bytes": 886
+    }
+  ],
+  "count": 27
+}

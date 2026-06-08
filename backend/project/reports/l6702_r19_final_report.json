@@ -1,0 +1,61 @@
+{
+  "version": "L6.70.2_R19_ToolSkill候选发布门轻量执行版_20260608",
+  "passed": true,
+  "runtime_tool_count": 139,
+  "added_tools": [
+    "learning_asset_release_gate_guide",
+    "learning_asset_release_gate_check"
+  ],
+  "new_commands": [
+    "asset-release guide",
+    "asset-release gate",
+    "asset-release drill pytest missing tests"
+  ],
+  "tests": {
+    "backend_compileall": "0",
+    "pytest": "0",
+    "codex_runtime_smoke": "0",
+    "runtime_tool_alignment_smoke": "0",
+    "frontend_compileall": "0",
+    "frontend_bridge_smoke": "0",
+    "r19_release_gate_smoke": "0"
+  },
+  "no_pollution": {
+    "ok": true,
+    "issues": [],
+    "assertions": {
+      "copied_v1_source": false,
+      "imported_v1_module": false,
+      "reused_v1_registry": false,
+      "reused_v1_executor": false,
+      "reused_v1_provider": false,
+      "monkey_patch": false,
+      "background_loop": false
+    },
+    "scanned_py_files": 857
+  },
+  "execution_first_policy": {
+    "kept": [
+      "quality_gate",
+      "release_gate",
+      "rollback_evidence",
+      "registration_request"
+    ],
+    "removed": [
+      "complex scoring",
+      "multi-level approval",
+      "auto activation"
+    ],
+    "llm_final_decider": true
+  },
+  "boundaries": {
+    "writes_real_skill_registry": false,
+    "registers_runtime_tool": false,
+    "activates_skill": false,
+    "releases_tool_handle": false,
+    "invokes_candidate_tool": false,
+    "imports_v1": false,
+    "copies_v1_source": false,
+    "starts_background_loop": false
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "schema": "tiangong.l6702.r18.learning_asset_candidate_sandbox.v1",
+  "package_ref": "candidate_package_r21:r21_ffcbd74b3723",
+  "asset_ref": "asset_r21_adapter:r21_0168756b9c25",
+  "asset_kind": "tool",
+  "namespace": "tool.learned_adapter.r21",
+  "name": "r21_experience_reuse_adapter",
+  "version": "0.1.0-r21-candidate",
+  "purpose": "从 decision_memory、task_digest、handoff_digest 等摘要中抽取可复用经验，并建议转成 Tool 或 Skill。",
+  "adapter_template_schema": "tiangong.l6702.r21.learning_asset_adapter_template.v1",
+  "adapter_template_id": "experience_reuse",
+  "source_trace": {
+    "source_kind": "r21_adapter_template",
+    "template_id": "experience_reuse"
+  },
+  "usage_card": {
+    "title": "经验复用类 Adapter",
+    "asset_kind": "tool",
+    "when_to_use": "用户要求从历史任务/交接/决策摘要中总结经验并转为 Tool/Skill 候选。",
+    "how_to_call": "runtime-tools tool <learned_tool_name> {json_args}；输入只来自用户提供材料或 Runtime 已返回摘要。",
+    "do_not_use_when": "需要触网、shell、后台任务、凭证读取、自动改 workspace 或替代 LLM 工程裁决时禁用。",
+    "next_action_hint": "返回后由 LLM 决定是否进入 Code-X 定位/补丁/测试/回滚或 handoff。",
+    "purpose": "从 decision_memory、task_digest、handoff_digest 等摘要中抽取可复用经验，并建议转成 Tool 或 Skill。"
+  },
+  "chain_recipe": [
+    "LLM selects R21 adapter template from usage card",
+    "normalize adapter template spec",
+    "validate adapter AST and boundaries",
+    "smoke with sample args",
+    "activate through R20 learned_tool_* registry",
+    "call via runtime-tools tool",
+    "LLM decides Tool vs Skill candidate production"
+  ],
+  "input_contract": {
+    "digests": "经验/任务/交接摘要列表",
+    "goal": "复用目标"
+  },
+  "output_contract": {
+    "lessons": "经验列表",
+    "recommendations": "Tool/Skill 候选建议"
+  },
+  "validation_contract": {
+    "required": [
+      "adapter_ast_scan",
+      "template_smoke",
+      "r20_activation_smoke",
+      "runtime_tool_alignment_check"
+    ],
+    "pass_condition": "zero P0/P1 issues and smoke status pass"
+  },
+  "rollback_contract": {
+    "strategy": "delete active record and active asset directory; reload Runtime registry"
+  },
+  "audit_contract": {
+    "source_ref": "asset_r21_adapter:r21_0168756b9c25",
+    "required_events": [
+      "template_normalized",
+      "template_smoke",
+      "activation_smoke"
+    ],
+    "redaction_required": true
+  },
+  "runtime_binding": {
+    "binding_type": "R21AdapterTemplate",
+    "adapter_template_id": "experience_reuse",
+    "tool_registry_write": false
+  },
+  "candidate_only": true,
+  "review_before_activation": true,
+  "no_real_skill_registry_write": true,
+  "no_runtime_tool_registration": true,
+  "no_skill_activation": true,
+  "no_tool_handle_release": true,
+  "no_candidate_tool_invocation": true,
+  "no_model_dispatch": true,
+  "no_network": true,
+  "no_shell": true,
+  "no_background_loop": true,
+  "no_v1_import_or_source_copy": true,
+  "llm_is_final_decider": true
+}

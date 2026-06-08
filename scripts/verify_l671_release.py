@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""FE01 STEP31A / L6.70.1 desktop all-in-one aggregate verifier."""
+"""FE01 STEP31F / L6.70.6 desktop visual-click aggregate verifier."""
 
 import json
 from datetime import datetime
@@ -40,7 +40,7 @@ def main() -> int:
     ]
     ok = all(item.get("ok") for item in results)
     summary = {
-        "contract_version": "tiangong.l6_70_1.desktop_bundle_verify.v1",
+        "contract_version": "tiangong.l6_70_6.desktop_visual_click_verify.v1",
         "checked_at": datetime.now().isoformat(timespec="seconds"),
         "ok": ok,
         "desktop_all_in_one_ready": ok,
@@ -53,7 +53,7 @@ def main() -> int:
         "runtime_core_mutation": False,
         "results": results,
         "merge_blockers": ["official real Runtime RC unlock not executed; desktop local bridge is not final RC evidence"],
-        "note": "L6.70.1 是桌面端前后端一体化启动包，不是正式 exe/msi 安装器，也不把本地桥接冒充真实 Runtime。",
+        "note": "L6.70.6 是桌面端全量视觉点击体感修复包，不是正式 exe/msi 安装器，也不把本地桥接冒充真实 Runtime。",
     }
     out = REPORTS / "validation_summary_l671.json"
     out.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")

@@ -1,0 +1,28 @@
+临渊者 FE01 STEP31Q / L6.71.7 Provider 设置体验与真实模型接入提示修复报告
+
+一、修复目标
+
+本轮处理“壳能跑，但用户不知道为什么没有真实 AI 回复”的问题。重点不是改 Runtime 主链，而是在前端和本地桌面桥接层把 Provider 状态讲清楚：缺什么、当前是不是 Mock、保存是否成功、下一步该做什么。
+
+二、修复内容
+
+1. 设置页增加 Provider readiness 摘要。
+2. 首页会话信息和底部模式标签明确显示 Mock 缺配置 / Mock 锁定 / 真实模型就绪。
+3. 检查配置改为检查状态，只读 /settings/provider，不裸调 Provider SDK。
+4. 保存 Provider 后继续清空 API Key 与 Base URL 输入框。
+5. 新增安全配置模板，不包含真实 API Key 或 Base URL。
+6. 本地桥接 Provider 投影增加 missing_fields、next_action、config_file_state、config_path_digest 等脱敏字段。
+7. 初始启动优先读取一次 Runtime 快照，让 Provider 状态首屏可见。
+
+三、边界
+
+- 未修改正式 Runtime 主链。
+- 未绕过 Planner / ExecutionSpine / QualityGate。
+- 未直接调用 Provider SDK。
+- 未直接执行工具。
+- 未写记忆。
+- 未泄露密钥。
+
+四、剩余风险
+
+真实 AI 回复仍依赖用户填写 Provider 配置并确保本机可连通目标 OpenAI-compatible 网关。正式 Runtime RC 联调仍未执行，本地桥接不可替代正式 TiangongWangguan / Runtime 证据。

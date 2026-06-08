@@ -1,0 +1,404 @@
+{
+  "ok": true,
+  "direct_alignment": {
+    "ok": true,
+    "tool_count": 149,
+    "usage_card_count": 149,
+    "alignment_issues": [],
+    "drill_summary": "LLM operational route drill simulated 42 scenarios; empty_routes=0, missing_tools=0.",
+    "drill_missing": [],
+    "drill_empty": []
+  },
+  "llm_operational_runs": [
+    {
+      "label": "runtime_align",
+      "plan_tools": [
+        "runtime_tool_alignment_check"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "Runtime tool alignment checked: 149 tools, 149 LLM usage cards, 0 blocking issue groups."
+      ],
+      "errors": []
+    },
+    {
+      "label": "runtime_drill",
+      "plan_tools": [
+        "runtime_llm_operational_drill"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "LLM operational route drill simulated 42 scenarios; empty_routes=0, missing_tools=0."
+      ],
+      "errors": []
+    },
+    {
+      "label": "runtime_raw_tool",
+      "plan_tools": [
+        "return_analysis"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "alignment smoke"
+      ],
+      "errors": []
+    },
+    {
+      "label": "core_scan",
+      "plan_tools": [
+        "scan_project"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "L6.16 项目雷达扫描结果：\n- root: .\n- files: 7\n- dirs: 11\n- skipped: 0\n- key_files: pyproject.toml\n- entry_points: <无>\n- test_files: tests/test_calc.py\n- package_dirs: <无>\n- file_types: {'.py': 2, '.md': 2, '.jsonl': 2, '.toml': 1}"
+      ],
+      "errors": []
+    },
+    {
+      "label": "core_diagnose",
+      "plan_tools": [
+        "scan_project",
+        "diagnose_project"
+      ],
+      "statuses": [
+        "ok",
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "L6.16 项目雷达扫描结果：\n- root: .\n- files: 7\n- dirs: 11\n- skipped: 0\n- key_files: pyproject.toml\n- entry_points: <无>\n- test_files: tests/test_calc.py\n- package_dirs: <无>\n- file_types: {'.py': 2, '.md': 2, '.jsonl': 2, '.toml': 1}",
+        "L6.17 工程诊断结果：\n- root: .\n- status: has_warnings\n- issues: 1\n- summary: 诊断状态=has_warnings；发现 1 个问题，其中 P0/P1=0，P2=1。\n  - [P2] missing_readme: 项目根或扫描范围内未发现 README，LLM 装甲缺少基础说明入口。"
+      ],
+      "errors": []
+    },
+    {
+      "label": "core_compileall",
+      "plan_tools": [
+        "run_python_quality_check"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "Listing '/tmp/runtime_tool_alignment_smoke_119gnu17'...\nListing '/tmp/runtime_tool_alignment_smoke_119gnu17/.linyuanzhe'...\nListing '/tmp/runtime_tool_alignment_smoke_119gnu17/.linyuanzhe/active_assets'...\nListing '/tmp/runtime_tool_alignme"
+      ],
+      "errors": []
+    },
+    {
+      "label": "core_zip",
+      "plan_tools": [
+        "create_zip_package"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "已生成 ZIP：dist/alignment_delivery.zip；文件数：7；SHA256：1a928309fb209b55aae57b65dc7f2a3c4ac2e14e2dd73e31bc50a6ce472cfc4e"
+      ],
+      "errors": []
+    },
+    {
+      "label": "codex_status",
+      "plan_tools": [
+        "code_x_runtime_status"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "Code-X Runtime tools are registered and callable through RuntimeToolRegistry."
+      ],
+      "errors": []
+    },
+    {
+      "label": "codex_skill",
+      "plan_tools": [
+        "code_x_skill_guide"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "Code-X Skill 已就绪：LLM 应按 读项目→定位→计划→快照→Patch→验证→失败归因→二修/回滚→打包→Handoff 的闭环使用工具。"
+      ],
+      "errors": []
+    },
+    {
+      "label": "codex_readiness",
+      "plan_tools": [
+        "code_x_world_class_readiness_check"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "Code-X 已达到世界级代码代理的结构能力门槛，但尚不能宣称已实证超越 Claude Code/Codex；还需大型真实仓库和长链 benchmark。"
+      ],
+      "errors": []
+    },
+    {
+      "label": "codex_repo_map",
+      "plan_tools": [
+        "repo_map"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "生成 repo_map：文件 7，技术栈 2，入口 0，测试映射 1。"
+      ],
+      "errors": []
+    },
+    {
+      "label": "codex_fix_front_chain",
+      "plan_tools": [
+        "code_x_skill_guide",
+        "project_rules_reader",
+        "repo_map",
+        "issue_to_file_localizer",
+        "workspace_snapshot",
+        "patch_plan_generator"
+      ],
+      "statuses": [
+        "ok",
+        "ok",
+        "ok",
+        "ok",
+        "ok",
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "Code-X Skill 已就绪：LLM 应按 读项目→定位→计划→快照→Patch→验证→失败归因→二修/回滚→打包→Handoff 的闭环使用工具。",
+        "Read 0 project rule file(s).",
+        "生成 repo_map：文件 7，技术栈 2，入口 0，测试映射 1。",
+        "Code-X 工具 issue_to_file_localizer 已返回结构化结果。",
+        "Code-X 工具 workspace_snapshot 已返回结构化结果。",
+        "Code-X 工具 patch_plan_generator 已返回结构化结果。"
+      ],
+      "errors": []
+    },
+    {
+      "label": "codex_smoke",
+      "plan_tools": [
+        "code_x_smoke_workflow"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "Code-X smoke workflow completed."
+      ],
+      "errors": []
+    },
+    {
+      "label": "v1_status",
+      "plan_tools": [
+        "v1_clean_import_status"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "v1 clean import layer is registered as an independent v2-native subsystem."
+      ],
+      "errors": []
+    },
+    {
+      "label": "v1_guide",
+      "plan_tools": [
+        "v1_clean_import_guide"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "v1 clean import guide returned LLM-facing usage cards."
+      ],
+      "errors": []
+    },
+    {
+      "label": "v1_search",
+      "plan_tools": [
+        "workspace_text_search"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "workspace text search scanned 7 files and found 2 hits."
+      ],
+      "errors": []
+    },
+    {
+      "label": "v1_document",
+      "plan_tools": [
+        "document_text_extract"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "document text extracted from docs/note.md."
+      ],
+      "errors": []
+    },
+    {
+      "label": "v1_learning",
+      "plan_tools": [
+        "learning_master_plan"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "learning mastery plan generated at depth L5."
+      ],
+      "errors": []
+    },
+    {
+      "label": "v1_tool_skill",
+      "plan_tools": [
+        "tool_skill_blueprint"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "Tool/Skill blueprint generated as draft only; no registration performed."
+      ],
+      "errors": []
+    },
+    {
+      "label": "asset_contract",
+      "plan_tools": [
+        "synthesize_experience_candidates",
+        "queue_skill_candidates",
+        "queue_tool_production_requests",
+        "learning_asset_contract_normalize",
+        "learning_asset_contract_validate"
+      ],
+      "statuses": [
+        "ok",
+        "ok",
+        "ok",
+        "ok",
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "L6.20 经验沉淀候选报告：status=candidate_ready；signals=2；lessons=2；skill_candidates=2；tool_gap_candidates=1；governance_transfers=3。已从安全摘要中提取 2 个经验信号，形成 2 条教训候选、2 个 Skill 候选、1 个 Tool 缺口候选。其中 P0/P1 信号 0 个。所有输出均为候选，不执行写入、注册、生产或发布。",
+        "L6.21 Skill 候选版本化审阅队列：status=queue_ready；draft_versions=2；review_queue=2；queue_only=True；execution_first=True。Skill 候选已转成草案版本并进入审阅队列；source_status=candidate_ready；source_candidates=2；本次新增=2；队列累计=2；已接收人工备注。草案可继续排序、审阅、导出和转交，但不会自动注册或激活。",
+        "L6.22 Tool 生产请求沙箱化队列：status=request_ready；requests=1；sandbox_plans=1；queue=1；request_only=True；execution_first=True。Tool 缺口候选已转成生产请求、沙箱验证前置计划并进入队列；source_status=candidate_ready；source_candidates=1；本次新增=1；队列累计=1；已接收人工备注。请求可继续排序、审阅、导出和转交，但不会自",
+        "R16 未来 Tool/Skill 统一资产契约：status=pass；contracts=6；issues=0。已将现有经验候选、Skill 草案、Tool 请求归一为同一资产契约；kinds={'skill': 4, 'tool': 2}；source_counts={'experience_skill_candidates': 2, 'experience_tool_gap_candidates': 1, 'skill_draft_versions': 2, 'too",
+        "R16 未来 Tool/Skill 统一资产契约：status=pass；contracts=6；issues=0。已校验 6 个候选契约；问题 0 个。"
+      ],
+      "errors": []
+    },
+    {
+      "label": "asset_sandbox",
+      "plan_tools": [
+        "learning_asset_sandbox_guide",
+        "synthesize_experience_candidates",
+        "queue_skill_candidates",
+        "queue_tool_production_requests",
+        "learning_asset_contract_normalize",
+        "learning_asset_contract_validate",
+        "learning_asset_sandbox_align",
+        "learning_asset_sandbox_validate"
+      ],
+      "statuses": [
+        "ok",
+        "ok",
+        "ok",
+        "ok",
+        "ok",
+        "ok",
+        "ok",
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "R17 已找到并说明现有 L6.22 Tool 生产请求沙箱化与验证前置链；本工具只返回对齐指南。",
+        "L6.20 经验沉淀候选报告：status=candidate_ready；signals=2；lessons=2；skill_candidates=2；tool_gap_candidates=2；governance_transfers=4。已从安全摘要中提取 2 个经验信号，形成 2 条教训候选、2 个 Skill 候选、2 个 Tool 缺口候选。其中 P0/P1 信号 0 个。所有输出均为候选，不执行写入、注册、生产或发布。",
+        "L6.21 Skill 候选版本化审阅队列：status=queue_ready；draft_versions=3；review_queue=3；queue_only=True；execution_first=True。Skill 候选已转成草案版本并进入审阅队列；source_status=candidate_ready；source_candidates=2；本次新增=1；队列累计=3；已接收人工备注。草案可继续排序、审阅、导出和转交，但不会自动注册或激活。",
+        "L6.22 Tool 生产请求沙箱化队列：status=request_ready；requests=2；sandbox_plans=2；queue=2；request_only=True；execution_first=True。Tool 缺口候选已转成生产请求、沙箱验证前置计划并进入队列；source_status=candidate_ready；source_candidates=2；本次新增=1；队列累计=2；已接收人工备注。请求可继续排序、审阅、导出和转交，但不会自",
+        "R16 未来 Tool/Skill 统一资产契约：status=pass；contracts=9；issues=0。已将现有经验候选、Skill 草案、Tool 请求归一为同一资产契约；kinds={'skill': 5, 'tool': 4}；source_counts={'experience_skill_candidates': 2, 'experience_tool_gap_candidates': 2, 'skill_draft_versions': 3, 'too",
+        "R16 未来 Tool/Skill 统一资产契约：status=pass；contracts=9；issues=0。已校验 9 个候选契约；问题 0 个。",
+        "R17 Tool/Skill 统一资产沙箱对齐：status=aligned；existing_sandbox=True；contracts=9；tool_contracts=4；requests=2；sandbox_plans=2；issues=0。已把 R16 Tool 类资产契约映射到 L6.22 ToolProductionRequest/SandboxValidationPlan；tool_contracts=4；requests=2；plans=2；aligned",
+        "R17 Tool/Skill 统一资产沙箱对齐：status=pass；existing_sandbox=True；contracts=9；tool_contracts=4；requests=2；sandbox_plans=2；issues=0。已把 R16 Tool 类资产契约映射到 L6.22 ToolProductionRequest/SandboxValidationPlan；tool_contracts=4；requests=2；plans=2；aligned=4；"
+      ],
+      "errors": []
+    },
+    {
+      "label": "asset_adapter_guide",
+      "plan_tools": [
+        "learning_asset_adapter_guide"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "R21 Adapter 模板指南已生成。"
+      ],
+      "errors": []
+    },
+    {
+      "label": "asset_adapter_templates",
+      "plan_tools": [
+        "learning_asset_adapter_template_list"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "R21 Adapter 模板列表：template_count=5。"
+      ],
+      "errors": []
+    },
+    {
+      "label": "asset_adapter_smoke",
+      "plan_tools": [
+        "learning_asset_adapter_template_smoke"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "R21 Adapter 模板 smoke：status=pass；smoke_count=5。"
+      ],
+      "errors": []
+    }
+  ],
+  "all_llm_runs_ok": true,
+  "zip_created": true,
+  "audit_event_count": 43
+}

@@ -1,0 +1,20 @@
+{
+  "base_url": "http://127.0.0.1:36945",
+  "health_status": "ok",
+  "self_iteration_status": "accepted",
+  "connector_status": "accepted",
+  "connector_count": 1,
+  "file_transfer_status": "accepted",
+  "file_auth_status": "accepted",
+  "file_auth_mode": "write",
+  "file_auth_scope": "workspace_outbox",
+  "startup_check_ok": true,
+  "startup_check_count": 3,
+  "mock_session_leaked_http": false,
+  "client_refresh_status": "local_desktop_bridge_ready",
+  "client_mock_session_state": "mock_session_discarded",
+  "client_mock_session_leaked": false,
+  "client_self_iteration_tail": "自我迭代候选 ITER-FE01-0001 已提交 Runtime 网关：accepted；不由前端直接合入。",
+  "client_startup_state": "pass",
+  "ok": true
+}

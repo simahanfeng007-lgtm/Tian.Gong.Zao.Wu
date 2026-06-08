@@ -1,0 +1,87 @@
+{
+  "schema": "tiangong.l6702.r18.learning_asset_candidate_sandbox.v1",
+  "package_ref": "candidate_package:r18_f1f990956f35",
+  "asset_ref": "asset_skill_draft:r16_ab1390b9728c0408",
+  "asset_kind": "skill",
+  "namespace": "skill.review_queue",
+  "name": "质量门失败复盘与最小复测_skill_候选",
+  "version": "0.1.0-draft",
+  "purpose": "把缺失测试、pytest 失败、compileall 失败转化为可执行前的修复/复测策略。",
+  "adapter_template_schema": "tiangong.l6702.r21.learning_asset_adapter_template.v1",
+  "adapter_template_id": "project_diagnostic",
+  "source_trace": {
+    "source_kind": "skill_review_queue.draft",
+    "source_ref": "skill_draft:l6_21_6ce6a61a981c",
+    "candidate_ref": "skill_candidate:l6_20_1d67963efffa"
+  },
+  "usage_card": {
+    "title": "质量门失败复盘与最小复测 Skill 候选",
+    "asset_kind": "skill",
+    "when_to_use": "质量门 fail/warn、诊断出现 missing_tests、pytest_missing 或 quality_check_failed。",
+    "how_to_call": "先由 LLM 读取 usage_card 和 chain_recipe，再选择已注册 Runtime 工具；候选阶段不得直接调用未注册工具。",
+    "do_not_use_when": "涉及 A5 高危、凭证、私钥、裸 shell/network、monkey patch、后台 loop、v1 源码/import/registry/executor/provider/self-iteration 复用时禁止。",
+    "next_action_hint": "执行后进入 validation_contract；失败进入归因/回滚；通过后生成 handoff_digest。",
+    "purpose": "把缺失测试、pytest 失败、compileall 失败转化为可执行前的修复/复测策略。"
+  },
+  "chain_recipe": [
+    "review draft",
+    "check trigger",
+    "map to Runtime tool cards",
+    "execute governed chain",
+    "record outcome"
+  ],
+  "validation_contract": {
+    "required": [
+      "contract_field_check",
+      "usage_card_check",
+      "chain_recipe_check",
+      "runtime_binding_check",
+      "risk_profile_check",
+      "no_pollution_scan",
+      "quality_gate_before_activation",
+      "l6_22_sandbox_alignment_before_tool_production"
+    ],
+    "evidence_refs": [
+      "validation:l6_20_1d67963efffa"
+    ],
+    "pass_condition": "learning_asset_contract_validate status=pass and zero P0/P1 issues before activation/release"
+  },
+  "rollback_contract": {
+    "strategy": "候选阶段可丢弃/重排/退回审阅；真实生产阶段必须提供 checkpoint/restore/manifest。",
+    "required_refs": [
+      "rollback:l6_20_1d67963efffa"
+    ]
+  },
+  "audit_contract": {
+    "source_ref": "skill_draft:l6_21_6ce6a61a981c",
+    "required_events": [
+      "candidate_created",
+      "contract_normalized",
+      "contract_validated",
+      "quality_gate",
+      "release_gate"
+    ],
+    "redaction_required": true
+  },
+  "runtime_binding": {
+    "binding_type": "SkillDraftVersion",
+    "registry_write": false,
+    "activation": false
+  },
+  "aligned_sandbox_mapping": {},
+  "notes": "pytest missing tests",
+  "sandbox_profile": "isolated_workspace_candidate_package_only",
+  "candidate_only": true,
+  "review_before_activation": true,
+  "no_real_skill_registry_write": true,
+  "no_runtime_tool_registration": true,
+  "no_skill_activation": true,
+  "no_tool_handle_release": true,
+  "no_candidate_tool_invocation": true,
+  "no_model_dispatch": true,
+  "no_network": true,
+  "no_shell": true,
+  "no_background_loop": true,
+  "no_v1_import_or_source_copy": true,
+  "llm_is_final_decider": true
+}

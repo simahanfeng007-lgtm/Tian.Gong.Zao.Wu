@@ -1,6 +1,6 @@
 {
-  "contract_version": "tiangong.l6_70_1.desktop_bundle_verify.v1",
-  "checked_at": "2026-06-07T10:10:33",
+  "contract_version": "tiangong.l6_70_6.desktop_visual_click_verify.v1",
+  "checked_at": "2026-06-08T04:05:01",
   "ok": true,
   "desktop_all_in_one_ready": true,
   "frontend_backend_bundled": true,
@@ -14,25 +14,25 @@
     {
       "name": "desktop_bundle_preflight_l671",
       "ok": true,
-      "report": "/mnt/data/l671_work/reports/desktop_bundle_preflight_l671.json"
+      "report": "/mnt/data/fusion_work/out/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/reports/desktop_bundle_preflight_l671.json"
     },
     {
       "name": "l671_desktop_bundle_compileall",
       "ok": true,
       "returncode": 0,
-      "exit": "/mnt/data/l671_work/reports/l671_desktop_bundle_compileall.exit",
-      "log": "/mnt/data/l671_work/reports/l671_desktop_bundle_compileall.log"
+      "exit": "/mnt/data/fusion_work/out/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/reports/l671_desktop_bundle_compileall.exit",
+      "log": "/mnt/data/fusion_work/out/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/reports/l671_desktop_bundle_compileall.log"
     },
     {
       "name": "l671_desktop_bundle_scan",
       "ok": true,
       "returncode": 0,
-      "exit": "/mnt/data/l671_work/reports/l671_desktop_bundle_scan.exit",
-      "log": "/mnt/data/l671_work/reports/l671_desktop_bundle_scan.log"
+      "exit": "/mnt/data/fusion_work/out/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/reports/l671_desktop_bundle_scan.exit",
+      "log": "/mnt/data/fusion_work/out/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/reports/l671_desktop_bundle_scan.log"
     }
   ],
   "merge_blockers": [
     "official real Runtime RC unlock not executed; desktop local bridge is not final RC evidence"
   ],
-  "note": "L6.70.1 是桌面端前后端一体化启动包，不是正式 exe/msi 安装器，也不把本地桥接冒充真实 Runtime。"
+  "note": "L6.70.6 是桌面端全量视觉点击体感修复包，不是正式 exe/msi 安装器，也不把本地桥接冒充真实 Runtime。"
 }

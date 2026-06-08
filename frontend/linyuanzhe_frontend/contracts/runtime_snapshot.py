@@ -5,6 +5,8 @@ from typing import Any, Dict, Iterable, List, Mapping, Optional
 import hashlib
 import re
 
+from linyuanzhe_frontend.version_info import FE_FULL_VERSION
+
 PROVIDER_SETTINGS_WRITE_CONTRACT_VERSION = "tiangong.l6_57.provider_settings_write.v1"
 from .action_guard import (
     ACTION_GUARD_CONTRACT_VERSION,
@@ -64,17 +66,48 @@ SENSITIVE_PATTERNS = [
 ]
 
 
+def _redact_sensitive_text(value: Any) -> str:
+    text = "" if value is None else str(value)
+    for pattern in SENSITIVE_PATTERNS:
+        text = pattern.sub("<redacted>", text)
+    return text
+
+
 def safe_text(value: Any, max_len: int = 260) -> str:
-    """Return UI-safe summary text.
+    """Return UI-safe single-line summary text.
 
     The frontend only displays sanitized projections. This helper is a final
     defensive layer against accidental raw secret/path leakage in mock or JSON
     report inputs. It is not a replacement for backend PublicProjection.
     """
-    text = "" if value is None else str(value)
-    for pattern in SENSITIVE_PATTERNS:
-        text = pattern.sub("<redacted>", text)
+    text = _redact_sensitive_text(value)
     text = text.replace("\r", " ").replace("\n", " ").strip()
+    if len(text) > max_len:
+        return text[: max_len - 1] + "…"
+    return text
+
+
+def safe_chat_text(value: Any, max_len: int = 8000) -> str:
+    """Return sanitized chat text while preserving Markdown-significant lines.
+
+    STEP31Q needs newlines for headings, lists, paragraphs and fenced code
+    blocks.  This remains display-only sanitization: secrets, tokens and local
+    paths are redacted before the Tk renderer sees the text.
+    """
+    text = _redact_sensitive_text(value)
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
+    lines = [line.rstrip() for line in text.split("\n")]
+    normalized: List[str] = []
+    blank_count = 0
+    for line in lines:
+        if line.strip():
+            blank_count = 0
+            normalized.append(line)
+        else:
+            blank_count += 1
+            if blank_count <= 2:
+                normalized.append("")
+    text = "\n".join(normalized).strip("\n")
     if len(text) > max_len:
         return text[: max_len - 1] + "…"
     return text
@@ -98,7 +131,7 @@ class ChatMessage:
             role=safe_text(data.get("role", "assistant"), 32),
             label=safe_text(data.get("label", "临渊者"), 32),
             time=safe_text(data.get("time", "--:--:--"), 32),
-            text=safe_text(data.get("text", ""), 500),
+            text=safe_chat_text(data.get("text", ""), 8000),
         )
 
 
@@ -273,6 +306,8 @@ class RuntimeSnapshot:
     pending_delta_chars: int = 0
     visible_message_count: int = 0
     hidden_message_count: int = 0
+    stream_activity_label: str = ""
+    stream_visual_state: str = "idle"
 
     # L6.62 Trace / Observability dashboard. Display-only projection from
     # Runtime SSE / Agent UI events; no frontend execution authority.
@@ -369,6 +404,10 @@ class RuntimeSnapshot:
     provider_api_key_digest: str = ""
     provider_base_url_configured: bool = False
     provider_base_url_digest: str = ""
+    last_provider_check_state: str = "not_tested"
+    last_provider_error_code: str = ""
+    last_provider_error_message: str = ""
+    last_provider_next_action: str = "发送一条短消息完成真实链路联调"
 
     # L6.53 streaming/control display contract. These are UI state markers only;
     # they do not authorize frontend-side execution, stop, reset, rollback, or memory writes.
@@ -388,7 +427,7 @@ class RuntimeSnapshot:
 
     success_count: int = 8
     blocked_count: int = 2
-    pending_confirmation_count: int = 1
+    pending_confirmation_count: int = 0
 
     execution_stage: str = "接口联调中"
     execution_steps: List[StepSummary] = field(default_factory=list)
@@ -423,13 +462,14 @@ class RuntimeSnapshot:
     self_iteration_projection: SelfIterationFrontendProjection = field(default_factory=SelfIterationFrontendProjection)
 
     def __post_init__(self) -> None:
-        if not self.execution_steps:
+        is_mock_source = safe_text(getattr(self, "source_kind", "mock"), 80) in {"mock", "mock_file", "frontend_mock", "demo", "mock_data"}
+        if is_mock_source and not self.execution_steps:
             self.execution_steps = [
                 StepSummary("接口对接", "succeeded", "A2", "audit_mock_001", "接口对接完成"),
                 StepSummary("权限验证", "succeeded", "A2", "audit_mock_002", "权限验证完成"),
                 StepSummary("数据同步", "running", "A2", "audit_mock_003", "数据同步进行中"),
             ]
-        if not self.chat_messages:
+        if is_mock_source and not self.chat_messages:
             self.chat_messages = [
                 ChatMessage("user", "你", "10:24:18", "请继续推进 P0 系统接入。"),
                 ChatMessage(
@@ -441,7 +481,7 @@ class RuntimeSnapshot:
             ]
         if self.visible_message_count <= 0:
             self.visible_message_count = len(self.chat_messages)
-        if not self.trace_records:
+        if is_mock_source and not self.trace_records:
             self.trace_records = [
                 TraceRecord(seq=1, event_type="run_started", source_event="run_started", category="run", phase="mock_ready", status="ready", message="Mock 运行观测投影已初始化"),
                 TraceRecord(seq=2, event_type="runtime_state", source_event="runtime_state", category="runtime", phase=self.current_stage, status=self.current_task_status, latency_ms=self.latency_ms, message="Runtime 状态投影"),
@@ -460,7 +500,7 @@ class RuntimeSnapshot:
             self.hook_stats = HookStats.from_records(self.hook_records).to_dict()
         self.hook_last_blocker = safe_text(self.hook_stats.get("last_blocker", ""), 220)
         self.hook_export_digest = digest_text(self.hook_stats, 16)
-        if not self.file_transfer_records:
+        if is_mock_source and not self.file_transfer_records:
             self.file_transfer_records = [
                 FileTransferPublicRecord(
                     transfer_id="FT-MOCK-READY",
@@ -470,7 +510,7 @@ class RuntimeSnapshot:
                     message="文件传输入口已接入；真实文件只经 Runtime / TiangongWangguan 授权链路。",
                 )
             ]
-        if not self.workspace_mounts:
+        if is_mock_source and not self.workspace_mounts:
             self.workspace_mounts = [
                 WorkspaceMount(
                     name="agent_workspace",
@@ -484,7 +524,7 @@ class RuntimeSnapshot:
             ]
         if not self.workspace_policy.mounts:
             object.__setattr__(self.workspace_policy, "mounts", self.workspace_mounts[:])
-        if not self.file_authorization_records:
+        if is_mock_source and not self.file_authorization_records:
             self.file_authorization_records = [
                 FileAuthorizationPublicRecord(
                     authorization_id="AUTH-MOCK-READY",
@@ -495,7 +535,7 @@ class RuntimeSnapshot:
                     message="文件授权边界已接入；真实授权只由 Runtime / QualityGate / TiangongWangguan 裁决。",
                 )
             ]
-        if not self.download_handoff_records:
+        if is_mock_source and not self.download_handoff_records:
             self.download_handoff_records = [
                 DownloadHandoffRecord(
                     artifact_id_digest="DL-MOCK-READY",
@@ -504,7 +544,7 @@ class RuntimeSnapshot:
                     message="前端只展示下载中转回执，不显示原始下载 token。",
                 )
             ]
-        if not self.connector_manifests:
+        if is_mock_source and not self.connector_manifests:
             self.connector_manifests = [
                 ConnectorManifestProjection(
                     connector_id_digest="CONN-MOCK-READY",
@@ -522,7 +562,7 @@ class RuntimeSnapshot:
                     runtime_authority_required=True,
                 )
             ]
-        if not self.connector_registration_records:
+        if is_mock_source and not self.connector_registration_records:
             self.connector_registration_records = [
                 ConnectorRegistrationPublicRecord(
                     request_id="CONN-REQ-MOCK-READY",
@@ -538,7 +578,10 @@ class RuntimeSnapshot:
             object.__setattr__(self.connector_registry_projection, "read_only_count", sum(1 for item in self.connector_manifests if item.read_only_default))
             object.__setattr__(self.connector_registry_projection, "quarantined_count", sum(1 for item in self.connector_manifests if item.quarantined))
 
-        if not self.task_sessions:
+        if is_mock_source and not self.task_sessions:
+            # STEP31E: production desktop shells must not inject recoverable demo
+            # sessions. A single active projection is enough for mock/demo mode;
+            # SESS-MOCK-* rows caused false resume requests in the task tower.
             active_title = self.task_snapshot.current_stage or self.current_stage or "当前任务"
             self.task_sessions = [
                 TaskSessionProjection(
@@ -557,51 +600,19 @@ class RuntimeSnapshot:
                     audit_id=self.audit_id,
                     tags=["active", "runtime_projection"],
                     message="当前任务由 Runtime 投影；前端只显示和提交请求。",
-                ),
-                TaskSessionProjection(
-                    session_id_digest="SESS-MOCK-CONFIRM",
-                    title="等待确认的高风险动作",
-                    status="waiting_confirmation",
-                    current_stage="等待用户确认票据",
-                    progress_percent=42,
-                    waiting_confirmation=True,
-                    recoverable=True,
-                    last_updated="mock",
-                    audit_id="EV-MOCK-CONFIRM",
-                    tags=["confirmation", "recoverable"],
-                    message="仅用于任务塔台 UI 回归。",
-                ),
-                TaskSessionProjection(
-                    session_id_digest="SESS-MOCK-FAILED",
-                    title="失败待恢复任务",
-                    status="recoverable",
-                    current_stage="等待 Runtime 恢复计划",
-                    progress_percent=68,
-                    blocked=True,
-                    recoverable=True,
-                    last_updated="mock",
-                    audit_id="EV-MOCK-RECOVERY",
-                    tags=["failed", "resume"],
-                    message="恢复按钮只提交 Runtime resume envelope。",
-                ),
-                TaskSessionProjection(
-                    session_id_digest="SESS-MOCK-DONE",
-                    title="已完成归档任务",
-                    status="completed",
-                    current_stage="归档完成",
-                    progress_percent=100,
-                    last_updated="mock",
-                    audit_id="EV-MOCK-DONE",
-                    tags=["completed"],
-                    message="已完成任务只读展示。",
-                ),
+                )
+            ]
+        if self.task_sessions:
+            self.task_sessions = [
+                item for item in self.task_sessions
+                if not safe_text(getattr(item, "session_id_digest", ""), 80).upper().startswith("SESS-MOCK")
             ]
         if not self.session_stats:
             self.session_stats = SessionManagerStats.from_sessions(self.task_sessions).to_dict()
         if self.session_filtered_count <= 0:
             self.session_filtered_count = len(self.task_sessions)
 
-        if not self.version_slots:
+        if is_mock_source and not self.version_slots:
             self.version_slots = [
                 VersionSlotProjection(
                     slot_name="active",
@@ -615,7 +626,7 @@ class RuntimeSnapshot:
                 ),
                 VersionSlotProjection(
                     slot_name="rollback",
-                    version_label="FE01 STEP28 / L6.67",
+                    version_label=FE_FULL_VERSION,
                     state="rollback",
                     path_digest="SLOT-ROLLBACK-MOCK",
                     package_sha256_digest="上一基线 digest 待 Runtime/Installer 填充",
@@ -633,14 +644,14 @@ class RuntimeSnapshot:
                     message="更新器骨架预留；当前禁止自动下载/自动应用。",
                 ),
             ]
-        if not self.startup_self_checks:
+        if is_mock_source and not self.startup_self_checks:
             self.startup_self_checks = [
                 StartupSelfCheckRecord(check_id="backend_layout", name="后端目录与 run_agent 入口", status="pending", message="等待 startup_self_check_l668.py 校验"),
                 StartupSelfCheckRecord(check_id="frontend_layout", name="前端桌面端与 RuntimeClient", status="pending", message="等待 startup_self_check_l668.py 校验"),
                 StartupSelfCheckRecord(check_id="launcher_layout", name="统一启动器与预检脚本", status="pending", message="等待 startup_self_check_l668.py 校验"),
                 StartupSelfCheckRecord(check_id="reports_writable", name="报告目录可写", status="pending", message="等待 startup_self_check_l668.py 校验"),
             ]
-        if not self.crash_report_records:
+        if is_mock_source and not self.crash_report_records:
             self.crash_report_records = [
                 CrashReportProjection(
                     report_id_digest="CRASH-MOCK-EMPTY",
@@ -651,7 +662,7 @@ class RuntimeSnapshot:
                     upload_allowed=False,
                 )
             ]
-        if not self.repair_action_records:
+        if is_mock_source and not self.repair_action_records:
             self.repair_action_records = [
                 RepairActionRecord(action_id="startup_self_check", title="启动自检", status="available", message="运行 installer/startup/startup_self_check_l668.py。"),
                 RepairActionRecord(action_id="offline_repair", title="离线修复预检", status="available", message="运行 installer/recovery/offline_repair_l668.py，默认 dry-run。"),
@@ -681,7 +692,7 @@ class RuntimeSnapshot:
             self.task_snapshot.next_plan = self.execution_stage
         if not self.conversation_guide.recommended_actions:
             self.conversation_guide.recommended_actions = ["继续下一步", "查看任务快照", "查看执行详情"]
-        if not self.self_iteration_projection.candidates:
+        if is_mock_source and not self.self_iteration_projection.candidates:
             self.self_iteration_projection.candidates = [
                 SelfIterationCandidate(
                     candidate_id="ITER-FE01-0001",
@@ -830,6 +841,8 @@ class RuntimeSnapshot:
             pending_delta_chars=int(data.get("pending_delta_chars", 0) or 0),
             visible_message_count=int(data.get("visible_message_count", 0) or 0),
             hidden_message_count=int(data.get("hidden_message_count", 0) or 0),
+            stream_activity_label=safe_text(data.get("stream_activity_label", ""), 80),
+            stream_visual_state=safe_text(data.get("stream_visual_state", data.get("stream_state", "idle")), 40),
             observability_contract=safe_text(data.get("observability_contract", OBSERVABILITY_CONTRACT_VERSION), 100),
             trace_enabled=bool(data.get("trace_enabled", True)),
             trace_records=trace_records,
@@ -896,6 +909,10 @@ class RuntimeSnapshot:
             provider_api_key_digest=safe_text(data.get("provider_api_key_digest", ""), 32),
             provider_base_url_configured=bool(data.get("provider_base_url_configured", False)),
             provider_base_url_digest=safe_text(data.get("provider_base_url_digest", ""), 32),
+            last_provider_check_state=safe_text(data.get("last_provider_check_state", "not_tested"), 60),
+            last_provider_error_code=safe_text(data.get("last_provider_error_code", ""), 80),
+            last_provider_error_message=safe_text(data.get("last_provider_error_message", ""), 180),
+            last_provider_next_action=safe_text(data.get("last_provider_next_action", "发送一条短消息完成真实链路联调"), 120),
             stream_state=safe_text(data.get("stream_state", "idle"), 40),
             reconnect_attempts=int(data.get("reconnect_attempts", 0) or 0),
             last_event_seq=int(data.get("last_event_seq", 0) or 0),
@@ -910,7 +927,7 @@ class RuntimeSnapshot:
             eta=safe_text(data.get("eta", "2025-05-15 13:30"), 80),
             success_count=int(data.get("success_count", 8) or 0),
             blocked_count=int(data.get("blocked_count", 2) or 0),
-            pending_confirmation_count=int(data.get("pending_confirmation_count", 1) or 0),
+            pending_confirmation_count=int(data.get("pending_confirmation_count", 0) or 0),
             execution_stage=safe_text(data.get("execution_stage", "接口联调中"), 80),
             execution_steps=steps,
             quality_decision=safe_text(data.get("quality_decision", "CONDITIONAL"), 64),
@@ -942,7 +959,7 @@ class RuntimeSnapshot:
         return asdict(self)
 
     def append_user_message(self, text: str, timestamp: str = "当前") -> None:
-        self.chat_messages.append(ChatMessage("user", "你", timestamp, safe_text(text, 500)))
+        self.chat_messages.append(ChatMessage("user", "你", timestamp, safe_chat_text(text, 4000)))
         self.chat_messages.append(
             ChatMessage(
                 "assistant",
@@ -952,33 +969,60 @@ class RuntimeSnapshot:
             )
         )
 
+    def recent_chat_contains(self, *keywords: str, window: int = 20) -> bool:
+        """Return True if a recent chat message contains all supplied keywords.
+
+        This is a UI transcript de-duplication guard. It does not change Runtime
+        state, ticket state, audit state, or tool execution behavior.
+        """
+        clean_keywords = [safe_text(item, 160) for item in keywords if safe_text(item, 160)]
+        if not clean_keywords:
+            return False
+        for item in self.chat_messages[-max(1, int(window)) :]:
+            body = str(getattr(item, "text", ""))
+            if all(keyword in body for keyword in clean_keywords):
+                return True
+        return False
+
+    def append_chat_message_once(self, message: ChatMessage, *keywords: str, window: int = 20) -> bool:
+        """Append a chat message unless the recent transcript already has it.
+
+        When keywords are omitted, the whole message text is used as the key.
+        The guard only prevents repetitive UI notices caused by repeated clicks,
+        F5 refresh, or repeated HTTP fallback; it never suppresses user messages.
+        """
+        dedupe_keywords = keywords or (safe_text(getattr(message, "text", ""), 500),)
+        if self.recent_chat_contains(*dedupe_keywords, window=window):
+            return False
+        self.chat_messages.append(message)
+        return True
+
+    def append_assistant_notice_once(self, channel: str, text: str, *keywords: str, window: int = 20) -> bool:
+        """Append one idempotent assistant notice for UI/status side effects.
+
+        This is the L6.71.7 transcript root guard: file handoff, connector
+        registration, installer self-check, control fallback and confirmation
+        notices must be idempotent across repeated clicks, refresh and reconnect.
+        Model/user conversational content still uses explicit message append.
+        """
+        message = ChatMessage("assistant", "临渊者", safe_text(channel, 40) or "状态", safe_chat_text(text, 3000))
+        return self.append_chat_message_once(message, *(keywords or (text,)), window=window)
+
     def add_file_transfer_record(self, record: FileTransferPublicRecord) -> None:
         self.file_transfer_records.append(record)
         self.file_transfer_records = self.file_transfer_records[-20:]
         self.file_transfer_state = safe_text(record.status, 80)
         self.file_transfer_last_message = safe_text(record.message or record.status, 220)
-        self.chat_messages.append(
-            ChatMessage(
-                "assistant",
-                "临渊者",
-                "文件",
-                f"文件传输请求已记录：{safe_text(record.file_name, 100)} · {safe_text(record.status, 40)}。前端未直接调用工具、写记忆或写审计。",
-            )
-        )
+        notice = f"文件传输请求已记录：{safe_text(record.file_name, 100)} · {safe_text(record.status, 40)}。前端未直接调用工具、写记忆或写审计。"
+        self.append_assistant_notice_once("文件", notice, "文件传输请求已记录", safe_text(record.file_name, 100), safe_text(record.status, 40), window=20)
 
     def add_file_authorization_record(self, record: FileAuthorizationPublicRecord) -> None:
         self.file_authorization_records.append(record)
         self.file_authorization_records = self.file_authorization_records[-40:]
         self.workspace_state = safe_text(record.status, 80)
         self.workspace_last_message = safe_text(record.message or record.status, 220)
-        self.chat_messages.append(
-            ChatMessage(
-                "assistant",
-                "临渊者",
-                "工作区",
-                f"文件授权请求已记录：{safe_text(record.file_name, 100)} · {safe_text(record.mode, 30)} · {safe_text(record.status, 40)}。真实授权仍由 Runtime / QualityGate 裁决。",
-            )
-        )
+        notice = f"文件授权请求已记录：{safe_text(record.file_name, 100)} · {safe_text(record.mode, 30)} · {safe_text(record.status, 40)}。真实授权仍由 Runtime / QualityGate 裁决。"
+        self.append_assistant_notice_once("工作区", notice, "文件授权请求已记录", safe_text(record.file_name, 100), safe_text(record.mode, 30), safe_text(record.status, 40), window=20)
 
     def add_download_handoff_record(self, record: DownloadHandoffRecord) -> None:
         self.download_handoff_records.append(record)
@@ -1013,19 +1057,23 @@ class RuntimeSnapshot:
         object.__setattr__(self.connector_registry_projection, "connector_count", len(self.connector_manifests))
         object.__setattr__(self.connector_registry_projection, "read_only_count", sum(1 for item in self.connector_manifests if item.read_only_default))
         object.__setattr__(self.connector_registry_projection, "quarantined_count", sum(1 for item in self.connector_manifests if item.quarantined))
-        self.chat_messages.append(
-            ChatMessage(
-                "assistant",
-                "临渊者",
-                "连接器",
-                f"连接器注册请求已记录：{safe_text(record.display_name, 100)} · {safe_text(record.status, 40)}。真实安装/执行仍由 Runtime / QualityGate / 工作区授权裁决。",
-            )
-        )
+        notice = f"连接器注册请求已记录：{safe_text(record.display_name, 100)} · {safe_text(record.status, 40)}。真实安装/执行仍由 Runtime / QualityGate / 工作区授权裁决。"
+        self.append_assistant_notice_once("连接器", notice, "连接器注册请求已记录", safe_text(record.display_name, 100), safe_text(record.status, 40), window=20)
 
     def record_session_resume_request(self, session_id_digest: str, status: str = "frontend_only_recorded", message: str = "") -> None:
         safe_session = safe_text(session_id_digest, 80)
         safe_status = safe_text(status, 80)
         safe_message = safe_text(message or "恢复请求已记录；真实恢复仍由 Runtime / TiangongWangguan 裁决。", 220)
+        if safe_session.upper().startswith("SESS-MOCK"):
+            # STEP31E: discard legacy demo resume requests; they are not real work.
+            self.task_sessions = [
+                item for item in self.task_sessions
+                if not safe_text(getattr(item, "session_id_digest", ""), 80).upper().startswith("SESS-MOCK")
+            ]
+            self.session_manager_state = "mock_session_discarded"
+            self.session_last_message = "已清理旧版演示 Session；未向 Runtime 提交恢复请求。"
+            self.session_stats = SessionManagerStats.from_sessions(self.task_sessions).to_dict()
+            return
         updated = []
         found = False
         for item in self.task_sessions:
@@ -1066,10 +1114,9 @@ class RuntimeSnapshot:
         self.session_manager_state = safe_status or "resume_requested"
         self.session_last_message = safe_message
         self.session_stats = SessionManagerStats.from_sessions(self.task_sessions).to_dict()
-        # 去重：已有同类消息则不重复追加
-        resume_tag = f"恢复请求已记录：{safe_session}"
-        if not any(resume_tag in str(getattr(m, "text", "")) for m in self.chat_messages[-5:]):
-            self.chat_messages.append(ChatMessage("assistant", "临渊者", "任务", f"Session 恢复请求已记录：{safe_session or 'unknown'}。前端未直接恢复工具、写记忆或写审计。"))
+        # Do not append resume notices into the chat transcript. The task tower
+        # already shows the request state; chat spam here looked like QualityGate
+        # output and confused active conversations.
 
     def record_session_search(self, query: str) -> None:
         safe_query = safe_text(query, 120)
@@ -1092,7 +1139,7 @@ class RuntimeSnapshot:
         self.installer_last_message = f"启动自检记录已更新：pass={summary.get('pass', 0)} warn={summary.get('warn', 0)} blocked={blocked}。前端未应用更新或回滚。"
         if not self.installer_manifest.startup_checks:
             object.__setattr__(self.installer_manifest, "startup_checks", self.startup_self_checks[:])
-        self.chat_messages.append(ChatMessage("assistant", "临渊者", "安装", self.installer_last_message))
+        self.append_assistant_notice_once("安装", self.installer_last_message, "启动自检记录已更新", str(summary.get("pass", 0)), str(summary.get("warn", 0)), str(blocked), window=20)
 
     def submit_confirmation(self, ticket_id: str, decision: str) -> None:
         safe_ticket = safe_text(ticket_id, 80)
@@ -1115,29 +1162,38 @@ class RuntimeSnapshot:
         for card in self.action_guard_cards:
             if safe_text(getattr(card, "ticket_id", ""), 80) == safe_ticket:
                 object.__setattr__(card, "status", f"frontend_{safe_decision}_recorded")
-        self.chat_messages.append(
+        self.append_chat_message_once(
             ChatMessage(
                 "assistant",
                 "临渊者",
                 "当前",
                 f"确认票据 {safe_ticket} 已在前端层记录为 {safe_decision} 请求；未触发工具、审计写入或回滚。",
-            )
+            ),
+            "确认票据",
+            safe_ticket,
+            safe_decision,
+            window=20,
         )
 
-    def submit_self_iteration_confirmation(self, candidate_id: str, decision: str) -> None:
+    def submit_self_iteration_confirmation(self, candidate_id: str, decision: str, *, runtime_submitted: bool = False, runtime_status: str = "") -> None:
         safe_candidate = safe_text(candidate_id, 80)
         safe_decision = safe_text(decision, 32)
+        safe_status = safe_text(runtime_status, 80)
         for item in self.self_iteration_projection.candidates:
             if safe_text(item.candidate_id, 80) == safe_candidate:
-                item.status = f"frontend_{safe_decision}"
+                item.status = f"runtime_{safe_status or safe_decision}" if runtime_submitted else f"frontend_{safe_decision}"
         self.self_iteration_projection.pending_count = sum(
             1 for item in self.self_iteration_projection.candidates if item.status == "pending_user_confirmation"
         )
-        self.chat_messages.append(
-            ChatMessage(
-                "assistant",
-                "临渊者",
-                "当前",
-                f"自我迭代候选 {safe_candidate} 已在前端 Mock 层记录为 {safe_decision}；真实更新仍需 Planner / ExecutionSpine / QualityGate。",
-            )
+        message = (
+            f"自我迭代候选 {safe_candidate} 已提交 Runtime 网关：{safe_status or safe_decision}；不由前端直接合入。"
+            if runtime_submitted
+            else f"自我迭代候选 {safe_candidate} 已在前端层记录为 {safe_decision}；真实更新仍需 Planner / ExecutionSpine / QualityGate。"
+        )
+        self.append_chat_message_once(
+            ChatMessage("assistant", "临渊者", "自我迭代", message),
+            "自我迭代候选",
+            safe_candidate,
+            safe_decision,
+            window=20,
         )

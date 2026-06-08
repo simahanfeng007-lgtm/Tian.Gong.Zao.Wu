@@ -1,0 +1,15 @@
+backend/project/tiangong_agent_runtime/learning_asset_adapter.py
+backend/project/tiangong_agent_runtime/runtime_entry.py
+backend/project/tiangong_agent_runtime/plan_bridge.py
+backend/project/tiangong_agent_runtime/runtime_tool_alignment.py
+backend/project/tiangong_agent_runtime/risk_classifier.py
+backend/project/tiangong_agent_runtime/learning_asset_candidate_sandbox.py
+backend/project/tiangong_agent_runtime/learning_asset_activation.py
+backend/project/run_learning_asset_adapter_smoke.py
+backend/project/run_runtime_tool_alignment_smoke.py
+backend/project/tests/test_learning_asset_adapter.py
+backend/project/docs/R21_LEARNING_ASSET_ADAPTER_REPORT.md
+docs/R21_LEARNING_ASSET_ADAPTER_REPORT.md
+launchers/run_learning_asset_adapter_smoke_l6702_r21.sh
+launchers/run_learning_asset_adapter_smoke_l6702_r21.bat
+reports/l6702_r21_*.json/log/exit

@@ -1,0 +1,107 @@
+{
+  "contract_version": "tiangong.l6_58.frontend_backend_e2e_smoke.v1",
+  "mode": "contract_server",
+  "runtime_url_digest": "af0538c3aaece545",
+  "endpoint_results": [
+    {
+      "path": "/health/runtime",
+      "method": "GET",
+      "ok": true,
+      "status_code": 200,
+      "latency_ms": 14,
+      "content_type": "application/json; charset=utf-8",
+      "error": ""
+    },
+    {
+      "path": "/metadata/product",
+      "method": "GET",
+      "ok": true,
+      "status_code": 200,
+      "latency_ms": 2,
+      "content_type": "application/json; charset=utf-8",
+      "error": ""
+    },
+    {
+      "path": "/settings/provider",
+      "method": "GET",
+      "ok": true,
+      "status_code": 200,
+      "latency_ms": 1,
+      "content_type": "application/json; charset=utf-8",
+      "error": ""
+    }
+  ],
+  "chat_stream_ok": true,
+  "terminal_order_valid": true,
+  "assistant_final_seen": true,
+  "run_terminal_seen": true,
+  "status_bar_fields_ok": true,
+  "product_identity_ok": true,
+  "provider_projection_safe": true,
+  "provider_write_ack_ok": true,
+  "provider_write_request_only": true,
+  "action_guard_request_only": true,
+  "no_frontend_provider_call": true,
+  "no_frontend_tool_execution": true,
+  "no_frontend_memory_write": true,
+  "no_frontend_rollback_apply": true,
+  "rendered_secret_free": true,
+  "event_count": 12,
+  "final_task_status": "COMPLETED",
+  "final_stream_state": "completed",
+  "final_audit_id": "audit_l657_stream",
+  "diagnostic": [
+    "provider_write_mode=fixture",
+    "provider_write_status=accepted"
+  ],
+  "ok": true,
+  "checked_at": "2026-06-08T01:52:49",
+  "policy": {
+    "contract_version": "tiangong.l6_58.frontend_backend_e2e_smoke.v1",
+    "allowed_endpoints": [
+      "/health/runtime",
+      "/metadata/product",
+      "/settings/provider",
+      "/chat/stream-events",
+      "/tasks/stop",
+      "/tasks/reset",
+      "/confirmations/submit"
+    ],
+    "required_probe_endpoints": [
+      "/health/runtime",
+      "/metadata/product",
+      "/settings/provider"
+    ],
+    "required_status_bar_fields": [
+      "runtime_status",
+      "provider_model",
+      "budget_pool",
+      "budget_used_ratio",
+      "gate_status",
+      "audit_id",
+      "memory_mode",
+      "tools_allowed",
+      "latency_ms"
+    ],
+    "required_terminal_tail": [
+      "assistant_final",
+      "run_terminal"
+    ],
+    "frontend_role": "display_submit_request_only",
+    "no_direct_provider_call": true,
+    "no_direct_tool_execution": true,
+    "no_direct_memory_write": true,
+    "no_frontend_audit_write": true,
+    "no_frontend_rollback_apply": true,
+    "no_kernel_mutation": true,
+    "runtime_url_in_reports": "digest_only",
+    "provider_settings_endpoint": "/settings/provider",
+    "provider_settings_write_method": "POST",
+    "provider_settings_write_only_fields": [
+      "api_key",
+      "base_url"
+    ]
+  },
+  "runtime_url_visible": "digest_only",
+  "note": "本报告不包含 Runtime URL 明文、Provider Key 明文或 Provider Base URL 明文。"
+}

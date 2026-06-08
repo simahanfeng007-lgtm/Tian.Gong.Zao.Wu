@@ -1,0 +1,19 @@
+{
+  "package_ref": "candidate_package:r18_17b1135d17a9",
+  "asset_ref": "asset_skill:r16_df4be34fdb4361dc",
+  "asset_kind": "skill",
+  "proposed_name": "质量门失败复盘与最小复测_skill_候选",
+  "review_status": "pending_llm_decision",
+  "required_before_activation": [
+    "static_scan_pass",
+    "smoke_pass",
+    "quality_gate_pass",
+    "release_gate_pass",
+    "rollback_checkpoint",
+    "audit_manifest",
+    "explicit_llm_decision"
+  ],
+  "activation_allowed_now": false,
+  "runtime_registration_allowed_now": false,
+  "skill_registry_write_allowed_now": false
+}

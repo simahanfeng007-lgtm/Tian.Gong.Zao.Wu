@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""FE01 STEP31A / L6.70.1 desktop all-in-one package preflight."""
+"""FE01 STEP31F / L6.70.6 desktop all-in-one package preflight."""
 
 import json
 import os
@@ -105,7 +105,7 @@ def _get_json(url: str, path: str) -> dict[str, Any]:
 
 
 def _post_sse(url: str, message: str) -> dict[str, Any]:
-    body = json.dumps({"message": message, "frontend_contract": "L6.70.1", "no_frontend_tool_execution": True, "no_frontend_memory_write": True, "no_frontend_rollback_apply": True}, ensure_ascii=False).encode("utf-8")
+    body = json.dumps({"message": message, "frontend_contract": "L6.70.6", "no_frontend_tool_execution": True, "no_frontend_memory_write": True, "no_frontend_rollback_apply": True}, ensure_ascii=False).encode("utf-8")
     req = urllib.request.Request(url + "/chat/stream-events", data=body, method="POST", headers={"Accept": "text/event-stream", "Content-Type": "application/json; charset=utf-8"})
     with urllib.request.urlopen(req, timeout=90) as resp:
         raw = resp.read().decode("utf-8", errors="replace")
@@ -185,7 +185,7 @@ def main() -> int:
     scan_result = _run("l671_desktop_bundle_scan", [sys.executable, str(ROOT / "scripts" / "scan_l659.py")], timeout=120)
     ok = bool(compile_result.get("ok") and bridge_result.get("ok") and scan_result.get("ok"))
     payload = {
-        "contract_version": "tiangong.l6_70_1.desktop_bundle_preflight.v1",
+        "contract_version": "tiangong.l6_70_6.desktop_visual_click_preflight.v1",
         "checked_at": datetime.now().isoformat(timespec="seconds"),
         "ok": ok,
         "desktop_all_in_one_ready": ok,

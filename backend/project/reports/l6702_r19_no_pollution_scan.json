@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "issues": [],
+  "assertions": {
+    "copied_v1_source": false,
+    "imported_v1_module": false,
+    "reused_v1_registry": false,
+    "reused_v1_executor": false,
+    "reused_v1_provider": false,
+    "monkey_patch": false,
+    "background_loop": false
+  },
+  "scanned_py_files": 857
+}

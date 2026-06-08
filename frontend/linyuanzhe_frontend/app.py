@@ -10,6 +10,7 @@ if __package__ in (None, ""):
 
 from linyuanzhe_frontend.clients import FutureRuntimeClient, JsonReportRuntimeClient, MockRuntimeClient, SseRuntimeClient
 from linyuanzhe_frontend.ui.main_window import LinyuanzheDesktopApp
+from linyuanzhe_frontend.version_info import FE_FULL_VERSION
 
 
 def build_client(args: argparse.Namespace):
@@ -24,7 +25,7 @@ def build_client(args: argparse.Namespace):
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="临渊者桌面驾驶舱 FE01 STEP23 / L6.62")
+    parser = argparse.ArgumentParser(description=f"临渊者桌面端 {FE_FULL_VERSION}")
     parser.add_argument("--mock-file", default=None, help="读取前端 Mock RuntimeSnapshot JSON")
     parser.add_argument("--json-report", default=None, help="读取后端导出的 JSON 报告文件或目录，只读")
     parser.add_argument("--future-placeholder", default=None, help="FutureRuntimeClient 占位端点，保留兼容")

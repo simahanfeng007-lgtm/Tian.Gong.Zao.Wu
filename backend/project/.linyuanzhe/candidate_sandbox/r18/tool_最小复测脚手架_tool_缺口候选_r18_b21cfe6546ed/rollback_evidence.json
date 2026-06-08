@@ -1,0 +1,8 @@
+{
+  "package_ref": "candidate_package:r18_b21cfe6546ed",
+  "asset_ref": "asset_tool_gap:r16_db4b6293f242b99b",
+  "strategy": "candidate package can be deleted or requeued; no Runtime registry or Skill registry rollback is needed because nothing was activated.",
+  "delete_scope": "this candidate package directory only",
+  "checkpoint_required_before_future_activation": true,
+  "restore_required_before_future_activation": true
+}

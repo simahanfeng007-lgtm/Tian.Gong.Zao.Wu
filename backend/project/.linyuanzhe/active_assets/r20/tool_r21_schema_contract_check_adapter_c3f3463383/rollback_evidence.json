@@ -1,0 +1,5 @@
+{
+  "status": "present",
+  "asset_ref": "asset_r21_adapter:r21_cfd1c67cb77f",
+  "delete_scope": "active asset record and active directory only"
+}

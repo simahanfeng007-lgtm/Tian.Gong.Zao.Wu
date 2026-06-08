@@ -1,0 +1,26 @@
+临渊者 FE01 STEP31N / L6.71.4 流式输出与思考态修复报告
+
+本轮目标：
+- 修复“AI 回复过程僵硬”的桌面端体验问题。
+- 增加发送后的思考态、输出态、断线续接态与完成态。
+- 保持聊天区增量渲染，不恢复全量刷新，不引入跳顶和闪屏。
+
+主要改动：
+1. main_window.py 新增 live_stream_var 与轻量呼吸点提示。
+2. main_window.py 新增流式状态格式化与 indicator 状态机。
+3. main_window.py 增加渲染计数器，用于验证 full rebuild / rewrite-last / append 路径。
+4. mock_runtime_client.py 新增 Mock 流式演示，明确标注 frontend_execution=false / runtime_only=true。
+5. sse_runtime_client.py assistant_delta / assistant_final 使用 safe_chat_text，保留 Markdown 换行。
+6. RuntimeSnapshot 增加 stream_activity_label / stream_visual_state 只读投影字段。
+7. 新增 desktop_streaming_thinking_acceptance_l6714.py 验收脚本。
+
+未做事项：
+- 未接正式 Runtime RC。
+- 未构建 exe/msi 安装器。
+- 未增加多会话标签、文件拖拽、语音、图片能力。
+
+边界确认：
+- 未修改后端 Runtime 主链。
+- 未绕过 Planner / ExecutionSpine / QualityGate。
+- 未保存、展示或打印 API Key 明文。
+- Mock 流式演示不等同真实 AI 回复。

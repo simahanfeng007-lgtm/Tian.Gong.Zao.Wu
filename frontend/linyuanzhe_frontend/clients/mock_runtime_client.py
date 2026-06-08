@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 import json
+import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from linyuanzhe_frontend.contracts.runtime_snapshot import RuntimeSnapshot, ChatMessage, safe_text
+from linyuanzhe_frontend.contracts.runtime_snapshot import RuntimeSnapshot, ChatMessage, safe_chat_text, safe_text
 
 from linyuanzhe_frontend.contracts.file_transfer import FileTransferPublicRecord, FileTransferRequest
 from linyuanzhe_frontend.contracts.workspace import FileAuthorizationPublicRecord, FileAuthorizationRequest
@@ -92,37 +93,108 @@ class MockRuntimeClient:
         return self._snapshot
 
     def refresh_snapshot(self) -> RuntimeSnapshot:
-        """Reload mock data from disk. This is frontend-only and does not execute anything."""
-        self._snapshot = self._load_snapshot()
+        """Reload mock data without discarding accumulated UI transcript messages."""
+        previous_messages = list(self._snapshot.chat_messages)
+        fresh = self._load_snapshot()
+        merged = []
+        seen = set()
+        for message in list(fresh.chat_messages) + previous_messages:
+            key = (
+                safe_text(getattr(message, "role", ""), 32),
+                safe_text(getattr(message, "label", ""), 32),
+                safe_text(getattr(message, "time", ""), 32),
+                safe_text(getattr(message, "text", ""), 500),
+            )
+            if key in seen:
+                continue
+            seen.add(key)
+            merged.append(message)
+        fresh.chat_messages = merged[-240:]
+        self._snapshot = fresh
         return self._snapshot
 
     def submit_user_message(self, text: str) -> RuntimeSnapshot:
-        self._snapshot.append_user_message(safe_text(text, 500))
+        self._snapshot.append_user_message(safe_chat_text(text, 4000))
         return self._snapshot
 
 
-    def submit_user_message_streaming(self, text: str, **_kwargs: Any) -> RuntimeSnapshot:
-        return self.submit_user_message(text)
+    def _snapshot_copy(self) -> RuntimeSnapshot:
+        return RuntimeSnapshot.from_mapping(self._snapshot.to_dict())
+
+    def _notify_stream_snapshot(self, callback: Any) -> None:
+        if callable(callback):
+            callback(self._snapshot_copy())
+
+    def submit_user_message_streaming(self, text: str, **kwargs: Any) -> RuntimeSnapshot:
+        """Run a small frontend-only streaming simulation for UI acceptance.
+
+        This is deliberately marked as Mock. It never calls a Provider SDK,
+        Runtime tool, memory writer, QualityGate writer, or audit writer.  The
+        purpose is to let the desktop shell validate thinking state, incremental
+        transcript repaint, and Markdown streaming without a live gateway.
+        """
+        on_snapshot = kwargs.get("on_snapshot")
+        safe_message = safe_chat_text(text, 4000)
+        self._snapshot.chat_messages = [*self._snapshot.chat_messages, ChatMessage("user", "你", "当前", safe_message)]
+        self._snapshot.source_kind = "mock"
+        self._snapshot.runtime_status = "mock_streaming"
+        self._snapshot.current_task_status = "RUNNING"
+        self._snapshot.current_stage = "Mock 正在准备流式演示"
+        self._snapshot.stream_state = "thinking"
+        self._snapshot.progress_percent = max(10, min(30, self._snapshot.progress_percent))
+        self._snapshot.pending_delta_chars = 0
+        self._snapshot.visible_message_count = len(self._snapshot.chat_messages)
+        self._snapshot.hidden_message_count = 0
+        self._snapshot.stream_activity_label = "临渊者正在思考"
+        self._snapshot.stream_visual_state = "thinking"
+        self._notify_stream_snapshot(on_snapshot)
+        time.sleep(0.05)
+
+        assistant = ChatMessage("assistant", "临渊者", "流式", "")
+        self._snapshot.chat_messages = [*self._snapshot.chat_messages, assistant]
+        chunks = [
+            "## Mock 流式演示\n",
+            "- 已接收用户输入，正在执行前端增量渲染回归。\n",
+            "- 当前没有调用真实模型、工具、记忆或审计写入。\n\n",
+            "```text\nfrontend_execution=false\nruntime_only=true\n```\n",
+            "流式演示完成。\n",
+        ]
+        for index, chunk in enumerate(chunks, start=1):
+            assistant.text = safe_chat_text(assistant.text + chunk, 8000)
+            self._snapshot.stream_state = "streaming"
+            self._snapshot.current_stage = "Mock 正在流式输出"
+            self._snapshot.progress_percent = min(95, 30 + index * 12)
+            self._snapshot.pending_delta_chars = len(chunk)
+            self._snapshot.visible_message_count = len(self._snapshot.chat_messages)
+            self._snapshot.stream_activity_label = "正在输出"
+            self._snapshot.stream_visual_state = "streaming"
+            self._notify_stream_snapshot(on_snapshot)
+            time.sleep(0.04)
+
+        self._snapshot.stream_state = "completed"
+        self._snapshot.current_task_status = "COMPLETED"
+        self._snapshot.current_stage = "Mock 流式演示已完成"
+        self._snapshot.progress_percent = 100
+        self._snapshot.pending_delta_chars = 0
+        self._snapshot.stream_activity_label = "已完成"
+        self._snapshot.stream_visual_state = "completed"
+        self._snapshot.visible_message_count = len(self._snapshot.chat_messages)
+        self._notify_stream_snapshot(on_snapshot)
+        return self._snapshot_copy()
 
     def request_task_stop(self, reason: str = "user_requested") -> RuntimeSnapshot:
         self._snapshot.control_state = "stop_frontend_only"
-        self._snapshot.chat_messages.append(
-            ChatMessage("assistant", "临渊者", "控制", "停止请求已在前端占位层记录；Mock/JSON/Future 客户端不会直接停止 Runtime。")
-        )
+        self._snapshot.append_assistant_notice_once("控制", "停止请求已在前端占位层记录；Mock/JSON/Future 客户端不会直接停止 Runtime。", "停止请求已在前端占位层记录", window=20)
         return self._snapshot
 
     def request_task_reset(self, reason: str = "user_requested") -> RuntimeSnapshot:
         self._snapshot.control_state = "reset_frontend_only"
-        self._snapshot.chat_messages.append(
-            ChatMessage("assistant", "临渊者", "控制", "复位请求已在前端占位层记录；Mock/JSON/Future 客户端不会直接复位 Runtime。")
-        )
+        self._snapshot.append_assistant_notice_once("控制", "复位请求已在前端占位层记录；Mock/JSON/Future 客户端不会直接复位 Runtime。", "复位请求已在前端占位层记录", window=20)
         return self._snapshot
 
     def request_task_interrupt(self, reason: str = "user_requested") -> RuntimeSnapshot:
         self._snapshot.control_state = "interrupt_frontend_only"
-        self._snapshot.chat_messages.append(
-            ChatMessage("assistant", "临渊者", "控制", "中断请求已在前端占位层记录；真实中断只能由 Runtime / TiangongWangguan 执行。")
-        )
+        self._snapshot.append_assistant_notice_once("控制", "中断请求已在前端占位层记录；真实中断只能由 Runtime / TiangongWangguan 执行。", "中断请求已在前端占位层记录", window=20)
         return self._snapshot
 
     def request_file_transfer(self, file_path: str, purpose: str = "user_attachment") -> RuntimeSnapshot:

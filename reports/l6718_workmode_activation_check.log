@@ -1,0 +1,10 @@
+- learning_asset_activation_status: ok｜R20 active asset 状态：status=active；active_count=9。
+[长链] executed=1/1 stopped_reason=completed failures=0
+产物：
+- /mnt/data/l6718_activate_work/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/backend/project/.linyuanzhe/active_assets/r20/active_assets_registry.json
+- learning_asset_activation_smoke: ok｜R20 active asset smoke：status=pass；smoke_count=9；issues=0。
+[长链] executed=1/1 stopped_reason=completed failures=0
+- runtime_tool_alignment_check: ok｜Runtime tool alignment checked: 158 tools, 158 LLM usage cards, 0 blocking issue groups.
+[长链] executed=1/1 stopped_reason=completed failures=0
+......................                                                   [100%]
+22 passed in 5.20s

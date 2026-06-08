@@ -1,0 +1,21 @@
+临渊者 FE01 STEP31H / L6.70.8 确认回执去重与刷新保留修复说明
+
+本包基于 STEP31G / L6.70.7，修复 L6707 未覆盖的聊天记录重复与刷新丢失问题：
+
+1. RuntimeSnapshot 新增 recent_chat_contains / append_chat_message_once，作为统一聊天区去重守卫。
+2. submit_confirmation 重复点击同一票据时，不再累积重复“确认票据已记录”消息。
+3. submit_self_iteration_confirmation 重复确认同一候选时，不再累积重复“自我迭代候选已记录”消息。
+4. SSE Runtime Client 中确认请求、HookBus 阻断、Runtime 未到达、自我迭代未到达等提示全部接入去重守卫。
+5. MockRuntimeClient.refresh_snapshot 不再直接覆盖现有 snapshot 的 chat_messages；F5 刷新会保留已累积聊天记录并去重合并。
+6. Windows .bat/.cmd/.ps1 入口仍保持 CRLF；Python 源码保持 LF。
+
+推荐启动顺序：
+- Windows 中文入口：启动临渊者桌面端_L6708.bat
+- 英文入口：START_DESKTOP_L6708.bat
+- 自检入口：一键自检_L6708.bat 或 SELF_CHECK_L6708.bat
+
+新增验证：
+- scripts/desktop_chat_transcript_dedupe_l6708.py
+- reports/desktop_chat_transcript_dedupe_l6708.log
+
+边界：本次仍只修桌面端前端投影/本地桥交互体验，不改 Runtime 主链、不改 Planner、不改工具执行逻辑。

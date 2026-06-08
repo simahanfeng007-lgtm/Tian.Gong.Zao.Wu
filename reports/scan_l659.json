@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-06-07T10:10:23",
+  "checked_at": "2026-06-08T05:02:26",
   "secret_scan": {
     "ok": true,
     "hit_count": 0,
@@ -30,7 +30,7 @@
       },
       {
         "file": "frontend/linyuanzhe_frontend/contracts/provider_settings.py",
-        "line": 54,
+        "line": 209,
         "pattern": "api_key_equals_literal",
         "match": "<redacted>"
       },

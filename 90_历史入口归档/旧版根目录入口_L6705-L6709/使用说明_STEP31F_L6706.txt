@@ -1,0 +1,23 @@
+临渊者桌面端 FE01 STEP31F / L6.70.6 使用说明
+
+1. 推荐默认启动
+   - 启动临渊者桌面端_L6706.bat
+   - 或 START_DESKTOP_L6706.bat
+   - 默认 backend-mode=auto：未配置模型时走本地演示桥；保存 Key/Base URL 后自动切换到 provider。
+
+2. 强制真实模型启动
+   - 启动临渊者桌面端_真实模型_L6706.bat
+   - 或 START_DESKTOP_PROVIDER_L6706.bat
+
+3. 强制演示模式启动
+   - 启动临渊者桌面端_演示Mock_L6706.bat
+   - 或 START_DESKTOP_MOCK_L6706.bat
+
+4. 自检
+   - 一键自检_L6706.bat
+   - 或 SELF_CHECK_L6706.bat
+
+5. 本轮重点
+   - 已做真实 Tk 窗口的人类视觉/点击体感审计。
+   - 逐页打开：聊天、执行、任务、观测、文件、工作区、连接器、记忆、自我迭代、四路径、安装、设置、Hooks。
+   - 验证聊天流式、滚动钉底、主题切换、文件上传、写入目录授权、MCP 注册、自检、Key 保存与自动切换 provider。

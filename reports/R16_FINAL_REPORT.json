@@ -1,0 +1,36 @@
+{
+  "stage": "L6.70.2_R16_未来ToolSkill统一资产契约",
+  "status": "PASS",
+  "baseline": "L6.70.2_R15_Runtime工具注册表Skill与LLM实操对齐_20260608.zip",
+  "tool_count": 130,
+  "new_tools": [
+    "learning_asset_contract_guide",
+    "learning_asset_contract_normalize",
+    "learning_asset_contract_validate"
+  ],
+  "new_skill": "skill.learning_asset_contract_workflow",
+  "new_schema": "tiangong.l6702.r16.learning_asset_contract.v1",
+  "validation": {
+    "compileall": "PASS",
+    "pytest": "12 passed",
+    "learning_asset_contract_smoke": "PASS",
+    "runtime_tool_alignment_smoke": "PASS, 130/130 usage cards",
+    "codex_runtime_smoke": "PASS",
+    "v1_clean_import_smoke": "PASS",
+    "frontend_codex_bridge_smoke": "PASS",
+    "cli_asset_contract_drill": "PASS",
+    "no_pollution_scan": "PASS"
+  },
+  "boundary": {
+    "writes_skill_registry": false,
+    "writes_tool_code": false,
+    "registers_generated_tool": false,
+    "activates_generated_skill": false,
+    "imports_v1": false,
+    "copies_v1_source": false,
+    "reuses_v1_registry_executor_provider_self_iteration": false,
+    "monkey_patch": false,
+    "background_loop": false
+  },
+  "next_step": "把该统一契约接入未来真实 Tool/Skill 生产沙箱与前端可视化状态栏。"
+}

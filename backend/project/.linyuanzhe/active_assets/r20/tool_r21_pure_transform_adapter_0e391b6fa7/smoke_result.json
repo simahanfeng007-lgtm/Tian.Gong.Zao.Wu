@@ -1,0 +1,31 @@
+{
+  "status": "pass",
+  "template_id": "pure_transform",
+  "result": {
+    "schema": "tiangong.l6702.r21.learning_asset_adapter_template.v1",
+    "generated_at": 1780892161.6035237,
+    "status": "pass",
+    "smoke_count": 1,
+    "smoke_results": [
+      {
+        "adapter_template_id": "pure_transform",
+        "ok": true,
+        "status": "ok",
+        "output_summary": "简单统计完成。",
+        "data_keys": [
+          "arguments",
+          "count",
+          "max",
+          "mean",
+          "min",
+          "sum"
+        ]
+      }
+    ],
+    "issue_count": 0,
+    "issues": [],
+    "next_action_hint": {
+      "next_tool": "learning_asset_adapter_drill"
+    }
+  }
+}

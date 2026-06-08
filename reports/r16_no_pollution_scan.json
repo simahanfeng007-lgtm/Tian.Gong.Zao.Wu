@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "scan_kind": "ast_import_and_affirmative_pollution_scan",
+  "issues": [],
+  "assertions": {
+    "no_python_import_v1": true,
+    "no_affirmative_v1_registry_executor_provider_reuse": true,
+    "guard_text_not_treated_as_pollution": true
+  }
+}

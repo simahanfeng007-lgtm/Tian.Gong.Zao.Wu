@@ -1,0 +1,23 @@
+临渊者 FE01 STEP31M / L6.71.3 Markdown 渲染增强修复报告
+
+本轮目标：
+- 修复纯文本聊天体验，增强 AI 对话可读性。
+- 在不改 Runtime 主链、不裸调 Provider SDK、不执行工具、不写记忆的前提下，为 Tk Text 聊天区增加基础 Markdown 展示。
+
+本轮变化：
+1. 聊天区支持基础 Markdown：标题、加粗、列表、引用、分割线、代码块、行内代码、链接识别。
+2. ChatMessage 正文改用 safe_chat_text 清洗，保留换行结构，同时继续脱敏 API Key、token、本地路径。
+3. Streaming DeltaMerger / VirtualTranscript 改为保留换行，避免流式代码块和列表被压成一行。
+4. 聊天渲染仍沿用 STEP31L 的增量渲染路径，不做整屏 delete/rebuild，避免发送后跳顶闪屏。
+5. Mock 示例消息加入 Markdown 样例，便于部署后直接观察渲染效果。
+
+新增验证：
+- scripts/desktop_markdown_render_acceptance_l6713.py
+- reports/step31m_markdown_acceptance.json
+
+边界：
+- 前端未直接调用工具。
+- 前端未裸调 Provider SDK。
+- 前端未写记忆。
+- 前端未绕过 Runtime。
+- 链接只做识别高亮，不自动打开外部浏览器。

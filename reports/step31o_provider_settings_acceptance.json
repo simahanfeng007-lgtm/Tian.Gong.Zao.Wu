@@ -1,0 +1,60 @@
+{
+  "schema": "tiangong.fe01.step31o.provider_settings_acceptance.v1",
+  "ok": true,
+  "checks": {
+    "missing_projection_detects_both_fields": true,
+    "ready_projection_detected": true,
+    "forced_mock_projection_detected": true,
+    "template_contains_placeholders": true,
+    "template_omits_raw_key": true,
+    "save_clears_raw_api_key": true,
+    "save_clears_raw_base_url": true,
+    "mock_save_does_not_claim_provider_call": true,
+    "home_mode_mentions_provider_state": true
+  },
+  "readiness_samples": {
+    "missing": {
+      "readiness": "missing_credentials",
+      "label": "缺 Provider 配置",
+      "missing_fields": [
+        "base_url",
+        "api_key"
+      ],
+      "effective_backend_mode": "mock",
+      "requested_backend_mode": "auto",
+      "primary_action": "填写 Base URL 与 API Key 后保存",
+      "can_use_real_model": false,
+      "mock_mode": true,
+      "message": "缺少：Base URL、API Key；保存后本地桥接 auto 模式会切到 provider。",
+      "config_error_code": "",
+      "severity": "warning"
+    },
+    "ready": {
+      "readiness": "ready",
+      "label": "真实模型就绪",
+      "missing_fields": [],
+      "effective_backend_mode": "provider",
+      "requested_backend_mode": "auto",
+      "primary_action": "返回会话继续对话",
+      "can_use_real_model": true,
+      "mock_mode": false,
+      "message": "Provider 配置已由 Runtime / 本地桥接托管；发送一条短消息即可完成真实链路联调。",
+      "config_error_code": "",
+      "severity": "ok"
+    },
+    "forced": {
+      "readiness": "forced_mock",
+      "label": "启动参数锁定 Mock",
+      "missing_fields": [],
+      "effective_backend_mode": "mock",
+      "requested_backend_mode": "mock",
+      "primary_action": "用 auto/provider 模式重启桌面端",
+      "can_use_real_model": false,
+      "mock_mode": true,
+      "message": "当前启动参数为 mock，即使已保存配置也不会走真实模型。",
+      "config_error_code": "",
+      "severity": "warning"
+    }
+  },
+  "note": "Provider UX acceptance validates digest-only readiness, template safety, raw input clearing, and Mock boundary. It does not call Provider SDKs, tools, memory, audit, or official Runtime RC."
+}

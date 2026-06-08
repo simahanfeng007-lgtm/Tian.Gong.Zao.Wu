@@ -1,0 +1,2782 @@
+{
+  "ok": true,
+  "tool_count": 137,
+  "alignment": {
+    "status": "ok",
+    "summary": "Runtime tool alignment checked: 137 tools, 137 LLM usage cards, 0 blocking issue groups.",
+    "tool_count": 137,
+    "usage_card_count": 137,
+    "family_counts": {
+      "code_x": 80,
+      "core_runtime": 3,
+      "delivery": 2,
+      "engineering_quality": 4,
+      "l6_planning_shell": 12,
+      "learning_asset_candidate_sandbox": 4,
+      "learning_asset_contract": 3,
+      "learning_asset_sandbox_alignment": 3,
+      "p0_memory_audit_recovery_quality": 5,
+      "p0_provider_budget_skill_handoff": 5,
+      "runtime_alignment": 2,
+      "v1_clean_import": 11,
+      "workspace_io": 3
+    },
+    "risk_counts": {
+      "A1": 33,
+      "A1/A2": 1,
+      "A2": 81,
+      "A3": 21,
+      "A3/A4": 1
+    },
+    "issues": [],
+    "all_tools_have_usage_cards": true,
+    "all_registered_tools_classifier_allowed": true,
+    "llm_entrypoints": {
+      "global_alignment": "runtime-tools align",
+      "global_drill": "runtime-tools drill",
+      "raw_runtime_tool": "runtime-tools tool <tool_name> {json_args}",
+      "code_x": "code-x skill / code-x fix / code-x tool <tool_name> {json_args}",
+      "v1_clean_import": "v1-import guide / v1-import search / v1-import learning",
+      "learning_asset_contract": "asset-contract guide / asset-contract normalize / asset-contract validate / asset-contract drill",
+      "learning_asset_sandbox_alignment": "asset-sandbox guide / asset-sandbox align / asset-sandbox validate / asset-sandbox drill",
+      "learning_asset_candidate_sandbox": "asset-candidate-sandbox guide / build / validate / review / drill",
+      "core_runtime": "scan / diagnose / read / write / compileall / pytest / zip"
+    },
+    "skill_sources": [
+      "skill.code_x_execution_workflow",
+      "skill.v1_clean_import_workflow",
+      "skill.runtime_tool_alignment_workflow",
+      "skill.learning_asset_contract_workflow",
+      "skill.learning_asset_sandbox_alignment_workflow",
+      "skill.learning_asset_candidate_sandbox_workflow"
+    ],
+    "authority_model": {
+      "llm": "主脑、工程判断者、最终裁决者",
+      "runtime": "工具调度、预算、审计、回滚、状态回传",
+      "planner": "动作建议器，不得夺权",
+      "subagents": "证据型助手，不得写 workspace 或提交主 patch"
+    },
+    "no_pollution_assertions": {
+      "copied_v1_source": false,
+      "imported_v1_module": false,
+      "reused_v1_registry": false,
+      "reused_v1_executor": false,
+      "reused_v1_provider": false,
+      "monkey_patch": false,
+      "background_loop": false
+    },
+    "tool_usage_cards": [
+      {
+        "tool": "affected_area_detector",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 原生工具：affected_area_detector",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "before_after_hash",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：before_after_hash",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_abilitypackage",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：build_abilitypackage",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_candidate_registry_manifest",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：build_candidate_registry_manifest",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_delivery_standardization",
+        "family": "l6_planning_shell",
+        "risk": "A2",
+        "description": "生成 L6.26 标准化交付证据：ChangeSet/TestEvidence/Manifest/Integrity/Todo，不打包不写文件不改内核。",
+        "when_to_use": "L6 外壳规划、候选入队、治理/恢复/Provider/交付标准化等分析型任务使用；默认不执行副作用。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_execution_exoskeleton",
+        "family": "l6_planning_shell",
+        "risk": "A2",
+        "description": "生成 L6.23 LLM 外骨骼执行提示与最小 Tool 候选票据，不注册不生产。",
+        "when_to_use": "L6 外壳规划、候选入队、治理/恢复/Provider/交付标准化等分析型任务使用；默认不执行副作用。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_full_bundle",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：build_full_bundle",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_governance_execution",
+        "family": "l6_planning_shell",
+        "risk": "A2",
+        "description": "生成 L6.30 治理执行力化报告：A0-A4 草案/分析/smoke/续接快车道，A5 硬边界，发布/注册/激活护栏；不改策略不执行不改内核。",
+        "when_to_use": "L6 外壳规划、候选入队、治理/恢复/Provider/交付标准化等分析型任务使用；默认不执行副作用。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_hooks_package",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：build_hooks_package",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_l6_38_budget_snapshot",
+        "family": "p0_provider_budget_skill_handoff",
+        "risk": "A2",
+        "description": "生成 L6.38 StepBudgetLedger/ChainBudgetLease/TimeoutBudget/FailureBudget/BudgetSnapshot，不直接改预算。",
+        "when_to_use": "P0 系统接入、状态摘要、票据、证据或 Planner 上下文需要对齐时使用；只生成治理材料，不改内核。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_l6_38_handoff_integration",
+        "family": "p0_provider_budget_skill_handoff",
+        "risk": "A2",
+        "description": "生成 L6.38 SubtaskTicket/HandoffEnvelope/ParentChainCollectReport，禁止自动递归派生。",
+        "when_to_use": "P0 系统接入、状态摘要、票据、证据或 Planner 上下文需要对齐时使用；只生成治理材料，不改内核。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_l6_38_p0_integration",
+        "family": "p0_provider_budget_skill_handoff",
+        "risk": "A2",
+        "description": "生成 L6.38 Provider/Budget/Skill/Handoff 四系统接入总报告，统一进入 PlannerExecutionController。",
+        "when_to_use": "P0 系统接入、状态摘要、票据、证据或 Planner 上下文需要对齐时使用；只生成治理材料，不改内核。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_l6_38_provider_integration",
+        "family": "p0_provider_budget_skill_handoff",
+        "risk": "A2",
+        "description": "生成 L6.38 ProviderProfile/ProviderExecutionTicket/CredentialRef，Provider smoke 无许可时降级 sample replay。",
+        "when_to_use": "P0 系统接入、状态摘要、票据、证据或 Planner 上下文需要对齐时使用；只生成治理材料，不改内核。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_l6_38_skill_integration",
+        "family": "p0_provider_budget_skill_handoff",
+        "risk": "A2",
+        "description": "生成 L6.38 SkillCandidateRoute/SkillReviewTicket/SkillActivationIntent/SkillExecutionHint，不注册不激活。",
+        "when_to_use": "P0 系统接入、状态摘要、票据、证据或 Planner 上下文需要对齐时使用；只生成治理材料，不改内核。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_l6_39_audit_integration",
+        "family": "p0_memory_audit_recovery_quality",
+        "risk": "A2",
+        "description": "生成 L6.39 AuditEvidenceEnvelope，只读审计安全摘要，不删除不重写。",
+        "when_to_use": "P0 系统接入、状态摘要、票据、证据或 Planner 上下文需要对齐时使用；只生成治理材料，不改内核。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_l6_39_memory_integration",
+        "family": "p0_memory_audit_recovery_quality",
+        "risk": "A2",
+        "description": "生成 L6.39 MemoryRecallRoute，只读当前上下文安全摘要，不写长期记忆。",
+        "when_to_use": "P0 系统接入、状态摘要、票据、证据或 Planner 上下文需要对齐时使用；只生成治理材料，不改内核。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_l6_39_p0_integration",
+        "family": "p0_memory_audit_recovery_quality",
+        "risk": "A2",
+        "description": "生成 L6.39 Memory/Audit/Recovery/QualityGate 四系统接入二总报告，统一进入 PlannerExecutionController。",
+        "when_to_use": "P0 系统接入、状态摘要、票据、证据或 Planner 上下文需要对齐时使用；只生成治理材料，不改内核。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_l6_39_quality_gate_integration",
+        "family": "p0_memory_audit_recovery_quality",
+        "risk": "A2",
+        "description": "生成 L6.39 QualityGateEvidence，只引用质量门裁决，不自动放行发布。",
+        "when_to_use": "P0 系统接入、状态摘要、票据、证据或 Planner 上下文需要对齐时使用；只生成治理材料，不改内核。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_l6_39_recovery_integration",
+        "family": "p0_memory_audit_recovery_quality",
+        "risk": "A2",
+        "description": "生成 L6.39 RecoveryResumeTicket，只给恢复续接票据，不执行补丁不派生子智能体。",
+        "when_to_use": "P0 系统接入、状态摘要、票据、证据或 Planner 上下文需要对齐时使用；只生成治理材料，不改内核。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_learning_convergence",
+        "family": "l6_planning_shell",
+        "risk": "A2",
+        "description": "生成 L6.28 经验/Skill/Tool 执行合流：PlannerHintRoute/SkillDraftRoute/ToolCandidateRoute/ConsumptionCard，不写记忆不注册不生产。",
+        "when_to_use": "L6 外壳规划、候选入队、治理/恢复/Provider/交付标准化等分析型任务使用；默认不执行副作用。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_planner_context",
+        "family": "l6_planning_shell",
+        "risk": "A2",
+        "description": "生成 L6.31 统一 Planner 上下文：聚合 L6.24-L6.30 外壳输出为 UnifiedPlannerContext / ExecutionStepDraft / ResumeEnvelope，不执行不注册不改内核。",
+        "when_to_use": "L6 外壳规划、候选入队、治理/恢复/Provider/交付标准化等分析型任务使用；默认不执行副作用。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_project_repair_plan",
+        "family": "l6_planning_shell",
+        "risk": "A2",
+        "description": "生成 L6.25 项目雷达 + 工程修复 PatchPlan/RegressionHint/RollbackEvidence，不应用补丁不改内核。",
+        "when_to_use": "L6 外壳规划、候选入队、治理/恢复/Provider/交付标准化等分析型任务使用；默认不执行副作用。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_provider_adaptation",
+        "family": "l6_planning_shell",
+        "risk": "A2",
+        "description": "生成 L6.27 Provider 适配外壳：ProviderProfile/CapabilityMatrix/API Surface/GovernanceMount，不触网不读密钥不注册正式适配器。",
+        "when_to_use": "L6 外壳规划、候选入队、治理/恢复/Provider/交付标准化等分析型任务使用；默认不执行副作用。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_readonly_analysis_demotion",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：build_readonly_analysis_demotion",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_recovery_coordination",
+        "family": "l6_planning_shell",
+        "risk": "A2",
+        "description": "生成 L6.29 自修复/多智能体/预算联动恢复协调：FailureSignal/RepairCandidate/HandoffDigest/BudgetUpdate/ResumePlan，不派生不执行不改预算不改内核。",
+        "when_to_use": "L6 外壳规划、候选入队、治理/恢复/Provider/交付标准化等分析型任务使用；默认不执行副作用。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_runner",
+        "family": "code_x",
+        "risk": "A3",
+        "description": "Code-X 原生工具：build_runner",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_shell_system_mount",
+        "family": "l6_planning_shell",
+        "risk": "A2",
+        "description": "生成 L6.24 十八系统 Runtime 外壳挂载报告，只读映射已装系统，不改内核。",
+        "when_to_use": "L6 外壳规划、候选入队、治理/恢复/Provider/交付标准化等分析型任务使用；默认不执行副作用。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_skill_workflow",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：build_skill_workflow",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_subagents_pack",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：build_subagents_pack",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "build_toolpackage",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：build_toolpackage",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "call_graph",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 工程感知：建立调用图。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "workspace_root/repo_root": "workspace 根目录，默认 ."
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "changed_files_index",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 原生工具：changed_files_index",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "code_owner_detector",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 工程感知：检测代码归属/规则线索。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "code_research_subagent",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：code_research_subagent",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "code_x_package_workflow",
+        "family": "code_x",
+        "risk": "A3",
+        "description": "Code-X 一步交付：delivery_candidate_packager→zip_delivery_packager。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "include/source/output": "待打包路径与输出 zip 路径"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "code_x_runtime_status",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X Runtime 注册状态与可用工具清单。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "code_x_skill_guide",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X Skill：向 LLM 暴露代码执行外骨骼使用方法与链路 recipes。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "code_x_smoke_workflow",
+        "family": "code_x",
+        "risk": "A3",
+        "description": "Code-X 最小可用链路 smoke：repo_map→环境探测→静态检查→fallback/handoff。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "code_x_v1_import_audit",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 审计：报告 v1 代码链语义导入与其他 v1 工具未导入边界。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "code_x_world_class_readiness_check",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 审计：确认世界级代码代理能力结构与实证缺口。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "command_capability_probe",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 原生工具：command_capability_probe",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "config_detector",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 工程感知：检测配置文件。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "conflict_detector",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：conflict_detector",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "edit_units": "LLM 审阅后的编辑单元；写入前必须先 snapshot"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "context_compactor",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 原生工具：context_compactor",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "conversation_history_search",
+        "family": "v1_clean_import",
+        "risk": "A1",
+        "description": "只读搜索本地会话/Runtime 留痕摘要。",
+        "when_to_use": "非代码材料、会话/作业/经验搜索、文档提取、学习精通或 Tool/Skill 草案任务使用；只读或草案，不混入 Code-X。",
+        "required_inputs": {
+          "query": "搜索关键词、行为描述或历史任务摘要"
+        },
+        "next_action": "v1_clean_import_guide 提供下一步；材料命中后进入 document_text_extract/learning_master_plan。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "create_release_bundle",
+        "family": "delivery",
+        "risk": "A3",
+        "description": "生成 L6.19 标准 Release Bundle 与交付 Manifest。",
+        "when_to_use": "阶段包、发布包、交付 zip 或交付 Manifest 需要生成时使用。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "生成 handoff_digest 并记录 hash。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "create_zip_package",
+        "family": "delivery",
+        "risk": "A3",
+        "description": "在工作区内生成交付 ZIP 与 SHA256。",
+        "when_to_use": "阶段包、发布包、交付 zip 或交付 Manifest 需要生成时使用。",
+        "required_inputs": {
+          "include/source/output": "待打包路径与输出 zip 路径"
+        },
+        "next_action": "生成 handoff_digest 并记录 hash。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "decision_memory",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：decision_memory",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "delivery_candidate_packager",
+        "family": "code_x",
+        "risk": "A3",
+        "description": "Code-X 交付：生成候选交付目录。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "dependency_error_analyzer",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：dependency_error_analyzer",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "dependency_graph",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 工程感知：建立依赖图。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "workspace_root/repo_root": "workspace 根目录，默认 ."
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "diagnose_project",
+        "family": "engineering_quality",
+        "risk": "A1/A2",
+        "description": "基于项目雷达和质量检查摘要生成工程诊断。",
+        "when_to_use": "项目扫描、诊断、质量门、compileall/pytest 质量检查时使用。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "失败进入 diagnose_project/failure attribution；通过进入交付或 handoff。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "document_text_extract",
+        "family": "v1_clean_import",
+        "risk": "A1",
+        "description": "只读提取 txt/md/json/jsonl/csv/docx/pdf 等文档文本。",
+        "when_to_use": "非代码材料、会话/作业/经验搜索、文档提取、学习精通或 Tool/Skill 草案任务使用；只读或草案，不混入 Code-X。",
+        "required_inputs": {
+          "path": "workspace 内相对文件路径"
+        },
+        "next_action": "v1_clean_import_guide 提供下一步；材料命中后进入 document_text_extract/learning_master_plan。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "edit_unit_planner",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：edit_unit_planner",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "entrypoint_detector",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 工程感知：检测入口文件。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "environment_probe",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 原生工具：environment_probe",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "evaluate_quality_gate",
+        "family": "engineering_quality",
+        "risk": "A2",
+        "description": "根据质量检查与工程诊断生成 L6.18 质量门裁决。",
+        "when_to_use": "项目扫描、诊断、质量门、compileall/pytest 质量检查时使用。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "失败进入 diagnose_project/failure attribution；通过进入交付或 handoff。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "experience_mentor_search",
+        "family": "v1_clean_import",
+        "risk": "A1",
+        "description": "只读搜索 SKILL.md/经验材料/历史留痕。",
+        "when_to_use": "非代码材料、会话/作业/经验搜索、文档提取、学习精通或 Tool/Skill 草案任务使用；只读或草案，不混入 Code-X。",
+        "required_inputs": {
+          "query": "搜索关键词、行为描述或历史任务摘要"
+        },
+        "next_action": "v1_clean_import_guide 提供下一步；材料命中后进入 document_text_extract/learning_master_plan。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "failure_attribution_analyzer",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：failure_attribution_analyzer",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "log_text": "失败日志、异常栈或测试输出"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "fallback_test_strategy",
+        "family": "code_x",
+        "risk": "A3",
+        "description": "Code-X 原生工具：fallback_test_strategy",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "file_to_symbol_localizer",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 原生工具：file_to_symbol_localizer",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "file_tree_scan",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 工程感知：扫描文件树。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "workspace_root/repo_root": "workspace 根目录，默认 ."
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "flaky_test_detector",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：flaky_test_detector",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "frontend_visual_subagent",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：frontend_visual_subagent",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "generate_linyuanzhe_md",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：generate_linyuanzhe_md",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "git_worktree_mode",
+        "family": "code_x",
+        "risk": "A3",
+        "description": "Code-X 原生工具：git_worktree_mode",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "graph_code_search",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 原生工具：graph_code_search",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "query": "搜索关键词、行为描述或历史任务摘要"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "handoff_digest",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：handoff_digest",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "import_error_analyzer",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：import_error_analyzer",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "log_text": "失败日志、异常栈或测试输出"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "issue_to_file_localizer",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 原生工具：issue_to_file_localizer",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "issue_text/issue": "用户问题、需求或报错日志"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "learning_asset_candidate_sandbox_build",
+        "family": "learning_asset_candidate_sandbox",
+        "risk": "A3",
+        "description": "把已通过 R16/R17 的 Tool/Skill 契约落盘为隔离候选包，并生成静态扫描、smoke、回滚与审阅证据。",
+        "when_to_use": "R16/R17 通过后，把 Tool/Skill 候选真实落盘为隔离候选包，做静态扫描、smoke、回滚证据和注册审阅；不注册不激活。",
+        "required_inputs": {
+          "notes/max_items": "可选安全备注和候选包数量；build 默认读取当前 R16 契约与 R17 沙箱映射"
+        },
+        "next_action": "learning_asset_candidate_sandbox_validate",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "learning_asset_candidate_sandbox_guide",
+        "family": "learning_asset_candidate_sandbox",
+        "risk": "A2",
+        "description": "说明 R18 Tool/Skill 候选包生产沙箱的边界、链路和命令。",
+        "when_to_use": "R16/R17 通过后，把 Tool/Skill 候选真实落盘为隔离候选包，做静态扫描、smoke、回滚证据和注册审阅；不注册不激活。",
+        "required_inputs": {
+          "notes/max_items": "可选安全备注和候选包数量；build 默认读取当前 R16 契约与 R17 沙箱映射"
+        },
+        "next_action": "learning_asset_candidate_sandbox_build",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "learning_asset_candidate_sandbox_review",
+        "family": "learning_asset_candidate_sandbox",
+        "risk": "A2",
+        "description": "生成 R18 候选包注册审阅结论，仅供 LLM 决定后续质量门/发布门，不自动注册。",
+        "when_to_use": "R16/R17 通过后，把 Tool/Skill 候选真实落盘为隔离候选包，做静态扫描、smoke、回滚证据和注册审阅；不注册不激活。",
+        "required_inputs": {
+          "notes/max_items": "可选安全备注和候选包数量；build 默认读取当前 R16 契约与 R17 沙箱映射"
+        },
+        "next_action": "quality_gate / release_gate / runtime registration review / handoff_digest",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "learning_asset_candidate_sandbox_validate",
+        "family": "learning_asset_candidate_sandbox",
+        "risk": "A2",
+        "description": "复核 R18 候选包 manifest、静态扫描、smoke 与边界断言；不注册不激活。",
+        "when_to_use": "R16/R17 通过后，把 Tool/Skill 候选真实落盘为隔离候选包，做静态扫描、smoke、回滚证据和注册审阅；不注册不激活。",
+        "required_inputs": {
+          "notes/max_items": "可选安全备注和候选包数量；build 默认读取当前 R16 契约与 R17 沙箱映射"
+        },
+        "next_action": "learning_asset_candidate_sandbox_review",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "learning_asset_contract_guide",
+        "family": "learning_asset_contract",
+        "risk": "A2",
+        "description": "返回未来自主学习与经验总结产生 Tool/Skill 的统一资产契约格式。",
+        "when_to_use": "统一未来自主学习、经验沉淀、Tool 生产请求和 Skill 草案的资产格式时使用；只做契约指南、归一化和校验，不生产不注册。",
+        "required_inputs": {
+          "notes/contract": "notes 用于归一化备注；contract/payload 用于校验外部候选契约；guide 无必填参数"
+        },
+        "next_action": "learning_asset_contract_normalize",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "learning_asset_contract_normalize",
+        "family": "learning_asset_contract",
+        "risk": "A2",
+        "description": "把经验候选、Skill 草案、Tool 请求归一为 R16 统一资产契约。",
+        "when_to_use": "统一未来自主学习、经验沉淀、Tool 生产请求和 Skill 草案的资产格式时使用；只做契约指南、归一化和校验，不生产不注册。",
+        "required_inputs": {
+          "notes/contract": "notes 用于归一化备注；contract/payload 用于校验外部候选契约；guide 无必填参数"
+        },
+        "next_action": "learning_asset_contract_validate",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "learning_asset_contract_validate",
+        "family": "learning_asset_contract",
+        "risk": "A2",
+        "description": "校验 R16 统一资产契约字段、usage card、chain recipe、风险和 no-pollution 边界。",
+        "when_to_use": "统一未来自主学习、经验沉淀、Tool 生产请求和 Skill 草案的资产格式时使用；只做契约指南、归一化和校验，不生产不注册。",
+        "required_inputs": {
+          "notes/contract": "notes 用于归一化备注；contract/payload 用于校验外部候选契约；guide 无必填参数"
+        },
+        "next_action": "learning_asset_sandbox_align for tool assets / quality_gate for skill-only assets",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "learning_asset_sandbox_align",
+        "family": "learning_asset_sandbox_alignment",
+        "risk": "A2",
+        "description": "把 R16 Tool 类统一资产契约映射到 L6.22 ToolProductionRequest / SandboxValidationPlan。",
+        "when_to_use": "把 R16 统一资产契约中的 Tool 候选对齐到已存在 L6.22 ToolProductionRequest/SandboxValidationPlan 沙箱前置链时使用；不新建沙箱、不生产不注册。",
+        "required_inputs": {
+          "notes": "可选安全备注；align/validate 默认读取当前 R16 契约报告与 L6.22 Tool 请求队列"
+        },
+        "next_action": "learning_asset_sandbox_validate",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "learning_asset_sandbox_guide",
+        "family": "learning_asset_sandbox_alignment",
+        "risk": "A2",
+        "description": "说明 R16 统一资产契约应如何接入已存在的 L6.22 Tool 生产请求沙箱化与验证前置链。",
+        "when_to_use": "把 R16 统一资产契约中的 Tool 候选对齐到已存在 L6.22 ToolProductionRequest/SandboxValidationPlan 沙箱前置链时使用；不新建沙箱、不生产不注册。",
+        "required_inputs": {
+          "notes": "可选安全备注；align/validate 默认读取当前 R16 契约报告与 L6.22 Tool 请求队列"
+        },
+        "next_action": "learning_asset_sandbox_align",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "learning_asset_sandbox_validate",
+        "family": "learning_asset_sandbox_alignment",
+        "risk": "A2",
+        "description": "复核 R16 Tool 类统一资产契约是否已绑定 L6.22 沙箱前置计划；只校验不生产不注册。",
+        "when_to_use": "把 R16 统一资产契约中的 Tool 候选对齐到已存在 L6.22 ToolProductionRequest/SandboxValidationPlan 沙箱前置链时使用；不新建沙箱、不生产不注册。",
+        "required_inputs": {
+          "notes": "可选安全备注；align/validate 默认读取当前 R16 契约报告与 L6.22 Tool 请求队列"
+        },
+        "next_action": "learning_asset_candidate_sandbox_build",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "learning_master_plan",
+        "family": "v1_clean_import",
+        "risk": "A2",
+        "description": "学习精通规划：L1-L5 深度、可信度、实践转化与资产化候选。",
+        "when_to_use": "非代码材料、会话/作业/经验搜索、文档提取、学习精通或 Tool/Skill 草案任务使用；只读或草案，不混入 Code-X。",
+        "required_inputs": {
+          "goal": "学习目标或 Tool/Skill 生产目标"
+        },
+        "next_action": "v1_clean_import_guide 提供下一步；材料命中后进入 document_text_extract/learning_master_plan。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "lint_runner",
+        "family": "code_x",
+        "risk": "A3",
+        "description": "Code-X 原生工具：lint_runner",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "list_dir",
+        "family": "workspace_io",
+        "risk": "A1",
+        "description": "列出工作区内目录。",
+        "when_to_use": "用户明确要求列目录、读文件或写 workspace 文件时使用；写入前由 Runtime 审计。",
+        "required_inputs": {
+          "path": "workspace 内相对路径，默认 ."
+        },
+        "next_action": "读后进入分析/搜索；写后必须进入质量检查或 handoff。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "log_compactor",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 原生工具：log_compactor",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "migration_subagent",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：migration_subagent",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "model_chat",
+        "family": "core_runtime",
+        "risk": "A2",
+        "description": "通过 Runtime 审计链执行模型聊天调用。",
+        "when_to_use": "通过 Runtime 审计链执行模型聊天调用。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "由 LLM 根据 output_summary 与 next_action_hint 裁决。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "next_patch_generator",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：next_patch_generator",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "npm_test_runner",
+        "family": "code_x",
+        "risk": "A3",
+        "description": "Code-X 原生工具：npm_test_runner",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "patch_manifest",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：patch_manifest",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "patch_plan_generator",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：patch_plan_generator",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "issue_text/issue": "用户问题、需求或报错日志"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "project_rules_reader",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 原生工具：project_rules_reader",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "pytest_runner",
+        "family": "code_x",
+        "risk": "A3",
+        "description": "Code-X 验证：运行 pytest。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "python_quality_runner",
+        "family": "code_x",
+        "risk": "A3",
+        "description": "Code-X 验证：运行 Python compileall/基础质量检查。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "command/target": "compileall 或 pytest；Code-X 质量 runner 可默认 workspace"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "queue_skill_candidates",
+        "family": "l6_planning_shell",
+        "risk": "A2",
+        "description": "生成 L6.21 Skill 草案版本与审阅队列，不注册不激活。",
+        "when_to_use": "L6 外壳规划、候选入队、治理/恢复/Provider/交付标准化等分析型任务使用；默认不执行副作用。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "queue_tool_production_requests",
+        "family": "l6_planning_shell",
+        "risk": "A2",
+        "description": "生成 L6.22 Tool 生产请求与沙箱验证前置队列，不生产不注册不释放。",
+        "when_to_use": "L6 外壳规划、候选入队、治理/恢复/Provider/交付标准化等分析型任务使用；默认不执行副作用。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "read_file",
+        "family": "workspace_io",
+        "risk": "A1",
+        "description": "读取工作区内普通文本文件。",
+        "when_to_use": "用户明确要求列目录、读文件或写 workspace 文件时使用；写入前由 Runtime 审计。",
+        "required_inputs": {
+          "path": "workspace 内相对路径，默认 ."
+        },
+        "next_action": "读后进入分析/搜索；写后必须进入质量检查或 handoff。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "refactor_review_subagent",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：refactor_review_subagent",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "repair_loop_planner",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：repair_loop_planner",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "repo_map",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 工程感知：生成压缩仓库地图。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "workspace_root/repo_root": "workspace 根目录，默认 ."
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "restore_checkpoint",
+        "family": "code_x",
+        "risk": "A3",
+        "description": "Code-X 回滚：从快照恢复 workspace。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "snapshot_id/manifest": "workspace_snapshot 返回的快照标识或路径"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "return_analysis",
+        "family": "core_runtime",
+        "risk": "A2",
+        "description": "审计型虚拟分析返回；不执行、不写文件。",
+        "when_to_use": "审计型虚拟分析返回；不执行、不写文件。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "由 LLM 根据 output_summary 与 next_action_hint 裁决。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "return_code",
+        "family": "core_runtime",
+        "risk": "A2",
+        "description": "审计型虚拟代码返回；不执行、不写文件。",
+        "when_to_use": "审计型虚拟代码返回；不执行、不写文件。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "由 LLM 根据 output_summary 与 next_action_hint 裁决。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "review_subagent",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：review_subagent",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "rollback_plan",
+        "family": "code_x",
+        "risk": "A3",
+        "description": "Code-X 原生工具：rollback_plan",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "run_python_quality_check",
+        "family": "engineering_quality",
+        "risk": "A3",
+        "description": "执行 allowlist 内 Python 质量检查。",
+        "when_to_use": "项目扫描、诊断、质量门、compileall/pytest 质量检查时使用。",
+        "required_inputs": {
+          "command/target": "compileall 或 pytest；Code-X 质量 runner 可默认 workspace"
+        },
+        "next_action": "失败进入 diagnose_project/failure attribution；通过进入交付或 handoff。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "runtime_llm_operational_drill",
+        "family": "runtime_alignment",
+        "risk": "A2",
+        "description": "模拟 LLM 从用户意图到 PlanBridge 到 Runtime 工具名的可用性演练。",
+        "when_to_use": "检查工具注册表、Skill/usage card/Planner 路由是否对齐，或做 LLM 路由实操演练时使用。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "handoff_digest 或阶段报告",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "runtime_tool_alignment_check",
+        "family": "runtime_alignment",
+        "risk": "A2",
+        "description": "全局 Runtime 工具注册表、风险、Skill 使用卡和 LLM 入口对齐检查。",
+        "when_to_use": "检查工具注册表、Skill/usage card/Planner 路由是否对齐，或做 LLM 路由实操演练时使用。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "runtime_llm_operational_drill",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "safe_command_runner",
+        "family": "code_x",
+        "risk": "A3",
+        "description": "Code-X 验证：运行 allowlist/受控本地命令。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "scan_project",
+        "family": "engineering_quality",
+        "risk": "A1",
+        "description": "只读扫描工作区项目结构并生成安全索引。",
+        "when_to_use": "项目扫描、诊断、质量门、compileall/pytest 质量检查时使用。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "失败进入 diagnose_project/failure attribution；通过进入交付或 handoff。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "security_review_subagent",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：security_review_subagent",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "semantic_code_search",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 原生工具：semantic_code_search",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "query": "搜索关键词、行为描述或历史任务摘要"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "stack_detector",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 工程感知：检测技术栈。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "workspace_root/repo_root": "workspace 根目录，默认 ."
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "static_analyzer",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 原生工具：static_analyzer",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "subagent_pack_manifest",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：subagent_pack_manifest",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "symbol_index",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 工程感知：建立符号索引。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "workspace_root/repo_root": "workspace 根目录，默认 ."
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "symbol_to_line_localizer",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 原生工具：symbol_to_line_localizer",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "syntax_error_analyzer",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：syntax_error_analyzer",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "log_text": "失败日志、异常栈或测试输出"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "synthesize_experience_candidates",
+        "family": "l6_planning_shell",
+        "risk": "A2",
+        "description": "生成 L6.20 经验沉淀与 Skill/Tool 候选，不注册不生产。",
+        "when_to_use": "L6 外壳规划、候选入队、治理/恢复/Provider/交付标准化等分析型任务使用；默认不执行副作用。",
+        "required_inputs": {
+          "notes": "用户目标、当前阶段、证据摘要；默认只生成报告/票据/Hint"
+        },
+        "next_action": "build_planner_context 或对应 P0 汇总工具。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "task_digest",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：task_digest",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "task_pattern_search",
+        "family": "v1_clean_import",
+        "risk": "A1",
+        "description": "只读搜索历史任务模式，辅助‘先抄再改’复用。",
+        "when_to_use": "非代码材料、会话/作业/经验搜索、文档提取、学习精通或 Tool/Skill 草案任务使用；只读或草案，不混入 Code-X。",
+        "required_inputs": {
+          "query": "搜索关键词、行为描述或历史任务摘要"
+        },
+        "next_action": "v1_clean_import_guide 提供下一步；材料命中后进入 document_text_extract/learning_master_plan。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "test_design_subagent",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：test_design_subagent",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "test_failure_analyzer",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：test_failure_analyzer",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "log_text": "失败日志、异常栈或测试输出"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "test_failure_trace_mapper",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 原生工具：test_failure_trace_mapper",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "test_map",
+        "family": "code_x",
+        "risk": "A1",
+        "description": "Code-X 工程感知：映射测试文件。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "workspace_root/repo_root": "workspace 根目录，默认 ."
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "tool_skill_blueprint",
+        "family": "v1_clean_import",
+        "risk": "A2",
+        "description": "Tool/Skill 生产标准草案：Manifest、SkillVersion、测试矩阵，不注册不执行。",
+        "when_to_use": "非代码材料、会话/作业/经验搜索、文档提取、学习精通或 Tool/Skill 草案任务使用；只读或草案，不混入 Code-X。",
+        "required_inputs": {
+          "goal": "学习目标或 Tool/Skill 生产目标"
+        },
+        "next_action": "v1_clean_import_guide 提供下一步；材料命中后进入 document_text_extract/learning_master_plan。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "typecheck_runner",
+        "family": "code_x",
+        "risk": "A3",
+        "description": "Code-X 原生工具：typecheck_runner",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "unified_diff_generator",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：unified_diff_generator",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "edit_units": "LLM 审阅后的编辑单元；写入前必须先 snapshot"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "v1_clean_import_audit",
+        "family": "v1_clean_import",
+        "risk": "A2",
+        "description": "v1 去重导入审计：报告哪些语义已去重、重建、暂缓。",
+        "when_to_use": "非代码材料、会话/作业/经验搜索、文档提取、学习精通或 Tool/Skill 草案任务使用；只读或草案，不混入 Code-X。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "v1_clean_import_guide 提供下一步；材料命中后进入 document_text_extract/learning_master_plan。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "v1_clean_import_guide",
+        "family": "v1_clean_import",
+        "risk": "A2",
+        "description": "v1 去重导入使用指南：给 LLM 的非 Code-X 工具使用卡。",
+        "when_to_use": "非代码材料、会话/作业/经验搜索、文档提取、学习精通或 Tool/Skill 草案任务使用；只读或草案，不混入 Code-X。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "v1_clean_import_guide 提供下一步；材料命中后进入 document_text_extract/learning_master_plan。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "v1_clean_import_status",
+        "family": "v1_clean_import",
+        "risk": "A2",
+        "description": "v1 去重导入状态：显示独立纯净导入层与命令。",
+        "when_to_use": "非代码材料、会话/作业/经验搜索、文档提取、学习精通或 Tool/Skill 草案任务使用；只读或草案，不混入 Code-X。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "v1_clean_import_guide 提供下一步；材料命中后进入 document_text_extract/learning_master_plan。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "validate_bundle",
+        "family": "code_x",
+        "risk": "A2",
+        "description": "Code-X 原生工具：validate_bundle",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "web_readability_extract",
+        "family": "v1_clean_import",
+        "risk": "A1",
+        "description": "对已提供 HTML/网页正文做可读性清洗；不联网抓取。",
+        "when_to_use": "非代码材料、会话/作业/经验搜索、文档提取、学习精通或 Tool/Skill 草案任务使用；只读或草案，不混入 Code-X。",
+        "required_inputs": {
+          "html_or_text": "用户已提供的 HTML 或正文；不联网抓取"
+        },
+        "next_action": "v1_clean_import_guide 提供下一步；材料命中后进入 document_text_extract/learning_master_plan。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "workspace_patch_applier",
+        "family": "code_x",
+        "risk": "A3",
+        "description": "Code-X Patch：在 workspace 内应用 edit_units，并输出 before/after evidence。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "edit_units": "LLM 审阅后的编辑单元；写入前必须先 snapshot"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "workspace_snapshot",
+        "family": "code_x",
+        "risk": "A3",
+        "description": "Code-X 回滚：创建 workspace 快照。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "arguments": "按工具描述提供结构化 JSON；不确定时先调用 runtime_tool_alignment_check 查看卡片。"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "workspace_text_search",
+        "family": "v1_clean_import",
+        "risk": "A1",
+        "description": "只读全文搜索 workspace 内文本/文档材料。",
+        "when_to_use": "非代码材料、会话/作业/经验搜索、文档提取、学习精通或 Tool/Skill 草案任务使用；只读或草案，不混入 Code-X。",
+        "required_inputs": {
+          "query": "搜索关键词、行为描述或历史任务摘要"
+        },
+        "next_action": "v1_clean_import_guide 提供下一步；材料命中后进入 document_text_extract/learning_master_plan。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "write_workspace_file",
+        "family": "workspace_io",
+        "risk": "A3/A4",
+        "description": "写入工作区文件，覆盖前自动备份。",
+        "when_to_use": "用户明确要求列目录、读文件或写 workspace 文件时使用；写入前由 Runtime 审计。",
+        "required_inputs": {
+          "path": "workspace 内相对路径",
+          "content": "写入内容"
+        },
+        "next_action": "读后进入分析/搜索；写后必须进入质量检查或 handoff。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      },
+      {
+        "tool": "zip_delivery_packager",
+        "family": "code_x",
+        "risk": "A3",
+        "description": "Code-X 交付：生成 ZIP 交付包。",
+        "when_to_use": "代码工程任务需要读库、定位、补丁、验证、二修、回滚或交付时使用；由 LLM 按 Code-X Skill 选择具体链路。",
+        "required_inputs": {
+          "include/source/output": "待打包路径与输出 zip 路径"
+        },
+        "next_action": "code_x_skill_guide 提供阶段下一步；失败后 failure_attribution_analyzer。",
+        "llm_policy": "LLM 是主脑和最终裁决者；Planner 只建议动作；工具只经 Runtime 审计链执行。"
+      }
+    ],
+    "risk_alignment_sample": [
+      {
+        "tool": "affected_area_detector",
+        "descriptor_risk": "A1",
+        "classifier_risk": "A1",
+        "aligned": true,
+        "reason": "Code-X 原生工具，风险等级 A1，受 Runtime 审计链约束。"
+      },
+      {
+        "tool": "before_after_hash",
+        "descriptor_risk": "A2",
+        "classifier_risk": "A2",
+        "aligned": true,
+        "reason": "Code-X 原生工具，风险等级 A2，受 Runtime 审计链约束。"
+      },
+      {
+        "tool": "build_abilitypackage",
+        "descriptor_risk": "A2",
+        "classifier_risk": "A2",
+        "aligned": true,
+        "reason": "Code-X 原生工具，风险等级 A2，受 Runtime 审计链约束。"
+      },
+      {
+        "tool": "build_candidate_registry_manifest",
+        "descriptor_risk": "A2",
+        "classifier_risk": "A2",
+        "aligned": true,
+        "reason": "Code-X 原生工具，风险等级 A2，受 Runtime 审计链约束。"
+      },
+      {
+        "tool": "build_delivery_standardization",
+        "descriptor_risk": "A2",
+        "classifier_risk": "A2",
+        "aligned": true,
+        "reason": "受治理 L6.26 交付链标准化，只生成 ChangeSet/TestEvidence/Manifest/Integrity/Todo 证据，不打包、不写文件、不改内核。"
+      },
+      {
+        "tool": "build_execution_exoskeleton",
+        "descriptor_risk": "A2",
+        "classifier_risk": "A2",
+        "aligned": true,
+        "reason": "受治理 L6.23 LLM 外骨骼压缩，只生成 PlannerHint 和最小 ToolCandidateTicket，不注册、不生产、不激活。"
+      },
+      {
+        "tool": "build_full_bundle",
+        "descriptor_risk": "A2",
+        "classifier_risk": "A2",
+        "aligned": true,
+        "reason": "Code-X 原生工具，风险等级 A2，受 Runtime 审计链约束。"
+      },
+      {
+        "tool": "build_governance_execution",
+        "descriptor_risk": "A2",
+        "classifier_risk": "A2",
+        "aligned": true,
+        "reason": "受治理 L6.30 治理执行力化，只生成 A0-A4 快车道、A5 硬边界、发布/注册/激活护栏和 PlannerGovernanceHint，不改 PermitGateway/ExecutionPolicy、不执行副作用、不改内核。"
+      },
+      {
+        "tool": "build_hooks_package",
+        "descriptor_risk": "A2",
+        "classifier_risk": "A2",
+        "aligned": true,
+        "reason": "Code-X 原生工具，风险等级 A2，受 Runtime 审计链约束。"
+      },
+      {
+        "tool": "build_l6_38_budget_snapshot",
+        "descriptor_risk": "A2",
+        "classifier_risk": "A2",
+        "aligned": true,
+        "reason": "受治理 L6.38 Budget 接入，只生成 StepBudgetLedger/ChainBudgetLease/TimeoutBudget/FailureBudget/BudgetSnapshot，不直接改预算，不默认阻断 A0-A4。"
+      },
+      {
+        "tool": "build_l6_38_handoff_integration",
+        "descriptor_risk": "A2",
+        "classifier_risk": "A2",
+        "aligned": true,
+        "reason": "受治理 L6.38 Handoff 接入，只生成 SubtaskTicket/HandoffEnvelope/ParentChainCollectReport，不自动递归派生，必须回流父链。"
+      },
+      {
+        "tool": "build_l6_38_p0_integration",
+        "descriptor_risk": "A2",
+        "classifier_risk": "A2",
+        "aligned": true,
+        "reason": "受治理 L6.38 P0 总报告，只汇总 Provider/Budget/Skill/Handoff 的 Hint/Ticket/Envelope/Evidence/Report，不新增 Runtime 不改内核。"
+      },
+      {
+        "tool": "build_l6_38_provider_integration",
+        "descriptor_risk": "A2",
+        "classifier_risk": "A2",
+        "aligned": true,
+        "reason": "受治理 L6.38 Provider 接入，只生成 ProviderProfile/ProviderExecutionTicket/CredentialRef；无许可时 sample replay，不触网、不读密钥、不裸调 SDK。"
+      },
+      {
+        "tool": "build_l6_38_skill_integration",
+        "descriptor_risk": "A2",
+        "classifier_risk": "A2",
+        "aligned": true,
+        "reason": "受治理 L6.38 Skill 接入，只生成 SkillCandidateRoute/SkillReviewTicket/SkillActivationIntent/SkillExecutionHint，不注册、不激活、不释放工具。"
+      },
+      {
+        "tool": "build_l6_39_audit_integration",
+        "descriptor_risk": "A2",
+        "classifier_risk": "A2",
+        "aligned": true,
+        "reason": "受治理 L6.39 Audit 接入，只生成 AuditEvidenceEnvelope 安全摘要证据，不删除、不重写、不伪造审计。"
+      },
+      {
+        "tool": "build_l6_39_memory_integration",
+        "descriptor_risk": "A2",
+        "classifier_risk": "A2",
+        "aligned": true,
+        "reason": "受治理 L6.39 Memory 接入，只生成 MemoryRecallRoute 安全摘要路由，不写长期记忆、不注入原始正文。"
+      },
+      {
+        "tool": "build_l6_39_p0_integration",
+        "descriptor_risk": "A2",
+        "classifier_risk": "A2",
+        "aligned": true,
+        "reason": "受治理 L6.39 P0 接入二总报告，只汇总 Memory/Audit/Recovery/QualityGate 的安全摘要/证据/票据/质量引用，不新增 Runtime 不改内核。"
+      },
+      {
+        "tool": "build_l6_39_quality_gate_integration",
+        "descriptor_risk": "A2",
+        "classifier_risk": "A2",
+        "aligned": true,
+        "reason": "受治理 L6.39 QualityGate 接入，只生成 QualityGateEvidence，不覆盖裁决、不自动放行发布。"
+      },
+      {
+        "tool": "build_l6_39_recovery_integration",
+        "descriptor_risk": "A2",
+        "classifier_risk": "A2",
+        "aligned": true,
+        "reason": "受治理 L6.39 Recovery 接入，只生成 RecoveryResumeTicket，不执行补丁、不派生子智能体、不改预算。"
+      },
+      {
+        "tool": "build_learning_convergence",
+        "descriptor_risk": "A2",
+        "classifier_risk": "A2",
+        "aligned": true,
+        "reason": "受治理 L6.28 经验/Skill/Tool 执行合流，只生成 PlannerHintRoute/SkillDraftRoute/ToolCandidateRoute/ConsumptionCard，不写记忆、不注册 Skill、不生产 Tool。"
+      }
+    ],
+    "next_action_hint": {
+      "next_tool": "runtime_llm_operational_drill",
+      "reason": "注册表和 Skill 卡片对齐后，模拟 LLM 从用户意图到 Planner 路由的真实选择链。",
+      "confidence": 0.92,
+      "llm_final_decision_required": true
+    }
+  },
+  "drill": {
+    "status": "ok",
+    "summary": "LLM operational route drill simulated 35 scenarios; empty_routes=0, missing_tools=0.",
+    "scenario_count": 35,
+    "empty_routes": [],
+    "missing_tool_routes": [],
+    "scenarios": [
+      {
+        "scenario": "runtime-tools align",
+        "plan_tools": [
+          "runtime_tool_alignment_check"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "runtime_tool_alignment_check",
+            "risk": "A2",
+            "reason": "受治理全局工具注册表/Skill 对齐检查，只读元数据，不执行目标工具，不改注册表。"
+          }
+        ]
+      },
+      {
+        "scenario": "runtime-tools drill",
+        "plan_tools": [
+          "runtime_llm_operational_drill"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "runtime_llm_operational_drill",
+            "risk": "A2",
+            "reason": "受治理 LLM 路由实操演练，只模拟意图到工具名链，不执行目标工具副作用。"
+          }
+        ]
+      },
+      {
+        "scenario": "runtime-tools tool return_analysis {\"analysis\":\"alignment smoke\"}",
+        "plan_tools": [
+          "return_analysis"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "return_analysis",
+            "risk": "A2",
+            "reason": "审计型虚拟返回，不执行代码、不写文件。"
+          }
+        ]
+      },
+      {
+        "scenario": "scan .",
+        "plan_tools": [
+          "scan_project"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "scan_project",
+            "risk": "A1",
+            "reason": "只读工作区操作。"
+          }
+        ]
+      },
+      {
+        "scenario": "diagnose .",
+        "plan_tools": [
+          "scan_project",
+          "diagnose_project"
+        ],
+        "plan_length": 2,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "scan_project",
+            "risk": "A1",
+            "reason": "只读工作区操作。"
+          },
+          {
+            "tool": "diagnose_project",
+            "risk": "A1",
+            "reason": "只读工作区操作。"
+          }
+        ]
+      },
+      {
+        "scenario": "compileall .",
+        "plan_tools": [
+          "run_python_quality_check"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "run_python_quality_check",
+            "risk": "A3",
+            "reason": "受控 Python 质量检查。"
+          }
+        ]
+      },
+      {
+        "scenario": "zip . dist/alignment_delivery.zip",
+        "plan_tools": [
+          "create_zip_package"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "create_zip_package",
+            "risk": "A3",
+            "reason": "受控交付打包。"
+          }
+        ]
+      },
+      {
+        "scenario": "code-x status",
+        "plan_tools": [
+          "code_x_runtime_status"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "code_x_runtime_status",
+            "risk": "A2",
+            "reason": "Code-X 原生工具，风险等级 A2，受 Runtime 审计链约束。"
+          }
+        ]
+      },
+      {
+        "scenario": "code-x skill bug_fix",
+        "plan_tools": [
+          "code_x_skill_guide"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "code_x_skill_guide",
+            "risk": "A2",
+            "reason": "Code-X 原生工具，风险等级 A2，受 Runtime 审计链约束。"
+          }
+        ]
+      },
+      {
+        "scenario": "code-x readiness",
+        "plan_tools": [
+          "code_x_world_class_readiness_check"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "code_x_world_class_readiness_check",
+            "risk": "A2",
+            "reason": "Code-X 原生工具，风险等级 A2，受 Runtime 审计链约束。"
+          }
+        ]
+      },
+      {
+        "scenario": "code-x v1-audit",
+        "plan_tools": [
+          "code_x_v1_import_audit"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "code_x_v1_import_audit",
+            "risk": "A2",
+            "reason": "Code-X 原生工具，风险等级 A2，受 Runtime 审计链约束。"
+          }
+        ]
+      },
+      {
+        "scenario": "code-x smoke .",
+        "plan_tools": [
+          "code_x_smoke_workflow"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "code_x_smoke_workflow",
+            "risk": "A3",
+            "reason": "Code-X 原生工具，风险等级 A3，受 Runtime 审计链约束。"
+          }
+        ]
+      },
+      {
+        "scenario": "code-x repo-map .",
+        "plan_tools": [
+          "repo_map"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "repo_map",
+            "risk": "A1",
+            "reason": "Code-X 原生工具，风险等级 A1，受 Runtime 审计链约束。"
+          }
+        ]
+      },
+      {
+        "scenario": "code-x locate import error",
+        "plan_tools": [
+          "issue_to_file_localizer"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "issue_to_file_localizer",
+            "risk": "A1",
+            "reason": "Code-X 原生工具，风险等级 A1，受 Runtime 审计链约束。"
+          }
+        ]
+      },
+      {
+        "scenario": "code-x fix add function failure",
+        "plan_tools": [
+          "code_x_skill_guide",
+          "project_rules_reader",
+          "repo_map",
+          "issue_to_file_localizer",
+          "workspace_snapshot",
+          "patch_plan_generator"
+        ],
+        "plan_length": 6,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "code_x_skill_guide",
+            "risk": "A2",
+            "reason": "Code-X 原生工具，风险等级 A2，受 Runtime 审计链约束。"
+          },
+          {
+            "tool": "project_rules_reader",
+            "risk": "A1",
+            "reason": "Code-X 原生工具，风险等级 A1，受 Runtime 审计链约束。"
+          },
+          {
+            "tool": "repo_map",
+            "risk": "A1",
+            "reason": "Code-X 原生工具，风险等级 A1，受 Runtime 审计链约束。"
+          },
+          {
+            "tool": "issue_to_file_localizer",
+            "risk": "A1",
+            "reason": "Code-X 原生工具，风险等级 A1，受 Runtime 审计链约束。"
+          },
+          {
+            "tool": "workspace_snapshot",
+            "risk": "A3",
+            "reason": "Code-X 原生工具，风险等级 A3，受 Runtime 审计链约束。"
+          },
+          {
+            "tool": "patch_plan_generator",
+            "risk": "A2",
+            "reason": "Code-X 原生工具，风险等级 A2，受 Runtime 审计链约束。"
+          }
+        ]
+      },
+      {
+        "scenario": "v1-import status",
+        "plan_tools": [
+          "v1_clean_import_status"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "v1_clean_import_status",
+            "risk": "A2",
+            "reason": "v1 非 Code-X 语义纯净重建工具，风险等级 A2，受 Runtime 审计链约束。"
+          }
+        ]
+      },
+      {
+        "scenario": "v1-import audit",
+        "plan_tools": [
+          "v1_clean_import_audit"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "v1_clean_import_audit",
+            "risk": "A2",
+            "reason": "v1 非 Code-X 语义纯净重建工具，风险等级 A2，受 Runtime 审计链约束。"
+          }
+        ]
+      },
+      {
+        "scenario": "v1-import guide all",
+        "plan_tools": [
+          "v1_clean_import_guide"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "v1_clean_import_guide",
+            "risk": "A2",
+            "reason": "v1 非 Code-X 语义纯净重建工具，风险等级 A2，受 Runtime 审计链约束。"
+          }
+        ]
+      },
+      {
+        "scenario": "v1-import search 学习精通",
+        "plan_tools": [
+          "workspace_text_search"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "workspace_text_search",
+            "risk": "A1",
+            "reason": "v1 非 Code-X 语义纯净重建工具，风险等级 A1，受 Runtime 审计链约束。"
+          }
+        ]
+      },
+      {
+        "scenario": "v1-import conversation 文档提取",
+        "plan_tools": [
+          "conversation_history_search"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "conversation_history_search",
+            "risk": "A1",
+            "reason": "v1 非 Code-X 语义纯净重建工具，风险等级 A1，受 Runtime 审计链约束。"
+          }
+        ]
+      },
+      {
+        "scenario": "v1-import task 文档提取",
+        "plan_tools": [
+          "task_pattern_search"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "task_pattern_search",
+            "risk": "A1",
+            "reason": "v1 非 Code-X 语义纯净重建工具，风险等级 A1，受 Runtime 审计链约束。"
+          }
+        ]
+      },
+      {
+        "scenario": "v1-import experience 文档",
+        "plan_tools": [
+          "experience_mentor_search"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "experience_mentor_search",
+            "risk": "A1",
+            "reason": "v1 非 Code-X 语义纯净重建工具，风险等级 A1，受 Runtime 审计链约束。"
+          }
+        ]
+      },
+      {
+        "scenario": "v1-import document docs/note.md",
+        "plan_tools": [
+          "document_text_extract"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "document_text_extract",
+            "risk": "A1",
+            "reason": "v1 非 Code-X 语义纯净重建工具，风险等级 A1，受 Runtime 审计链约束。"
+          }
+        ]
+      },
+      {
+        "scenario": "v1-import readability <html><body><h1>标题</h1><p>正文</p></body></html>",
+        "plan_tools": [
+          "web_readability_extract"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "web_readability_extract",
+            "risk": "A1",
+            "reason": "v1 非 Code-X 语义纯净重建工具，风险等级 A1，受 Runtime 审计链约束。"
+          }
+        ]
+      },
+      {
+        "scenario": "v1-import learning 学习一个 CLI 并沉淀为 Skill",
+        "plan_tools": [
+          "learning_master_plan"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "learning_master_plan",
+            "risk": "A2",
+            "reason": "v1 非 Code-X 语义纯净重建工具，风险等级 A2，受 Runtime 审计链约束。"
+          }
+        ]
+      },
+      {
+        "scenario": "v1-import tool-skill 生成一个只读文档摘要工具",
+        "plan_tools": [
+          "tool_skill_blueprint"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "tool_skill_blueprint",
+            "risk": "A2",
+            "reason": "v1 非 Code-X 语义纯净重建工具，风险等级 A2，受 Runtime 审计链约束。"
+          }
+        ]
+      },
+      {
+        "scenario": "asset-contract drill 未来所有自主学习总结经验生产 tool skill 格式统一",
+        "plan_tools": [
+          "synthesize_experience_candidates",
+          "queue_skill_candidates",
+          "queue_tool_production_requests",
+          "learning_asset_contract_normalize",
+          "learning_asset_contract_validate"
+        ],
+        "plan_length": 5,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "synthesize_experience_candidates",
+            "risk": "A2",
+            "reason": "受治理 L6.20 经验候选生成，不注册 Skill、不生产 Tool。"
+          },
+          {
+            "tool": "queue_skill_candidates",
+            "risk": "A2",
+            "reason": "受治理 L6.21 Skill 草案版本入队，不注册、不激活、不写 Skill 注册表。"
+          },
+          {
+            "tool": "queue_tool_production_requests",
+            "risk": "A2",
+            "reason": "受治理 L6.22 Tool 生产请求入队，只做沙箱验证前置，不生产、不注册、不释放工具句柄。"
+          },
+          {
+            "tool": "learning_asset_contract_normalize",
+            "risk": "A2",
+            "reason": "受治理 R16 未来资产契约归一化，只把候选 Skill/Tool 元数据转为统一格式，不注册不生产。"
+          },
+          {
+            "tool": "learning_asset_contract_validate",
+            "risk": "A2",
+            "reason": "受治理 R16 未来资产契约校验，只检查字段/usage card/chain recipe/no-pollution，不激活不写入。"
+          }
+        ]
+      },
+      {
+        "scenario": "asset-sandbox guide",
+        "plan_tools": [
+          "learning_asset_sandbox_guide"
+        ],
+        "plan_length": 1,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "learning_asset_sandbox_guide",
+            "risk": "A2",
+            "reason": "受治理 R17 沙箱对齐指南，只说明已存在 L6.22 Tool 生产请求沙箱前置链，不执行副作用。"
+          }
+        ]
+      },
+      {
+        "scenario": "asset-sandbox drill pytest missing tests",
+        "plan_tools": [
+          "learning_asset_sandbox_guide",
+          "synthesize_experience_candidates",
+          "queue_skill_candidates",
+          "queue_tool_production_requests",
+          "learning_asset_contract_normalize",
+          "learning_asset_contract_validate",
+          "learning_asset_sandbox_align",
+          "learning_asset_sandbox_validate"
+        ],
+        "plan_length": 8,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "learning_asset_sandbox_guide",
+            "risk": "A2",
+            "reason": "受治理 R17 沙箱对齐指南，只说明已存在 L6.22 Tool 生产请求沙箱前置链，不执行副作用。"
+          },
+          {
+            "tool": "synthesize_experience_candidates",
+            "risk": "A2",
+            "reason": "受治理 L6.20 经验候选生成，不注册 Skill、不生产 Tool。"
+          },
+          {
+            "tool": "queue_skill_candidates",
+            "risk": "A2",
+            "reason": "受治理 L6.21 Skill 草案版本入队，不注册、不激活、不写 Skill 注册表。"
+          },
+          {
+            "tool": "queue_tool_production_requests",
+            "risk": "A2",
+            "reason": "受治理 L6.22 Tool 生产请求入队，只做沙箱验证前置，不生产、不注册、不释放工具句柄。"
+          },
+          {
+            "tool": "learning_asset_contract_normalize",
+            "risk": "A2",
+            "reason": "受治理 R16 未来资产契约归一化，只把候选 Skill/Tool 元数据转为统一格式，不注册不生产。"
+          },
+          {
+            "tool": "learning_asset_contract_validate",
+            "risk": "A2",
+            "reason": "受治理 R16 未来资产契约校验，只检查字段/usage card/chain recipe/no-pollution，不激活不写入。"
+          },
+          {
+            "tool": "learning_asset_sandbox_align",
+            "risk": "A2",
+            "reason": "受治理 R17 沙箱对齐，只把 R16 Tool 契约映射到 L6.22 SandboxValidationPlan，不生产不注册。"
+          },
+          {
+            "tool": "learning_asset_sandbox_validate",
+            "risk": "A2",
+            "reason": "受治理 R17 沙箱对齐校验，只复核映射证据，不释放工具句柄。"
+          }
+        ]
+      },
+      {
+        "scenario": "asset-candidate-sandbox drill pytest missing tests",
+        "plan_tools": [
+          "learning_asset_candidate_sandbox_guide",
+          "synthesize_experience_candidates",
+          "queue_skill_candidates",
+          "queue_tool_production_requests",
+          "learning_asset_contract_normalize",
+          "learning_asset_contract_validate",
+          "learning_asset_sandbox_align",
+          "learning_asset_sandbox_validate",
+          "learning_asset_candidate_sandbox_build",
+          "learning_asset_candidate_sandbox_validate",
+          "learning_asset_candidate_sandbox_review"
+        ],
+        "plan_length": 11,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "learning_asset_candidate_sandbox_guide",
+            "risk": "A2",
+            "reason": "受治理 R18 候选包沙箱指南，只返回链路和边界元数据。"
+          },
+          {
+            "tool": "synthesize_experience_candidates",
+            "risk": "A2",
+            "reason": "受治理 L6.20 经验候选生成，不注册 Skill、不生产 Tool。"
+          },
+          {
+            "tool": "queue_skill_candidates",
+            "risk": "A2",
+            "reason": "受治理 L6.21 Skill 草案版本入队，不注册、不激活、不写 Skill 注册表。"
+          },
+          {
+            "tool": "queue_tool_production_requests",
+            "risk": "A2",
+            "reason": "受治理 L6.22 Tool 生产请求入队，只做沙箱验证前置，不生产、不注册、不释放工具句柄。"
+          },
+          {
+            "tool": "learning_asset_contract_normalize",
+            "risk": "A2",
+            "reason": "受治理 R16 未来资产契约归一化，只把候选 Skill/Tool 元数据转为统一格式，不注册不生产。"
+          },
+          {
+            "tool": "learning_asset_contract_validate",
+            "risk": "A2",
+            "reason": "受治理 R16 未来资产契约校验，只检查字段/usage card/chain recipe/no-pollution，不激活不写入。"
+          },
+          {
+            "tool": "learning_asset_sandbox_align",
+            "risk": "A2",
+            "reason": "受治理 R17 沙箱对齐，只把 R16 Tool 契约映射到 L6.22 SandboxValidationPlan，不生产不注册。"
+          },
+          {
+            "tool": "learning_asset_sandbox_validate",
+            "risk": "A2",
+            "reason": "受治理 R17 沙箱对齐校验，只复核映射证据，不释放工具句柄。"
+          },
+          {
+            "tool": "learning_asset_candidate_sandbox_build",
+            "risk": "A3",
+            "reason": "受治理 R18 候选包生产沙箱，只能写入隔离 candidate_sandbox 目录，不注册不激活。"
+          },
+          {
+            "tool": "learning_asset_candidate_sandbox_validate",
+            "risk": "A2",
+            "reason": "受治理 R18 候选包校验，只复核隔离候选包静态/smoke/回滚证据，不注册不激活。"
+          },
+          {
+            "tool": "learning_asset_candidate_sandbox_review",
+            "risk": "A2",
+            "reason": "受治理 R18 候选包注册审阅，只给 LLM 决策证据，不写注册表不释放句柄。"
+          }
+        ]
+      },
+      {
+        "scenario": "候选包沙箱 drill pytest missing tests",
+        "plan_tools": [
+          "learning_asset_candidate_sandbox_guide",
+          "synthesize_experience_candidates",
+          "queue_skill_candidates",
+          "queue_tool_production_requests",
+          "learning_asset_contract_normalize",
+          "learning_asset_contract_validate",
+          "learning_asset_sandbox_align",
+          "learning_asset_sandbox_validate",
+          "learning_asset_candidate_sandbox_build",
+          "learning_asset_candidate_sandbox_validate",
+          "learning_asset_candidate_sandbox_review"
+        ],
+        "plan_length": 11,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "learning_asset_candidate_sandbox_guide",
+            "risk": "A2",
+            "reason": "受治理 R18 候选包沙箱指南，只返回链路和边界元数据。"
+          },
+          {
+            "tool": "synthesize_experience_candidates",
+            "risk": "A2",
+            "reason": "受治理 L6.20 经验候选生成，不注册 Skill、不生产 Tool。"
+          },
+          {
+            "tool": "queue_skill_candidates",
+            "risk": "A2",
+            "reason": "受治理 L6.21 Skill 草案版本入队，不注册、不激活、不写 Skill 注册表。"
+          },
+          {
+            "tool": "queue_tool_production_requests",
+            "risk": "A2",
+            "reason": "受治理 L6.22 Tool 生产请求入队，只做沙箱验证前置，不生产、不注册、不释放工具句柄。"
+          },
+          {
+            "tool": "learning_asset_contract_normalize",
+            "risk": "A2",
+            "reason": "受治理 R16 未来资产契约归一化，只把候选 Skill/Tool 元数据转为统一格式，不注册不生产。"
+          },
+          {
+            "tool": "learning_asset_contract_validate",
+            "risk": "A2",
+            "reason": "受治理 R16 未来资产契约校验，只检查字段/usage card/chain recipe/no-pollution，不激活不写入。"
+          },
+          {
+            "tool": "learning_asset_sandbox_align",
+            "risk": "A2",
+            "reason": "受治理 R17 沙箱对齐，只把 R16 Tool 契约映射到 L6.22 SandboxValidationPlan，不生产不注册。"
+          },
+          {
+            "tool": "learning_asset_sandbox_validate",
+            "risk": "A2",
+            "reason": "受治理 R17 沙箱对齐校验，只复核映射证据，不释放工具句柄。"
+          },
+          {
+            "tool": "learning_asset_candidate_sandbox_build",
+            "risk": "A3",
+            "reason": "受治理 R18 候选包生产沙箱，只能写入隔离 candidate_sandbox 目录，不注册不激活。"
+          },
+          {
+            "tool": "learning_asset_candidate_sandbox_validate",
+            "risk": "A2",
+            "reason": "受治理 R18 候选包校验，只复核隔离候选包静态/smoke/回滚证据，不注册不激活。"
+          },
+          {
+            "tool": "learning_asset_candidate_sandbox_review",
+            "risk": "A2",
+            "reason": "受治理 R18 候选包注册审阅，只给 LLM 决策证据，不写注册表不释放句柄。"
+          }
+        ]
+      },
+      {
+        "scenario": "沙箱对齐 ToolSkill 统一资产",
+        "plan_tools": [
+          "learning_asset_sandbox_guide",
+          "learning_asset_sandbox_align",
+          "learning_asset_sandbox_validate"
+        ],
+        "plan_length": 3,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "learning_asset_sandbox_guide",
+            "risk": "A2",
+            "reason": "受治理 R17 沙箱对齐指南，只说明已存在 L6.22 Tool 生产请求沙箱前置链，不执行副作用。"
+          },
+          {
+            "tool": "learning_asset_sandbox_align",
+            "risk": "A2",
+            "reason": "受治理 R17 沙箱对齐，只把 R16 Tool 契约映射到 L6.22 SandboxValidationPlan，不生产不注册。"
+          },
+          {
+            "tool": "learning_asset_sandbox_validate",
+            "risk": "A2",
+            "reason": "受治理 R17 沙箱对齐校验，只复核映射证据，不释放工具句柄。"
+          }
+        ]
+      },
+      {
+        "scenario": "planner-context LLM 使用工具对齐",
+        "plan_tools": [
+          "build_shell_system_mount",
+          "build_learning_convergence",
+          "build_recovery_coordination",
+          "build_delivery_standardization",
+          "build_provider_adaptation",
+          "build_governance_execution",
+          "build_planner_context"
+        ],
+        "plan_length": 7,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "build_shell_system_mount",
+            "risk": "A2",
+            "reason": "受治理 L6.24 十八系统壳装，只读映射已装系统，不注册、不激活、不改内核。"
+          },
+          {
+            "tool": "build_learning_convergence",
+            "risk": "A2",
+            "reason": "受治理 L6.28 经验/Skill/Tool 执行合流，只生成 PlannerHintRoute/SkillDraftRoute/ToolCandidateRoute/ConsumptionCard，不写记忆、不注册 Skill、不生产 Tool。"
+          },
+          {
+            "tool": "build_recovery_coordination",
+            "risk": "A2",
+            "reason": "受治理 L6.29 自修复/多智能体/预算联动，只生成 FailureSignal/RepairCandidate/HandoffDigest/BudgetUpdate/ResumePlan，不派生子智能体、不执行补丁、不改预算、不改内核。"
+          },
+          {
+            "tool": "build_delivery_standardization",
+            "risk": "A2",
+            "reason": "受治理 L6.26 交付链标准化，只生成 ChangeSet/TestEvidence/Manifest/Integrity/Todo 证据，不打包、不写文件、不改内核。"
+          },
+          {
+            "tool": "build_provider_adaptation",
+            "risk": "A2",
+            "reason": "受治理 L6.27 Provider 适配外壳，只生成声明式 ProviderProfile/CapabilityMatrix/API Surface/GovernanceMount，不触网、不读密钥、不注册正式适配器。"
+          },
+          {
+            "tool": "build_governance_execution",
+            "risk": "A2",
+            "reason": "受治理 L6.30 治理执行力化，只生成 A0-A4 快车道、A5 硬边界、发布/注册/激活护栏和 PlannerGovernanceHint，不改 PermitGateway/ExecutionPolicy、不执行副作用、不改内核。"
+          },
+          {
+            "tool": "build_planner_context",
+            "risk": "A2",
+            "reason": "受治理 L6.31 统一 Planner 接入，只生成 UnifiedPlannerContext / ExecutionStepDraft / PlannerResumeEnvelope，不执行工具、不注册 Tool/Skill/Provider、不读取密钥、不改内核。"
+          }
+        ]
+      },
+      {
+        "scenario": "p0-system-build Provider Budget Skill Handoff 对齐",
+        "plan_tools": [
+          "build_provider_adaptation",
+          "synthesize_experience_candidates",
+          "queue_skill_candidates",
+          "build_l6_38_provider_integration",
+          "build_l6_38_budget_snapshot",
+          "build_l6_38_skill_integration",
+          "build_l6_38_handoff_integration",
+          "build_l6_38_p0_integration"
+        ],
+        "plan_length": 8,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "build_provider_adaptation",
+            "risk": "A2",
+            "reason": "受治理 L6.27 Provider 适配外壳，只生成声明式 ProviderProfile/CapabilityMatrix/API Surface/GovernanceMount，不触网、不读密钥、不注册正式适配器。"
+          },
+          {
+            "tool": "synthesize_experience_candidates",
+            "risk": "A2",
+            "reason": "受治理 L6.20 经验候选生成，不注册 Skill、不生产 Tool。"
+          },
+          {
+            "tool": "queue_skill_candidates",
+            "risk": "A2",
+            "reason": "受治理 L6.21 Skill 草案版本入队，不注册、不激活、不写 Skill 注册表。"
+          },
+          {
+            "tool": "build_l6_38_provider_integration",
+            "risk": "A2",
+            "reason": "受治理 L6.38 Provider 接入，只生成 ProviderProfile/ProviderExecutionTicket/CredentialRef；无许可时 sample replay，不触网、不读密钥、不裸调 SDK。"
+          },
+          {
+            "tool": "build_l6_38_budget_snapshot",
+            "risk": "A2",
+            "reason": "受治理 L6.38 Budget 接入，只生成 StepBudgetLedger/ChainBudgetLease/TimeoutBudget/FailureBudget/BudgetSnapshot，不直接改预算，不默认阻断 A0-A4。"
+          },
+          {
+            "tool": "build_l6_38_skill_integration",
+            "risk": "A2",
+            "reason": "受治理 L6.38 Skill 接入，只生成 SkillCandidateRoute/SkillReviewTicket/SkillActivationIntent/SkillExecutionHint，不注册、不激活、不释放工具。"
+          },
+          {
+            "tool": "build_l6_38_handoff_integration",
+            "risk": "A2",
+            "reason": "受治理 L6.38 Handoff 接入，只生成 SubtaskTicket/HandoffEnvelope/ParentChainCollectReport，不自动递归派生，必须回流父链。"
+          },
+          {
+            "tool": "build_l6_38_p0_integration",
+            "risk": "A2",
+            "reason": "受治理 L6.38 P0 总报告，只汇总 Provider/Budget/Skill/Handoff 的 Hint/Ticket/Envelope/Evidence/Report，不新增 Runtime 不改内核。"
+          }
+        ]
+      },
+      {
+        "scenario": "p0-system2-build Memory Audit Recovery QualityGate 对齐",
+        "plan_tools": [
+          "build_recovery_coordination",
+          "build_l6_39_memory_integration",
+          "build_l6_39_audit_integration",
+          "build_l6_39_recovery_integration",
+          "build_l6_39_quality_gate_integration",
+          "build_l6_39_p0_integration"
+        ],
+        "plan_length": 6,
+        "all_registered": true,
+        "missing_tools": [],
+        "risk": [
+          {
+            "tool": "build_recovery_coordination",
+            "risk": "A2",
+            "reason": "受治理 L6.29 自修复/多智能体/预算联动，只生成 FailureSignal/RepairCandidate/HandoffDigest/BudgetUpdate/ResumePlan，不派生子智能体、不执行补丁、不改预算、不改内核。"
+          },
+          {
+            "tool": "build_l6_39_memory_integration",
+            "risk": "A2",
+            "reason": "受治理 L6.39 Memory 接入，只生成 MemoryRecallRoute 安全摘要路由，不写长期记忆、不注入原始正文。"
+          },
+          {
+            "tool": "build_l6_39_audit_integration",
+            "risk": "A2",
+            "reason": "受治理 L6.39 Audit 接入，只生成 AuditEvidenceEnvelope 安全摘要证据，不删除、不重写、不伪造审计。"
+          },
+          {
+            "tool": "build_l6_39_recovery_integration",
+            "risk": "A2",
+            "reason": "受治理 L6.39 Recovery 接入，只生成 RecoveryResumeTicket，不执行补丁、不派生子智能体、不改预算。"
+          },
+          {
+            "tool": "build_l6_39_quality_gate_integration",
+            "risk": "A2",
+            "reason": "受治理 L6.39 QualityGate 接入，只生成 QualityGateEvidence，不覆盖裁决、不自动放行发布。"
+          },
+          {
+            "tool": "build_l6_39_p0_integration",
+            "risk": "A2",
+            "reason": "受治理 L6.39 P0 接入二总报告，只汇总 Memory/Audit/Recovery/QualityGate 的安全摘要/证据/票据/质量引用，不新增 Runtime 不改内核。"
+          }
+        ]
+      }
+    ],
+    "coverage_statement": "该演练验证 LLM 意图→PlanBridge→Runtime 工具名注册链；真实副作用仍由 Runtime 审计和具体工具 smoke 验证。",
+    "next_action_hint": {
+      "next_tool": "code_x_smoke_workflow",
+      "reason": "路由演练通过后，对代表性 Code-X/v1/core 链执行真实 smoke。",
+      "confidence": 0.9,
+      "llm_final_decision_required": true
+    }
+  }
+}

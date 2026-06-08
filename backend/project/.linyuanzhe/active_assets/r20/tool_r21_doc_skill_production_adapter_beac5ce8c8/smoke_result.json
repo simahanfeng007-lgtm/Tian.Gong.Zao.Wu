@@ -1,0 +1,28 @@
+{
+  "status": "pass",
+  "template_id": "doc_skill_production",
+  "result": {
+    "schema": "tiangong.l6702.r21.learning_asset_adapter_template.v1",
+    "generated_at": 1780892161.6840546,
+    "status": "pass",
+    "smoke_count": 1,
+    "smoke_results": [
+      {
+        "adapter_template_id": "doc_skill_production",
+        "ok": true,
+        "status": "ok",
+        "output_summary": "文档/Skill 辅助草案已生成。",
+        "data_keys": [
+          "arguments",
+          "draft",
+          "operation"
+        ]
+      }
+    ],
+    "issue_count": 0,
+    "issues": [],
+    "next_action_hint": {
+      "next_tool": "learning_asset_adapter_drill"
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "contract_version": "tiangong.l6_58.frontend_backend_e2e_smoke.v1",
+  "mode": "contract_server",
+  "runtime_url_digest": "15a41c7483861d1e",
+  "endpoint_results": [
+    {
+      "path": "/health/runtime",
+      "method": "GET",
+      "ok": true,
+      "status_code": 200,
+      "latency_ms": 12,
+      "content_type": "application/json; charset=utf-8",
+      "error": ""
+    },
+    {
+      "path": "/metadata/product",
+      "method": "GET",
+      "ok": true,
+      "status_code": 200,
+      "latency_ms": 1,
+      "content_type": "application/json; charset=utf-8",
+      "error": ""
+    },
+    {
+      "path": "/settings/provider",
+      "method": "GET",
+      "ok": true,
+      "status_code": 200,
+      "latency_ms": 1,
+      "content_type": "application/json; charset=utf-8",
+      "error": ""
+    }
+  ],
+  "chat_stream_ok": true,
+  "terminal_order_valid": true,
+  "assistant_final_seen": true,
+  "run_terminal_seen": true,
+  "status_bar_fields_ok": true,
+  "product_identity_ok": true,
+  "provider_projection_safe": true,
+  "provider_write_ack_ok": true,
+  "provider_write_request_only": true,
+  "action_guard_request_only": true,
+  "no_frontend_provider_call": true,
+  "no_frontend_tool_execution": true,
+  "no_frontend_memory_write": true,
+  "no_frontend_rollback_apply": true,
+  "rendered_secret_free": true,
+  "event_count": 8,
+  "final_task_status": "COMPLETED",
+  "final_stream_state": "completed",
+  "final_audit_id": "audit_codex_stream",
+  "diagnostic": [
+    "provider_write_mode=fixture",
+    "provider_write_status=accepted"
+  ],
+  "ok": true,
+  "code_x_projection_ok": true,
+  "code_x_tool_results": [
+    "code_x_runtime_status",
+    "repo_map"
+  ]
+}

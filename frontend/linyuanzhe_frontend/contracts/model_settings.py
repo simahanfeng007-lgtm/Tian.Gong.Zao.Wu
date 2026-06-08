@@ -38,6 +38,7 @@ class ModelOption:
 
 
 DEFAULT_MODEL_CATALOG: List[ModelOption] = [
+    ModelOption("openai_compatible", "deepseek-v4-pro", "Hermes Gateway / OpenAI 兼容主模型", "long", ["reasoning", "gateway", "primary"]),
     ModelOption("deepseek", "deepseek-reasoner", "DeepSeek Reasoner 主推理模型", "64K+", ["reasoning", "primary", "long-chain"]),
     ModelOption("deepseek", "deepseek-chat", "DeepSeek Chat 通用模型", "64K", ["chat", "fast", "daily"]),
     ModelOption("qwen", "qwen3-max", "Qwen3 Max 兼容占位", "long", ["fallback", "cn", "tool-use"]),
@@ -78,8 +79,8 @@ def sanitize_runtime_settings(raw: Mapping[str, Any]) -> Dict[str, Any]:
     key_configured = bool(api_key.strip())
     base_url_configured = bool(base_url.strip())
     return {
-        "provider": safe_text(raw.get("provider", "deepseek"), 40),
-        "main_model": safe_text(raw.get("main_model", "deepseek-reasoner"), 80),
+        "provider": safe_text(raw.get("provider", "openai_compatible"), 40),
+        "main_model": safe_text(raw.get("main_model", "deepseek-v4-pro"), 80),
         "api_key_configured": key_configured,
         "api_key_digest": digest_text(api_key, 16) if key_configured else "",
         "base_url_configured": base_url_configured,

@@ -1,0 +1,44 @@
+{
+  "schema": "tiangong.fe01.step31p.provider_error_theme_acceptance.v1",
+  "ok": true,
+  "checks": {
+    "gateway_error_classified": true,
+    "auth_error_classified": true,
+    "provider_error_hint_has_next_action": true,
+    "bottom_theme_buttons_present_initially": true,
+    "bottom_theme_buttons_survive_rebuild": true,
+    "bottom_theme_can_switch_to_extreme_day": true,
+    "bottom_theme_can_switch_back_to_extreme_night": true,
+    "settings_hint_mentions_bottom_switch": true,
+    "no_raw_secret_in_error_projection": true
+  },
+  "readiness_samples": {
+    "gateway_unreachable": {
+      "readiness": "error",
+      "label": "网关不可达",
+      "missing_fields": [],
+      "effective_backend_mode": "provider",
+      "requested_backend_mode": "auto",
+      "primary_action": "检查 Tailscale / Base URL / 网关进程后，发送一条短消息复测",
+      "can_use_real_model": false,
+      "mock_mode": true,
+      "message": "无法连到 OpenAI-compatible 网关。优先检查 Tailscale 是否在线、Base URL 是否为 /v1 上游地址、网关进程是否启动。 脱敏摘要：connection refused <redacted>",
+      "config_error_code": "gateway_unreachable",
+      "severity": "error"
+    },
+    "auth_failed": {
+      "readiness": "error",
+      "label": "API Key 无效或未授权",
+      "missing_fields": [],
+      "effective_backend_mode": "provider",
+      "requested_backend_mode": "auto",
+      "primary_action": "重新填写 API Key 后保存，再发送短消息复测",
+      "can_use_real_model": false,
+      "mock_mode": true,
+      "message": "Provider 返回鉴权失败。前端只显示错误类型，不回显 Key。 脱敏摘要：401 unauthorized <redacted>",
+      "config_error_code": "auth_failed",
+      "severity": "error"
+    }
+  },
+  "note": "Validates Provider error-state classification and bottom-frame 永夜/极昼 theme quick switch. It does not call Provider SDKs, tools, memory, audit, or official Runtime RC."
+}

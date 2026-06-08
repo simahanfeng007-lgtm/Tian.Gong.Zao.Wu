@@ -164,23 +164,17 @@ class JsonReportRuntimeClient(MockRuntimeClient):
 
     def request_task_stop(self, reason: str = "user_requested") -> RuntimeSnapshot:
         self._snapshot.control_state = "stop_frontend_only"
-        self._snapshot.chat_messages.append(
-            ChatMessage("assistant", "临渊者", "控制", "停止请求已在前端占位层记录；Mock/JSON/Future 客户端不会直接停止 Runtime。")
-        )
+        self._snapshot.append_assistant_notice_once("控制", "停止请求已在前端占位层记录；Mock/JSON/Future 客户端不会直接停止 Runtime。", "停止请求已在前端占位层记录", window=20)
         return self._snapshot
 
     def request_task_reset(self, reason: str = "user_requested") -> RuntimeSnapshot:
         self._snapshot.control_state = "reset_frontend_only"
-        self._snapshot.chat_messages.append(
-            ChatMessage("assistant", "临渊者", "控制", "复位请求已在前端占位层记录；Mock/JSON/Future 客户端不会直接复位 Runtime。")
-        )
+        self._snapshot.append_assistant_notice_once("控制", "复位请求已在前端占位层记录；Mock/JSON/Future 客户端不会直接复位 Runtime。", "复位请求已在前端占位层记录", window=20)
         return self._snapshot
 
     def request_task_interrupt(self, reason: str = "user_requested") -> RuntimeSnapshot:
         self._snapshot.control_state = "interrupt_frontend_only"
-        self._snapshot.chat_messages.append(
-            ChatMessage("assistant", "临渊者", "控制", "中断请求已在前端占位层记录；真实中断只能由 Runtime / TiangongWangguan 执行。")
-        )
+        self._snapshot.append_assistant_notice_once("控制", "中断请求已在前端占位层记录；真实中断只能由 Runtime / TiangongWangguan 执行。", "中断请求已在前端占位层记录", window=20)
         return self._snapshot
 
     def request_file_transfer(self, file_path: str, purpose: str = "user_attachment") -> RuntimeSnapshot:

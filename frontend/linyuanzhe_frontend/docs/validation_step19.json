@@ -1,0 +1,121 @@
+{
+  "version": "L6-FE.01 STEP19 / L6.58",
+  "checked_at": "2026-06-08T01:52:43",
+  "root": "/mnt/data/lyz_step31p_clean/natures-craftsmanship-v2.0-L6.71.7-hotfix/frontend/linyuanzhe_frontend",
+  "missing_files": [
+    "tests/smoke_test_frontend.py",
+    "tests/gui_construct_smoke.py",
+    "tests/test_frontend_contracts.py",
+    "tests/test_l6_52_sse_runtime_client.py",
+    "tests/test_l6_53_streaming_controls.py",
+    "tests/test_l6_54_smooth_agent_ui.py",
+    "tests/test_l6_55_action_guard_cards.py",
+    "tests/test_l6_56_e2e_integration_smoke.py",
+    "tests/test_l6_57_provider_settings_writeback.py",
+    "tests/test_l6_58_rc_preflight.py",
+    "docs/demo_manifest_step09.json",
+    "docs/demo_manifest_step10b.json",
+    "docs/homepage_screenshot_acceptance_step10b.txt",
+    "docs/demo_manifest_step15.json",
+    "docs/demo_manifest_step16.json",
+    "docs/demo_manifest_step17.json",
+    "docs/demo_manifest_step18.json",
+    "docs/demo_manifest_step19.json",
+    "docs/STEP12_启动修复与L6511契约对齐完成报告_20260607.txt",
+    "docs/STEP13_L652_Runtime_SSE状态接线完成报告_20260607.txt",
+    "docs/STEP14_L653_流式续接错误态与任务控制完成报告_20260607.txt",
+    "docs/STEP15_L654_顺滑层AgentUI事件契约与视觉Token完成报告_20260607.txt",
+    "docs/STEP16_L655_行动守卫卡审计回滚只读与确认请求UX完成报告_20260607.txt",
+    "docs/STEP17_L656_真实后端联调包与端到端桌面烟测完成报告_20260607.txt",
+    "docs/STEP18_L657_Provider设置页后端写入回执与密钥状态UX完成报告_20260607.txt",
+    "docs/STEP19_L658_真实后端实例联调与RC前置收口完成报告_20260607.txt",
+    "docs/secret_scan_step16.json",
+    "docs/provider_sdk_import_scan_step16.json",
+    "docs/bare_except_pass_scan_step16.json",
+    "docs/secret_scan_step17.json",
+    "docs/provider_sdk_import_scan_step17.json",
+    "docs/bare_except_pass_scan_step17.json",
+    "docs/secret_scan_step18.json",
+    "docs/provider_sdk_import_scan_step18.json",
+    "docs/bare_except_pass_scan_step18.json",
+    "docs/secret_scan_step19.json",
+    "docs/provider_sdk_import_scan_step19.json",
+    "docs/bare_except_pass_scan_step19.json"
+  ],
+  "compileall": {
+    "cmd": [
+      "/opt/pyvenv/bin/python3",
+      "-m",
+      "compileall",
+      "-q",
+      "/mnt/data/lyz_step31p_clean/natures-craftsmanship-v2.0-L6.71.7-hotfix/frontend/linyuanzhe_frontend"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "smoke_test": {
+    "cmd": [
+      "/opt/pyvenv/bin/python3",
+      "/mnt/data/lyz_step31p_clean/natures-craftsmanship-v2.0-L6.71.7-hotfix/frontend/linyuanzhe_frontend/tests/smoke_test_frontend.py"
+    ],
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "/opt/pyvenv/bin/python3: can't open file '/mnt/data/lyz_step31p_clean/natures-craftsmanship-v2.0-L6.71.7-hotfix/frontend/linyuanzhe_frontend/tests/smoke_test_frontend.py': [Errno 2] No such file or directory\n"
+  },
+  "gui_construct_smoke": {
+    "cmd": [
+      "gui_construct_smoke",
+      "skipped_by_validation_default"
+    ],
+    "returncode": 0,
+    "stdout": "GUI construct smoke is skipped by default in validate_demo_package to avoid headless DISPLAY/Xvfb hangs; run xvfb-run -a python tests/gui_construct_smoke.py for desktop CI.",
+    "stderr": ""
+  },
+  "pytest_contracts": {
+    "cmd": [
+      "/opt/pyvenv/bin/python3",
+      "-m",
+      "pytest",
+      "-q",
+      "/mnt/data/lyz_step31p_clean/natures-craftsmanship-v2.0-L6.71.7-hotfix/frontend/linyuanzhe_frontend/tests/test_frontend_contracts.py",
+      "/mnt/data/lyz_step31p_clean/natures-craftsmanship-v2.0-L6.71.7-hotfix/frontend/linyuanzhe_frontend/tests/test_l6_52_sse_runtime_client.py",
+      "/mnt/data/lyz_step31p_clean/natures-craftsmanship-v2.0-L6.71.7-hotfix/frontend/linyuanzhe_frontend/tests/test_l6_53_streaming_controls.py",
+      "/mnt/data/lyz_step31p_clean/natures-craftsmanship-v2.0-L6.71.7-hotfix/frontend/linyuanzhe_frontend/tests/test_l6_54_smooth_agent_ui.py",
+      "/mnt/data/lyz_step31p_clean/natures-craftsmanship-v2.0-L6.71.7-hotfix/frontend/linyuanzhe_frontend/tests/test_l6_55_action_guard_cards.py",
+      "/mnt/data/lyz_step31p_clean/natures-craftsmanship-v2.0-L6.71.7-hotfix/frontend/linyuanzhe_frontend/tests/test_l6_56_e2e_integration_smoke.py",
+      "/mnt/data/lyz_step31p_clean/natures-craftsmanship-v2.0-L6.71.7-hotfix/frontend/linyuanzhe_frontend/tests/test_l6_57_provider_settings_writeback.py",
+      "/mnt/data/lyz_step31p_clean/natures-craftsmanship-v2.0-L6.71.7-hotfix/frontend/linyuanzhe_frontend/tests/test_l6_58_rc_preflight.py"
+    ],
+    "returncode": 4,
+    "stdout": "\nno tests ran in 0.00s\n",
+    "stderr": "ERROR: file or directory not found: /mnt/data/lyz_step31p_clean/natures-craftsmanship-v2.0-L6.71.7-hotfix/frontend/linyuanzhe_frontend/tests/test_frontend_contracts.py\n\n"
+  },
+  "l6_58_real_runtime_e2e_smoke": {
+    "cmd": [
+      "/opt/pyvenv/bin/python3",
+      "-m",
+      "linyuanzhe_frontend.run_backend_integration_smoke",
+      "--contract-server",
+      "--out",
+      "/mnt/data/lyz_step31p_clean/natures-craftsmanship-v2.0-L6.71.7-hotfix/frontend/linyuanzhe_frontend/reports/validation_l6_58_real_runtime_e2e_smoke.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"mode\": \"contract_server\",\n  \"report\": \"/mnt/data/lyz_step31p_clean/natures-craftsmanship-v2.0-L6.71.7-hotfix/frontend/linyuanzhe_frontend/reports/validation_l6_58_real_runtime_e2e_smoke.json\"\n}\n",
+    "stderr": ""
+  },
+  "l6_58_rc_preflight": {
+    "cmd": [
+      "/opt/pyvenv/bin/python3",
+      "-m",
+      "linyuanzhe_frontend.run_rc_preflight",
+      "--contract-server",
+      "--out",
+      "/mnt/data/lyz_step31p_clean/natures-craftsmanship-v2.0-L6.71.7-hotfix/frontend/linyuanzhe_frontend/reports/validation_l6_58_rc_preflight.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"ready_for_combine\": false,\n  \"rc_status\": \"blocked_before_frontend_backend_combine\",\n  \"mode\": \"contract_server\",\n  \"report\": \"/mnt/data/lyz_step31p_clean/natures-craftsmanship-v2.0-L6.71.7-hotfix/frontend/linyuanzhe_frontend/reports/validation_l6_58_rc_preflight.json\"\n}\n",
+    "stderr": ""
+  },
+  "ok": false
+}

@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "report": "reports/l6702_r21_learning_asset_adapter_smoke_report.json",
+  "template_count": 5,
+  "runtime_tool_count_after_drill": 154,
+  "direct_calls": 5
+}

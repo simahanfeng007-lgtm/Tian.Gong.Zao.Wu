@@ -1,6 +1,6 @@
 {
-  "contract_version": "tiangong.l6_70_1.desktop_bundle_preflight.v1",
-  "checked_at": "2026-06-07T10:10:23",
+  "contract_version": "tiangong.l6_70_6.desktop_visual_click_preflight.v1",
+  "checked_at": "2026-06-08T04:04:53",
   "ok": true,
   "desktop_all_in_one_ready": true,
   "frontend_backend_bundled": true,
@@ -14,16 +14,16 @@
     "name": "l671_desktop_bundle_compileall",
     "ok": true,
     "returncode": 0,
-    "latency_ms": 3603,
-    "log": "/mnt/data/l671_work/reports/l671_desktop_bundle_compileall.log",
-    "exit": "/mnt/data/l671_work/reports/l671_desktop_bundle_compileall.exit"
+    "latency_ms": 1217,
+    "log": "/mnt/data/fusion_work/out/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/reports/l671_desktop_bundle_compileall.log",
+    "exit": "/mnt/data/fusion_work/out/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/reports/l671_desktop_bundle_compileall.exit"
   },
   "local_bridge_probe": {
     "ok": true,
-    "latency_ms": 7138,
-    "bridge_url_digest": "b506da5d6de82f76",
+    "latency_ms": 2908,
+    "bridge_url_digest": "0aafd2adc4e35b73",
     "startup_lines": [
-      "LINYUANZHE_LOCAL_RUNTIME_URL=http://127.0.0.1:45417"
+      "LINYUANZHE_LOCAL_RUNTIME_URL=http://127.0.0.1:35447"
     ],
     "runtime_kind": "local_desktop_bridge",
     "read_endpoint_results": [
@@ -62,14 +62,34 @@
           "base_url_configured",
           "base_url_digest",
           "config_error_code",
+          "config_file_exists",
+          "config_file_state",
+          "config_location_hint",
+          "config_path_digest",
+          "effective_backend_mode",
           "frontend_contract",
+          "last_provider_audit_id",
+          "last_provider_check_state",
+          "last_provider_elapsed",
+          "last_provider_error_code",
+          "last_provider_error_message",
+          "last_provider_next_action",
+          "local_bridge_can_persist",
           "local_desktop_bridge",
           "message",
+          "missing_fields",
           "model",
+          "next_action",
           "official_real_runtime_smoke_target",
           "planner_mode",
           "provider",
           "provider_config_state",
+          "provider_readiness",
+          "raw_secret_visible_to_frontend",
+          "readiness_label",
+          "requested_backend_mode",
+          "runtime_credential_persisted",
+          "runtime_credential_store_digest",
           "stream",
           "tool_execution_mode"
         ]
@@ -139,8 +159,8 @@
         "run_terminal"
       ],
       "assistant_final_before_run_terminal": true,
-      "assistant_final_digest": "bac7ed10f585e087",
-      "assistant_final_length": 27
+      "assistant_final_digest": "cce9e5b1a2a31248",
+      "assistant_final_length": 54
     },
     "official_real_runtime_smoke_target": false
   },
@@ -148,9 +168,9 @@
     "name": "l671_desktop_bundle_scan",
     "ok": true,
     "returncode": 0,
-    "latency_ms": 7619,
-    "log": "/mnt/data/l671_work/reports/l671_desktop_bundle_scan.log",
-    "exit": "/mnt/data/l671_work/reports/l671_desktop_bundle_scan.exit"
+    "latency_ms": 3382,
+    "log": "/mnt/data/fusion_work/out/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/reports/l671_desktop_bundle_scan.log",
+    "exit": "/mnt/data/fusion_work/out/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/reports/l671_desktop_bundle_scan.exit"
   },
   "merge_blockers": [
     "official real Runtime RC unlock not executed in this desktop all-in-one package"

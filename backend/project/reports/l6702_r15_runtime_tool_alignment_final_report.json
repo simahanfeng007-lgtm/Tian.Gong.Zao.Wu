@@ -1,0 +1,37 @@
+{
+  "stage": "L6.70.2_R15_Runtime工具注册表Skill与LLM实操对齐",
+  "status": "PASS",
+  "runtime_tool_count": 127,
+  "usage_card_count": 127,
+  "alignment_issues": 0,
+  "llm_route_scenarios": 29,
+  "empty_routes": 0,
+  "missing_tool_routes": 0,
+  "representative_real_runs": 19,
+  "pytest": "10 passed",
+  "backend_compileall": "PASS",
+  "frontend_compileall": "PASS",
+  "codex_runtime_smoke": "PASS",
+  "v1_clean_import_smoke": "PASS",
+  "frontend_codex_bridge_smoke": "PASS",
+  "no_pollution": "PASS",
+  "new_tools": [
+    "runtime_tool_alignment_check",
+    "runtime_llm_operational_drill"
+  ],
+  "new_commands": [
+    "runtime-tools align",
+    "runtime-tools drill",
+    "runtime-tools tool <tool_name> {json_args}"
+  ],
+  "boundary": {
+    "copied_v1_source": false,
+    "imported_v1_module": false,
+    "reused_v1_registry": false,
+    "reused_v1_executor": false,
+    "reused_v1_provider": false,
+    "monkey_patch": false,
+    "background_loop": false,
+    "planner_can_override_llm": false
+  }
+}

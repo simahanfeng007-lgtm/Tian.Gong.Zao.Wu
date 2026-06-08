@@ -9,7 +9,7 @@
   "current_task_status": "RUNNING",
   "progress_percent": 67,
   "plan_id": "plan_20250515_p0_integration",
-  "current_stage": "接口联调与验证",
+  "current_stage": "等待用户输入",
   "eta": "2025-05-15 13:30",
   "success_count": 8,
   "blocked_count": 2,
@@ -68,7 +68,7 @@
       "role": "assistant",
       "label": "临渊者",
       "time": "10:24:26",
-      "text": "已推进 P0 系统接入工作。\n接口对接与权限验证已完成，数据同步服务已启动。\n下一步将进行订单推送与回执验证。"
+      "text": "# P0 系统接入进展\n\n已推进 **Provider / Runtime / QualityGate** 只读投影接入。\n\n- 接口对接：完成\n- 权限验证：完成\n- 数据同步：运行中\n\n```json\n{\n  \"mode\": \"mock\",\n  \"frontend_execution\": false\n}\n```\n\n字段 `frontend_execution` 必须保持 false。\n\n参考：[设置页](app://settings)\n\n下一步：进入真实 Provider 配置检查。"
     }
   ],
   "pending_confirmations": [
@@ -206,5 +206,9 @@
     }
   ],
   "confirmation_request_state": "idle",
-  "last_confirmation_request": {}
+  "last_confirmation_request": {},
+  "stream_activity_label": "",
+  "stream_visual_state": "idle",
+  "render_mode": "delta_merge_virtual_transcript_thinking_indicator",
+  "stream_state": "idle"
 }

@@ -1,0 +1,51 @@
+{
+  "package": "L6.70.2_R20_学习资产受控注册激活可用闭环_20260608",
+  "status": "PASS",
+  "static_runtime_tools": 143,
+  "runtime_tools_after_activation_drill": 147,
+  "usage_cards_after_activation_drill": "147/147",
+  "pytest": "20 passed",
+  "compileall_backend": "PASS",
+  "compileall_frontend_backend": "PASS",
+  "codex_runtime_smoke": "PASS",
+  "learning_asset_activation_smoke": "pass",
+  "activation_status": "active",
+  "activated_count": 4,
+  "active_names": [
+    "learned_skill_skill_c8f38ea1",
+    "learned_tool_tool_ea486bb0",
+    "learned_skill_skill_378299a6",
+    "learned_tool_tool_65eb4cd2"
+  ],
+  "no_pollution": "PASS",
+  "core_chain": [
+    "R16 contract",
+    "R17 sandbox alignment",
+    "R18 candidate package",
+    "R19 release gate",
+    "R20 active registration",
+    "learned_* callable",
+    "smoke",
+    "alignment"
+  ],
+  "new_tools": [
+    "learning_asset_activation_guide",
+    "learning_asset_activation_apply",
+    "learning_asset_activation_status",
+    "learning_asset_activation_smoke"
+  ],
+  "commands": [
+    "asset-activate guide",
+    "asset-activate apply",
+    "asset-activate status",
+    "asset-activate smoke",
+    "asset-activate drill pytest missing tests",
+    "runtime-tools tool <learned_tool_name> {json_args}"
+  ],
+  "boundary": {
+    "no_auto_override_builtin_tools": true,
+    "no_v1_import_or_source_copy": true,
+    "no_background_loop": true,
+    "llm_final_decider": true
+  }
+}

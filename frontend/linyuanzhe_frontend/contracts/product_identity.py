@@ -14,7 +14,7 @@ class ProductIdentity:
     """
 
     product_name: str = "天工造物 / 临渊者"
-    app_name: str = "临渊者桌面驾驶舱"
+    app_name: str = "临渊者桌面端"
     unique_developer: str = "于泳翔"
     angel_investor: str = "胖胖龙"
     metadata_endpoint: str = "/metadata/product"

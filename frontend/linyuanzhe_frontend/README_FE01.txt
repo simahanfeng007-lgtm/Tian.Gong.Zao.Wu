@@ -1,6 +1,6 @@
-# 临渊者桌面驾驶舱 FE.01
+# 临渊者桌面端 FE.01
 
-版本：L6-FE.01【前端契约驾驶舱原型】
+版本：L6-FE.01【前端契约桌面端原型】
 类型：Python 标准库桌面端 / tkinter / Mock + JSON Report + L6.58 Runtime SSE 流式续接与 RC 预检驱动
 
 ## 1. 定位
@@ -185,14 +185,14 @@ RuntimeEntry → PlannerExecutionController → LongChainRunner → ExecutionSpi
 
 ## STEP08：视觉打磨与可演示桌面效果增强
 
-本阶段在 STEP07 可演示交互基础上增强极夜桌面驾驶舱视觉效果：
+本阶段在 STEP07 可演示交互基础上增强中性桌面端视觉效果：
 
 - 补充 `ui/visual_spec.py`，冻结 STEP08 视觉验收项。
 - 扩展 `ui/theme.py`，增加桌面演示级颜色、字体、布局、按钮 token。
 - 扩展 `ui/widgets.py`，增加 Chip、MetricRow、StepItem、readonly banner、统一按钮工厂。
 - 首页增加 FE.01 只读演示提示条。
 - 顶部栏、左侧导航、状态栏、执行摘要和执行步骤样式增强。
-- smoke test 增加视觉规格检查，防止后续偏离极夜桌面驾驶舱方向。
+- smoke test 增加视觉规格检查，防止后续偏离中性桌面端方向。
 
 历史阶段说明：当时不接真实 Runtime；当前 STEP15 只允许通过 L6.58 Runtime SSE 契约端点接线，仍不裸调模型/Provider SDK、不直接执行工具、不调用 Adapter、不写 tiangong_kernel。
 
@@ -282,7 +282,7 @@ python -m linyuanzhe_frontend.run_file_transfer_guide_interrupt_smoke
 
 ## FE01 STEP28 / L6.67
 
-新增多任务 Session 管理器：任务塔台、搜索、恢复请求、等待确认/失败/完成状态投影与快捷键入口。前端只提交 Runtime 请求，不直接恢复工具或写入记忆/审计/回滚。
+新增多任务 Session 管理器：任务、搜索、恢复请求、等待确认/失败/完成状态投影与快捷键入口。前端只提交 Runtime 请求，不直接恢复工具或写入记忆/审计/回滚。
 
 ## 2.8 L6.68 安装器 RC 前置结构
 
@@ -305,3 +305,44 @@ python ../scripts/installer_rc_preflight_l668.py
 ```
 
 边界：前端不可生成安装包、不可应用更新、不可恢复回滚槽、不可上传崩溃报告、不可修改 Runtime 核心文件。
+
+
+## FE01 STEP31Q / L6.71.7 前端收敛说明
+
+- 首页改为对话优先：右侧 Runtime 状态默认折叠为“会话信息”，不再四张监控卡常驻。
+- 左侧导航从 13 项收敛为 5 项：会话 / 任务 / 记忆 / 系统 / 设置；详细执行链、运行观测、连接器、安装器、规则等仍可从页面内入口访问。
+- 底部状态栏从指标条改为极简状态提示：就绪/模式/质量门/审计，预算、命中率、消耗不再占用首页。
+- Provider 配置使用设置页向导：Provider、Base URL、API Key、主模型。保存后 API Key/Base URL 明文清空，只显示 configured/digest。
+- 仍然遵守前端边界：不裸调 Provider SDK，不直接执行工具，不写记忆，不绕过 Runtime/QualityGate。
+
+## FE01 STEP31Q / L6.71.7 Markdown 渲染说明
+
+本轮修复纯文本聊天体验，不改变 Runtime、Planner、QualityGate 或 Provider 调用边界。
+
+- `runtime_snapshot.safe_chat_text`：保留聊天正文换行，同时继续脱敏 API Key、token、本地路径等敏感内容。
+- `streaming_render.DeltaMerger / VirtualTranscript`：流式 delta 合并保留换行，避免 Markdown 结构被压平。
+- `ui.main_window`：Tk Text 增加基础 Markdown tag 渲染，支持标题、列表、引用、分割线、代码块、行内代码、加粗和链接识别。
+- 链接当前只做可识别高亮，不自动外跳，避免前端产生额外外部动作。
+- 所有真实执行仍必须走 Planner → ExecutionSpine → Runtime → QualityGate → Audit / Rollback。
+
+## FE01 STEP31Q / L6.71.7 流式输出与思考态说明
+
+本轮只增强桌面端前端渲染体验：发送后显示“临渊者正在思考”，收到 assistant_delta 后切换为“正在输出”，断流时显示“断线续接中”，完成或错误后自动收口。聊天区继续走增量渲染，避免回车发送后的全量刷新、闪屏和跳顶。
+
+Mock 客户端加入前端只读流式演示，用于无 Provider 环境下验证 UI；该演示明确标注 frontend_execution=false / runtime_only=true，不代表真实 AI 回复。
+
+## FE01 STEP31Q / L6.71.7 Provider 设置说明
+
+本轮将 Provider 接入状态前置为用户可理解的四类：真实模型就绪、缺 Provider 配置、启动参数锁定 Mock、配置异常。
+
+- 首页只显示模式摘要，不展示密钥、Base URL 或复杂配置。
+- 设置页集中填写 Provider、Base URL、API Key、主模型。
+- 保存后 Runtime / 本地桥接托管配置，前端立即清空 API Key 与 Base URL 明文输入框。
+- 检查状态只读 `/settings/provider` 公共投影，不调用 Provider SDK。
+- 配置模板只包含占位符，不包含真实密钥。
+
+默认本地桥接配置文件由平台应用数据目录托管：Windows `%APPDATA%\\LinyuanzheDesktop\\provider_config.json`，macOS `~/Library/Application Support/LinyuanzheDesktop/provider_config.json`，Linux `$XDG_CONFIG_HOME/linyuanzhe_desktop/provider_config.json`。UI 和报告只显示 digest / 状态，不回显明文。
+
+## STEP31Q / L6.71.7
+
+新增 DataUp 社区安全更新入口。前端只启动独立更新器，不直接覆盖文件；更新器负责 manifest 校验、路径白名单/黑名单、回滚点、自检与失败回滚。默认双源为 Gitee 主源与 GitHub 备源。

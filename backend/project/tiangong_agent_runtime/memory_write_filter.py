@@ -11,6 +11,7 @@ from typing import Any
 
 from tiangong_kernel.l6_plugins.common._common import ensure_bool, ensure_score
 
+from .biodynamic_policy_core import BioDynamicState, dynamic_count_requirement, dynamic_threshold, weighted_mean
 from .memory_math_core import MemoryLevel, PromotionScoreVector
 
 L6_40_MEMORY_WRITE_FILTER_SCHEMA = "tiangong.l6_40.memory_write_filter.v1"
@@ -87,18 +88,77 @@ class MemoryEvidenceGate:
             ("conflict_score", conflict_score),
         ):
             ensure_score(value, f"MemoryEvidenceGate.{field_name}")
+        promotion_drive = promotion.promotion_score if promotion is not None else confidence_score
+        stability_recovery = promotion.stability if promotion is not None else confidence_score
+        state = BioDynamicState(
+            evidence=confidence_score,
+            drive=weighted_mean(((promotion_drive, 0.55), (confidence_score, 0.45))),
+            privacy_pressure=privacy_risk_score,
+            pollution_pressure=pollution_risk_score,
+            conflict_pressure=conflict_score,
+            uncertainty_pressure=1.0 - confidence_score,
+            recovery=stability_recovery,
+            user_intent=confidence_score,
+        )
+        evidence_required = dynamic_count_requirement(
+            self.minimum_evidence_refs,
+            load=state.load,
+            drive=state.adaptive_drive,
+            minimum=1,
+            maximum=4,
+        )
+        confidence_gate = dynamic_threshold(
+            self.minimum_confidence_score,
+            load=state.load,
+            drive=state.adaptive_drive,
+            recovery=state.recovery,
+            minimum=0.28,
+            maximum=0.76,
+        )
+        privacy_gate = dynamic_threshold(
+            self.privacy_block_threshold,
+            load=state.load,
+            drive=state.adaptive_drive,
+            recovery=state.recovery,
+            minimum=0.58,
+            maximum=0.94,
+        )
+        pollution_gate = dynamic_threshold(
+            self.pollution_review_threshold,
+            load=state.load,
+            drive=state.adaptive_drive,
+            recovery=state.recovery,
+            minimum=0.36,
+            maximum=0.84,
+        )
+        conflict_gate = dynamic_threshold(
+            self.conflict_review_threshold,
+            load=state.load,
+            drive=state.adaptive_drive,
+            recovery=state.recovery,
+            minimum=0.42,
+            maximum=0.88,
+        )
+        l5_sensitivity_gate = dynamic_threshold(
+            0.08,
+            load=state.load,
+            drive=state.adaptive_drive,
+            recovery=state.recovery,
+            minimum=0.02,
+            maximum=0.16,
+        )
         reasons: list[str] = []
-        if len(tuple(evidence_refs)) < self.minimum_evidence_refs:
+        if len(tuple(evidence_refs)) < evidence_required:
             reasons.append("evidence_refs_insufficient")
-        if confidence_score < self.minimum_confidence_score:
-            reasons.append("confidence_below_gate")
-        if privacy_risk_score >= self.privacy_block_threshold:
+        if confidence_score < confidence_gate:
+            reasons.append("confidence_below_dynamic_gate")
+        if privacy_risk_score >= privacy_gate:
             reasons.append("privacy_risk_blocks_context")
-        if pollution_risk_score >= self.pollution_review_threshold:
+        if pollution_risk_score >= pollution_gate:
             reasons.append("pollution_review_required")
-        if conflict_score >= self.conflict_review_threshold:
+        if conflict_score >= conflict_gate:
             reasons.append("conflict_review_required")
-        if level is MemoryLevel.L5 and (privacy_risk_score > 0.0 or pollution_risk_score > 0.0):
+        if level is MemoryLevel.L5 and max(privacy_risk_score, pollution_risk_score) > l5_sensitivity_gate:
             reasons.append("l5_only_system_rules_no_private_or_polluted_memory")
         if promotion is not None and promotion.cannot_promote:
             reasons.append("promotion_vector_rejects_auto_promotion")

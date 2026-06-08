@@ -42,6 +42,16 @@ PLANNABLE_TOOLS: dict[str, frozenset[str]] = {
     "build_l6_39_recovery_integration": frozenset({"notes", "manual_notes", "max_items"}),
     "build_l6_39_quality_gate_integration": frozenset({"notes", "manual_notes"}),
     "build_l6_39_p0_integration": frozenset({"notes", "manual_notes"}),
+    "learning_asset_contract_guide": frozenset({"notes", "manual_notes"}),
+    "learning_asset_contract_normalize": frozenset({"notes", "manual_notes", "max_items"}),
+    "learning_asset_contract_validate": frozenset({"contract", "payload", "notes", "manual_notes"}),
+    "learning_asset_sandbox_guide": frozenset({"notes", "manual_notes"}),
+    "learning_asset_sandbox_align": frozenset({"notes", "manual_notes", "strict"}),
+    "learning_asset_sandbox_validate": frozenset({"notes", "manual_notes"}),
+    "learning_asset_candidate_sandbox_guide": frozenset({"notes", "manual_notes"}),
+    "learning_asset_candidate_sandbox_build": frozenset({"notes", "manual_notes", "max_items"}),
+    "learning_asset_candidate_sandbox_validate": frozenset({"notes", "manual_notes"}),
+    "learning_asset_candidate_sandbox_review": frozenset({"notes", "manual_notes"}),
 }
 
 REQUIRED_FIELDS: dict[str, frozenset[str]] = {
@@ -76,6 +86,16 @@ REQUIRED_FIELDS: dict[str, frozenset[str]] = {
     "build_l6_39_recovery_integration": frozenset(),
     "build_l6_39_quality_gate_integration": frozenset(),
     "build_l6_39_p0_integration": frozenset(),
+    "learning_asset_contract_guide": frozenset(),
+    "learning_asset_contract_normalize": frozenset(),
+    "learning_asset_contract_validate": frozenset(),
+    "learning_asset_sandbox_guide": frozenset(),
+    "learning_asset_sandbox_align": frozenset(),
+    "learning_asset_sandbox_validate": frozenset(),
+    "learning_asset_candidate_sandbox_guide": frozenset(),
+    "learning_asset_candidate_sandbox_build": frozenset(),
+    "learning_asset_candidate_sandbox_validate": frozenset(),
+    "learning_asset_candidate_sandbox_review": frozenset(),
 }
 
 PATH_FIELDS = {"path", "target", "source"}
@@ -387,6 +407,16 @@ def planner_schema_prompt() -> str:
                 "build_l6_39_recovery_integration": {"notes": "optional safe summary", "max_items": "1-20 optional"},
                 "build_l6_39_quality_gate_integration": {"notes": "optional safe summary"},
                 "build_l6_39_p0_integration": {"notes": "optional safe summary"},
+                "learning_asset_contract_guide": {"notes": "optional safe summary"},
+                "learning_asset_contract_normalize": {"notes": "optional safe summary", "max_items": "1-200 optional"},
+                "learning_asset_contract_validate": {"contract": "optional candidate contract payload", "payload": "optional alias"},
+                "learning_asset_sandbox_guide": {"notes": "optional safe summary"},
+                "learning_asset_sandbox_align": {"notes": "optional safe summary", "strict": "boolean optional"},
+                "learning_asset_sandbox_validate": {"notes": "optional safe summary"},
+                "learning_asset_candidate_sandbox_guide": {"notes": "optional safe summary"},
+                "learning_asset_candidate_sandbox_build": {"notes": "optional safe summary", "max_items": "integer optional"},
+                "learning_asset_candidate_sandbox_validate": {"notes": "optional safe summary"},
+                "learning_asset_candidate_sandbox_review": {"notes": "optional safe summary"},
             },
             "safe_prefix_tools": list(WILDCARD_ALLOWED_PREFIXES),
             "forbidden": [

@@ -1,0 +1,56 @@
+{
+  "ok": true,
+  "tool_count": 149,
+  "code_x_tools_present": true,
+  "results": [
+    {
+      "tool_name": "code_x_runtime_status",
+      "status": "ok",
+      "error_code": "",
+      "summary": "Code-X Runtime tools are registered and callable through RuntimeToolRegistry."
+    },
+    {
+      "tool_name": "repo_map",
+      "status": "ok",
+      "error_code": "",
+      "summary": "生成 repo_map：文件 3，技术栈 2，入口 0，测试映射 1。"
+    },
+    {
+      "tool_name": "issue_to_file_localizer",
+      "status": "ok",
+      "error_code": "",
+      "summary": "Code-X 工具 issue_to_file_localizer 已返回结构化结果。"
+    },
+    {
+      "tool_name": "workspace_snapshot",
+      "status": "ok",
+      "error_code": "",
+      "summary": "Code-X 工具 workspace_snapshot 已返回结构化结果。"
+    },
+    {
+      "tool_name": "workspace_patch_applier",
+      "status": "ok",
+      "error_code": "",
+      "summary": "Code-X 工具 workspace_patch_applier 已返回结构化结果。"
+    },
+    {
+      "tool_name": "python_quality_runner",
+      "status": "ok",
+      "error_code": "",
+      "summary": "Code-X 工具 python_quality_runner 已返回结构化结果。"
+    },
+    {
+      "tool_name": "failure_attribution_analyzer",
+      "status": "ok",
+      "error_code": "",
+      "summary": "Primary failure category: syntax_error"
+    },
+    {
+      "tool_name": "code_x_package_workflow",
+      "status": "ok",
+      "error_code": "",
+      "summary": "Code-X package workflow completed."
+    }
+  ],
+  "zip_created": true
+}

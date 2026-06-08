@@ -1,0 +1,104 @@
+{
+  "schema": "tiangong.l6702.r19.learning_asset_release_gate.v1",
+  "generated_at": 1780892180.408119,
+  "status": "registration_request_ready",
+  "summary": "轻量四项门已完成：质量门、发布门、回滚证据、注册申请。",
+  "workspace_root": "/mnt/data/l6718_activate_work/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/backend/project",
+  "report_path": "/mnt/data/l6718_activate_work/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/backend/project/.linyuanzhe/candidate_sandbox/r19/r19_release_gate_request.json",
+  "source_candidate_status": "review_ready",
+  "package_count": 4,
+  "quality_gate": {
+    "decision": "pass",
+    "pass": true,
+    "minimal_checks": [
+      "review_ready",
+      "static_scan_pass",
+      "smoke_pass",
+      "candidate_boundary_clean"
+    ]
+  },
+  "release_gate": {
+    "decision": "pass",
+    "allow_release_request": true,
+    "allow_activation_now": false,
+    "allow_runtime_registration_now": false,
+    "reason": "只允许形成注册申请，不允许自动注册/激活。"
+  },
+  "rollback_evidence": {
+    "ready": true,
+    "items": [
+      {
+        "package_ref": "candidate_package:r18_4104b4b3e19c",
+        "path": "/mnt/data/l6718_activate_work/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/backend/project/.linyuanzhe/candidate_sandbox/r18/skill_质量门失败复盘与最小复测_skill_候选_r18_4104b4b3e19c/rollback_evidence.json",
+        "present": true
+      },
+      {
+        "package_ref": "candidate_package:r18_b21cfe6546ed",
+        "path": "/mnt/data/l6718_activate_work/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/backend/project/.linyuanzhe/candidate_sandbox/r18/tool_最小复测脚手架_tool_缺口候选_r18_b21cfe6546ed/rollback_evidence.json",
+        "present": true
+      },
+      {
+        "package_ref": "candidate_package:r18_456404460190",
+        "path": "/mnt/data/l6718_activate_work/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/backend/project/.linyuanzhe/candidate_sandbox/r18/skill_质量门失败复盘与最小复测_skill_候选_r18_456404460190/rollback_evidence.json",
+        "present": true
+      },
+      {
+        "package_ref": "candidate_package:r18_8c6ae910f18d",
+        "path": "/mnt/data/l6718_activate_work/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/backend/project/.linyuanzhe/candidate_sandbox/r18/tool_最小复测脚手架_tool_缺口候选_r18_8c6ae910f18d/rollback_evidence.json",
+        "present": true
+      }
+    ],
+    "restore_required_before_activation": true
+  },
+  "registration_request": {
+    "ready": true,
+    "request_type": "llm_review_required_before_any_activation",
+    "items": [
+      {
+        "package_ref": "candidate_package:r18_4104b4b3e19c",
+        "path": "/mnt/data/l6718_activate_work/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/backend/project/.linyuanzhe/candidate_sandbox/r18/skill_质量门失败复盘与最小复测_skill_候选_r18_4104b4b3e19c/registration_review.json",
+        "present": true
+      },
+      {
+        "package_ref": "candidate_package:r18_b21cfe6546ed",
+        "path": "/mnt/data/l6718_activate_work/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/backend/project/.linyuanzhe/candidate_sandbox/r18/tool_最小复测脚手架_tool_缺口候选_r18_b21cfe6546ed/registration_review.json",
+        "present": true
+      },
+      {
+        "package_ref": "candidate_package:r18_456404460190",
+        "path": "/mnt/data/l6718_activate_work/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/backend/project/.linyuanzhe/candidate_sandbox/r18/skill_质量门失败复盘与最小复测_skill_候选_r18_456404460190/registration_review.json",
+        "present": true
+      },
+      {
+        "package_ref": "candidate_package:r18_8c6ae910f18d",
+        "path": "/mnt/data/l6718_activate_work/临渊者_FE01_STEP31Q_L6717_R21后端融合包_20260608/backend/project/.linyuanzhe/candidate_sandbox/r18/tool_最小复测脚手架_tool_缺口候选_r18_8c6ae910f18d/registration_review.json",
+        "present": true
+      }
+    ],
+    "runtime_registration_allowed_now": false,
+    "skill_registry_write_allowed_now": false,
+    "tool_handle_release_allowed_now": false,
+    "llm_final_decision_required": true
+  },
+  "issues": [],
+  "issue_count": 0,
+  "chain": [
+    "learning_asset_candidate_sandbox_build",
+    "learning_asset_candidate_sandbox_validate",
+    "learning_asset_candidate_sandbox_review",
+    "learning_asset_release_gate_check"
+  ],
+  "writes_real_skill_registry": false,
+  "registers_runtime_tool": false,
+  "activates_skill": false,
+  "releases_tool_handle": false,
+  "invokes_candidate_tool": false,
+  "dispatches_model": false,
+  "starts_background_loop": false,
+  "imports_v1": false,
+  "copies_v1_source": false,
+  "next_action_hint": {
+    "next_tool": "runtime_tool_alignment_check",
+    "reason": "通过后只生成注册申请证据；是否真实注册/激活仍由 LLM 裁决。"
+  }
+}

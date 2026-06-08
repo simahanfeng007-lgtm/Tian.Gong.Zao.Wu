@@ -6,11 +6,13 @@ from pathlib import Path
 
 from .execution_policy import RiskLevel
 from .tool_invocation import ToolInvocation
+from .code_x_runtime_adapters import CODE_X_TOOL_RISK
+from .v1_clean_import_adapters import V1_CLEAN_TOOL_RISK
 
 A1_TOOLS = {"scan_project", "diagnose_project", "list_dir", "read_file"}
-A2_TOOLS = {"model_chat", "return_code", "return_analysis", "evaluate_quality_gate", "synthesize_experience_candidates", "queue_skill_candidates", "queue_tool_production_requests", "build_execution_exoskeleton", "build_shell_system_mount", "build_project_repair_plan", "build_delivery_standardization", "build_provider_adaptation", "build_learning_convergence", "build_recovery_coordination", "build_governance_execution", "build_planner_context", "build_l6_38_provider_integration", "build_l6_38_budget_snapshot", "build_l6_38_skill_integration", "build_l6_38_handoff_integration", "build_l6_38_p0_integration", "build_l6_39_memory_integration", "build_l6_39_audit_integration", "build_l6_39_recovery_integration", "build_l6_39_quality_gate_integration", "build_l6_39_p0_integration"}
+A2_TOOLS = {"model_chat", "return_code", "return_analysis", "evaluate_quality_gate", "synthesize_experience_candidates", "queue_skill_candidates", "queue_tool_production_requests", "build_execution_exoskeleton", "build_shell_system_mount", "build_project_repair_plan", "build_delivery_standardization", "build_provider_adaptation", "build_learning_convergence", "build_recovery_coordination", "build_governance_execution", "build_planner_context", "build_l6_38_provider_integration", "build_l6_38_budget_snapshot", "build_l6_38_skill_integration", "build_l6_38_handoff_integration", "build_l6_38_p0_integration", "build_l6_39_memory_integration", "build_l6_39_audit_integration", "build_l6_39_recovery_integration", "build_l6_39_quality_gate_integration", "build_l6_39_p0_integration", "runtime_tool_alignment_check", "runtime_llm_operational_drill", "learning_asset_contract_guide", "learning_asset_contract_normalize", "learning_asset_contract_validate", "learning_asset_sandbox_guide", "learning_asset_sandbox_align", "learning_asset_sandbox_validate", "learning_asset_candidate_sandbox_guide", "learning_asset_candidate_sandbox_validate", "learning_asset_candidate_sandbox_review", "learning_asset_release_gate_guide", "learning_asset_release_gate_check", "learning_asset_activation_guide", "learning_asset_activation_status", "learning_asset_adapter_guide", "learning_asset_adapter_template_list", "learning_asset_adapter_template_normalize", "learning_asset_adapter_template_validate", "learning_asset_adapter_template_smoke"}
 WILDCARD_ALLOWED_PREFIXES = ("diagnose_", "scan_", "read_", "list_", "synthesize_")
-A3_TOOLS = {"write_workspace_file", "run_python_quality_check", "create_zip_package", "create_release_bundle"}
+A3_TOOLS = {"write_workspace_file", "run_python_quality_check", "create_zip_package", "create_release_bundle", "learning_asset_candidate_sandbox_build", "learning_asset_activation_apply", "learning_asset_activation_smoke", "learning_asset_adapter_drill"}
 A5_COMMAND_TERMS = {
     "rm",
     "del",
@@ -34,6 +36,27 @@ class RiskClassifier:
 
         tool_name = invocation.tool_name
         args_text = " ".join(str(v).lower() for v in invocation.arguments.values())
+
+        if tool_name in CODE_X_TOOL_RISK:
+            if _contains_dangerous_command(args_text):
+                return RiskLevel.A5, "Code-X 调用参数命中危险命令或破坏性模式。"
+            declared = CODE_X_TOOL_RISK[tool_name]
+            return RiskLevel(declared), f"Code-X 原生工具，风险等级 {declared}，受 Runtime 审计链约束。"
+
+        if tool_name in V1_CLEAN_TOOL_RISK:
+            if _contains_dangerous_command(args_text):
+                return RiskLevel.A5, "v1 纯净导入工具参数命中危险命令或破坏性模式。"
+            declared = V1_CLEAN_TOOL_RISK[tool_name]
+            if declared in {"A1", "A2"} and any(term in args_text for term in SENSITIVE_TERMS):
+                return RiskLevel.A5, "v1 纯净导入工具读取目标疑似敏感路径或凭证。"
+            return RiskLevel(declared), f"v1 非 Code-X 语义纯净重建工具，风险等级 {declared}，受 Runtime 审计链约束。"
+
+        if tool_name.startswith(("learned_tool_", "learned_skill_")):
+            if _contains_dangerous_command(args_text):
+                return RiskLevel.A5, "R20 active learned asset 参数命中危险命令或破坏性模式。"
+            if any(term in args_text for term in SENSITIVE_TERMS):
+                return RiskLevel.A5, "R20 active learned asset 参数疑似包含敏感路径或凭证。"
+            return RiskLevel.A3, "R20 已激活学习资产 learned_*，只允许经 Runtime 注册表和审计链调用。"
 
         if tool_name not in A1_TOOLS | A2_TOOLS | A3_TOOLS and not tool_name.startswith(WILDCARD_ALLOWED_PREFIXES):
             return RiskLevel.A5, "未知工具不允许执行。"
@@ -95,6 +118,46 @@ class RiskClassifier:
                 return RiskLevel.A2, "受治理 L6.39 QualityGate 接入，只生成 QualityGateEvidence，不覆盖裁决、不自动放行发布。"
             if tool_name == "build_l6_39_p0_integration":
                 return RiskLevel.A2, "受治理 L6.39 P0 接入二总报告，只汇总 Memory/Audit/Recovery/QualityGate 的安全摘要/证据/票据/质量引用，不新增 Runtime 不改内核。"
+            if tool_name == "runtime_tool_alignment_check":
+                return RiskLevel.A2, "受治理全局工具注册表/Skill 对齐检查，只读元数据，不执行目标工具，不改注册表。"
+            if tool_name == "runtime_llm_operational_drill":
+                return RiskLevel.A2, "受治理 LLM 路由实操演练，只模拟意图到工具名链，不执行目标工具副作用。"
+            if tool_name == "learning_asset_contract_guide":
+                return RiskLevel.A2, "受治理 R16 未来资产契约指南，只返回 Tool/Skill 统一格式元数据。"
+            if tool_name == "learning_asset_contract_normalize":
+                return RiskLevel.A2, "受治理 R16 未来资产契约归一化，只把候选 Skill/Tool 元数据转为统一格式，不注册不生产。"
+            if tool_name == "learning_asset_contract_validate":
+                return RiskLevel.A2, "受治理 R16 未来资产契约校验，只检查字段/usage card/chain recipe/no-pollution，不激活不写入。"
+            if tool_name == "learning_asset_sandbox_guide":
+                return RiskLevel.A2, "受治理 R17 沙箱对齐指南，只说明已存在 L6.22 Tool 生产请求沙箱前置链，不执行副作用。"
+            if tool_name == "learning_asset_sandbox_align":
+                return RiskLevel.A2, "受治理 R17 沙箱对齐，只把 R16 Tool 契约映射到 L6.22 SandboxValidationPlan，不生产不注册。"
+            if tool_name == "learning_asset_sandbox_validate":
+                return RiskLevel.A2, "受治理 R17 沙箱对齐校验，只复核映射证据，不释放工具句柄。"
+            if tool_name == "learning_asset_candidate_sandbox_guide":
+                return RiskLevel.A2, "受治理 R18 候选包沙箱指南，只返回链路和边界元数据。"
+            if tool_name == "learning_asset_candidate_sandbox_validate":
+                return RiskLevel.A2, "受治理 R18 候选包校验，只复核隔离候选包静态/smoke/回滚证据，不注册不激活。"
+            if tool_name == "learning_asset_candidate_sandbox_review":
+                return RiskLevel.A2, "受治理 R18 候选包注册审阅，只给 LLM 决策证据，不写注册表不释放句柄。"
+            if tool_name == "learning_asset_release_gate_guide":
+                return RiskLevel.A2, "受治理 R19 轻量发布门指南，只返回四项直检链路和边界说明。"
+            if tool_name == "learning_asset_release_gate_check":
+                return RiskLevel.A2, "受治理 R19 轻量发布门，只生成质量门/发布门/回滚证据/注册申请，不注册不激活。"
+            if tool_name == "learning_asset_activation_guide":
+                return RiskLevel.A2, "受治理 R20 学习资产激活指南，只返回注册/激活/回滚规则。"
+            if tool_name == "learning_asset_activation_status":
+                return RiskLevel.A2, "受治理 R20 active asset 状态读取，只加载 workspace 级 learned_* 注册信息。"
+            if tool_name == "learning_asset_adapter_guide":
+                return RiskLevel.A2, "受治理 R21 Adapter 模板指南，只返回模板链路和边界元数据。"
+            if tool_name == "learning_asset_adapter_template_list":
+                return RiskLevel.A2, "受治理 R21 Adapter 模板列表，只返回 LLM 可读 usage card。"
+            if tool_name == "learning_asset_adapter_template_normalize":
+                return RiskLevel.A2, "受治理 R21 Adapter 模板归一化，只生成模板 spec，不注册不激活。"
+            if tool_name == "learning_asset_adapter_template_validate":
+                return RiskLevel.A2, "受治理 R21 Adapter 模板校验，只做 AST/usage/边界检查。"
+            if tool_name == "learning_asset_adapter_template_smoke":
+                return RiskLevel.A2, "受治理 R21 Adapter 模板 smoke，只处理参数内样本，不触网不写 workspace。"
             return RiskLevel.A2, "受治理质量门裁决，不执行外部副作用。"
 
         if _contains_dangerous_command(args_text):
@@ -122,6 +185,18 @@ class RiskClassifier:
 
         if tool_name == "create_release_bundle":
             return RiskLevel.A3, "受控 L6.19 标准发布包构建。"
+
+        if tool_name == "learning_asset_candidate_sandbox_build":
+            return RiskLevel.A3, "受治理 R18 候选包生产沙箱，只能写入隔离 candidate_sandbox 目录，不注册不激活。"
+
+        if tool_name == "learning_asset_activation_apply":
+            return RiskLevel.A3, "受治理 R20 学习资产激活：只写 workspace active_assets/r20，并注册 learned_*，不得覆盖内置工具或导入 v1。"
+
+        if tool_name == "learning_asset_activation_smoke":
+            return RiskLevel.A3, "受治理 R20 active learned asset smoke 调用，只验证 learned_* 是否可用。"
+
+        if tool_name == "learning_asset_adapter_drill":
+            return RiskLevel.A3, "受治理 R21 Adapter drill：生成隔离候选包并经 R20 激活 learned_tool_*，不覆盖内置工具。"
 
         return RiskLevel.A5, "默认安全阻断。"
 

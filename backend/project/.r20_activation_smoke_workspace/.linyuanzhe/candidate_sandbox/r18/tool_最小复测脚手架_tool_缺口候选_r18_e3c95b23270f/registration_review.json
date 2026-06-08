@@ -1,0 +1,19 @@
+{
+  "package_ref": "candidate_package:r18_e3c95b23270f",
+  "asset_ref": "asset_tool_request:r16_e7ad356532f4ae5b",
+  "asset_kind": "tool",
+  "proposed_name": "最小复测脚手架_tool_缺口候选",
+  "review_status": "pending_llm_decision",
+  "required_before_activation": [
+    "static_scan_pass",
+    "smoke_pass",
+    "quality_gate_pass",
+    "release_gate_pass",
+    "rollback_checkpoint",
+    "audit_manifest",
+    "explicit_llm_decision"
+  ],
+  "activation_allowed_now": false,
+  "runtime_registration_allowed_now": false,
+  "skill_registry_write_allowed_now": false
+}

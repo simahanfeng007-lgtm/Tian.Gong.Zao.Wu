@@ -1,15 +1,170 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-from typing import Any, Dict, Mapping
+from typing import Any, Dict, List, Mapping
 
 from .runtime_snapshot import digest_text, safe_text
 from .sse_events import PROVIDER_SETTINGS_ENDPOINT
 
 
 PROVIDER_SETTINGS_WRITE_CONTRACT_VERSION = "tiangong.l6_57.provider_settings_write.v1"
-ALLOWED_PROVIDER_VALUES = {"deepseek", "qwen", "zhipu", "openai", "custom"}
+ALLOWED_PROVIDER_VALUES = {"openai_compatible", "deepseek", "qwen", "zhipu", "openai", "custom"}
 WRITE_ONLY_FIELDS = ("api_key", "base_url")
+
+
+PROVIDER_ERROR_HINTS: Dict[str, tuple[str, str, str]] = {
+    "gateway_unreachable": (
+        "网关不可达",
+        "检查 Tailscale / Base URL / 网关进程后，发送一条短消息复测",
+        "无法连到 OpenAI-compatible 网关。优先检查 Tailscale 是否在线、Base URL 是否为 /v1 上游地址、网关进程是否启动。",
+    ),
+    "auth_failed": (
+        "API Key 无效或未授权",
+        "重新填写 API Key 后保存，再发送短消息复测",
+        "Provider 返回鉴权失败。前端只显示错误类型，不回显 Key。",
+    ),
+    "model_not_found": (
+        "模型不存在或无权限",
+        "确认模型名与账号权限，必要时换成可用模型",
+        "Provider 没有接受当前模型名，或当前 Key 无权调用该模型。",
+    ),
+    "provider_timeout": (
+        "Provider 超时",
+        "检查网络与网关负载，或提高 Runtime 超时后重试",
+        "请求超时。可能是网关无响应、模型排队或链路质量不足。",
+    ),
+    "provider_rate_limited": (
+        "Provider 限流",
+        "降低频率或更换额度后重试",
+        "Provider 返回限流或额度约束。",
+    ),
+    "provider_server_error": (
+        "Provider 服务端错误",
+        "稍后重试；若持续出现，检查网关日志",
+        "Provider 或兼容网关返回 5xx 服务端错误。",
+    ),
+    "provider_runtime_error": (
+        "Provider 联调失败",
+        "查看脱敏错误摘要，修正配置后发送短消息复测",
+        "真实模型链路失败，但前端未直接调用 Provider。",
+    ),
+}
+
+
+def provider_error_user_hint(error_code: Any) -> tuple[str, str, str]:
+    code = safe_text(error_code, 80) or "provider_runtime_error"
+    return PROVIDER_ERROR_HINTS.get(code, PROVIDER_ERROR_HINTS["provider_runtime_error"])
+
+
+@dataclass(frozen=True)
+class ProviderReadinessProjection:
+    """Digest-only Provider readiness projection for UI guidance.
+
+    This object is derived from public Runtime /settings/provider projection. It
+    intentionally contains no raw API key, Base URL, endpoint, token, or secret.
+    """
+
+    readiness: str
+    label: str
+    missing_fields: List[str]
+    effective_backend_mode: str
+    requested_backend_mode: str
+    primary_action: str
+    can_use_real_model: bool
+    mock_mode: bool
+    message: str
+    config_error_code: str = ""
+    severity: str = "info"
+
+    def to_dict(self) -> Dict[str, Any]:
+        return asdict(self)
+
+
+def provider_readiness_from_public_projection(public: Mapping[str, Any]) -> ProviderReadinessProjection:
+    """Return a safe, user-facing Provider readiness summary.
+
+    The function accepts only already-sanitized public fields. It must not be
+    called with raw provider credentials. STEP31Q also interprets the local
+    bridge's last real-provider smoke result, but still only from public/digest
+    projection fields.
+    """
+
+    api_key_configured = bool(public.get("api_key_configured", False))
+    base_url_configured = bool(public.get("base_url_configured", False))
+    requested_mode = safe_text(public.get("requested_backend_mode", "auto"), 40) or "auto"
+    effective_mode = safe_text(public.get("effective_backend_mode", "mock"), 40) or "mock"
+    state = safe_text(public.get("provider_config_state", public.get("status", "idle")), 60)
+    last_check_state = safe_text(public.get("last_provider_check_state", ""), 60)
+    config_error_code = safe_text(public.get("last_provider_error_code") or public.get("config_error_code", ""), 80)
+    missing: List[str] = []
+    raw_missing = public.get("missing_fields")
+    if isinstance(raw_missing, list):
+        missing = [safe_text(item, 40) for item in raw_missing if safe_text(item, 40)]
+    else:
+        if not base_url_configured:
+            missing.append("base_url")
+        if not api_key_configured:
+            missing.append("api_key")
+
+    severity = "info"
+    if last_check_state == "failed" or state in {"error", "rejected", "failed"}:
+        label, primary_action, default_message = provider_error_user_hint(config_error_code)
+        readiness = "error"
+        can_use_real_model = False
+        mock_mode = True
+        severity = "error"
+        detail = safe_text(public.get("last_provider_error_message") or public.get("message") or default_message, 260)
+        message = f"{default_message} 脱敏摘要：{detail}" if detail and detail != default_message else default_message
+    elif effective_mode == "provider" and not missing:
+        readiness = "ready"
+        label = "真实模型就绪"
+        primary_action = "返回会话继续对话"
+        can_use_real_model = True
+        mock_mode = False
+        severity = "ok"
+        if last_check_state == "passed":
+            message = "最近一次真实 Provider 联调通过；配置由 Runtime / 本地桥接托管，前端只显示 digest。"
+        else:
+            message = "Provider 配置已由 Runtime / 本地桥接托管；发送一条短消息即可完成真实链路联调。"
+    elif requested_mode == "mock":
+        readiness = "forced_mock"
+        label = "启动参数锁定 Mock"
+        primary_action = "用 auto/provider 模式重启桌面端"
+        can_use_real_model = False
+        mock_mode = True
+        severity = "warning"
+        message = "当前启动参数为 mock，即使已保存配置也不会走真实模型。"
+    elif missing:
+        readiness = "missing_credentials"
+        label = "缺 Provider 配置"
+        primary_action = "填写 Base URL 与 API Key 后保存"
+        can_use_real_model = False
+        mock_mode = True
+        severity = "warning"
+        cn = {"base_url": "Base URL", "api_key": "API Key"}
+        message = "缺少：" + "、".join(cn.get(item, item) for item in missing) + "；保存后本地桥接 auto 模式会切到 provider。"
+    else:
+        readiness = "saved_waiting_runtime"
+        label = "配置已提交，等待 Runtime 确认"
+        primary_action = "刷新快照或重新发送一条消息"
+        can_use_real_model = False
+        mock_mode = effective_mode != "provider"
+        severity = "warning"
+        message = safe_text(public.get("message", "配置已提交，但 Runtime 尚未返回 provider 模式。"), 220)
+
+    return ProviderReadinessProjection(
+        readiness=readiness,
+        label=label,
+        missing_fields=missing,
+        effective_backend_mode=effective_mode,
+        requested_backend_mode=requested_mode,
+        primary_action=primary_action,
+        can_use_real_model=can_use_real_model,
+        mock_mode=mock_mode,
+        message=message,
+        config_error_code=config_error_code,
+        severity=severity,
+    )
 
 
 @dataclass(frozen=True)
@@ -35,10 +190,10 @@ class ProviderSettingsWriteRequest:
 
     @classmethod
     def from_form(cls, raw: Mapping[str, Any]) -> "ProviderSettingsWriteRequest":
-        provider = safe_text(raw.get("provider", "deepseek"), 40).lower() or "deepseek"
+        provider = safe_text(raw.get("provider", "openai_compatible"), 40).lower() or "openai_compatible"
         if provider not in ALLOWED_PROVIDER_VALUES:
             provider = "custom"
-        model = safe_text(raw.get("model") or raw.get("main_model") or raw.get("model_id") or "deepseek-reasoner", 100)
+        model = safe_text(raw.get("model") or raw.get("main_model") or raw.get("model_id") or "deepseek-v4-pro", 100)
         api_key = "" if raw.get("api_key") is None else str(raw.get("api_key") or "")
         base_url = "" if raw.get("base_url") is None else str(raw.get("base_url") or raw.get("api_base_url") or "")
         if not base_url and raw.get("api_base_url") is not None:

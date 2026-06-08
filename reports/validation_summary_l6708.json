@@ -1,0 +1,45 @@
+{
+  "contract_version": "tiangong.l6_70_8.desktop_transcript_dedupe_verify.v1",
+  "checked_at": "2026-06-07T22:56:06",
+  "ok": true,
+  "desktop_all_in_one_ready": true,
+  "frontend_backend_bundled": true,
+  "local_desktop_bridge_ready": true,
+  "real_runtime_smoke_passed": false,
+  "ready_for_combine": false,
+  "final_installer_allowed": false,
+  "windows_installer_artifact_emitted": false,
+  "runtime_core_mutation": false,
+  "results": [
+    {
+      "name": "desktop_chat_transcript_dedupe_l6708",
+      "ok": true,
+      "returncode": 0,
+      "exit": "/mnt/data/l6709_work/natures-craftsmanship-v2.0-L6.70.9-hotfix/reports/desktop_chat_transcript_dedupe_l6708.exit",
+      "log": "/mnt/data/l6709_work/natures-craftsmanship-v2.0-L6.70.9-hotfix/reports/desktop_chat_transcript_dedupe_l6708.log"
+    },
+    {
+      "name": "desktop_bundle_preflight_l671",
+      "ok": true,
+      "report": "/mnt/data/l6709_work/natures-craftsmanship-v2.0-L6.70.9-hotfix/reports/desktop_bundle_preflight_l671.json"
+    },
+    {
+      "name": "l671_desktop_bundle_compileall",
+      "ok": true,
+      "returncode": 0,
+      "exit": "/mnt/data/l6709_work/natures-craftsmanship-v2.0-L6.70.9-hotfix/reports/l671_desktop_bundle_compileall.exit",
+      "log": "/mnt/data/l6709_work/natures-craftsmanship-v2.0-L6.70.9-hotfix/reports/l671_desktop_bundle_compileall.log"
+    },
+    {
+      "name": "l671_desktop_bundle_scan",
+      "ok": true,
+      "returncode": 0,
+      "exit": "/mnt/data/l6709_work/natures-craftsmanship-v2.0-L6.70.9-hotfix/reports/l671_desktop_bundle_scan.exit",
+      "log": "/mnt/data/l6709_work/natures-craftsmanship-v2.0-L6.70.9-hotfix/reports/l671_desktop_bundle_scan.log"
+    }
+  ],
+  "merge_blockers": [
+    "official real Runtime RC unlock not executed; desktop local bridge is not final RC evidence"
+  ],
+  "note": "L6.70.8 修复桌面端聊天区重复回执与 mock 刷新丢失消息，不替代正式 TiangongWangguan/Runtime 真实联调。"
+}

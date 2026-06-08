@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "python_import_violations": [],
+  "copied_v1_filename_hits": [],
+  "scanned_py_files": 1764,
+  "note": "Audit strings in docs/skill metadata are allowed; v1 code/imports are not."
+}

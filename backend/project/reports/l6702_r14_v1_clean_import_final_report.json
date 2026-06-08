@@ -1,0 +1,86 @@
+{
+  "version": "L6.70.2_R14_v1非CodeX工具纯净去重导入_20260608",
+  "base": "L6.70.2_R13C1_CodeX_LLM使用强化复检_20260608",
+  "status": "PASS",
+  "runtime_total_tools": 125,
+  "code_x_boundary": "unchanged; Code-X remains coding exoskeleton only",
+  "v1_clean_import_tools": [
+    "v1_clean_import_status",
+    "v1_clean_import_audit",
+    "v1_clean_import_guide",
+    "workspace_text_search",
+    "conversation_history_search",
+    "task_pattern_search",
+    "experience_mentor_search",
+    "document_text_extract",
+    "web_readability_extract",
+    "learning_master_plan",
+    "tool_skill_blueprint"
+  ],
+  "llm_skill": "backend/project/tiangong_agent_runtime/skills/v1_clean_import_workflow/SKILL.md",
+  "plan_bridge_commands": [
+    "v1-import status",
+    "v1-import audit",
+    "v1-import guide",
+    "v1-import search <query>",
+    "v1-import conversation <query>",
+    "v1-import task <query>",
+    "v1-import experience <query>",
+    "v1-import document <path>",
+    "v1-import readability <html_or_text>",
+    "v1-import learning <goal>",
+    "v1-import tool-skill <goal>"
+  ],
+  "dedupe_summary": {
+    "deduped_to_codex": [
+      "代码生产链",
+      "终端执行",
+      "代码文件写入",
+      "回滚/打包/交付"
+    ],
+    "deduped_to_v2_lifecycle": [
+      "自我迭代",
+      "心流",
+      "主动驱动"
+    ],
+    "pure_rebuilt_now": [
+      "只读全文搜索",
+      "会话搜索",
+      "历史任务模式复用",
+      "经验/SKILL 搜索",
+      "文档文本提取",
+      "已提供 HTML 可读性清洗",
+      "学习精通规划",
+      "Tool/Skill 生产蓝图草案"
+    ],
+    "deferred": [
+      "真实联网网页搜索",
+      "截图视觉/桌面感知"
+    ]
+  },
+  "no_pollution_assertions": {
+    "copied_v1_source": false,
+    "import_v1": false,
+    "reuse_v1_registry": false,
+    "reuse_v1_executor": false,
+    "reuse_v1_terminal": false,
+    "reuse_v1_provider": false,
+    "reuse_v1_self_iteration": false,
+    "background_loop": false,
+    "planner_or_subagent_override_llm": false
+  },
+  "validation": {
+    "backend_compileall": "PASS",
+    "runtime_pytest": "8 passed",
+    "codex_runtime_smoke": "PASS",
+    "v1_clean_import_smoke": "PASS",
+    "frontend_compileall": "PASS",
+    "frontend_codex_bridge_smoke": "PASS",
+    "no_pollution_scan": "PASS"
+  },
+  "reports": [
+    "backend/project/reports/l6702_codex_runtime_smoke_report.json",
+    "backend/project/reports/l6702_r14_v1_clean_import_smoke_report.json",
+    "frontend/linyuanzhe_frontend/reports/l6702_codex_frontend_bridge_smoke_report.json"
+  ]
+}

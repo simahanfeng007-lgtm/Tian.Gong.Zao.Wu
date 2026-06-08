@@ -21,7 +21,7 @@ from linyuanzhe_frontend.contracts.runtime_controls import (
     TASK_RESET_ENDPOINT,
     TASK_STOP_ENDPOINT,
 )
-from linyuanzhe_frontend.contracts.runtime_snapshot import RuntimeSnapshot, StepSummary, ChatMessage, digest_text, safe_text
+from linyuanzhe_frontend.contracts.runtime_snapshot import RuntimeSnapshot, StepSummary, ChatMessage, digest_text, safe_chat_text, safe_text
 from linyuanzhe_frontend.contracts.file_transfer import FILE_TRANSFER_ENDPOINT, FileTransferPublicRecord, FileTransferRequest
 from linyuanzhe_frontend.contracts.workspace import FILE_AUTHORIZATION_ENDPOINT, WORKSPACE_POLICY_ENDPOINT, FileAuthorizationPublicRecord, FileAuthorizationRequest, WorkspacePolicyProjection
 from linyuanzhe_frontend.contracts.connectors import (
@@ -129,6 +129,7 @@ class SseRuntimeClient:
         self.last_control_result: Dict[str, Any] = {}
         self._active_run_id = ""
         self._active_task_id = ""
+        self._active_user_message = ""
         self._last_seq = 0
         self._seen_assistant_final = False
         self._hook_bus = HookBus.default_frontend_bus()
@@ -145,6 +146,8 @@ class SseRuntimeClient:
             agent_ui_contract=AGENT_UI_CONTRACT_VERSION,
             stream_render_contract=STREAM_RENDER_CONTRACT_VERSION,
             render_mode="delta_merge_virtual_transcript",
+            stream_activity_label="",
+            stream_visual_state="idle",
         )
         self._snapshot.trace_records = []
         self._snapshot.trace_stats = TraceStats.from_records([]).to_dict()
@@ -226,6 +229,26 @@ class SseRuntimeClient:
             "message",
             "audit_id",
             "requires_restart",
+            "requested_backend_mode",
+            "effective_backend_mode",
+            "runtime_credential_persisted",
+            "runtime_credential_store_digest",
+            "provider_readiness",
+            "readiness_label",
+            "missing_fields",
+            "next_action",
+            "config_location_hint",
+            "config_file_state",
+            "config_file_exists",
+            "config_path_digest",
+            "local_bridge_can_persist",
+            "raw_secret_visible_to_frontend",
+            "last_provider_check_state",
+            "last_provider_error_code",
+            "last_provider_error_message",
+            "last_provider_next_action",
+            "last_provider_elapsed",
+            "last_provider_audit_id",
         }
         payload = data.get("payload", data) if isinstance(data, Mapping) else {}
         if not isinstance(payload, Mapping):
@@ -257,6 +280,18 @@ class SseRuntimeClient:
             self._snapshot.provider_config_message = safe_text(self.provider_settings.get("message"), 220)
         if self.provider_settings.get("audit_id"):
             self._snapshot.provider_config_audit_id = safe_text(self.provider_settings.get("audit_id"), 80)
+        if self.provider_settings.get("last_provider_check_state"):
+            self._snapshot.last_provider_check_state = safe_text(self.provider_settings.get("last_provider_check_state"), 60)
+        if self.provider_settings.get("last_provider_error_code"):
+            self._snapshot.last_provider_error_code = safe_text(self.provider_settings.get("last_provider_error_code"), 80)
+        if self.provider_settings.get("last_provider_error_message"):
+            self._snapshot.last_provider_error_message = safe_text(self.provider_settings.get("last_provider_error_message"), 180)
+        if self.provider_settings.get("last_provider_next_action"):
+            self._snapshot.last_provider_next_action = safe_text(self.provider_settings.get("last_provider_next_action"), 120)
+        if self.provider_settings.get("effective_backend_mode"):
+            mode = safe_text(self.provider_settings.get("effective_backend_mode"), 40)
+            if self._snapshot.provider_config_message:
+                self._snapshot.provider_config_message = safe_text(f"{self._snapshot.provider_config_message}；effective_backend_mode={mode}", 220)
 
     def _apply_product_identity(self, data: Mapping[str, Any]) -> None:
         allowed = {
@@ -289,19 +324,52 @@ class SseRuntimeClient:
             self._snapshot.connector_registration_records = [ConnectorRegistrationPublicRecord.from_mapping(x) for x in records if isinstance(x, Mapping)][:40]
         self._snapshot.connector_last_message = safe_text(payload.get("message", "连接器注册表投影已读取"), 220)
 
+    def _normalize_session_stats(self, stats_payload: Mapping[str, Any], sessions: List[TaskSessionProjection]) -> Dict[str, Any]:
+        computed = SessionManagerStats.from_sessions(sessions).to_dict()
+        out: Dict[str, Any] = dict(computed)
+        if isinstance(stats_payload, Mapping):
+            aliases = {
+                "total_count": "total",
+                "running_count": "running",
+                "waiting_confirmation_count": "waiting_confirmation",
+                "blocked_count": "blocked",
+                "recoverable_count": "recoverable",
+                "completed_count": "completed",
+                "failed_count": "failed",
+                "queued_count": "queued",
+            }
+            for key, value in stats_payload.items():
+                normalized_key = aliases.get(str(key), str(key))
+                try:
+                    out[normalized_key] = int(value)
+                except (TypeError, ValueError):
+                    out[normalized_key] = value
+        for key, value in computed.items():
+            if key not in out or out.get(key) in (None, ""):
+                out[key] = value
+        return out
+
+    def _drop_legacy_mock_sessions(self, sessions: List[TaskSessionProjection]) -> List[TaskSessionProjection]:
+        return [
+            item for item in sessions
+            if not safe_text(getattr(item, "session_id_digest", ""), 80).upper().startswith("SESS-MOCK")
+        ]
+
     def _apply_session_manager(self, data: Mapping[str, Any]) -> None:
         payload = data.get("payload", data) if isinstance(data, Mapping) else {}
         if not isinstance(payload, Mapping):
             payload = {}
         sessions_payload = payload.get("task_sessions", payload.get("sessions", []))
-        sessions: list[TaskSessionProjection] = []
+        stats_payload = payload.get("session_stats", payload.get("stats", {}))
         if isinstance(sessions_payload, list):
-            sessions = [TaskSessionProjection.from_mapping(x) for x in sessions_payload if isinstance(x, Mapping)][:80]
-        if sessions:
+            sessions = self._drop_legacy_mock_sessions([TaskSessionProjection.from_mapping(x) for x in sessions_payload if isinstance(x, Mapping)][:80])
+            # Runtime endpoint is canonical even when it returns an empty list.
+            # Keeping the previous list here leaks FE mock rows into the real desktop bridge.
             self._snapshot.task_sessions = sessions
-            stats_payload = payload.get("session_stats", payload.get("stats", {}))
-            self._snapshot.session_stats = dict(stats_payload) if isinstance(stats_payload, Mapping) else SessionManagerStats.from_sessions(sessions).to_dict()
+            self._snapshot.session_stats = self._normalize_session_stats(stats_payload if isinstance(stats_payload, Mapping) else {}, sessions)
             self._snapshot.session_filtered_count = len(sessions)
+        elif isinstance(stats_payload, Mapping):
+            self._snapshot.session_stats = self._normalize_session_stats(stats_payload, list(self._snapshot.task_sessions or []))
         self._snapshot.session_manager_state = safe_text(payload.get("session_manager_state", payload.get("state", "ready")), 80)
         self._snapshot.session_last_message = safe_text(payload.get("session_last_message", payload.get("message", "任务 Session 投影已读取")), 220)
 
@@ -487,6 +555,9 @@ class SseRuntimeClient:
             self._snapshot.runtime_status = safe_text(payload.get("runtime_status", "active"), 60)
             self._snapshot.current_task_status = "RUNNING"
             self._snapshot.connection_status = "Runtime SSE 已连接"
+            self._snapshot.stream_state = "thinking"
+            self._snapshot.stream_visual_state = "thinking"
+            self._snapshot.stream_activity_label = "临渊者正在思考"
             if payload.get("provider_model"):
                 self._snapshot.provider_model = safe_text(payload.get("provider_model"), 80)
                 self._snapshot.model_provider = self._snapshot.provider_model
@@ -494,6 +565,9 @@ class SseRuntimeClient:
         elif name == "planner_started":
             self._snapshot.planner_mode = safe_text(payload.get("planner_mode", self._snapshot.planner_mode), 80)
             self._snapshot.current_stage = "Planner 正在生成计划"
+            self._snapshot.stream_state = "thinking"
+            self._snapshot.stream_visual_state = "thinking"
+            self._snapshot.stream_activity_label = "临渊者正在思考"
             self._snapshot.progress_percent = max(self._snapshot.progress_percent, 15)
         elif name == "planner_plan":
             raw_steps = payload.get("steps") or []
@@ -578,17 +652,18 @@ class SseRuntimeClient:
                 self._snapshot.recovery_ticket_id = rollback_ref
             self._snapshot.recovery_requires_human_confirmation = bool(payload.get("requires_human_confirmation", False))
         elif name == "assistant_delta":
-            content = safe_text(payload.get("content", ""), 1200)
+            content = safe_chat_text(payload.get("content", ""), 1200)
             if content:
                 self._delta_merger.push(content)
                 self._flush_pending_assistant_delta(force=False)
+            self._snapshot.stream_state = "streaming"
+            self._snapshot.stream_visual_state = "streaming"
+            self._snapshot.stream_activity_label = "正在输出"
             self._snapshot.current_stage = "Runtime 正在流式输出"
-            self._snapshot.chat_messages = self._transcript.visible_messages()
-            self._snapshot.visible_message_count = self._transcript.visible_message_count
         elif name == "assistant_final":
             self._seen_assistant_final = True
             self._flush_pending_assistant_delta(force=True)
-            content = safe_text(payload.get("content", ""), 1000)
+            content = safe_chat_text(payload.get("content", ""), 8000)
             status = safe_text(payload.get("status", "ok"), 64)
             if content:
                 self._transcript.finalize_assistant(content)
@@ -599,7 +674,14 @@ class SseRuntimeClient:
             self._snapshot.progress_percent = max(self._snapshot.progress_percent, 90)
         elif name == "run_terminal":
             self._flush_pending_assistant_delta(force=True)
+            terminal_status = safe_text(payload.get("status", "ok"), 64)
+            if terminal_status == "ok" and self._snapshot.current_task_status not in {"PARTIAL_OR_FAILED", "BLOCKED"}:
+                self._snapshot.current_task_status = "COMPLETED"
             self._snapshot.stream_state = "completed"
+            self._snapshot.stream_visual_state = "completed"
+            self._snapshot.stream_activity_label = "已完成"
+            self._snapshot.current_stage = "Runtime SSE 已收口"
+            self._snapshot.execution_stage = "任务已完成" if self._snapshot.current_task_status == "COMPLETED" else "任务已收口，需检查异常"
             self._snapshot.connection_status = "Runtime SSE 已收口：assistant_final -> run_terminal"
             self._snapshot.progress_percent = 100 if self._snapshot.current_task_status == "COMPLETED" else self._snapshot.progress_percent
         elif name == "error":
@@ -608,6 +690,8 @@ class SseRuntimeClient:
             self._snapshot.current_task_status = "PARTIAL_OR_FAILED"
             self._snapshot.runtime_status = "error"
             self._snapshot.stream_state = "error"
+            self._snapshot.stream_visual_state = "error"
+            self._snapshot.stream_activity_label = "已停止"
             self._snapshot.connection_status = f"Runtime error：{code}"
             self._transcript.finalize_assistant(message, time="错误")
             self._snapshot.chat_messages = self._transcript.visible_messages()
@@ -622,6 +706,68 @@ class SseRuntimeClient:
             self._apply_hook_block(event, post_decision)
         self._sync_derived_projection()
 
+    def _runtime_session_status(self) -> str:
+        status = safe_text(self._snapshot.current_task_status, 60).upper()
+        if status in {"COMPLETED", "DONE", "SUCCESS"}:
+            return "completed"
+        if status in {"RUNNING", "STREAMING"}:
+            return "running"
+        if status in {"BLOCKED", "A5_BLOCKED"}:
+            return "blocked"
+        if status in {"PARTIAL_OR_FAILED", "STREAM_INTERRUPTED", "ERROR", "FAILED"}:
+            return "recoverable"
+        if status in {"DISCONNECTED"}:
+            return "paused"
+        if status in {"READY", "IDLE"}:
+            return "queued"
+        return status.lower() if status else "queued"
+
+    def _sync_active_session_projection(self) -> None:
+        s = self._snapshot
+        if not (self._active_run_id or s.active_run_id or self._active_task_id or s.active_task_id):
+            s.session_stats = self._normalize_session_stats({}, list(s.task_sessions or []))
+            return
+        run_id = self._active_run_id or s.active_run_id or s.session_id
+        task_id = self._active_task_id or s.active_task_id or s.task_snapshot.task_id
+        session_digest = digest_text(run_id or task_id or s.session_id, 16)
+        status = self._runtime_session_status()
+        waiting = bool(s.pending_confirmation_count > 0 or s.task_snapshot.waiting_user_confirmation)
+        blocked = status == "blocked" or bool(s.blocked_count > 0 and not s.quality_allow_continue)
+        recoverable = status in {"recoverable", "failed", "paused", "blocked"} or bool(s.recovery_resume_plan_count > 0 or s.recovery_ticket_id)
+        title = safe_text(self._active_user_message or s.task_snapshot.current_stage or s.current_stage or "当前任务", 120)
+        active = status == "running"
+        projected = TaskSessionProjection(
+            session_id_digest=session_digest,
+            title=title or "当前任务",
+            status=status,
+            current_stage=safe_text(s.task_snapshot.current_stage or s.current_stage, 140),
+            progress_percent=s.progress_percent,
+            waiting_confirmation=waiting,
+            blocked=blocked,
+            recoverable=recoverable,
+            active=active,
+            last_updated="当前",
+            run_id_digest=digest_text(run_id, 16),
+            task_id_digest=digest_text(task_id, 16),
+            audit_id=s.audit_id or s.evidence_ref,
+            tags=["runtime_projection", s.stream_state],
+            message="当前任务由 Runtime SSE 投影；前端只显示和提交请求。",
+        )
+        existing = self._drop_legacy_mock_sessions(list(s.task_sessions or []))
+        replaced = False
+        updated: List[TaskSessionProjection] = []
+        for item in existing:
+            if safe_text(getattr(item, "session_id_digest", ""), 80) == session_digest:
+                updated.append(projected)
+                replaced = True
+            else:
+                updated.append(item)
+        if not replaced:
+            updated.insert(0, projected)
+        s.task_sessions = updated[:80]
+        s.session_stats = self._normalize_session_stats({}, s.task_sessions)
+        s.session_filtered_count = len(s.task_sessions)
+
     def _sync_derived_projection(self) -> None:
         s = self._snapshot
         s.task_snapshot.current_stage = s.current_stage
@@ -633,10 +779,13 @@ class SseRuntimeClient:
         s.task_snapshot.snapshot_ref = s.audit_id or s.evidence_ref
         s.conversation_guide.intent_summary = f"当前 Runtime 状态：{s.current_task_status}"
         s.conversation_guide.risk_hint = s.gate_status
-        if s.action_guard_cards:
+        pending_from_cards = sum(1 for card in s.action_guard_cards if card.requires_user_confirmation and card.status in {"pending_user_confirmation", "display_only"})
+        pending_from_tickets = len([item for item in (s.pending_confirmations or []) if not safe_text(item.get("runtime_status", item.get("frontend_decision_request", item.get("frontend_decision", ""))), 80)])
+        s.pending_confirmation_count = max(pending_from_cards, pending_from_tickets)
+        s.task_snapshot.waiting_user_confirmation = bool(s.pending_confirmation_count > 0)
+        if pending_from_cards:
             s.conversation_guide.recommended_actions = ["查看行动守卫卡", "提交确认请求", "必要时中断任务"]
             s.conversation_guide.suggested_questions = ["请解释这张行动守卫卡为什么需要确认", "如果拒绝会怎样", "只执行低风险部分"]
-            s.pending_confirmation_count = sum(1 for card in s.action_guard_cards if card.requires_user_confirmation and card.status in {"pending_user_confirmation", "display_only"})
         elif s.file_transfer_records and getattr(s.file_transfer_records[-1], "status", "") not in {"ready", "idle"}:
             s.conversation_guide.recommended_actions = ["让临渊者读取附件摘要", "确认文件用途", "必要时中断任务"]
             s.conversation_guide.suggested_questions = ["请基于附件继续分析", "请列出附件中的风险点", "请生成下一步执行计划"]
@@ -648,6 +797,8 @@ class SseRuntimeClient:
         s.pending_delta_chars = self._delta_merger.pending_chars
         s.visible_message_count = self._transcript.visible_message_count
         s.hidden_message_count = self._transcript.hidden_message_count
+        s.task_sessions = self._drop_legacy_mock_sessions(list(s.task_sessions or []))
+        self._sync_active_session_projection()
         self._sync_hook_projection()
 
     def _connection_failure_snapshot(self, reason: str) -> RuntimeSnapshot:
@@ -932,7 +1083,7 @@ class SseRuntimeClient:
                 self._snapshot = RuntimeSnapshot.from_mapping({**self._snapshot.to_dict(), **snapshot_data, "source_kind": "runtime_json_response"})
                 self._notify_snapshot(on_snapshot)
         else:
-            self._snapshot.chat_messages.append(ChatMessage("assistant", "临渊者", "响应", safe_text(parsed, 500)))
+            self._snapshot.append_assistant_notice_once("响应", safe_text(parsed, 500), "runtime_json_response", safe_text(parsed, 180), window=20)
             self._notify_snapshot(on_snapshot)
 
     def submit_user_message(self, text: str) -> RuntimeSnapshot:
@@ -947,6 +1098,7 @@ class SseRuntimeClient:
         max_reconnects: Optional[int] = None,
     ) -> RuntimeSnapshot:
         safe_message = safe_text(text, 1000)
+        self._active_user_message = safe_message
         self._snapshot.chat_messages.append(ChatMessage("user", "你", "当前", safe_message))
         self._transcript.load(self._snapshot.chat_messages)
         self._delta_merger = DeltaMerger(flush_interval_ms=45, max_chars=1200)
@@ -955,7 +1107,13 @@ class SseRuntimeClient:
         self._snapshot.agent_ui_contract = AGENT_UI_CONTRACT_VERSION
         self._snapshot.stream_render_contract = STREAM_RENDER_CONTRACT_VERSION
         self._snapshot.render_mode = "delta_merge_virtual_transcript"
-        self._snapshot.stream_state = "streaming"
+        self._snapshot.pending_confirmation_count = 0
+        self._snapshot.pending_confirmations = []
+        self._snapshot.action_guard_cards = []
+        self._snapshot.task_snapshot.waiting_user_confirmation = False
+        self._snapshot.stream_state = "thinking"
+        self._snapshot.stream_visual_state = "thinking"
+        self._snapshot.stream_activity_label = "临渊者正在思考"
         self._snapshot.runtime_status = "active"
         self._snapshot.current_task_status = "RUNNING"
         self._snapshot.current_stage = "Runtime SSE 流式提交中"
@@ -985,6 +1143,8 @@ class SseRuntimeClient:
                     resume = True
                     self._snapshot.reconnect_attempts = attempt
                     self._snapshot.stream_state = "reconnecting"
+                    self._snapshot.stream_visual_state = "reconnecting"
+                    self._snapshot.stream_activity_label = "断线续接中"
                     self._snapshot.connection_status = f"Runtime SSE 断流，正在续接 {attempt}/{allowed_reconnects}"
                     self._notify_snapshot(on_snapshot)
                     continue
@@ -998,6 +1158,8 @@ class SseRuntimeClient:
                 resume = True
                 self._snapshot.reconnect_attempts = attempt
                 self._snapshot.stream_state = "reconnecting"
+                self._snapshot.stream_visual_state = "reconnecting"
+                self._snapshot.stream_activity_label = "断线续接中"
                 self._snapshot.connection_status = f"Runtime SSE 未收到 run_terminal，正在续接 {attempt}/{allowed_reconnects}"
                 self._notify_snapshot(on_snapshot)
                 continue
@@ -1012,13 +1174,23 @@ class SseRuntimeClient:
         if not self._snapshot.terminal_order_valid:
             self._snapshot.current_task_status = "PARTIAL_OR_FAILED"
             self._snapshot.stream_state = "error"
+            self._snapshot.stream_visual_state = "error"
+            self._snapshot.stream_activity_label = "已停止"
             self._snapshot.connection_status = "Runtime SSE 事件顺序异常：缺少 assistant_final -> run_terminal"
         elif "run_terminal" not in [item.event for item in events]:
             self._snapshot.current_task_status = "STREAM_INTERRUPTED"
             self._snapshot.stream_state = "interrupted"
+            self._snapshot.stream_visual_state = "interrupted"
+            self._snapshot.stream_activity_label = "已停止"
             self._snapshot.connection_status = "Runtime SSE 流未完整收口：未收到 run_terminal"
         elif self._snapshot.stream_state not in {"error"}:
             self._snapshot.stream_state = "completed"
+            self._snapshot.stream_visual_state = "completed"
+            self._snapshot.stream_activity_label = "已完成"
+        try:
+            self._apply_session_manager(self._json_request(SESSION_LIST_ENDPOINT))
+        except Exception as exc:
+            self._snapshot.session_last_message = f"任务 Session 收口刷新失败：{safe_text(exc, 160)}"
         self._sync_derived_projection()
         self._notify_snapshot(on_snapshot)
         return self._snapshot
@@ -1036,7 +1208,7 @@ class SseRuntimeClient:
                 frontend_only_fallback=True,
             ).__dict__
             self._snapshot.control_state = f"{request.action}_blocked_by_hook"
-            self._snapshot.chat_messages.append(ChatMessage("assistant", "临渊者", "控制", self.last_control_result["message"]))
+            self._snapshot.append_assistant_notice_once("控制", self.last_control_result["message"], "控制", self.last_control_result["message"], window=20)
             self._sync_derived_projection()
             return self._snapshot
         try:
@@ -1048,7 +1220,7 @@ class SseRuntimeClient:
                 self._snapshot.audit_id = result.audit_id
                 self._snapshot.evidence_ref = result.audit_id
             if result.message:
-                self._snapshot.chat_messages.append(ChatMessage("assistant", "临渊者", "控制", result.message))
+                self._snapshot.append_assistant_notice_once("控制", result.message, "控制", result.message, window=20)
         except Exception as exc:
             self.last_control_result = RuntimeControlResult(
                 action=request.action,
@@ -1057,7 +1229,7 @@ class SseRuntimeClient:
                 frontend_only_fallback=True,
             ).__dict__
             self._snapshot.control_state = f"{request.action}_frontend_fallback_recorded"
-            self._snapshot.chat_messages.append(ChatMessage("assistant", "临渊者", "控制", self.last_control_result["message"]))
+            self._snapshot.append_assistant_notice_once("控制", self.last_control_result["message"], "控制", self.last_control_result["message"], window=20)
         self._sync_derived_projection()
         return self._snapshot
 
@@ -1264,7 +1436,12 @@ class SseRuntimeClient:
         return self._snapshot
 
     def request_session_resume(self, session_id_digest: str, reason: str = "user_requested_resume") -> RuntimeSnapshot:
-        request = SessionResumeRequest(session_id_digest=safe_text(session_id_digest, 80), reason=safe_text(reason, 120))
+        safe_session = safe_text(session_id_digest, 80)
+        if safe_session.upper().startswith("SESS-MOCK"):
+            self._snapshot.record_session_resume_request(safe_session, status="mock_session_discarded", message="已清理旧版演示 Session；未向 Runtime 提交恢复请求。")
+            self._sync_derived_projection()
+            return self._snapshot
+        request = SessionResumeRequest(session_id_digest=safe_session, reason=safe_text(reason, 120))
         payload = request.to_payload()
         hook_decision = self._evaluate_hook(HOOK_STAGE_PRE_CONTROL_REQUEST, {"payload": payload, "run_id": self._active_run_id, "task_id": self._active_task_id})
         if not hook_decision.ok:
@@ -1317,7 +1494,12 @@ class SseRuntimeClient:
         hook_decision = self._evaluate_hook(HOOK_STAGE_PRE_CONFIRMATION_SUBMIT, {"payload": envelope_payload, "ticket_id": envelope.ticket_id, "run_id": envelope.run_id, "task_id": envelope.task_id})
         if not hook_decision.ok:
             self._snapshot.confirmation_request_state = "blocked_by_hook"
-            self._snapshot.chat_messages.append(ChatMessage("assistant", "临渊者", "确认", f"HookBus 阻断确认请求：{hook_decision.reason}"))
+            self._snapshot.append_chat_message_once(
+                ChatMessage("assistant", "临渊者", "确认", f"HookBus 阻断确认请求：{hook_decision.reason}"),
+                "HookBus 阻断确认请求",
+                safe_text(hook_decision.reason, 160),
+                window=20,
+            )
             self._sync_derived_projection()
             return self._snapshot
         try:
@@ -1342,11 +1524,40 @@ class SseRuntimeClient:
             for card in self._snapshot.action_guard_cards:
                 if safe_text(card.ticket_id, 80) == envelope.ticket_id:
                     object.__setattr__(card, "status", f"runtime_{status}")
-            self._snapshot.chat_messages.append(ChatMessage("assistant", "临渊者", "确认", "确认请求已提交 Runtime 网关；等待 QualityGate/Audit 回执，不由前端放行。"))
+            self._snapshot.append_chat_message_once(
+                ChatMessage("assistant", "临渊者", "确认", "确认请求已提交 Runtime 网关；等待 QualityGate/Audit 回执，不由前端放行。"),
+                "确认请求已提交 Runtime 网关",
+                window=20,
+            )
         except Exception as exc:
             self._snapshot.submit_confirmation(envelope.ticket_id, envelope.decision)
             self._snapshot.confirmation_request_state = "frontend_fallback_recorded"
-            self._snapshot.chat_messages.append(ChatMessage("assistant", "临渊者", "确认", f"确认请求未到达 Runtime，仅前端记录请求：{safe_text(exc, 160)}"))
+            fallback_message = f"确认请求未到达 Runtime，仅前端记录请求：{safe_text(exc, 160)}"
+            self._snapshot.append_chat_message_once(
+                ChatMessage("assistant", "临渊者", "确认", fallback_message),
+                "确认请求未到达 Runtime",
+                safe_text(exc, 160),
+                window=20,
+            )
+        self._sync_derived_projection()
+        return self._snapshot
+
+
+    def run_startup_self_check(self) -> RuntimeSnapshot:
+        try:
+            data = self._json_request("/installer/startup/self-check", method="GET")
+            payload = data.get("payload", data) if isinstance(data, Mapping) else {}
+            if not isinstance(payload, Mapping):
+                payload = {}
+            raw_checks = payload.get("startup_self_checks", payload.get("checks", []))
+            checks = [StartupSelfCheckRecord.from_mapping(x) for x in raw_checks if isinstance(x, Mapping)][:40] if isinstance(raw_checks, list) else []
+            status = safe_text(payload.get("status", "pass" if payload.get("ok", False) else "warn"), 80)
+            self._snapshot.record_installer_self_check_result(checks, status=status)
+        except Exception as exc:
+            self._snapshot.record_installer_self_check_result(
+                [StartupSelfCheckRecord(check_id="startup_self_check_http", name="启动自检请求", status="fail", message=f"自检请求失败：{safe_text(exc, 160)}")],
+                status="frontend_request_failed",
+            )
         self._sync_derived_projection()
         return self._snapshot
 
@@ -1354,17 +1565,33 @@ class SseRuntimeClient:
         payload = {"candidate_id": safe_text(candidate_id, 80), "decision": safe_text(decision, 32), "frontend_contract": ACTION_GUARD_CONTRACT_VERSION, "no_frontend_self_iteration_apply": True}
         hook_decision = self._evaluate_hook(HOOK_STAGE_PRE_SELF_ITERATION_CONFIRM, {"payload": payload})
         if not hook_decision.ok:
-            self._snapshot.chat_messages.append(ChatMessage("assistant", "临渊者", "自我迭代", f"HookBus 阻断自我迭代确认请求：{hook_decision.reason}"))
+            self._snapshot.append_chat_message_once(
+                ChatMessage("assistant", "临渊者", "自我迭代", f"HookBus 阻断自我迭代确认请求：{hook_decision.reason}"),
+                "HookBus 阻断自我迭代确认请求",
+                safe_text(hook_decision.reason, 160),
+                window=20,
+            )
             self._sync_derived_projection()
             return self._snapshot
-        try:
-            self._json_request(
-                "/self-iteration/confirm",
-                method="POST",
-                payload=payload,
-            )
-            self._snapshot.chat_messages.append(ChatMessage("assistant", "临渊者", "自我迭代", "自我迭代确认已提交 Runtime 网关；不由前端直接合入。"))
-        except Exception as exc:
-            self._snapshot.submit_self_iteration_confirmation(candidate_id, decision)
-            self._snapshot.chat_messages.append(ChatMessage("assistant", "临渊者", "自我迭代", f"自我迭代确认未到达 Runtime，仅前端记录请求：{safe_text(exc, 160)}"))
+        last_error = ""
+        for endpoint in ("/self-iteration/confirm", "/self_iteration/confirm", "/self-iteration/confirm/request"):
+            try:
+                data = self._json_request(endpoint, method="POST", payload=payload)
+                payload_out = data.get("payload", data) if isinstance(data, Mapping) else {}
+                status = safe_text(payload_out.get("status", "accepted") if isinstance(payload_out, Mapping) else "accepted", 80)
+                self._snapshot.submit_self_iteration_confirmation(candidate_id, decision, runtime_submitted=True, runtime_status=status)
+                self._sync_derived_projection()
+                return self._snapshot
+            except Exception as exc:
+                last_error = safe_text(exc, 160)
+                continue
+        self._snapshot.submit_self_iteration_confirmation(candidate_id, decision)
+        fallback_message = f"自我迭代确认未到达 Runtime，仅前端记录请求：{last_error}"
+        self._snapshot.append_chat_message_once(
+            ChatMessage("assistant", "临渊者", "自我迭代", fallback_message),
+            "自我迭代确认未到达 Runtime",
+            last_error,
+            window=20,
+        )
+        self._sync_derived_projection()
         return self._snapshot

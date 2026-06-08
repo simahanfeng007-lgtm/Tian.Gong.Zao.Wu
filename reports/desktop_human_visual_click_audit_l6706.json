@@ -1,0 +1,214 @@
+{
+  "ok": true,
+  "schema": "tiangong.fe01.step31f.human_visual_click_audit.v1",
+  "version": "FE01 STEP31F / L6.70.6",
+  "checks": [
+    {
+      "name": "page_render:chat",
+      "ok": true,
+      "detail": "widgets=27"
+    },
+    {
+      "name": "page_render:sessions",
+      "ok": true,
+      "detail": "widgets=57"
+    },
+    {
+      "name": "page_scrollable:sessions",
+      "ok": true,
+      "detail": "non-chat page has outer scroll canvas"
+    },
+    {
+      "name": "page_render:memory",
+      "ok": true,
+      "detail": "widgets=68"
+    },
+    {
+      "name": "page_scrollable:memory",
+      "ok": true,
+      "detail": "non-chat page has outer scroll canvas"
+    },
+    {
+      "name": "page_render:four_paths",
+      "ok": true,
+      "detail": "widgets=44"
+    },
+    {
+      "name": "page_scrollable:four_paths",
+      "ok": true,
+      "detail": "non-chat page has outer scroll canvas"
+    },
+    {
+      "name": "page_render:settings",
+      "ok": true,
+      "detail": "widgets=138"
+    },
+    {
+      "name": "page_scrollable:settings",
+      "ok": true,
+      "detail": "non-chat page has outer scroll canvas"
+    },
+    {
+      "name": "page_render:execution",
+      "ok": true,
+      "detail": "widgets=61"
+    },
+    {
+      "name": "page_scrollable:execution",
+      "ok": true,
+      "detail": "non-chat page has outer scroll canvas"
+    },
+    {
+      "name": "page_render:observability",
+      "ok": true,
+      "detail": "widgets=80"
+    },
+    {
+      "name": "page_scrollable:observability",
+      "ok": true,
+      "detail": "non-chat page has outer scroll canvas"
+    },
+    {
+      "name": "page_render:files",
+      "ok": true,
+      "detail": "widgets=25"
+    },
+    {
+      "name": "page_scrollable:files",
+      "ok": true,
+      "detail": "non-chat page has outer scroll canvas"
+    },
+    {
+      "name": "page_render:workspace",
+      "ok": true,
+      "detail": "widgets=49"
+    },
+    {
+      "name": "page_scrollable:workspace",
+      "ok": true,
+      "detail": "non-chat page has outer scroll canvas"
+    },
+    {
+      "name": "page_render:connectors",
+      "ok": true,
+      "detail": "widgets=56"
+    },
+    {
+      "name": "page_scrollable:connectors",
+      "ok": true,
+      "detail": "non-chat page has outer scroll canvas"
+    },
+    {
+      "name": "page_render:iteration",
+      "ok": true,
+      "detail": "widgets=23"
+    },
+    {
+      "name": "page_scrollable:iteration",
+      "ok": true,
+      "detail": "non-chat page has outer scroll canvas"
+    },
+    {
+      "name": "page_render:installer",
+      "ok": true,
+      "detail": "widgets=51"
+    },
+    {
+      "name": "page_scrollable:installer",
+      "ok": true,
+      "detail": "non-chat page has outer scroll canvas"
+    },
+    {
+      "name": "page_render:hooks",
+      "ok": true,
+      "detail": "widgets=69"
+    },
+    {
+      "name": "page_scrollable:hooks",
+      "ok": true,
+      "detail": "non-chat page has outer scroll canvas"
+    },
+    {
+      "name": "theme:warm_gray_root",
+      "ok": true,
+      "detail": "#F6F7F5"
+    },
+    {
+      "name": "theme:warm_gray_sidebar_repaint",
+      "ok": true,
+      "detail": "#F1F2EF"
+    },
+    {
+      "name": "theme:ink_green_root",
+      "ok": true,
+      "detail": "#07110F"
+    },
+    {
+      "name": "chat:stream_completed",
+      "ok": true,
+      "detail": "completed"
+    },
+    {
+      "name": "chat:no_pending_confirmation_for_simple_message",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "name": "chat:no_mock_session_leak",
+      "ok": true,
+      "detail": "mock sessions filtered"
+    },
+    {
+      "name": "chat:scroll_pinned_after_refresh",
+      "ok": true,
+      "detail": "yview=(0.9484220442769665, 1.0)"
+    },
+    {
+      "name": "file:transfer_ack",
+      "ok": true,
+      "detail": "accepted"
+    },
+    {
+      "name": "workspace:write_auth_mode",
+      "ok": true,
+      "detail": "write"
+    },
+    {
+      "name": "workspace:write_auth_scope",
+      "ok": true,
+      "detail": "workspace_outbox"
+    },
+    {
+      "name": "connector:registration_ack",
+      "ok": true,
+      "detail": "record exists"
+    },
+    {
+      "name": "connector:visible_notice",
+      "ok": true,
+      "detail": "notice captured"
+    },
+    {
+      "name": "installer:self_check",
+      "ok": true,
+      "detail": "pass"
+    },
+    {
+      "name": "provider:key_digest_saved",
+      "ok": true,
+      "detail": "{'provider': 'deepseek', 'model': 'deepseek-reasoner', 'provider_config_state': 'ready', 'provider_readiness': 'ready', 'readiness_label': '真实模型就绪', 'missing_fields': [], 'next_action': '发送一条短消息完成真实链路联调', 'config_error_code': '', 'message': '本地桌面桥接后端已就绪；真实模型配置由本机 Runtime 凭证文件托管。', 'audit_id': 'audit_local_provider_b1e271c78bed4c50', 'last_provider_check_state': 'not_tested', 'last_provider_error_code': '', 'last_provider_error_message': '', 'last_provider_next_action': '发送一条短消息完成真实链路联调', 'last_provider_elapsed': '', 'last_provider_audit_id': '', 'planner_mode': 'rule_only', 'tool_execution_mode': 'runtime_governed', 'stream': True, 'api_key_configured': True, 'api_key_digest': 'fba93b20b34292be', 'base_url_configured': True, 'base_url_digest': 'cd4a9f297a66ee3b', 'runtime_credential_persisted': True, 'runtime_credential_store_digest': '2dc92f3f7469c3f1', 'config_file_exists': True, 'config_file_state': 'exists', 'config_location_hint': 'system_user_config_dir/LinyuanzheDesktop/provider_config.json', 'config_path_digest': '2dc92f3f7469c3f1', 'local_bridge_can_persist': True, 'raw_secret_visible_to_frontend': False, 'requested_backend_mode': 'auto', 'effective_backend_mode': 'provider'}"
+    },
+    {
+      "name": "provider:auto_switches_to_provider",
+      "ok": true,
+      "detail": "{'provider': 'deepseek', 'model': 'deepseek-reasoner', 'provider_config_state': 'ready', 'provider_readiness': 'ready', 'readiness_label': '真实模型就绪', 'missing_fields': [], 'next_action': '发送一条短消息完成真实链路联调', 'config_error_code': '', 'message': '本地桌面桥接后端已就绪；真实模型配置由本机 Runtime 凭证文件托管。', 'audit_id': 'audit_local_provider_b1e271c78bed4c50', 'last_provider_check_state': 'not_tested', 'last_provider_error_code': '', 'last_provider_error_message': '', 'last_provider_next_action': '发送一条短消息完成真实链路联调', 'last_provider_elapsed': '', 'last_provider_audit_id': '', 'planner_mode': 'rule_only', 'tool_execution_mode': 'runtime_governed', 'stream': True, 'api_key_configured': True, 'api_key_digest': 'fba93b20b34292be', 'base_url_configured': True, 'base_url_digest': 'cd4a9f297a66ee3b', 'runtime_credential_persisted': True, 'runtime_credential_store_digest': '2dc92f3f7469c3f1', 'config_file_exists': True, 'config_file_state': 'exists', 'config_location_hint': 'system_user_config_dir/LinyuanzheDesktop/provider_config.json', 'config_path_digest': '2dc92f3f7469c3f1', 'local_bridge_can_persist': True, 'raw_secret_visible_to_frontend': False, 'requested_backend_mode': 'auto', 'effective_backend_mode': 'provider'}"
+    }
+  ],
+  "messagebox_calls": [
+    {
+      "kind": "info",
+      "title": "连接器注册已提交",
+      "message": "本地 MCP 候选连接器 · mcp_server · accepted。默认禁用，只读待审；前端未安装或执行 MCP。"
+    }
+  ]
+}

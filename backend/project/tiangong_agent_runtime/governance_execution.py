@@ -20,6 +20,7 @@ from typing import Any
 
 from tiangong_agent_shell.safe_logging import redact_text
 
+from .biodynamic_policy_core import BioDynamicState
 from .tool_invocation import ToolInvocation
 from .tool_result import ToolResult, ToolResultStatus
 from .turn_context import TurnContext
@@ -46,6 +47,8 @@ class GovernanceFastLane:
     runtime_governed: bool = True
     direct_execution_now: bool = False
     mutates_policy: bool = False
+    dynamic_activation_score: float = 0.0
+    adaptive_threshold: float = 0.0
 
     def __post_init__(self) -> None:
         if any(level not in A0_A4_LEVELS for level in self.risk_levels):
@@ -65,6 +68,8 @@ class GovernanceFastLane:
             "runtime_governed": self.runtime_governed,
             "direct_execution_now": self.direct_execution_now,
             "mutates_policy": self.mutates_policy,
+            "dynamic_activation_score": self.dynamic_activation_score,
+            "adaptive_threshold": self.adaptive_threshold,
         }
 
 
@@ -495,41 +500,94 @@ def stable_governance_execution_digest(report: GovernanceExecutionReport) -> str
     return hashlib.sha256(encoded).hexdigest()[:16]
 
 
+def _lane_with_biodynamics(
+    *,
+    lane_ref: str,
+    lane_name: str,
+    risk_levels: tuple[str, ...],
+    action_kinds: tuple[str, ...],
+    planner_policy: str,
+    quality_gate_position: str,
+    evidence: float,
+    drive: float,
+    load: float,
+    recovery: float,
+) -> GovernanceFastLane:
+    state = BioDynamicState(
+        evidence=evidence,
+        drive=drive,
+        resource_pressure=load,
+        failure_pressure=load * 0.45,
+        uncertainty_pressure=load * 0.35,
+        recovery=recovery,
+        reversibility=recovery,
+        user_intent=drive,
+    )
+    threshold = state.threshold(0.44, minimum=0.24, maximum=0.72)
+    return GovernanceFastLane(
+        lane_ref=lane_ref,
+        lane_name=lane_name,
+        risk_levels=risk_levels,
+        action_kinds=action_kinds,
+        planner_policy=planner_policy,
+        quality_gate_position=quality_gate_position,
+        dynamic_activation_score=round(state.execution_score, 4),
+        adaptive_threshold=threshold,
+    )
+
+
 def _default_fast_lanes() -> list[GovernanceFastLane]:
-    return [
-        GovernanceFastLane(
-            lane_ref="lane:a0_a2_read_analyze_plan",
-            lane_name="A0-A2 只读分析与计划快车道",
-            risk_levels=("A0", "A1", "A2"),
-            action_kinds=("scan", "read", "diagnose", "planner_hint", "governance_projection"),
-            planner_policy="默认允许生成分析、诊断、计划与治理投影；不因质量门失败阻断草案。",
-            quality_gate_position="quality_gate_observes_draft_but_blocks_release_only",
-        ),
-        GovernanceFastLane(
-            lane_ref="lane:a2_a3_draft_smoke_repair",
-            lane_name="A2-A3 草案 / smoke / 最小修复快车道",
-            risk_levels=("A2", "A3"),
-            action_kinds=("tool_draft", "skill_draft", "patch_plan", "smoke_test", "targeted_regression"),
-            planner_policy="允许生成最小草案、修复计划和 smoke 验证；正式写入、注册、激活另走护栏。",
-            quality_gate_position="quality_gate_runs_before_delivery_or_activation",
-        ),
-        GovernanceFastLane(
-            lane_ref="lane:a1_a4_resume_handoff_budget",
-            lane_name="A1-A4 续接 / Handoff / 预算投影快车道",
-            risk_levels=("A1", "A2", "A3", "A4"),
-            action_kinds=("resume_plan", "handoff_digest", "budget_projection", "rollback_evidence"),
-            planner_policy="允许把长链失败压成续接计划和投影；A4 真实副作用仍不直接执行。",
-            quality_gate_position="quality_gate_blocks_release_not_resume_projection",
-        ),
-        GovernanceFastLane(
-            lane_ref="lane:a2_a3_delivery_evidence",
-            lane_name="A2-A3 交付证据快车道",
-            risk_levels=("A2", "A3"),
-            action_kinds=("change_set", "test_evidence", "manifest_evidence", "integrity_evidence"),
-            planner_policy="允许整理交付证据、测试证据和完整性摘要；正式发布包仍走 Release Gate。",
-            quality_gate_position="release_gate_after_evidence_before_publish",
-        ),
-    ]
+    lane_specs = (
+        {
+            "lane_ref": "lane:a0_a2_read_analyze_plan",
+            "lane_name": "A0-A2 只读分析与计划快车道",
+            "risk_levels": ("A0", "A1", "A2"),
+            "action_kinds": ("scan", "read", "diagnose", "planner_hint", "governance_projection"),
+            "planner_policy": "默认允许生成分析、诊断、计划与治理投影；不因质量门失败阻断草案。",
+            "quality_gate_position": "quality_gate_observes_draft_but_blocks_release_only",
+            "evidence": 0.86,
+            "drive": 0.82,
+            "load": 0.16,
+            "recovery": 0.84,
+        },
+        {
+            "lane_ref": "lane:a2_a3_draft_smoke_repair",
+            "lane_name": "A2-A3 草案 / smoke / 最小修复快车道",
+            "risk_levels": ("A2", "A3"),
+            "action_kinds": ("tool_draft", "skill_draft", "patch_plan", "smoke_test", "targeted_regression"),
+            "planner_policy": "允许生成最小草案、修复计划和 smoke 验证；正式写入、注册、激活另走护栏。",
+            "quality_gate_position": "quality_gate_runs_before_delivery_or_activation",
+            "evidence": 0.76,
+            "drive": 0.86,
+            "load": 0.32,
+            "recovery": 0.78,
+        },
+        {
+            "lane_ref": "lane:a1_a4_resume_handoff_budget",
+            "lane_name": "A1-A4 续接 / Handoff / 预算投影快车道",
+            "risk_levels": ("A1", "A2", "A3", "A4"),
+            "action_kinds": ("resume_plan", "handoff_digest", "budget_projection", "rollback_evidence"),
+            "planner_policy": "允许把长链失败压成续接计划和投影；A4 真实副作用仍不直接执行。",
+            "quality_gate_position": "quality_gate_blocks_release_not_resume_projection",
+            "evidence": 0.74,
+            "drive": 0.80,
+            "load": 0.42,
+            "recovery": 0.88,
+        },
+        {
+            "lane_ref": "lane:a2_a3_delivery_evidence",
+            "lane_name": "A2-A3 交付证据快车道",
+            "risk_levels": ("A2", "A3"),
+            "action_kinds": ("change_set", "test_evidence", "manifest_evidence", "integrity_evidence"),
+            "planner_policy": "允许整理交付证据、测试证据和完整性摘要；正式发布包仍走 Release Gate。",
+            "quality_gate_position": "release_gate_after_evidence_before_publish",
+            "evidence": 0.82,
+            "drive": 0.78,
+            "load": 0.28,
+            "recovery": 0.86,
+        },
+    )
+    return [_lane_with_biodynamics(**spec) for spec in lane_specs]
 
 
 def _build_boundaries(

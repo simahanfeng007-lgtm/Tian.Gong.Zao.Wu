@@ -242,7 +242,8 @@ class RuntimeContractHandler(BaseHTTPRequestHandler):
         parsed = self._read_json_body()
         if self.path == CHAT_STREAM_ENDPOINT:
             resume = bool(parsed.get("resume"))
-            events = self._chat_events(resume=resume)
+            message = safe_text(parsed.get("message", parsed.get("user_message", "")), 200)
+            events = self._chat_events(resume=resume, message=message)
             self._send_sse(events)
             return
         if self.path == PROVIDER_SETTINGS_ENDPOINT:
@@ -371,9 +372,20 @@ class RuntimeContractHandler(BaseHTTPRequestHandler):
         self._send_json({"error": "not_found"}, status=404)
 
     @staticmethod
-    def _chat_events(*, resume: bool = False) -> List[Dict[str, Any]]:
+    def _chat_events(*, resume: bool = False, message: str = "") -> List[Dict[str, Any]]:
         run_id = "run_l657_resume" if resume else "run_l657"
         task_id = "task_l657"
+        if any(term in message.lower() for term in ("code-x", "codex", "代码外骨骼")):
+            return [
+                {"event": "run_started", "seq": 1, "run_id": run_id, "task_id": task_id, "timestamp": "2026-06-08T00:00:00Z", "payload": {"runtime_status": "active", "provider_model": "deepseek-v4-pro", "code_x_enabled": True}},
+                {"event": "planner_plan", "seq": 2, "run_id": run_id, "task_id": task_id, "timestamp": "2026-06-08T00:00:01Z", "payload": {"steps": [{"name": "Code-X Runtime 状态", "status": "queued", "risk_level": "A2"}, {"name": "repo_map", "status": "queued", "risk_level": "A1"}, {"name": "python_quality_runner", "status": "queued", "risk_level": "A3"}]}},
+                {"event": "runtime_state", "seq": 3, "run_id": run_id, "task_id": task_id, "timestamp": "2026-06-08T00:00:02Z", "payload": {"phase": "code_x", "progress_percent": 35, "status_bar": {"runtime_status": "active", "provider_model": "deepseek-v4-pro", "budget_pool": "code_x", "budget_used_ratio": "0.18", "gate_status": "A0-A4 allowed / A5 blocked", "audit_id": "audit_codex_stream", "memory_mode": "read_only_projection", "tools_allowed": 66, "latency_ms": 20}}},
+                {"event": "tool_started", "seq": 4, "run_id": run_id, "task_id": task_id, "timestamp": "2026-06-08T00:00:03Z", "payload": {"step_id": "step_codex_1", "tool_name": "code_x_runtime_status"}},
+                {"event": "tool_result", "seq": 5, "run_id": run_id, "task_id": task_id, "timestamp": "2026-06-08T00:00:04Z", "payload": {"step_id": "step_codex_1", "tool_name": "code_x_runtime_status", "status": "ok", "risk_level": "A2", "audit_ref": "audit_codex_status", "output_summary": "Code-X Runtime tools are registered and callable."}},
+                {"event": "tool_result", "seq": 6, "run_id": run_id, "task_id": task_id, "timestamp": "2026-06-08T00:00:05Z", "payload": {"step_id": "step_codex_2", "tool_name": "repo_map", "status": "ok", "risk_level": "A1", "audit_ref": "audit_codex_repo_map", "output_summary": "repo_map completed; next_action_hint=issue_to_file_localizer"}},
+                {"event": "assistant_final", "seq": 7, "run_id": run_id, "task_id": task_id, "timestamp": "2026-06-08T00:00:06Z", "payload": {"content": "Code-X 可用链路已进入 Runtime 可见投影。", "status": "ok"}},
+                {"event": "run_terminal", "seq": 8, "run_id": run_id, "task_id": task_id, "timestamp": "2026-06-08T00:00:07Z", "payload": {"terminal": True, "final_event_seen": True}},
+            ]
         return [
             {"event": "run_started", "seq": 1, "run_id": run_id, "task_id": task_id, "timestamp": "2026-06-07T00:00:00Z", "payload": {"runtime_status": "active", "provider_model": "deepseek-v4-pro"}},
             {"event": "planner_started", "seq": 2, "run_id": run_id, "task_id": task_id, "timestamp": "2026-06-07T00:00:01Z", "payload": {"planner_mode": "model_suggest", "schema_required": True}},

@@ -1,0 +1,41 @@
+临渊者 FE01 STEP31L / L6.71.2 前端第一轮修复报告
+
+目标：
+- 首页对话优先，不再像运维监控面板。
+- 左侧导航从 13 项收敛为 5 项。
+- 右侧 Runtime 状态默认收起为“会话信息”。
+- 底部指标条改为极简状态提示。
+- Provider 配置入口集中到设置页向导。
+- 回车发送滚动稳定回归通过。
+
+本轮已改：
+1. 首页主聊天区扩大，右侧默认折叠，只保留“会话信息”入口。
+2. 右侧展开后只显示一个组合会话信息面板：模式、阶段、质量门、审计、建议。
+3. 左侧主导航只保留：会话 / 任务 / 记忆 / 系统 / 设置。
+4. 执行详情、运行观测、文件交接、工作区、连接器、迭代、安装、规则仍保留为隐藏路由，可由二级按钮进入。
+5. 顶部栏只保留版本、新会话、设置。
+6. 底部状态栏改为：就绪 / 模式 / 质量门 / 审计。
+7. 发送区保留附件、发送、中断、任务；停止/复位/重连下沉，不再挤压首页。
+8. Provider 默认改为 openai_compatible，默认模型 deepseek-v4-pro；设置页新增“检查配置”。
+9. 本地桥接同时支持 TIANGONG_PROVIDER / TIANGONG_MODEL / TIANGONG_BASE_URL / TIANGONG_API_KEY 与旧 LINYUANZHE_* 环境变量。
+10. API Key/Base URL 保存后仍清空明文，只显示 configured/digest。
+
+验证摘要：
+- compileall：通过
+- desktop_entry_layout_audit_l6710：通过
+- cross_platform_desktop_audit_l6710：通过
+- desktop_windows_line_ending_audit_l6707：通过
+- desktop_bundle_preflight_l671：通过
+- verify_l671_release：通过
+- desktop_human_visual_click_audit_l6706：通过，40 项
+- step31l_ui_acceptance：通过，8 项
+- scan_l659：通过，secret_scan hit_count=0
+- validate_demo_package.py：失败；原因是它仍按旧 STEP19 / L6.58 测试/文档清单校验，当前包未携带这些历史文件。
+
+边界：
+- 未直接调用工具。
+- 未裸调 Provider SDK。
+- 未写记忆。
+- 未绕过 Runtime。
+- 未修改后端 Runtime 主链。
+- 未泄露 API Key、token、secret 原文。

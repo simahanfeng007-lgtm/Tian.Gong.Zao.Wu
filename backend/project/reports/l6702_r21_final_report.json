@@ -1,0 +1,68 @@
+{
+  "name": "L6.70.2_R21_学习资产实用型Adapter强化_20260608",
+  "status": "PASS",
+  "baseline": "L6.70.2_R20_学习资产受控注册激活可用闭环_20260608",
+  "core_result": "R21 added practical learned tool adapter templates and activation drill while preserving R20 controlled activation.",
+  "runtime_tool_count_base": 149,
+  "runtime_tool_count_after_adapter_drill": 154,
+  "adapter_template_count": 5,
+  "new_tools": [
+    "learning_asset_adapter_guide",
+    "learning_asset_adapter_template_list",
+    "learning_asset_adapter_template_normalize",
+    "learning_asset_adapter_template_validate",
+    "learning_asset_adapter_template_smoke",
+    "learning_asset_adapter_drill"
+  ],
+  "commands": [
+    "asset-adapter guide",
+    "asset-adapter templates",
+    "asset-adapter normalize <template_id>",
+    "asset-adapter validate <template_id>",
+    "asset-adapter smoke <template_id|all>",
+    "asset-adapter drill",
+    "runtime-tools tool <learned_tool_name> {json_args}"
+  ],
+  "templates": [
+    "pure_transform",
+    "schema_contract_check",
+    "project_diagnostic",
+    "doc_skill_production",
+    "experience_reuse"
+  ],
+  "r20_compatibility_fix": "R18/R20 candidate static test renderer now writes valid Python instead of Markdown into tests/test_static_contract.py.",
+  "regression": {
+    "backend_compileall": "PASS",
+    "frontend_compileall": "PASS",
+    "pytest": "22 passed",
+    "codex_runtime_smoke": "PASS",
+    "r20_activation_smoke": "PASS",
+    "r21_adapter_smoke": "PASS",
+    "runtime_tool_alignment": "PASS",
+    "frontend_bridge_smoke": "PASS",
+    "no_pollution": "PASS"
+  },
+  "reports": [
+    "reports/l6702_r21_backend_compileall.log",
+    "reports/l6702_r21_pytest.log",
+    "reports/l6702_r21_codex_runtime_smoke.log",
+    "reports/l6702_r21_learning_asset_activation_smoke_report.json",
+    "reports/l6702_r21_learning_asset_adapter_smoke_report.json",
+    "reports/l6702_r21_runtime_tool_alignment_smoke_report.json",
+    "reports/l6702_r21_frontend_bridge_smoke_report.json",
+    "reports/l6702_r21_no_pollution_scan.json"
+  ],
+  "no_pollution_assertions": {
+    "no_v1_import_ast": true,
+    "no_v1_source_copy": true,
+    "no_v1_registry_reuse_detected": true,
+    "no_v1_executor_reuse_detected": true,
+    "no_v1_terminal_reuse_detected": true,
+    "no_v1_provider_reuse_detected": true,
+    "no_v1_self_iteration_reuse_detected": true,
+    "no_monkey_patch_added": true,
+    "no_background_loop_added": true,
+    "r21_generated_adapter_exec_free": true
+  },
+  "next_step": "R22 should connect practical adapters into richer real-world repo failure summarization and SWE-bench style evaluation harness without allowing adapters to run shell/network directly."
+}

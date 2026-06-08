@@ -1,0 +1,16 @@
+临渊者 FE01 STEP31G / L6.70.7 Windows 换行符与交付入口修复说明
+
+本包基于 STEP31F / L6.70.6，仅做 Windows 交付兼容性收口：
+
+1. 已确认 L6.70.6 中多数 .bat 启动脚本为 Unix LF 换行。
+2. 已将所有 .bat/.cmd/.ps1 Windows 入口脚本统一转换为 CRLF。
+3. 已清理顶层历史 mojibake 重名脚本，避免 Windows 解压后出现乱码启动入口。
+4. Python 源码与 .sh 脚本保持 LF，不改变运行逻辑。
+5. 新增推荐入口：启动临渊者桌面端_L6707.bat / START_DESKTOP_L6707.bat。
+
+推荐启动顺序：
+- Windows 中文入口：启动临渊者桌面端_L6707.bat
+- 英文入口：START_DESKTOP_L6707.bat
+- 自检入口：一键自检_L6707.bat 或 SELF_CHECK_L6707.bat
+
+边界：本次不改 Runtime 主链、不改 Planner、不改工具执行逻辑，只修 Windows 文件交付与入口脚本格式。

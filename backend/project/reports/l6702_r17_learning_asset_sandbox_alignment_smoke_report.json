@@ -1,0 +1,101 @@
+{
+  "ok": true,
+  "direct_statuses": [
+    "ok",
+    "ok",
+    "ok",
+    "ok",
+    "ok",
+    "ok",
+    "ok",
+    "ok"
+  ],
+  "sandbox_validate_status": "pass",
+  "existing_sandbox_found": true,
+  "sandbox_profile": "isolated_workspace_candidate_only",
+  "tool_contract_count": 2,
+  "aligned_tool_contract_count": 2,
+  "issue_count": 0,
+  "llm_runs": [
+    {
+      "label": "guide",
+      "plan_tools": [
+        "learning_asset_sandbox_guide"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "R17 已找到并说明现有 L6.22 Tool 生产请求沙箱化与验证前置链；本工具只返回对齐指南。"
+      ],
+      "errors": []
+    },
+    {
+      "label": "drill",
+      "plan_tools": [
+        "learning_asset_sandbox_guide",
+        "synthesize_experience_candidates",
+        "queue_skill_candidates",
+        "queue_tool_production_requests",
+        "learning_asset_contract_normalize",
+        "learning_asset_contract_validate",
+        "learning_asset_sandbox_align",
+        "learning_asset_sandbox_validate"
+      ],
+      "statuses": [
+        "ok",
+        "ok",
+        "ok",
+        "ok",
+        "ok",
+        "ok",
+        "ok",
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "R17 已找到并说明现有 L6.22 Tool 生产请求沙箱化与验证前置链；本工具只返回对齐指南。",
+        "L6.20 经验沉淀候选报告：status=candidate_ready；signals=1；lessons=1；skill_candidates=1；tool_gap_candidates=1；governance_transfers=2。已从安全摘要中提取 1 个经验信号，形成 1 条教训候选、1 个 Skill 候选、1 个 Tool 缺口候选。其中 P0/P1 信号 0 个。所有输出均为候选，不执行写入、注册、生产或发布。",
+        "L6.21 Skill 候选版本化审阅队列：status=queue_ready；draft_versions=2；review_queue=2；queue_only=True；execution_first=True。Skill 候选已转成草案版本并进入审阅队列；source_status=candidate_ready；source_candidates=1；本次新增=1；队列累计=2；已接收人工备注。草案可继续排序、审阅、导出和转交，但不会自动注册或激活。",
+        "L6.22 Tool 生产请求沙箱化队列：status=request_ready；requests=2；sandbox_plans=2；queue=2；request_only=True；execution_first=True。Tool 缺口候选已转成生产请求、沙箱验证前置计划并进入队列；source_status=candidate_ready；source_candidates=1；本次新增=1；队列累计=2；已接收人工备注。请求可继续排序、审阅、导出和转交，但不会自",
+        "R16 未来 Tool/Skill 统一资产契约：status=pass；contracts=4；issues=0。已将现有经验候选、Skill 草案、Tool 请求归一为同一资产契约；kinds={'skill': 2, 'tool': 2}；source_counts={'experience_skill_candidates': 1, 'experience_tool_gap_candidates': 1, 'skill_draft_versions': 2, 'too",
+        "R16 未来 Tool/Skill 统一资产契约：status=pass；contracts=4；issues=0。已校验 4 个候选契约；问题 0 个。",
+        "R17 Tool/Skill 统一资产沙箱对齐：status=aligned；existing_sandbox=True；contracts=4；tool_contracts=2；requests=2；sandbox_plans=2；issues=0。已把 R16 Tool 类资产契约映射到 L6.22 ToolProductionRequest/SandboxValidationPlan；tool_contracts=2；requests=2；plans=2；aligned",
+        "R17 Tool/Skill 统一资产沙箱对齐：status=pass；existing_sandbox=True；contracts=4；tool_contracts=2；requests=2；sandbox_plans=2；issues=0。已把 R16 Tool 类资产契约映射到 L6.22 ToolProductionRequest/SandboxValidationPlan；tool_contracts=2；requests=2；plans=2；aligned=2；"
+      ],
+      "errors": []
+    },
+    {
+      "label": "natural",
+      "plan_tools": [
+        "learning_asset_sandbox_guide",
+        "learning_asset_sandbox_align",
+        "learning_asset_sandbox_validate"
+      ],
+      "statuses": [
+        "ok",
+        "ok",
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "R17 已找到并说明现有 L6.22 Tool 生产请求沙箱化与验证前置链；本工具只返回对齐指南。",
+        "R17 Tool/Skill 统一资产沙箱对齐：status=aligned；existing_sandbox=True；contracts=4；tool_contracts=2；requests=2；sandbox_plans=2；issues=0。已把 R16 Tool 类资产契约映射到 L6.22 ToolProductionRequest/SandboxValidationPlan；tool_contracts=2；requests=2；plans=2；aligned",
+        "R17 Tool/Skill 统一资产沙箱对齐：status=pass；existing_sandbox=True；contracts=4；tool_contracts=2；requests=2；sandbox_plans=2；issues=0。已把 R16 Tool 类资产契约映射到 L6.22 ToolProductionRequest/SandboxValidationPlan；tool_contracts=2；requests=2；plans=2；aligned=2；"
+      ],
+      "errors": []
+    }
+  ],
+  "tool_count": 133,
+  "usage_card_count": 133,
+  "skill_sources": [
+    "skill.code_x_execution_workflow",
+    "skill.v1_clean_import_workflow",
+    "skill.runtime_tool_alignment_workflow",
+    "skill.learning_asset_contract_workflow",
+    "skill.learning_asset_sandbox_alignment_workflow"
+  ],
+  "drill_missing_tool_routes": [],
+  "drill_empty_routes": []
+}

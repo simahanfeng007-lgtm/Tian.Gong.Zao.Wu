@@ -1,0 +1,35 @@
+临渊者桌面驾驶舱 FE01 STEP31I / L6.70.9
+
+本包目标：三端通用。Windows、macOS、Linux 均走同一套 Python 启动器，系统脚本只做薄封装。
+
+一、Windows
+1. 双击：启动临渊者桌面端_L6709.bat
+2. 自检：一键自检_L6709.bat
+
+二、macOS
+1. 双击：启动临渊者桌面端_L6709.command
+2. 自检：一键自检_L6709.command
+3. 如系统阻止执行，可在终端运行：chmod +x *.command *.sh
+
+三、Linux / macOS 终端
+1. 启动：./start_desktop_l6709.sh
+2. 自检：./self_check_l6709.sh
+3. 强制演示：./start_desktop_mock_l6709.sh
+4. 强制真实模型：./start_desktop_provider_l6709.sh
+
+四、环境要求
+- Python 3.10+
+- Tkinter/Tcl-Tk 可用
+- Windows：建议官方 Python 3.10/3.11/3.12，安装时勾选 Tcl/Tk and IDLE
+- macOS：建议 python.org Python 或 Homebrew Python，并确保 tkinter 可用
+- Linux：通常需要安装 python3-tk / tk 包
+
+五、配置保存位置
+- Windows：%APPDATA%/LinyuanzheDesktop/provider_config.json
+- macOS：~/Library/Application Support/LinyuanzheDesktop/provider_config.json
+- Linux：${XDG_CONFIG_HOME:-~/.config}/linyuanzhe_desktop/provider_config.json
+
+六、说明
+- 前端仍不直接执行工具、不写记忆、不写审计、不直接回滚。
+- 本地桥用于桌面包联调，不替代正式 TiangongWangguan / Runtime RC 解阻。
+- ready_for_combine=false 属于边界标记，不代表桌面三端包不可用。

@@ -21,6 +21,7 @@ from typing import Any
 
 from tiangong_agent_shell.safe_logging import redact_text
 
+from .biodynamic_policy_core import BioDynamicState, bounded_growth, weighted_mean
 from .tool_invocation import ToolInvocation
 from .tool_result import ToolResult, ToolResultStatus
 from .turn_context import TurnContext
@@ -30,6 +31,29 @@ SENSITIVE_PATTERN = re.compile(
     r"(?i)(api[_-]?key|authorization|bearer|token|secret|password|credential)\s*[:=]\s*[^\s,;]+"
 )
 SENSITIVE_WORDS = ("api_key", "apikey", "authorization", "bearer", "token", "secret", "password", "credential")
+
+_INTENT_MARKERS: dict[str, tuple[str, ...]] = {
+    "bundle": ("zip", "打包", "发布", "release", "bundle", "package", "交付"),
+    "test": ("test", "pytest", "测试", "regression", "smoke", "验证", "quality"),
+    "scan": ("scan", "扫描", "检索", "diagnose", "诊断", "audit", "审计"),
+    "report": ("报告", "report", "summary", "摘要", "handoff", "接力"),
+}
+
+
+def _marker_activation(text: str, markers: tuple[str, ...]) -> float:
+    lowered = text.lower()
+    hits = 0.0
+    for marker in markers:
+        token = marker.lower()
+        if token and token in lowered:
+            hits += 1.0
+    return bounded_growth(min(1.0, hits / max(1, len(markers))))
+
+
+def _dominant_intent(text: str) -> tuple[str, dict[str, float]]:
+    scores = {intent: _marker_activation(text, markers) for intent, markers in _INTENT_MARKERS.items()}
+    best = max(scores, key=lambda key: scores[key])
+    return best, scores
 
 
 @dataclass(frozen=True)
@@ -469,33 +493,44 @@ def _build_tool_ticket(raw: dict[str, Any]) -> ToolCandidateTicket:
     )
 
 
+def _intent_ready(intent: str, scores: dict[str, float], *, base_threshold: float = 0.34) -> bool:
+    state = BioDynamicState(
+        evidence=scores.get(intent, 0.0),
+        drive=weighted_mean(tuple((score, 1.0) for score in scores.values()), default=0.0),
+        uncertainty_pressure=1.0 - scores.get(intent, 0.0),
+        recovery=scores.get(intent, 0.0),
+        user_intent=scores.get(intent, 0.0),
+    )
+    return state.execution_score >= state.threshold(base_threshold, minimum=0.22, maximum=0.66)
+
+
 def _infer_inputs(purpose: str) -> list[str]:
-    text = purpose.lower()
-    if "zip" in text or "打包" in text or "发布" in text:
+    intent, scores = _dominant_intent(purpose)
+    if intent == "bundle" and _intent_ready("bundle", scores):
         return ["source_relative_path", "target_relative_zip_path", "manifest_metadata"]
-    if "test" in text or "pytest" in text or "测试" in text:
+    if intent == "test" and _intent_ready("test", scores):
         return ["workspace_relative_path", "test_target", "quality_command"]
-    if "scan" in text or "扫描" in text or "检索" in text:
+    if intent == "scan" and _intent_ready("scan", scores):
         return ["workspace_relative_path", "include_patterns", "max_files"]
     return ["workspace_relative_path", "safe_text_or_json_arguments"]
 
 
 def _infer_outputs(purpose: str) -> list[str]:
-    text = purpose.lower()
-    if "报告" in text or "report" in text:
+    intent, scores = _dominant_intent(purpose)
+    if intent == "report" and _intent_ready("report", scores):
         return ["report_markdown", "structured_json_summary"]
-    if "扫描" in text or "scan" in text:
+    if intent == "scan" and _intent_ready("scan", scores):
         return ["finding_list", "structured_json_summary"]
     return ["structured_json_result", "short_human_summary"]
 
 
 def _infer_smoke_test(name: str, purpose: str) -> str:
-    lower = f"{name} {purpose}".lower()
-    if "zip" in lower or "打包" in lower:
+    intent, scores = _dominant_intent(f"{name} {purpose}")
+    if intent == "bundle" and _intent_ready("bundle", scores):
         return "create tiny workspace fixture -> build candidate bundle in sandbox -> verify zip exists and excludes secrets"
-    if "pytest" in lower or "测试" in lower:
+    if intent == "test" and _intent_ready("test", scores):
         return "create passing and failing toy tests -> run candidate in sandbox -> verify returncode and parsed summary"
-    if "scan" in lower or "扫描" in lower:
+    if intent == "scan" and _intent_ready("scan", scores):
         return "create small file tree -> run candidate scan -> verify deterministic finding list and no file writes"
     return "create minimal fixture -> call candidate contract -> assert structured result and no registry/kernel mutation"
 

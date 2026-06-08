@@ -1,0 +1,150 @@
+{
+  "version": "FE01 STEP31J / L6.71.0",
+  "ok": true,
+  "checks": {
+    "entry_layout": {
+      "ok": true,
+      "missing": [],
+      "root_scripts": [],
+      "executable_bad": []
+    },
+    "line_endings": {
+      "ok": true,
+      "items": [
+        {
+          "file": "01_启动入口/Windows/01_启动临渊者桌面端_自动模式_L6710.bat",
+          "kind": "windows",
+          "ok": true,
+          "crlf": 45,
+          "lone_lf": 0,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "01_启动入口/Windows/02_启动临渊者桌面端_真实模型_L6710.bat",
+          "kind": "windows",
+          "ok": true,
+          "crlf": 45,
+          "lone_lf": 0,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "01_启动入口/Windows/03_启动临渊者桌面端_演示Mock_L6710.bat",
+          "kind": "windows",
+          "ok": true,
+          "crlf": 45,
+          "lone_lf": 0,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "01_启动入口/Windows/04_一键自检_L6710.bat",
+          "kind": "windows",
+          "ok": true,
+          "crlf": 42,
+          "lone_lf": 0,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "01_启动入口/macOS/01_启动临渊者桌面端_自动模式_L6710.command",
+          "kind": "posix",
+          "ok": true,
+          "executable": true,
+          "crlf": 0,
+          "lone_lf": 8,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "01_启动入口/macOS/02_启动临渊者桌面端_真实模型_L6710.command",
+          "kind": "posix",
+          "ok": true,
+          "executable": true,
+          "crlf": 0,
+          "lone_lf": 8,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "01_启动入口/macOS/03_启动临渊者桌面端_演示Mock_L6710.command",
+          "kind": "posix",
+          "ok": true,
+          "executable": true,
+          "crlf": 0,
+          "lone_lf": 8,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "01_启动入口/macOS/04_一键自检_L6710.command",
+          "kind": "posix",
+          "ok": true,
+          "executable": true,
+          "crlf": 0,
+          "lone_lf": 8,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "01_启动入口/Linux/01_start_desktop_auto_l6710.sh",
+          "kind": "posix",
+          "ok": true,
+          "executable": true,
+          "crlf": 0,
+          "lone_lf": 8,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "01_启动入口/Linux/02_start_desktop_provider_l6710.sh",
+          "kind": "posix",
+          "ok": true,
+          "executable": true,
+          "crlf": 0,
+          "lone_lf": 8,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "01_启动入口/Linux/03_start_desktop_mock_l6710.sh",
+          "kind": "posix",
+          "ok": true,
+          "executable": true,
+          "crlf": 0,
+          "lone_lf": 8,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "01_启动入口/Linux/04_self_check_l6710.sh",
+          "kind": "posix",
+          "ok": true,
+          "executable": true,
+          "crlf": 0,
+          "lone_lf": 8,
+          "lone_cr": 0,
+          "exists": true
+        }
+      ]
+    },
+    "append_guard": {
+      "ok": true,
+      "violations": []
+    },
+    "self_check": {
+      "ok": true,
+      "output_tail": "platform             : PASS · Linux\npython_version       : PASS · 3.13.5\nproject_root         : PASS · /mnt/data/l6721_dynamic_fix_work/临渊者_FE01_STEP31Q_L6721_前端修复与生物动态模型增强_20260608\nbridge_entry         : PASS · desktop/linyuanzhe_local_runtime_bridge_l671.py\nprovider_config_path : PASS · /home/oai/.config/linyuanzhe_desktop/provider_config.json\ntkinter              : PASS · ok\n"
+    },
+    "bridge_probe": {
+      "ok": true,
+      "url": "http://127.0.0.1:41207",
+      "health_status": "ok",
+      "settings_state": "forced_mock",
+      "tail": [
+        "LINYUANZHE_LOCAL_RUNTIME_URL=http://127.0.0.1:41207"
+      ]
+    }
+  }
+}

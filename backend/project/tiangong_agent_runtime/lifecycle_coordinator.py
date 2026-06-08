@@ -17,6 +17,7 @@ import json
 from tiangong_kernel.l6_plugins.common._common import ensure_bool, ensure_score
 
 from .autonomous_goal_queue import AutonomousGoalQueue, build_autonomous_goal_queue
+from .biodynamic_policy_core import BioDynamicState, dynamic_count_requirement
 from .free_will_candidate_route import AutonomyLease, FreeWillCandidateRoute, build_autonomy_lease, build_free_will_route
 from .lifecycle_clock import LifecycleClockTick
 from .self_healing_execution_route import SelfHealingExecutionRoute, build_self_healing_route
@@ -419,6 +420,22 @@ class LifecycleCoordinator:
         top_goal = autonomous_goal_queue.top_goal() if autonomous_goal_queue is not None else None
         autonomous_goal_refs = [top_goal.goal_id] if top_goal is not None else []
         candidate_summary = top_goal.summary if top_goal is not None else "根据长期目标生成下一步低风险候选"
+        idle_drive = min(1.0, max(0.0, idle_seconds / 900.0))
+        lease_state = BioDynamicState(
+            evidence=1.0 if user_allowed_autonomy else 0.55,
+            drive=idle_drive,
+            resource_pressure=budget_pressure,
+            uncertainty_pressure=context_pressure,
+            fatigue=max(budget_pressure, context_pressure),
+            recovery=1.0 - max(budget_pressure, context_pressure),
+            reversibility=0.86,
+            user_intent=1.0 if user_allowed_autonomy else 0.35,
+            inertia=1.0 if active_user_task and not user_allowed_autonomy else 0.18,
+        )
+        lease_score = lease_state.execution_score
+        lease_duration = round(90.0 + 300.0 * lease_score, 3)
+        lease_budget = round(max(0.06, min(0.22, 0.08 + 0.16 * lease_score - 0.06 * lease_state.load)), 4)
+        lease_steps = dynamic_count_requirement(3, load=lease_state.load, drive=lease_score, minimum=1, maximum=6)
         lease = build_autonomy_lease(
             active_user_task=active_user_task,
             user_allowed_autonomy=user_allowed_autonomy,
@@ -426,9 +443,9 @@ class LifecycleCoordinator:
             budget_pressure=budget_pressure,
             context_pressure=context_pressure,
             tick_ref=clock_tick.tick_id if clock_tick is not None else "",
-            max_duration_seconds=180.0,
-            max_budget_score=0.12,
-            max_tool_steps=3,
+            max_duration_seconds=lease_duration,
+            max_budget_score=lease_budget,
+            max_tool_steps=lease_steps,
             interruptible=True,
         )
         free_will = build_free_will_route(

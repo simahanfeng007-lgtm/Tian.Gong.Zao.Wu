@@ -1,0 +1,26 @@
+{
+  "schema": "tiangong.fe01.step31n.streaming_thinking_acceptance.v1",
+  "ok": true,
+  "checks": {
+    "submit_started": true,
+    "stream_completed": true,
+    "thinking_indicator_seen": true,
+    "streaming_indicator_seen": true,
+    "markdown_stream_visible": true,
+    "no_full_rebuild_after_submit": true,
+    "last_message_rewritten_incrementally": true,
+    "append_path_used": true,
+    "frontend_boundary_visible": true
+  },
+  "render_counters": {
+    "full_rebuild": 2,
+    "rewrite_last": 3,
+    "append": 9,
+    "baseline_full_rebuild": 2
+  },
+  "indicator_history": [
+    "临渊者正在思考",
+    "正在输出"
+  ],
+  "note": "Mock streaming validates thinking state and incremental Tk rendering only. No Runtime tool, Provider SDK, memory write, audit write or QualityGate bypass is executed."
+}

@@ -1,0 +1,110 @@
+{
+  "ok": true,
+  "direct_statuses": [
+    "ok",
+    "ok",
+    "ok",
+    "ok",
+    "ok",
+    "ok"
+  ],
+  "contract_validate_status": "pass",
+  "contract_count": 2,
+  "contract_issue_count": 0,
+  "llm_runs": [
+    {
+      "label": "guide",
+      "plan_tools": [
+        "learning_asset_contract_guide"
+      ],
+      "statuses": [
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "R16 未来 Tool/Skill 统一资产契约指南已生成；后续自主学习和经验总结候选必须按该格式归一化与校验。"
+      ]
+    },
+    {
+      "label": "drill",
+      "plan_tools": [
+        "synthesize_experience_candidates",
+        "queue_skill_candidates",
+        "queue_tool_production_requests",
+        "learning_asset_contract_normalize",
+        "learning_asset_contract_validate"
+      ],
+      "statuses": [
+        "ok",
+        "ok",
+        "ok",
+        "ok",
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "L6.20 经验沉淀候选报告：status=candidate_ready；signals=1；lessons=1；skill_candidates=1；tool_gap_candidates=0；governance_transfers=1。已从安全摘要中提取 1 个经验信号，形成 1 条教训候选、1 个 Skill 候选、0 个 Tool 缺口候选。其中 P0/P1 信号 0 个。所有输出均为候选，不执行写入、注册、生产或发布。",
+        "L6.21 Skill 候选版本化审阅队列：status=queue_ready；draft_versions=2；review_queue=2；queue_only=True；execution_first=True。Skill 候选已转成草案版本并进入审阅队列；source_status=candidate_ready；source_candidates=1；本次新增=1；队列累计=2；已接收人工备注。草案可继续排序、审阅、导出和转交，但不会自动注册或激活。",
+        "L6.22 Tool 生产请求沙箱化队列：status=empty；requests=0；sandbox_plans=0；queue=0；request_only=True；execution_first=True。未发现可转化为 Tool 生产请求的 Tool 缺口候选。source_status=candidate_ready；source_candidates=0；已接收人工备注。",
+        "R16 未来 Tool/Skill 统一资产契约：status=pass；contracts=2；issues=0。已将现有经验候选、Skill 草案、Tool 请求归一为同一资产契约；kinds={'skill': 2}；source_counts={'experience_skill_candidates': 1, 'experience_tool_gap_candidates': 0, 'skill_draft_versions': 2, 'tool_productio",
+        "R16 未来 Tool/Skill 统一资产契约：status=pass；contracts=2；issues=0。已校验 2 个候选契约；问题 0 个。"
+      ]
+    },
+    {
+      "label": "natural",
+      "plan_tools": [
+        "learning_asset_contract_guide",
+        "learning_asset_contract_normalize",
+        "learning_asset_contract_validate"
+      ],
+      "statuses": [
+        "ok",
+        "ok",
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "R16 未来 Tool/Skill 统一资产契约指南已生成；后续自主学习和经验总结候选必须按该格式归一化与校验。",
+        "R16 未来 Tool/Skill 统一资产契约：status=pass；contracts=2；issues=0。已将现有经验候选、Skill 草案、Tool 请求归一为同一资产契约；kinds={'skill': 2}；source_counts={'experience_skill_candidates': 1, 'experience_tool_gap_candidates': 0, 'skill_draft_versions': 2, 'tool_productio",
+        "R16 未来 Tool/Skill 统一资产契约：status=pass；contracts=2；issues=0。已校验 2 个候选契约；问题 0 个。"
+      ]
+    },
+    {
+      "label": "converge",
+      "plan_tools": [
+        "synthesize_experience_candidates",
+        "queue_skill_candidates",
+        "queue_tool_production_requests",
+        "build_execution_exoskeleton",
+        "build_learning_convergence",
+        "learning_asset_contract_normalize",
+        "learning_asset_contract_validate"
+      ],
+      "statuses": [
+        "ok",
+        "ok",
+        "ok",
+        "ok",
+        "ok",
+        "ok",
+        "ok"
+      ],
+      "ok": true,
+      "summaries": [
+        "L6.20 经验沉淀候选报告：status=candidate_ready；signals=1；lessons=1；skill_candidates=1；tool_gap_candidates=0；governance_transfers=1。已从安全摘要中提取 1 个经验信号，形成 1 条教训候选、1 个 Skill 候选、0 个 Tool 缺口候选。其中 P0/P1 信号 0 个。所有输出均为候选，不执行写入、注册、生产或发布。",
+        "L6.21 Skill 候选版本化审阅队列：status=queue_ready；draft_versions=3；review_queue=3；queue_only=True；execution_first=True。Skill 候选已转成草案版本并进入审阅队列；source_status=candidate_ready；source_candidates=1；本次新增=1；队列累计=3；已接收人工备注。草案可继续排序、审阅、导出和转交，但不会自动注册或激活。",
+        "L6.22 Tool 生产请求沙箱化队列：status=empty；requests=0；sandbox_plans=0；queue=0；request_only=True；execution_first=True。未发现可转化为 Tool 生产请求的 Tool 缺口候选。source_status=candidate_ready；source_candidates=0；已接收人工备注。",
+        "L6.23 LLM 外骨骼执行力压缩：status=exoskeleton_ready；hints=4；tool_tickets=0；minimal_chain=True；draft_only=True。已将 Skill/Tool 候选压缩为 LLM 可直接消费的执行外骨骼；PlannerHint=4（本次新增 4）；ToolCandidateTicket=0（本次新增 0）；已接收人工备注。后续不再增加重型审阅层，优先进入最小草案与一次性验证。",
+        "L6.28 经验 / Skill / Tool 执行合流：status=learning_convergence_ready；hints=4；skill_routes=4；tool_routes=0；cards=8；direct_consumption=True。已把经验、Skill 草案、Tool 候选和外骨骼输出合流为下一轮可消费执行对象；PlannerHintRoute=4；SkillDraftRoute=4；ToolCandidateRoute=0；Execution",
+        "R16 未来 Tool/Skill 统一资产契约：status=pass；contracts=2；issues=0。已将现有经验候选、Skill 草案、Tool 请求归一为同一资产契约；kinds={'skill': 2}；source_counts={'experience_skill_candidates': 1, 'experience_tool_gap_candidates': 0, 'skill_draft_versions': 3, 'tool_productio",
+        "R16 未来 Tool/Skill 统一资产契约：status=pass；contracts=2；issues=0。已校验 2 个候选契约；问题 0 个。"
+      ]
+    }
+  ],
+  "tool_count": 133,
+  "usage_card_count": 133,
+  "all_registered_tools_classifier_allowed": true,
+  "alignment_issues": [],
+  "drill_missing_tool_routes": [],
+  "drill_empty_routes": []
+}

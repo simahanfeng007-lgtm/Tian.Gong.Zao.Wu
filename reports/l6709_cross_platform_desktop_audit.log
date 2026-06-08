@@ -1,0 +1,180 @@
+{
+  "version": "FE01 STEP31I / L6.70.9",
+  "ok": true,
+  "checks": {
+    "line_endings": {
+      "ok": true,
+      "items": [
+        {
+          "file": "START_DESKTOP_L6709.bat",
+          "kind": "windows",
+          "ok": true,
+          "crlf": 16,
+          "lone_lf": 0,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "START_DESKTOP_MOCK_L6709.bat",
+          "kind": "windows",
+          "ok": true,
+          "crlf": 16,
+          "lone_lf": 0,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "START_DESKTOP_PROVIDER_L6709.bat",
+          "kind": "windows",
+          "ok": true,
+          "crlf": 16,
+          "lone_lf": 0,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "SELF_CHECK_L6709.bat",
+          "kind": "windows",
+          "ok": true,
+          "crlf": 6,
+          "lone_lf": 0,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "启动临渊者桌面端_L6709.bat",
+          "kind": "windows",
+          "ok": true,
+          "crlf": 16,
+          "lone_lf": 0,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "启动临渊者桌面端_演示Mock_L6709.bat",
+          "kind": "windows",
+          "ok": true,
+          "crlf": 16,
+          "lone_lf": 0,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "启动临渊者桌面端_真实模型_L6709.bat",
+          "kind": "windows",
+          "ok": true,
+          "crlf": 16,
+          "lone_lf": 0,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "一键自检_L6709.bat",
+          "kind": "windows",
+          "ok": true,
+          "crlf": 6,
+          "lone_lf": 0,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "start_desktop_l6709.sh",
+          "kind": "posix",
+          "ok": true,
+          "executable": true,
+          "crlf": 0,
+          "lone_lf": 7,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "start_desktop_mock_l6709.sh",
+          "kind": "posix",
+          "ok": true,
+          "executable": true,
+          "crlf": 0,
+          "lone_lf": 7,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "start_desktop_provider_l6709.sh",
+          "kind": "posix",
+          "ok": true,
+          "executable": true,
+          "crlf": 0,
+          "lone_lf": 7,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "self_check_l6709.sh",
+          "kind": "posix",
+          "ok": true,
+          "executable": true,
+          "crlf": 0,
+          "lone_lf": 6,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "启动临渊者桌面端_L6709.command",
+          "kind": "posix",
+          "ok": true,
+          "executable": true,
+          "crlf": 0,
+          "lone_lf": 6,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "启动临渊者桌面端_演示Mock_L6709.command",
+          "kind": "posix",
+          "ok": true,
+          "executable": true,
+          "crlf": 0,
+          "lone_lf": 6,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "启动临渊者桌面端_真实模型_L6709.command",
+          "kind": "posix",
+          "ok": true,
+          "executable": true,
+          "crlf": 0,
+          "lone_lf": 6,
+          "lone_cr": 0,
+          "exists": true
+        },
+        {
+          "file": "一键自检_L6709.command",
+          "kind": "posix",
+          "ok": true,
+          "executable": true,
+          "crlf": 0,
+          "lone_lf": 6,
+          "lone_cr": 0,
+          "exists": true
+        }
+      ]
+    },
+    "append_guard": {
+      "ok": true,
+      "violations": []
+    },
+    "self_check": {
+      "ok": true,
+      "output_tail": "platform             : PASS · Linux\npython_version       : PASS · 3.13.5\nproject_root         : PASS · /mnt/data/l6709_work/natures-craftsmanship-v2.0-L6.70.9-hotfix\nbridge_entry         : PASS · desktop/linyuanzhe_local_runtime_bridge_l671.py\nprovider_config_path : PASS · /home/oai/.config/linyuanzhe_desktop/provider_config.json\ntkinter              : PASS · ok\n"
+    },
+    "bridge_probe": {
+      "ok": true,
+      "url": "http://127.0.0.1:46199",
+      "health_status": "ok",
+      "settings_state": "mock_ready",
+      "tail": [
+        "LINYUANZHE_LOCAL_RUNTIME_URL=http://127.0.0.1:46199"
+      ]
+    }
+  }
+}

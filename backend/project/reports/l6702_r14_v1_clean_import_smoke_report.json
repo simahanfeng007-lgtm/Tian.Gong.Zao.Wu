@@ -1,0 +1,67 @@
+{
+  "ok": true,
+  "tool_count": 149,
+  "v1_clean_tools_present": true,
+  "results": [
+    {
+      "tool_name": "v1_clean_import_status",
+      "status": "ok",
+      "summary": "v1 clean import layer is registered as an independent v2-native subsystem.",
+      "error_code": ""
+    },
+    {
+      "tool_name": "v1_clean_import_audit",
+      "status": "ok",
+      "summary": "v1 bundle has been deduplicated against v2 and imported only as clean v2-native semantics.",
+      "error_code": ""
+    },
+    {
+      "tool_name": "v1_clean_import_guide",
+      "status": "ok",
+      "summary": "v1 clean import guide returned LLM-facing usage cards.",
+      "error_code": ""
+    },
+    {
+      "tool_name": "workspace_text_search",
+      "status": "ok",
+      "summary": "workspace text search scanned 4 files and found 2 hits.",
+      "error_code": ""
+    },
+    {
+      "tool_name": "conversation_history_search",
+      "status": "ok",
+      "summary": "conversation history search scanned 2 files and found 2 hits.",
+      "error_code": ""
+    },
+    {
+      "tool_name": "task_pattern_search",
+      "status": "ok",
+      "summary": "task pattern search scanned 1 records and found 1 reusable candidates.",
+      "error_code": ""
+    },
+    {
+      "tool_name": "experience_mentor_search",
+      "status": "ok",
+      "summary": "experience mentor search found 1 reusable experience entries.",
+      "error_code": ""
+    },
+    {
+      "tool_name": "document_text_extract",
+      "status": "ok",
+      "summary": "document text extracted from docs/note.md.",
+      "error_code": ""
+    },
+    {
+      "tool_name": "learning_master_plan",
+      "status": "ok",
+      "summary": "learning mastery plan generated at depth L5.",
+      "error_code": ""
+    },
+    {
+      "tool_name": "tool_skill_blueprint",
+      "status": "ok",
+      "summary": "Tool/Skill blueprint generated as draft only; no registration performed.",
+      "error_code": ""
+    }
+  ]
+}
