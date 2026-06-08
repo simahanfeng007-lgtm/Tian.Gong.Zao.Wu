@@ -5,7 +5,7 @@ set "SCRIPT_DIR=%~dp0"
 for %%I in ("%SCRIPT_DIR%..\..") do set "ROOT=%%~fI"
 set "CHECKER=%ROOT%\00_ASCII_START_HERE\python\DEPENDENCY_CHECK.py"
 
-echo [天工造物 v2.0] 一键依赖检测
+echo [Tiangong v2.0] Dependency check
 call :find_python
 if errorlevel 1 (
   pause
@@ -31,6 +31,6 @@ if not errorlevel 1 (
   set "PYTHON_EXE=python"
   exit /b 0
 )
-echo [天工造物] 未找到 Python。请安装 Python 3.10-3.12。
-echo 下载: https://www.python.org/downloads/
+echo [Tiangong] Python not found. Install Python 3.10-3.12.
+echo Download: https://www.python.org/downloads/
 exit /b 1

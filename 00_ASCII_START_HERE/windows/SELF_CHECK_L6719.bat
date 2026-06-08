@@ -5,22 +5,22 @@ set "SCRIPT_DIR=%~dp0"
 for %%I in ("%SCRIPT_DIR%..\..") do set "ROOT=%%~fI"
 set "ENTRY=%ROOT%\00_ASCII_START_HERE\python\SELF_CHECK_L6710.py"
 cd /d "%ROOT%"
-echo [天工造物 v2.0] self check
+echo [Tiangong v2.0] self check
 call :find_python_tk
 if errorlevel 1 (
   pause
   exit /b 1
 )
-echo [天工造物 v2.0] 正在检测 Python 环境...
+echo [Tiangong] Checking Python environment...
 "%PYTHON_EXE%" "%ROOT%\00_ASCII_START_HERE\python\DEPENDENCY_CHECK.py"
 if errorlevel 1 (
-  echo [天工造物] 依赖检测未通过。
+  echo [Tiangong] Dependency check failed.
   pause
   exit /b 1
 )
 "%PYTHON_EXE%" "%ENTRY%"
 set "RC=%ERRORLEVEL%"
-pause
+if not "%RC%"=="0" pause
 exit /b %RC%
 
 :find_python_tk
@@ -37,7 +37,7 @@ call :try_python_tk py -3
 if defined PYTHON_EXE exit /b 0
 call :try_python_tk python
 if defined PYTHON_EXE exit /b 0
-echo [临渊者] 未找到可用的 Python 3 + tkinter。请安装 Python 3.10-3.12 并勾选 Tcl/Tk。
+echo [Tiangong] Python 3 + tkinter not found. Install Python 3.10-3.12 with Tcl/Tk checked.
 exit /b 1
 
 :try_python_tk
