@@ -5,7 +5,7 @@ set "SCRIPT_DIR=%~dp0"
 for %%I in ("%SCRIPT_DIR%..\..") do set "ROOT=%%~fI"
 set "ENTRY=%ROOT%\00_ASCII_START_HERE\python\SELF_CHECK_L6710.py"
 cd /d "%ROOT%"
-echo [临渊者] FE01 STEP31Q / L6.71.9 - 一键自检
+echo [Tiangong v2.0] Linyuanzhe - SELF CHECK
 call :find_python_tk
 if errorlevel 1 (
   pause
@@ -13,7 +13,7 @@ if errorlevel 1 (
 )
 "%PYTHON_EXE%" "%ENTRY%" %*
 set "RC=%ERRORLEVEL%"
-if not "%RC%"=="0" echo [临渊者] 自检失败，退出码 %RC%。
+if not "%RC%"=="0" echo [Tiangong] Self check failed, exit code %RC%.
 pause
 exit /b %RC%
 
@@ -31,7 +31,7 @@ call :try_python_tk py -3
 if defined PYTHON_EXE exit /b 0
 call :try_python_tk python
 if defined PYTHON_EXE exit /b 0
-echo [临渊者] 未找到可用的 Python 3 + tkinter。请安装 Python 3.10-3.12 并勾选 Tcl/Tk。
+echo [Tiangong] Python 3 + tkinter not found. Install Python 3.10-3.12 with Tcl/Tk checked.
 exit /b 1
 
 :try_python_tk

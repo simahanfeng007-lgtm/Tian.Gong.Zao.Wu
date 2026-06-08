@@ -4,7 +4,7 @@ setlocal
 set "SCRIPT_DIR=%~dp0"
 for %%I in ("%SCRIPT_DIR%..\..") do set "ROOT=%%~fI"
 cd /d "%ROOT%"
-echo [Tiangong] DataUp Safe Update - v2.0
+echo [临渊者] DataUp 一键安全更新 - L6.71.9 修复版
 call :find_python
 if errorlevel 1 (
   pause
@@ -14,11 +14,11 @@ if errorlevel 1 (
 set "RC=%ERRORLEVEL%"
 if not "%RC%"=="0" (
   echo.
-  echo [Tiangong] DataUp update failed, exit code %RC%. Do not overwrite old version before confirming success.
+  echo [临渊者] DataUp 更新失败，退出码 %RC%。未确认成功前不要覆盖旧版本。
   pause
   exit /b %RC%
 )
-echo [Tiangong] DataUp update completed.
+echo [临渊者] DataUp 更新完成。
 pause
 exit /b 0
 
@@ -36,7 +36,7 @@ call :try_python py -3
 if defined PYTHON_EXE exit /b 0
 call :try_python python
 if defined PYTHON_EXE exit /b 0
-echo [Tiangong] Python 3 not found. Install Python 3.10-3.12.
+echo [临渊者] 未找到可用的 Python 3。请安装 Python 3.10-3.12。
 exit /b 1
 
 :try_python
