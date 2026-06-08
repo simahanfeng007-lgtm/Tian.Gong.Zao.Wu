@@ -14,7 +14,7 @@ from linyuanzhe_frontend.contracts.model_settings import DEFAULT_MODEL_CATALOG, 
 from linyuanzhe_frontend.contracts.provider_settings import provider_readiness_from_public_projection
 from linyuanzhe_frontend.contracts.runtime_snapshot import RuntimeSnapshot, StepSummary, digest_text, safe_chat_text, safe_text
 from linyuanzhe_frontend.version_info import PROVIDER_CONFIG_SCHEMA_VERSION
-from .theme import COLORS, FONTS, STATUS_COLORS, THEME_PROFILES
+from .theme import COLORS, DIMENS, FONTS, STATUS_COLORS, THEME_PROFILES
 from .widgets import Card, Chip, MetricRow, StepItem, LabeledValue, StatusPill, make_button, make_hint, make_readonly_banner, make_section_title
 
 
