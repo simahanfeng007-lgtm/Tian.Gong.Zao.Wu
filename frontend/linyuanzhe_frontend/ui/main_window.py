@@ -428,6 +428,10 @@ class LinyuanzheDesktopApp(tk.Tk, ChatRuntimeMixin, FeaturePagesMixin, FrontendA
         for child in self.content.winfo_children():
             child.destroy()
         self._page_scroll_canvas = None
+        self._chat_body_widget = None
+        self._chat_render_signatures = []
+        self.input_text = None
+        self.input_placeholder_label = None
         self.content.grid_columnconfigure(0, weight=1)
         self.content.grid_rowconfigure(0, weight=1)
 
