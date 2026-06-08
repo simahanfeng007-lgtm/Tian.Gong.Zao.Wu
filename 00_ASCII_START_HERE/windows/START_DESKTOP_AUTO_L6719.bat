@@ -11,6 +11,14 @@ if errorlevel 1 (
   pause
   exit /b 1
 )
+echo [天工造物 v2.0] 正在检测 Python 环境...
+"%PYTHON_EXE%" "%ROOT%\00_ASCII_START_HERE\python\DEPENDENCY_CHECK.py"
+if errorlevel 1 (
+  echo [天工造物] 依赖检测未通过，启动中止。
+  pause
+  exit /b 1
+)
+echo 依赖检测通过，正在启动...
 "%PYTHON_EXE%" "%ENTRY%" --backend-mode auto %*
 set "RC=%ERRORLEVEL%"
 if not "%RC%"=="0" pause
