@@ -1,0 +1,29 @@
+L6.72.39 A5 Only 执行力治理接线表
+
+用户意图
+→ Frontend WorkMode / RunWorkbench
+→ Desktop Bridge
+→ RuntimeEntry
+→ ModelPlanner
+   - 不再提示“禁止代码 / 禁止 Shell / 禁止绝对路径 / 20 步硬上限”
+   - 鼓励 Code-X 工具链、safe_command_runner、workspace_patch_applier
+→ PlanSchema
+   - Code-X 工具可规划
+   - 绝对路径通过 schema
+   - 仅 A5 命令/凭证类前置拒绝
+→ ExecutionSpine
+→ RiskClassifier
+   - A0-A4：默认放行
+   - A5：硬阻断
+→ PermitGateway
+   - A0-A4：ALLOWED
+   - A5：BLOCKED
+→ Tool Adapter
+   - shell=False、timeout、输出截断、审计引用
+→ QualityGate
+   - P0/P1/P2：警告，可继续
+   - A5：阻断
+→ Audit / Rollback Evidence
+→ 会话进度流 / 用户可读摘要
+
+保留原则：执行力第一，但 A5 不放。

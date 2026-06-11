@@ -1,0 +1,20 @@
+L6.72.11 Prompt 拼接点审计表
+
+| 文件 | 原状态 | 是否用户可见 | 处置 |
+|---|---|---|---|
+| backend/project/tiangong_agent_shell/prompt_builder.py | 直接拼 desktop / CLI system prompt | 会进入模型上下文 | 已迁移为 PromptCompiler 兼容入口，不再自行拼接 |
+| backend/project/tiangong_agent_shell/session_state.py | build_system_prompt() 无 config，reset 不能感知当前 Provider / ToolMode | 会进入模型上下文 | 改为 build_system_prompt(config)，每次 Session 创建 / reset 重新编译 |
+| desktop/linyuanzhe_local_runtime_bridge_l671.py::_compose_runtime_message | Soul / 本体名称拼入用户消息 | 会污染用户任务文本 | 改为只返回用户消息，Soul 通过环境信号进入 PromptCompiler |
+| desktop/linyuanzhe_local_runtime_bridge_l671.py::_run_backend_subprocess | 桌面桥接仅靠 TIANGONG_CONVERSATION_FILE 推断桌面端 | 间接影响模型上下文 | 显式注入 entry_channel、tool_mode、provider_ready、soul_name、soul_prompt、task_mode、output_contract |
+| backend/project/tiangong_agent_shell/cli_loop.py::run_once | planner_mode 非 rule_only 时普通聊天可能进入 Planner | 用户会看到运行链噪声 | 加 TIANGONG_TASK_MODE 闸门；ordinary_chat 直走 run_chat_once |
+| backend/project/tiangong_agent_shell/cli_loop.py::run_runtime_task | no-plan fallback 会输出“未生成可执行计划” | 用户可见 | 删除用户可见输出，作为内部 fallback 路由处理 |
+| backend/project/tiangong_agent_shell/config_loader.py | --mock 可直接进入 Mock provider | 用户可能误以为真实模型 | Mock 仅允许 TIANGONG_ALLOW_INTERNAL_MOCK=1 内部兼容 |
+| backend/project/tiangong_agent_shell/model_client_openai_compatible.py | 缺 Key 提示包含 --mock | 用户可见 | 改为提示设置模型接口 |
+| frontend/linyuanzhe_frontend/clients/sse_runtime_client.py | Provider 写入 ack 可能回填 raw base_url_display | 前端投影可见 | 改为 digest-only / 不回显明文地址 |
+
+审计结论：
+1. Prompt 的唯一生成权收束到 backend/project/tiangong_agent_shell/prompt_compiler.py。
+2. 器官/桥接层只输出结构化状态或环境信号，不再直接拼 system prompt。
+3. 桌面端 prompt 明确为“天工造物 v2.0 - 临渊者桌面端”，不再出现“最小 CLI 模式”。
+4. Soul 不再污染用户消息；本体名称与人格设定进入 SoulCard。
+5. ordinary_chat 不进入 Planner；工具任务仍可通过 task_mode 显式进入 Runtime。

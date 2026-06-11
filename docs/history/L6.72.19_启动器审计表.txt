@@ -1,0 +1,37 @@
+L6.72.19_启动器审计表
+========================================
+审计范围：00_ASCII_START_HERE、01_启动入口、根目录兼容启动入口。
+结论：30 个 BAT/SH/COMMAND 入口均已迁移为 manifest + template 生成；旧文件名后缀仅作为兼容别名保留，内容显示版本统一为 L6.72.19。
+
+| 文件 | 平台 | 入口类型 | 改造前版本 | 改造后版本 | 是否模板生成 | 旧探针 | root 扫描 | 迁移状态 |
+|---|---|---|---|---|---|---|---|---|
+| 00_ASCII_START_HERE/windows/START_DESKTOP_AUTO_L6719.bat | windows | start_desktop_auto | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 00_ASCII_START_HERE/windows/START_DESKTOP_PROVIDER_L6719.bat | windows | start_desktop_provider | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 00_ASCII_START_HERE/windows/SELF_CHECK_L6719.bat | windows | self_check | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 00_ASCII_START_HERE/windows/DATAUP_SAFE_UPDATE_L6719.bat | windows | dataup_safe_update | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 00_ASCII_START_HERE/windows/DEPENDENCY_CHECK.bat | windows | dependency_check | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 00_ASCII_START_HERE/windows/START_FROM_ANYWHERE_AUTO_L67210.bat | windows | start_desktop_auto | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 00_ASCII_START_HERE/windows/START_FROM_ANYWHERE_AUTO_L6729.bat | windows | start_desktop_auto | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 00_ASCII_START_HERE/windows/SELF_CHECK_FROM_ANYWHERE_L67210.bat | windows | self_check | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 00_ASCII_START_HERE/windows/SELF_CHECK_FROM_ANYWHERE_L6729.bat | windows | self_check | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| START_FROM_ANYWHERE_AUTO_L67210.bat | windows | start_desktop_auto | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| START_FROM_ANYWHERE_AUTO_L6729.bat | windows | start_desktop_auto | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| SELF_CHECK_FROM_ANYWHERE_L67210.bat | windows | self_check | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| SELF_CHECK_FROM_ANYWHERE_L6729.bat | windows | self_check | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 00_ASCII_START_HERE/linux_macos/start_desktop_auto_l6719.sh | linux | start_desktop_auto | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 00_ASCII_START_HERE/linux_macos/start_desktop_provider_l6719.sh | linux | start_desktop_provider | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 00_ASCII_START_HERE/linux_macos/self_check_l6719.sh | linux | self_check | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 00_ASCII_START_HERE/linux_macos/dataup_safe_update_l6719.sh | linux | dataup_safe_update | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 00_ASCII_START_HERE/linux_macos/dependency_check.sh | linux | dependency_check | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 01_启动入口/Windows/01_启动临渊者桌面端_自动模式_L6710.bat | windows | start_desktop_auto | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 01_启动入口/Windows/02_启动临渊者桌面端_真实模型_L6710.bat | windows | start_desktop_provider | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 01_启动入口/Windows/04_一键自检_L6710.bat | windows | self_check | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 01_启动入口/Windows/05_DataUp一键安全更新_L6717.bat | windows | dataup_safe_update | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 01_启动入口/Linux/01_start_desktop_auto_l6710.sh | linux | start_desktop_auto | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 01_启动入口/Linux/02_start_desktop_provider_l6710.sh | linux | start_desktop_provider | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 01_启动入口/Linux/04_self_check_l6710.sh | linux | self_check | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 01_启动入口/Linux/05_dataup_safe_update_l6717.sh | linux | dataup_safe_update | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 01_启动入口/macOS/01_启动临渊者桌面端_自动模式_L6710.command | macos | start_desktop_auto | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 01_启动入口/macOS/02_启动临渊者桌面端_真实模型_L6710.command | macos | start_desktop_provider | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 01_启动入口/macOS/04_一键自检_L6710.command | macos | self_check | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |
+| 01_启动入口/macOS/05_DataUp一键安全更新_L6717.command | macos | dataup_safe_update | L6.72.17 | L6.72.19 | 是 | 否 | scan_common | 已迁移 |

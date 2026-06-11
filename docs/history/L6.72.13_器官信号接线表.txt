@@ -1,0 +1,61 @@
+L6.72.13 器官信号接线表
+
+1. UIStateCard
+- 来源：shell.ui_state
+- 内容：入口端、session_id、message_count、conversation_file 状态。
+- 作用：防止桌面端被误提示为 CLI/演示模式。
+
+2. ProviderCard
+- 来源：shell.provider_state
+- 内容：provider、model、base_url_configured、key_ready、real_model_ready。
+- 作用：未配置 Provider 时不得 Mock，已配置后进入真实链路。
+
+3. RuntimeCard
+- 来源：runtime.snapshot_bus
+- 内容：workspace、max_steps、pending_confirmations、kernel_importable、最近 Runtime 状态。
+- 作用：作为神经系统内感受，不执行工具。
+
+4. ToolCard
+- 来源：runtime.tool_registry
+- 内容：tool_execution_mode、available_tool_count、top_tools、risk_samples。
+- 作用：tool_task/code_task/file_task/diagnostic_task 中辅助 LLM 判断可用身体能力。
+
+5. RiskCard
+- 来源：runtime.risk_policy
+- 内容：A5 硬拦、A0-A4 Runtime 管控、待确认票据。
+- 作用：边界稳定注入，不允许器官绕过。
+
+6. MemoryCard
+- 来源：runtime.memory_recall_snapshot
+- 内容：MemoryRecall 只读摘要、hints、filtered_count、summary_only/no_raw_memory_body。
+- 作用：只注入摘要，不写记忆，不泄露原文。
+
+7. SkillCard
+- 来源：runtime.skill_ability_snapshots
+- 内容：SkillQueue、LearningConvergence、Exoskeleton、ToolRequest、ActiveAsset 相关状态。
+- 作用：代码/工具任务中提示 LLM 可复用的经验神经回路。
+
+8. EmotionCard
+- 来源：runtime.affective_snapshot / 环境风格提示
+- 内容：情感总色彩只读投影、style_hint。
+- 作用：只影响表达底色和行为偏置，不授权、不拒绝、不覆盖用户目标。
+
+9. SelfHealCard
+- 来源：runtime.self_heal_snapshots
+- 内容：Recovery、ProjectRepair、QualityGate、Diagnosis、ExecutionFreeze 状态。
+- 作用：诊断/修复任务中提示复检、回滚、恢复路径，不直接应用补丁。
+
+10. LifecycleCard
+- 来源：runtime.lifecycle_snapshot
+- 内容：生命周期 bundle、status、next_action_hints。
+- 作用：只读协调，不执行、不热切、不改内核。
+
+11. PlannerCard
+- 来源：runtime.planner_snapshot
+- 内容：planner_mode、planner_context_status、Planner 边界。
+- 作用：任务模式可作为建议器；ordinary_chat 下由 AttentionGate 硬阻断。
+
+12. AuditCard
+- 来源：runtime.audit_summary
+- 内容：recent_events 数量。
+- 作用：默认 trace_only，diagnostic_task 才允许进入 LLM 上下文。

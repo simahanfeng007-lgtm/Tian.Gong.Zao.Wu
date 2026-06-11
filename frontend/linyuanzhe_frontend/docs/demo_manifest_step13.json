@@ -1,0 +1,6 @@
+{
+  "step": "FE01 STEP13",
+  "purpose": "runtime sse desktop demo manifest",
+  "bundled_for_backward_contract": true,
+  "secret_policy": "no plaintext credentials"
+}

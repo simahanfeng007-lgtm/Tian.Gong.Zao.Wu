@@ -1,0 +1,45 @@
+L6.72.48 macOS 桌面表面修复接线表
+
+一、问题现象
+macOS 打开桌面端后：
+- 左侧出现大面积黑块
+- 导航按钮变成白色空块
+- 历史页/主页面整体错位
+- 页面可用区域被侧栏挤压
+
+二、根因
+1. 侧边栏宽度按窗口百分比扩张：max(DIMENS["sidebar_w"], min(260, int(width * 0.22)))。
+   在 macOS/Tk 下会放大侧栏，挤压内容区。
+2. icon_mode 阈值 width < 1100 过高，普通窗口也容易进入图标模式。
+3. macOS Aqua/Tk 对 tk.Button 的背景/前景色支持不稳定，可能出现白色空按钮。
+
+三、修复方案
+1. 固定侧栏宽度
+- >=900px：return DIMENS["sidebar_w"]
+- <900px：return DIMENS["sidebar_icon_w"]
+
+2. 降低 icon_mode 阈值
+- 从 width < 1100 改为 width < 900
+- 避免正常桌面窗口被误判为窄屏
+
+3. 导航控件替换
+- 原：tk.Button
+- 新：tk.Label + <Button-1> 事件绑定
+- 避开 macOS 原生 Button 白块问题
+
+4. 导航状态渲染收口
+- _sync_nav_state() 只配置 Label 支持的 bg / fg
+- 不再配置 activebackground / activeforeground
+
+四、边界
+- 只修 UI 表面。
+- 不影响 Runtime 执行链。
+- 不影响长链任务状态。
+- 不影响 stop / interrupt / reconnect。
+- 不影响设置页任务流程显示开关。
+
+五、验收标准
+1. macOS 打开桌面端，左侧不再出现大片黑块。
+2. 左侧导航文字或图标可见，不再是白色空按钮。
+3. 历史页内容在右侧正常显示，不被侧边栏遮挡。
+4. 缩放窗口时，>=900px 保持完整侧栏，<900px 才进入窄图标侧栏。

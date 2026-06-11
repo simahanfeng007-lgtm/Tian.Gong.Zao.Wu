@@ -1,0 +1,33 @@
+## compileall backend/project frontend desktop
+compileall_status=0
+Compiling 'frontend/linyuanzhe_frontend/run_duplicate_selection_prune_smoke_l67230.py'...
+Compiling 'frontend/linyuanzhe_frontend/run_long_chain_chat_progress_smoke_l67238.py'...
+Compiling 'frontend/linyuanzhe_frontend/run_provider_model_binding_smoke_l67223.py'...
+Compiling 'frontend/linyuanzhe_frontend/run_real_host_execution_acceptance_smoke_l67232.py'...
+Compiling 'frontend/linyuanzhe_frontend/run_windows_native_gui_path_compat_smoke_l67235.py'...
+Compiling 'frontend/linyuanzhe_frontend/run_work_mode_activation_smoke_l67225.py'...
+Listing 'frontend/linyuanzhe_frontend/scripts'...
+Listing 'frontend/linyuanzhe_frontend/tokens'...
+Listing 'frontend/linyuanzhe_frontend/ui'...
+Listing 'desktop'...
+## execution_first_a5_only
+PASS L6.72.39 execution-first A5-only governance smoke
+## prompt_compiler
+PASS test_desktop_prompt
+PASS test_cli_prompt
+PASS test_soul_injection_changes
+PASS test_tool_mode_cards
+PASS test_ordinary_chat_no_planner_output
+PASS test_provider_not_configured_no_mock
+PASS test_provider_configured_real_chain_shape
+PASS test_conversation_continuity_and_new_conversation
+PASS test_no_pollution_static
+L6.72.11 PromptCompiler smoke PASS
+## long_chain_progress
+PASS L6.72.39 long_chain_chat_progress_smoke
+## real_host
+PASS L6.72.39 RealHostExecutionAcceptance smoke
+## windows_native_gui_path
+PASS L6.72.39 Windows native GUI/path compatibility smoke
+## provider_model
+PASS provider_model_binding_smoke_l67223

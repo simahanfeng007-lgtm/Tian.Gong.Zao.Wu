@@ -1,0 +1,35 @@
+{
+  "schema": "tiangong.dataup.manifest.v1",
+  "package_id": "linyuanzhe-fe01-step68-l6738",
+  "version": "FE01 STEP68 / L6.73.8",
+  "target_min_version": "FE01 STEP68 / L6.73.8",
+  "channel": "community",
+  "risk_level": "A4",
+  "payload_prefix": "payload/",
+  "files": [
+    {
+      "path": "frontend/linyuanzhe_frontend/ui/main_window.py",
+      "sha256": "<payload-file-sha256>",
+      "mode": "replace"
+    }
+  ],
+  "blocked_paths": [
+    "provider_config.json",
+    ".env",
+    "memory/",
+    "logs/",
+    "audit_private/",
+    "credentials/"
+  ],
+  "post_checks": [
+    "compileall",
+    "secret_scan",
+    "desktop_bundle_preflight"
+  ],
+  "signature_policy": "detached Ed25519 signature required for dataup_manifest.json",
+  "signature_files": [
+    "dataup_manifest.sig",
+    "dataup_signature.sig",
+    "manifest.sig"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "playbook_id": "document_parse_rewrite",
+  "work_type": "document",
+  "description": "明确 docx/pdf/pptx/xlsx/txt 文档解析、追问、改写、导出与回滚工作流。",
+  "phase_sequence": ["document_parse", "query_or_rewrite_plan", "apply_or_export", "rollback_ready", "final_report"],
+  "recommended_tools": ["document_parse", "document_query", "document_rewrite_plan", "document_apply_rewrite", "document_export", "document_rollback"],
+  "forbidden_tools": [],
+  "verification_policy": "文档写回必须保留回滚证据；导出必须返回 artifact refs。",
+  "fallback_policy": "解析失败只返回文档错误摘要，不改写原文件；可回滚优先。"
+}

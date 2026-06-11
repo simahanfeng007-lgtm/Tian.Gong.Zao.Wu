@@ -1,0 +1,47 @@
+L6.72.22 UI 数据管理接线表
+
+1. 本地历史存储
+- 模块：frontend/linyuanzhe_frontend/contracts/local_history.py
+- 类：LocalChatHistoryStore
+- 默认目录：workspace/chat_history
+- Schema：tiangong.fe01.local_chat_history.l67222.v1
+- 权限边界：前端本地文件；不写 Runtime 记忆、不写审计、不触发工具。
+
+2. 自动保存
+- 接线点：ui/main_window_chat_runtime.py::_render_chat_messages_into
+- 行为：聊天消息渲染后调用 _persist_current_chat_history
+- 幂等：基于消息摘要避免重复写入。
+
+3. 启动恢复
+- 接线点：ui/main_window.py::__init__ -> _restore_last_local_session_if_requested
+- 行为：若当前 Runtime 快照没有聊天消息，则读取最近一条本地历史恢复到聊天区。
+- 偏好开关：restore_last_session。
+
+4. 历史页面
+- 注册：ui/page_specs.py -> PageSpec("history", "历史", ...)
+- 路由：ui/main_window.py::show_page("history")
+- 页面：ui/main_window_feature_pages.py::_build_history_page
+- 功能：按日期分组、全文检索、只读加载、导出、清理。
+
+5. 历史只读模式
+- 接线点：ui/main_window_actions.py::_load_local_history_readonly
+- 阻断点：ui/main_window_actions.py::_send_message
+- 行为：历史回放状态禁止继续发送，需新会话解除。
+
+6. 导出
+- 接线点：_export_selected_history / _export_current_conversation
+- 格式：Markdown / TXT / JSON
+- Markdown 保留代码围栏与 用户 / AI 角色标签。
+
+7. 清除本地数据
+- 接线点：_clear_local_data_frontend_only
+- 保护：两次确认。
+- 范围：workspace/chat_history 与 workspace/cache。
+
+8. 启动画面
+- 接线点：ui/main_window.py::_show_startup_splash
+- 行为：1.5 秒品牌 splash，只做 UI 展示。
+
+9. 托盘兼容预留
+- 接线点：ui/main_window.py::_init_optional_tray / _on_close_window
+- 行为：pystray/Pillow 存在时启用托盘；不存在时降级任务栏最小化。

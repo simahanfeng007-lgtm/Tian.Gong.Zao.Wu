@@ -1,0 +1,78 @@
+L6.72.45 文档追问引用导出接线表
+
+一、主链接线
+
+用户意图
+→ PlanBridge / plan_schema
+→ RuntimeEntry
+→ ExecutionSpine
+→ RuntimeToolRegistry
+→ document_* adapter
+→ WorkspaceGuard / Audit / QualityGate
+→ ToolResult 安全摘要
+→ 前端主会话投影
+
+二、工具接线
+
+1. document_parse
+
+输入：path, max_chars
+职责：解析 txt/md/csv/json/code/html/docx/xlsx/pptx/pdf。
+新增：解析后调用 save_document_context，生成 document_id 与 citation_blocks。
+风险等级：A1。
+主会话：只显示 human_readable_summary。
+禁止：raw bytes、stderr、content_preview 直接进入主会话。
+
+2. document_query
+
+输入：query, document_id?, path?, top_k?, max_chars?
+职责：基于最近或指定文档上下文追问，返回引用片段。
+路径：如果传入 path，先 parse_document 再保存上下文并查询。
+风险等级：A1。
+输出：answer_summary + matches + citation_id。
+
+3. document_export
+
+输入：document_id?, path?, target?, format?, query?, top_k?
+职责：导出 md/txt/json 格式的安全摘要、引用片段和可追问上下文。
+默认输出：document_exports/<document_id>_summary.<ext>
+风险等级：A3。
+边界：只写 artifact，不写原文，不包含二进制/raw/stderr。
+
+4. document_rewrite_plan
+
+输入：instruction, document_id?, path?, output_path?, output_format?
+职责：生成文档修改计划和引用证据。
+风险等级：A2。
+边界：不直接写入，不覆盖原文，不绕过 QualityGate。
+后续真实修改需长链模式经审批写入。
+
+三、PlanBridge 路由
+
+1. “帮我读一下 xx.docx/pdf/xlsx/pptx”
+→ document_parse
+
+2. “刚才那个文档里 A5 是什么意思”
+→ document_query
+
+3. “导出刚才文档摘要为 md/json/txt”
+→ document_export
+
+4. “把刚才文档里的某段改写得更清晰”
+→ document_rewrite_plan
+
+5. “你会做什么”
+→ 空计划，保持普通聊天。
+
+四、桌面桥接线
+
+纯聊天模式：
+- 可以直接解析用户显式指定的文档。
+- 解析后保存最近文档上下文。
+- 支持“刚才文档里……”追问。
+- 不静默执行文件导出。
+
+长链模式：
+- document_export / document_rewrite_plan 进入 Runtime 执行链。
+- 任务工作台与进度卡显示仍受“显示任务流程”开关控制。
+- 隐藏流程不影响真实执行链。

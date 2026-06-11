@@ -1,0 +1,9 @@
+{
+  "slot_name": "candidate",
+  "version_label": "windows-installer-candidate-dry-run",
+  "state": "candidate",
+  "path_digest": "SLOT-CANDIDATE-L669-DRY-RUN",
+  "rollback_capable": false,
+  "package_sha256_digest": "dry-run-no-binary",
+  "message": "候选槽仅保留 Windows 安装包构建计划；禁止自动下载、自动应用或输出真实安装包。"
+}

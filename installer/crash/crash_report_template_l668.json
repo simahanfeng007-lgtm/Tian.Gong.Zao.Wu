@@ -1,0 +1,9 @@
+{
+  "contract_version": "tiangong.l6_68.crash_report_template.v1",
+  "local_only": true,
+  "auto_upload": false,
+  "raw_log_excluded": true,
+  "safe_summary_required": true,
+  "fields": ["timestamp", "component", "safe_summary", "stack_digest", "package_version", "slot_name"],
+  "message": "Crash reports remain local until explicit user-controlled export is implemented."
+}

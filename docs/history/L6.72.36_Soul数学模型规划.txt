@@ -1,0 +1,63 @@
+L6.72.36 Soul 数学模型规划
+
+一、目标
+Soul 是唯一人格源与情感底色源。除 Soul 外，其他提示词只能提供事实、任务、格式、安全边界和执行状态，不能改变回复风格。
+
+二、状态向量
+定义 Soul 原文为 T_s。
+
+B_soul = f(T_s) ∈ [-1,1]^8
+
+其中 8 个基础维度为：
+1. PAD 情感维度
+   - valence / pleasure：冷暖、积极度
+   - arousal：兴奋度、行动能级
+   - dominance：掌控感、果断度
+2. OCEAN 人格维度
+   - openness：开放性 / 创造性
+   - conscientiousness：尽责性 / 复检性
+   - extraversion：外向性 / 互动能量
+   - agreeableness：宜人性 / 陪伴感
+   - neuroticism：神经质 / 不稳定性
+
+三、稳态情感底色
+E_t = clamp((1-alpha)E_{t-1}+alpha*B_soul)
+alpha = 0.18
+
+当前无历史持久化 prior 时：
+E_t = B_soul
+
+重要隔离：
+Runtime / Planner / Tool / Skill / Memory / Provider / OutputContract 不得作为 E_t 的输入。
+它们只能影响“做什么、能不能做、怎么验收”，不能影响“像谁说话、以什么情感底色说话”。
+
+四、回复风格投影
+R_style = g(E_t)
+
+已实现的表达轴：
+- warmth：温度 / 陪伴感
+- directness：直接度 / 判断锋利度
+- detail：细致度 / 复检密度
+- energy：行动能量
+- human_naturalness：自然人味
+- poetic_density：诗性密度
+
+示例：
+warmth = 0.52*valence + 0.34*agreeableness - 0.20*neuroticism + soul_keyword_bias
+directness = 0.44*dominance + 0.28*conscientiousness - 0.10*neuroticism + soul_keyword_bias
+detail = 0.50*conscientiousness + 0.22*openness + 0.12*dominance + soul_keyword_bias
+energy = 0.62*arousal + 0.28*extraversion + 0.10*dominance + soul_keyword_bias
+
+五、风格主权规则
+1. SoulText 是唯一风格输入。
+2. 非 Soul 卡里的风格词全部降级为事实/格式约束。
+3. 用户显式要求“用某种语言/格式/长度”时，可以影响输出格式，但不改变人格底色。
+4. 安全规则高于 Soul，但安全规则不产生人格。
+5. 工具失败、路径错误、Provider 错误只能影响诊断内容，不能让人格变机械。
+
+六、工程接线
+- soul_style_model.py：数学投影与策略定义。
+- prompt_compiler.py：唯一 system prompt 编译入口，注入 SoulStyleSovereignty 卡。
+- desktop bridge：强制 style_source=soul_only，清理外部风格 env。
+- frontend provider_settings：写入 style_source=soul_only / non_soul_style_influence_allowed=false。
+- Soul 设置页：提示用户 Soul 是唯一人格源。

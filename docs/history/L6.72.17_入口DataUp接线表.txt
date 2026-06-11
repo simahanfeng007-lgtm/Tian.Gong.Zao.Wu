@@ -1,0 +1,41 @@
+L6.72.17 入口与 DataUp 接线表
+
+1. Python 入口链
+BAT / Shell / command
+→ START_DESKTOP_L6710.py / SELF_CHECK_L6710.py / DATAUP_SAFE_UPDATE_L6717.py
+→ _entry_common_l67217.py
+→ desktop/start_linyuanzhe_desktop_l671.py 或 desktop/dataup_update_helper_l6717.py
+
+2. Windows Python 探针链
+BAT
+→ 00_ASCII_START_HERE/python/PYTHON_PROBE_L67217.py
+→ sys.executable / tkinter / Python 版本检查
+→ PYTHON_EXE
+→ 目标入口脚本
+
+3. Shell 安全链
+Shell / command
+→ validate_python_bin
+→ root discovery
+→ LINYUANZHE_ROOT_HINT
+→ Python 入口脚本
+
+4. DataUp 安全链
+DataUp zip
+→ dataup_manifest.json
+→ detached signature file
+→ Ed25519 public key
+→ sha256 校验
+→ path whitelist / blacklist
+→ rollback point
+→ apply
+→ post checks
+→ rollback on failure
+
+5. Active Assets 打包卫生链
+active_assets_registry.json
+→ active_count > 0
+→ records non-empty
+→ relative path fields present
+→ no stale <local_workspace>/work_* path
+→ relocation_supported=true

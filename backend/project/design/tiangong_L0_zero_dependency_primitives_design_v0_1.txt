@@ -1,0 +1,349 @@
+《天工造物 L0 零依赖原语层设计 v0.1》
+生成日期：2026-06-03
+状态：设计草案
+
+============================================================
+一、L0 定义
+============================================================
+
+L0 是天工造物的生命数据原子层。
+它只定义可序列化、可审计、可哈希、可回放、可恢复、可演化的最小事实语言。
+它不执行任何真实动作。
+
+硬规则：
+- 只允许 Python 标准库。
+- 所有 dataclass 必须 frozen=True, slots=True。
+- 采用 Result-first。
+- Canonical JSON 为第一事实格式。
+- 不允许真实 IO、网络、模型调用、工具调用、插件加载、进程启动。
+
+============================================================
+二、推荐目录结构与类清单
+============================================================
+
+tiangong_kernel/l0_primitives/
+  __init__.py
+  identity.py
+  time.py
+  result.py
+  errors.py
+  serialization.py
+  trace.py
+  event.py
+  observation.py
+  signal.py
+  metric.py
+  message.py
+  content.py
+  communication.py
+  actor.py
+  self_identity.py
+  scope.py
+  trust.py
+  privacy.py
+  secret.py
+  goal.py
+  plan.py
+  action.py
+  effect.py
+  decision.py
+  risk.py
+  grant_lease.py
+  contract.py
+  policy.py
+  instruction.py
+  autonomy.py
+  value.py
+  resource.py
+  cost_budget.py
+  environment.py
+  location.py
+  tool_adapter.py
+  skill_capability.py
+  component_package.py
+  state.py
+  lifecycle.py
+  failure.py
+  transaction.py
+  deletion.py
+  memory.py
+  forgetting.py
+  context.py
+  retrieval.py
+  learning.py
+  health.py
+  artifact.py
+  evidence.py
+  audit.py
+  versioning.py
+  namespace.py
+  relation.py
+  validation.py
+  schedule.py
+
+============================================================
+三、模块职责与建议对象
+============================================================
+
+identity.py
+  建议对象：CoreId, RefId, TypedRef, IdPrefix, new_core_id(), validate_core_id()
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+time.py
+  建议对象：Timestamp, Duration, Deadline, TimeRange, TemporalWindow, LogicalClock, LogicalTime, SequenceNo, ClockSourceRef, ClockKind
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+result.py
+  建议对象：CoreResult, ResultStatus, ok(), err()
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+errors.py
+  建议对象：CoreError, ErrorCode, ErrorSeverity
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+serialization.py
+  建议对象：StableSerializable, stable_json_dumps(), stable_hash(), to_primitive(), from_primitive()
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+trace.py
+  建议对象：TraceContext, CausalEventMetadata, TraceId, SpanId, CorrelationId, CausationId, ActorId, ScopeId, SequenceNo
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+event.py
+  建议对象：CoreEvent, EventRef, EventType, EventMeta, EventPayloadRef, EventState
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+observation.py
+  建议对象：ObservationRef, ObservationKind, ObservationQuality, ObservationWindow, ObservationPayloadRef, ObservationSource
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+signal.py
+  建议对象：SignalRef, SignalKind, SignalStrength, SignalPolarity, SignalConfidence, SignalWindow
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+metric.py
+  建议对象：MetricRef, MetricKind, MetricValue, MetricUnit, MetricWindow, MetricAggregation, MetricPoint, MetricSeriesRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+message.py
+  建议对象：CoreMessage, MessageRef, MessageRole, MessageState
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+content.py
+  建议对象：ContentRef, ContentKind, ContentDigest, ContentEncoding, ContentLength, PayloadRef, PayloadKind, MediaTypeRef, MediaTypeKind
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+communication.py
+  建议对象：CommunicationRef, MessageEnvelopeRef, MessageKind, ChannelRef, ProtocolRef, DeliveryState, ReplyToRef, ConversationRef, HandoffRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+actor.py
+  建议对象：ActorRef, ActorKind
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+self_identity.py
+  建议对象：SelfRef, IdentityRef, ContinuityRef, BoundaryRef, OwnershipRef, AffiliationRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+scope.py
+  建议对象：CoreScope, ScopeRef, ScopeKind, BoundaryRef, ScopeBoundary
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+trust.py
+  建议对象：TrustBoundaryRef, TrustBoundaryKind, TrustLevel, ProvenanceRef, ResponsibilityChainRef, AttestationRef, IntegrityDigest
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+privacy.py
+  建议对象：PrivacyRef, ConsentRef, DataClass, DataSubjectRef, ProcessingPurposeRef, RetentionPolicyRef, DataLifecycleState, AccessSensitivity
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+secret.py
+  建议对象：SecretRef, SecretKind, CredentialRef, CredentialKind, CapabilityTokenRef, TokenKind, CredentialBindingRef, RevocationRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+goal.py
+  建议对象：GoalRef, GoalKind, GoalState, GoalPriority, GoalSuccessCriteriaRef, GoalFailureCriteriaRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+plan.py
+  建议对象：PlanRef, PlanKind, PlanState, PlanPriority, PlanOriginRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+action.py
+  建议对象：ActionIntent, ActionRef, ActionKind, ActionState
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+effect.py
+  建议对象：EffectRef, EffectKind, EffectIntent, EffectState, EffectResultRef, EffectReversibility, EffectImpact
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+decision.py
+  建议对象：Decision, DecisionRef, DecisionKind, DecisionReason
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+risk.py
+  建议对象：RiskLevel, RiskSignal, RiskView, RiskRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+grant_lease.py
+  建议对象：GrantRef, LeaseRef, GrantKind, LeaseStatus, PermissionWindow
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+contract.py
+  建议对象：ContractRef, ContractKind, ContractState, ContractScopeRef, ContractSatisfaction, ContractViolationRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+policy.py
+  建议对象：PolicyRef, PolicyKind, PolicyState, NormRef, NormKind, GovernanceRef, GovernanceDomain, PolicyConflictRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+instruction.py
+  建议对象：InstructionRef, InstructionKind, InstructionAuthority, InstructionSource, InstructionPriority, InstructionState, DirectiveRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+autonomy.py
+  建议对象：AutonomyLevel, AgencyLevel, ControlModeRef, OversightMode, ControlModeState, AutonomyBoundaryRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+value.py
+  建议对象：ValueRef, ValueKind, PreferenceRef, PreferenceKind, ObjectiveRef, UtilitySignalRef, TradeoffRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+resource.py
+  建议对象：ResourceRef, ResourceKind, ResourceQuantity, ResourceUsage, ResourceBudget, ResourceLimit, ResourcePressure, EnergyBudget
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+cost_budget.py
+  建议对象：CostRef, CostKind, CostAmount, BudgetRef, BudgetKind, QuotaRef, QuotaKind, RateLimitRef, RateLimitKind
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+environment.py
+  建议对象：EnvironmentRef, EnvironmentKind, EnvironmentState, SandboxRef, SandboxKind, IsolationBoundaryRef, IsolationLevel
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+location.py
+  建议对象：LocationRef, LocationKind, AddressRef, AddressKind, URIRef, URIKind, LocatorRef, LocatorKind
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+tool_adapter.py
+  建议对象：ToolRef, AdapterRef, ToolKind, AdapterKind, ToolState, ToolVersionRef, AdapterVersionRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+skill_capability.py
+  建议对象：SkillRef, CapabilityRef, CapabilityKind, CapabilityState, CapabilityOriginRef, CapabilityRiskRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+component_package.py
+  建议对象：ComponentRef, ComponentKind, ModuleRef, ModuleKind, PackageRef, PackageKind, PackageDigest
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+state.py
+  建议对象：RuntimeStateRef, ExecutionStateRef, StateSnapshotRef, StateDeltaRef, CheckpointRef, RecoveryPointRef, InvariantRef, ConstraintRef, Violation
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+lifecycle.py
+  建议对象：LifecycleRef, LifecycleState, LifecyclePhase, LifecycleTransitionRef, LifecycleReason
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+failure.py
+  建议对象：FailureRef, FailureKind, FailureSeverity, FaultRef, FaultKind, RecoveryDiagnosisRef, RootCauseRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+transaction.py
+  建议对象：TransactionRef, TransactionKind, TransactionState, CompensationRef, ReversibilityKind, IdempotencyKey, CommitRef, RollbackRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+deletion.py
+  建议对象：DeletionRef, DeletionKind, ErasureRef, ErasureKind, TombstoneRef, TombstoneKind, RedactionRef, CryptoErasureRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+memory.py
+  建议对象：MemoryRef, MemoryTraceRef, MemoryKind, MemoryState, MemoryOriginRef, MemoryConfidence, MemoryRetentionRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+forgetting.py
+  建议对象：ForgettingRef, RetentionTrace, DecayTrace, InterferenceTrace, SuppressionRef, PruningRef, RevisionRef, ForgettingKind
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+context.py
+  建议对象：ContextRef, ContextKind, ContextWindow, ContextBoundary, ContextDigest, BeliefStateRef, WorldStateRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+retrieval.py
+  建议对象：IndexRef, IndexKind, QueryRef, QueryKind, RetrievalRef, RetrievalKind, RetrievalResultRef, RankingRef, FilterRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+learning.py
+  建议对象：LearningRef, LearningKind, AdaptationRef, AdaptationKind, EvolutionRef, EvolutionKind, ImprovementProposalRef, EvolutionCommitRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+health.py
+  建议对象：HealthRef, HealthState, VitalityRef, VitalityKind, HomeostasisRef, HomeostasisState, StabilityRange, StressRef, DamageRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+artifact.py
+  建议对象：ArtifactRef, ArtifactKind, ArtifactState, ArtifactDigest, ArtifactVersionRef, ArtifactLocationRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+evidence.py
+  建议对象：EvidenceRef, EvidenceKind, EvidenceDigest, EvidenceState, EvidenceSourceRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+audit.py
+  建议对象：AuditRef, AuditTrailRef, AccountabilityRef, ResponsibilityRef, TamperEvidenceRef, IntegrityChainRef, AuditFindingRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+versioning.py
+  建议对象：SchemaRef, SchemaVersion, ObjectVersion, VersionRef, MigrationRef, MigrationKind, CompatibilityLevel, UpcastRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+namespace.py
+  建议对象：NamespaceRef, NamespaceKind, NameRef, QualifiedName, RegistryRef, RegistryKind, NameBindingRef, AliasRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+relation.py
+  建议对象：RelationRef, RelationKind, DependencyRef, DependencyKind, GraphRef, NodeRef, EdgeRef, PathRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+validation.py
+  建议对象：TestRef, TestKind, ValidationRef, ValidationKind, VerificationRef, VerificationKind, AssertionRef, EvaluationRef, RegressionRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+schedule.py
+  建议对象：ScheduleRef, ScheduleKind, TriggerRef, TriggerKind, TimerRef, TimerKind, WakeupRef, RecurrenceRef
+  规则：只定义引用、值对象、枚举、事实结构；不得实现执行器、算法、适配器或外部资源访问。
+
+============================================================
+四、自动测试清单
+============================================================
+
+1. test_l0_no_outer_imports.py：L0 不 import L1-L6。
+2. test_l0_no_third_party_imports.py：L0 不 import 第三方库。
+3. test_l0_no_io.py：L0 不调用 open、Path.read_text、Path.write_text、socket、subprocess、requests 等真实 IO。
+4. test_l0_dataclass_frozen.py：所有 L0 dataclass 必须 frozen=True, slots=True。
+5. test_l0_serialization.py：所有 L0 对象可稳定转 primitive / canonical JSON。
+6. test_l0_stable_hash.py：所有可事实化对象 stable_hash 可重复。
+7. test_l0_no_system_pollution_words.py：L0 核心类名不得出现 ToolExecutor、PluginHost、MemorySystem、Frontend、Gateway、Database、Shell、HTTPClient 等上层实现词。
+8. test_l0_ref_objects.py：所有 Ref 类只保存引用事实，不承载执行器、客户端、回调函数或真实资源句柄。
+9. test_l0_enum_stability.py：枚举值发布后不得删除或重命名，只能新增或 deprecated。
+10. test_l0_result_first.py：普通校验函数返回 CoreResult，不用异常作为常规控制流。
+
+============================================================
+五、第一版落地顺序
+============================================================
+
+阶段 1：identity.py、time.py、result.py、errors.py、serialization.py、trace.py。
+阶段 2：event.py、observation.py、signal.py、metric.py、content.py、message.py。
+阶段 3：actor.py、scope.py、goal.py、plan.py、action.py、effect.py、decision.py、risk.py、grant_lease.py。
+阶段 4：state.py、lifecycle.py、failure.py、transaction.py、deletion.py。
+阶段 5：memory.py、forgetting.py、context.py、learning.py、health.py。
+阶段 6：trust.py、privacy.py、secret.py、contract.py、policy.py、instruction.py、autonomy.py、value.py。
+阶段 7：resource.py、cost_budget.py、environment.py、location.py、communication.py、tool_adapter.py、skill_capability.py、component_package.py。
+阶段 8：artifact.py、evidence.py、audit.py、versioning.py、namespace.py、relation.py、retrieval.py、validation.py、schedule.py。
+
+============================================================
+六、最终结论
+============================================================
+
+L0 的目标不是写复杂逻辑，而是建立整个天工造物生命体的共同事实语言。
+L0 是数据原子层，不是大脑、肌肉、工具、插件或前端。

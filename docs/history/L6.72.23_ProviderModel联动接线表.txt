@@ -1,0 +1,40 @@
+L6.72.23 ProviderModel 联动接线表
+
+1. contracts/model_settings.py
+- 新增 PROVIDER_OPTIONS。
+- 新增 PROVIDER_DISPLAY_NAMES。
+- 新增 DEFAULT_PROVIDER_BASE_URLS。
+- 新增 MODEL_CUSTOM_SENTINEL=自定义模型名。
+- 新增 model_values_for_provider(provider, query)。
+- 新增 effective_model_name(provider, selected_model, custom_model)。
+- sanitize_runtime_settings 改为输出 provider_model_binding=True 与 effective model。
+
+2. ui/main_window.py
+- 新增 custom_model_var。
+- 保存 last_provider / last_model / last_custom_model 到 UI preferences。
+- Provider 变量增加 trace，切换服务商时刷新模型列表。
+- 版本升至 L6.72.23，启动页文案同步。
+
+3. ui/main_window_feature_pages.py
+- 模型管理卡片顺序改为 Provider → Model → 自定义模型名 → Base URL → API Key。
+- Provider 下拉值由 PROVIDER_OPTIONS 统一提供。
+- Model 下拉值由 model_values_for_provider 生成。
+- 增加“OpenAI 自定义”快捷入口。
+- 配置模板输出 selected_model / custom_model 字段。
+
+4. ui/main_window_actions.py
+- 新增 _refresh_provider_model_controls_frontend_only。
+- 新增 _on_provider_changed_frontend_only。
+- 新增 _effective_model_for_submit_frontend_only。
+- 保存设置前计算 effective_model，避免提交“自定义模型名”占位文字。
+- DeepSeek 预设改为调用默认 Provider Base URL。
+
+5. contracts/provider_settings.py
+- ALLOWED_PROVIDER_VALUES 增加 local。
+
+6. desktop/linyuanzhe_local_runtime_bridge_l671.py
+- provider_config schema 升至 L6.72.23。
+- public projection 增加 provider_model_binding 与 custom_model_allowed。
+
+7. run_provider_model_binding_smoke_l67223.py
+- 验证 DeepSeek/OpenAI/OpenAI-compatible/local 的模型联动、OpenAI 自定义模型、local provider 准入、schema bump。

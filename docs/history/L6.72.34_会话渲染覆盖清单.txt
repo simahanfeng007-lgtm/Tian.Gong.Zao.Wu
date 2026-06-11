@@ -1,0 +1,33 @@
+L6.72.34 会话渲染覆盖清单
+
+已覆盖内容类型：
+1. 普通段落
+2. 自动分段
+3. 密集 inline 列表拆分
+4. Markdown 标题 # / ## / ### / ####
+5. 粗体 **text**
+6. 斜体 *text* / _text_
+7. 删除线 ~~text~~
+8. 行内代码 `code`
+9. 行内数学文本 $x$ / $$x$$
+10. Markdown 链接 [label](url)
+11. http/https 链接
+12. sandbox:/ 文件链接文本
+13. 项目符号列表
+14. 编号列表
+15. 嵌套列表缩进
+16. 任务列表 - [ ] / - [x]
+17. Markdown 表格
+18. fenced code block + 语言标签
+19. 引用块 > quote
+20. 分割线 --- / *** / ___
+21. 来源/引用/参考行
+22. footnote 行 [1]: / [^1]:
+23. Run / Runtime / Planner / Tool / Provider / 状态 / 当前 / 审计事件行
+24. 成功/警告/错误状态行
+25. emoji 简写映射
+26. return_analysis / return_code / tool_call_raw 等内部信号二次过滤
+
+未做图形化渲染的内容：
+1. Mermaid / 图片 / 复杂数学公式仍以文本或代码块显示。
+2. Tk Text 原生不支持真正 HTML/CSS 级富文本盒模型，本轮采用 tag-based 增强，不引入浏览器内核。

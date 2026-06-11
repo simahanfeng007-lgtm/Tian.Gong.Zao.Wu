@@ -1,0 +1,61 @@
+L6.72.44 文档解析接线表（含 Planner / safecommandrunner P0 收口）
+
+一、主链路
+用户意图
+  -> 前端提交消息与工作模式
+  -> desktop/linyuanzhe_local_runtime_bridge_l671.py 生成 Runtime directives / 主机路径提示
+  -> RuntimeEntry.run_text
+  -> PlanBridge / ModelPlanner
+  -> plan_schema.validate_and_build_plan
+  -> RuntimeToolRegistry
+  -> document_parse_adapter
+  -> document_parser.parse_document
+  -> ToolResult.human_readable_summary
+  -> 会话摘要投影
+
+二、工具注册
+RuntimeToolRegistry：
+- document_parse -> document_parse_adapter
+- read_file -> readonly_file_adapter
+- safe_command_runner -> Code-X safe command adapter
+
+别名归一：
+- safecommandrunner / safeCommandRunner / safe-command-runner / safe command runner / code_x.safe_command_runner / codex.safe_command_runner -> safe_command_runner
+- documentparse / parse_document / doc_parse -> document_parse
+
+三、Planner 分流规则
+1. 自然语言直达 PlanBridge：
+- “帮我读一下桌面的 xx.docx” -> document_parse(path=desktop_relative_path/xx.docx)
+- “帮我总结下载里的 xx.pdf” -> document_parse(path=downloads_relative_path/xx.pdf)
+- “打开这个 xlsx 看看内容” -> document_parse(path=xx.xlsx)
+- “帮我看这个 pptx” -> document_parse(path=xx.pptx)
+
+2. 模型计划 plan_schema 改写：
+- read_file + .docx/.pdf/.xlsx/.pptx/.csv/.md/.txt/.html/.json/.py/.js/.ts/.tsx/.jsx/.css/.java/.cpp/.c/.go/.rs 等 -> document_parse
+- safe_command_runner/safeCommandRunner + cat/type/more/less/Get-Content/open/start + 文档路径 -> document_parse
+
+3. 禁止路径：
+- docx/pdf/xlsx/pptx 不允许 shell 硬读。
+- 文档读取失败不允许误报 Provider/API。
+- raw bytes / stderr / tool raw result 不进入 ChatMessage.text。
+
+四、解析方式
+- txt/md/csv/json/code/html/xml/yaml/toml/sql：文本解码器，UTF-8/GB18030/CP936/UTF-16/Big5 优先。
+- docx：python-docx 或 zip+xml 提取标题、段落、表格。
+- xlsx：openpyxl 提取 sheet、表头、单元格摘要。
+- pptx：python-pptx 或 zip+xml 提取每页文本。
+- pdf：优先 pypdf/pdfplumber；依赖缺失时输出明确诊断，不输出乱码。
+- 图片/zip/二进制：只显示类型、大小、路径、建议工具，不读原始字节。
+
+五、风险等级
+- document_parse：A1 只读/诊断类。
+- safe_command_runner：仍走 Code-X 原生风险等级与 QualityGate；文档读取场景会被 Planner 改写为 document_parse。
+- A5 Only 口径保持：A0-A4 默认放行，A5 才硬阻断。
+
+六、legacy ToolBridge
+backend/project/tiangong_agent_shell/tool_bridge.py 仅保留 legacy 状态桥职责：
+- LEGACY_STATUS_BRIDGE = True
+- ToolBridge.is_legacy_status_bridge = True
+- 不接成执行器。
+真实执行链必须走：
+RuntimeEntry -> PlannerExecutionController -> LongChainRunner -> ExecutionSpine -> RuntimeToolRegistry -> Adapter。

@@ -1,0 +1,26 @@
+L6.72.21 UI 接线表
+
+字体/主题：
+- ui/theme.py：THEME_PROFILES、UI_FONT_FAMILIES、CODE_FONT_FAMILIES、apply_typography_preferences
+- ui/main_window.py：前端偏好读取/保存、即时应用、响应式侧栏
+- ui/main_window_feature_pages.py：字体主题设置卡
+
+设置页：
+- 模型管理：_build_model_management_card
+- Soul：_build_soul_settings_card
+- 技能面板：_build_skill_panel_card / _collect_skill_items
+- 工具面板：_build_tool_panel_card / _collect_tool_items
+- 运行时状态：_build_runtime_status_card / _toggle_runtime_status_card
+- 配置文件：_build_config_file_card / _toggle_config_file_card
+
+聊天增强：
+- 权限弹窗：_maybe_show_permission_popup / _show_permission_approval_modal
+- 右键菜单：_show_message_context_menu
+- 新消息按钮：_chat_should_auto_scroll / _show_new_message_button
+- 代码复制：_copy_last_code_block
+- 快捷键：_clear_chat_keyboard_shortcut / _escape_key_dispatch / _copy_last_assistant_reply
+
+前端边界：
+- 权限审批只提交 submit_confirmation。
+- 技能/工具开关只保存前端偏好，最终准入仍由 Runtime / ToolMode / QualityGate 裁决。
+- 配置文件只读脱敏展示。

@@ -1,0 +1,10 @@
+天工造物v2.0-临渊者
+FE01 STEP68 / L6.73.8
+基线：L6.73.8 QAExtraRound8Round9ClosureHotfix + Q10专项修复复检通过包
+补丁：Q12-Round11RegressionClosure
+说明：在 Q8/Q9/Q10 已闭环基线上，针对第 11 轮新增质检问题做交付卫生与 smoke 副作用闭环：最终 ZIP 排除 .linyuanzhe 运行态/候选资产、reports、__pycache__、*.pyc；learning asset activation/sandbox alignment smoke 改为临时目录并避免源码树报告污染；用户可见 README 与入口说明更新为 FE01 STEP68 / L6.73.8；废弃 desktop demo POSIX/BAT wrapper 使用受控 Python -S 入口；launcher consistency smoke 明确覆盖全量 BAT/SH/COMMAND wrapper 卫生检查。未改 RuntimeEntry / ModelPlanner / PromptIntegrator / QualityGate / Tool 执行主链。
+
+补丁：Q16-QAClosureFix
+说明：修复 Q16 深挖质检中发现的 RC 启动器旧身份、Runtime --status 写入运行态和绝对路径输出、早期 release verifier 超时/pycache、生成器 STEP31R 兜底、长链/真实主机 smoke 无输出超时、桌面 headless 失败路径污染 reports/暴露包体绝对路径，并额外修复本 Q14 ZIP 内部反斜杠路径导致 Linux/macOS 解压目录结构失效的问题。
+
+Q19：历史入口 smoke/verifier + Desktop/Downloads/权限边界修复；默认入口需 PASS 或明确 SKIP，运行态写入隔离到 temp/user/state，不污染交付树。

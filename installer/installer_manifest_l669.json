@@ -1,0 +1,163 @@
+{
+  "contract_version": "tiangong.l6_69.installer_packager_rc.v1",
+  "product_name": "天工造物 / 临渊者",
+  "package_stage": "rc_packager_dry_run",
+  "install_mode": "engineering_package_with_packager_dry_run",
+  "version_label": "FE01 STEP68 / L6.73.8",
+  "unique_developer": "于泳翔",
+  "angel_investor": "胖胖龙",
+  "active_slot": "active",
+  "rollback_slot": "rollback",
+  "update_channel": "internal_rc",
+  "install_root_digest": "INSTALL-ROOT-L6738-PENDING",
+  "startup_self_check_state": "pending",
+  "crash_report_state": "empty",
+  "rollback_ready": true,
+  "offline_repair_available": true,
+  "updater_skeleton_only": true,
+  "installer_build_allowed": false,
+  "slots": [
+    {
+      "slot_name": "active",
+      "version_label": "FE01 STEP68 / L6.73.8",
+      "state": "active",
+      "path_digest": "SLOT-ACTIVE-L6738",
+      "package_sha256_digest": "pending-final-package-sha256",
+      "last_verified": "pending-l669-packager-preflight",
+      "rollback_capable": true,
+      "message": "工程总包活动槽；包含 Windows 打包器 dry-run 结构；不是最终安装包。"
+    },
+    {
+      "slot_name": "rollback",
+      "version_label": "FE01 STEP68 / L6.73.8",
+      "state": "rollback",
+      "path_digest": "SLOT-ROLLBACK-L6738",
+      "package_sha256_digest": "refer-to-input-sha256-file",
+      "last_verified": "pending-offline-repair-check",
+      "rollback_capable": true,
+      "message": "回滚槽结构预留；真实恢复必须由安装器控制器或显式维护脚本执行。"
+    },
+    {
+      "slot_name": "candidate",
+      "version_label": "windows-installer-candidate-dry-run",
+      "state": "candidate",
+      "path_digest": "SLOT-CANDIDATE-L6738-DRY-RUN",
+      "package_sha256_digest": "dry-run-no-binary",
+      "last_verified": "pending-build-plan-validation",
+      "rollback_capable": false,
+      "message": "候选安装包槽仅生成 dry-run build plan；禁止输出 exe/msi。"
+    }
+  ],
+  "startup_checks": [
+    {
+      "check_id": "backend_layout",
+      "name": "后端目录与 run_agent 入口",
+      "status": "pending",
+      "message": "等待 L6.69 启动自检脚本校验"
+    },
+    {
+      "check_id": "frontend_layout",
+      "name": "前端桌面端与 RuntimeClient",
+      "status": "pending",
+      "message": "等待 L6.69 启动自检脚本校验"
+    },
+    {
+      "check_id": "launcher_layout",
+      "name": "统一启动器与预检脚本",
+      "status": "pending",
+      "message": "等待 L6.69 启动自检脚本校验"
+    },
+    {
+      "check_id": "installer_l668_manifest",
+      "name": "L6.68 安装器 manifest 兼容存在",
+      "status": "pending",
+      "message": "等待 L6.69 启动自检脚本校验"
+    },
+    {
+      "check_id": "installer_l669_manifest",
+      "name": "L6.69 打包器 manifest 存在",
+      "status": "pending",
+      "message": "等待 L6.69 启动自检脚本校验"
+    },
+    {
+      "check_id": "release_manifest",
+      "name": "发布 manifest 存在",
+      "status": "pending",
+      "message": "等待发布管线预检校验"
+    },
+    {
+      "check_id": "signing_policy",
+      "name": "签名策略占位存在",
+      "status": "pending",
+      "message": "等待发布管线预检校验"
+    },
+    {
+      "check_id": "reports_writable",
+      "name": "报告目录可写",
+      "status": "pending",
+      "message": "等待 L6.69 启动自检脚本校验"
+    }
+  ],
+  "crash_reports": [
+    {
+      "report_id_digest": "CRASH-L668-EMPTY",
+      "status": "empty",
+      "crash_count": 0,
+      "last_crash_at": "none",
+      "safe_summary": "暂无崩溃报告；默认本地保存。",
+      "local_only": true,
+      "upload_allowed": false
+    }
+  ],
+  "repair_actions": [
+    {
+      "action_id": "startup_self_check_l669",
+      "title": "启动自检",
+      "status": "available",
+      "message": "运行 installer/startup/startup_self_check_l669.py。",
+      "no_frontend_apply": true,
+      "no_runtime_core_mutation": true
+    },
+    {
+      "action_id": "packager_dry_run_l669",
+      "title": "Windows 打包 dry-run",
+      "status": "available",
+      "message": "运行 installer/build/package_builder_dry_run_l669.py；只生成计划和报告，不输出 exe/msi。",
+      "no_frontend_apply": true,
+      "no_runtime_core_mutation": true
+    },
+    {
+      "action_id": "release_pipeline_preflight_l669",
+      "title": "发布管线预检",
+      "status": "available",
+      "message": "运行 installer/release/release_pipeline_preflight_l669.py；校验 manifest、签名策略和版本槽。",
+      "no_frontend_apply": true,
+      "no_runtime_core_mutation": true
+    },
+    {
+      "action_id": "offline_repair",
+      "title": "离线修复预检",
+      "status": "available",
+      "message": "运行 installer/recovery/offline_repair_l668.py；默认 dry-run。",
+      "no_frontend_apply": true,
+      "no_runtime_core_mutation": true
+    },
+    {
+      "action_id": "rollback_plan",
+      "title": "回滚槽恢复计划",
+      "status": "available",
+      "message": "运行 installer/recovery/rollback_slot_restore_l668.py，仅生成计划。",
+      "no_frontend_apply": true,
+      "no_runtime_core_mutation": true
+    }
+  ],
+  "package_builder_dry_run_available": true,
+  "package_builder_dry_run_allowed": true,
+  "final_installer_build_allowed": false,
+  "windows_installer_artifact_emitted": false,
+  "release_pipeline_preflight_available": true,
+  "requires_real_runtime_unlock_before_rc": true,
+  "requires_signature_verification": true,
+  "requires_sha256_verification": true,
+  "requires_version_slot_validation": true
+}

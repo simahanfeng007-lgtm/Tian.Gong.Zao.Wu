@@ -1,0 +1,5 @@
+package_id=tiangong_v2_linyuanzhe_L6.73.8_Q22DialogueAnalysisWorkModeBoundaryFix
+version=FE01 STEP68 / L6.73.8
+date=2026-06-12
+base=Q21_CasualChatWorkModeRouteFix
+scope=Q22 work-mode ordinary question / analysis-question routing boundary fix

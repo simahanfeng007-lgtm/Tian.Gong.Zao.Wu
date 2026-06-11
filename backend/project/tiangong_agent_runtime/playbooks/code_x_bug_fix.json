@@ -1,0 +1,10 @@
+{
+  "playbook_id": "code_x_bug_fix",
+  "work_type": "code",
+  "description": "代码修复默认工作流：发现项目结构、定位问题、规划补丁、应用修改、验证、修复、交付。",
+  "phase_sequence": ["repo_discovery", "localization", "patch_planning", "patch_apply", "validation", "repair", "delivery"],
+  "recommended_tools": ["scan_project", "diagnose_project", "read_file", "write_workspace_file", "run_python_quality_check", "code_x_runtime_status", "code_x_smoke_workflow", "create_zip_package"],
+  "forbidden_tools": ["document_parse", "document_query", "document_rewrite_plan"],
+  "verification_policy": "代码修改后必须运行 compileall / pytest / 对应质量检查；质量检查失败不得 completed_pass。",
+  "fallback_policy": "定位失败进入 diagnose_project；验证失败进入 AdaptiveWorkLoop repair；仍失败则 partial_with_resume。"
+}

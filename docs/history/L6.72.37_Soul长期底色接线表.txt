@@ -1,0 +1,40 @@
+L6.72.37 Soul 长期底色接线表
+
+1. 用户设置页
+   frontend/ui/main_window_feature_pages.py
+   ↓
+2. ProviderSettingsWriteRequest
+   frontend/contracts/provider_settings.py
+   字段：persona_name / persona_prompt / soul_style_contract / soul_baseline_contract
+   ↓
+3. Desktop bridge 持久化
+   desktop/linyuanzhe_local_runtime_bridge_l671.py
+   provider_config.json 保存 Soul 配置，不向前端回显密钥
+   ↓
+4. Desktop bridge 运行时环境
+   TIANGONG_SOUL_NAME
+   TIANGONG_SOUL_PROMPT
+   TIANGONG_SOUL_BASELINE_PATH
+   TIANGONG_STYLE_SOURCE=soul_only
+   ↓
+5. PromptCompiler
+   backend/project/tiangong_agent_shell/prompt_compiler.py
+   读取 Soul，构建 SoulCard
+   ↓
+6. SoulStyleModel
+   backend/project/tiangong_agent_shell/soul_style_model.py
+   B_soul=f(SoulText)
+   E_t=clamp((1-alpha)E_{t-1}+alpha*B_soul)
+   ↓
+7. 长期底色状态文件
+   soul_emotion_baseline.json
+   只保存向量/hash/计数/时间，不保存 Soul 原文
+   ↓
+8. Final System Prompt
+   SoulStyleSovereignty 卡输出 SoulEmotionBaseline + SoulInstantProjection
+   ↓
+9. LLM 回复
+   风格只由 Soul + SoulStyleModelState 决定
+
+禁止旁路：
+Runtime / Planner / Tool / Memory / Skill / Provider / OutputContract 不得写入情感底色，也不得通过提示词改变回复风格。

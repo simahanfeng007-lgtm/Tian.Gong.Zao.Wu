@@ -1,0 +1,10 @@
+{
+  "playbook_id": "delivery_package",
+  "work_type": "delivery",
+  "description": "交付打包工作流：扫描项目、质量检查、打包、manifest、报告。",
+  "phase_sequence": ["scan_project", "quality_check", "package", "manifest", "report"],
+  "recommended_tools": ["scan_project", "run_python_quality_check", "diagnose_project", "create_zip_package", "create_release_bundle", "build_delivery_standardization"],
+  "forbidden_tools": ["document_parse", "document_apply_rewrite"],
+  "verification_policy": "打包前至少有项目扫描和质量检查摘要；失败不得 completed_pass。",
+  "fallback_policy": "质量检查失败则 completed_with_warnings 或 partial_with_resume，不阻塞非 A5 打包报告。"
+}

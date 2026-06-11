@@ -1,0 +1,40 @@
+L6.72.25 工作模式接线表
+
+一、模式定义
+- 聊天：chat，普通问答，不主动请求 Planner / Tools。
+- 干活：work，默认执行模式，请求 Planner + ToolMode。
+- 代码：code，请求代码任务意图，适合修复/运行/测试/编译。
+- 文件：file，请求文件任务意图，适合读取/导出/打包/压缩。
+- 长链：long_chain，请求长链任务意图，适合审计/全链修复/回归/交付。
+
+二、UI 接线
+- 顶部模式下拉：main_window.py -> work_mode_var
+- 输入区模式下拉：main_window_chat_runtime.py -> work_mode_var
+- 设置页默认模式：main_window_feature_pages.py -> ui_preferences
+- 发送按钮文案：main_window_actions.py -> _current_work_mode_button_text()
+
+三、提交接线
+- _send_message()
+  -> _resolve_submit_work_mode_payload()
+  -> resolve_submit_work_mode()
+  -> _submit_text_to_runtime_stream()
+  -> submit_user_message_streaming(..., work_mode_payload=...)
+
+四、SSE Payload 字段
+- frontend_contract = L6.72.25
+- work_mode_contract = tiangong.l6_72_25.work_mode.v1
+- frontend_work_mode
+- work_mode
+- planner_allowed
+- tools_requested
+- long_chain_requested
+- quality_gate_required
+- tool_execution_mode
+
+五、边界字段
+- no_frontend_tool_execution = True
+- no_frontend_memory_write = True
+- no_frontend_rollback_apply = True
+
+六、执行原则
+前端只声明工作意图和审批需求，不直接执行工具。最终执行权仍属于 LLM 主脑、Runtime、Planner、ToolMode、QualityGate 组合链路。

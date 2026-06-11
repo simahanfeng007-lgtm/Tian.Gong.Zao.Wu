@@ -1,0 +1,237 @@
+《天工造物全局架构宪法 v0.1》
+生成日期：2026-06-03
+状态：草案冻结版
+用途：作为新版天工造物从零重塑时的最高架构约束、分层边界、L0 准入规则和后续代码实现依据。
+
+============================================================
+一、总纲
+============================================================
+
+1. 系统性质
+天工造物 = 智能体操作系统 + 工程生命体系统。A 是工程形态，C 是长期愿景。
+
+2. 最高目标
+生命性第一。稳定性、安全性、执行力、可演化性均服务于生命性。
+
+3. 智能体形态
+底层只定义 Actor 抽象，不写死单智能体或多智能体。
+
+4. 执行权原则
+大模型可自由提出意图；所有真实副作用必须经底层框架约束、授权、记录与恢复。
+
+5. 插件化原则
+核心内建底座 + 插件化扩展。核心负责活着、受控、可恢复；插件负责变强、变多、变聪明。
+
+6. 核心内建边界
+除知识生产系统和前端/UI 外，状态机、事件、权限/风险、工具边界、记忆、遗忘、生命体征、插件宿主、自愈、Skill 运行契约、工具释放契约均进核心。
+
+7. 大脑核心
+大脑核心 = 记忆系统 + 遗忘系统。二者都需模拟人类真实机制，并使用数学模型做底层。
+
+8. 自愈系统
+自愈系统 = 审计 + 恢复 + 回滚 + 复盘 + 修复建议 + 自我校验。
+
+9. 七层结构
+L0 零依赖原语层；L1 端口协议层；L2 领域状态层；L3 运行编排层；L4 外部适配层；L5 插件宿主层；L6 子系统插件层。
+
+10. 依赖方向
+L0 不依赖任何项目层；L1 只依赖 L0；L2 依赖 L0/L1；L3 依赖 L0-L2；L4 依赖 L0-L3；L5 依赖 L0-L4；L6 依赖 L0-L5 公开接口。
+
+11. 反向依赖禁令
+任何内层 import 外层、L5 硬编码 L6 插件、L0 引入上层概念均为架构违规。
+
+12. 架构测试
+依赖方向、第三方依赖、IO 禁令、不可变性、稳定序列化必须写成自动测试。
+
+13. L0 生命边界
+L0 不放 MemorySystem/ToolSystem 等系统名；允许 Trace、Retention、Decay、Recovery、EnergyBudget、StabilityRange 等生命数学原语。
+
+14. 记忆遗忘数学路线
+L0 定义通用数学原语；L2 先用可解释公式；L6 可引入 Ebbinghaus、ACT-R、LTP/LTD 等高级模型。
+
+15. 命名规范
+代码使用英文工程名，文档与注释保留中文理念名。
+
+16. L0 零第三方依赖
+L0 只允许 Python 标准库，禁止任何第三方库与 L1-L6 项目模块。
+
+17. 不可变性
+所有 L0 数据对象 @dataclass(frozen=True, slots=True)，变化必须生成新对象、事件、快照或 Delta。
+
+18. Result-first
+普通错误返回 CoreResult；异常只用于不可恢复或程序员错误。
+
+19. 序列化策略
+Canonical JSON 为第一事实格式；Protocol Buffers 为未来二进制派生格式；Avro 作为事件流候选。
+
+20. 统一事实对象
+可独立记录、事件化、审计、恢复、哈希的核心对象必须具备 id/type/schema_version/created_at/trace_id/origin_ref/evidence_refs/meta 等事实字段。
+
+21. 追踪模型
+采用 TraceContext + CausalEventMetadata：trace_id、span_id、parent_span_id、correlation_id、causation_id、actor_id、scope_id、sequence_no、schema_version。
+
+22. Event-first
+事件是第一事实来源；状态是事件折叠后的当前视图；日志是生命轨迹。
+
+23. 事件流 + 快照
+事件流为事实；StateView 为投影；Checkpoint/Snapshot 只用于加速恢复，不能覆盖事件。
+
+24. 运行状态引用
+RuntimeStateRef、ExecutionStateRef、StateSnapshotRef、StateDeltaRef、CheckpointRef、RecoveryPointRef 进入 L0；完整状态机进 L2/L3。
+
+25. Lifecycle
+LifecycleRef、LifecycleState、LifecyclePhase、LifecycleTransitionRef 进入 L0，表达对象生命阶段。
+
+26. Failure/Fault/Diagnosis
+Failure、Fault、RecoveryDiagnosis 进入 L0，区分错误、违反、病灶、功能失败与诊断。
+
+27. Transaction/Compensation
+Transaction、Compensation、Reversibility、IdempotencyKey 进入 L0，表达提交边界、补偿和重试安全。
+
+28. Deletion/Erasure/Tombstone
+Deletion、Erasure、Tombstone、Redaction、Anonymization、CryptoErasure 进入 L0。
+
+29. Observation
+Observation 表达原始观察材料。
+
+30. Signal
+Signal 表达系统感知到的语义变化、压力、趋势和反馈。
+
+31. Metric
+Metric 表达可量化测量值，与 Event/Signal 分离。
+
+32. Context
+ContextRef 进入 L0；完整上下文装配、压缩、选择、污染检测在 L2/L3/L6。
+
+33. Belief/WorldState
+BeliefStateRef 和 WorldStateRef 进入 L0，完整信念模型和世界模型不进 L0。
+
+34. Memory
+MemoryRef / MemoryTraceRef 进入 L0；完整记忆内容、召回、索引、巩固算法不进 L0。
+
+35. Forgetting
+ForgettingRef、RetentionTrace、DecayTrace、InterferenceTrace 等进入 L0；完整遗忘算法不进 L0。
+
+36. Learning/Adaptation/Evolution
+LearningRef、AdaptationRef、EvolutionRef、ImprovementProposalRef、EvolutionCommitRef、EvolutionRollbackRef 进入 L0。
+
+37. Goal
+Goal 进入 L0，只表达目标事实，不做目标分解、冲突处理或调度。
+
+38. PlanRef
+PlanRef 进入 L0；完整 Plan 结构、步骤、依赖图、重试策略不进 L0。
+
+39. ActionIntent/Effect
+ActionIntent 表达行动意图；Effect 表达会改变世界的受控副作用。
+
+40. Decision/Risk
+Decision 和 RiskView 进入 L0，表达裁决事实与风险事实，不实现策略算法。
+
+41. Grant/Lease
+Grant 记录授权来源；Lease 控制运行期临时使用权。
+
+42. HumanGate/Approval
+HumanGate、Approval、Intervention、Escalation 进入 L0，表达人类治理事实。
+
+43. Autonomy/Agency/ControlMode
+AutonomyLevel、AgencyLevel、ControlMode、OversightMode 进入 L0。
+
+44. Policy/Norm/Governance
+PolicyRef、NormRef、GovernanceRef 进入 L0；具体规则引擎和 Policy DSL 不进 L0。
+
+45. Contract
+ContractRef 进入 L0，表达运行承诺与治理边界引用。
+
+46. Value/Preference/Objective
+ValueRef、PreferenceRef、ObjectiveRef、UtilitySignalRef、TradeoffRef 进入 L0。
+
+47. Instruction/Directive
+Instruction/Directive 进入 L0，区分观察到的内容和有权威的指令事实。
+
+48. Actor
+ActorRef / ActorKind 进入 L0，只表达身份与责任，不表达行为。
+
+49. Self/Identity/Continuity
+SelfRef、IdentityRef、ContinuityRef、BoundaryRef、OwnershipRef、AffiliationRef 进入 L0。
+
+50. Scope/Boundary
+Scope 表达作用域边界，是权限、资源、上下文、记忆、工具和恢复的基础。
+
+51. Trust/Provenance
+TrustBoundary、TrustLevel、Provenance、ResponsibilityChain、Attestation、IntegrityDigest 进入 L0。
+
+52. Privacy/DataGovernance
+PrivacyRef、ConsentRef、DataClass、ProcessingPurposeRef、RetentionPolicyRef、DataLifecycleState 进入 L0。
+
+53. Secret/Credential/CapabilityToken
+SecretRef、CredentialRef、CapabilityTokenRef 进入 L0，只记录引用，不接触真实密钥。
+
+54. Uncertainty/Confidence/DataQuality
+不确定性、置信度、数据质量、冲突引用进入 L0。
+
+55. Resource/Energy
+ResourceRef、ResourceUsage、ResourceBudget、ResourcePressure、EnergyBudget 进入 L0。
+
+56. Cost/Budget/Quota/RateLimit
+Cost、Budget、Quota、RateLimit 进入 L0，表达成本、预算、额度和速率限制。
+
+57. Environment/Sandbox
+EnvironmentRef、SandboxRef、IsolationBoundaryRef 进入 L0。
+
+58. Location/URI/Locator
+LocationRef、AddressRef、URIRef、LocatorRef 进入 L0。
+
+59. Communication/MessageEnvelope
+CommunicationRef、MessageEnvelopeRef、ChannelRef、ProtocolRef、ConversationRef、HandoffRef 进入 L0。
+
+60. ToolRef/AdapterRef
+ToolRef / AdapterRef 进入 L0；完整 Tool/Adapter/schema/executor 不进 L0。
+
+61. SkillRef/CapabilityRef
+SkillRef / CapabilityRef 进入 L0；完整 Skill/Capability 不进 L0。
+
+62. Component/Module/Package
+ComponentRef、ModuleRef、PackageRef 进入 L0。
+
+63. Content/Payload/MediaType
+ContentRef、PayloadRef、MediaTypeRef、ContentDigest 进入 L0。
+
+64. Artifact
+ArtifactRef、ArtifactDigest、ArtifactState 进入 L0。
+
+65. Index/Query/Retrieval
+IndexRef、QueryRef、RetrievalRef、RetrievalResultRef 进入 L0。
+
+66. Test/Validation/Verification
+TestRef、ValidationRef、VerificationRef、AssertionRef、EvaluationRef、RegressionRef 进入 L0。
+
+67. Audit/Accountability
+AuditRef、AuditTrailRef、AccountabilityRef、TamperEvidenceRef、IntegrityChainRef 进入 L0。
+
+68. Schema/Version/Migration
+SchemaRef、VersionRef、MigrationRef、CompatibilityLevel、DeprecationRef、UpcastRef 进入 L0。
+
+69. Namespace/Registry/Naming
+NamespaceRef、NameRef、QualifiedName、RegistryRef、NameBindingRef 进入 L0。
+
+70. Relation/Dependency/Graph
+RelationRef、DependencyRef、GraphRef、NodeRef、EdgeRef、PathRef 进入 L0。
+
+71. Schedule/Trigger/Timer
+ScheduleRef、TriggerRef、TimerRef、WakeupRef、RecurrenceRef 进入 L0。
+
+72. L0 不执行
+L0 不调用模型、不调用工具、不读写文件、不访问网络、不启动进程、不执行真实删除、不做真实授权、不做真实加密、不做真实调度。
+
+73. L0 准入标准
+对象进 L0 必须同时满足：不依赖上层、跨系统通用、表达事实而非执行逻辑、可序列化审计哈希、长期稳定。
+
+============================================================
+二、最终收口
+============================================================
+
+L0 是天工造物的“生命数据原子层”。
+它不是普通基础库，也不是玄学生命系统。
+它是智能体生命系统在工程上能被序列化、审计、回放、恢复、验证、演化的最小事实语言。
+
+下一步文档：《天工造物 L0 零依赖原语层设计 v0.1》。

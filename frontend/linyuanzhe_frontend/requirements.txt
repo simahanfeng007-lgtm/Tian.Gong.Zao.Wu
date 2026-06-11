@@ -1,0 +1,10 @@
+# 天工造物 v2.0 / 临渊者 FE01 STEP68 / L6.73.8
+# Core desktop frontend uses Python standard library + tkinter.
+# tkinter is bundled with most CPython installers, but on Linux may require OS
+# packages such as python3-tk.
+
+# Optional tray extras, install only when system tray integration is enabled:
+# pystray>=0.19
+# Pillow>=10
+
+# Document parsing/writeback extras live in backend/project/requirements-docs.txt.

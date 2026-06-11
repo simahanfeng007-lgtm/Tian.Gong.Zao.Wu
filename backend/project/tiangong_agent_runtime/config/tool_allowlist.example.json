@@ -1,0 +1,20 @@
+{
+  "tools": [
+    "model_chat",
+    "scan_project",
+    "diagnose_project",
+    "list_dir",
+    "read_file",
+    "write_workspace_file",
+    "run_python_quality_check",
+    "create_zip_package"
+  ],
+  "python_quality_commands": [
+    "compileall",
+    "pytest"
+  ],
+  "notes": [
+    "diagnose_project is read-only and produces public diagnostic summaries.",
+    "repair-loop still writes only through write_workspace_file and packages only through create_zip_package."
+  ]
+}

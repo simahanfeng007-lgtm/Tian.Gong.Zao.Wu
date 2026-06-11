@@ -1,0 +1,19 @@
+L6.72.26 前端执行链路接线表
+
+用户选择模式
+-> frontend contracts/work_modes.py 生成 work_mode payload
+-> SseRuntimeClient._chat_payload 序列化 frontend_work_mode / planner_allowed / tools_requested / long_chain_requested
+-> desktop local bridge /chat/stream-events 接收 payload
+-> _runtime_directives_from_payload 映射为：
+   chat       -> TIANGONG_TASK_MODE=ordinary_chat   TIANGONG_PLANNER_MODE=rule_only      TIANGONG_OUTPUT_CONTRACT=normal_chat
+   work       -> TIANGONG_TASK_MODE=tool_task       TIANGONG_PLANNER_MODE=model_suggest  TIANGONG_OUTPUT_CONTRACT=tool_plan
+   code       -> TIANGONG_TASK_MODE=code_task       TIANGONG_PLANNER_MODE=model_suggest  TIANGONG_OUTPUT_CONTRACT=code_patch
+   file       -> TIANGONG_TASK_MODE=file_task       TIANGONG_PLANNER_MODE=model_suggest  TIANGONG_OUTPUT_CONTRACT=tool_plan
+   long_chain -> TIANGONG_TASK_MODE=diagnostic_task TIANGONG_PLANNER_MODE=model_suggest  TIANGONG_OUTPUT_CONTRACT=tool_plan
+-> 桥接先发 SSE run_started/planner_started/quality_gate/tool_started
+-> 后台线程调用 backend/project/run_agent.py --once
+-> 执行中发送 runtime_state heartbeat
+-> 完成后发送 tool_result/assistant_delta/audit_event/assistant_final/run_terminal
+-> 前端渲染执行状态与结果
+
+边界：前端只提交意图和显示事件，不直接调用工具，不写记忆，不应用回滚。

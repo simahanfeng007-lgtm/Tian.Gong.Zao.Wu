@@ -1,0 +1,24 @@
+天工造物 L6 第一阶段公共插件底座交付索引
+生成日期：2026-06-05
+
+工程根目录：project_l6_phase1_public_plugin_foundation_20260605
+阶段目标：新增 L6 公共插件底座 common contracts。
+边界口径：只做声明、契约、ref、summary、digest、quality gate、forbidden scan、invariant；不做业务插件，不裸调模型，不裸调工具，不直接写状态，不保存凭证，不绕过 L3/L4/L5。
+
+核心新增目录：
+- tiangong_kernel/l6_plugins/
+- tiangong_kernel/l6_plugins/common/
+
+核心新增测试：
+- tests/test_l6_phase1_*.py
+
+核心报告：
+- docs/l6_phase1_development_report_zh.txt
+- docs/l6_phase1_change_list_zh.txt
+- docs/l6_phase1_validation_report_zh.txt
+- docs/l6_phase1_test_results_zh.txt
+- docs/l6_phase1_handoff_report_zh.txt
+- docs/l6_phase1_todo_zh.txt
+- docs/l6_phase1_risk_list_zh.txt
+- docs/forbidden_scan_l6_phase1_20260605.json
+- docs/l6_phase1_hash_compare_l0_l5_20260605.json

@@ -1,0 +1,57 @@
+L6.72.48 聊天路径透传接线表
+
+一、修复目标
+复制 Windows/macOS 本机文件路径后，前端不能把路径在提交 Runtime 前替换为 <redacted>。脱敏只能用于显示层、诊断层、审计摘要层；Runtime 必须收到用户原文，才能解析文件路径、文档任务和真实本机访问意图。
+
+二、旧链路问题
+用户输入文本
+ -> safe_text / safe_chat_text
+ -> ChatMessage.text
+ -> _chat_payload(message=safe_message)
+ -> Runtime
+
+问题：safe_text / safe_chat_text 会脱敏本机路径，导致 Runtime 收到 <redacted>，后续工具无法找到文件。
+
+三、新链路
+用户输入文本
+ -> runtime_submission_text(text)
+    - 去控制字符
+    - 统一换行
+    - 长度上限
+    - 不脱敏路径
+ -> runtime_message
+ -> _chat_payload(message=runtime_message, user_message=runtime_message)
+ -> Runtime / Planner / ToolMode
+
+同时：
+runtime_message
+ -> safe_chat_text(runtime_message)
+ -> message_display / ChatMessage.text
+ -> 前端会话显示
+
+四、关键字段
+1. payload["message"]
+- 用途：Runtime 真实处理
+- 内容：原始用户文本
+- 是否脱敏：否
+
+2. payload["user_message"]
+- 用途：Runtime 兼容字段
+- 内容：原始用户文本
+- 是否脱敏：否
+
+3. payload["message_display"]
+- 用途：前端/诊断/显示
+- 内容：脱敏文本
+- 是否脱敏：是
+
+4. ChatMessage.text
+- 用途：主会话气泡
+- 内容：脱敏文本
+- 是否脱敏：是
+
+五、边界
+- 该修复不开放前端直接读写文件。
+- 该修复不绕过 Runtime / QualityGate。
+- 该修复不把本机路径原文写入主会话气泡。
+- Runtime 是否允许读写仍由工作模式、工具路由、QualityGate、Audit 决定。

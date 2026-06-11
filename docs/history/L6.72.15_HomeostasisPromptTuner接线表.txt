@@ -1,0 +1,51 @@
+L6.72.15 HomeostasisPromptTuner 接线表
+
+1. PromptTrace outcome
+   prompt_trace.record_prompt_trace_outcome(...)
+   -> build_prompt_trace_outcome(...)
+   -> update_prompt_tuning_from_outcome(shell_context, outcome)
+
+2. Tuner 状态
+   homeostasis_prompt_tuner.HomeostasisPromptTuningState
+   - success_ema
+   - failure_ema
+   - noise_pressure
+   - conflict_pressure
+   - planner_leak_pressure
+   - provider_pressure
+   - global_threshold_delta
+   - organ_bias
+
+3. 下轮 Prompt 编译
+   organ_signal_emitters.refresh_session_system_prompt(...)
+   -> get_prompt_tuning_state(context)
+   -> build_prompt_context(..., prompt_tuning_state=state.public_dict())
+   -> compile_prompt(...)
+
+4. AttentionGate 调权
+   organ_signal_card.score_organ_signal_card(..., tuning_state=...)
+   -> base AttentionGate score
+   -> tuned_score_bias(...)
+   -> S_i'
+
+5. 入选阈值调权
+   organ_signal_card.select_organ_signal_cards(..., tuning_state=...)
+   -> tuned_min_score(...)
+   -> θ'
+
+6. PromptTrace 可观察
+   trace_organ_signal_cards 输出 tuning_bias。
+   PromptTuner 状态通过 /prompt-tuner 查看。
+   /prompt-tuner-reset 可重置基线。
+
+7. 持久化位置
+   默认：workspace/.linyuanzhe/prompt_trace/prompt_tuning_state.json
+   环境变量覆盖：TIANGONG_PROMPT_TUNER_FILE
+   禁用：TIANGONG_PROMPT_TUNER_DISABLED=1
+
+8. 不污染约束
+   - Tuner 状态不进入 system prompt。
+   - Tuner 不执行工具。
+   - Tuner 不修改器官内部状态。
+   - Tuner 不覆盖 Kernel。
+   - ordinary_chat 下 PlannerCard 硬阻断不受调权影响。

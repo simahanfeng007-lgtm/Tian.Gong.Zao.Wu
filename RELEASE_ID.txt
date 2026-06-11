@@ -1,0 +1,5 @@
+release_id=Q22_DialogueAnalysisWorkModeBoundaryFix_20260612
+product=tiangong_v2_linyuanzhe
+version=FE01 STEP68 / L6.73.8
+top_level_dir=tiangong_v2_linyuanzhe_L6.73.8_Q22DialogueAnalysisWorkModeBoundaryFix
+notes=Extends Q21 by keeping ordinary questions, explanation requests, capability/status questions, and error-analysis turns in chat even when the Windows desktop selector is left on 工作. Concrete read/write/run/repair/package requests still activate the work boundary.

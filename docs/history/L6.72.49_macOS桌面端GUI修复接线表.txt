@@ -1,0 +1,10 @@
+# L6.72.49 macOS桌面端GUI修复接线表
+
+| 模块 | 本轮修复 | 验收点 |
+|---|---|---|
+| frontend/linyuanzhe_frontend/ui/theme.py | 提升 window_min_w/window_min_h；新增 content_min_w、chat_input_min_h、sidebar_w、sidebar_icon_w | 窗口不再过窄压缩 |
+| frontend/linyuanzhe_frontend/ui/main_window.py | 新增 macOS surface 判定；macOS 禁用自适应窄栏；侧栏列固定 minsize | 左侧不应黑块/白块/错位 |
+| main_window shell grid | 侧栏列固定，内容列设置最小宽度 | 历史记录页/搜索导出区不压出屏幕 |
+| macOS 启动脚本 | 设置 Tk 与 UTF-8 环境 | 规避 Tk Button / 深色主题异常 |
+
+说明：本环境不能真实渲染用户 macOS 窗口，本项仍需用户本机截图验收。

@@ -1,0 +1,104 @@
+L6.72.46 文档真实修改写回接线表
+
+一、入口
+
+用户意图示例：
+- 把刚才文档里的 A 改成 B 并写回。
+- 把桌面的 test.docx 里的 A 改成 B 并写回。
+- 对 sample.md 执行 replacements 并生成修订副本。
+- 覆盖写入 sample.txt，overwrite=true。
+
+二、Planner / PlanBridge 路由
+
+1. 显式 old_text/new_text：
+PlanBridge -> document_apply_rewrite
+
+2. 桌面 / 下载 / 文档 + 文件名 + host hint：
+PlanBridge -> _parse_host_file_task -> document_apply_rewrite
+
+3. 修改意图不明确：
+PlanBridge -> document_rewrite_plan
+
+4. 普通聊天：
+PlanBridge -> []
+
+三、工具注册
+
+RuntimeEntry：
+ToolDescriptor("document_apply_rewrite", "按明确替换/全文内容对 txt/md/code/docx/xlsx/pptx 执行受治理写回，生成备份与回滚清单。", "A3")
+
+Adapter：
+document_apply_rewrite_adapter
+
+Registry alias：
+- document_apply_rewrite
+- document_writeback
+- document_write_back
+- document_edit_apply
+- apply_document_rewrite
+- apply_rewrite
+- 文档写回
+- 应用文档修改
+
+四、参数
+
+常用参数：
+- path：源文件路径。
+- document_id：已解析文档上下文 ID。
+- old_text：待替换文本。
+- new_text：替换文本。
+- replacements：批量替换列表。
+- content / new_content：文本类文件全文写入内容。
+- operation：replace / write_full_text / append。
+- target / output_path：指定输出路径。
+- overwrite：是否覆盖原文件，默认 false。
+- dry_run：是否只预演，默认 false。
+- allow_no_match：未命中替换时是否仍继续，默认 false。
+
+五、执行链
+
+RuntimeEntry
+-> PlannerExecutionController / LongChainRunner
+-> ExecutionSpine
+-> RuntimeToolRegistry
+-> PermitGateway / QualityGate / Audit
+-> document_apply_rewrite_adapter
+-> manifest / backup / artifact output
+
+六、写回策略
+
+1. 默认 copy mode：
+source.md -> source.linyuanzhe_rewrite.md
+
+2. 覆盖模式：
+overwrite=true 或 mode=overwrite 才允许覆盖。
+覆盖前写入 backup。
+
+3. 写回清单：
+.linyuanzhe/document_writeback/manifests/docwrite_xxx.json
+
+4. 备份路径：
+.linyuanzhe/document_writeback/backups/docwrite_xxx/...
+
+七、主会话投影
+
+允许显示：
+- 状态
+- 源文件
+- 输出文件
+- 替换命中数
+- operation_id
+- 回滚凭据
+- 边界说明
+
+禁止显示：
+- 原始正文全文
+- raw result
+- stderr
+- 二进制字节
+- Office/XML 原始内容
+
+八、风险等级
+
+document_apply_rewrite = A3
+理由：受治理写入工作区文件，有备份与回滚；不是 A5 默认硬拦截。

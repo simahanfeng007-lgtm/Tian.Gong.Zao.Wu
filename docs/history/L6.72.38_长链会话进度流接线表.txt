@@ -1,0 +1,30 @@
+L6.72.38 长链会话进度流接线表
+
+Runtime SSE 事件 -> 前端处理 -> 会话区表现
+
+run_started -> _append_progress_notice -> 长链任务已启动
+run_accepted -> _append_progress_notice -> 任务已进入执行链
+planner_started -> _append_progress_notice -> 正在拆解任务计划
+planner_plan -> _summarize_plan_steps + _append_progress_notice -> 执行计划已生成，展示步骤列表
+tool_started -> _append_progress_notice -> 正在执行步骤
+tool_progress -> digest 去重 + _append_progress_notice -> 步骤进展
+tool_result -> _append_progress_notice -> 步骤已返回
+approval_required / quality_gate -> _append_progress_notice -> 等待用户审批
+error -> _append_progress_notice -> 执行出现异常
+run_terminal -> _append_progress_notice(force=True) -> 任务已收口
+
+用户状态追问：
+“咋样了 / 怎么样 / 进度 / 到哪了 / 完成没 / status / progress”
+-> main_window_actions._send_message
+-> client.try_handle_status_probe
+-> _format_status_probe_reply
+-> 会话区展示当前 Run 状态
+
+原始工具输出治理：
+assistant_delta / assistant_final
+-> _clean_assistant_visible_content
+-> _strip_raw_tool_output
+-> readfile/list_dir/shell/python/npm/pytest/rg/grep 等原始行不进主会话
+
+边界：
+前端只展示事件与提交状态追问，不执行工具、不写文件、不改记忆、不绕过 QualityGate。

@@ -1,0 +1,76 @@
+天工造物 v2.0 - 临渊者 L6.72.5 任意位置启动热修报告
+============================================================
+
+一、问题归因
+
+用户截图中的报错不是前端渲染层崩溃，而是 Windows 启动器路径容错不足：
+- 旧 BAT 依赖固定 ..\\.. 路径推导项目根目录。
+- 当用户从 01_启动入口/Windows、压缩包临时视图、复制入口、或非预期工作目录启动时，可能找不到 00_ASCII_START_HERE/python/START_DESKTOP_L6710.py 或 backend/frontend/desktop。
+- 随后 Python 启动链进入缺路径状态，CMD 显示 The system cannot find the path specified，并返回 exit code 3。
+
+二、本轮修复
+
+1. Windows BAT 任意位置根目录发现
+- 改造 00_ASCII_START_HERE/windows/*.bat。
+- 改造 01_启动入口/Windows/*.bat。
+- 新增根目录 START_FROM_ANYWHERE_AUTO_L6725.bat。
+- 新增根目录 SELF_CHECK_FROM_ANYWHERE_L6725.bat。
+- 支持从脚本目录、当前目录、上级目录、Desktop、Downloads、Documents 自动搜索项目根。
+- 找不到根目录时输出明确诊断：必须完整解压 ZIP，不能在压缩包视图里直接双击 BAT。
+
+2. 诊断入口降级为纯 Python
+- SELF_CHECK_L6719.bat 不再要求 tkinter 可用才启动。
+- DEPENDENCY_CHECK.bat 保持纯 Python 诊断。
+- 这样缺 Tk 的 Windows 机器也能看到依赖诊断，而不是入口直接退出。
+
+3. Python 入口根目录发现增强
+- 00_ASCII_START_HERE/python/START_DESKTOP_L6710.py 支持 LINYUANZHE_ROOT_HINT / TIANGONG_ROOT_HINT / cwd / __file__ 多源定位。
+- SELF_CHECK_L6710.py 同步增强。
+- DATAUP_SAFE_UPDATE_L6717.py 同步增强。
+- 01_启动入口/通用Python 同步更新。
+
+4. macOS/Linux 入口同步容错
+- 00_ASCII_START_HERE/linux_macos/*.sh 已改为向上查找 + 常用目录搜索。
+- 01_启动入口/Linux/*.sh 已同步。
+- 01_启动入口/macOS/*.command 已同步。
+
+5. 版本标记
+- frontend/linyuanzhe_frontend/version_info.py 提升到 L6.72.5。
+- README 与 VERSION_PRODUCT 已同步说明。
+
+三、验证
+
+已完成：
+- compileall PASS。
+- Python 入口从 root / 00_ASCII_START_HERE/windows / 01_启动入口/Windows / 外部 cwd + ROOT_HINT 启动 self-check PASS。
+- Linux/macOS shell 入口自检 PASS。
+- 前端 import smoke PASS。
+- Code-X runtime smoke PASS。
+- R20 activation smoke PASS。
+- R21 adapter smoke PASS。
+- runtime tool alignment smoke PASS。
+- v1 clean import smoke PASS。
+- BAT 内容 ASCII PASS。
+- BAT 行尾 CRLF PASS。
+- 净包已清理 __pycache__ / *.pyc / reports / .pytest_cache。
+
+说明：
+- 净包按约定排除了 tests/，所以在净包内运行 pytest 会显示 no tests ran。此处以 compileall + smoke 链作为净包验收。
+- 直接在 ZIP 压缩包视图中双击 BAT 仍然无法保证启动，因为 Windows 可能只临时释放单个 BAT，完整 backend/frontend/desktop 不存在。必须先完整解压。
+
+四、首选入口
+
+Windows：
+1. START_FROM_ANYWHERE_AUTO_L6725.bat
+2. 00_ASCII_START_HERE/windows/START_DESKTOP_AUTO_L6719.bat
+3. 01_启动入口/Windows/01_启动临渊者桌面端_自动模式_L6710.bat
+
+诊断：
+1. SELF_CHECK_FROM_ANYWHERE_L6725.bat
+2. 00_ASCII_START_HERE/windows/DEPENDENCY_CHECK.bat
+3. 00_ASCII_START_HERE/windows/SELF_CHECK_L6719.bat
+
+五、是否影响外骨骼
+
+不影响 Runtime 主链、不改工具注册、不改学习资产、不改 Planner/子智能体边界。
+本轮仅修启动器、路径发现、入口诊断与版本标记。

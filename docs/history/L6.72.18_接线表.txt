@@ -1,0 +1,41 @@
+# L6.72.18 接线表
+
+## BridgeEnvelope 边界
+
+backend subprocess stdout/stderr
+  -> _redact_output
+  -> returncode == 0: user_text = stdout
+  -> returncode != 0: diagnostic_text = stdout+stderr -> state.last_bridge_diagnostic
+  -> user_text = 安全失败摘要
+  -> provider_projection exposes diagnostic_digest/error_kind only
+
+## Backend Provider NetworkPolicy
+
+OpenAICompatibleModelClient
+  -> tiangong_agent_shell.network_policy.urlopen_with_policy
+  -> loopback HTTP allowed for local compatible provider
+  -> remote HTTP blocked
+  -> HTTPS default CA verification / optional pinning
+
+## Frontend Runtime NetworkPolicy
+
+SseRuntimeClient / RuntimeIntegrationProbe
+  -> linyuanzhe_frontend.clients.network_policy.urlopen_with_policy
+  -> local bridge http://127.0.0.1:8787 allowed
+  -> remote Runtime HTTP blocked
+  -> HTTPS default CA verification / optional pinning
+
+## DataUp NetworkPolicy
+
+DataUp latest/package downloader
+  -> scripts.network_policy_l67218.urlopen_with_policy
+  -> remote HTTP blocked
+  -> HTTPS default CA verification / optional pinning
+  -> existing Ed25519 manifest signature guard remains mandatory
+
+## AssetRegistry Hygiene
+
+active_assets_registry.json
+  -> workspace root fields relative
+  -> record path/dir fields normalized to *_relative values
+  -> hygiene smoke blocks <local_workspace>/, <temp>/, /home/, C:\, D:\

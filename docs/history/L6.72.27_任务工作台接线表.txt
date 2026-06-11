@@ -1,0 +1,32 @@
+L6.72.27 任务工作台接线表
+
+前端提交：
+- UI 工作模式：聊天 / 干活 / 代码 / 文件 / 长链
+- Payload：work_mode、planner_allowed、tools_requested、long_chain_requested、quality_gate_required、tool_execution_mode
+
+SSE 事件：
+- run_started -> submitting
+- run_accepted -> accepted
+- planner_started / planner_plan -> planning
+- quality_gate / approval_required -> waiting_approval 或 accepted
+- heartbeat / runtime_state -> tool_running / 续航可见
+- tool_started / tool_progress / tool_result -> tool_running
+- assistant_delta / assistant_final -> streaming
+- run_terminal -> completed / failed / cancelled
+- error -> failed
+
+本地桥接：
+- active_runs：记录 run_id/task_id/status/frontend_work_mode/planner_mode/heartbeat_count
+- active_processes：记录活跃 backend Popen 子进程
+- /runs/status：前端重连/状态恢复读取入口
+- /control/task/stop、/interrupt、/reset：真实终止活跃子进程，不只是 UI 解锁
+
+聊天页工作台：
+- 状态：Run ID / 模式 / 心跳 / 最新事件
+- 进度：当前工具名 / 当前工具状态
+- 操作：重连 / 停止 / 复制诊断
+
+安全边界：
+- frontend_executes_tools=false
+- 前端不直接调用工具、不写 Runtime、不改 PromptCore
+- 工具执行仍由 Runtime / Planner / ToolMode / QualityGate 裁决
