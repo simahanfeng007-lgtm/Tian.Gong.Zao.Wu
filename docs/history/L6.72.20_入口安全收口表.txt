@@ -1,0 +1,14 @@
+天工造物 v2.0 - 临渊者 L6.72.20 入口安全收口表
+
+| 问题 | 处理结果 | 验证 |
+|---|---|---|
+| DEPENDENCY_CHECK 只打印“按任意键退出” | 已改为真实 input("按回车键退出")，非交互跳过 | entry_python_safety_smoke_l67220 PASS |
+| DATAUP_SAFE_UPDATE subprocess.run 无 timeout | _entry_common_l67217.py 已加 timeout，超时返回 124 | entry_python_safety_smoke_l67220 PASS |
+| dataup_update_helper subprocess.run 无 timeout | helper 已加 timeout，超时返回 124 | entry_python_safety_smoke_l67220 PASS |
+| runpy.run_path 普通异常直接冒泡 | 已转中文友好诊断，debug 环境变量才打印堆栈 | entry_python_safety_smoke_l67220 PASS |
+| TIANGONG_ROOT_HINT 无效 hint 未先跳过 | 已先做 exists/is_file/is_dir 检查，无效 hint 跳过 | invalid hint skip PASS |
+| Shell "$@" 参数透传 | 已从 POSIX/macOS 模板移除 | launcher verifier PASS |
+| BAT %* 参数透传 | 已从 BAT 模板移除 | launcher verifier PASS |
+| 入口版本显示 | 统一 L6.72.20 | verify_launchers_l67220 PASS |
+
+残留说明：未做 Windows/macOS 原生双击 GUI 验收；需在真实系统上执行。

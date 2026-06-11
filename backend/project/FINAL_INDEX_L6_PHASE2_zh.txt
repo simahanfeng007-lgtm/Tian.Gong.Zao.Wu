@@ -1,0 +1,31 @@
+天工造物 L6 第二阶段交付索引
+生成日期：2026-06-05
+
+阶段：L6 第二阶段——插件生命周期、事件、状态投影、Handoff、插件间协作边界、调用回流路径与新增插件准入体系。
+
+核心新增目录/文件：
+- tiangong_kernel/l6_plugins/common/admission.py
+- tiangong_kernel/l6_plugins/common/audit.py
+- tiangong_kernel/l6_plugins/common/events.py
+- tiangong_kernel/l6_plugins/common/handoff_phase2.py
+- tiangong_kernel/l6_plugins/common/interoperation.py
+- tiangong_kernel/l6_plugins/common/invocation_return.py
+- tiangong_kernel/l6_plugins/common/phase2_quality.py
+- tiangong_kernel/l6_plugins/common/projections_phase2.py
+- tiangong_kernel/l6_plugins/common/versioning.py
+
+核心报告：
+- docs/l6_phase2_development_log_zh.txt
+- docs/l6_phase2_handoff_report_zh.txt
+- docs/l6_phase2_validation_report_zh.txt
+- docs/l6_phase2_change_list_zh.txt
+- docs/l6_phase2_test_results_zh.txt
+- docs/l6_phase2_forbidden_scan_20260605.md/json
+- docs/l6_phase2_hash_compare_l0_l5_20260605.md/json
+- docs/l6_phase2_test_inventory_compare_20260605.md/json
+- docs/l6_phase2_public_projection_safety_20260605.md/json
+- docs/l6_phase2_audit_evidence_chain_20260605.md/json
+- docs/l6_phase2_risk_list_zh.txt
+- docs/l6_phase2_todo_zh.txt
+
+最终结论：P0=0，P1=0；full pytest 已真实执行通过：1453 passed in 13.06s；建议进入 L6 第三阶段。

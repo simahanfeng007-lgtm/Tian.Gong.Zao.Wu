@@ -1,0 +1,65 @@
+{
+  "contract_version": "tiangong.l6_68.installer_rc.v1",
+  "product_name": "天工造物 / 临渊者",
+  "package_stage": "rc_preinstall",
+  "install_mode": "engineering_package",
+  "version_label": "FE01 STEP68 / L6.73.8",
+  "unique_developer": "于泳翔",
+  "angel_investor": "胖胖龙",
+  "active_slot": "active",
+  "rollback_slot": "rollback",
+  "update_channel": "internal_rc",
+  "install_root_digest": "INSTALL-ROOT-L6738-PENDING",
+  "startup_self_check_state": "pending",
+  "crash_report_state": "empty",
+  "rollback_ready": true,
+  "offline_repair_available": true,
+  "updater_skeleton_only": true,
+  "installer_build_allowed": false,
+  "slots": [
+    {
+      "slot_name": "active",
+      "version_label": "FE01 STEP68 / L6.73.8",
+      "state": "active",
+      "path_digest": "SLOT-ACTIVE-L6738",
+      "package_sha256_digest": "pending-final-package-sha256",
+      "last_verified": "pending-startup-self-check",
+      "rollback_capable": true,
+      "message": "工程总包活动槽；不是最终安装包。"
+    },
+    {
+      "slot_name": "rollback",
+      "version_label": "FE01 STEP68 / L6.73.8 rollback baseline",
+      "state": "rollback",
+      "path_digest": "SLOT-ROLLBACK-L6738",
+      "package_sha256_digest": "refer-to-input-sha256-file",
+      "last_verified": "pending-offline-repair-check",
+      "rollback_capable": true,
+      "message": "回滚槽结构预留；真实恢复必须由安装器控制器或显式维护脚本执行。"
+    },
+    {
+      "slot_name": "candidate",
+      "version_label": "next-update-candidate",
+      "state": "candidate",
+      "path_digest": "SLOT-CANDIDATE-PENDING",
+      "package_sha256_digest": "not-downloaded",
+      "last_verified": "not-run",
+      "rollback_capable": false,
+      "message": "更新器候选槽骨架；禁止自动下载和自动应用。"
+    }
+  ],
+  "startup_checks": [
+    {"check_id": "backend_layout", "name": "后端目录与 run_agent 入口", "status": "pending", "message": "等待启动自检脚本校验"},
+    {"check_id": "frontend_layout", "name": "前端桌面端与 RuntimeClient", "status": "pending", "message": "等待启动自检脚本校验"},
+    {"check_id": "launcher_layout", "name": "统一启动器与预检脚本", "status": "pending", "message": "等待启动自检脚本校验"},
+    {"check_id": "reports_writable", "name": "报告目录可写", "status": "pending", "message": "等待启动自检脚本校验"}
+  ],
+  "crash_reports": [
+    {"report_id_digest": "CRASH-L668-EMPTY", "status": "empty", "crash_count": 0, "last_crash_at": "none", "safe_summary": "暂无崩溃报告；默认本地保存。", "local_only": true, "upload_allowed": false}
+  ],
+  "repair_actions": [
+    {"action_id": "startup_self_check", "title": "启动自检", "status": "available", "message": "运行 installer/startup/startup_self_check_l668.py", "no_frontend_apply": true},
+    {"action_id": "offline_repair", "title": "离线修复预检", "status": "available", "message": "运行 installer/recovery/offline_repair_l668.py；默认 dry-run。", "no_frontend_apply": true},
+    {"action_id": "rollback_plan", "title": "回滚槽恢复计划", "status": "available", "message": "运行 installer/recovery/rollback_slot_restore_l668.py，仅生成计划。", "no_frontend_apply": true}
+  ]
+}

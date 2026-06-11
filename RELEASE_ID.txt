@@ -1,0 +1,5 @@
+release_id=Q19_HistoryEntryPermissionBoundaryFix_20260611
+product=tiangong_v2_linyuanzhe
+version=FE01 STEP68 / L6.73.8
+top_level_dir=tiangong_v2_linyuanzhe_L6.73.8_Q19HistoryEntryPermissionBoundaryFix
+notes=Extends Q18 with all-history entry smoke/verifier hardening, headless demo SKIP, temp/user report routing, clean state isolation, and real folder permission boundary verification.

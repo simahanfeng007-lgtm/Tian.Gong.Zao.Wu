@@ -1,0 +1,10 @@
+# L6.72.49 路径透传与脱敏接线表
+
+| 链路 | 本轮处理 | 失败保护 |
+|---|---|---|
+| 前端 SSE payload | 保留 raw_user_text、text_raw、original_user_message、original_path、host_path_candidates | raw 载荷出现 <redacted> 触发 path_redaction_leak_detected |
+| 路径候选提取 | 支持 Windows 盘符路径、UNC、macOS/Linux 绝对路径、中文和空格路径 | 只把候选传入 Runtime，不把 display 脱敏文本当真实路径 |
+| 后端 bridge | 优先读取 raw alias；message 被脱敏时尝试 original_path / host_path_candidates 恢复 | 无法恢复则明确返回 path_redaction_leak_detected，不误报模型格式错误 |
+| 工具参数 | 禁止 <redacted> 进入 Runtime 工具参数 | 防止真实文件路径被吞后假执行 |
+
+验收建议：分别复制 C:\Users\...、OneDrive 桌面路径、/Users/...、含中文和空格的文件路径测试读取/解析/写回。

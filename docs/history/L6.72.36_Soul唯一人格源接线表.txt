@@ -1,0 +1,26 @@
+L6.72.36 Soul 唯一人格源接线表
+
+用户设置页 Soul 文本
+  -> frontend/ProviderSettingsWriteRequest.persona_prompt
+  -> style_source=soul_only
+  -> desktop bridge 持久化 provider_config.json
+  -> _run_backend_subprocess 环境变量 TIANGONG_SOUL_PROMPT
+  -> PromptCompiler._soul_state_from_env
+  -> SoulStyleModel.derive_soul_style_vector
+  -> SoulStyleSovereignty 卡
+  -> 最终 system prompt
+  -> LLM 回复风格
+
+隔离链：
+- TIANGONG_RESPONSE_STYLE：桥接层移除，PromptCompiler 不读取。
+- TIANGONG_LANGUAGE_POLICY：桥接层移除，PromptCompiler 不读取。
+- RuntimeStateCard：只提供工具/风险/错误事实。
+- PlannerCard：只提供动作建议边界。
+- ToolPolicyCard：只提供工具权限边界。
+- OutputContract：只提供输出格式/内部日志隔离，不提供人格。
+- ProviderState：只提供模型服务状态。
+
+冲突处理：
+- Soul 与非 Soul 卡风格冲突：保留非 Soul 的安全/事实含义，忽略风格含义。
+- Soul 与 A5 安全规则冲突：A5 硬拦优先，但安全规则不成为人格。
+- 用户要求格式/语言：作为格式要求处理，不改变 Soul 情感底色。

@@ -1,0 +1,12 @@
+L6.72.24 UI 布局收口表
+
+问题 | 根因 | 修复
+左侧栏打开时压成异常宽度 | Tk 初始 winfo_width()==1 被误判为 <1100px | _current_window_width() 对未稳定宽度回退 1280 基准
+左侧栏文字/图标模式错位 | 宽度与 icon/full 模式不是同源判断 | _build_sidebar() 统一用稳定宽度同步模式
+设置页文字溢出 | 1280 基准下两列过窄 + label 无 wrap | 设置页 >=1500px 才双列；长文本加 wraplength
+标题下面说明太多 | Page/Card subtitle 默认渲染 | Page subtitle 抑制；Card subtitle 默认不显示
+标题/正文层级不明显 | card_title 与 body 差距太小 | 提升 title / page_title / card_title 层级
+设置页滚轮卡顿 | 搜索每键全页重建 + 全局滚轮捕获 + Configure 频繁刷新 | 搜索 debounce、scrollregion 节流、页面局部滚轮绑定
+按钮挤出卡片 | pack 横排无法换行 | 模型管理和数据管理按钮改 grid 分行
+
+安全边界：只改前端桌面壳 UI；不改 Runtime、PromptCore、tiangong_kernel。

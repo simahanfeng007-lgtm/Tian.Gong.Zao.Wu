@@ -1,0 +1,8 @@
+{
+  "slot_name": "rollback",
+  "version_label": "FE01 STEP68 / L6.73.8 rollback baseline",
+  "state": "rollback",
+  "path_digest": "SLOT-ROLLBACK-L6738",
+  "rollback_capable": true,
+  "message": "Rollback slot is a current-package compatibility placeholder; real restore must be controlled by installer tooling."
+}

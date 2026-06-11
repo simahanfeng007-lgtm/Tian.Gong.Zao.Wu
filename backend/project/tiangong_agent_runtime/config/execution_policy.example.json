@@ -1,0 +1,7 @@
+{
+  "auto_execute_levels": ["A0", "A1", "A2", "A3"],
+  "confirmation_levels": ["A4"],
+  "blocked_levels": ["A5"],
+  "default_timeout_seconds": 120,
+  "max_output_chars": 12000
+}

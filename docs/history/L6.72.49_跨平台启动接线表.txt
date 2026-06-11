@@ -1,0 +1,11 @@
+# L6.72.49 跨平台启动接线表
+
+| 模块 | 本轮接线 | 目标 |
+|---|---|---|
+| desktop/start_linyuanzhe_desktop_l671.py | 升级版本号；构建 UTF-8 / macOS Tk 环境变量 | 启动失败诊断更清晰，macOS Tk 表面更稳定 |
+| 01_启动入口/macOS/*.command | 注入 TK_SILENCE_DEPRECATION、LINYUANZHE_DESKTOP_PLATFORM、LINYUANZHE_TK_SCALING、LC_CTYPE | macOS 桌面启动口径统一 |
+| 00_ASCII_START_HERE/linux_macos/*.sh | 同步 Linux/macOS 启动环境 | 保持短路径启动入口可用 |
+| frontend/linyuanzhe_frontend/version_info.py | FE01 STEP59 / L6.72.49 | 前端状态与包版本一致 |
+| VERSION_PRODUCT.txt | 产品版本升至 L6.72.49 | 交付包版本可识别 |
+
+边界：未改 tiangong_kernel；未替换 Runtime 主入口；未绕过 QualityGate。

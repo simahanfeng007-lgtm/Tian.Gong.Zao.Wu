@@ -1,0 +1,61 @@
+{
+  "schema": "tiangong.v2_0_linyuanzhe.merge_validation.v1",
+  "generated_at": 1780904944.6393886,
+  "product": "天工造物v2·0-临渊者",
+  "merge_strategy": "L6721.1 as functional base; user v2.0 unique dependency check entries merged; root renamed and UTF-8 path normalization applied.",
+  "diff_summary": {
+    "user_files": 2028,
+    "l6721_1_files": 2303,
+    "common_files": 2025,
+    "changed_files": 56,
+    "user_only_files": 3,
+    "l6721_1_only_files": 278
+  },
+  "validation": {
+    "dependency_check": "PASS",
+    "compileall": "PASS",
+    "pytest": "28 passed",
+    "active_assets_relocation_smoke": "PASS",
+    "workmode_activation_check": "PASS: 9 active assets, 9 smoke calls, 158 tools / 158 usage cards",
+    "r20_activation_smoke": "PASS",
+    "r21_adapter_smoke": "PASS",
+    "runtime_tool_alignment": "PASS: 149 base tools / 149 usage cards; 158 in workmode after active assets",
+    "codex_runtime_smoke": "PASS",
+    "frontend_bridge_smoke": "PASS",
+    "v1_clean_import_smoke": "PASS",
+    "cross_platform_desktop_audit": "PASS",
+    "bat_line_endings": "PASS: 0 LF-only bat, chcp 65001 present"
+  },
+  "final_package_file_count": 2135,
+  "final_top_level_counts": {
+    "backend": 1167,
+    "reports": 600,
+    "frontend": 79,
+    "launchers": 69,
+    "90_历史入口归档": 53,
+    "docs": 50,
+    "scripts": 44,
+    "installer": 22,
+    "01_启动入口": 19,
+    "00_ASCII_START_HERE": 16,
+    "desktop": 4,
+    "dataup": 3,
+    ".linyuanzhe": 2,
+    "README_FUSION_L6717_R21_BACKEND.md": 1,
+    "README_L6702_CODEX_RUNTIME.md": 1,
+    "README_先看这里_L6710.txt": 1,
+    "目录说明_L6710.txt": 1,
+    "VERSION_PRODUCT.txt": 1,
+    "README_先看这里_天工造物v2.0-临渊者.txt": 1,
+    "DIFF_MERGE_REPORT_20260608.md": 1
+  },
+  "llm_boundary": {
+    "llm_is_main_brain": true,
+    "runtime_not_main_brain": true,
+    "planner_no_takeover": true,
+    "background_loop_added": false,
+    "a5_boundary_changed": false
+  },
+  "generated_at_iso": "2026-06-08T07:49:04.639389+00:00",
+  "l67217_entry_hygiene_note": "L6.72.17 adds import-safe entry common, script hygiene, DataUp signature guard, and active registry hygiene checks."
+}

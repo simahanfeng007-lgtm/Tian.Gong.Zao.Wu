@@ -1,0 +1,99 @@
+L6.72.46 文档回滚接线表
+
+一、入口
+
+用户意图示例：
+- 回滚刚才文档写回。
+- 回滚文档写回 docwrite_1234567890abcdef。
+- 使用 manifest_path 回滚。
+
+二、Planner / PlanBridge 路由
+
+1. 含 docwrite_xxx operation_id：
+PlanBridge -> document_rollback
+
+2. 显式“回滚 / 撤回修改 / 还原 / rollback / undo”：
+PlanBridge -> document_rollback
+
+3. 没有 operation_id：
+Adapter 会尝试根据 manifest_path；仍缺失则返回 rollback_manifest_missing。
+
+三、工具注册
+
+RuntimeEntry：
+ToolDescriptor("document_rollback", "根据 document_apply_rewrite 生成的 operation_id/manifest 执行受治理回滚。", "A3")
+
+Adapter：
+document_rollback_adapter
+
+Registry alias：
+- document_rollback
+- documentrollback
+- rollback_document
+- document_writeback_rollback
+- 文档回滚
+
+四、参数
+
+常用参数：
+- operation_id：document_apply_rewrite 输出的 docwrite_xxx。
+- manifest_path：写回 manifest 相对路径。
+- force：目标文件写回后发生变化时是否强制回滚，默认 false。
+
+五、回滚策略
+
+1. 默认修订副本模式：
+rollback_action = delete_output
+回滚时删除生成的 .linyuanzhe_rewrite 文件。
+
+2. 覆盖写入模式：
+rollback_action = restore_backup
+回滚时从 backup_path 恢复目标文件。
+
+3. 防二次覆盖：
+若 target_hash_after 与当前目标文件 hash 不一致，默认 blocked，提示目标文件已被后续修改。
+用户明确 force=true 后才允许继续。
+
+六、回滚清单
+
+回滚会生成：
+.linyuanzhe/document_writeback/manifests/docwrite_xxx_rollback.json
+
+清单内容包括：
+- operation_id
+- rolled_back_at
+- target_path
+- backup_path
+- pre_rollback_backup
+- action
+- force
+
+七、执行链
+
+RuntimeEntry
+-> PlannerExecutionController / LongChainRunner
+-> ExecutionSpine
+-> RuntimeToolRegistry
+-> PermitGateway / QualityGate / Audit
+-> document_rollback_adapter
+-> rollback manifest / artifact output
+
+八、主会话投影
+
+允许显示：
+- 状态
+- operation_id
+- 目标文件
+- 回滚记录
+- 边界说明
+
+禁止显示：
+- 原文件全文
+- backup 原始内容
+- raw bytes
+- stderr
+
+九、风险等级
+
+document_rollback = A3
+理由：回滚会修改或删除工作区文件，但严格基于 manifest / backup，且受 Runtime / QualityGate / Audit 链约束。

@@ -1,0 +1,10 @@
+{
+  "playbook_id": "workspace_file_simple",
+  "work_type": "file",
+  "description": "普通工作区文件读写工作流：写入或读取、验证、报告。创建 txt/md/json 不进入文档解析系统。",
+  "phase_sequence": ["write_or_read", "verify", "final_report"],
+  "recommended_tools": ["list_dir", "read_file", "write_workspace_file", "return_analysis"],
+  "forbidden_tools": ["document_parse", "document_query", "document_rewrite_plan", "document_apply_rewrite"],
+  "verification_policy": "写文件后必须 read_file 或物理落盘验证；读取失败进入 failed_recoverable。",
+  "fallback_policy": "Provider 不可用时可用 deterministic fallback；不可确定任务输出 model_required。"
+}

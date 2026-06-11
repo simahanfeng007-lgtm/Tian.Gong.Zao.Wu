@@ -1,0 +1,21 @@
+{
+  "contract_version": "tiangong.l6_69.signing_policy.v1",
+  "product_name": "天工造物 / 临渊者",
+  "stage": "policy_placeholder_only",
+  "signing_required_for_final_installer": true,
+  "signing_key_material_in_package": false,
+  "certificate_path_in_package": false,
+  "timestamping_required_for_final": true,
+  "allowed_in_l669": [
+    "policy_validation",
+    "digest_validation",
+    "dry_run_report"
+  ],
+  "forbidden_in_l669": [
+    "load_private_key",
+    "sign_exe",
+    "sign_msi",
+    "emit_signed_installer"
+  ],
+  "message": "L6.69 不携带签名证书或私钥，只校验签名策略占位。"
+}

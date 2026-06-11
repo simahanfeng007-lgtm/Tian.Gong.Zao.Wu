@@ -1,0 +1,83 @@
+L6.72.37 Soul 长期情感底色数学模型
+
+一、定义
+SoulText：用户设置的 Soul 原文，是唯一人格源。
+B_soul：从 SoulText 直接投影出来的瞬时人格/情感向量。
+E_t：长期情感底色。
+R_style：最终回复风格投影。
+
+二、向量空间
+B_soul ∈ [-1,1]^14
+其中：
+1. PAD 维度：
+   - valence
+   - arousal
+   - dominance
+2. OCEAN 维度：
+   - openness
+   - conscientiousness
+   - extraversion
+   - agreeableness
+   - neuroticism
+3. 表达投影轴：
+   - warmth
+   - directness
+   - detail
+   - energy
+   - human_naturalness
+   - poetic_density
+
+三、长期底色更新
+E_t = clamp((1-alpha) * E_{t-1} + alpha * B_soul)
+alpha = 0.18
+
+解释：
+- alpha 不能太大，否则 Soul 每次轻微修改都会导致人格跳变。
+- alpha 不能太小，否则用户修改 Soul 后长期底色难以响应。
+- 0.18 适合桌面智能体：稳定优先，但可在数轮内完成过渡。
+
+四、重置条件
+当 soul_hash 变化时：
+E_t = B_soul
+update_count = 1
+reset_reason = soul_hash_changed
+
+原因：
+Soul 是唯一人格源。用户改 Soul 代表换人格设定或人格修订，旧 Soul 的长期底色不能继续污染新 Soul。
+
+五、合法输入源
+允许：
+- SoulText
+- SoulStyleModelState / soul_emotion_baseline.json
+
+禁止：
+- Kernel
+- Runtime
+- Planner
+- Tool
+- Memory
+- Skill
+- Provider
+- OutputContract
+- 环境变量 TIANGONG_RESPONSE_STYLE / TIANGONG_LANGUAGE_POLICY
+
+六、状态文件原则
+状态文件只保存：
+- contract
+- soul_hash
+- soul_name
+- update_count
+- alpha
+- created_at / updated_at
+- baseline_vector
+- instant_vector
+- style_source = soul_style_model_only
+
+状态文件不保存：
+- Soul 原文
+- 用户消息
+- 工具输出
+- Runtime stderr
+- Planner hint
+- Memory / Skill 原文
+- Provider 密钥

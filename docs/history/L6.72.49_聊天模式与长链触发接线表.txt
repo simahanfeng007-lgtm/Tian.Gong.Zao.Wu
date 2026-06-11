@@ -1,0 +1,11 @@
+# L6.72.49 聊天模式与长链触发接线表
+
+| 场景 | L6.72.49 行为 | 不允许行为 |
+|---|---|---|
+| 普通聊天 chat | 轻量对话；连接失败时 workbench idle | 不生成假 run_id/task_id，不触发 Planner failed |
+| 工作/代码/文件模式 | 正常对话，显式执行意图才升级 | 不因模式名自动开长链 |
+| long_chain 模式 | 保留真实 Runtime 长链执行链 | 不用 UI 假状态冒充执行 |
+| 显示任务流程关闭 | 隐藏任务工作台/进度卡展示 | 不影响真实执行链 |
+| 历史记录页 | 只读回放 | 不继续对话、不写记忆、不触发工具 |
+
+主会话只允许 human_readable_summary / user-facing answer 进入；raw diagnostics 进入诊断区。

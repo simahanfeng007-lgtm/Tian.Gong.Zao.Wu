@@ -1,0 +1,17 @@
+L6.72.32 真实电脑执行链路接线表
+
+| 序号 | 链路节点 | 文件/接口 | 本轮状态 | 说明 |
+|---|---|---|---|---|
+| 1 | 前端工作模式 | frontend/linyuanzhe_frontend/clients/sse_runtime_client.py | 已接 | 发送 frontend_work_mode / planner_allowed / tools_requested / long_chain_requested / tool_execution_mode。 |
+| 2 | 本地桥接接收 | desktop/linyuanzhe_local_runtime_bridge_l671.py /chat/stream-events | 已接 | 生成 run_id/task_id/audit_id，先发 run_started/run_accepted/planner_started。 |
+| 3 | 主机访问范围 | BridgeState + /settings/provider | 已接 | 支持 system_drive / user_home / project_workspace / custom_root。 |
+| 4 | Workspace 注入 | run_agent.py --workspace <host_root> | 已接 | Runtime 工具路径以受治理 workspace 为根；前端不直接读写文件。 |
+| 5 | 环境变量 | LINYUANZHE_HOST_ACCESS_SCOPE / ROOT_DIGEST | 已接 | 子进程可读取访问范围语义；只暴露 digest，不暴露 UI 可执行路径能力。 |
+| 6 | 桌面/下载/文档提示 | _host_access_context_hint | 已修 | 注入 desktop_relative_path / downloads_relative_path / documents_relative_path；越界则标记 <outside_access_scope>。 |
+| 7 | 自然语言转工具计划 | backend/project/tiangong_agent_runtime/plan_bridge.py | 已修 | 桌面/下载/文档查看类任务确定性转 list_dir/read_file。 |
+| 8 | Provider 缺失处理 | _run_backend_subprocess | 已修 | tools_requested=True 时不因未配置 Provider 阻断本地工具任务。 |
+| 9 | 工具执行 | Runtime / ToolMode / WorkspaceGuard | 已验 | smoke 已验证 list_dir 真实读取 Desktop probe 文件。 |
+|10 | QualityGate/审批 | Runtime + bridge event | 已保留 | 写入/删除/覆盖类不由桥接层直接执行；权限类问题可回传 approval_required。 |
+|11 | 状态回传 | SSE events | 已修 | 增补 tool_progress；保留 tool_started/tool_result/run_terminal。 |
+|12 | 错误分类 | _classify_execution_error | 已修 | Provider、Runtime、Tool 权限、路径、Windows 权限、模型输出格式分离。 |
+|13 | 结果清洗 | _clean_user_facing_answer | 已回归 | return_analysis / return_code / model_chat 不外泄。 |

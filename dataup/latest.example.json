@@ -1,0 +1,20 @@
+{
+  "schema": "tiangong.dataup.latest.v1",
+  "product": "linyuanzhe_desktop",
+  "channel": "community",
+  "latest_version": "FE01 STEP68 / L6.73.8",
+  "package_name": "临渊者_FE01_STEP68_L6738_DataUp安全更新入口包_20260611.zip",
+  "package_url_gitee": "https://gitee.com/yu-yongxiang1994/natures-craftsmanship/raw/main/dataup/packages/<package>.zip",
+  "package_url_github": "https://raw.githubusercontent.com/simahanfeng007-lgtm/Tian.Gong.Zao.Wu/main/dataup/packages/<package>.zip",
+  "sha256": "<fill-package-sha256-after-upload>",
+  "signature": "<optional-signature-file-or-detached-signature>",
+  "min_supported_version": "FE01 STEP68 / L6.73.8",
+  "risk_level": "A4",
+  "required_checks": [
+    "compileall",
+    "secret_scan",
+    "desktop_bundle_preflight"
+  ],
+  "signature_policy": "Ed25519 detached signature required; unsigned package is blocked before apply",
+  "manifest_signature": "<fill-detached-manifest-signature-reference>"
+}

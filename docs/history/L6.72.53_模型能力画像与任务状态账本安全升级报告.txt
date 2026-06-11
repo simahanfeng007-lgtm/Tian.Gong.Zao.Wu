@@ -1,0 +1,75 @@
+L6.72.53 模型能力画像与任务状态账本安全升级报告
+
+一、升级判断
+
+本次升级基于 L6.72.52 前端人类使用化稳定包继续推进。目标不是重写执行链，也不是改前端，而是在不影响现有执行效果和前端显示效果的前提下，为“模型执行力操作系统”补上成功概率最高的控制层底座。
+
+采用路线：
+1. ModelCapabilityAdapter：被动模型能力画像。
+2. ModelProfileStore：安全画像落盘。
+3. TaskStateLedger：任务级状态账本，第一版只记录不控制。
+4. RuntimeEntry：接入画像和账本，但不改变 Planner、工具、QualityGate、前端渲染行为。
+
+未在本轮启用 AdaptiveWorkLoop、ContextWindowManager、SkillPlaybookRouter 的执行控制，因为这些会改变实际执行策略，风险高于当前收益。本轮只做“可观测、可追踪、可续接底座”。
+
+二、已落地内容
+
+1. 新增 backend/project/tiangong_agent_runtime/model_capability_adapter.py
+- 生成 ModelProfile：provider_id、model_id、context_window_estimate、json_reliability、tool_plan_reliability、recommended_role 等。
+- 生成 ModelExecutionPolicy：max_plan_steps_per_round、prompt_contract、allow_long_chain、micro_step_mode 等。
+- 当前 policy 标记 passive_only=True，默认不改变 Planner 行为。
+- 支持 deepseek / openai / claude / gemini / qwen / glm / minimax / mock / unknown 的静态画像。
+
+2. 新增 backend/project/tiangong_agent_runtime/model_profile_store.py
+- 将模型画像安全写入 .linyuanzhe/model_profiles/。
+- 不写 API Key，不写 raw prompt，不写工具结果正文。
+- 写入失败不影响 Runtime 主链。
+
+3. 新增 backend/project/tiangong_agent_runtime/task_state_schema.py
+- 定义 TaskState / TaskEvent。
+- 状态字段包括 task_id、user_goal、activation_form、model_profile、model_execution_policy、current_phase、status、plan_history、executed_steps、quality_gate、unresolved_failures、next_action 等。
+- 默认 storage_boundary：no_api_key、no_full_file_content、summary_and_refs_only、passive_only。
+
+4. 新增 backend/project/tiangong_agent_runtime/task_state_ledger.py
+- 每个 run_text 工作链生成 .linyuanzhe/tasks/<task_id>/task_state.json。
+- 同步生成 events.jsonl、artifacts_manifest.json、quality/latest_quality.json、handoff_digest.md。
+- 只记录安全摘要、路径引用、audit_ref、tool_name、状态，不写敏感正文。
+- 写入失败不会中断执行链。
+
+5. 修改 backend/project/tiangong_agent_runtime/runtime_entry.py
+- RuntimeEntry 初始化新增 model_capability、model_profile_store、task_state_ledger。
+- RuntimeRunResult 新增 task_id、model_profile、model_execution_policy、task_state_snapshot。
+- run_text 开始时创建被动模型画像和任务状态。
+- ActivationForm / ModelPlannerResult / PlannerExecutionReport / ToolResult 安全摘要写入账本。
+- 工具执行仍走原 LongChainRunner + ExecutionSpine。
+- Planner 行为未改，工具集合未改，前端未改。
+
+6. 新增 backend/project/run_model_capability_task_ledger_smoke_l67253.py
+- 验证模型画像、策略、安全落盘、任务账本、真实写文件任务、chat 不调工具、API Key 不泄漏。
+
+三、边界说明
+
+本轮是安全升级，不是执行策略强改：
+- 不改前端 UI。
+- 不改前端双模式。
+- 不改 PromptIntegrator 唯一出口。
+- 不改 ProviderClient 裸 messages 拒绝规则。
+- 不改 ModelPlanner 计划策略。
+- 不改 QualityGate 放行策略。
+- 不启用模型自动降级 / fallback。
+- 不启用失败自动再规划。
+- 不启用工具候选缩减。
+
+这样可以最大限度避免影响实际执行效果和前端显示效果。
+
+四、升级价值
+
+1. 以后每次工作任务都有 task_id，不再只靠聊天历史续命。
+2. 每次工作任务都记录当前模型画像和推荐角色，为后续按模型分级控制打基础。
+3. 每次计划、执行、失败、质量摘要都有安全账本，可用于长链续接、断线恢复、失败复盘。
+4. 后续接 AdaptiveWorkLoop 时，有 TaskState 可以读，不需要从零重构。
+5. 强模型、中模型、弱模型的能力边界可以逐步接入，但本轮不强制改变现有执行链。
+
+五、版本结论
+
+L6.72.53 是“模型执行力操作系统”的低风险控制层升级包。它不是半成品重构，而是在 L6.72.52 可用基线上增加可观测、可持久、可续接的任务状态与模型画像底座，为后续自适应长链工作能力做准备。

@@ -1,0 +1,9 @@
+{
+  "provider": "openai_compatible",
+  "base_url": "",
+  "api_key": "",
+  "model": "deepseek-v4-pro",
+  "tool_execution_mode": "disabled",
+  "planner_mode": "rule_only",
+  "note": "Provider credential fields are write-only. Do not store real secrets in this file for distribution."
+}

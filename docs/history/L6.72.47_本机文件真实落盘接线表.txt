@@ -1,0 +1,86 @@
+L6.72.47 本机文件真实落盘接线表
+
+一、目标
+修复“报告写入成功但用户电脑看不到文件 / read_file 再读失败”。核心要求：文件工具只有在真实物理落盘已验证后才能返回成功。
+
+二、接线链路
+1. 前端桌面端
+   - 用户输入意图。
+   - 前端只提交意图、工作模式、审批决定。
+   - 前端不直接创建目录、不写文件、不复制字节。
+
+2. desktop/linyuanzhe_local_runtime_bridge_l671.py
+   - 解析 host_access_scope 和 host_access_root。
+   - 通过 Windows Known Folder / OneDrive fallback 解析 Desktop/Downloads/Documents。
+   - 注入 env：
+     * LINYUANZHE_DESKTOP_RELATIVE_PATH
+     * LINYUANZHE_DOWNLOADS_RELATIVE_PATH
+     * LINYUANZHE_DOCUMENTS_RELATIVE_PATH
+   - 拼接 [桌面端主机文件访问提示]，要求使用 relative_path，不允许 Users/User/Desktop 占位路径。
+
+3. Runtime / Planner / PlanSchema
+   - plan_schema 提醒模型使用 host known-folder relative_path。
+   - 如果模型仍输出 Users/User/Desktop，adapter 层再次归一。
+   - 不绕过 RuntimeToolRegistry / ExecutionSpine / QualityGate。
+
+4. host_path_normalizer.py
+   - 读取 env 或 context.user_message 中的 relative_path。
+   - 把以下路径归一到真实 known-folder relative_path：
+     * Desktop/xxx
+     * 桌面/xxx
+     * Downloads/xxx
+     * 下载/xxx
+     * Documents/xxx
+     * 文档/xxx
+     * Users/*/Desktop/xxx
+     * C:/Users/*/Desktop/xxx
+     * OneDrive/Desktop/xxx
+   - 只返回相对路径，最终仍由 WorkspaceGuard 校验。
+
+5. WorkspaceGuard
+   - 对归一后的路径进行工作区/host root 边界校验。
+   - 敏感文件和敏感目录规则仍有效。
+
+6. physical_commit.py
+   - write_text_atomic_verified：
+     * 创建同目录临时文件。
+     * 写入并 fsync。
+     * os.replace 原子替换目标。
+     * 尝试 fsync 父目录。
+     * read-after-write 验证文本内容。
+     * 校验 byte_size / sha256。
+     * 枚举父目录确认目标文件存在。
+   - verify_file_commit：
+     * 用于 Office 写回等非文本 writer 的后置验真。
+
+7. write_workspace_file
+   - 写入前 path normalization。
+   - 写入后 physical_commit_verified=True 才返回 OK。
+   - 验真失败返回 physical_commit_verification_failed。
+
+8. document_export
+   - 输出路径 path normalization。
+   - 导出文件写入后 physical commit verification。
+
+9. document_apply_rewrite
+   - source/target path normalization。
+   - 文本文件采用 verified atomic write。
+   - docx/xlsx/pptx 写回后 verify_file_commit。
+   - rollback manifest 也采用 verified write。
+
+10. read_file / list_dir / document_parse
+   - 读取路径同样归一。
+   - 保证“写入时的 synthetic path”和“读取时的 synthetic path”指向同一个真实 known-folder 文件。
+
+三、错误分类
+- physical_commit_verification_failed：写入后无法证明物理落盘。
+- file_write_commit_error：文件写入提交异常。
+- windows_permission_error：Windows ACL / 提权 / 管理员目录问题。
+- file_path_error：目标路径不存在或不是文件。
+
+四、不变边界
+- 前端不是执行主体。
+- PromptCore 不参与路径修复。
+- tiangong_kernel 未改。
+- A5 Only 治理不变。
+- 工具 raw output 不进主会话。

@@ -1,0 +1,85 @@
+L6.72.16 PromptTuner 稳定性接线表
+
+一、主链路
+
+Organ emit_card
+-> OrganSignalCard
+-> select_organ_signal_cards
+-> PromptCompiler
+-> PromptBundle
+-> LLM
+-> PromptTrace outcome
+-> HomeostasisPromptTuner
+-> 下一轮 AttentionGate
+
+二、新增反馈字段
+
+PromptTrace outcome 输出：
+- success_proxy
+- baseline_shadow_success_proxy
+- selected_organ_counts
+- selected_organ_entropy
+- selected_max_organ_ratio
+- credit_by_card
+- credit_by_organ
+
+三、调权状态字段
+
+HomeostasisPromptTuningState v2：
+- success_ema
+- failure_ema
+- baseline_success_ema
+- tuned_success_ema
+- quality_delta_ema
+- diversity_entropy_ema
+- max_organ_ratio_ema
+- selection_dominance_streak
+- negative_delta_streak
+- organ_bias
+- global_threshold_delta
+- lock_guard_active
+- rollback_reason
+- exploration_rate
+
+四、选择保护
+
+ordinary_chat：
+- planner/tool 硬阻断
+- memory 最大 2
+- skill 最大 1
+- emotion 最大 1
+- provider/ui/risk 保底可入选
+
+code_task：
+- runtime/tool/skill/risk 保底
+- memory 最大 2
+- planner 最大 1
+- self_heal/audit 可辅助
+
+diagnostic_task：
+- runtime/audit/self_heal/risk 保底
+- memory 最大 1
+
+五、回滚保护
+
+触发条件：
+- tuned_success_ema < baseline_success_ema - 0.03 且 sample_count >= 50
+- negative_delta_streak >= 8
+- dominance_streak >= 20
+- failure_ema > 0.78 且 noise_pressure > 0.55
+
+动作：
+- 压缩正向 organ_bias
+- 抬高 global_threshold_delta
+- 打开 lock_guard_active
+- 记录 rollback_reason
+
+六、不污染核心声明
+
+L6.72.16 只改 shell 层 PromptCore / AttentionGate / Trace / Tuner。
+未改 tiangong_kernel。
+未改 Runtime 主入口。
+未新增第二执行链。
+未 import v1。
+未 monkey patch。
+未启动后台 loop。

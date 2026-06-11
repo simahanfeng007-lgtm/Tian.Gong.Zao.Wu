@@ -1,0 +1,62 @@
+天工造物 v2.0 - 临渊者 L6.72.4 前端 / Windows / 渲染热修报告
+============================================================
+
+结论：原上传完整融合体中的 L6.72.1-L6.72.3 问题没有全部解决。基础 compileall/pytest 能通过，但用户侧前端启动、页面切换、流式收口、Windows BAT 编码、工具默认模式仍存在落地缺口。
+
+本轮已修：
+1. frontend/linyuanzhe_frontend/ui/main_window_chat_runtime.py
+   - 补 import re
+   - 补 DIMENS import
+   - 解决聊天首页 DIMENS NameError 与 Markdown 渲染 re NameError
+
+2. frontend/linyuanzhe_frontend/ui/main_window_feature_pages.py
+   - 补 DIMENS import
+   - 解决 文件/连接器/工作区 等页面点击后 NameError
+
+3. frontend/linyuanzhe_frontend/ui/main_window.py
+   - show_page/_clear_content 时清理 _chat_body_widget / _chat_render_signatures / 输入框引用
+   - 解决页面切换后流式渲染写入已销毁 Text widget 的风险
+
+4. frontend/linyuanzhe_frontend/ui/main_window_actions.py
+   - 流式 finished 收口强制以最终 snapshot 重建聊天页
+   - 不再调用 show_page("chat") 重新拉旧 client snapshot，避免最终回答被旧快照覆盖
+
+5. backend/project/tiangong_agent_shell/config_loader.py
+   - tool_execution_mode 默认值改为 RUNTIME_GOVERNED
+
+6. backend/project/tiangong_agent_shell/tool_bridge.py
+   - ToolBridge 默认值改为 RUNTIME_GOVERNED
+   - normalize_tool_mode(None/空值/未知值) 默认进入 RUNTIME_GOVERNED
+   - 用户不传 --tool-mode 时不再默认 disabled
+
+7. 品牌名
+   - 前端 version_info/product_identity 与 desktop metadata 统一到 “天工造物 v2.0 - 临渊者”
+   - 前端版本标记提升到 L6.72.4
+
+8. Windows BAT
+   - 00_ASCII_START_HERE/windows 用户入口 BAT：ASCII + CRLF
+   - 01_启动入口/Windows 用户入口 BAT：ASCII + CRLF
+   - launchers BAT：ASCII + CRLF
+   - frontend 常用 BAT：ASCII + CRLF
+
+验证结果：
+- compileall PASS
+- pytest PASS：28 passed
+- frontend import/static render smoke PASS
+- default tool mode smoke PASS：runtime_governed
+- runtime_tool_alignment smoke PASS
+- learning_asset_activation smoke PASS
+- learning_asset_adapter smoke PASS
+- v1_clean_import smoke PASS
+- active_assets_relocation smoke PASS
+- codex_frontend_bridge smoke PASS
+- workmode_activation_check PASS：158 tools / 158 usage cards / 9 active assets
+- 当前用户入口 BAT ASCII/CRLF PASS
+
+打包规则：
+- 生成热修净包，排除 reports/、tests/、__pycache__/、*.pyc、.git/、*.bak、90_历史入口归档/、临时 smoke workspace。
+- 保留 frontend/、backend/、desktop/、dataup/、installer/、launchers/、scripts/、00_ASCII_START_HERE/、01_启动入口/、.linyuanzhe/ 与根目录说明文件。
+
+仍需注意：
+- 我无法在此 Linux 沙箱真实打开 Windows Tk 窗口，只能做静态、导入、渲染函数、smoke 与打包审计。
+- Windows 真实机仍建议做一次：双击 00_ASCII_START_HERE/windows/DEPENDENCY_CHECK.bat，再运行 START_DESKTOP_AUTO_L6719.bat。

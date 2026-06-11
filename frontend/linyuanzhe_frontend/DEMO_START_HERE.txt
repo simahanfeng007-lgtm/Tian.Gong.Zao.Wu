@@ -1,0 +1,17 @@
+临渊者桌面端 FE01 STEP68 / L6.73.8 当前交付入口说明
+
+启动方式：
+- Windows：优先使用 01_启动入口/Windows 下的启动脚本，或 00_ASCII_START_HERE/windows 下的 ASCII 入口。
+- macOS / Linux：优先使用 01_启动入口/Linux 或 01_启动入口/macOS 下的启动脚本。
+- Python 通用入口：python 00_ASCII_START_HERE/python/START_DESKTOP_L6710.py
+
+真实后端 / Provider：
+- 在桌面设置页填写 Provider、模型、Base URL、API Key。
+- Base URL 可保存与回填；API Key 只写入，不明文回显。
+
+验证方式：
+- Windows：双击 run_validation.bat
+- macOS / Linux：bash run_validation.sh
+- RC preflight：bash run_rc_preflight.sh --contract-server
+
+说明：本文件是当前 L6.73.8 用户入口说明。历史 STEP15/STEP19/L6.54/L6.58 文案已不再作为当前验收口径。

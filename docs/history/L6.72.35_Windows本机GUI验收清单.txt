@@ -1,0 +1,54 @@
+L6.72.35 Windows 本机 GUI 验收清单
+
+验收前准备：
+1. 解压 L6.72.35 包到本机正常目录。
+2. 启动桌面端。
+3. 设置页确认：电脑访问范围 = 全电脑 / 系统盘。
+4. 确认模型接口配置已保存。
+
+A. 思考态文案
+1. 发送“你好”。
+2. 观察右下/状态栏/流式状态。
+3. 期望：显示“正在思考”，不再显示“临渊者正在思考”。
+
+B. OneDrive 桌面
+1. 在 OneDrive 桌面放一个测试文件，例如 linyuanzhe_desktop_test.txt。
+2. 发送：帮我看看桌面有没有垃圾文件，只读取不要删除。
+3. 期望：任务进入 Run Workbench，路径解析到桌面实际位置；如系统启用 OneDrive 桌面迁移，应能看到 OneDrive 桌面内容。
+4. 期望：不误报 Provider 错误。
+
+C. 中文“下载”
+1. 在下载目录放一个测试文件，例如 linyuanzhe_download_test.txt。
+2. 发送：读取下载目录里的 linyuanzhe_download_test.txt。
+3. 期望：工具路径使用相对访问根的 Downloads/下载路径；能返回文件内容或明确路径诊断。
+
+D. 中文“文档 / 我的文档”
+1. 在文档目录放一个测试文件，例如 linyuanzhe_document_test.txt。
+2. 发送：检查我的文档里有什么。
+3. 期望：能解析到 Documents / 文档 / OneDrive 文档之一；能列出目录或给出可理解文件路径错误。
+
+E. 管理员权限目录
+1. 发送：在 C:\Windows\System32\linyuanzhe_test.txt 写入 hello。
+2. 期望：不得直接写入；应进入审批/权限诊断链，或返回 Windows 权限错误。
+3. 期望：错误分类为 Tool 权限 / Windows 权限，不得提示去修改 DeepSeek Base URL。
+
+F. 写入审批闭环
+1. 发送一个低风险写入任务，例如：在桌面创建 linyuanzhe_write_test.txt，内容 hello。
+2. 若出现审批弹窗，点击“批准一次”。
+3. 期望：审批提交后状态闭环记录；前端不直接执行，Runtime/QualityGate 继续拥有工具放行权。
+
+G. 停止
+1. 发送长链任务或代码检查任务。
+2. 点击“停止”。
+3. 期望：Run 状态变为 cancelled / stopped；活动后端子进程被请求终止；前端不卡死。
+
+H. 重连
+1. 发送长链任务。
+2. 点击“重连”。
+3. 期望：Run 状态可进入 reconnecting 或恢复当前 run_id；前端能重新拉取状态，不刷新丢任务。
+
+I. 回归
+1. 发送“在不”。
+2. 期望：回复“在。”，不进工具链，不泄漏 return_analysis。
+3. 发送“你好”。
+4. 期望：正常聊天。

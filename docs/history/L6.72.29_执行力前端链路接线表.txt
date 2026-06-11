@@ -1,0 +1,25 @@
+L6.72.29 执行力前端链路接线表
+
+用户输入
+→ 工作模式解析 resolve_submit_work_mode()
+→ 短寒暄保护：在不/你好/ping 临时 chat，不进入 Planner
+→ 任务动词提升：修复/运行/测试/打包/读取 自动提升 work/code/file/long_chain
+→ SseRuntimeClient._chat_payload()
+→ frontend_contract=L6.72.29
+→ tool_execution_mode=runtime_governed 或 disabled
+→ planner_allowed / tools_requested / long_chain_requested 明确下发
+→ /chat/stream-events
+→ 本地桥接 _runtime_directives_from_payload()
+→ TIANGONG_TASK_MODE / TIANGONG_PLANNER_MODE / TIANGONG_TOOL_MODE
+→ run_agent.py --once
+→ Runtime / Planner / ToolMode / QualityGate
+→ SSE run_started / run_accepted / planner_started / heartbeat / tool_result / assistant_delta / assistant_final / run_terminal
+→ 前端 Run 工作台显示状态、心跳、工具、诊断
+→ 用户可停止 / 重连 / 复位 / 复制诊断
+
+边界：
+- 前端只提交意图和审批。
+- 前端不直接调用工具。
+- 前端不写长期记忆。
+- 前端不应用回滚。
+- 前端不污染 PromptCore。

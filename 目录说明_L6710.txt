@@ -1,0 +1,25 @@
+FE01 STEP31J / L6.71.0 目录归类清单
+
+00 根目录
+- README_先看这里_L6710.txt：只保留人类说明，不再堆启动脚本。
+
+01_启动入口
+- Windows：Windows 用户只看这里。
+- macOS：macOS 用户只看这里。
+- Linux：Linux 用户只看这里。
+- 通用Python：三端共用主入口，不建议普通用户直接改。
+
+backend / desktop / frontend / installer
+- 程序主体与桥接链路，保持原相对位置，避免破坏 Runtime/前端导入路径。
+
+launchers
+- 工程预检和历史验证入口。
+
+scripts
+- 审计、预检、发布验证脚本。
+
+docs / reports
+- 文档与修复报告。
+
+90_历史入口归档
+- L6705-L6709 旧根目录入口。仅用于追溯，不建议验收使用。

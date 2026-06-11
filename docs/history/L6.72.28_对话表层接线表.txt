@@ -1,0 +1,29 @@
+L6.72.28 对话表层接线表
+
+用户输入
+ -> UI resolve_submit_work_mode
+    -> 如果是寒暄/心跳：casual_chat_override=True，effective_mode=chat
+    -> 如果是任务动词：保持执行力优先，自动提升 work/code/file/long_chain
+
+UI 请求体
+ -> frontend_work_mode
+ -> work_mode.casual_chat_override
+ -> planner_allowed
+ -> tools_requested
+ -> tool_mode_requested
+
+本地桥接
+ -> _runtime_directives_from_payload 二次判定
+ -> casual chat: TIANGONG_TASK_MODE=ordinary_chat, planner_mode=rule_only, tool_mode=disabled
+ -> work/code/file/long_chain: 保持 Planner + ToolMode 执行链
+
+Runtime 返回
+ -> SSE assistant_delta / assistant_final
+ -> _clean_assistant_visible_content
+ -> 过滤 return_analysis/return_code/model_chat 内部虚拟工具名
+ -> 聊天气泡只展示用户可读答复
+
+最终效果
+- “在不”正常显示“在。”或模型自然回复。
+- “修复这个 bug 并运行测试”仍进入执行链。
+- 前端不夺权，只做意图声明和显示过滤。

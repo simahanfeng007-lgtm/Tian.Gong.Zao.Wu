@@ -1,0 +1,5 @@
+package_id=tiangong_v2_linyuanzhe_L6.73.8_Q19HistoryEntryPermissionBoundaryFix
+version=FE01 STEP68 / L6.73.8
+date=2026-06-11
+base=Q18_RealLongChainWriteFixPackFix
+scope=Q19 historical smoke/verifier scan + Desktop/Downloads/permission boundary fix

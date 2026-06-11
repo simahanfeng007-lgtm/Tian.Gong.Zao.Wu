@@ -1,0 +1,48 @@
+{
+  "contract_version": "tiangong.l6_69.release_manifest.v1",
+  "product_name": "天工造物 / 临渊者",
+  "version_label": "FE01 STEP68 / L6.73.8",
+  "release_stage": "rc_packager_dry_run",
+  "unique_developer": "于泳翔",
+  "angel_investor": "胖胖龙",
+  "release_channel": "internal_rc",
+  "final_installer_allowed": false,
+  "real_runtime_unlock_required": true,
+  "signing_required_for_final": true,
+  "signing_key_stored_in_package": false,
+  "hash_manifest_required": true,
+  "artifacts": [
+    {
+      "name": "engineering_rc_zip",
+      "kind": "zip",
+      "status": "current_package",
+      "sha256": "computed-after-final-zip"
+    },
+    {
+      "name": "windows_installer_exe",
+      "kind": "exe",
+      "status": "disabled_in_dry_run",
+      "sha256": "not-emitted"
+    },
+    {
+      "name": "windows_installer_msi",
+      "kind": "msi",
+      "status": "disabled_in_dry_run",
+      "sha256": "not-emitted"
+    }
+  ],
+  "pipeline_gates": [
+    "startup_self_check_l669",
+    "version_slot_validation_l669",
+    "packager_dry_run_l669",
+    "release_pipeline_preflight_l669",
+    "scan_l659",
+    "real_runtime_unlock_l661_require_real_before_final_rc"
+  ],
+  "privacy": {
+    "store_raw_runtime_url": false,
+    "store_provider_secret": false,
+    "store_signing_secret": false,
+    "reports_digest_only": true
+  }
+}

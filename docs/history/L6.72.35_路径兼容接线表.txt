@@ -1,0 +1,58 @@
+L6.72.35 路径兼容接线表
+
+1. 前端设置
+   设置页电脑访问范围 -> host_access_scope -> 桥接启动环境 LINYUANZHE_HOST_ACCESS_SCOPE。
+
+2. 桌面桥接
+   _resolve_host_access_root(scope, raw_root)
+   -> system_drive / user_home / project_workspace / custom_root。
+
+3. Windows Known Folder
+   _windows_known_folder_path(kind)
+   -> SHGetKnownFolderPath Desktop / Downloads / Documents。
+   -> 支持 OneDrive Known Folder Move。
+
+4. OneDrive fallback
+   _known_user_folder(kind)
+   -> OneDrive / OneDriveConsumer / OneDriveCommercial。
+   -> USERPROFILE / HOME。
+   -> 中文/英文目录名 fallback。
+
+5. LLM / Planner 提示
+   _host_access_context_hint(scope, root)
+   -> desktop_relative_path
+   -> downloads_relative_path
+   -> documents_relative_path
+   -> localized_folder_aliases
+   -> Windows 管理员目录提醒。
+
+6. PlanBridge
+   用户说“桌面/下载/文档/我的文档”
+   -> _detect_host_folder
+   -> _extract_host_hints
+   -> list_dir / read_file。
+   写入/删除/覆盖/移动/重命名
+   -> 不由自然语言桥直接生成写工具
+   -> 交给 Runtime / Planner / QualityGate。
+
+7. 管理员权限目录
+   workspace_write_adapter
+   -> Windows/System32/Program Files/ProgramData/Recovery 等直接写入 BLOCKED。
+   -> error_code=windows_permission_required。
+
+8. 错误分类
+   _classify_execution_error
+   -> WinError 5 / WinError 1314 / requires elevation / 需要管理员权限
+   -> windows_permission_error。
+   -> 不归为 Provider/API 错误。
+
+9. 审批闭环
+   permission error
+   -> approval_required(ticket_id, risk_level, impact_scope)
+   -> /confirmations/submit
+   -> pending_approvals 记录 frontend_decision
+   -> 前端不直接执行。
+
+10. 停止 / 重连
+   /control/task/stop -> request_stop_active_runs -> cancelled。
+   /runtime/reconnect -> request_reconnect -> reconnecting。

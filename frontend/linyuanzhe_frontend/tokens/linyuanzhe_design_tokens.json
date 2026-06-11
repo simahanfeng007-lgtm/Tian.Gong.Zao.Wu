@@ -1,0 +1,50 @@
+{
+  "schema": "tiangong.l6_71_3.design_tokens.v1",
+  "brand": {
+    "tiangong": "极昼 / 明亮 / 母品牌",
+    "linyuanzhe": "永夜 / 极昼 / 中性工作台"
+  },
+  "theme": "linyuanzhe-neutral-workbench",
+  "color": {
+    "night_bg_root": "#0C0E11",
+    "night_bg_window": "#101215",
+    "night_card": "#15191E",
+    "night_card_alt": "#1A1F25",
+    "ink_blue": "#102522",
+    "cold_gold": "#D6A84F",
+    "qing_white": "#ECEFF3",
+    "accent_blue": "#14B8A6",
+    "status_success": "#22C55E",
+    "status_warning": "#F59E0B",
+    "status_danger": "#EF4444",
+    "risk_a0": "#64748B",
+    "risk_a1": "#22C55E",
+    "risk_a2": "#3B82F6",
+    "risk_a3": "#F59E0B",
+    "risk_a4": "#FB7185",
+    "risk_a5": "#EF4444"
+  },
+  "motion": {
+    "stream_flush_interval_ms": 45,
+    "status_transition_ms": 120,
+    "avoid_neon_overload": true
+  },
+  "layout": {
+    "home_principle": "对话优先 + 会话信息默认折叠 + 底部极简状态",
+    "visible_top_nav_count": 5,
+    "home_side_panel_default": "collapsed",
+    "max_home_side_cards": 1,
+    "bottom_status_fields": [
+      "就绪",
+      "模式",
+      "质量门",
+      "审计"
+    ],
+    "dense_dashboard_forbidden": true
+  },
+  "typography": {
+    "cn_primary": "TkDefaultFont",
+    "latin_primary": "TkDefaultFont",
+    "monospace": "TkFixedFont"
+  }
+}
